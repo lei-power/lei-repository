@@ -1,0 +1,36 @@
+@startuml
+
+!if %variable_exists("$THEME")
+title Class Diagram - $THEME theme
+!else
+title Class Diagram
+!endif
+
+'skinparam BackgroundColor transparent
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList: this is a message
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+  Object[] elementData
+  size()
+}
+
+enum TimeUnit {
+  DAYS
+  HOURS
+  MINUTES
+}
+
+annotation SuppressWarnings
+
+@enduml

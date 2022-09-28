@@ -1,0 +1,31 @@
+@startuml
+hide empty description
+state "updateCbf"#cyan
+state "updateCbht"#cyan
+state "delCbdkxx"#cyan
+state "deleteLock"#cyan
+state "updateCbjyqz"#cyan
+state "applyFlowtesk"#cyan
+state "updateQslyzlfj"#cyan
+state "updateCbjyqzdjb"#cyan
+
+state "allOfFuture" #red
+
+
+updateCbf -[#DD00AA,bold]--> allOfFuture
+updateCbht --[#DD00AA,bold]--> allOfFuture
+delCbdkxx ---[#DD00AA,bold]--> allOfFuture
+deleteLock ----[#DD00AA,bold]--> allOfFuture
+updateCbjyqz ----[#DD00AA,bold]--> allOfFuture
+applyFlowtesk ---[#DD00AA,bold]--> allOfFuture
+updateQslyzlfj --[#DD00AA,bold]--> allOfFuture
+updateCbjyqzdjb -[#DD00AA,bold]--> allOfFuture
+
+
+
+
+
+
+
+
+@enduml

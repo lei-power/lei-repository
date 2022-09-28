@@ -1,0 +1,166 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Courier
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Courier
+}
+actor 审核科员
+participant "初始登记Controller" as a
+participant "初始登记Service" as b
+participant "初始登记Manage" as c
+participant "承包方锁Manage" as d
+participant "承包方Manage" as e
+participant "承包合同Manage" as f
+participant "承包经营权证登记簿Manage" as g
+participant "承包地块信息Manage" as h
+participant "登记流程Manage" as i
+participant "登记流程操作日志Manage" as j
+participant "区域承包经营权证配置Manage" as pcc
+participant "登记簿序列号游标Manage" as rsc
+participant "权属来源资料附件Manage" as qsl
+participant "登记簿变更记录Manage" as rc
+participant "承包经营权证Manage" as qz
+
+autonumber
+
+
+审核科员 -> a : audit
+activate a
+a -> b : audit
+activate b
+b -> c : audit
+activate c
+c -> i : 获得登记流程表中记录
+activate i
+i --> c:返回结果
+deactivate i
+c -> c : 校验当前登记是否处于待审核状态
+c -> c : 查询当前登记的记录
+
+c -> e : getByCbfbm
+activate e
+e --> c:返回结果
+deactivate e
+c -> c : 校验承包方信息
+
+c -> f : getByCbfbm
+activate f
+f --> c:返回结果
+deactivate f
+c -> c : 校验承包合同信息
+
+c -> g : getByCbfbm
+activate g
+g --> c:返回结果
+deactivate g
+c -> c : 校验承包经营权证信息
+
+c -> pcc : 获取区域承包经营权证配置信息
+activate pcc
+pcc --> c:返回结果
+deactivate pcc
+
+
+c->c:判断是审核通过还是审核驳回
+
+
+c -> i : 修改登记流程以及创建登记流程操作日志(审核驳回)
+activate i
+i -> i : 保存数据
+
+i -> j : 创建登记流程操作日志
+activate j
+j -> j : 保存数据
+j --> i:返回结果
+deactivate j
+i --> c
+deactivate i
+c -> d : 删除承包方锁
+activate d
+d --> c:返回结果
+deactivate d
+c-->b:返回结果(审核驳回)
+
+b-->a:返回结果(审核驳回)
+a-->审核科员:返回结果(审核驳回)
+
+
+
+
+c -> i : 修改登记流程以及创建登记流程操作日志(审核通过)
+activate i
+i -> i : 保存数据
+
+i -> j : 创建登记流程操作日志
+activate j
+j -> j : 保存数据
+j --> i:返回结果
+deactivate j
+i --> c:返回结果
+deactivate i
+
+
+c -> rsc : 获取最大流水号
+activate rsc
+rsc -> rsc : 获取前区域最大流水号
+rsc -> rsc : 更新数据
+rsc --> c:返回结果
+deactivate rsc
+
+
+c -> g : 创建承包经营权证登记簿
+
+activate g
+g -> g : 保存数据
+g --> c:返回结果
+deactivate g
+
+c -> f : 更新承包合同信息
+activate f
+f -> f: 更新数据
+f --> c
+deactivate f
+c -> qsl : 创建权属来源资料附件
+activate qsl
+qsl -> qsl : 保存数据
+qsl --> c : 返回结果
+
+deactivate qsl
+c -> rc : 登记簿变更记录
+activate rc
+rc -> rc : 保存数据
+rc --> c: 返回结果
+deactivate rc
+
+c -> qz : 创建承包经营权证
+activate qz
+qz -> qz : 检验是否已生成权证
+qz -> pcc : 获取区域承包经营权证配置信息
+activate pcc
+pcc --> qz: 返回结果
+deactivate pcc
+qz -> qz : 保存数据
+qz --> c: 返回结果
+deactivate qz
+c -> d : 删除承包方锁
+activate d
+d --> c: 返回结果
+deactivate d
+c --> b: 返回结果（审核通过）
+deactivate c
+b --> a: 返回结果（审核通过）
+deactivate b
+return: 返回结果（审核通过）
+@enduml

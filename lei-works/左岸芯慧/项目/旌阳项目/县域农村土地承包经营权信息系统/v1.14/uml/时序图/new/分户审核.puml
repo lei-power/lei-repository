@@ -1,0 +1,64 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+skinparam sequenceMessageAlign right
+actor 审核科员
+participant "service-landowner服务" as A
+
+审核科员 -> A:1.发送审核分户登记请求
+activate A
+
+A -> A: 2.参数校验\n2.1校验入参\n2.2校验当前登记是否处于待审核状态\n1.3校验承包方信息\n1.4校验承包合同信息\n1.5校验承包经营权证登记簿
+A -> A: 3.获取被分户的承包方目前所有承包地块编码
+A -> A: 4.获取被分户的获取家庭成员列表
+A -> A: 5.校验被分户的家庭成员信息
+A -> A: 6.获取区域配置信息
+A -> A: 7.判断是审核通过还是审核驳回\n7.1.1修改登记流程以及创建登记流程操作日志(审核驳回)\n7.1.2删除承包方锁
+A -> A: 8.获取新分户详情列表
+A -> A: 9.获取新分户家庭成员详情列表
+A -> A: 10.获取每个新分户家庭成员信息
+A -> A: 11.检查家庭成员信息是否发生变化
+A -> A: 12.检查分户的地块在审核时，是否发生变更
+A -> A: 13.获取分户家庭成员记录
+A -> A: 14.获取分户承包信息记录
+A -> A: 15.创建新分户承包方\n15.1获取承包方编码游标\n15.2保存数据
+A -> A: 16.更新被分户家庭成员信息
+A -> A: 17.创建新分户承包合同
+A -> A: 18.获取地块列表信息
+A -> A: 19.批量更新地块信息
+A -> A: 20.批量更新地块信息
+A -> A: 21.创建新分户承包权证登记簿\n21.1获取登记簿流水号游标
+A -> A: 22.创建新分户权属来源资料附件
+A -> A: 23.创建新分户承包权证
+A -> A: 24.更新被分户承包方信息
+A -> A: 25.更新被分户承包合同信息
+A -> A: 26.更新被分户承包经营权证登记簿信息
+A -> A: 27.创建经营权证登记簿变更记录
+A -> A: 28.更新被分户承包方附件
+A -> A: 29.修改登记流程以及创建登记流程操作日志(审核通过)
+A -> A: 30.删除承包方锁
+
+
+A --> 审核科员: 返回结果
+deactivate A
+
+
+
+@enduml
+
+

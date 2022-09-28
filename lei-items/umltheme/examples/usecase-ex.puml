@@ -1,0 +1,27 @@
+@startuml
+
+!if %variable_exists("$THEME")
+title Usecase Diagram - $THEME theme
+!else
+title Usecase Diagram
+!endif
+
+legend
+This is my legend
+it can have a long list of stuff here
+and it can go on and on and on
+that's about it
+endlegend
+
+'skinparam BackgroundColor transparent
+
+left to right direction
+actor customer
+actor clerk
+rectangle checkout {
+  customer -- (checkout)
+  (checkout) .> (payment) : include
+  (help) .> (checkout) : extends
+  (checkout) -- clerk
+}
+@enduml

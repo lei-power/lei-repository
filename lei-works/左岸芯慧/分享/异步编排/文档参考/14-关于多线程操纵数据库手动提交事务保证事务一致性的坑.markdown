@@ -1,0 +1,85 @@
+---
+layout:  post
+title:   关于多线程操纵数据库手动提交事务保证事务一致性的坑
+date:   22-01-24 17:03:44 修改
+author:  'zhangtao'
+header-img: 'img/post-bg-2015.jpg'
+catalog:   false
+tags:
+-数据库
+-java
+-database
+
+---
+
+
+## 关于多线程操纵数据库手动提交事务保证事务一致性的坑
+
+思路： 主线程开启多个子线程，每个子线程开启自己的事务不提交，等所有数据都在子线程的事务里，且没有子线程报错的情况下，所有子线程再一起提交，发现任意一个子线程报错，所有子线程回滚。 问题： 1.假设我有8个线程，10条数据，每条数据开启一个子线程，当事务开启到第7个的时候，第8个就创建不出来了，因为线程这时候都被占用了（7子+1主），程序陷入死循环，一直等待。 2.假设我8个线程，5条数据，问题1不会出现，这时候saveOrUpdateDataBase()方法如果我用mybatis-plus的saveBatch方法去实现，会报错，初步分析，是第一个执行完commit的子线程会关闭sqlsession，导致第二个将要执行完的子线程commit的时候找不到sqlsession了，报错。
+
+```java
+@Service
+public interface SyncSaveOrUpdateTransactionService<T> {
+   
+    Logger log = LoggerFactory.getLogger(SyncSaveOrUpdateTransactionService.class);
+    default void syncSaveOrUpdate(List<T> list) throws ExecutionException, InterruptedException {
+   
+        List<List<T>> partition = Lists.partition(list, 1);
+        List<TransactionStatus> statusList = Collections.synchronizedList(Lists.newArrayList());
+        List<CompletableFuture<Boolean>> futureList = Collections.synchronizedList(Lists.newArrayList());
+        DataSourceTransactionManager transactionManager = getDataSourceTransactionManager();
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = getThreadPoolTaskExecutor();
+        for (List<T> subList : partition) {
+   
+
+            CompletableFuture<Boolean> booleanFuture = CompletableFuture.supplyAsync(() -> {
+   
+                try {
+   
+                    DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
+                    definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+                    TransactionStatus status = transactionManager.getTransaction(definition);
+                    statusList.add(status);
+                    log.info("开启事务{}",statusList.size());
+                    saveOrUpdateDataBase(subList);
+                } catch (TransactionException e) {
+   
+                    return false;
+                }
+                return true;
+            }, threadPoolTaskExecutor).exceptionally(e -> false);
+            futureList.add(booleanFuture);
+
+        }
+        if (!CollectionUtils.isEmpty(futureList)) {
+   
+            boolean isSuccessful = Boolean.TRUE;
+            for (CompletableFuture<Boolean> future : futureList) {
+   
+                if (!future.get()) {
+   
+                    // 所有子线程回滚
+                    isSuccessful = Boolean.FALSE;
+                }
+            }
+            if (isSuccessful) {
+   
+                // 所有子线程提交
+                log.info("所有子线程提交{}",statusList.size());
+                statusList.forEach(transactionManager::commit);
+            }else {
+   
+                log.info("所有子线程回滚{}",statusList.size());
+                statusList.forEach(transactionManager::rollback);
+            }
+        }
+    }
+
+    void saveOrUpdateDataBase(List<T> subList);
+
+    DataSourceTransactionManager getDataSourceTransactionManager();
+
+    ThreadPoolTaskExecutor getThreadPoolTaskExecutor();
+}
+```
+

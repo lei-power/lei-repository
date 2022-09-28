@@ -1,0 +1,33 @@
+@startuml
+
+!if %variable_exists("$THEME")
+title Activity Diagram - $THEME theme
+!else
+title Activity Diagram
+!endif
+
+'skinparam BackgroundColor black
+
+start
+ :start;
+ fork
+  partition "My Partition" {
+   :foo1;
+   :foo2;
+  }
+ fork again
+   :foo3;
+   note right: Note
+   detach
+ endfork
+ if (foo4) then (yes)
+   :foo5;
+   detach
+ else (no)
+  stop
+ endif
+ :foo6;
+ detach
+ :foo7;
+ stop
+@enduml

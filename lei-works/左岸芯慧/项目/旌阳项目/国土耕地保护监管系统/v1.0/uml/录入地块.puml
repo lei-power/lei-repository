@@ -1,0 +1,62 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+
+actor 筛查人
+participant "service-landoccupy服务" as A
+participant "service-gissde服务" as B
+
+筛查人 -> A: 1.发送录入需要复核请求
+activate A
+
+A -> A: 2.请求参数校验
+A -> A: 3.校验筛查人信息
+A -> A: 4.生成当前批次最大可用编码并保存
+
+A -> A: 5.创建耕地占用物并赋值基本信息
+A -> A: 6.耕地占用物的筛查相关信息赋值为\n筛查人的信息，状态赋值为“待复核”
+A -> A: 7.保存耕地占用物
+A -> A: 8.保存日志
+A -> B: 9.异步新增耕地占用物gis数据
+activate B
+A --> 筛查人: 返回结果
+deactivate A
+B -> B: 10.新增耕地占用物gis数据
+
+B --> A : 返回结果
+activate A
+deactivate B
+deactivate A
+actor 筛查人
+participant "service-landoccupy服务" as A
+participant "service-gissde服务" as B
+
+
+
+
+筛查人 -> A: 1.发送录入无需复核请求
+activate A
+A -> A: 2-5步骤同上
+ A-> A: 6.耕地占用物的筛查、审核相关信息赋值为\n筛查人的信息，状态赋值为“审核通过”
+A -> A: 7-10.步骤同上
+A --> 筛查人: 返回结果
+deactivate A
+
+
+
+@enduml

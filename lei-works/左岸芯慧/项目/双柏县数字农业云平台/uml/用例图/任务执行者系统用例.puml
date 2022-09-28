@@ -1,0 +1,37 @@
+@startuml
+!include ../style.puml
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+
+left to right direction
+actor :任务执行者(co端) :as 任务执行者
+actor 小队长
+
+小队长--|>任务执行者
+
+rectangle 接收农事任务 {
+usecase 创建农事任务变更记录 as 创建农事任务变更记录5
+usecase 创建农事任务变更记录 as 创建农事任务变更记录6
+  任务执行者 --> (拒绝农事任务)
+  (拒绝农事任务) ..> (创建农事任务变更记录5) : include
+
+  任务执行者 --> (接受农事任务)
+  (接受农事任务) ..> (创建农事任务变更记录6) : include
+  (接受农事任务) <.. (创建农资出库子任务) : extends
+  (接受农事任务) <.. (创建农机领用子任务) : extends
+
+}
+
+
+rectangle 提交农事任务执行结果 {
+usecase 创建农事任务变更记录 as 创建农事任务变更记录7
+  任务执行者 --> (提交任务信息)
+  (提交任务信息) ..> (创建农事任务变更记录7) : include
+  (提交任务信息) ..> (创建农事任务劳作人员工时) : include
+}
+
+@enduml

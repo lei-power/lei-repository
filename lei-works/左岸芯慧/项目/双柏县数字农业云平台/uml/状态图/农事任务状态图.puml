@@ -1,0 +1,39 @@
+@startuml
+!include ../style.puml
+
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+hide empty description
+
+
+[*] --r-> 待接受 :1.创建
+
+待接受 -> 关闭 :4.拒绝
+待接受 --> 关闭 :3.撤回
+待接受 -> 待接受 :2.修改
+
+state fork_state <<fork>>
+
+待接受 --> fork_state : 5.接受
+
+fork_state -> 仓储处理中
+fork_state ---> 待执行
+
+仓储处理中 -> 仓储处理中 :6.1出库\n6.2领用\n6.3出库&领用
+
+仓储处理中 -> 待执行 :7.1出库完成\n7.2领用完成\n7.3出库完成&领用完成
+
+待执行 -> 执行完毕 :8.提交任务信息
+执行完毕 -> 完成 :9.确认完成
+
+state end1 <<end>>
+关闭 -l> end1
+完成 -> [*]
+
+
+@enduml
+

@@ -1,0 +1,250 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Courier
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Courier
+}
+actor 审核科员
+participant "分户登记Controller" as A
+participant "分户登记Service" as B
+participant "分户登记Manage" as C
+
+participant "登记流程Manage" as I
+participant "登记流程操作日志Manage" as J
+
+participant "承包地块信息Manage" as H
+participant "承包方Manage" as E
+participant "承包方编码游标Manage" as ccc
+
+participant "承包合同Manage" as F
+
+
+
+participant "承包方家庭成员Manage" as K
+
+participant "承包经营权证登记簿Manage" as G
+participant "登记簿序列号游标Manage" as rsc
+participant "承包经营权证Manage" as qz
+participant "区域承包经营权证配置Manage" as pcc
+participant "承包方锁Manage" as D
+participant "分户详情Manage" as M
+participant "分户承包信息记录Manage" as N
+participant "分户家庭成员记录Manage" as X
+
+participant "权属来源资料附件Manage" as qsl
+participant "登记簿变更记录Manage" as rc
+
+
+autonumber
+
+
+
+审核科员 -> A : audit
+activate A
+A -> B : audit
+activate B
+B -> C : audit
+activate C
+
+
+C -> I : 获得登记流程表中记录
+activate I
+I --> C:返回结果
+deactivate I
+C -> C : 校验当前登记是否处于待审核状态
+C -> C : 查询当前登记的记录
+
+C -> H : 获取被分户的承包方目前所有承包地块编码
+activate H
+H --> C:返回结果
+deactivate H
+
+
+C -> E : getByCbfbm
+activate E
+E --> C:返回结果
+deactivate E
+C -> C : 校验承包方信息
+C -> F : getByCbfbm
+activate F
+F --> C:返回结果
+deactivate F
+C -> C : 校验承包合同信息
+
+C -> K : 获取家庭成员列表
+activate K
+K --> C:返回结果
+deactivate K
+C -> C : 校验家庭成员信息
+C -> G : getByCbfbm
+activate G
+G --> C:返回结果
+deactivate G
+C -> C : 校验承包经营权证登记簿信息
+
+C -> pcc : getByAreaId
+activate pcc
+pcc --> C:返回结果
+deactivate pcc
+C -> C : 获取区域配置信息
+
+C->C:判断是审核通过还是审核驳回
+C -> I : 修改登记流程以及创建登记流程操作日志(审核驳回)
+actIvate I
+I -> I : 保存数据
+
+I -> J : 创建登记流程操作日志
+activate J
+J -> J : 保存数据
+J --> I:返回结果
+deactivate J
+I --> C:返回结果
+deactivate I
+C -> D : 删除承包方锁
+activate D
+D --> C:返回结果(审核驳回)
+deactivate D
+C-->B:返回结果(审核驳回)
+
+B-->A:返回结果(审核驳回)
+A-->审核科员:返回结果(审核驳回)
+
+C -> M : 获取新分户详情列表
+activate M
+M --> C:返回结果
+deactivate M
+C -> X : 获取新分户家庭成员详情列表
+activate X
+X --> C:返回结果
+deactivate X
+C -> K : 获取每个新分户家庭成员信息
+activate K
+
+K --> C:返回结果
+deactivate K
+C -> C : 检查家庭成员信息是否发生变化
+C -> H : 查询分户的地块在审核时，是否发生变更
+activate H
+H --> C:返回结果
+deactivate H
+C -> X : 获取分户家庭成员记录
+activate X
+X --> C:返回结果
+deactivate X
+C -> N : 获取分户承包信息记录
+activate N
+N --> C:返回结果
+deactivate N
+C -> E : 创建新分户承包方
+activate E
+E -> ccc : 获取承包方编码游标
+activate ccc
+ccc -> ccc : 保存数据
+ccc --> E:返回结果
+deactivate ccc
+E -> E:保存数据
+E --> C:返回结果
+deactivate E
+C -> K : 更新被分户家庭成员信息
+activate K
+K --> C:返回结果
+deactivate K
+C -> F : 创建新分户承包合同
+activate F
+F -> F : 保存数据
+F --> C:返回结果
+deactivate F
+C -> H : 获取地块列表信息
+activate H
+H --> C:返回结果
+deactivate H
+C -> C : 校验地块列表信息
+C -> H : 批量更新地块信息
+activate H
+H --> C:返回结果
+deactivate H
+C -> rsc : 获取登记簿流水号游标
+activate rsc
+rsc --> rsc:保存数据
+rsc --> C:返回结果
+deactivate rsc
+C -> G : 创建新分户承包权证登记簿
+activate G
+G -> G : 保存数据
+G --> C:返回结果
+deactivate G
+C -> qsl : 创建新分户权属来源资料附件
+activate qsl
+qsl -> qsl : 保存数据
+qsl --> C : 返回结果
+deactivate qsl
+
+C -> qz : 创建新分户承包权证
+activate qz
+qz -> qz : 保存数据
+qz --> C: 返回结果
+deactivate qz
+C -> K : 获取家庭成员列表
+activate K
+K --> C: 返回结果
+deactivate K
+C -> E : 更新被分户承包方信息
+activate E
+E --> C: 返回结果
+deactivate E
+C -> F : 更新被分户承包合同信息
+activate F
+F --> C: 返回结果
+deactivate F
+C -> rsc : 获取登记簿流水号游标
+activate rsc
+rsc-> rsc : 保存数据
+rsc --> C: 返回结果
+deactivate rsc
+C -> G : 更新被分户承包经营权证登记簿信息
+activate G
+G --> C:返回结果
+deactivate G
+C -> rc : 创建经营权证登记簿变更记录
+activate rc
+rc -> rc : 保存数据
+rc --> C:返回结果
+deactivate rc
+
+C -> qsl : 更新被分户承包方附件
+activate qsl
+qsl --> C:返回结果
+deactivate qsl
+C -> I : 修改登记流程以及创建登记流程操作日志(审核通过)
+actIvate I
+I -> I : 保存数据
+
+I -> J : 创建登记流程操作日志
+activate J
+J -> J : 保存数据
+J --> I:返回结果
+deactivate J
+I --> C:返回结果
+deactivate I
+C -> D : 删除承包方锁
+activate D
+D --> C:返回结果
+deactivate D
+C --> B: 返回结果（审核通过）
+deactivate C
+B --> A: 返回结果（审核通过）
+deactivate B
+return: 返回结果（审核通过）
+@enduml

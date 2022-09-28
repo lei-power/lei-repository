@@ -1,0 +1,57 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+
+actor 审核人
+participant "service-landoccupy服务" as A
+participant "service-gissde服务" as B
+
+审核人 -> A: 1.发送审核通过请求
+activate A
+
+A -> A: 2.请求参数校验
+A -> A: 3.校验审核人信息
+A -> A: 4.检查耕地占用物是否存在
+A -> A: 5.检查该耕地占用物是否处于“待审核”状态
+A -> A: 6.修改耕地占用物审核相关信息为审核人\r的信息，状态修改为“审核通过”
+A -> A: 7.更新耕地占用物
+A -> A: 8.保存日志
+A -> B: 9.异步更新耕地占用物gis数据
+activate B
+A --> 审核人: 返回结果
+deactivate A
+B -> B: 10.更新耕地占用物gis数据
+
+B --> A : 返回结果
+activate A
+deactivate B
+deactivate A
+actor 审核人
+participant "service-landoccupy服务" as A
+participant "service-gissde服务" as B
+
+
+审核人 -> A: 1.发送审核驳回请求
+activate A
+A -> A: 2-5步骤同上
+A -> A: 修改耕地占用物审核相关信息为审核人\r的信息，状态修改为“审核驳回”
+A -> A: 7-10.步骤同上
+A --> 审核人: 返回结果
+deactivate A
+
+@enduml

@@ -1,0 +1,218 @@
+@startuml
+participant Actor
+Actor -> GovApplyMergeController : audit
+activate GovApplyMergeController
+GovApplyMergeController -> GovApplyMergeService : audit
+activate GovApplyMergeService
+GovApplyMergeService -> ApplyMergeManage : audit
+activate ApplyMergeManage
+ApplyMergeManage -> ApplyFlowManage : getById
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyMergeManage
+deactivate ApplyFlowManage
+ApplyMergeManage -> ApplyMergeManage : getById
+activate ApplyMergeManage
+ApplyMergeManage --> ApplyMergeManage
+deactivate ApplyMergeManage
+ApplyMergeManage -> ApplyFlowManage : editApplyFlowAndCreateApplyFlowOperatorLog
+activate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : getById
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : update
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowOperatorLogManage : createApplyFlowOperatorLog
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage -> ApplyFlowOperatorLogManage : insert
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowOperatorLogManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowManage --> ApplyMergeManage
+deactivate ApplyFlowManage
+ApplyMergeManage -> ApplyCbfbmLockRecordManage : deleteByCbfbm
+activate ApplyCbfbmLockRecordManage
+ApplyCbfbmLockRecordManage --> ApplyMergeManage
+deactivate ApplyCbfbmLockRecordManage
+ApplyMergeManage -> CbfManage : getByCbfbm
+activate CbfManage
+CbfManage --> ApplyMergeManage
+deactivate CbfManage
+ApplyMergeManage -> CbhtManage : getByCbfbm
+activate CbhtManage
+CbhtManage --> ApplyMergeManage
+deactivate CbhtManage
+ApplyMergeManage -> CbjyqzdjbManage : getByCbfbm
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyMergeManage
+deactivate CbjyqzdjbManage
+ApplyMergeManage -> CbfJtcyManage : getByCbfbmAndYhzgx
+activate CbfJtcyManage
+CbfJtcyManage --> ApplyMergeManage
+deactivate CbfJtcyManage
+ApplyMergeManage -> PrintCertificateConfigManage : getByAreaId
+activate PrintCertificateConfigManage
+PrintCertificateConfigManage --> ApplyMergeManage
+deactivate PrintCertificateConfigManage
+ApplyMergeManage -> ApplyMergeDetailManage : getListByApplyMergeId
+activate ApplyMergeDetailManage
+ApplyMergeDetailManage --> ApplyMergeManage
+deactivate ApplyMergeDetailManage
+ApplyMergeManage -> CbfManage : getByCbfbm
+activate CbfManage
+CbfManage --> ApplyMergeManage
+deactivate CbfManage
+ApplyMergeManage -> CbhtManage : getByCbfbm
+activate CbhtManage
+CbhtManage --> ApplyMergeManage
+deactivate CbhtManage
+ApplyMergeManage -> CbjyqzdjbManage : getByCbfbm
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyMergeManage
+deactivate CbjyqzdjbManage
+ApplyMergeManage -> ApplyMergeFamilyRecordManage : getListByApplyMergeDetailId
+activate ApplyMergeFamilyRecordManage
+ApplyMergeFamilyRecordManage --> ApplyMergeManage
+deactivate ApplyMergeFamilyRecordManage
+ApplyMergeManage -> CbfJtcyManage : getById
+activate CbfJtcyManage
+CbfJtcyManage --> ApplyMergeManage
+deactivate CbfJtcyManage
+ApplyMergeManage -> ApplyMergeFamilyRecordManage : getListByApplyMergeDetailId
+activate ApplyMergeFamilyRecordManage
+ApplyMergeFamilyRecordManage --> ApplyMergeManage
+deactivate ApplyMergeFamilyRecordManage
+ApplyMergeManage -> CbfJtcyManage : update
+activate CbfJtcyManage
+CbfJtcyManage --> ApplyMergeManage
+deactivate CbfJtcyManage
+ApplyMergeManage -> CbdkxxManage : getListByCbfbm
+activate CbdkxxManage
+CbdkxxManage --> ApplyMergeManage
+deactivate CbdkxxManage
+ApplyMergeManage -> CbdkxxManage : updateBatch
+activate CbdkxxManage
+CbdkxxManage --> ApplyMergeManage
+deactivate CbdkxxManage
+ApplyMergeManage -> CbfManage : update
+activate CbfManage
+CbfManage --> ApplyMergeManage
+deactivate CbfManage
+ApplyMergeManage -> CbhtManage : update
+activate CbhtManage
+CbhtManage --> ApplyMergeManage
+deactivate CbhtManage
+ApplyMergeManage -> CbjyqzdjbManage : update
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyMergeManage
+deactivate CbjyqzdjbManage
+ApplyMergeManage -> QslyzlfjManage : getByCbjyqzbm
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyMergeManage
+deactivate QslyzlfjManage
+ApplyMergeManage -> QslyzlfjManage : update
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyMergeManage
+deactivate QslyzlfjManage
+ApplyMergeManage -> CbjyqzManage : getByCbjyqzbm
+activate CbjyqzManage
+CbjyqzManage --> ApplyMergeManage
+deactivate CbjyqzManage
+ApplyMergeManage -> CbjyqzManage : update
+activate CbjyqzManage
+CbjyqzManage --> ApplyMergeManage
+deactivate CbjyqzManage
+ApplyMergeManage -> CbfJtcyManage : getListByCbfbm
+activate CbfJtcyManage
+CbfJtcyManage --> ApplyMergeManage
+deactivate CbfJtcyManage
+ApplyMergeManage -> CbfManage : update
+activate CbfManage
+CbfManage --> ApplyMergeManage
+deactivate CbfManage
+ApplyMergeManage -> CbdkxxManage : getListByCbfbm
+activate CbdkxxManage
+CbdkxxManage --> ApplyMergeManage
+deactivate CbdkxxManage
+ApplyMergeManage -> ApplyMergeManage : λ→
+activate ApplyMergeManage
+ApplyMergeManage -> CbhtManage : update
+activate CbhtManage
+CbhtManage --> ApplyMergeManage
+deactivate CbhtManage
+ApplyMergeManage -> RegisterSerialCursorManage : getMaxSerialByAreaId
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage -> RegisterSerialCursorManage : getByAreaId
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage --> RegisterSerialCursorManage
+deactivate RegisterSerialCursorManage
+RegisterSerialCursorManage -> RegisterSerialCursorManage : update
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage --> RegisterSerialCursorManage
+deactivate RegisterSerialCursorManage
+RegisterSerialCursorManage --> ApplyMergeManage
+deactivate RegisterSerialCursorManage
+ApplyMergeManage -> CbjyqzdjbManage : update
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyMergeManage
+deactivate CbjyqzdjbManage
+ApplyMergeManage -> QslyzlfjManage : getByCbjyqzbm
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyMergeManage
+deactivate QslyzlfjManage
+ApplyMergeManage -> QslyzlfjManage : update
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyMergeManage
+deactivate QslyzlfjManage
+ApplyMergeManage -> CbjyqzManage : getByCbjyqzbm
+activate CbjyqzManage
+CbjyqzManage --> ApplyMergeManage
+deactivate CbjyqzManage
+ApplyMergeManage -> CbjyqzManage : update
+activate CbjyqzManage
+CbjyqzManage --> ApplyMergeManage
+deactivate CbjyqzManage
+ApplyMergeManage -> RegisterChangeRecordManage : createRegisterChangeRecord
+activate RegisterChangeRecordManage
+RegisterChangeRecordManage -> RegisterChangeRecordManage : insert
+activate RegisterChangeRecordManage
+RegisterChangeRecordManage --> RegisterChangeRecordManage
+deactivate RegisterChangeRecordManage
+RegisterChangeRecordManage --> ApplyMergeManage
+deactivate RegisterChangeRecordManage
+ApplyMergeManage -> ApplyFlowManage : editApplyFlowAndCreateApplyFlowOperatorLog
+activate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : getById
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : update
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowOperatorLogManage : createApplyFlowOperatorLog
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage -> ApplyFlowOperatorLogManage : insert
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowOperatorLogManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowManage --> ApplyMergeManage
+deactivate ApplyFlowManage
+ApplyMergeManage -> ApplyCbfbmLockRecordManage : deleteByCbfbm
+activate ApplyCbfbmLockRecordManage
+ApplyCbfbmLockRecordManage --> ApplyMergeManage
+deactivate ApplyCbfbmLockRecordManage
+ApplyMergeManage --> ApplyMergeManage
+deactivate ApplyMergeManage
+ApplyMergeManage --> GovApplyMergeService
+deactivate ApplyMergeManage
+GovApplyMergeService --> GovApplyMergeController
+deactivate GovApplyMergeService
+return
+@enduml

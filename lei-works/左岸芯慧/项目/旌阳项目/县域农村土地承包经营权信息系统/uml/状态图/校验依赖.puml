@@ -1,0 +1,33 @@
+@startuml
+hide empty description
+state "applyFlowFuture" #cyan
+state "userFuture" #cyan
+
+state "applyCancelFuture"
+state "cbfFuture"
+state "cbhtFuture"
+state "cbjyqzFuture"
+state "cbjyqzdjbFuture"
+state "allOfFuture" #red
+
+
+
+
+applyFlowFuture -[#green,bold]-> applyCancelFuture
+applyCancelFuture --[#green,bold]-> cbfFuture
+applyCancelFuture -[#green,bold]-> cbhtFuture
+applyCancelFuture -[#green,bold]-> cbjyqzFuture
+applyCancelFuture -[#green,bold]-> cbjyqzdjbFuture
+
+cbfFuture -[#DD00AA,bold]--> allOfFuture
+cbhtFuture --[#DD00AA,bold]--> allOfFuture
+cbjyqzFuture --[#DD00AA,bold]--> allOfFuture
+cbjyqzdjbFuture -[#DD00AA,bold]--> allOfFuture
+userFuture ----[#DD00AA,bold]--> allOfFuture
+
+
+
+
+
+
+@enduml

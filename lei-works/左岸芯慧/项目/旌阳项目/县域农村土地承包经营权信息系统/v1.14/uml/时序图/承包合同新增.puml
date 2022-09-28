@@ -1,0 +1,82 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Courier
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Courier
+}
+actor 科员
+participant "承包合同Controller" as A
+participant "承包合同Service" as B
+participant "承包合同Manage" as C
+participant "承包地块信息Manage" as F
+participant "发包方Manage" as D
+
+
+autonumber
+
+科员 -> A : add
+activate A
+A -> B : add
+activate B
+B -> F : 校验地块信息
+activate F
+F -> 承包方Manage : getByCbfbm
+activate 承包方Manage
+承包方Manage --> F:返回结果
+deactivate 承包方Manage
+F -> F : 校验承包方
+F -> F : 地块信息参数校验
+F -> F : 校验发包方
+F -> F : 校验是否是承包地块
+
+F --> B :返回结果
+deactivate F
+B -> C : 创建承包合同
+activate C
+C -> 承包方Manage : getByCbfbm
+activate 承包方Manage
+承包方Manage --> C:返回结果
+deactivate 承包方Manage
+C -> C : 校验承包方
+C -> D : getByFbfbm
+
+activate D
+D --> C:返回结果
+deactivate D
+C -> C : 校验发包方
+C -> C : 校验该承包方是否已存在合同
+C -> C : 校验签订时间必须大于等于承包期起日期\r且小于等于承包期限止日期
+C -> C : 校验发包方
+C -> C : 保存数据
+
+C --> B:返回结果
+deactivate C
+B -> F : 批量保存承包地块信息
+activate F
+F -> F :校验要插入的地块是否已存在数据库
+F -> D : getByFbfbm
+activate D
+D --> F: 返回结果
+deactivate D
+F -> F :校验发包方是否存在
+F -> F : 批量保存承包地块信息
+F --> B:返回结果
+deactivate F
+B --> A:返回结果
+deactivate B
+A --> 科员:返回结果
+deactivate A
+
+@enduml

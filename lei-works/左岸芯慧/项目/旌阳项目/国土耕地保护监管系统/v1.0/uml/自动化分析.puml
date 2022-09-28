@@ -1,0 +1,61 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+
+actor admin运维人员
+participant "service-landoccupy服务" as A
+participant "service-gissde服务" as B
+participant "前端gis三调服务" as C
+
+admin运维人员 -> A: 1.发送自动化分析请求
+activate A
+
+A -> A: 2.参数校验\n2.1校验当前批次是否存在\n2.2校验三调服务地址是否配置\n\n2.3校验该区域是否存在\n\n2.4校验前批次是否配置地块游标\n2.5校验当前批次批次区域下是否配置地块游标\n\n2.6校验当前批次是否有未分析的地块需要执行
+A -> B: 3.发送自动化分析请求
+activate B
+
+
+B -> B: 4.校验当前区域当前批次是否有未分析的地块
+B -> B: 5.耕地保护异步分析开始
+B -> B:5.1循环查询临时表里批次、区域、未分析-未同步的地块，每次返回100条\n5.2计算当前占用物面积
+B -> B:5.3查询所有相交的地块列表\n5.3.1校验轮廓首尾没有闭环，进行处理\n5.3.2数据组装\n5.3.3拼接请求头
+B -> C:5.3.4发送获取相交列表请求
+activate C
+C --> B : 返回结果
+
+deactivate C
+
+B -> B:5.4校验token是否失效
+B -> B:5.5校验占用物与三调是否相交\n5.5.1不相交则赋值占用物面积、占用面积、分析标志等\n5.5.2有相交则计算相交面积，后赋值赋值占用物面积、占用面积、分析标志等
+B -> B:5.6 更新temp表（sqlServer数据库有限制，这里每次更新50条数据）
+
+B -> B:5.7同步数据到gis服务tbl_arable_land_occupy表和mysql数据库\n5.7.1校验当前区域当前批次未同步的数据是否为0
+
+B -> A:5.7.2获取最大编码
+A--> B : 返回结果
+B -> B:5.7.3 同步数据到gis服务tbl_arable_land_occupy表
+B -> A:5.7.4同步数据到mysql数据库tbl_arable_land_occupy表
+A--> B : 返回结果
+B --> A : 返回结果
+
+deactivate B
+A --> admin运维人员 : 返回结果
+deactivate A
+
+
+@enduml

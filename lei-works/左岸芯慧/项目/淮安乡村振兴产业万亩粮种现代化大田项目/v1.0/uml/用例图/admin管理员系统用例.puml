@@ -1,0 +1,49 @@
+@startuml
+!include ../style.puml
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+
+left to right direction
+
+actor :admin管理员(admin端) :as a
+
+  a --> (管理农机大类)
+  usecase 新增 as 管理农机大类新增
+  usecase 修改 as 管理农机大类修改
+  usecase 删除 as 管理农机大类删除
+  (管理农机大类) --> (管理农机大类新增)
+  (管理农机大类) --> (管理农机大类修改)
+  (管理农机大类) --> (管理农机大类删除)
+
+  a --> (管理农机小类)
+  usecase 新增 as 管理农机小类新增
+  usecase 修改 as 管理农机小类修改
+  usecase 删除 as 管理农机小类删除
+  (管理农机小类) --> (管理农机小类新增)
+  (管理农机小类) --> (管理农机小类修改)
+  (管理农机小类) --> (管理农机小类删除)
+
+
+  a --> (管理农机种类)
+  usecase 新增 as 管理农机种类新增
+  usecase 修改 as 管理农机种类修改
+  usecase 删除 as 管理农机种类删除
+  (管理农机种类) --> (管理农机种类新增)
+  (管理农机种类) --> (管理农机种类修改)
+  (管理农机种类) --> (管理农机种类删除)
+
+
+  a --> (管理任务类型)
+  usecase 新增 as 管理任务类型新增
+  usecase 修改 as 管理任务类型修改
+  usecase 删除 as 管理任务类型删除
+  (管理任务类型) --> (管理任务类型新增)
+  (管理任务类型) --> (管理任务类型修改)
+  (管理任务类型) --> (管理任务类型删除)
+
+
+@enduml

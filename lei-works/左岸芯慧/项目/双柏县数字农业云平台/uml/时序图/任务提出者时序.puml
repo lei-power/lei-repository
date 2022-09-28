@@ -1,0 +1,206 @@
+@startuml
+!include ../style.puml
+autonumber  "0."
+
+actor 任务提出者
+participant "produce服务" as A
+
+任务提出者->A:发起创建农事任务请求
+activate A
+A -> A: 入参校验企业id、农场id、任务类型唯一标志、地块id列表、作业方式、\n预计作业开始时间、预计作业结束时间是否有效
+activate A
+deactivate A
+A -> A: 校验用户信息是否合法
+activate A
+deactivate A
+
+A -> A: 校验任务类型及农事类型，未查询到结果时，返回错误提示
+activate A
+deactivate A
+
+A -> A: 当作业方式等于机械时校验农事任务农机入参列表的\n农机种类id和农机出库数量是否有效
+activate A
+deactivate A
+
+A -> A: 当农事类型是否使用农资大类字段有有效值时校验农事任务农资入参列表农资id、\n农资出库数量是否有效
+activate A
+deactivate A
+
+A -> A: 当农事任务类型是否创建种植计划等于是时，校验作物id是否有效
+activate A
+deactivate A
+
+A -> A: 当农事任务类型是否生成采收计划等于是时，校验种养计划id是否有效
+activate A
+deactivate A
+
+A -> A:校验企业、农场信息是否有效
+activate A
+deactivate A
+
+A -> A:校验农事任务地块列表入参列表是否有效
+activate A
+deactivate A
+
+
+A -> A: 组装农事任务数据\n1.生成农事任务编号\n2.填入任务发起人id,任务状态赋值为**“待接受”**\n3.保存数据
+activate A
+deactivate A
+
+A -> A: 组装农事任务地块数据，并保存数据
+activate A
+deactivate A
+
+A -> A: 当农事类型是否使用农资大类字段有有效值时，组装农事任务农资数据，并保存数据
+activate A
+deactivate A
+
+
+A -> A: 当作业方式等于机械时，组装农事任务农机数据，并保存数据
+activate A
+deactivate A
+
+A -> A: 组装农事任务变更记录数据并保存数据
+activate A
+deactivate A
+
+A --> 任务提出者: 返回结果
+deactivate A
+
+
+...
+...
+...
+autonumber  "0."
+任务提出者->A:发起修改农事任务请求
+activate A
+A -> A: 入参校验农事任务id、任务类型唯一标志、地块id列表、作业方式、\n预计作业开始时间、预计作业结束时间是否有效
+activate A
+deactivate A
+A -> A: 校验农事任务状态是否为**“待接受”**
+activate A
+deactivate A
+A -> A: 校验用户信息是否合法
+activate A
+deactivate A
+
+
+A -> A: 当作业方式等于机械时校验农事任务农机入参列表的\n农机种类id和农机出库数量是否有效
+activate A
+deactivate A
+
+A -> A: 当农事类型是否使用农资大类字段有有效值时校验农事任务农资入参列表农资id、\n农资出库数量是否有效
+activate A
+deactivate A
+
+A -> A: 当农事任务类型是否创建种植计划等于是时，校验作物id是否有效
+activate A
+deactivate A
+
+A -> A: 当农事任务类型是否生成采收计划等于是时，校验种养计划id是否有效
+activate A
+deactivate A
+
+A -> A:校验农事任务地块列表入参列表是否有效
+activate A
+deactivate A
+
+A -> A: 组装农事任务数据,并更新数据
+activate A
+deactivate A
+
+
+A -> A: 组装农事任务地块数据，先删除该农事任务下的农事任务地块，\n后保存数据
+activate A
+deactivate A
+
+A -> A: 当农事类型是否使用农资大类字段有有效值时，组装农事任务农资数据，\n先删除该农事任务下的农事任务农资，后保存数据
+activate A
+deactivate A
+A -> A: 当作业方式等于机械时，组装农事任务农机数据，\n先删除该农事任务下的农事任务农机，后保存数据
+activate A
+deactivate A
+
+
+A -> A: 组装农事任务变更记录数据并保存数据
+activate A
+deactivate A
+
+A --> 任务提出者: 返回结果
+deactivate A
+
+
+
+...
+...
+...
+autonumber  "0."
+任务提出者->A:发起撤回农事任务请求
+activate A
+A -> A: 入参校验农事任务id是否有效
+activate A
+deactivate A
+A -> A: 校验农事任务状态是否为**“待接受”**
+activate A
+deactivate A
+A -> A: 校验用户信息是否合法
+activate A
+deactivate A
+
+A -> A: 将农事任务数据状态改为**“关闭”**并更新数据
+activate A
+deactivate A
+
+
+A -> A: 组装农事任务变更记录数据并保存数据
+activate A
+deactivate A
+
+A --> 任务提出者: 返回结果
+deactivate A
+
+...
+...
+...
+autonumber  "0."
+任务提出者->A:发起确认完成农事任务请求
+activate A
+A -> A: 入参校验农事任务id,评价分数，评价内容是否有效
+activate A
+deactivate A
+A -> A: 校验农事任务状态是否为**“执行完毕”**
+activate A
+deactivate A
+A -> A: 校验用户信息是否合法
+activate A
+deactivate A
+
+
+A -> A: 判断农事任务类型是否创建种植计划等于是时，\n校验作物id是否有效,并创建种养计划
+activate A
+activate A
+deactivate A
+A -> A: 回填农事任务数据的种养计划id
+deactivate A
+
+
+A -> A: 判断农事任务类型是否生成采收计划等于是时，\n校验种养计划id是否有效，并创建采收记录
+activate A
+deactivate A
+
+A -> A: 将农事任务数据状态改为**“完成”**并更新数据
+activate A
+deactivate A
+
+A -> A: 组装农事记录数据并保存数据
+activate A
+deactivate A
+
+A -> A: 组装农事任务变更记录数据并保存数据
+activate A
+deactivate A
+
+A --> 任务提出者: 返回结果
+deactivate A
+
+@enduml

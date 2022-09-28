@@ -1,0 +1,79 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+autonumber
+actor 筛查人
+participant "异常占用耕地Controller" as A
+participant "异常占用耕地Service" as B
+participant "异常占用耕地Manage" as C
+participant "耕地地块编码游标Manage" as F
+participant "异常占用耕地操作日志Manage" as D
+participant "gis服务" as E
+
+
+筛查人 -> A: 发送录入无需复核请求
+activate A
+
+A -> A: 请求参数校验
+
+A -> B: 发送录入无需复核请求
+
+activate B
+B -> B: 获取筛查人信息
+B -> B:  校验筛查人信息
+
+
+B -> C: 发送录入无需复核请求
+
+activate C
+
+C -> F: 获取当前批次最大可用编码
+activate F
+F -> F: 生成当前批次最大可用编码并保存
+F --> C: 返回结果
+deactivate F
+
+C -> C: 生成地块并赋值基本信息
+C -> C: 地块的筛查人信息、审核人信息赋值为\r当前用户的信息（筛查人），状态赋值为“审核通过”
+C -> C: 保存地块
+C -> D: 保存日志
+
+activate D
+D -> D: 保存日志
+D --> C: 返回结果
+deactivate D
+C -> E: 异步新增异常占用耕地gis数据
+
+activate E
+E -> E: 新增异常占用耕地gis数据
+C --> B: 返回结果
+
+deactivate C
+
+B --> A: 返回结果
+deactivate B
+
+A --> 筛查人: 返回结果
+deactivate A
+
+E --> C: 返回结果
+activate C
+deactivate C
+deactivate E
+
+@enduml

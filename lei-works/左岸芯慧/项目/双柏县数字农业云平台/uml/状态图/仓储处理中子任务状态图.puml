@@ -1,0 +1,29 @@
+@startuml
+!include ../style.puml
+
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+hide empty description
+
+
+state 仓储处理中 {
+  [*] --> 待出库 :创建农资出库子任务
+  待出库 --> 待出库 : 出库
+  待出库 --> 已出库 : 出库完成
+  已出库 ---> [*]
+ ||
+
+  [*] --> 待处理 :创建农机领用子任务
+  待处理 -> 待处理 : 领用
+  待处理 --> 已处理 : 领用完成
+  已处理 ---> [*]
+
+}
+
+
+@enduml
+

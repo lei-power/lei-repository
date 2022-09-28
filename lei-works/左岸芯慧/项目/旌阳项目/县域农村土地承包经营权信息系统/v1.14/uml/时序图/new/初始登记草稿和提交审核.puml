@@ -1,0 +1,103 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+skinparam sequenceMessageAlign right
+actor 登记科员
+participant "service-landowner服务" as A
+
+登记科员 -> A: （模板）1.发送新增XXX登记请求
+activate A
+
+A -> A: 1.参数校验\n1.1校验入参\n1.2判断当前动作，若是提交审核则校验承包方编码是否锁定\n1.3校验承包方信息\n1.4校验承包合同信息\n1.5校验承包经营权证登记簿
+
+A -> A: 2.创建登记流程和登记流程操作日志
+
+A -> A: 3.数据组装
+A -> A: 4.保存数据
+
+A -> A: 5.校验当前动作，若是提交审核则锁定承包方
+
+A --> 登记科员: 返回结果
+deactivate A
+
+登记科员 -> A: 1.发送新增初始登记请求
+activate A
+A -> A: 1.参数校验\n1.5校验是否未生成承包经营权证登记簿
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+
+登记科员 -> A: 1.发送新增其他方式登记请求
+activate A
+A -> A: 1.参数校验\n1.5校验是否未生成承包经营权证登记簿
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+登记科员 -> A: 1.发送新增互换登记请求
+activate A
+A -> A:   1.参数校验\n1.5校验是否已生成承包经营权证登记簿\n1.6校验地块信息\n1.6.1校验承包方\n1.6.2互换地块不可为0\n1.6.3校验发包方\n1.6.4校验是否是承包地块
+
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+登记科员 -> A: 1.发送新增转让登记请求
+activate A
+A -> A:   1.参数校验\n1.5校验是否已生成承包经营权证登记簿\n1.6校验地块信息\n1.6.1校验承包方\n1.6.2转让地块不可为0\n1.6.3校验发包方\n1.6.4校验是否是承包地块\n1.7转让方不可将自身地块全部转让
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+登记科员 -> A: 1.发送新增变更户主登记请求
+activate A
+A -> A:   1.参数校验\n1.5校验是否已生成承包经营权证登记簿\n1.6校验家庭成员信息\n1.6.1校验当前承包方是否只有一个成员\n1.6.2校验当前承包方家庭成员是否有多户主\n1.6.3校验户主选择出现多个或者0个
+A -> A:   4.保存数据\n4.1保存变更户主登记信息\n4.2保存变更的家庭成员信息
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+登记科员 -> A: 1.发送新增分户登记请求
+activate A
+A -> A:   1.参数校验\n1.5校验是否已生成承包经营权证登记簿\n1.6校验该承包方类型是否是农户\n1.7校验当前承包方是否只有一个成员\n校验地块信息
+A -> A: 4.保存数据\n4.1保存分户登记信息\n4.2保存分户的数据（新分户数据集合）\n4.2.1保存分户承包信息（用于生成承包方和合同）\n4.2.2保存新分户家庭成员信息
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+登记科员 -> A: 1.发送新增合户登记请求
+activate A
+A -> A:   1.参数校验\n1.5校验是否已生成承包经营权证登记簿\n1.6校验该承包方类型是否是农户\n1.7校验家庭成员信息\n1.8校验是否属于同一个发包方
+A -> A: 4.保存数据\n4.1保存合户登记信息\n4.2保存被合户方数据
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+登记科员 -> A: 1.发送注销登记请求
+activate A
+A -> A:   1.参数校验\n1.5校验是否已生成承包经营权证登记簿
+A -> A: 其余步骤同模板
+A --> 登记科员: 返回结果
+deactivate A
+
+
+
+@enduml
+
+

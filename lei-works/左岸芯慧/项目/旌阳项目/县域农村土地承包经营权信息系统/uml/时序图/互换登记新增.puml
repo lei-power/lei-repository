@@ -1,0 +1,107 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Courier
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Courier
+}
+actor 登记科员
+participant "互换登记Controller" as A
+participant "互换登记Service" as B
+participant "互换登记Manage" as C
+participant "承包方锁Manage" as D
+participant "承包方Manage" as E
+participant "承包合同Manage" as F
+participant "承包经营权证登记簿Manage" as G
+participant "承包地块信息Manage" as H
+participant "登记流程Manage" as I
+participant "登记流程操作日志Manage" as J
+
+autonumber
+
+
+登记科员 -> A : add
+activate A
+A -> B : add
+activate B
+B -> C : 创建互换登记
+activate C
+
+
+C -> D : 校验当前动作，若是提交审核\r则校验承包方编码是否锁定
+activate D
+D -> D : 校验承包方是否锁定
+D --> C: 返回结果
+deactivate D
+
+
+C -> E : getByCbfbm
+activate E
+E --> C: 返回结果
+deactivate E
+C -> C: 校验承包方信息
+C -> F : getByCbfbm
+activate F
+F --> C: 返回结果
+deactivate F
+C -> C: 校验承包合同信息
+
+C -> G : getByCbhtbm
+activate G
+G --> C: 返回结果
+deactivate G
+C -> C: 校验是否已生成承包经营权证登记簿
+
+
+
+C -> H : 校验地块信息
+activate H
+H -> E : getByCbfbm
+activate E
+E --> H:返回结果
+deactivate E
+H -> H : 校验承包方
+H -> H : 地块信息参数校验
+H -> H : 校验发包方
+H -> H : 校验是否是承包地块
+
+H --> C :返回结果
+deactivate H
+
+
+C -> C : 保存数据
+
+C -> I : 创建登记流程和登记流程操作日志
+activate I
+I -> I : 保存数据
+
+I -> J : 创建登记流程操作日志
+activate J
+J -> J : 保存数据
+J --> I: 返回结果
+deactivate J
+I --> C: 返回结果
+deactivate I
+C -> D : 校验当前动作，若是提交审核则锁定承包方
+activate D
+D -> D : 保存数据
+
+D --> C: 返回结果
+deactivate D
+C --> B: 返回结果
+deactivate C
+B --> A: 返回结果
+deactivate B
+return: 返回结果
+@enduml

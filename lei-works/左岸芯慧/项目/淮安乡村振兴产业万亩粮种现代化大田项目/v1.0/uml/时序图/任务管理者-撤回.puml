@@ -1,0 +1,20 @@
+@startuml
+!include ../style.puml
+autonumber  "0."
+
+ actor 总监或中队长 as 任务管理者
+participant "produce服务" as A
+
+autonumber  "0."
+任务管理者->A:撤回
+activate A
+A -> A: 入参校验
+A -> A: <1>校验农事任务状态是否为**“待接受”**\n<2>校验用户信息是否合法
+A -> A: 将农事任务数据状态改为**“关闭”**,并更新'农事任务表'
+A -> A: 组装农事任务变更记录数据,并插入'农事任务变更记录表'
+
+A --> 任务管理者: 返回结果
+deactivate A
+
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+hide empty description
+state "任务一" #cyan
+state "任务二"
+state "任务三"
+state "任务四"
+state "任务五"#deeppink
+state "任务六"
+state "任务七" #red
+
+
+任务一 -[#green,bold]-> 任务二
+任务一 -[#green,bold]-> 任务三
+
+任务二 -[#green,bold]> 任务四
+任务二 -[#black,bold]-> 任务五
+
+
+任务三 -[#black,bold]-> 任务五
+任务三 -[#green,bold]-> 任务六
+
+任务四 -[#DD00AA,bold]-> 任务七
+任务五 -[#DD00AA,bold]-> 任务七
+任务六 -[#DD00AA,bold]-> 任务七
+
+
+
+
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+autonumber
+actor 审核人
+participant "异常占用耕地Controller" as A
+participant "异常占用耕地Service" as B
+participant "异常占用耕地Manage" as C
+participant "异常占用耕地操作日志Manage" as D
+participant "gis服务" as E
+
+审核人 -> A: 发送审核驳回请求
+activate A
+
+A -> A: 请求参数校验
+
+A -> B: 发送审核驳回请求
+
+activate B
+B -> B: 获取审核人信息
+B -> B:  校验审核人信息
+
+
+B -> C: 发送审核驳回请求
+
+activate C
+
+C -> C: 检查异常占用耕地的地块是否存在
+C -> C: 检查该地块是否处于“待审核”状态
+C -> C: 修改该地块状态为“审核驳回”\r以及审核人信息
+C -> C: 更新地块
+C -> D: 保存日志
+
+activate D
+D -> D: 保存日志
+D --> C: 返回结果
+deactivate D
+C -> E: 异步更新异常占用耕地gis数据
+
+activate E
+E -> E: 更新异常占用耕地gis数据
+C --> B: 返回结果
+
+deactivate C
+
+B --> A: 返回结果
+deactivate B
+
+A --> 审核人: 返回结果
+deactivate A
+
+E -> C: 返回结果
+activate C
+deactivate C
+deactivate E
+
+@enduml

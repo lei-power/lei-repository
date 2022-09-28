@@ -1,0 +1,51 @@
+@startuml
+
+!if %variable_exists("$THEME")
+title Component Diagram - $THEME theme
+!else
+title Component Diagram
+!endif
+
+'skinparam BackgroundColor transparent
+
+package "My Package" {
+  HTTP - [First Component]
+  [Another Component]
+  rectangle MyRectangle1
+  collections MyCollection1
+}
+ 
+node "My Node" {
+  FTP - [Second Component]
+  [First Component] --> FTP
+  rectangle MyRectangle2
+} 
+
+cloud "My Cloud" {
+  [Example 1]
+}
+
+collections MyCollection2
+
+database "My Database" {
+  folder "My folder" {
+	[Folder 3]
+  }
+  frame "My Frame" {
+	[Frame 4]
+  }
+}
+
+artifact "My Artifact"
+storage "My Storage"
+queue "My Queue"
+interface "My Interface"
+card "My Card"
+file "My File"
+stack "My Stack"
+
+[Another Component] --> [Example 1]: some message
+[Example 1] --> [Folder 3]
+[Folder 3] --> [Frame 4]
+
+@enduml

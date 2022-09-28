@@ -1,0 +1,52 @@
+@startuml
+
+skinparam actor {
+BorderColor black
+BackgroundColor DeepSkyBlue
+FontName Aapex
+FontSize 17
+
+}
+skinparam usecase {
+BackgroundColor #A9DCDF
+BorderColor DarkSlateGray
+ArrowColor DarkSlateGray
+ActorBorderColor black
+ActorFontName Aapex
+ActorFontSize 17
+}
+left to right direction
+
+actor : 科员（政府端）: as a
+
+
+usecase 地块管理 as b
+usecase 新增 as b1
+usecase 查询 as b2
+usecase 修改 as b3
+
+
+
+
+
+
+
+
+
+a .-> b
+
+
+b .-> b1
+b .-> b2
+b .-> b3
+
+
+
+
+
+
+
+
+
+@enduml
+

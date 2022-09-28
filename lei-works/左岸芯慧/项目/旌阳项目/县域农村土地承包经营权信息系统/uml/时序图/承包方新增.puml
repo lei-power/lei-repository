@@ -1,0 +1,80 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Courier
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Courier
+}
+autonumber
+actor 科员
+科员 -> 承包方Controller : add
+activate 承包方Controller
+承包方Controller -> 承包方Service : add
+activate 承包方Service
+承包方Service -> 承包方Manage : 创建承包方并创建户主
+activate 承包方Manage
+承包方Manage -> 承包方Manage : 新增承包方
+
+承包方Manage -> 发包方Manage : 检验发包方
+activate 发包方Manage
+发包方Manage --> 承包方Manage :返回结果
+deactivate 发包方Manage
+
+承包方Manage -> 承包方编码游标Manage : 获取最大编码游标
+activate 承包方编码游标Manage
+承包方编码游标Manage -> 发包方Manage : 获取发包方信息
+activate 发包方Manage
+发包方Manage --> 承包方编码游标Manage:返回结果
+deactivate 发包方Manage
+承包方编码游标Manage -> 承包方Manage : getListByFbfbm
+
+承包方Manage --> 承包方编码游标Manage :返回结果
+承包方编码游标Manage --> 承包方编码游标Manage :生成游标
+承包方编码游标Manage -> 承包方编码游标Manage : 更新数据
+
+承包方编码游标Manage --> 承包方Manage:返回结果
+deactivate 承包方编码游标Manage
+承包方Manage -> 承包方Manage : 校验证件号码
+
+承包方Manage -> 承包方Manage :保存数据
+
+
+承包方Manage -> 承包方家庭成员Manage : 创建户主
+activate 承包方家庭成员Manage
+承包方家庭成员Manage -> 承包方Manage : 校验承包方
+
+承包方Manage --> 承包方家庭成员Manage:返回结果
+
+承包方家庭成员Manage -> 承包方家庭成员Manage : 校验证件号码
+
+承包方家庭成员Manage -> 承包方家庭成员Manage : 校验是否为农户
+承包方家庭成员Manage -> 承包方家庭成员Manage : 校验是否已有户主
+
+承包方家庭成员Manage -> 承包方家庭成员Manage : 保存数据
+
+承包方家庭成员Manage -> 承包方家庭成员Manage : 统计家庭成员数量
+承包方家庭成员Manage -> 承包方Manage : 更新数据（家庭成员数量）
+
+承包方Manage --> 承包方家庭成员Manage :返回结果
+承包方家庭成员Manage --> 承包方Manage : 返回结果
+deactivate 承包方家庭成员Manage
+
+deactivate 承包方家庭成员Manage
+承包方Manage --> 承包方Service:返回结果
+deactivate 承包方Manage
+承包方Service --> 承包方Controller:返回结果
+deactivate 承包方Service
+承包方Controller-->科员:返回结果
+deactivate 承包方Controller
+@enduml

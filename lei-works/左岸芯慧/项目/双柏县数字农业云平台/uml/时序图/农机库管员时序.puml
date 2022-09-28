@@ -1,0 +1,95 @@
+@startuml
+!include ../style.puml
+autonumber  "0."
+
+actor 农机库管员
+participant "produce服务" as A
+
+
+农机库管员->A:发起农机领用请求
+activate A
+A -> A: 入参校验农机领用子任务id,农机领用入参列表是否有效
+activate A
+deactivate A
+A -> A: 校验农机领用子任务状态是否为**“待处理”**
+activate A
+deactivate A
+A -> A: 校验用户信息是否合法
+activate A
+deactivate A
+A -> A: 校验农机库是否支持领用\n该农机领用入参列表的种类和数量农机
+activate A
+deactivate A
+
+A -> A: 查询农事任务农机列表
+activate A
+deactivate A
+A -> A: 查询该农机领用子任务的农机出入库记录列表
+activate A
+deactivate A
+
+A -> A: 校验该次农机领用入参列表种类数量是\n否超出农机领用子任务尚未出库数据量
+activate A
+deactivate A
+
+A -> A: 领用农机，并保存农机出入库记录
+activate A
+deactivate A
+
+A --> 农机库管员: 返回结果
+deactivate A
+
+...
+...
+...
+autonumber  "0."
+
+农机库管员->A:发起领用完成请求
+activate A
+A -> A: 入参校验农事任务id是否有效
+activate A
+deactivate A
+A -> A: 校验农机领用子任务状态是否为**“待处理”**
+activate A
+deactivate A
+A -> A: 校验用户信息是否合法
+activate A
+deactivate A
+
+
+A -> A: 查询农事任务农机列表
+activate A
+deactivate A
+A -> A: 查询该农机领用子任务的农机出入库记录列表
+activate A
+deactivate A
+
+A -> A: 校验该农机领用子任务农机是否已全部领用
+activate A
+deactivate A
+
+A -> A: 修改该农机领用子任务状态是否为**“已处理”**，并更新数据
+activate A
+deactivate A
+
+A -> A: 校验该农事任务是否有农资出库子任务
+activate A
+deactivate A
+
+group 没有农资出库子任务或者农资出库子任务状态为**“已出库”**
+A -> A: 将农事任务数据状态改为**“待执行”**并更新数据
+activate A
+A -> A: 组装农事任务变更记录数据并保存数据
+activate A
+deactivate A
+A --> 农机库管员: 返回结果
+deactivate A
+end
+
+group 有农资出库子任务且农资出库子任务状态为**“待出库”**
+A --> 农机库管员: 返回结果
+deactivate A
+end
+
+
+@enduml

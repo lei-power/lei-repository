@@ -1,0 +1,25 @@
+@startuml
+!include ../style.puml
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+
+left to right direction
+
+actor : 农资库管员(co端) :as a
+
+
+rectangle 管理农资出库子任务 {
+usecase 创建农事任务变更记录 as 创建农事任务变更记录8
+  a --> (出库)
+  (出库) --> (创建农资出入库记录)
+  a --> (出库完成)
+  (出库完成)<.. (创建农事任务变更记录8) : extends
+}
+
+
+
+@enduml

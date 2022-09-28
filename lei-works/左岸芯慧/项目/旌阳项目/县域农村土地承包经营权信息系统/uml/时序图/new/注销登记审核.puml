@@ -1,0 +1,57 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+skinparam sequenceMessageAlign right
+actor 审核科员
+participant "service-landowner服务" as A
+
+审核科员 -> A:1.发送审核注销登记请求
+activate A
+
+A -> A: 查询审核流程是否存在及是否是待审核状态，否的话不可以审核
+A -> A: 校验用户信息是否合法
+A -> A: 检查承包方是否存在，且未被注销
+A -> A: 检查承包合同是否存在，且未被注销
+A -> A: 检查检查是否已经生成承包登记簿，且未被注销
+A -> A: 检查检查是否已经生成承包登记权证，且未被注销
+
+A -> A: 判断审核状态是通过还是驳回
+activate A
+A -> A: 审核驳回\n1.更新流程审批表和新增日志记录\n2.承包方编码解锁
+A --> 审核科员: 返回结果
+deactivate A
+A -> A: 审核通过
+A -> A: 更新流程审批表和新增日志记录、承包登记簿变更明细表
+A -> A: 承包方表：注销承包方记录
+A -> A: 承包合同表：注销承包合同记录
+A -> A: 承包地块表：删除被注销的承包合同的地块记录
+A -> A: 承包登记簿表：注销承包方的登记簿记录
+A -> A: 承包权证表：注销承包方的承包权证记录
+A -> A: 权证注销表：新增新记录
+A -> A: 修改权属来源资料附件表
+A -> A: 承包方编码解锁
+
+
+A --> 审核科员: 返回结果
+deactivate A
+
+
+
+@enduml
+
+

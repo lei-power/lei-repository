@@ -1,0 +1,69 @@
+@startuml
+
+skinparam actor {
+BorderColor black
+BackgroundColor DeepSkyBlue
+FontName Aapex
+FontSize 17
+
+}
+skinparam usecase {
+BackgroundColor #A9DCDF
+BorderColor DarkSlateGray
+ArrowColor DarkSlateGray
+ActorBorderColor black
+ActorFontName Aapex
+ActorFontSize 17
+}
+left to right direction
+
+actor : 登记科员（政府端）: as a
+
+usecase 更新承包方代表信息登记 as b
+usecase 查看详情 as b1
+usecase 新增_草稿 as b2
+usecase 新增_待审核 as b3
+usecase 编辑_草稿 as b4
+usecase 提交审核_待审核 as b5
+usecase 撤回_草稿 as b6
+usecase 重新提交_草稿 as b7
+usecase 删除草稿 as b8
+
+usecase 更新家庭成员登记 as c
+
+usecase 补录地块登记 as e
+
+usecase 分割地块登记 as f
+
+usecase 更新地块轮廓登记 as g
+
+usecase 征占用登记 as h
+
+a .-> b
+a .-> c
+
+a .-> e
+a .-> f
+a .-> g
+a .-> h
+
+
+
+
+
+b .-> b1
+b .-> b2
+b .-> b3
+b .-> b4
+b .-> b5
+b .-> b6
+b .-> b7
+b .-> b8
+
+
+note right of g
+  其五种登记用例与更新承包方代表信息登记相同
+end note
+
+@enduml
+

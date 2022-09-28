@@ -1,0 +1,38 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+skinparam sequenceMessageAlign right
+actor 科员
+participant "service-landowner服务" as A
+
+科员 -> A: 1.发送新增承包合同请求
+activate A
+
+A -> A: 1.参数校验\n1.1校验入参\n\n1.2校验地块信息\n1.2.1校验承包方\n1.2.2新增地块不可为0\n1.2.3校验发包方\n1.2.4校验是否是承包地块\n\n1.3校验该承包方是否已存在合同\n1.4校验签订时间必须大于等于承包期起日期且小于等于承包期限止日期
+
+A -> A: 2.数据组装
+A -> A: 3.保存数据
+
+A -> A: 4.批量保存承包地块信息\n4.1校验要插入的地块是否已存在\n4.2保存数据
+
+A --> 科员: 返回结果
+deactivate A
+
+@enduml
+
+

@@ -1,0 +1,246 @@
+@startuml
+participant Actor
+Actor -> GovApplyExchangeController : audit
+activate GovApplyExchangeController
+GovApplyExchangeController -> GovApplyExchangeService : audit
+activate GovApplyExchangeService
+GovApplyExchangeService -> ApplyExchangeManage : audit
+activate ApplyExchangeManage
+ApplyExchangeManage -> ApplyFlowManage : getById
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyExchangeManage
+deactivate ApplyFlowManage
+ApplyExchangeManage -> ApplyExchangeManage : getById
+activate ApplyExchangeManage
+ApplyExchangeManage --> ApplyExchangeManage
+deactivate ApplyExchangeManage
+ApplyExchangeManage -> CbfManage : getByCbfbm
+activate CbfManage
+CbfManage --> ApplyExchangeManage
+deactivate CbfManage
+ApplyExchangeManage -> CbhtManage : getByCbfbm
+activate CbhtManage
+CbhtManage --> ApplyExchangeManage
+deactivate CbhtManage
+ApplyExchangeManage -> CbfManage : getByCbfbm
+activate CbfManage
+CbfManage --> ApplyExchangeManage
+deactivate CbfManage
+ApplyExchangeManage -> CbhtManage : getByCbfbm
+activate CbhtManage
+CbhtManage --> ApplyExchangeManage
+deactivate CbhtManage
+ApplyExchangeManage -> CbjyqzdjbManage : getByCbhtbm
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyExchangeManage
+deactivate CbjyqzdjbManage
+ApplyExchangeManage -> CbjyqzdjbManage : getByCbhtbm
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyExchangeManage
+deactivate CbjyqzdjbManage
+ApplyExchangeManage -> PrintCertificateConfigManage : getByAreaId
+activate PrintCertificateConfigManage
+PrintCertificateConfigManage --> ApplyExchangeManage
+deactivate PrintCertificateConfigManage
+ApplyExchangeManage -> CbdkxxManage : checkOwner
+activate CbdkxxManage
+CbdkxxManage -> CbfManage : getByCbfbm
+activate CbfManage
+CbfManage --> CbdkxxManage
+deactivate CbfManage
+CbdkxxManage -> CbdkxxManage : λ→
+activate CbdkxxManage
+CbdkxxManage --> CbdkxxManage
+deactivate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : checkOwner
+activate CbdkxxManage
+CbdkxxManage -> CbfManage : getByCbfbm
+activate CbfManage
+CbfManage --> CbdkxxManage
+deactivate CbfManage
+CbdkxxManage -> CbdkxxManage : λ→
+activate CbdkxxManage
+CbdkxxManage --> CbdkxxManage
+deactivate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> ApplyFlowManage : editApplyFlowAndCreateApplyFlowOperatorLog
+activate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : getById
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : update
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowOperatorLogManage : createApplyFlowOperatorLog
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage -> ApplyFlowOperatorLogManage : insert
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowOperatorLogManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowManage --> ApplyExchangeManage
+deactivate ApplyFlowManage
+ApplyExchangeManage -> ApplyCbfbmLockRecordManage : deleteByCbfbm
+activate ApplyCbfbmLockRecordManage
+ApplyCbfbmLockRecordManage --> ApplyExchangeManage
+deactivate ApplyCbfbmLockRecordManage
+ApplyExchangeManage -> ApplyCbfbmLockRecordManage : deleteByCbfbm
+activate ApplyCbfbmLockRecordManage
+ApplyCbfbmLockRecordManage --> ApplyExchangeManage
+deactivate ApplyCbfbmLockRecordManage
+ApplyExchangeManage -> ApplyFlowManage : editApplyFlowAndCreateApplyFlowOperatorLog
+activate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : getById
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowManage : update
+activate ApplyFlowManage
+ApplyFlowManage --> ApplyFlowManage
+deactivate ApplyFlowManage
+ApplyFlowManage -> ApplyFlowOperatorLogManage : createApplyFlowOperatorLog
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage -> ApplyFlowOperatorLogManage : insert
+activate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowOperatorLogManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowOperatorLogManage --> ApplyFlowManage
+deactivate ApplyFlowOperatorLogManage
+ApplyFlowManage --> ApplyExchangeManage
+deactivate ApplyFlowManage
+ApplyExchangeManage -> ApplyExchangeManage : λ→
+activate ApplyExchangeManage
+ApplyExchangeManage -> CbdkxxManage : getByDkbm
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : updateBatch
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : updateBatch
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : getlistByCbf
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> ApplyExchangeManage : λ→
+activate ApplyExchangeManage
+ApplyExchangeManage -> CbdkxxManage : getlistByCbf
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : getlistByCbf
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : getlistByCbf
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : getlistByCbf
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbdkxxManage : getlistByCbf
+activate CbdkxxManage
+CbdkxxManage --> ApplyExchangeManage
+deactivate CbdkxxManage
+ApplyExchangeManage -> CbhtManage : update
+activate CbhtManage
+CbhtManage --> ApplyExchangeManage
+deactivate CbhtManage
+ApplyExchangeManage -> CbhtManage : update
+activate CbhtManage
+CbhtManage --> ApplyExchangeManage
+deactivate CbhtManage
+ApplyExchangeManage -> RegisterSerialCursorManage : getMaxSerialByAreaId
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage -> RegisterSerialCursorManage : getByAreaId
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage --> RegisterSerialCursorManage
+deactivate RegisterSerialCursorManage
+RegisterSerialCursorManage -> RegisterSerialCursorManage : update
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage --> RegisterSerialCursorManage
+deactivate RegisterSerialCursorManage
+RegisterSerialCursorManage --> ApplyExchangeManage
+deactivate RegisterSerialCursorManage
+ApplyExchangeManage -> RegisterSerialCursorManage : getMaxSerialByAreaId
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage -> RegisterSerialCursorManage : getByAreaId
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage --> RegisterSerialCursorManage
+deactivate RegisterSerialCursorManage
+RegisterSerialCursorManage -> RegisterSerialCursorManage : update
+activate RegisterSerialCursorManage
+RegisterSerialCursorManage --> RegisterSerialCursorManage
+deactivate RegisterSerialCursorManage
+RegisterSerialCursorManage --> ApplyExchangeManage
+deactivate RegisterSerialCursorManage
+ApplyExchangeManage -> CbjyqzdjbManage : update
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyExchangeManage
+deactivate CbjyqzdjbManage
+ApplyExchangeManage -> CbjyqzdjbManage : update
+activate CbjyqzdjbManage
+CbjyqzdjbManage --> ApplyExchangeManage
+deactivate CbjyqzdjbManage
+ApplyExchangeManage -> QslyzlfjManage : getByCbjyqzbm
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyExchangeManage
+deactivate QslyzlfjManage
+ApplyExchangeManage -> QslyzlfjManage : getByCbjyqzbm
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyExchangeManage
+deactivate QslyzlfjManage
+ApplyExchangeManage -> QslyzlfjManage : update
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyExchangeManage
+deactivate QslyzlfjManage
+ApplyExchangeManage -> QslyzlfjManage : update
+activate QslyzlfjManage
+QslyzlfjManage --> ApplyExchangeManage
+deactivate QslyzlfjManage
+ApplyExchangeManage -> RegisterChangeRecordManage : createRegisterChangeRecord
+activate RegisterChangeRecordManage
+RegisterChangeRecordManage -> RegisterChangeRecordManage : insert
+activate RegisterChangeRecordManage
+RegisterChangeRecordManage --> RegisterChangeRecordManage
+deactivate RegisterChangeRecordManage
+RegisterChangeRecordManage --> ApplyExchangeManage
+deactivate RegisterChangeRecordManage
+ApplyExchangeManage -> RegisterChangeRecordManage : createRegisterChangeRecord
+activate RegisterChangeRecordManage
+RegisterChangeRecordManage -> RegisterChangeRecordManage : insert
+activate RegisterChangeRecordManage
+RegisterChangeRecordManage --> RegisterChangeRecordManage
+deactivate RegisterChangeRecordManage
+RegisterChangeRecordManage --> ApplyExchangeManage
+deactivate RegisterChangeRecordManage
+ApplyExchangeManage -> ApplyCbfbmLockRecordManage : deleteByCbfbm
+activate ApplyCbfbmLockRecordManage
+ApplyCbfbmLockRecordManage --> ApplyExchangeManage
+deactivate ApplyCbfbmLockRecordManage
+ApplyExchangeManage -> ApplyCbfbmLockRecordManage : deleteByCbfbm
+activate ApplyCbfbmLockRecordManage
+ApplyCbfbmLockRecordManage --> ApplyExchangeManage
+deactivate ApplyCbfbmLockRecordManage
+ApplyExchangeManage --> ApplyExchangeManage
+deactivate ApplyExchangeManage
+ApplyExchangeManage --> ApplyExchangeManage
+deactivate ApplyExchangeManage
+ApplyExchangeManage --> GovApplyExchangeService
+deactivate ApplyExchangeManage
+GovApplyExchangeService --> GovApplyExchangeController
+deactivate GovApplyExchangeService
+return
+@enduml

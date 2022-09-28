@@ -1,0 +1,36 @@
+@startuml
+skinparam sequence {
+ArrowColor red
+ActorBorderColor black
+LifeLineBorderColor blue
+LifeLineBackgroundColor #A9DCDF
+
+
+ParticipantBackgroundColor DeepSkyBlue
+ParticipantFontName Aapex
+ParticipantFontSize 15
+ParticipantFontColor black
+
+ActorBackgroundColor DeepSkyBlue
+ActorFontColor black
+ActorFontSize 15
+ActorFontName Aapex
+}
+skinparam sequenceMessageAlign right
+actor 科员
+participant "service-landowner服务" as A
+
+科员 -> A: 1.发送新增承包方请求
+activate A
+
+A -> A: 1.参数校验\n1.1校验入参\n1.2校验承包方信息
+A -> A: 2.数据组装\n2.1获取承包方最新编码\n2.1.1生成游标并更新数据\n2.2校验证件号码
+A -> A: 3.保存数据
+A -> A: 4.创建户主\n4.1校验证件号码\n4.2校验是否为农户\n4.3校验是否已有户主\n4.4保存数据\n4.5更新承包方的家庭成员数量字段
+
+A --> 科员: 返回结果
+deactivate A
+
+@enduml
+
+
