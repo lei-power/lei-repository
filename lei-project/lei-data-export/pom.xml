@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<artifactId>database-export</artifactId>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+			</plugin>
+			<plugin>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.springframework.boot</groupId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<artifactId>spring-boot-starter</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>ojdbc8</artifactId>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<version>${oracle.version}</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>poi-tl</artifactId>
+			<groupId>com.deepoove</groupId>
+			<version>${poitl.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>mysql-connector-java</artifactId>
+			<groupId>mysql</groupId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>mssql-jdbc</artifactId>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<version>${sqlserver.version}</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>postgresql</artifactId>
+			<groupId>org.postgresql</groupId>
+			<version>${postgresql.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<artifactId>commons-io</artifactId>
+			<groupId>commons-io</groupId>
+			<version>${common-io.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>commons-lang3</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<version>${common-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>orai18n</artifactId>
+			<groupId>cn.easyproject</groupId>
+			<version>${orai18n.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>fastjson</artifactId>
+			<groupId>com.alibaba</groupId>
+			<version>${fastjson.version}</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>druid</artifactId>
+			<groupId>com.alibaba</groupId>
+			<version>${druid.version}</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>guava</artifactId>
+			<groupId>com.google.guava</groupId>
+			<version>${guava.version}</version>
+		</dependency>
+
+
+	</dependencies>
+	<description>database export project for PomZWJ</description>
+	<developers>
+		<developer>
+			<email>1513041820@qq.com</email>
+			<name>PomZWJ</name>
+			<url>https://github.com/PomZWJ/database-export</url>
+		</developer>
+	</developers>
+
+	<groupId>com.pomzwj</groupId>
+	<modelVersion>4.0.0</modelVersion>
+	<name>database-export</name>
+	<packaging>jar</packaging>
+
+	<parent>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<groupId>org.springframework.boot</groupId>
+		<relativePath/>
+		<version>2.5.0</version>
+	</parent>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>public</id>
+			<name>aliyun nexus</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<common-io.version>2.7</common-io.version>
+		<common-lang3.version>3.12.0</common-lang3.version>
+		<druid.version>1.1.24</druid.version>
+		<fastjson.version>1.2.75</fastjson.version>
+		<guava.version>30.1-jre</guava.version>
+		<java.version>1.8</java.version>
+		<mysql.version>8.0.20</mysql.version>
+		<oracle.version>19.7.0.0</oracle.version>
+		<orai18n.version>12.1.0.2.0</orai18n.version>
+		<poitl.version>1.10.0</poitl.version>
+		<postgresql.version>42.2.22</postgresql.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<sqlserver.version>7.4.0.jre8</sqlserver.version>
+	</properties>
+	<repositories>
+		<repository>
+			<id>public</id>
+			<name>aliyun nexus</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+	<version>3.2.0-SNAPSHOT</version>
+</project>

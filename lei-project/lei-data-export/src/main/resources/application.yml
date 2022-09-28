@@ -1,0 +1,36 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /dbExport
+  index: v2/index2
+spring:
+  application:
+    name: db-export
+  thymeleaf:
+    cache: false
+    charset: UTF-8
+    prefix: classpath:/templates/thymeleaf/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+export:
+  template-copy-path: .databaseExport
+
+database:
+  # 数据库连接池框架 默认druid 可选hikaricp,druid
+  pool: druid
+  jdbc:
+    mysql: jdbc:mysql://%s:%s/%s?serverTimezone=UTC
+    oracle: jdbc:oracle:thin:@//%s:%s/%s
+    sqlServer: jdbc:sqlserver://%s:%s;databaseName=%s
+    postgresql: jdbc:postgresql://%s:%s/%s
+  driver:
+    mysql: com.mysql.cj.jdbc.Driver
+    oracle: oracle.jdbc.OracleDriver
+    sqlServer: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    postgresql: org.postgresql.Driver
+  getTableNameSql:
+    mysql: select table_name TABLE_NAME, table_comment COMMENTS from information_schema.tables where table_schema='%s' and table_type='BASE TABLE'
+    oracle: select t1.TABLE_NAME,t2.COMMENTS from user_tables t1 ,user_tab_comments t2 where t1.table_name = t2.table_name(+)
+    sqlServer: select TABLE_NAME=d.name,COMMENTS=f.value  from sysobjects d left join sys.extended_properties f on d.id=f.major_id and f.minor_id=0 where d.xtype = 'u' and d.name != 'sysdiagrams'
+    postgresql: SELECT relname AS TABLE_NAME,CAST ( obj_description ( relfilenode, 'pg_class' ) AS VARCHAR ) AS COMMENTS FROM pg_class C WHERE relkind = 'r' AND relname NOT LIKE'pg_%' AND relname NOT LIKE'sql_%' AND relchecks = 0 ORDER BY relname

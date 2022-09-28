@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta content="no-cache" http-equiv="pragma"/>
+  <meta content="no-cache" http-equiv="Cache-Control"/>
+  <meta content="no-store" http-equiv="Cache-Control"/>
+  <meta content="0" http-equiv="Expires"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <meta charset="UTF-8">
+  <title>数据库表结构导出生成WORD文档</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="../../../static/assetss/images/fav.png" rel="icon" th:href="@{/assetss/images/fav.png}">
+  <link href="../../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+        th:href="@{/bootstrap/css/bootstrap.min.css}">
+  <link href="../../../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}">
+  <script src="../../../static/js/jquery-3.3.1.js" th:src="@{/js/jquery-3.3.1.js}"></script>
+  <script src="../../../static/bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+  <script src="../../../static/js/index.js" th:src="@{/js/index.js}"></script>
+</head>
+
+<div class="container">
+  <div style="text-align: center">
+    <img style="width: 80px" th:src="@{/assetss/images/fav.png}"><span
+      style="font-size: 30px">数据库表结构导出生成WORD文档 V1.0</span>
+  </div>
+  <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+    <div class="panel panel-default">
+      <div class="panel-heading" id="headingOne" role="tab">
+        <h4 class="panel-title">
+          <a aria-controls="collapseOne" aria-expanded="true" data-parent="#accordion" data-toggle="collapse"
+             href="#collapseOne" role="button">
+            ORACLE
+          </a>
+        </h4>
+      </div>
+      <div aria-labelledby="headingOne" class="panel-collapse collapse in" id="collapseOne" role="tabpanel">
+        <div class="panel-body">
+          <form style="margin-top: 20px;margin-left: 100px;margin-right: 400px;">
+            <label><h1>oracle info</h1></label>
+            <div class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="o_ip">ip</label>
+                <input class="form-control" id="o_ip" placeholder="127.0.0.1" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="o_port">port</label>
+                <input class="form-control" id="o_port" placeholder="" type="text" value="1521">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="o_dbName">dbName</label>
+                <input class="form-control" id="o_dbName" placeholder="" type="text" value="orcl">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="o_userName">userName</label>
+              <input class="form-control" id="o_userName" placeholder="userName" type="text">
+            </div>
+            <div class="form-group">
+              <label for="o_password">password</label>
+              <input class="form-control" id="o_password" placeholder="password" type="text">
+            </div>
+
+            <p><a class="btn btn-primary btn-lg" href="javascript:o_excute();"
+                  role="button">生成文档</a></p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" id="headingTwo" role="tab">
+        <h4 class="panel-title">
+          <a aria-controls="collapseTwo" aria-expanded="false" class="collapsed" data-parent="#accordion"
+             data-toggle="collapse" href="#collapseTwo" role="button">
+            MYSQL
+          </a>
+        </h4>
+      </div>
+      <div aria-labelledby="headingThree" class="panel-collapse collapse" id="collapseTwo" role="tabpanel">
+        <div class="panel-body">
+          <form style="margin-top: 20px;margin-left: 100px;margin-right: 400px;">
+            <label><h1>mysql info</h1></label>
+            <div class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="m_ip">ip</label>
+                <input class="form-control" id="m_ip" placeholder="127.0.0.1" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="m_port">port</label>
+                <input class="form-control" id="m_port" placeholder="3306" type="text" value="3306">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="m_dbName">dbName</label>
+                <input class="form-control" id="m_dbName" placeholder="数据库名" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="m_userName">userName</label>
+              <input class="form-control" id="m_userName" placeholder="userName" type="text">
+            </div>
+            <div class="form-group">
+              <label for="m_password">password</label>
+              <input class="form-control" id="m_password" placeholder="password" type="text">
+            </div>
+
+            <p><a class="btn btn-primary btn-lg" href="javascript:m_excute();" role="button">生成文档</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" id="headingThree" role="tab">
+        <h4 class="panel-title">
+          <a aria-controls="collapseThree" aria-expanded="false" class="collapsed" data-parent="#accordion"
+             data-toggle="collapse" href="#collapseThree" role="button">
+            SQL SERVER
+          </a>
+        </h4>
+      </div>
+      <div aria-labelledby="headingThree" class="panel-collapse collapse" id="collapseThree" role="tabpanel">
+        <div class="panel-body">
+          <form style="margin-top: 20px;margin-left: 100px;margin-right: 400px;">
+            <label><h1>sql server info</h1></label>
+            <div class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="s_ip">ip</label>
+                <input class="form-control" id="s_ip" placeholder="127.0.0.1" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="s_port">port</label>
+                <input class="form-control" id="s_port" placeholder="1433" type="text" value="1433">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="s_dbName">dbName</label>
+                <input class="form-control" id="s_dbName" placeholder="数据库名" type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="s_userName">userName</label>
+              <input class="form-control" id="s_userName" placeholder="userName" type="text">
+            </div>
+            <div class="form-group">
+              <label for="s_password">password</label>
+              <input class="form-control" id="s_password" placeholder="password" type="text">
+            </div>
+
+            <p><a class="btn btn-primary btn-lg" href="javascript:s_excute();" role="button">生成文档</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 模态框（Modal） -->
+  <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" data-keyboard="false" id="myModal"
+       role="dialog"
+       tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">正在努力生成文档中，成功后文档在D:export.docx</h4>
+        </div>
+        <div class="modal-body" id="messageText">正在努力生成中......</div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+
+
+</div>
+</html>

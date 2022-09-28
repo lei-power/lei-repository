@@ -1,0 +1,313 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta content="no-cache" http-equiv="pragma"/>
+  <meta content="no-cache" http-equiv="Cache-Control"/>
+  <meta content="no-store" http-equiv="Cache-Control"/>
+  <meta content="0" http-equiv="Expires"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <meta charset="UTF-8">
+  <title>database-export</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="../../../static/assetss/images/fav.png" rel="icon" th:href="@{/assetss/images/fav.png}">
+  <!-- 引入样式 -->
+  <link href="../../../static/element-ui/element-ui.css" rel="stylesheet" th:href="@{/element-ui/element-ui.css}">
+  <link href="../../../static/css/index2.css" rel="stylesheet" th:href="@{/css/index2.css}">
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var ctx = [[@{/}]];
+  </script>
+  <!-- 引入组件库 -->
+  <script src="../../../static/vue/vue.v2.6.10.js" th:src="@{/vue/vue.v2.6.10.js}"></script>
+  <script src="../../../static/vue/axios.v0.19.0.min.js" th:src="@{/vue/axios.v0.19.0.min.js}"></script>
+  <script src="../../../static/element-ui/element-ui.js" th:src="@{/element-ui/element-ui.js}"></script>
+</head>
+
+<body>
+<div id="app">
+  <div class="header">
+    <div class="icon-img">
+      <img v-bind:src="iconUrl">
+    </div>
+    <div class="icon-text">
+      <h1 class="icon-title">{{iconTitle}}</h1>
+      <h5 class="icon-notes">{{iconNotes}}</h5>
+    </div>
+  </div>
+  <div class="body">
+    <div class="body_side_bar">
+      <div @click="barClick('welcome')" class="sql-kind-div" v-bind:style="welcomeBarStyle">
+        <img class="bar-icon" v-bind:src="welcomeIconImg"/>
+      </div>
+      <div @click="barClick('oracle')" class="sql-kind-div" v-bind:style="oracleBarStyle">
+        <img class="bar-icon" v-bind:src="oracleIconImg"/>
+      </div>
+      <div @click="barClick('mysql')" class="sql-kind-div" v-bind:style="mysqlBarStyle">
+        <img class="bar-icon" v-bind:src="mysqlIconImg"/>
+      </div>
+      <div @click="barClick('sqlserver')" class="sql-kind-div" v-bind:style="sqlServerBarStyle">
+        <img class="bar-icon" v-bind:src="sqlserverIconImg"/>
+      </div>
+      <div @click="barClick('postgresql')" class="sql-kind-div" v-bind:style="postgresqlBarStyle">
+        <img class="bar-icon" v-bind:src="postgresqlIconImg"/>
+      </div>
+    </div>
+    <div class="body_content" element-loading-background="rgba(242,246,252, 0.8)"
+         element-loading-text="拼命生成中...请勿刷新网页,如果表多,可能需要等待几分钟" v-loading="loading">
+      <div v-bind:style="contentStyle" v-show="welcomeDivShow">
+        <div style="padding-top: 2rem">
+          <span style="font-size: 25px">database-export是一款能生成数据库结构文档工具</span><br>
+          <br/>
+          <br/>
+          <span style="font-size: 20px">能支持最新的数据库版本，可以导出支持office2007版本以上的docx格式的文档</span>
+          <br/>
+          <span style="font-size: 20px">也可以导出excel，支持xlsx，也可以直接在浏览器预览</span>
+          <br/>
+          <br/>
+          <span style="font-size: 20px">如果有问题,可以去GitHub上提交issue，或微信联系我</span>
+          <br/>
+          <span style="font-size: 20px">想要进技术群加我微信，点击下面的微信图标加我</span>
+        </div>
+        <div style="padding-top: 10%">
+          <a href="https://gitee.com/pomz/database-export" target="_blank" title="Gitee">
+            <img style="width: 80px;height: 80px;margin-left: 30px;" v-bind:src="giteeIconImg"/>
+          </a>
+          <a href="https://github.com/PomZWJ/database-export/" target="_blank" title="GitHub">
+            <img style="width: 80px;height: 80px;margin-left: 30px;" v-bind:src="githubIconImg"/>
+          </a>
+          <a href="mailto:1513041820@qq.com" target="_blank" title="给我发邮件吧">
+            <img style="width: 88px;height: 88px;margin-left: 30px;" v-bind:src="emailIconImg"/>
+          </a>
+          <a title="微信">
+            <img @click="openMyWxQr" style="width: 108px;height: 88px;margin-left: 30px;" v-bind:src="weChatIconImg"/>
+          </a>
+        </div>
+        <div style="margin-top: 60px">
+          <span>Copyright © PomZWJ XiaMen 2018~2022</span>
+        </div>
+
+      </div>
+      <div style="display: none;" v-bind:style="contentStyle" v-show="oracleDivShow">
+        <el-image :fit="fit" src="oracle-bg.png" style="width: 190px;height:110px;"
+                  th:src="@{/assetss/images/v2/oracle-bg.png}"></el-image>
+        <el-form label-width="250px" style="width: 90%;padding-left: 10%;padding-top: 20px">
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable placeholder="127.0.0.1" v-model="o_ip">
+                <template slot="prepend" style="width: 200px;">IP地址</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="o_port">
+                <template slot="prepend">端&nbsp;&nbsp;&nbsp;口</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="o_dataname">
+                <template slot="prepend">数据库</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="o_username">
+                <template slot="prepend">用户名</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="o_password">
+                <template slot="prepend">密&nbsp;&nbsp;&nbsp;码</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin: 0 auto;">
+            <el-popover placement="top" v-model="oraclePopoverVisible" width="200">
+              <el-row>
+                <el-button @click="generateWord('oracle','word')" class="el-icon-download" plain type="primary">word
+                </el-button>
+                <el-button @click="generateWord('oracle','excel')" class="el-icon-download" plain type="primary">excel
+                </el-button>
+              </el-row>
+              <el-button class="el-icon-download" slot="reference">生成文档</el-button>
+            </el-popover>
+            <el-button @click="generateDocHtml('oracle')" class="el-icon-view">HTML预览</el-button>
+          </el-row>
+        </el-form>
+      </div>
+
+      <div style="display: none;" v-bind:style="contentStyle" v-show="mysqlDivShow">
+        <el-image :fit="fit" src="mysql-bg.png" style="width: 110px;height:110px;"
+                  th:src="@{/assetss/images/v2/mysql-bg.png}"></el-image>
+        <el-form label-width="250px" style="width: 90%;padding-left: 10%;padding-top: 20px">
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable placeholder="127.0.0.1" v-model="m_ip">
+                <template slot="prepend" style="width: 200px;">IP地址</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="m_port">
+                <template slot="prepend">端&nbsp;&nbsp;&nbsp;口</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="m_dataname">
+                <template slot="prepend">数据库</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="m_username">
+                <template slot="prepend">用户名</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="m_password">
+                <template slot="prepend">密&nbsp;&nbsp;&nbsp;码</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin: 0 auto">
+            <el-popover placement="top" v-model="mysqlPopoverVisible" width="200">
+              <el-row>
+                <el-button @click="generateWord('mysql','word')" class="el-icon-download" plain type="primary">word
+                </el-button>
+                <el-button @click="generateWord('mysql','excel')" class="el-icon-download" plain type="primary">excel
+                </el-button>
+              </el-row>
+              <el-button class="el-icon-download" slot="reference">生成文档</el-button>
+            </el-popover>
+            <el-button @click="generateDocHtml('mysql')" class="el-icon-view">HTML预览</el-button>
+          </el-row>
+        </el-form>
+      </div>
+      <div style="display: none;" v-bind:style="contentStyle" v-show="sqlserverDivShow">
+        <el-image :fit="fit" src="sqlserver-bg.png" style="width: 306.8px;height:80px;;padding-top: 30px"
+                  th:src="@{/assetss/images/v2/sqlserver-bg.png}"></el-image>
+        <el-form label-width="250px" style="width: 90%;padding-left: 10%;padding-top: 20px">
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable placeholder="127.0.0.1" v-model="s_ip">
+                <template slot="prepend" style="width: 200px;">IP地址</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="s_port">
+                <template slot="prepend">端&nbsp;&nbsp;&nbsp;口</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="s_dataname">
+                <template slot="prepend">数据库</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="s_username">
+                <template slot="prepend">用户名</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="s_password">
+                <template slot="prepend">密&nbsp;&nbsp;&nbsp;码</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin: 0 auto">
+            <el-popover placement="top" v-model="sqlserverPopoverVisible" width="200">
+              <el-row>
+                <el-button @click="generateWord('sqlserver','word')" class="el-icon-download" plain type="primary">
+                  word
+                </el-button>
+                <el-button @click="generateWord('sqlserver','excel')" class="el-icon-download" plain type="primary">
+                  excel
+                </el-button>
+              </el-row>
+              <el-button class="el-icon-download" slot="reference">生成文档</el-button>
+            </el-popover>
+            <el-button @click="generateDocHtml('sqlserver')" class="el-icon-view">HTML预览</el-button>
+          </el-row>
+        </el-form>
+      </div>
+      <div style="display: none;" v-bind:style="contentStyle" v-show="postgresqlDivShow">
+        <el-image :fit="fit" src="sqlserver-bg.png" style="width: 306.8px;height:80px;;padding-top: 30px"
+                  th:src="@{/assetss/images/v2/postgresql-bg.png}"></el-image>
+        <el-form label-width="250px" style="width: 90%;padding-left: 10%;padding-top: 20px">
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable placeholder="127.0.0.1" v-model="postgresql_ip">
+                <template slot="prepend" style="width: 200px;">IP地址</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="postgresql_port">
+                <template slot="prepend">端&nbsp;&nbsp;&nbsp;口</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="postgresql_dataname">
+                <template slot="prepend">数据库</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="postgresql_username">
+                <template slot="prepend">用户名</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin-bottom: 20px;">
+            <el-col :span="20">
+              <el-input clearable v-model="postgresql_password">
+                <template slot="prepend">密&nbsp;&nbsp;&nbsp;码</template>
+              </el-input>
+            </el-col>
+          </el-row>
+          <el-row style="margin: 0 auto">
+            <el-popover placement="top" v-model="postgresqlPopoverVisible" width="200">
+              <el-row>
+                <el-button @click="generateWord('postgresql','word')" class="el-icon-download" plain type="primary">
+                  word
+                </el-button>
+                <el-button @click="generateWord('postgresql','excel')" class="el-icon-download" plain type="primary">
+                  excel
+                </el-button>
+              </el-row>
+              <el-button class="el-icon-download" slot="reference">生成文档</el-button>
+            </el-popover>
+            <el-button @click="generateDocHtml('postgresql')" class="el-icon-view">HTML预览</el-button>
+          </el-row>
+        </el-form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="../../../static/js/index2.js" th:src="@{/js/index2.js}"></script>
+</html>
