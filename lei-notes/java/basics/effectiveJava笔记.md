@@ -82,7 +82,7 @@
 - 那么，如果类的对象中封装的资源（例如文件或者线程）确实需要终止，应该怎么做才能不用编写终结方法或者清除方法呢？只需让类实现AutoCloseable，并要求其客户端在每个实例不再需要的时候调用close方法，一般是利用try-with-resources确保终止，即使遇到异常也是如此（详见第9条）。
   
 ### 9. 使用 try-with-resources 语句替代 try-finally 语句
-```java
+```java 
  // try-finally - No longer the best way to close resources!
  static String firstLineOfFile(String path) throws IOException {
      BufferedReader br = new BufferedReader(new FileReader(path));
@@ -93,8 +93,69 @@
      }
  }
 ```
+- try-with-resources 块和 finally 块中的代码都可以抛出异常。第二个异常会覆盖第一个异常导致无法追踪；
+```java
+ static void copy(String src, String dst) throws IOException {
+     try (InputStream   in = new FileInputStream(src);
+          OutputStream out = new FileOutputStream(dst)) {
+         byte[] buf = new byte[BUFFER_SIZE];
+         int n;
+         while ((n = in.read(buf)) >= 0)
+             out.write(buf, 0, n);
+     }
+ }
+```
+
+### 10. 重写 equals 方法时遵守通用约定
+- ？？？ 类是私有的或包级私有的，可以确定它的 equals 方法永远不会被调用。如果你非常厌恶风险，可以重写 equals 方法，以确保不会被意外调用
+```java
+ @Override 
+ public boolean equals(Object o) {
+     throw new AssertionError(); // Method is never called
+ }
+```
+- 重写equals约定：
+     - **自反性：** 对于任何非空引用 x，`x.equals(x)` 必须返回 true。
+     - **对称性：** 对于任何非空引用 x 和 y，如果且仅当 `y.equals(x)` 返回 true 时 `x.equals(y)` 必须返回 true。
+     - **传递性：** 对于任何非空引用 x、y、z，如果 `x.equals(y)` 返回 true，`y.equals(z)` 返回 true，则 `x.equals(z)` 必须返回 true。
+     - **一致性：** 对于任何非空引用 x 和 y，如果在 equals 比较中使用的信息没有修改，则 `x.equals(y)` 的多次调用必须始终返回 true 或始终返回 false。
+     - 对于任何非空引用 x，`x.equals(null)` 必须返回 false。
+
+- 没有令人满意的方法来继承一个可实例化的类并添加一个值组件，可以采用“组合而不是继承”；在 ColorPoint 类中定义一个私有 Point 属性，和一个公共的视图（view）方法，用来返回具有相同位置的 ColorPoint 对象。
+```java
+ public class ColorPoint {
+     private final Point point;
+     private final Color color;
+ 
+     public ColorPoint(int x, int y, Color color) {
+         point = new Point(x, y);
+         this.color = Objects.requireNonNull(color);
+     }
+     
+     /**
+      * Returns the point-view of this color point.
+      */
+     public Point asPoint() {
+         return point;
+     }
+ 
+     @Override 
+     public boolean equals(Object o) {
+         if (!(o instanceof ColorPoint))
+             return false;
+         ColorPoint cp = (ColorPoint) o;
+         return cp.point.equals(point) && cp.color.equals(color);
+     }
+     
+     ...    // Remainder omitted
+ }
+```
+- 对于类型为非 float 或 double 的基本类型，使用 == 运算符进行比较；对于对象引用属性，递归地调用 equals 方法；对于 float 基本类型的属性，使用静态 `Float.compare(float, float)` 方法；对于 double 基本类型的属性，使用 `Double.compare(double, double)` 方法。
+
+### 11. 重写 equals 方法时同时也要重写 hashcode 方法
 
 
+### 10. 重写 equals 方法时遵守通用约定
 
 
 
