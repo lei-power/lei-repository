@@ -152,8 +152,6 @@
 ```
 - 对于类型为非 float 或 double 的基本类型，使用 == 运算符进行比较；对于对象引用属性，递归地调用 equals 方法；对于 float 基本类型的属性，使用静态 `Float.compare(float, float)` 方法；对于 double 基本类型的属性，使用 `Double.compare(double, double)` 方法。
 
-### 11. 重写 equals 方法时同时也要重写 hashcode 方法
-
 
 ### 10. 重写 equals 方法时遵守通用约定
 
