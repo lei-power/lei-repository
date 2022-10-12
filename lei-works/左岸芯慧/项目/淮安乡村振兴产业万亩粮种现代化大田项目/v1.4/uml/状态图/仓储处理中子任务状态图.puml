@@ -1,32 +1,27 @@
 @startuml
 !include ../style.puml
 
-  skinparam arrow {
-    Color deeppink
-	Thickness 1
-	fontsize 10
-	fontcolor #blue
-  }
-hide empty description
+!if %variable_exists("$THEME")
+title Activity Diagram - $THEME theme
+!else
+title Activity Diagram
+!endif
 
+start
+:totalCount 待分配的总数量 \r\ntotalAcre   地块总面积 \r\ntotalCount 待分配的总数量 \r\ntotalCount 待分配的总数量 ;
 
-state 仓储处理中 {
-  [*] -> 待出库 :6.接受\n(创建农资出库子任务)
-  待出库 -> 待出库 : 11.出库
-  待出库 -> 待出库 : 12.删除农资出入库记录
-  待出库 --> 已出库 : 7.出库完成
-  已出库 --> [*]
-
- --
-
-
-  [*] -> 待处理 :6.接受\n(创建农机领用子任务)
-  待处理 -> 待处理 : 14.领用
-  待处理 -> 待处理 : 15.删除农机出入记录
-  待处理 --> 已处理 : 8.领用完成
-  已处理 --> [*]
-
+-> test of color;
+if (color?) is (<color:red>red) then
+  :print red;
+else
+  :print not red;
+  note right: no color
+endif
+partition End {
+  :end;
 }
+-> this is the end;
+end
 
 @enduml
 
