@@ -1,0 +1,19 @@
+@startuml
+!include ../style.puml
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+
+left to right direction
+
+actor :企业端用户 :as a
+
+  a --> (登录)
+
+
+
+
+@enduml

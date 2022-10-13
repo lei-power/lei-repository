@@ -1,0 +1,29 @@
+@startuml
+!include ../style.puml
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+
+left to right direction
+
+actor :企业端用户 :as a
+usecase 管理地块
+  a --> (管理地块)
+  管理地块 --> (新增)
+  管理地块 --> (修改)
+  管理地块 --> (删除)
+
+
+ (删除)--> (删除地块)
+
+  (删除)--> (删除种植计划：农林牧渔)
+  (删除)--> (删除采收计划：农林牧渔)
+ (删除)--> (删除农事)
+ (删除)--> (删除农事投入品)
+ (删除)--> (删除农事参与人)
+ (删除)--> (删除销售记录：农林牧渔)
+
+@enduml
