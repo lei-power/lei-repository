@@ -1,0 +1,36 @@
+@startuml
+!include ../uml/style.puml
+
+
+'skinparam linetype ortho
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+entity "作物种类" as 作物种类 {
+   \t主键
+  --
+}
+
+
+entity "种养小类" as 种养小类 {
+   \t主键
+  --
+}
+
+
+entity "种养大类" as 种养大类 {
+   \t主键
+  --
+}
+
+种养大类 ||-o{ 种养小类
+种养小类 ||-o{ 作物种类
+
+
+
+@enduml
+
+

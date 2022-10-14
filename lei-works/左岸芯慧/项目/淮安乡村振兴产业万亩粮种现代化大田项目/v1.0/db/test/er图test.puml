@@ -1,0 +1,43 @@
+@startuml
+!include ../uml/style.puml
+
+
+'skinparam linetype ortho
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+entity "用户" as 用户 {
+   \t主键
+  --
+}
+
+
+entity "资源" as 资源 {
+   \t主键
+  --
+}
+
+
+entity "企业" as 企业 {
+   \t主键
+  --
+}
+entity "角色" as 角色 {
+   \t主键
+  --
+}
+
+企业 }o-o{ 用户
+
+
+用户 }o--o{ 角色
+
+
+角色 }o-o{ 资源
+
+@enduml
+
+

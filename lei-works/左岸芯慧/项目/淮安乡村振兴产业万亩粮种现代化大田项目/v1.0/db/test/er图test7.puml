@@ -1,0 +1,80 @@
+@startuml
+!include ../uml/style.puml
+
+
+'skinparam linetype ortho
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+entity "用户" as 用户 {
+   \t主键
+  --
+}
+
+
+entity "农资表" as 农资表 {
+   \t主键
+  --
+}
+
+
+entity "采收记录（农林牧渔）" as 采收记录 {
+   \t主键
+  --
+}
+entity "种养计划（农林牧渔）" as 种养计划 {
+   \t主键
+  --
+}
+entity "采收溯源（农林牧渔）" as 采收溯源 {
+   \t主键
+  --
+}
+
+entity "农事" as 农事 {
+   \t主键
+  --
+}
+
+entity "条形码" as 条形码 {
+   \t主键
+  --
+}
+
+entity "条形码模板" as 条形码模板 {
+   \t主键
+  --
+}
+entity "条形码模板属性表" as 条形码模板属性表 {
+   \t主键
+  --
+}
+entity "条形码组表" as 条形码组表 {
+   \t主键
+  --
+}
+entity "条形码属性表" as 条形码属性表 {
+   \t主键
+  --
+}
+
+用户}o--o{ 农事
+农事}o--l-o{ 农资表
+农事||--|| 采收记录
+农事||-|| 采收溯源
+种养计划||--lo{ 采收记录
+采收记录||--|| 采收溯源
+
+采收记录||--o{ 条形码
+条形码}o--|| 条形码模板
+条形码模板}o-lo{ 条形码模板属性表
+条形码}o--|| 条形码组表
+条形码组表||-o{ 条形码属性表
+
+
+@enduml
+
+

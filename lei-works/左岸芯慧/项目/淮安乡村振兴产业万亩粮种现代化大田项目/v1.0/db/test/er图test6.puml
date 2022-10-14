@@ -1,0 +1,42 @@
+@startuml
+!include ../uml/style.puml
+
+
+'skinparam linetype ortho
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+entity "运营商" as 运营商 {
+   \t主键
+  --
+}
+entity "运营商后台用户" as 运营商后台用户 {
+   \t主键
+  --
+}
+
+
+entity "运营商后台角色" as 运营商后台角色 {
+   \t主键
+  --
+}
+
+
+entity "运营商后台资源" as 运营商后台资源 {
+   \t主键
+  --
+}
+
+运营商 ||-o{ 运营商后台用户
+运营商后台用户 ||--o{ 运营商后台角色
+运营商后台角色 ||-o{ 运营商后台资源
+
+
+
+
+@enduml
+
+

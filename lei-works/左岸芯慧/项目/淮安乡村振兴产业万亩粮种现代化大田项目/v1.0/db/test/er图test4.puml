@@ -1,0 +1,47 @@
+@startuml
+!include ../uml/style.puml
+
+
+'skinparam linetype ortho
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+entity "种养计划（农林牧渔）" as 种养计划 {
+   \t主键
+  --
+}
+entity "地块" as 地块 {
+   \t主键
+  --
+}
+
+
+entity "种植标准" as 种植标准 {
+   \t主键
+  --
+}
+
+
+entity "检测报告（农林牧渔）" as 检测报告 {
+   \t主键
+  --
+}
+
+entity "种养计划检测报告证书图片" as 种养计划检测报告证书图片 {
+   \t主键
+  --
+}
+
+地块 ||-o{ 种养计划
+种养计划 ||--o{ 种植标准
+种养计划 ||-o{ 检测报告
+检测报告 ||--o{ 种养计划检测报告证书图片
+
+
+
+@enduml
+
+

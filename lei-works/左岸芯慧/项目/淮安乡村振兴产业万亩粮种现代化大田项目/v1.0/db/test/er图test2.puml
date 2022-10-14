@@ -1,0 +1,43 @@
+@startuml
+!include ../uml/style.puml
+
+
+'skinparam linetype ortho
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+entity "农场" as 农场 {
+   \t主键
+  --
+}
+
+
+entity "地块" as 地块 {
+   \t主键
+  --
+}
+
+
+entity "企业" as 企业 {
+   \t主键
+  --
+}
+entity "地块类型" as 地块类型 {
+   \t主键
+  --
+}
+
+企业 ||-o{ 农场
+
+
+农场 ||-o{ 地块
+
+
+地块 ||--o{ 地块类型
+
+@enduml
+
+

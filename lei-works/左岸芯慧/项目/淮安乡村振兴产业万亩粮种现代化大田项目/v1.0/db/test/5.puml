@@ -1,0 +1,36 @@
+@startuml
+!include ../uml/style.puml
+
+
+'skinparam linetype ortho
+  skinparam arrow {
+    Color deeppink
+	Thickness 1
+	fontsize 10
+	fontcolor #blue
+  }
+entity "admin用户" as admin用户 {
+   \t主键
+  --
+}
+
+
+entity "admin资源" as admin资源 {
+   \t主键
+  --
+}
+
+
+entity "admin角色" as admin角色 {
+   \t主键
+  --
+}
+
+admin用户 ||-o{ admin角色
+admin角色 ||-o{ admin资源
+
+
+
+@enduml
+
+
