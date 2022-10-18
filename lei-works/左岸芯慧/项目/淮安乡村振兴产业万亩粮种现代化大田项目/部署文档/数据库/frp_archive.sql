@@ -1,1339 +1,3117 @@
-/*
- Navicat Premium Data Transfer
 
- Source Server         : 神农口袋—测试服F 47.97.120.110
- Source Server Type    : MySQL
- Source Server Version : 50739
- Source Host           : 47.97.120.110:3306
- Source Schema         : frp_adminuser
-
- Target Server Type    : MySQL
- Target Server Version : 50739
- File Encoding         : 65001
-
- Date: 17/10/2022 16:36:47
-*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for sys_resource
+-- Table structure for tbl_archive_agri_mechanisation_statistics
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_resource`;
-CREATE TABLE `sys_resource`  (
-                                 `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '标识',
-                                 `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
-                                 `permission` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限标识',
-                                 `type` int(2) NULL DEFAULT NULL COMMENT '资源类型   1:菜单    2：按钮',
-                                 `parent_id` int(20) NULL DEFAULT NULL COMMENT '父资源id',
-                                 `web_url` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'web页面地址',
-                                 `sort_num` int(20) NULL DEFAULT NULL COMMENT '排序',
-                                 `menu_icon` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
-                                 `icon_color` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标颜色',
-                                 `target` varchar(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '_self' COMMENT '相当于 a 链接的 target 属性：_blank,_self',
-                                 `menu_cat` tinyint(4) NOT NULL DEFAULT 1 COMMENT '菜单分类，只在type=1时候有效，采用位运算，取值位一下取值的和：1-web端，2-手机H5端',
-                                 PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 536 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '资源表' ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `tbl_archive_agri_mechanisation_statistics`;
+CREATE TABLE `tbl_archive_agri_mechanisation_statistics`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT,
+    `plant_plan_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '种植计划id',
+    `plant_start_date`        date                                                          NULL DEFAULT NULL COMMENT '种植时间',
+    `close_date`              date                                                          NULL DEFAULT NULL COMMENT '种植结束时间',
+    `status`                  int(11)                                                       NULL DEFAULT 0 COMMENT '1结束  0未结束',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id，租户标识，saas系统必备',
+    `company_name`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业名',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '主体类型',
+    `company_category_name`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`        int(11)                                                       NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci        NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci        NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `statistics_flag`         int(11)                                                       NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `gis_land_type_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块用途id',
+    `gis_land_type_name`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地块用途名称',
+    `land_type_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块类型id',
+    `land_type_name`          varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地块类型名称',
+    `land_group_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块分组id',
+    `land_group_name`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地块分组名称',
+    `land_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块id',
+    `sh_gis_dkid`             varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '对应上海测绘院地块id(地块编码)',
+    `land_name`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地块名称',
+    `land_acre`               decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '地块面积',
+    `crop_category_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物种类id',
+    `crop_name`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物种类名称',
+    `sown_area`               decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '播种面积(亩)',
+    `zhibo_area`              decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '直播-机械面积',
+    `yizai_area`              decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '移栽-机械面积',
+    `fangeng_area`            decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '翻耕-机械面积',
+    `fangeng_mission_id`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '翻耕农事id',
+    `zhengqi_area`            decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '整畦-机械面积',
+    `zhengqi_mission_id`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '整畦农事id',
+    `pick_area`               decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '采收-机械面积',
+    `pick_record_id`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '采收记录id',
+    `create_time`             datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_plant_plan_id` (`plant_plan_id`) USING BTREE,
+    INDEX `idx_farm_id` (`farm_id`) USING BTREE,
+    INDEX `idx_plant_start_date` (`plant_start_date`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农业机械化统计'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of sys_resource
+-- Table structure for tbl_archive_agri_res_use_area_month
 -- ----------------------------
-INSERT INTO `sys_resource` VALUES (137, '运营数据', NULL, 1, 0, NULL, 2, 'md-trending-up', NULL, '_self', 3);
-INSERT INTO `sys_resource` VALUES (138, '企业', NULL, 1, 137, '/company', 1, NULL, NULL, '_self', 3);
-INSERT INTO `sys_resource` VALUES (139, '用户', NULL, 1, 137, '/user', 3, NULL, NULL, '_self', 3);
-INSERT INTO `sys_resource` VALUES (140, '农场', NULL, 1, 137, '/farm', 2, NULL, NULL, '_self', 3);
-INSERT INTO `sys_resource` VALUES (141, '地块', NULL, 1, 137, '/land', 4, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (142, '任务', NULL, 1, 137, '/mission', 5, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (143, '采收', NULL, 1, 137, '/pick', 6, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (144, '平台管理', NULL, 1, 0, NULL, 5, 'ios-people', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (145, '平台账号管理', NULL, 1, 144, '/sysuser', 2, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (146, '平台角色管理', NULL, 1, 144, '/sysrole', 2, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (147, '平台菜单管理', NULL, 1, 144, '/sysresource', 3, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (148, '基础配置', NULL, 1, 0, NULL, 3, 'md-options', NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (149, '农资类型', NULL, 1, 148, '/agritype', 4, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (150, '农资单位', NULL, 1, 148, '/agriunit', 5, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (151, '种植标准', NULL, 1, 148, '/plantstandard', 3, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (152, '地块类型', NULL, 1, 148, '/landtype', 2, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (153, '作物种类', NULL, 1, 148, '/crop', 1, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (161, '企业角色', NULL, 1, 148, '/role', 6, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (175, '协议/条款管理', NULL, 1, 212, '/agreement', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (176, '添加', 'landtype:add', 2, 152, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (177, '添加', 'agritype:add', 2, 149, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (178, '编辑', 'agritype:edit', 2, 149, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (179, '删除', 'agritype:del', 2, 149, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (180, '添加', 'agriunit:add', 2, 150, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (181, '编辑', 'landtype:edit', 2, 152, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (182, '删除', 'landtype:del', 2, 152, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (183, '添加', 'plantstandard:add', 2, 151, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (184, '编辑', 'plantstandard:edit', 2, 151, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (185, '删除', 'plantstandard:del', 2, 151, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (186, '添加', 'crop:add', 2, 153, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (187, '编辑', 'crop:edit', 2, 153, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (188, '删除', 'crop:del', 2, 153, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (189, '编辑', 'co:role:edit', 2, 161, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (190, '添加', 'agreement:add', 2, 175, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (191, '编辑', 'agreement:edit', 2, 175, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (192, '删除', 'agreement:edit', 2, 175, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (193, '添加', 'sysuser:add', 2, 145, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (194, '编辑', 'sysuser:edit', 2, 145, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (195, '删除', 'sysuser:del', 2, 145, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (196, '添加', 'sysrole:add', 2, 146, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (197, '编辑', 'sysrole:edit', 2, 146, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (198, '删除', 'sysrole:del', 2, 146, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (199, '添加', 'sysresource:add', 2, 147, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (200, '编辑', 'sysresource:edit', 2, 147, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (201, '删除', 'sysresource:del', 2, 147, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (202, '编辑', 'agriunit:edit', 1, 150, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (203, '删除', 'agriunit:del', 1, 150, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (205, 'icon图标', '', 1, 144, 'https://www.iviewui.com/components/icon', 6, 'ios-paper-outline', '', '_blank', 1);
-INSERT INTO `sys_resource` VALUES (207, '企业资源', '', 1, 148, '/resource', 7, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (208, '添加', 'coresource:add', 2, 207, '', 1, 'ios-paper-outline', '', '', 1);
-INSERT INTO `sys_resource` VALUES (209, '编辑', 'coresource:edit', 2, 207, '', 2, 'ios-paper-outline', '', '', 1);
-INSERT INTO `sys_resource` VALUES (210, '删除', 'coresource:del', 2, 207, '', 3, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (212, '高级配置', '', 1, 0, '', 3, 'ios-construct', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (213, '安卓包下载管理', 'apkaddress', 1, 212, '/apkaddress', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (214, '官网农场主评价', 'farmercomment', 1, 212, '/farmercomment', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (216, '登录页Banner', 'loginbanner', 1, 212, '/loginbanner', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (217, '官网示例管理', 'qrcodeexample', 1, 212, '/qrcodeexample', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (218, '官网Banner', 'websitebanner', 1, 212, '/websitebanner', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (219, '添加', 'apkaddress:add', 2, 213, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (220, '编辑', 'apkaddress:edit', 2, 213, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (221, '删除', 'apkaddress:del', 2, 213, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (222, '添加', 'qrcodeexample:add', 2, 217, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (223, '编辑', 'qrcodeexample:edit', 1, 217, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (224, '删除', 'qrcodeexample:del', 1, 217, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (225, '添加', 'loginbanner:add', 2, 216, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (226, '编辑', 'loginbanner:edit', 2, 216, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (227, '删除', 'loginbanner:del', 2, 216, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (228, '添加', 'farmercomment:add', 2, 214, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (231, '编辑', 'farmercomment:edit', 2, 214, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (232, '删除', 'farmercomment:del', 2, 214, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (233, '添加', 'websitebanner:add', 2, 218, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (234, '编辑', 'websitebanner:edit', 1, 218, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (235, '删除', 'websitebanner:del', 2, 218, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (236, '工作台', '', 1, 0, '', 1, 'ios-paper-outline', '', '_self', 3);
-INSERT INTO `sys_resource` VALUES (237, '新增趋势', '', 1, 236, '/home', 1, 'ios-paper-outline', '', '_self', 3);
-INSERT INTO `sys_resource` VALUES (238, '演示农场', '', 1, 212, '/demofarm', 7, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (239, '演示地块', '', 1, 212, '/demoland', 8, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (240, '农场秀模板', '', 1, 212, '/farmshowmodel', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (241, '详情', 'farmshowmodel:info', 2, 240, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (242, '添加', 'farmshowmodel:add', 2, 240, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (243, '编辑', 'farmshowmodel:edit', 2, 240, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (244, '删除', 'farmshowmodel:del', 1, 240, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (245, '活跃趋势', '', 1, 236, '/platformdata', 2, 'ios-paper-outline', '', '_self', 3);
-INSERT INTO `sys_resource` VALUES (246, '添加', 'farmdemo:add', 2, 238, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (247, '编辑', 'farmdemo:edit', 2, 238, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (248, '删除', 'farmdemo:del', 2, 238, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (249, '添加', 'landdemo:add', 2, 239, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (250, '编辑', 'landdemo:edit', 2, 239, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (251, '删除', 'landdemo:del', 2, 239, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (252, '种植计划', '', 1, 137, '/plantplan', 7, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (253, '农场地图', '', 1, 236, '/indexmap', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (255, '物联网账号', '', 1, 212, '/iotaccountconfig', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (256, '修改', 'iotaccountconfig:edit', 2, 255, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (258, '农作物审核', '', 1, 137, '/cropfeedback', 10, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (259, '农场iot配置', '', 1, 212, '/iotfarmconfig', 10, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (260, '通过', 'cropfeedback:pass', 2, 258, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (261, '详情', 'iotfarmconfig:info', 2, 259, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (262, '定制logo', '', 1, 212, '/companyshowconfig', 11, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (263, '添加', 'companyshowconfig:add', 2, 262, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (264, '编辑', 'companyshowconfig:edit', 2, 262, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (265, '删除', 'companyshowconfig:del', 2, 262, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (271, '政府端主体（全量）', '', 1, 144, '/governmentsubject', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (272, '详情', 'governmentsubject:info', 2, 271, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (273, '新增', 'governmentsubject:add', 2, 271, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (274, '编辑', 'governmentsubject:edit', 2, 271, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (275, '删除', 'governmentsubject:del', 2, 271, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (281, '溯源H5配置', '', 1, 212, '/traceconfig', 13, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (282, '添加', 'traceconfig:add', 2, 281, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (283, '删除', 'traceconfig:del', 2, 281, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (284, '修改', 'traceconfig:edit', 2, 281, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (285, '运营商配置', '', 1, 144, '/opersubject', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (286, '添加', 'opersubject:add', 2, 285, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (287, '修改', 'opersubject:edit', 1, 285, '', 2, 'ios-paper-outline', '', '_self', 2);
-INSERT INTO `sys_resource` VALUES (288, '删除', 'opersubject:del', 1, 285, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (289, '详情', 'opersubject:info', 1, 285, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (290, '溯源码样式配置', '', 1, 212, '/barcodetemplateattr', 15, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (291, '溯源码配置', '', 1, 212, '/barcodetemplate', 14, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (292, '溯源过期时间配置', '', 1, 212, '/sysconf', 18, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (293, '添加', 'barcodetemplate:add', 2, 291, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (294, '删除', 'barcodetemplate:del', 2, 291, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (295, '修改', 'barcodetemplate:edit', 1, 291, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (296, '添加', 'barcodetemplateattr:add', 2, 290, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (297, '删除', 'barcodetemplateattr:del', 1, 290, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (298, '修改', 'barcodetemplateattr:edit', 1, 290, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (299, '添加', 'sysconf:add', 2, 292, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (300, '删除', 'sysconf:del', 2, 292, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (301, '修改', 'sysconf:edit', 2, 292, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (302, '企业留存率', '', 1, 236, '/companyretention', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (303, 'gis类型配置', '', 1, 212, '/gistype', 19, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (304, '添加', 'gistype:add', 2, 303, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (305, '编辑', 'gistype:edit', 2, 303, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (306, '删除', 'gistype:del', 2, 303, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (307, '详情', 'gistype:info', 1, 303, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (308, '作物大类', '', 1, 148, '/cropSubject', 8, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (310, '客服管理', '', 1, 212, '/service', 20, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (311, '企业资质审核', '', 1, 236, '/qualification', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (312, '审核', 'qualification:check', 2, 311, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (313, '作物分类', '', 1, 148, '/cropClassify', 10, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (314, '作物病虫害', '', 1, 148, '/cropDisease', 11, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (315, '作物小类', '', 1, 148, '/cropCate', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (316, '添加', 'cropCate:add', 2, 315, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (317, '修改', 'cropCate:edit', 1, 315, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (318, '添加', 'cropClassify:add', 2, 313, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (319, '修改', 'cropClassify:edit', 2, 313, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (320, '删除', 'cropClassify:del', 2, 313, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (321, '添加', 'cropDisease:add', 2, 314, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (322, '修改', 'cropDisease:edit', 2, 314, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (323, '删除', 'cropDisease:del', 2, 314, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (324, '修改', 'cropSubject:edit', 2, 308, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (326, '监管', 'company:supervisionflag', 2, 138, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (328, '添加企业成员', 'user:refAdd', 2, 139, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (329, '农场统计', 'produce:farm:editstatisticsflag', 2, 140, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (330, '农场土地经营权', 'produce:farm:editlandright', 2, 140, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (331, '企业类型', 'user:company:editbusinesscategory', 2, 138, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (332, '企业统一社会信用代码', 'user:company:editenterprisecreditcode', 2, 138, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (333, '企业等级配置', 'user:company:editranktype', 2, 138, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (334, '收费模式配置', 'operuser:operatesubject:editrankopenflag', 2, 285, '', 5, 'ios-paper-outline', '', '_self', 5);
-INSERT INTO `sys_resource` VALUES (335, '经营类目', '', 1, 148, '/businesscategorymanage', 1, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (336, '企业类型', '', 1, 148, '/companycategory', 3, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (337, '添加', 'businesscategory:add', 2, 335, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (338, '编辑', 'businesscategory:edit', 2, 335, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (339, '删除', 'businesscategory:del', 2, 335, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (340, '添加', 'companycategory:add', 2, 336, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (341, '编辑', 'companycategory:edit', 2, 336, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (342, '删除', 'companycategory:del', 2, 336, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (343, '农场经营类目编辑', 'farm:editbusinesscategory', 2, 140, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (344, '区域配置管理', '', 1, 212, '/arealandtype', 21, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (345, '农产品批发市场列表', '', 1, 212, '/ncMark', 1, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (347, '区域地块类型添加', 'areaLandTypeDistribution:add', 2, 344, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (348, '区域地块类型编辑', 'areaLandTypeDistribution:edit', 2, 344, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (349, '区域地块类型删除', 'areaLandTypeDistribution:del', 2, 344, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (350, '区域摄像头添加', 'areaCameraConfig:add', 2, 344, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (351, '区域摄像头编辑', 'areaCameraConfig:edit', 2, 344, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (352, '区域摄像头删除', 'areaCameraConfig:del', 2, 344, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (353, '区域更新', '', 1, 148, '/updateArea', 12, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (354, '设置密码', 'user:setpassword', 2, 139, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (355, '删除企业', 'company:del', 2, 138, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (356, '农资管理', '', 1, 148, '/agriList', 5, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (357, '农场地址修改', 'farm:editFarmAddress', 2, 140, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (359, '新增农资', 'agriList:add', 2, 356, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (360, '编辑农资', 'agriList:edit', 2, 356, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (361, '删除农资', 'agriList:del', 2, 356, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (363, '农事类型', NULL, 1, 148, '/missioncategory', 4, NULL, NULL, '_self', 1);
-INSERT INTO `sys_resource` VALUES (364, '添加', 'missioncategory:add', 2, 363, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (365, '编辑', 'missioncategory:edit', 2, 363, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (366, '删除', 'missioncategory:del', 2, 363, '', 2, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (367, '农资审核', '', 1, 137, '/agrifeedback', 8, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (368, '通过', 'agrifeedback:pass', 2, 367, '', 1, '', '', '', 1);
-INSERT INTO `sys_resource` VALUES (369, '地区管理', '', 1, 148, '/areaAdmin', 13, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (371, '添加街镇', 'areaAdmin:addTown', 2, 369, '', 1, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (372, '添加村', 'areaAdmin:addVillage', 1, 369, '', 2, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (373, '编辑', 'areaAdmin:edit', 2, 369, '', 3, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (375, '删除', 'areaAdmin:del', 2, 369, '', 4, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (380, '专家列表', '', 1, 212, '/expert', 22, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (381, '问题列表', '', 1, 137, '/question', 11, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (382, '出入库类型', '', 1, 148, '/agristorage', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (383, '添加出入库类型', 'agristorage:add', 2, 382, '', 1, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (384, '修改出入库类型', 'agristorage:edit', 2, 382, '', 2, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (385, '是否禁用出入库类型', 'agristorage:del', 2, 382, '', 3, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (386, '农资包装单位', '', 1, 148, '/agripackunit', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (387, '添加', 'agripackunit:add', 1, 386, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (388, '修改', 'agripackunit:edit', 1, 386, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (389, '禁用', 'agripackunit:del', 1, 386, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (390, '农委企业列表', '', 1, 137, '/nongweicompany', 12, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (391, '修改地块绑定gis地块Id', 'land:editshdkid', 2, 141, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (392, '专家类型', '', 1, 212, '/expertType', 23, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (393, '添加专家', 'expert:add', 2, 380, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (394, '编辑专家', 'expert:edit', 2, 380, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (395, '禁用专家', 'expert:enable', 2, 380, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (396, '增加专家类型', 'expertType:add', 2, 392, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (397, '修改专家类型', 'expertType:edit', 2, 392, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (398, '删除专家类型', 'expertType:del', 2, 392, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (400, '地块校准页面', '', 1, 140, '/farmlandcompare', 6, 'ios-paper-outline', '', '_self', 3);
-INSERT INTO `sys_resource` VALUES (401, '地块校准按钮', 'farm:landedit', 2, 140, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (403, '管理中台菜单管理', '', 1, 144, '/govplat', 3, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (404, '地块用途', '', 1, 148, '/landuse', 2, '', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (406, '添加', 'landuse:add', 1, 404, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (407, '编辑', 'landuse:edit', 2, 404, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (408, '删除', 'landuse:del', 2, 404, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (409, '添加', 'govplat:add', 2, 403, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (410, '编辑', 'govplat:edit', 2, 403, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (411, '删除', 'govplat:del', 2, 403, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (412, '用户信息添加', 'governmentsubject:userinfo:add', 2, 271, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (413, '用户信息修改', 'governmentsubject:userinfo:edit', 2, 271, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (415, '用户角色添加', 'governmentsubject:userrole:add', 2, 271, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (416, '用户角色修改', 'governmentsubject:userrole:edit', 2, 271, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (417, '用户角色中台授权', 'governmentsubject:userrole:grant', 2, 271, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (418, '用户角色删除', 'governmentsubject:userrole:del', 2, 271, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (419, '地块信息添加', 'governmentsubject:landtype:add', 2, 271, '', 7, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (420, '种植标准信息添加', 'governmentsubject:plantstandard:add', 2, 271, '', 8, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (421, 'gis信息添加', 'governmentsubject:gis:add', 2, 271, '', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (422, 'gis信息子数据添加', 'governmentsubject:gis:child:add', 2, 271, '', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (423, 'gis信息子数据修改', 'governmentsubject:gis:child:edit', 2, 271, '', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (424, 'gis信息子数据删除', 'governmentsubject:gis:child:del', 2, 271, '', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (425, '产值信息配置添加', 'governmentsubject:output:add', 2, 271, '', 10, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (426, '产值信息配置修改', 'governmentsubject:output:edit', 2, 271, '', 10, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (427, '产值信息配置产值配置开关修改', 'governmentsubject:output:onoff', 2, 271, '', 10, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (428, '产值信息配置删除', 'governmentsubject:output:del', 2, 271, '', 10, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (429, '用户信息重置密码', 'governmentsubject:userinfo:pwdedit', 2, 271, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (430, '用户信息删除', 'governmentsubject:userinfo:del', 2, 271, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (431, '地块信息修改', 'governmentsubject:landtype:edit', 2, 271, '', 7, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (432, '地块信息删除', 'governmentsubject:landtype:del', 2, 271, '', 7, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (433, '种植标准信息修改', 'governmentsubject:plantstandard:edit', 2, 271, '', 8, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (434, '种植标准信息删除', 'governmentsubject:plantstandard:del', 2, 271, '', 8, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (435, 'gis信息修改', 'governmentsubject:gis:edit', 2, 271, '', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (436, 'gis信息删除', 'governmentsubject:gis:del', 2, 271, '', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (437, 'gis信息子数据配置', 'governmentsubject:gis:child', 2, 271, '', 9, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (438, '险种管理', '', 1, 148, '/insure', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (439, '险种管理', '', 1, 137, '/insure', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (440, '险种管理编辑', 'insure:edit', 2, 439, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (441, '公告类型', '', 1, 148, '/bulletinCategory', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (442, '新增地块', 'land:add', 2, 141, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (443, '编辑地块', 'land:edit', 2, 141, '', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (444, '删除地块', 'land:delete', 2, 141, '', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (445, '下架地块', 'land:offShelf', 2, 141, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (446, '大数据平台路由管理', '', 1, 212, '/platformRouteManagement', 24, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (448, '中台&大数据用户解锁', 'governmentsubject:userinfo:unlock', 1, 271, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (449, '险种管理启用禁用', 'insure:disable', 2, 439, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (450, '险种基本信息保存', 'insure:save', 2, 439, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (451, '添加可投保作物', 'insurable:add', 2, 439, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (452, '可投保作物编辑', 'insurable:edit', 2, 439, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (453, '可投保作物启用禁用', 'insurable:disable', 2, 439, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (454, '可投保作物信息保存', 'insurable:save', 2, 439, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (455, '合格证字段', '', 1, 212, '/certificateField', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (456, '合格证样式', '', 1, 212, '/certificateStyle', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (457, '新增', 'certificateField:add', 2, 455, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (458, '修改', 'certificateField:edit', 2, 455, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (459, '下架', 'certificateField:offshelf', 2, 455, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (460, '新增', 'certificateStyle:add', 2, 456, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (461, '修改', 'certificateStyle:edit', 2, 456, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (462, '系统管理', '', 1, 0, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (463, '日志管理', '', 1, 462, '/system-logs', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (464, '区域农事类型添加', 'areaFarmingType:add', 2, 344, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (466, '区域农事类型删除', 'areaFarmingType:del', 2, 344, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (467, '地块差异比对（上海） ', '', 1, 137, '/plotDeffience', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (468, '关联测绘院主体', 'plot:association', 2, 467, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (469, '地块校准', 'plot:landedit', 2, 467, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (470, '备注和状态修改', 'plot:edit', 2, 467, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (471, '关联测绘院主体', 'farm:association', 2, 140, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (472, '外设管理', '', 1, 212, '/peripherals', 24, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (473, '一年生作物预测配置', '', 1, 148, '/production-forecast', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (474, '修改', 'productionForecast:edit', 2, 473, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (475, '清空', 'productionForecast:clear', 2, 473, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (476, '解锁', 'sysuser:unlock', 2, 145, '', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (477, '关联政府主体', 'sysuser:link', 1, 145, '', 5, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (478, '关联政府主体详细页', '', 1, 145, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (479, '添加关联', 'relateGovSubject:add', 2, 478, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (480, '取消关联', 'relateGovSubject:cancel', 2, 478, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (481, '政府端主体', '', 1, 144, '/governmentsubjectPowser', 4, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (484, '发布公告', '', 1, 144, '/announce', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (485, '发布新公告', 'notice:add', 2, 484, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (487, '解锁', 'opersubject:unlock', 2, 285, '', 6, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (488, '撤回公告', 'notice:withdraw', 2, 484, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (489, '取消公告', 'notice:cancel', 2, 484, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (490, '编辑公告', 'notice:edit', 2, 484, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (491, '删除公告', 'notice:del', 2, 484, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (492, '测试菜单1', '', 1, 463, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (497, '农机作业类型', '', 1, 148, '/machineryOperation', 14, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (498, '农机大类', '', 1, 148, '/machinerySubject', 15, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (499, '农机小类', '', 1, 148, '/machineryCate', 16, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (500, '农机分类', '', 1, 148, '/machineryVariety', 17, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (501, '农机生产企业', '', 1, 148, '/agriMachineCompany', 18, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (502, '农机调度系统菜单管理', '', 1, 144, '/machineryDispatchMenu', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (503, '农机服务中心', '', 1, 144, '/agriMachineryService', 3, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (504, '添加', 'machineryDispatchMenu:add', 2, 502, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (505, '编辑', 'machineryDispatchMenu:edit', 2, 502, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (506, '删除', 'machineryDispatchMenu:del', 2, 502, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (507, '添加', 'agriMachineryService:add', 2, 503, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (508, '修改', 'agriMachineryService:edit', 2, 503, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (509, '角色信息系统授权', 'agriMachineryService:rolegrant', 2, 503, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (510, '1', '', 1, 0, '1', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (511, '22', '', 1, 510, 'sss', 2, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (512, '供应企业', '', 1, 137, '/supplier', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (513, '使用记录', 'supplier:supplierRecord', 2, 512, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (514, '修改', 'supplier:change', 2, 512, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (515, '添加', 'noticetype:add', 2, 441, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (516, '编辑', 'noticetype:edit', 2, 441, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (517, '启用/禁用', 'noticetype:enabled', 2, 441, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (518, '任务类型', '', 1, 148, '/taskType', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (520, '添加', 'machineryVariety:add', 2, 500, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (521, '修改', 'machineryVariety:edit', 2, 500, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (522, '上架', 'machineryVariety:up', 2, 500, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (523, '下架', 'machineryVariety:down', 2, 500, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (524, '添加', 'machineryCate:add', 2, 499, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (525, '修改', 'machineryCate:edit', 2, 499, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (526, '上架', 'machineryCate:up', 2, 499, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (527, '下架', 'machineryCate:down', 2, 499, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (529, '修改', 'machinerySubject:edit', 2, 498, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (530, '添加', 'machinerySubject:add', 2, 498, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (531, '上架', 'machinerySubject:up', 2, 498, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (532, '下架', 'machinerySubject:down', 2, 498, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (533, '添加', 'tasktype:add', 2, 518, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (534, '修改', 'tasktype:edit', 2, 518, '', 1, 'ios-paper-outline', '', '_self', 1);
-INSERT INTO `sys_resource` VALUES (535, '禁用', 'tasktype:forbidden', 2, 518, '', 1, 'ios-paper-outline', '', '_self', 1);
+DROP TABLE IF EXISTS `tbl_archive_agri_res_use_area_month`;
+CREATE TABLE `tbl_archive_agri_res_use_area_month`
+(
+    `id`                        bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `record_key`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '统计月份字符串，格式：yyyy-MM',
+    `record_start_date`         date                                                         NULL DEFAULT NULL COMMENT '统计的起始日期',
+    `record_end_date`           date                                                         NULL DEFAULT NULL COMMENT '统计的结束日期',
+    `feiliao_use_value`         decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '肥料用量：单位 公斤，四舍五入保留2位小数',
+    `nongyao_use_value`         decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '农药用量：单位 公斤，四舍五入保留2位小数',
+    `yuyao_use_value`           decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '渔药用量：单位 公斤，四舍五入保留2位小数',
+    `xumu_siliao_use_value`     decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '畜牧饲料用量：单位 公斤，四舍五入保留2位小数',
+    `shuichan_siliao_use_value` decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '水产饲料用量：单位 公斤，四舍五入保留2位小数',
+    `shouyao_use_value`         decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '兽药用量：单位 公斤，四舍五入保留2位小数',
+    `zhongmiao_use_value`       decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '种苗用量：单位 公斤，四舍五入保留2位小数',
+    `statistics_mode`           tinyint(2)                                                   NULL DEFAULT NULL COMMENT '统计方式 0 手动 1 自动',
+    `create_time`               datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`               datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_recordKey` (`area_id`, `record_key`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农资使用统计-区域-按月份统计'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Table structure for sys_role
+-- Table structure for tbl_archive_arable_land_occupy_day
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_role`;
-CREATE TABLE `sys_role`  (
-                             `id` bigint(20) NOT NULL AUTO_INCREMENT,
-                             `role_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名称',
-                             `role_desc` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色描述',
-                             `sort_num` int(11) NULL DEFAULT NULL COMMENT '排序字段，越小越靠前',
-                             `create_time` datetime NULL DEFAULT NULL,
-                             `update_time` datetime NULL DEFAULT NULL,
-                             PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `tbl_archive_arable_land_occupy_day`;
+CREATE TABLE `tbl_archive_arable_land_occupy_day`
+(
+    `id`                              bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `arable_land_batch_record_id`     bigint(20)                                                   NOT NULL COMMENT '耕地占用批次信息id',
+    `arable_land_batch_record_name`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '耕地占用批次信息名称',
+    `area_id`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `total_land_acre`                 decimal(16, 2)                                               NULL DEFAULT NULL COMMENT '三调耕地总面积（汇总统计该区域所有三调耕地地块的面积之和) 单位：亩',
+    `total_occupy_arable_land_acre`   decimal(16, 2)                                               NULL DEFAULT NULL COMMENT '占用耕地面积（汇总统计该区域所有占用物占用耕地的面积之和) 单位：亩',
+    `total_building_arable_land_acre` decimal(16, 2)                                               NULL DEFAULT NULL COMMENT '建筑物占用耕地面积（汇总统计该区域所有建筑物占用物占用耕地的面积之和) 单位：亩',
+    `total_ford_arable_land_acre`     decimal(16, 2)                                               NULL DEFAULT NULL COMMENT '水体占用耕地面积（汇总统计该区域所有水体占用物占用耕地的面积之和) 单位：亩',
+    `total_forest_arable_land_acre`   decimal(16, 2)                                               NULL DEFAULT NULL COMMENT '林地占用耕地面积（汇总统计该区域所有林地占用物占用耕地的面积之和) 单位：亩',
+    `total_other_arable_land_acre`    decimal(16, 2)                                               NULL DEFAULT NULL COMMENT '其他占用耕地面积（汇总统计该区域所有其他占用物占用耕地的面积之和) 单位：亩',
+    `land_occupy_count`               int(11)                                                      NULL DEFAULT 0 COMMENT '占用物数量',
+    `create_time`                     datetime                                                     NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`                     datetime                                                     NULL DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `batch_area_uk` (`arable_land_batch_record_id`, `area_id`) USING BTREE COMMENT '批次id和区域id联合主键'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '占用耕地按日归档表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of sys_role
+-- Table structure for tbl_archive_arable_land_occupy_month
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '管理员', '管理员权限', 1, '2019-01-04 11:07:11', '2019-01-18 09:56:41');
-INSERT INTO `sys_role` VALUES (14, '开发人员', '开发人员使用', 2, '2019-01-18 09:59:59', '2021-07-16 10:13:58');
-INSERT INTO `sys_role` VALUES (17, '测试', '测试测试测试', 3, '2019-01-21 14:07:55', '2019-01-21 14:08:09');
-INSERT INTO `sys_role` VALUES (19, '运营', '运营人员', 4, '2019-02-01 10:26:10', '2019-02-01 10:26:10');
-INSERT INTO `sys_role` VALUES (20, '政府客户', '只看农场地图', 5, '2019-03-22 19:47:59', '2019-03-22 19:47:59');
-INSERT INTO `sys_role` VALUES (21, '产品', '产品人员', 6, '2019-04-02 16:33:28', '2019-04-02 16:33:28');
-INSERT INTO `sys_role` VALUES (22, '超级管理员', '超级管理员', 1, '2020-06-28 16:04:50', '2021-02-22 10:24:48');
-INSERT INTO `sys_role` VALUES (24, '1', '1', 1, '2021-10-08 10:20:05', '2021-10-08 10:20:05');
-INSERT INTO `sys_role` VALUES (25, '等保测评', '等保测评', 1, '2021-12-23 09:54:45', '2021-12-23 09:54:45');
+DROP TABLE IF EXISTS `tbl_archive_arable_land_occupy_month`;
+CREATE TABLE `tbl_archive_arable_land_occupy_month`
+(
+    `id`                            bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_month_str`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '按月统计时间:例如：2020-01',
+    `arable_land_batch_record_id`   bigint(20)                                                   NOT NULL COMMENT '耕地占用批次信息id',
+    `arable_land_batch_record_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '耕地占用批次信息名称',
+    `area_id`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `total_check_count`             int(11)                                                      NULL DEFAULT 0 COMMENT '统计该区域所有占用物筛查次数',
+    `total_review_count`            int(11)                                                      NULL DEFAULT 0 COMMENT '统计该区域所有占用物复核次数',
+    `total_audit_count`             int(11)                                                      NULL DEFAULT 0 COMMENT '统计该区域所有占用物审核次数',
+    `create_time`                   datetime                                                     NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`                   datetime                                                     NULL DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `batch_area_date_uk` (`arable_land_batch_record_id`, `area_id`, `archive_month_str`) USING BTREE COMMENT '批次和区域时间联合主键'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '占用耕地处理按月归档表（增量）'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Table structure for sys_role_resource_ref
+-- Table structure for tbl_archive_arable_land_occupy_month_full
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_role_resource_ref`;
-CREATE TABLE `sys_role_resource_ref`  (
-                                          `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色id',
-                                          `resource_id` bigint(20) NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色资源关联表' ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `tbl_archive_arable_land_occupy_month_full`;
+CREATE TABLE `tbl_archive_arable_land_occupy_month_full`
+(
+    `id`                            bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `arable_land_batch_record_id`   bigint(20)                                                   NOT NULL COMMENT '耕地占用批次信息id',
+    `arable_land_batch_record_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '耕地占用批次信息名称',
+    `area_id`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `total_check_count`             int(11)                                                      NULL DEFAULT 0 COMMENT '统计该区域所有占用物筛查次数',
+    `total_review_count`            int(11)                                                      NULL DEFAULT 0 COMMENT '统计该区域所有占用物复核次数',
+    `total_audit_count`             int(11)                                                      NULL DEFAULT 0 COMMENT '统计该区域所有占用物审核次数',
+    `create_time`                   datetime                                                     NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`                   datetime                                                     NULL DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `batch_area_uk` (`arable_land_batch_record_id`, `area_id`) USING BTREE COMMENT '批次id,区域id联合主键'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '占用耕地处理按月归档表（全量）'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of sys_role_resource_ref
+-- Table structure for tbl_archive_area_config
 -- ----------------------------
-INSERT INTO `sys_role_resource_ref` VALUES (20, 236);
-INSERT INTO `sys_role_resource_ref` VALUES (20, 237);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 236);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 245);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 253);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 302);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 137);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 138);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 326);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 331);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 332);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 333);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 140);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 139);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 141);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 142);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 143);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 148);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 153);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 186);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 187);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 188);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 152);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 176);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 181);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 182);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 151);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 183);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 184);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 185);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 149);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 177);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 178);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 179);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 150);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 180);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 161);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 189);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 175);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 190);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 191);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 192);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 144);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 145);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 193);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 194);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 195);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 146);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 196);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 197);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 198);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 147);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 199);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 200);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 201);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 285);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 286);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 287);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 288);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 289);
-INSERT INTO `sys_role_resource_ref` VALUES (17, 334);
-INSERT INTO `sys_role_resource_ref` VALUES (21, 137);
-INSERT INTO `sys_role_resource_ref` VALUES (21, 140);
-INSERT INTO `sys_role_resource_ref` VALUES (21, 139);
-INSERT INTO `sys_role_resource_ref` VALUES (21, 141);
-INSERT INTO `sys_role_resource_ref` VALUES (21, 142);
-INSERT INTO `sys_role_resource_ref` VALUES (21, 143);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 236);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 237);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 245);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 253);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 311);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 302);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 137);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 138);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 140);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 139);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 141);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 142);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 143);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 252);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 258);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 148);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 153);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 152);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 151);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 149);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 150);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 161);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 207);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 308);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 315);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 313);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 314);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 212);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 213);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 255);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 175);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 218);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 217);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 214);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 228);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 231);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 232);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 216);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 238);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 239);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 240);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 241);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 259);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 261);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 262);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 281);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 291);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 290);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 292);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 303);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 310);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 271);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 272);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 285);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 286);
-INSERT INTO `sys_role_resource_ref` VALUES (14, 205);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 137);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 138);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 326);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 331);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 332);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 333);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 140);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 329);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 330);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 343);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 357);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 139);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 141);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 142);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 143);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 252);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 367);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 258);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 148);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 153);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 335);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 152);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 151);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 336);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 149);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 363);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 150);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 356);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 161);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 308);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 315);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 313);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 369);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 212);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 344);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 347);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 348);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 349);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 350);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 351);
-INSERT INTO `sys_role_resource_ref` VALUES (19, 352);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 236);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 237);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 245);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 302);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 137);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 138);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 140);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 139);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 141);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 212);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 213);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 255);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 175);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 218);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 217);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 214);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 216);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 144);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 145);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 193);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 194);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 195);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 146);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 196);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 197);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 198);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 271);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 272);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 273);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 274);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 275);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 412);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 413);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 429);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 430);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 415);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 416);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 417);
-INSERT INTO `sys_role_resource_ref` VALUES (25, 418);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 236);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 237);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 245);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 253);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 311);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 312);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 302);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 511);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 137);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 138);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 326);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 331);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 332);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 333);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 355);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 439);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 440);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 449);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 450);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 451);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 452);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 453);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 454);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 467);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 468);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 469);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 470);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 512);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 513);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 514);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 140);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 329);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 471);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 330);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 343);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 357);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 401);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 400);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 139);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 328);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 354);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 141);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 442);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 445);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 443);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 444);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 391);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 142);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 143);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 252);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 367);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 368);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 258);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 260);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 381);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 390);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 148);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 153);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 186);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 187);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 188);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 335);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 337);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 338);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 339);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 438);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 473);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 474);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 475);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 518);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 152);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 176);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 181);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 182);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 404);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 406);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 407);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 408);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 151);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 183);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 184);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 185);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 336);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 340);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 341);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 342);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 441);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 149);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 177);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 178);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 179);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 363);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 364);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 365);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 366);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 150);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 180);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 202);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 203);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 356);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 359);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 360);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 361);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 382);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 383);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 384);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 385);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 386);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 387);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 388);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 389);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 161);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 189);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 207);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 208);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 209);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 210);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 308);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 324);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 315);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 316);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 317);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 313);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 318);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 319);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 320);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 314);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 321);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 322);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 323);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 353);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 369);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 371);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 372);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 373);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 375);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 497);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 498);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 499);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 500);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 501);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 212);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 213);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 219);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 220);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 221);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 255);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 256);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 345);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 455);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 457);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 458);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 459);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 456);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 460);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 461);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 175);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 190);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 191);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 192);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 218);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 233);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 234);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 235);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 217);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 222);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 223);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 224);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 214);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 228);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 231);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 232);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 216);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 225);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 226);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 227);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 238);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 246);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 247);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 248);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 239);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 249);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 250);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 251);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 240);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 241);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 242);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 243);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 244);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 259);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 261);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 262);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 263);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 264);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 265);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 281);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 282);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 283);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 284);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 291);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 293);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 294);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 295);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 290);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 296);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 297);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 298);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 292);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 299);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 300);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 301);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 303);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 304);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 305);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 306);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 307);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 310);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 344);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 347);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 464);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 466);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 348);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 349);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 350);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 351);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 352);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 380);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 393);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 394);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 395);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 392);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 396);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 397);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 398);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 446);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 472);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 144);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 484);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 485);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 488);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 489);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 490);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 491);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 145);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 193);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 194);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 195);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 476);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 477);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 478);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 479);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 480);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 146);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 196);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 197);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 198);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 147);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 199);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 200);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 201);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 403);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 409);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 410);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 411);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 502);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 504);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 505);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 506);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 503);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 507);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 508);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 509);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 271);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 272);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 273);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 274);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 275);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 412);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 413);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 429);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 430);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 448);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 415);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 416);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 417);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 418);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 419);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 431);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 432);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 420);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 433);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 434);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 421);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 422);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 423);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 424);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 435);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 436);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 437);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 425);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 426);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 427);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 428);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 481);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 285);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 286);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 287);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 288);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 289);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 334);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 487);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 205);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 462);
-INSERT INTO `sys_role_resource_ref` VALUES (1, 463);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 236);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 237);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 245);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 253);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 311);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 312);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 302);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 137);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 138);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 326);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 331);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 332);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 333);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 355);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 439);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 440);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 449);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 450);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 451);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 452);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 453);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 454);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 467);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 468);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 469);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 470);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 512);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 513);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 514);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 140);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 329);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 471);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 330);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 343);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 357);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 401);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 400);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 139);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 328);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 354);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 141);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 442);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 445);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 443);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 444);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 391);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 142);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 143);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 252);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 367);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 368);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 258);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 260);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 381);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 390);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 148);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 153);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 186);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 187);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 188);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 335);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 337);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 338);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 339);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 438);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 473);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 474);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 475);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 518);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 533);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 534);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 535);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 152);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 176);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 181);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 182);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 404);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 406);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 407);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 408);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 151);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 183);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 184);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 185);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 336);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 340);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 341);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 342);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 441);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 515);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 516);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 517);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 149);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 177);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 178);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 179);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 363);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 364);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 365);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 366);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 150);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 180);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 202);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 203);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 356);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 359);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 360);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 361);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 382);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 383);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 384);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 385);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 386);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 387);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 388);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 389);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 161);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 189);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 207);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 208);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 209);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 210);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 308);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 324);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 315);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 316);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 317);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 313);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 318);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 319);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 320);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 314);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 321);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 322);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 323);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 353);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 369);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 371);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 372);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 373);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 375);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 497);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 498);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 529);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 530);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 531);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 532);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 499);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 524);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 525);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 526);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 527);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 500);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 520);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 521);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 522);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 523);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 501);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 212);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 213);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 219);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 220);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 221);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 255);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 256);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 345);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 455);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 457);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 458);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 459);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 456);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 460);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 461);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 175);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 190);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 191);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 192);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 218);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 233);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 234);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 235);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 217);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 222);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 223);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 224);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 214);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 228);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 231);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 232);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 216);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 225);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 226);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 227);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 238);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 246);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 247);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 248);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 239);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 249);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 250);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 251);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 240);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 241);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 242);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 243);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 244);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 259);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 261);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 262);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 263);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 264);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 265);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 281);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 282);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 283);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 284);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 291);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 293);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 294);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 295);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 290);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 296);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 297);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 298);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 292);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 299);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 300);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 301);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 303);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 304);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 305);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 306);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 307);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 310);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 344);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 347);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 464);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 466);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 348);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 349);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 350);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 351);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 352);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 380);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 393);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 394);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 395);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 392);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 396);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 397);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 398);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 446);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 472);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 144);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 484);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 485);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 488);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 489);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 490);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 491);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 145);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 193);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 194);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 195);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 476);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 477);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 478);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 479);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 480);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 146);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 196);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 197);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 198);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 147);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 199);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 200);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 201);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 403);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 409);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 410);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 411);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 502);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 504);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 505);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 506);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 503);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 507);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 508);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 509);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 271);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 272);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 273);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 274);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 275);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 412);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 413);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 429);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 430);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 448);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 415);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 416);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 417);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 418);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 419);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 431);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 432);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 420);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 433);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 434);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 421);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 422);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 423);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 424);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 435);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 436);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 437);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 425);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 426);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 427);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 428);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 481);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 285);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 286);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 287);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 288);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 289);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 334);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 487);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 205);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 462);
-INSERT INTO `sys_role_resource_ref` VALUES (22, 463);
+DROP TABLE IF EXISTS `tbl_archive_area_config`;
+CREATE TABLE `tbl_archive_area_config`
+(
+    `id`          bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `area_id`     varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `level`       tinyint(4)                                                   NULL DEFAULT NULL COMMENT '区域等级',
+    `create_time` datetime                                                     NULL DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Table structure for sys_user
+-- Table structure for tbl_archive_area_farm_land_acre
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_user`;
-CREATE TABLE `sys_user`  (
-                             `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键，采用idgen生成',
-                             `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
-                             `nickname` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '昵称，正式姓名',
-                             `password` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
-                             `enable` tinyint(4) NULL DEFAULT 1 COMMENT '是否启用：1启用，0冻结',
-                             `head_url` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '头像url',
-                             `admin_flag` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否超级管理员：1-是，0-否，如果是超级管理员，标识账号内置，不可修改，不可删除',
-                             `login_time` datetime NULL DEFAULT NULL COMMENT '最近登录时间',
-                             `role_id` bigint(20) NULL DEFAULT 0 COMMENT '角色id，如果是内置的超级管理员账号，则不需要设置该字段，该字段取0',
-                             `create_time` datetime NULL DEFAULT NULL,
-                             `update_time` datetime NULL DEFAULT NULL,
-                             `edit_password_flag` tinyint(2) NOT NULL DEFAULT 0 COMMENT '该账号是否已强制修改密码 true 是 false 否',
-                             PRIMARY KEY (`id`) USING BTREE,
-                             UNIQUE INDEX `uqi_username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `tbl_archive_area_farm_land_acre`;
+CREATE TABLE `tbl_archive_area_farm_land_acre`
+(
+    `id`                  bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`             int(11)                                                      NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `farm_count`          int(11)                                                      NULL DEFAULT NULL COMMENT '主体家数（对应区域下参与统计的经营主体数量合计）',
+    `land_count`          int(11)                                                      NULL DEFAULT NULL COMMENT '地块总数',
+    `land_area`           decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '地块面积之和(亩)',
+    `liangtian_area`      decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '粮田面积（亩）',
+    `jingzuo_area`        decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '经作田面积（亩）',
+    `guoyuan_area`        decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '果园面积（亩）',
+    `caitian_area`        decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '菜田面积（亩）',
+    `shuichan_breed_area` decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '水产养殖面积(池塘面积)（亩）',
+    `xumu_breed_area`     decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '畜牧养殖面积(栏舍面积)（亩）',
+    `create_time`         datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`         datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_area_id` (`area_id`) USING BTREE COMMENT '区域id唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '地块面积-按区域-按日归档表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of sys_user
+-- Table structure for tbl_archive_area_onland_crop_day
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'superadmin', '超管', 'e10adc3949ba59abbe56e057f20f883e', 1, 'http://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/DE046EC1CC404284E6A5864BC3CFFF23.jpg', 1, '2022-10-17 14:09:54', 0, '2019-01-03 17:52:19', '2022-10-17 14:09:54', 1);
+DROP TABLE IF EXISTS `tbl_archive_area_onland_crop_day`;
+CREATE TABLE `tbl_archive_area_onland_crop_day`
+(
+    `id`                       bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区域名称',
+    `crop_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_img_url`             varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物图片',
+    `crop_group_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_group_img_url`       text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物分组图片地址',
+    `crop_category_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_category_logo_url`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物小类logo地址',
+    `crop_category_identifier` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类唯一标识',
+    `crop_subject_id`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类名称',
+    `crop_subject_logo_url`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物大类logo地址',
+    `crop_subject_identifier`  varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类唯一标示',
+    `lvyecai_flag`             tinyint(2)                                                    NULL DEFAULT NULL COMMENT '该作物是否为绿叶菜',
+    `onland_count`             int(20)                                                       NULL DEFAULT NULL COMMENT '该区域，该作物的当前在田地块个数',
+    `onland_area`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '该区域，该作物的当前在田面积之和（亩）',
+    `onland_farm_count`        int(20)                                                       NULL DEFAULT NULL COMMENT '该区域，该作物的当前在田主体家数',
+    `create_time`              datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`              datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    `archive_date`             date                                                          NULL DEFAULT NULL COMMENT '归档日期',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uni_area_cop_date` (`area_id`, `crop_id`, `archive_date`) USING BTREE COMMENT '区域id+作物id+date唯一键'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = ' 在田面积按区域按作物按日统计'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Table structure for tbl_user_salt
+-- Table structure for tbl_archive_certificate
 -- ----------------------------
-DROP TABLE IF EXISTS `tbl_user_salt`;
-CREATE TABLE `tbl_user_salt`  (
-                                  `user_id` bigint(20) NOT NULL,
-                                  `salt` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                                  PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `tbl_archive_certificate`;
+CREATE TABLE `tbl_archive_certificate`
+(
+    `id`                        bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `farm_id`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`              varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`           tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`             int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`                 decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `attr_key_zl_unit`          varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '重量单位',
+    `attr_key_zl_num`           decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '重量',
+    `crop_id`                   int(11)                                                       NULL DEFAULT NULL COMMENT '作物Id',
+    `crop_name`                 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物名',
+    `crop_group_id`             int(11)                                                       NULL DEFAULT NULL COMMENT '分组Id',
+    `crop_group_name`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分组名',
+    `crop_category_id`          int(11)                                                       NULL DEFAULT NULL COMMENT '小类Id',
+    `crop_category_name`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '小类名',
+    `crop_subject_id`           int(11)                                                       NULL DEFAULT NULL COMMENT '大类Id',
+    `crop_subject_name`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '大类名',
+    `company_id`                int(11)                                                       NULL DEFAULT NULL COMMENT '企业Id',
+    `create_time`               datetime                                                      NULL DEFAULT CURRENT_TIMESTAMP,
+    `update_time`               datetime                                                      NULL DEFAULT CURRENT_TIMESTAMP,
+    `year_month_day`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '合格证生成时间',
+    `certificate_scan_count`    int(10)                                                       NULL DEFAULT NULL COMMENT '合格证扫码次数',
+    `certificate_count`         int(10)                                                       NULL DEFAULT NULL COMMENT '合格证次数',
+    `company_name`              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `legal_person`              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`          tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `enterprise_credit_code`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `certificate_template_type` int(2)                                                        NULL DEFAULT NULL COMMENT '合格证模版类型',
+    `company_category_name`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业类型名称',
+    `business_category_ids`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '经营类目id',
+    `business_category_names`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '经营类目名称字段',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '合格证归档表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of tbl_user_salt
+-- Table structure for tbl_archive_certificate_area
 -- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_certificate_area`;
+CREATE TABLE `tbl_archive_certificate_area`
+(
+    `id`                      bigint(11)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `farm_id`                 bigint(11)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `year_month`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '时间(月度)',
+    `farm_name`               varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '省id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '省名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `business_category_ids`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `certificates_num`        bigint(11)                                                    NULL DEFAULT NULL COMMENT '合格证生成张数(张)',
+    `opener_weight`           decimal(11, 2)                                                NULL DEFAULT NULL COMMENT '合格证开具重量(公斤)',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_certificate_farm_crop
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_certificate_farm_crop`;
+CREATE TABLE `tbl_archive_certificate_farm_crop`
+(
+    `id`               bigint(11)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `certificate_id`   bigint(11)                                                    NULL DEFAULT NULL COMMENT '合格证id',
+    `farm_id`          bigint(11)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `certificate_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '合格证编码',
+    `crop_id`          int(11)                                                       NULL DEFAULT NULL COMMENT '作物种类id',
+    `crop_name`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物种类名称',
+    `goods_name`       varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场品名称',
+    `opener_time`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '开具日期',
+    `opener_month`     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '开具所属月份',
+    `opener_weight`    decimal(11, 2)                                                NULL DEFAULT NULL COMMENT '开具重量(公斤)',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_certificate_green
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_certificate_green`;
+CREATE TABLE `tbl_archive_certificate_green`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `year_month`              varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '年月',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `green_id`                int(11)                                                       NULL DEFAULT NULL COMMENT '绿色证书ID',
+    `certificate_count`       int(10)                                                       NULL DEFAULT NULL COMMENT '合格证生成张数（张）',
+    `print_unit`              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '合格证打印重量单位',
+    `print_weight`            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '合格证打印重量',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`           int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `crop_id`                 int(11)                                                       NULL DEFAULT NULL COMMENT '作物Id',
+    `crop_name`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物名',
+    `crop_group_id`           int(11)                                                       NULL DEFAULT NULL COMMENT '分组Id',
+    `crop_group_name`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分组名',
+    `crop_category_id`        int(11)                                                       NULL DEFAULT NULL COMMENT '小类Id',
+    `crop_category_name`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '小类名',
+    `crop_subject_id`         int(11)                                                       NULL DEFAULT NULL COMMENT '大类Id',
+    `crop_subject_name`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '大类名',
+    `company_id`              int(11)                                                       NULL DEFAULT NULL COMMENT '企业Id',
+    `create_time`             datetime                                                      NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+    `company_name`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `legal_person`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `company_category_name`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业类型名称',
+    `business_category_ids`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '经营类目id',
+    `business_category_names` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '经营类目名称字段',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = ' 合格证统计-按绿色证书按月归档'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_disease_reported
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_disease_reported`;
+CREATE TABLE `tbl_archive_disease_reported`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_day_str`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '受灾日期 yyyy-MM-dd',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `crop_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物种类id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `group_id`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `group_name`              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物分组name',
+    `category_id`             bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `category_name`           varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物小类name',
+    `subject_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `subject_name`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物大类name',
+    `loss_num`                decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '损失量（公斤）\n',
+    `create_time`             datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveDay` (`farm_id`, `crop_id`, `archive_day_str`) USING BTREE COMMENT '农场id+作物id+受灾日期唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体受灾情况按品种按日统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm`;
+CREATE TABLE `tbl_archive_farm`
+(
+    `id`                                   bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                           bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`                varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`                     tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                              bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                         varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`                      tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`                        int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`                            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `business_category_ids`                varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`              varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `land_count`                           int(20)                                                       NULL DEFAULT NULL COMMENT '地块数量',
+    `land_sum_area`                        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '地块面积之和(亩)',
+    `gis_land_area`                        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '入网地块面积(亩)',
+    `gis_land_count`                       int(20)                                                       NULL DEFAULT NULL COMMENT '入网地块数量',
+    `onland_area`                          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '在田面积(亩)',
+    `onland_count`                         int(20)                                                       NULL DEFAULT NULL COMMENT '在田地块数量',
+    `onland_area_shucai`                   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜在田面积(亩)',
+    `onland_count_shucai`                  int(20)                                                       NULL DEFAULT NULL COMMENT '蔬菜在田数量',
+    `onland_area_lvyecai`                  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜在田面积(亩)',
+    `onland_count_lvyecai`                 int(20)                                                       NULL DEFAULT NULL COMMENT '绿叶菜在田数量',
+    `onland_area_lvfei`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿肥在田面积(亩)',
+    `onland_count_lvfei`                   int(20)                                                       NULL DEFAULT NULL COMMENT '绿肥在田数量',
+    `freeland_area`                        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '空闲地块面积(亩)',
+    `freeland_count`                       int(20)                                                       NULL DEFAULT NULL COMMENT '空闲地块数量',
+    `lvse_land_count`                      int(20)                                                       NULL DEFAULT NULL COMMENT '绿色认证地块数',
+    `lvse_land_area`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿色认证地块面积(亩)',
+    `patrol_record_total_count`            int(20)                                                       NULL DEFAULT NULL COMMENT '累计执法监管次数',
+    `patrol_record_qualified_total_count`  int(20)                                                       NULL DEFAULT NULL COMMENT '累计执法监管合格次数',
+    `onmarket_amount_shucai`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜待上市量(公斤)',
+    `onmarket_amount_lvyecai`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜待上市量(公斤)',
+    `create_time`                          datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`                          datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    `liangtian_area`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮田面积（亩）',
+    `caitian_area`                         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田面积（亩）',
+    `guoyuan_area`                         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '果园面积（亩）',
+    `jingzuo_area`                         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作田面积（亩）',
+    `xumu_breed_area`                      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '畜牧养殖面积（亩）',
+    `shuichan_breed_area`                  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水产养殖面积（亩）',
+    `caitian_greenhouse_area`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜大棚面积（亩）',
+    `caitian_open_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜露地面积（亩）',
+    `liangtian_free_area`                  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮田空闲面积（亩）',
+    `caitian_free_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田空闲面积（亩）',
+    `guoyuan_free_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '果园空闲面积（亩）',
+    `jingzuo_free_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作田空闲面积（亩）',
+    `xumu_breed_free_area`                 decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '畜牧养殖空闲面积（亩）',
+    `shuichan_breed_free_area`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水产养殖空闲面积（亩）',
+    `onmarket_amount_month_shucai`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜本月待上市量（公斤）',
+    `onmarket_amount_month_lvyecai`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜本月待上市量（公斤）',
+    `onland_acre_ls`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮食在田面积',
+    `onland_count_ls`                      int(20)                                                       NULL DEFAULT NULL COMMENT '粮食在田地块数',
+    `onland_acre_jz`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作在田面积',
+    `onland_count_jz`                      int(20)                                                       NULL DEFAULT NULL COMMENT '经作在田地块数',
+    `onland_acre_sg`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水果在田面积',
+    `onland_count_sg`                      int(20)                                                       NULL DEFAULT NULL COMMENT '水果在田地块数',
+    `shuichan_breed_area_fish`             decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '鱼类养殖面积',
+    `shuichan_breed_area_shrimp`           decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '虾类养殖面积',
+    `shuichan_breed_area_crab`             decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '蟹类养殖面积',
+    `shuichan_breed_area_other`            decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '其他水产养殖面积',
+    `shuichan_breed_count_fish`            int(10)                                                       NULL DEFAULT 0 COMMENT '鱼类养殖地块数量',
+    `shuichan_breed_count_shrimp`          int(10)                                                       NULL DEFAULT 0 COMMENT '虾类养殖地块数量',
+    `shuichan_breed_count_crab`            int(10)                                                       NULL DEFAULT 0 COMMENT '蟹类养殖地块数量',
+    `shuichan_breed_count_other`           int(10)                                                       NULL DEFAULT 0 COMMENT '其他水产养殖地块数量',
+    `sv_onland_area`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田蔬菜在田面积（亩）',
+    `sv_onland_count`                      int(20)                                                       NULL DEFAULT NULL COMMENT '季节性菜田蔬菜在田地块数（个）',
+    `svg_onland_area`                      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜在田面积（亩）',
+    `svg_onland_count`                     int(20)                                                       NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜在田地块数（个）',
+    `cn_ct_shucai_onland_area`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田蔬菜在田面积（亩）',
+    `cn_ct_shucai_onland_count`            int(11)                                                       NULL DEFAULT NULL COMMENT '常年菜田蔬菜在田地块数（个）',
+    `cn_ct_lvyecai_onland_area`            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田绿叶菜在田面积（亩）',
+    `cn_ct_lvyecai_onland_count`           int(11)                                                       NULL DEFAULT NULL COMMENT '常年菜田绿叶菜在田地块数（个）',
+    `onland_strawberry_area`               decimal(10, 2)                                                NULL DEFAULT NULL COMMENT '草莓在田面积（亩）',
+    `onland_strawberry_count`              int(11)                                                       NULL DEFAULT NULL COMMENT '草莓在田地块数（个）',
+    `vegetable_quality_dep_rank_status`    int(11)                                                       NULL DEFAULT NULL COMMENT '蔬菜标准园部级 0 不是 1是',
+    `vegetable_quality_city_rank_status`   int(11)                                                       NULL DEFAULT NULL COMMENT '蔬菜标准园市级 0 不是 1是',
+    `vegetable_quality_county_rank_status` int(11)                                                       NULL DEFAULT NULL COMMENT '蔬菜标准园区级 0 不是 1是',
+    `green_leafy_vegetable_quality_status` int(11)                                                       NULL DEFAULT NULL COMMENT '绿叶菜核心基地 0 不是 1是',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId` (`farm_id`) USING BTREE COMMENT '农场id唯一索引',
+    INDEX `index_statistics_flag` (`statistics_flag`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场统计归档表（经营主体汇总统计表）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_agri_res_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_agri_res_month`;
+CREATE TABLE `tbl_archive_farm_agri_res_month`
+(
+    `id`                        bigint(20)                                                    NOT NULL AUTO_INCREMENT,
+    `company_id`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`     varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`          tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`              varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `business_category_ids`     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`           tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `archive_month_str`         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '按月统计时间:例如：2020-01',
+    `first_agri_category_id`    bigint(20)                                                    NULL DEFAULT NULL COMMENT '农资一级分类id',
+    `first_agri_category_name`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农资一级分类名称',
+    `second_agri_category_id`   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农资二级分类id',
+    `second_agri_category_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农资二级分类名称',
+    `in_value`                  decimal(30, 2)                                                NULL DEFAULT 0.00 COMMENT '入库量（公斤）',
+    `out_value`                 decimal(30, 2)                                                NULL DEFAULT 0.00 COMMENT '出库量（公斤）',
+    `mission_used_value`        decimal(30, 2)                                                NULL DEFAULT 0.00 COMMENT '农资使用日期在该月的农资重量（公斤）',
+    `sow_acre`                  decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '施用面积（亩）',
+    `used_avg`                  decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '亩均用量（公斤/亩）',
+    `used_n`                    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '使用量(公斤)-氮',
+    `used_p`                    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '使用量(公斤)-磷',
+    `used_k`                    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '使用量(公斤)-钾',
+    `used_effective`            decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '使用量(公斤)-有效成分总含量',
+    `pure_n`                    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '折纯量（公斤/亩）-氮',
+    `pure_p`                    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '折纯量（公斤/亩）-磷',
+    `pure_k`                    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '折纯量（公斤/亩）-钾',
+    `effective_total_pertage`   decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '折纯量（公斤/亩）-有效成分总含量',
+    `sow_acre_n`                decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '施用面积(亩次) -氮',
+    `sow_acre_p`                decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '施用面积(亩次) -磷',
+    `sow_acre_k`                decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '施用面积(亩次) -钾',
+    `create_time`               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_archiveMonthStr_firstAgriCategoryId_secondAgriCategoryId` (`farm_id`, `archive_month_str`, `first_agri_category_id`, `second_agri_category_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体农资使用按月归档表（经营主体农资使用按月统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_agri_res_stock_and_to_be_used_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_agri_res_stock_and_to_be_used_day`;
+CREATE TABLE `tbl_archive_farm_agri_res_stock_and_to_be_used_day`
+(
+    `id`                        bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`     varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`          tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `statistics_flag`           tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `agri_res_id`               bigint(20)                                                    NOT NULL COMMENT '农资id',
+    `agri_res_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农资名称',
+    `productor`                 varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '生产厂家',
+    `first_agri_category_id`    bigint(20)                                                    NULL DEFAULT NULL COMMENT '一级农资分类id',
+    `first_agri_category_name`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '一级农资分类名称',
+    `second_agri_category_id`   bigint(20)                                                    NULL DEFAULT 0 COMMENT '二级农资分类id',
+    `second_agri_category_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '二级农资分类名称',
+    `stock_value`               decimal(30, 3)                                                NULL DEFAULT 0.000 COMMENT '库存量(按计量单位统计并转换公斤)',
+    `stock_value_to_be_used`    decimal(30, 3)                                                NULL DEFAULT 0.000 COMMENT '待使用库存量(按计量单位统计并转换公斤)',
+    `create_time`               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_agriResId` (`farm_id`, `agri_res_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农资库存和农资待使用量归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_barcode_area_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_barcode_area_day`;
+CREATE TABLE `tbl_archive_farm_barcode_area_day`
+(
+    `id`                  bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `archive_month`       varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '时间（月度），例如：202111 代表2021年11月',
+    `total_barcode`       int(20)                                                      NULL DEFAULT NULL COMMENT '合格证张数',
+    `total_access_record` int(20)                                                      NULL DEFAULT NULL COMMENT '访问次数',
+    `total_farm`          int(20)                                                      NULL DEFAULT NULL COMMENT '经营主体数量',
+    `create_time`         datetime                                                     NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`         datetime                                                     NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '合格证-经营主体-区域表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_barcode_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_barcode_day`;
+CREATE TABLE `tbl_archive_farm_barcode_day`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_month`           varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '时间（月度），例如：202111 代表2021年11月',
+    `total_barcode`           int(20)                                                       NULL DEFAULT NULL COMMENT '合格证张数',
+    `total_access_record`     int(20)                                                       NULL DEFAULT NULL COMMENT '访问次数',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业 ID',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场 ID',
+    `legal_person`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_acre`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `business_category_ids`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `farm_sort_num`           int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `create_time`             datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '合格证-经营主体表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_compare
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_compare`;
+CREATE TABLE `tbl_archive_farm_compare`
+(
+    `id`                    bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `farm_id`               bigint(20)                                                    NULL     DEFAULT NULL COMMENT '农场id',
+    `land_code_miss_count`  int(11)                                                       NULL     DEFAULT NULL COMMENT '地块编码未找到数量',
+    `land_not_belong_count` int(11)                                                       NULL     DEFAULT NULL COMMENT '不属于农场数量',
+    `land_diff_count`       int(11)                                                       NULL     DEFAULT NULL COMMENT '地块信息不一致数量',
+    `land_miss_count`       int(11)                                                       NULL     DEFAULT NULL COMMENT '缺少地块数量',
+    `sn_land_count`         int(11)                                                       NULL     DEFAULT NULL COMMENT '神农口袋地块数量',
+    `gis_farm_count`        int(11)                                                       NULL     DEFAULT NULL COMMENT '测绘院关联主体数量',
+    `gis_land_count`        int(11)                                                       NULL     DEFAULT NULL COMMENT '测绘院主体地块数量',
+    `status`                tinyint(2)                                                    NOT NULL DEFAULT 0 COMMENT ' 0-待处理 1-处理中 2-已处理',
+    `compare_date`          varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '对比日期（对比开始时间）',
+    `remark`                varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `un_farmid_cpdate` (`farm_id`, `compare_date`) USING BTREE COMMENT '神农口袋农场id+对比日期'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '主体映射结果表，周任务，与gis服务地块对比差异结果表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop`;
+CREATE TABLE `tbl_archive_farm_crop`
+(
+    `id`                             bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`          varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`               tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`                tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`          varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`        varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `crop_id`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`                      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_img_url`                   varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物图片',
+    `crop_group_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_group_img_url`             text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物分组图片地址',
+    `crop_category_id`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_category_logo_url`         text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物小类logo地址',
+    `crop_category_identifier`       varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类唯一标识',
+    `crop_subject_id`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类名称',
+    `crop_subject_logo_url`          text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物大类logo地址',
+    `crop_subject_identifier`        varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类唯一标示',
+    `lvyecai_flag`                   tinyint(2)                                                    NULL DEFAULT NULL COMMENT '该作物是否为绿叶菜',
+    `onland_count`                   int(20)                                                       NULL DEFAULT NULL COMMENT '该作物在田地块数',
+    `onland_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '该作物在田面积(亩)',
+    `onmarket_amount`                decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '待上市量',
+    `onmarket_amount_curmonth`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '本月待上市量',
+    `onmarket_amount_curmonth_next1` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '本月+1月待上市量',
+    `onmarket_amount_curmonth_next2` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '本月+2月待上市量',
+    `onmarket_amount_curmonth_next3` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '本月+3月待上市量',
+    `onmarket_amount_curmonth_next4` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '本月+4月待上市量',
+    `onmarket_amount_curmonth_next5` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '本月+5月待上市量',
+    `crop_unit`                      varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '单位',
+    `create_time`                    datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`                    datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_cropId` (`farm_id`, `crop_id`) USING BTREE COMMENT '农场id+作物id组合唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场作物统计归档表（经营主体在田数据统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop_day`;
+CREATE TABLE `tbl_archive_farm_crop_day`
+(
+    `id`                       bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`         tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`             varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`          tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`            int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`                decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `business_category_ids`    varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `archive_day_str`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '统计日期 yyyy-MM-dd',
+    `sown_area_shucai`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜播种面积(亩)',
+    `pick_area_shucai`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜采收面积(亩)',
+    `pick_amount_shucai`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜采收量(公斤)',
+    `sown_area_lvyecai`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜播种面积(亩)',
+    `pick_area_lvyecai`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜采收面积(亩)',
+    `pick_amount_lvyecai`      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜采收量(公斤)',
+    `sown_area_liangshi`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮食播种面积(亩)',
+    `pick_area_liangshi`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮食采收面积(亩)',
+    `pick_amount_liangshi`     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮食采收量(公斤)',
+    `sown_area_shuiguo`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水果播种面积(亩)',
+    `pick_area_shuiguo`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水果采收面积(亩)',
+    `pick_amount_shuiguo`      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水果采收量(公斤)',
+    `sown_area_doulei`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '豆类播种面积(亩)',
+    `pick_area_doulei`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '豆类采收面积(亩)',
+    `pick_amount_doulei`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '豆类采收量(公斤)',
+    `sown_area_youliao`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '油料播种面积(亩)',
+    `pick_area_youliao`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '油料采收面积(亩)',
+    `pick_amount_youliao`      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '油料采收量(公斤)',
+    `sown_area_chaye`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '茶叶播种面积(亩)',
+    `pick_area_chaye`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '茶叶采收面积(亩)',
+    `pick_amount_chaye`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '茶叶采收量(公斤)',
+    `sown_area_zhongyaocai`    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '中药材播种面积(亩)',
+    `pick_area_zhongyaocai`    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '中药材采收面积(亩)',
+    `pick_amount_zhongyaocai`  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '中药材采收量(公斤)',
+    `sown_area_xianwei`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '纤维播种面积(亩)',
+    `pick_area_xianwei`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '纤维采收面积(亩)',
+    `pick_amount_xianwei`      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '纤维采收量(公斤)',
+    `jz_sow_acre`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作播种面积',
+    `jz_pick_acre`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作采收面积',
+    `jz_pick_quantity`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作采收量',
+    `zzy_sow_acre`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '种植业播种面积',
+    `zzy_pick_acre`            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '种植业采收面积',
+    `zzy_pick_quantity`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '种植业采收量',
+    `create_time`              datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`              datetime                                                      NULL DEFAULT NULL COMMENT '修改时间',
+    `sown_area_strawberry`     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '草莓播种面积（亩次）',
+    `pick_area_strawberry`     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '草莓采收面积（亩次）',
+    `pick_amount_strawberry`   varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '草莓采收量（公斤）',
+    `sown_area_shucai_year`    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田蔬菜播种面积（亩次）',
+    `sown_area_shucai_season`  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田蔬菜播种面积（亩次）',
+    `sown_area_lvyecai_year`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田绿叶菜播种面积（亩次）',
+    `sown_area_lvyecai_season` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜播种面积（亩次）',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveDay` (`farm_id`, `archive_day_str`) USING BTREE COMMENT '农场id+归档日期唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场作物按日统计归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop_day_output
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop_day_output`;
+CREATE TABLE `tbl_archive_farm_crop_day_output`
+(
+    `id`                       bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`         tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`             varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`          tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`    varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `crop_unit`                varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '单位',
+    `crop_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_img_url`             varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物图片',
+    `crop_group_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_group_img_url`       text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物分组图片地址',
+    `crop_category_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_category_logo_url`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物小类logo地址',
+    `crop_category_identifier` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类唯一标识',
+    `crop_subject_id`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类名称',
+    `crop_subject_logo_url`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物大类logo地址',
+    `crop_subject_identifier`  varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类唯一标示',
+    `lvyecai_flag`             tinyint(2)                                                    NULL DEFAULT NULL COMMENT '该作物是否为绿叶菜',
+    `sown_area`                decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '播种面积(亩)',
+    `output`                   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '产量',
+    `archive_day_str`          varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '归档年月日 yyyy-MM-dd',
+    `create_time`              datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`              datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_day_farm_crop` (`farm_id`, `crop_id`, `archive_day_str`) USING BTREE COMMENT '日+农场+作物唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场作物按日统计归档表（经营主体播种面积按日统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop_group_prediction_yield_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop_group_prediction_yield_day`;
+CREATE TABLE `tbl_archive_farm_crop_group_prediction_yield_day`
+(
+    `id`                        bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `farm_id`                   bigint(20)                                                    NOT NULL,
+    `farm_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `crop_group_id`             bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_category_identifier`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类标识',
+    `onland_area`               decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '在田面积',
+    `statistics_flag`           tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `province_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `w1`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第1周',
+    `w1_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第1周-时间',
+    `w1_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第1周-预计采收面积',
+    `w1_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第1周-预计采收量',
+    `w2`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第2周',
+    `w2_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第2周-时间',
+    `w2_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第2周-预计采收面积',
+    `w2_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第2周-预计采收量',
+    `w3`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第3周',
+    `w3_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第3周-时间',
+    `w3_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第3周-预计采收面积',
+    `w3_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第3周-预计采收量',
+    `w4`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第4周',
+    `w4_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第4周-时间',
+    `w4_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第4周-预计采收面积',
+    `w4_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第4周-预计采收量',
+    `w5`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第5周',
+    `w5_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第5周-时间',
+    `w5_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第5周-预计采收面积',
+    `w5_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第5周-预计采收量',
+    `w6`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第6周',
+    `w6_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第6周-时间',
+    `w6_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第6周-预计采收面积',
+    `w6_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第6周-预计采收量',
+    `w7`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第7周',
+    `w7_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第7周-时间',
+    `w7_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第7周-预计采收面积',
+    `w7_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第7周-预计采收量',
+    `w8`                        int(11)                                                       NULL DEFAULT NULL COMMENT '第8周',
+    `w8_date`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '第8周-时间',
+    `w8_prediction_pick_area`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第8周-预计采收面积',
+    `w8_prediction_pick_amount` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '第8周-预计采收量',
+    `create_time`               datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '预测产量按经营主体按作物分组按日归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop_month`;
+CREATE TABLE `tbl_archive_farm_crop_month`
+(
+    `id`                       bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`         tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`             varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`          tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`    varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `crop_unit`                varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '单位',
+    `crop_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_img_url`             varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物图片',
+    `crop_group_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_group_img_url`       text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物分组图片地址',
+    `crop_category_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_category_logo_url`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物小类logo地址',
+    `crop_category_identifier` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类唯一标识',
+    `crop_subject_id`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类名称',
+    `crop_subject_logo_url`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物大类logo地址',
+    `crop_subject_identifier`  varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类唯一标示',
+    `lvyecai_flag`             tinyint(2)                                                    NULL DEFAULT NULL COMMENT '该作物是否为绿叶菜',
+    `sown_area`                decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '播种面积(亩)',
+    `output`                   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '产量',
+    `archive_month_str`        varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '归档年月 yyyy-MM',
+    `create_time`              datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`              datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_month_farm_crop` (`farm_id`, `crop_id`, `archive_month_str`) USING BTREE COMMENT '月份+农场+作物唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场作物按月统计归档表（经营主体播种面积按月统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop_overdue_area_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop_overdue_area_day`;
+CREATE TABLE `tbl_archive_farm_crop_overdue_area_day`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `crop_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`               varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_group_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_category_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_subject_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类名称',
+    `overdue_plant_area`      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '超期种植面积(亩)',
+    `overdue_plant_plan`      int(11)                                                       NULL DEFAULT NULL COMMENT '超期种植计划个数',
+    `create_time`             datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = ' 经营主体超期种植面积按作物按日归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop_pick_certificat_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop_pick_certificat_day`;
+CREATE TABLE `tbl_archive_farm_crop_pick_certificat_day`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `crop_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_group_name`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_group_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_category_name`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_category_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_subject_name`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物大类名称',
+    `crop_subject_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `archive_day_str`         varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '归档年月日 yyyy-MM-dd',
+    `certificate_print_num`   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '合格证打印重量',
+    `certificat_print_unit`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '合格证打印重量单位',
+    `pick_num`                decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '采收量',
+    `pick_unit`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '采收单位',
+    `create_time`             datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_day_farm` (`farm_id`, `archive_day_str`, `crop_id`) USING BTREE COMMENT '日+农场+作物分组id唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体采收开证按作物按日统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_crop_prediction_yield_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_crop_prediction_yield_day`;
+CREATE TABLE `tbl_archive_farm_crop_prediction_yield_day`
+(
+    `id`                            bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `farm_id`                       bigint(20)                                                    NOT NULL,
+    `farm_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `crop_id`                       bigint(20)                                                    NOT NULL COMMENT '作物id',
+    `crop_name`                     varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_group_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `predict_pick_date`             date                                                          NOT NULL COMMENT ' 预计采收日期',
+    `prediction_weeks`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '预测周数',
+    `prediction_pick_amount_offset` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '预计可采收量（公斤）',
+    `pick_amount`                   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '已采收量（公斤）',
+    `prediction_pick_amount`        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '预计采收量（公斤）',
+    `prediction_pick_area`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '预计采收面积（亩）',
+    `crop_category_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '种养小类名称',
+    `crop_category_identifier`      varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类标识',
+    `crop_subject_id`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '种养大类名称',
+    `statistics_flag`               tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`         varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`       varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `company_id`                    bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `enterprise_credit_code`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `company_category_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`         varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`              tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `province_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `create_time`                   datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '预测产量按经营主体按作物按日归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_day`;
+CREATE TABLE `tbl_archive_farm_day`
+(
+    `id`                                   bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                           bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`                varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`                     tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                              bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                         varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`                      tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`                        int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`                            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `business_category_ids`                varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`              varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `land_count`                           int(20)                                                       NULL DEFAULT NULL COMMENT '地块数量',
+    `land_sum_area`                        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '地块面积之和(亩)',
+    `gis_land_area`                        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '入网地块面积(亩)',
+    `gis_land_count`                       int(20)                                                       NULL DEFAULT NULL COMMENT '入网地块数量',
+    `onland_area`                          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '在田面积(亩)',
+    `onland_count`                         int(20)                                                       NULL DEFAULT NULL COMMENT '在田地块数量',
+    `onland_area_shucai`                   decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜在田面积(亩)',
+    `onland_count_shucai`                  int(20)                                                       NULL DEFAULT NULL COMMENT '蔬菜在田数量',
+    `onland_area_lvyecai`                  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜在田面积(亩)',
+    `onland_count_lvyecai`                 int(20)                                                       NULL DEFAULT NULL COMMENT '绿叶菜在田数量',
+    `onland_area_lvfei`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿肥在田面积(亩)',
+    `onland_count_lvfei`                   int(20)                                                       NULL DEFAULT NULL COMMENT '绿肥在田数量',
+    `freeland_area`                        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '空闲地块面积(亩)',
+    `freeland_count`                       int(20)                                                       NULL DEFAULT NULL COMMENT '空闲地块数量',
+    `lvse_land_count`                      int(20)                                                       NULL DEFAULT NULL COMMENT '绿色认证地块数',
+    `lvse_land_area`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿色认证地块面积(亩)',
+    `patrol_record_total_count`            int(20)                                                       NULL DEFAULT NULL COMMENT '累计执法监管次数',
+    `patrol_record_qualified_total_count`  int(20)                                                       NULL DEFAULT NULL COMMENT '累计执法监管合格次数',
+    `create_time`                          datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`                          datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    `liangtian_area`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮田面积（亩）',
+    `caitian_area`                         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田面积（亩）',
+    `guoyuan_area`                         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '果园面积（亩）',
+    `jingzuo_area`                         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作田面积（亩）',
+    `xumu_breed_area`                      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '畜牧养殖面积（亩）',
+    `shuichan_breed_area`                  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水产养殖面积（亩）',
+    `caitian_greenhouse_area`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜大棚面积（亩）',
+    `caitian_open_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜露地面积（亩）',
+    `liangtian_free_area`                  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮田空闲面积（亩）',
+    `caitian_free_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田空闲面积（亩）',
+    `guoyuan_free_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '果园空闲面积（亩）',
+    `jingzuo_free_area`                    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作田空闲面积（亩）',
+    `xumu_breed_free_area`                 decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '畜牧养殖空闲面积（亩）',
+    `shuichan_breed_free_area`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水产养殖空闲面积（亩）',
+    `onland_acre_ls`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '粮食在田面积',
+    `onland_count_ls`                      int(20)                                                       NULL DEFAULT NULL COMMENT '粮食在田地块数',
+    `onland_acre_jz`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '经作在田面积',
+    `onland_count_jz`                      int(20)                                                       NULL DEFAULT NULL COMMENT '经作在田地块数',
+    `onland_acre_sg`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '水果在田面积',
+    `onland_count_sg`                      int(20)                                                       NULL DEFAULT NULL COMMENT '水果在田地块数',
+    `shuichan_breed_area_fish`             decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '鱼类养殖面积',
+    `shuichan_breed_area_shrimp`           decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '虾类养殖面积',
+    `shuichan_breed_area_crab`             decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '蟹类养殖面积',
+    `shuichan_breed_area_other`            decimal(15, 2)                                                NULL DEFAULT 0.00 COMMENT '其他水产养殖面积',
+    `shuichan_breed_count_fish`            int(10)                                                       NULL DEFAULT 0 COMMENT '鱼类养殖地块数量',
+    `shuichan_breed_count_shrimp`          int(10)                                                       NULL DEFAULT 0 COMMENT '虾类养殖地块数量',
+    `shuichan_breed_count_crab`            int(10)                                                       NULL DEFAULT 0 COMMENT '蟹类养殖地块数量',
+    `shuichan_breed_count_other`           int(10)                                                       NULL DEFAULT 0 COMMENT '其他水产养殖地块数量',
+    `sv_onland_area`                       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田蔬菜在田面积（亩）',
+    `sv_onland_count`                      int(20)                                                       NULL DEFAULT NULL COMMENT '季节性菜田蔬菜在田地块数（个）',
+    `svg_onland_area`                      decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜在田面积（亩）',
+    `svg_onland_count`                     int(20)                                                       NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜在田地块数（个）',
+    `cn_ct_shucai_onland_area`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田蔬菜在田面积（亩）',
+    `cn_ct_shucai_onland_count`            int(11)                                                       NULL DEFAULT NULL COMMENT '常年菜田蔬菜在田地块数（个）',
+    `cn_ct_lvyecai_onland_area`            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田绿叶菜在田面积（亩）',
+    `cn_ct_lvyecai_onland_count`           int(11)                                                       NULL DEFAULT NULL COMMENT '常年菜田绿叶菜在田地块数（个）',
+    `vegetable_quality_dep_rank_status`    int(11)                                                       NULL DEFAULT NULL COMMENT '蔬菜标准园部级 0 不是 1是',
+    `vegetable_quality_city_rank_status`   int(11)                                                       NULL DEFAULT NULL COMMENT '蔬菜标准园市级 0 不是 1是',
+    `vegetable_quality_county_rank_status` int(11)                                                       NULL DEFAULT NULL COMMENT '蔬菜标准园区级 0 不是 1是',
+    `green_leafy_vegetable_quality_status` int(11)                                                       NULL DEFAULT NULL COMMENT '绿叶菜核心基地 0 不是 1是',
+    `archive_date`                         date                                                          NULL DEFAULT NULL COMMENT '归档日期',
+    `caitian_conservation_area`            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田保育地块面积（亩）',
+    `caitian_conservation_count`           int(11)                                                       NULL DEFAULT NULL COMMENT '菜田保育地块数（个）',
+    `caitian_onland_area`                  decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田在田面积（亩）',
+    `caitian_onland_count`                 int(11)                                                       NULL DEFAULT NULL COMMENT '菜田在田地块数（个）',
+    `caitian_leisure_area`                 decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田空闲面积（亩）',
+    `caitian_leisure_count`                int(11)                                                       NULL DEFAULT NULL COMMENT '菜田空闲地块数（个）',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uni_farm_date` (`farm_id`, `archive_date`) USING BTREE COMMENT '农场id与归档时间唯一键',
+    INDEX `idx_date` (`archive_date`) USING BTREE COMMENT '归档时间'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场统计归档表按日归档（经营主体汇总统计表按日归档）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_info_report_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_info_report_day`;
+CREATE TABLE `tbl_archive_farm_info_report_day`
+(
+    `id`                                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`                   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`                        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `business_category_ids`                   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`                 varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`                         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `archive_day_str`                         varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '按日统计时间:例如：2020-01-01',
+    `plant_plan_count_agri`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_mission_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '填报总数',
+    `mission_rate`                            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '填报及时率',
+    `total_overdue_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '逾期总数',
+    `create_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveDayStr` (`farm_id`, `archive_day_str`) USING BTREE,
+    INDEX `idx_company_category_id` (`company_category_id`) USING BTREE,
+    INDEX `idx_statistics_flag` (`statistics_flag`) USING BTREE,
+    INDEX `idx_region` (`company_id`, `province_id`, `city_id`, `town_id`, `village_id`) USING BTREE,
+    INDEX `idx_test` (`city_id`, `total_mission_count`, `archive_day_str`, `farm_id`) USING BTREE,
+    INDEX `idx_farm_id` (`farm_id`, `farm_name`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报按日归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_land_patrolled_record_pharmacy_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_land_patrolled_record_pharmacy_day`;
+CREATE TABLE `tbl_archive_farm_land_patrolled_record_pharmacy_day`
+(
+    `id`                         bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键id',
+    `farm_id`                    bigint(20) NOT NULL COMMENT '农场id',
+    `land_id`                    bigint(20) NOT NULL COMMENT '地块id',
+    `land_pharmacy_time`         datetime   NULL DEFAULT NULL COMMENT '地块用药时间',
+    `one_week_during_status`     tinyint(2) NULL DEFAULT NULL COMMENT '一周内是否用药 0、否 1、是',
+    `create_time`                datetime   NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                datetime   NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `three_day_land_id`          bigint(20) NULL DEFAULT NULL COMMENT '3内用药的地块id',
+    `three_day_during_status`    tinyint(2) NULL DEFAULT 0 COMMENT '3天内是否用药 0、否 1、是 用药任意为兽药、渔药、农药 ',
+    `three_day_land_during_time` datetime   NULL DEFAULT NULL COMMENT '地块3天内用药时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_lnadId` (`land_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场地块用药按天归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_not_reported
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_not_reported`;
+CREATE TABLE `tbl_archive_farm_not_reported`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_day_str`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '统计日期 yyyy-MM-dd',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `last_filling_date`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '最后填报日期 yyyy-MM-dd',
+    `days_not_filled`         int(20)                                                       NULL DEFAULT NULL COMMENT '未填报天数',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveDay` (`farm_id`, `archive_day_str`) USING BTREE COMMENT '农场id+归档日期唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '30天未上报经营主体统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_onland_crop_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_onland_crop_day`;
+CREATE TABLE `tbl_archive_farm_onland_crop_day`
+(
+    `id`                       bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`         tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`             varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`          tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`    varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `crop_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_img_url`             varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物图片',
+    `crop_group_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_group_img_url`       text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物分组图片地址',
+    `crop_category_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_category_logo_url`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物小类logo地址',
+    `crop_category_identifier` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类唯一标识',
+    `crop_subject_id`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类名称',
+    `crop_subject_logo_url`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物大类logo地址',
+    `crop_subject_identifier`  varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类唯一标示',
+    `lvyecai_flag`             tinyint(2)                                                    NULL DEFAULT NULL COMMENT '该作物是否为绿叶菜',
+    `onland_count`             int(20)                                                       NULL DEFAULT NULL COMMENT '该作物在田地块数',
+    `onland_area`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '该作物在田面积(亩)',
+    `create_time`              datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`              datetime                                                      NULL DEFAULT NULL COMMENT '更新时间',
+    `archive_date`             date                                                          NULL DEFAULT NULL COMMENT '归档日期',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uni_farm_cop_date` (`farm_id`, `crop_id`, `archive_date`) USING BTREE COMMENT '农场id+作物id+date唯一键',
+    INDEX `idx_date` (`archive_date`) USING BTREE COMMENT '归档日期'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场在田面积按作物按日统计（经营主体在田面积按作物按日统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_patrolled_record_during_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_patrolled_record_during_tag`;
+CREATE TABLE `tbl_archive_farm_patrolled_record_during_tag`
+(
+    `id`                                        bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `farm_id`                                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                              varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `farm_center_lat`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '农场中心点维度值',
+    `farm_center_lng`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '农场中心点经度值',
+    `land_id`                                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '最后一次用药的地块id',
+    `land_during_time`                          datetime                                                      NULL DEFAULT NULL COMMENT '地块用药时间 ，任意一个地块最后用药为该农场的最后一次用药时间',
+    `statistics_flag`                           tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `patrolled_record_finally_qualified_status` tinyint(2)                                                    NULL DEFAULT 0 COMMENT '执法记录最后一次检查是否合格  0、否 1、是',
+    `patrolled_record_finally_qualified_time`   datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '执法记录最后一次检查时间',
+    `patrolled_record_id`                       bigint(20)                                                    NULL DEFAULT NULL COMMENT '最后一次检查记录id',
+    `business_category_ids`                     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`                   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `onland_area`                               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '在田面积(亩)',
+    `farm_vegetable_quality_status`             tinyint(2)                                                    NULL DEFAULT 0 COMMENT '蔬菜标准园标识 0、否 1、是',
+    `farm_green_leafy_vegetable_quality_status` tinyint(2)                                                    NULL DEFAULT 0 COMMENT '绿叶核心基地标识 0、否 1、是',
+    `farm_green_breeding_status`                tinyint(2)                                                    NULL DEFAULT 0 COMMENT '水产养殖绿色生产方式标识 0、否 1、是',
+    `farm_healthy_breeding_status`              tinyint(2)                                                    NULL DEFAULT 0 COMMENT '水产健康养殖示范农场标识 0、否 1、是',
+    `create_time`                               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId` (`farm_id`) USING BTREE COMMENT '农场id唯一索引',
+    INDEX `index_statistics_flag` (`statistics_flag`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场&用药时间&检查情况&农场标签(绿叶标准、蔬菜标准、水产健康、水产养殖标准)、在田面积、归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_patrolled_record_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_patrolled_record_month`;
+CREATE TABLE `tbl_archive_farm_patrolled_record_month`
+(
+    `id`                          bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_month_str`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '按月统计时间:例如：2020-01',
+    `farm_id`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`             tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`       varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `patrolled_count`             int(11)                                                       NULL DEFAULT 0 COMMENT '农场被执法次数',
+    `patrolled_regular_count`     int(11)                                                       NULL DEFAULT 0 COMMENT '农场被执法合格次数',
+    `patrolled_not_regular_count` int(11)                                                       NULL DEFAULT 0 COMMENT '农场被执法不合格次数',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archive_month_str` (`farm_id`, `archive_month_str`) USING BTREE COMMENT '农场id与月份唯一索引',
+    INDEX `index_statistics_flag` (`statistics_flag`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场被执法按月归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_pick_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_pick_month`;
+CREATE TABLE `tbl_archive_farm_pick_month`
+(
+    `id`                       bigint(20)                                                    NOT NULL AUTO_INCREMENT,
+    `company_id`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`         tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`             varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `business_category_ids`    varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`  varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`          tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `archive_month_str`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '按月统计时间:例如：2020-01',
+    `crop_id`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`                varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `crop_img_url`             varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物图片',
+    `crop_group_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_group_img_url`       text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物分组图片地址',
+    `crop_category_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类名称',
+    `crop_category_logo_url`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物小类logo地址',
+    `crop_category_identifier` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物小类唯一标识',
+    `crop_subject_id`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_subject_name`        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类名称',
+    `crop_subject_logo_url`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '作物大类logo地址',
+    `crop_subject_identifier`  varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物大类唯一标示',
+    `lvyecai_flag`             tinyint(2)                                                    NULL DEFAULT NULL COMMENT '绿叶菜标识：0：不是；1：是',
+    `pick_value`               decimal(30, 2)                                                NULL DEFAULT 0.00 COMMENT '采收/捕捞/出栏数量',
+    `crop_unit`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '采收单位名称:公斤/头/尾',
+    `pick_type`                tinyint(4)                                                    NULL DEFAULT NULL COMMENT '入库或销售类型：1-放入仓库 ，2-田头销售 ，3-赠送 ，4-扔掉 ，5-其他 ，6-死亡 ，7-更换养殖区 ，8-超市 ，9-企业事业单位 ，10-菜场 ，11-批发市场 ，12-配送中心 ，13- 粮管所',
+    `create_time`              datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`              datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveMonthStr_cropId_pickType` (`farm_id`, `archive_month_str`, `crop_id`, `pick_type`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体采收按日归档表（经营主体采收按月统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_scale_area_acre
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_scale_area_acre`;
+CREATE TABLE `tbl_archive_farm_scale_area_acre`
+(
+    `id`              bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `acre_level`      tinyint(4)                                                   NULL DEFAULT NULL COMMENT '面积等级 1：<10  2：10-50 3：50-1004：100-5005：>=500',
+    `farm_count`      bigint(20)                                                   NULL DEFAULT NULL COMMENT '经营主体数量(家)',
+    `farm_acre`       decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '主体面积（亩）',
+    `show_name`       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '页面展示名称，填写 <10亩、10-50亩、50-100亩、100-500亩、>=500亩',
+    `statistics_mode` tinyint(2)                                                   NULL DEFAULT NULL COMMENT '统计方式 0 手动 1 自动',
+    `create_time`     datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`     datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_acreLevel` (`area_id`, `acre_level`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体规模-区域-按面积范围统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_scale_area_business_category
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_scale_area_business_category`;
+CREATE TABLE `tbl_archive_farm_scale_area_business_category`
+(
+    `id`                     bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `business_category_id`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '经营类目id，自定义id = 0统计经营主体总数，id=其他，统计各自数据',
+    `business_category_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '经营类目名称',
+    `farm_count`             bigint(20)                                                   NULL DEFAULT NULL COMMENT '经营主体数量(家)',
+    `farm_acre`              decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '主体面积（亩）',
+    `statistics_mode`        tinyint(2)                                                   NULL DEFAULT NULL COMMENT '统计方式 0 手动 1 自动',
+    `create_time`            datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`            datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_businessCategoryId` (`area_id`, `business_category_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体规模-区域-按经营类目统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_scale_area_company_category
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_scale_area_company_category`;
+CREATE TABLE `tbl_archive_farm_scale_area_company_category`
+(
+    `id`                    bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `company_category_id`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '企业类型id,1：农业企业  2：合作社 3：家庭农场  4：大户  5：农户  6：村组集体  7 其他',
+    `company_category_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '企业类型名称',
+    `farm_count`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '经营主体数量(家)',
+    `farm_acre`             decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '主体面积（亩）',
+    `statistics_mode`       tinyint(2)                                                   NULL DEFAULT NULL COMMENT '统计方式 0 手动 1 自动',
+    `create_time`           datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`           datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_companyCategoryId` (`area_id`, `company_category_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体规模-区域-按企业类型统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_farm_subsidy_year
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_farm_subsidy_year`;
+CREATE TABLE `tbl_archive_farm_subsidy_year`
+(
+    `id`                               bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                       bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`            varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`                 tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                          bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`                  tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`                    int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`                        decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `business_category_ids`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`          varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `archive_year`                     int(11)                                                       NULL DEFAULT NULL COMMENT '统计日期：年 2021',
+    `caitian_acre`                     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田面积（亩）',
+    `subsidy_acre_lvyecai`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜补贴面积（亩）',
+    `subsidy_acre_not_lvyecai`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '非绿叶菜补贴面积（亩）',
+    `subsidy_acre_total`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '总补贴面积（亩）',
+    `subsidy_acre_caitian_lvyecai`     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田绿叶菜补贴面积（亩）',
+    `subsidy_acre_caitian_not_lvyecai` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田非绿叶菜补贴面积（亩）',
+    `subsidy_acre_caitian_total`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田总补贴面积（亩）',
+    `create_time`                      datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                      datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_landId_archive_year` (`farm_id`, `archive_year`) USING BTREE COMMENT '农场id+统计年份'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '农场按年补贴归档表（经营主体补贴面积测算归档表）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_gis_farm_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_gis_farm_relation`;
+CREATE TABLE `tbl_archive_gis_farm_relation`
+(
+    `id`            bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `farm_id`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `gis_farm_id`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '测绘院主体编号/ZHUTIID',
+    `gis_farm_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '测绘院主体名称',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farm_id_gis_farm_id` (`farm_id`, `gis_farm_id`) USING BTREE COMMENT '神农口袋farmId & gis_zhuti_info 唯一主键'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '测绘院主体关联表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_info_report_area_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_info_report_area_day`;
+CREATE TABLE `tbl_archive_info_report_area_day`
+(
+    `id`                                      bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `archive_day_str`                         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '按天统计 格式：2021-11-11 表示第11月11号',
+    `plant_plan_count_agri`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_farm_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '主体总数（家）',
+    `total_mission_farm_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报主体总数（家）',
+    `total_not_mission_farm_count`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '未填报主体总数（家）',
+    `total_mission_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报总数',
+    `total_overdue_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '逾期总数',
+    `not_mission_farm_rate`                   decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '未填报主体占比',
+    `mission_rate`                            decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '填报及时率',
+    `create_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_archiveDayStr` (`area_id`, `archive_day_str`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报区域按天归档表（经营主体信息直报区域按天统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_info_report_area_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_info_report_area_month`;
+CREATE TABLE `tbl_archive_info_report_area_month`
+(
+    `id`                                      bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `archive_month_str`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '按月统计 格式：2021-09 表示第9月',
+    `plant_plan_count_agri`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_farm_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '主体总数（家）',
+    `total_mission_farm_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报主体总数（家）',
+    `total_not_mission_farm_count`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '未填报主体总数（家）',
+    `total_mission_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报总数',
+    `total_overdue_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '逾期总数',
+    `not_mission_farm_rate`                   decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '未填报主体占比',
+    `mission_rate`                            decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '填报及时率',
+    `record_start_day`                        date                                                         NULL DEFAULT NULL COMMENT '当前月开始日期 2021-01-01表示当前月第一天',
+    `record_end_day`                          date                                                         NULL DEFAULT NULL COMMENT '当前月开始日期 2021-01-31表示当前月最后一天',
+    `create_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_archiveMonthStr` (`area_id`, `archive_month_str`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报区域按月归档表（经营主体信息直报区域按月统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_info_report_area_week
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_info_report_area_week`;
+CREATE TABLE `tbl_archive_info_report_area_week`
+(
+    `id`                                      bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `archive_week_str`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '按周统计 格式：2021-11 表示第11周',
+    `plant_plan_count_agri`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_farm_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '主体总数（家）',
+    `total_mission_farm_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报主体总数（家）',
+    `total_not_mission_farm_count`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '未填报主体总数（家）',
+    `total_mission_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报总数',
+    `total_overdue_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '逾期总数',
+    `not_mission_farm_rate`                   decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '未填报主体占比',
+    `mission_rate`                            decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '填报及时率',
+    `record_start_day`                        date                                                         NULL DEFAULT NULL COMMENT '当前周开始日期 2021-01-01表示当前周第一天',
+    `record_end_day`                          date                                                         NULL DEFAULT NULL COMMENT '当前周开始日期 2021-01-07表示当前周最后一天',
+    `create_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_archiveWeekStr` (`area_id`, `archive_week_str`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报区域按周归档表（经营主体信息直报区域按周统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_info_report_area_year
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_info_report_area_year`;
+CREATE TABLE `tbl_archive_info_report_area_year`
+(
+    `id`                                      bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `archive_year_str`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '按月统计 格式：2021 表示第2020年',
+    `plant_plan_count_agri`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                   NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                   NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                   NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                   NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                   NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                   NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_farm_count`                        bigint(20)                                                   NULL DEFAULT NULL COMMENT '主体总数（家）',
+    `total_mission_farm_count`                bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报主体总数（家）',
+    `total_not_mission_farm_count`            bigint(20)                                                   NULL DEFAULT NULL COMMENT '未填报主体总数（家）',
+    `total_mission_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '填报总数',
+    `total_overdue_count`                     bigint(20)                                                   NULL DEFAULT NULL COMMENT '逾期总数',
+    `not_mission_farm_rate`                   decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '未填报主体占比',
+    `mission_rate`                            decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '填报及时率',
+    `create_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_archiveYearStr` (`area_id`, `archive_year_str`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报区域按年归档表（经营主体信息直报区域按年统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_info_report_farm_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_info_report_farm_month`;
+CREATE TABLE `tbl_archive_info_report_farm_month`
+(
+    `id`                                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`                   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`                        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `business_category_ids`                   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`                 varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`                         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `archive_month_str`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '按月统计 格式：2021-01 表示第1月',
+    `plant_plan_count_agri`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_mission_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '填报总数',
+    `total_overdue_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '逾期总数',
+    `mission_rate`                            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '填报及时率',
+    `record_start_day`                        date                                                          NULL DEFAULT NULL COMMENT '当前月开始日期 2021-01-01表示当前月第一天',
+    `record_end_day`                          date                                                          NULL DEFAULT NULL COMMENT '当前月开始日期 2021-01-31表示当前月最后一天',
+    `create_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveMonthStr` (`farm_id`, `archive_month_str`) USING BTREE,
+    INDEX `idx_archive_month_str` (`archive_month_str`) USING BTREE,
+    INDEX `idx_cityid_statisticsflag_archiveMonthStr` (`city_id`, `statistics_flag`, `archive_month_str`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报主体-按月归档表（经营主体信息直报按月统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_info_report_farm_week
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_info_report_farm_week`;
+CREATE TABLE `tbl_archive_info_report_farm_week`
+(
+    `id`                                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`                   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`                        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `business_category_ids`                   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`                 varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`                         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `archive_week_str`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '按周统计 格式：2021-11 表示第11周',
+    `plant_plan_count_agri`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_mission_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '填报总数',
+    `total_overdue_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '逾期总数',
+    `mission_rate`                            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '填报及时率',
+    `record_start_day`                        date                                                          NULL DEFAULT NULL COMMENT '当前周开始日期 2021-01-01表示当前周第一天',
+    `record_end_day`                          date                                                          NULL DEFAULT NULL COMMENT '当前周开始日期 2021-01-07表示当前周最后一天',
+    `create_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveWeekStr` (`farm_id`, `archive_week_str`) USING BTREE,
+    INDEX `idx_archive_week_str` (`archive_week_str`) USING BTREE,
+    INDEX `idx_cityid_statisticsflag_archiveWeekStr` (`city_id`, `statistics_flag`, `archive_week_str`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报主体-按周归档表（经营主体信息直报按周统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_info_report_farm_year
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_info_report_farm_year`;
+CREATE TABLE `tbl_archive_info_report_farm_year`
+(
+    `id`                                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`                   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`                        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `business_category_ids`                   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`                 varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`                         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `archive_year_str`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '按年统计 格式：2021  表示2021年',
+    `plant_plan_count_agri`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案添加次数',
+    `plant_plan_overdue_count_agri`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业种植档案逾期次数',
+    `plant_plan_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案添加次数',
+    `plant_plan_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业养殖档案逾期次数',
+    `plant_plan_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案添加次数',
+    `plant_plan_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业养殖档案逾期次数',
+    `plant_plan_count_forestry`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案添加次数',
+    `plant_plan_overdue_count_forestry`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业种植档案逾期次数',
+    `fertilizer_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥次数',
+    `fertilizer_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '施肥逾期次数',
+    `feeding_count`                           bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料次数',
+    `feeding_overdue_count`                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '喂料逾期次数',
+    `charging_count`                          bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料次数',
+    `charging_overdue_count`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '投料逾期次数',
+    `medication_count`                        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药次数',
+    `medication_overdue_count`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用药逾期次数',
+    `medication_count_animal`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '用兽药次数',
+    `medication_overdue_count_animal`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '用瘦药逾期次数',
+    `medication_count_fishery`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药次数',
+    `medication_overdue_count_fishery`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '用渔药逾期次数',
+    `mission_category_count_other`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作次数（其他）',
+    `mission_category_overdue_count_other`    bigint(20)                                                    NULL DEFAULT NULL COMMENT '低频农事类型操作逾期次数（其他）',
+    `pick_record_count_agri`                  bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收次数',
+    `pick_record_overdue_count_agri`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业采收逾期次数',
+    `pick_record_count_forestry`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收次数',
+    `pick_record_overdue_count_forestry`      bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业采收逾期次数',
+    `pick_record_count_fishery`               bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞次数',
+    `pick_record_overdue_count_fishery`       bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业捕捞逾期次数',
+    `pick_record_count_animal`                bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞次数',
+    `pick_record_overdue_count_animal`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业捕捞逾期次数',
+    `pick_record_sale_count_agri`             bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售次数',
+    `pick_record_sale_overdue_count_agri`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '农业销售逾期次数',
+    `pick_record_sale_count_forestry`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售次数',
+    `pick_record_sale_overdue_count_forestry` bigint(20)                                                    NULL DEFAULT NULL COMMENT '林业销售逾期次数',
+    `pick_record_sale_count_fishery`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售次数',
+    `pick_record_sale_overdue_count_fishery`  bigint(20)                                                    NULL DEFAULT NULL COMMENT '渔业销售逾期次数',
+    `pick_record_sale_count_animal`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售次数',
+    `pick_record_sale_overdue_count_animal`   bigint(20)                                                    NULL DEFAULT NULL COMMENT '畜牧业销售逾期次数',
+    `total_mission_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '填报总数',
+    `total_overdue_count`                     bigint(20)                                                    NULL DEFAULT NULL COMMENT '逾期总数',
+    `mission_rate`                            decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '填报及时率',
+    `create_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_archiveYearStr` (`farm_id`, `archive_year_str`) USING BTREE,
+    INDEX `idx_archive_year_str` (`archive_year_str`) USING BTREE,
+    INDEX `idx_cityid_statisticsflag_archiveYearStr` (`city_id`, `statistics_flag`, `archive_year_str`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '信息直报主体-按年归档表（经营主体信息直报按年统计）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_insurable_situation_farm_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_insurable_situation_farm_day`;
+CREATE TABLE `tbl_archive_insurable_situation_farm_day`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_day_str`         varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '归档年月 yyyy-MM-dd,按日归档',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `onland_acre`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '在田面积（亩）',
+    `insurable_area`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '可投保面积（亩）',
+    `uninsured_area`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '未投保面积（亩）',
+    `ensure_area`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '保障中面积（亩）',
+    `insure_rate`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '投保比例',
+    `create_time`             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId` (`farm_id`) USING BTREE COMMENT '农场id唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '绿叶菜价格险今日可投情况-按农场查看'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_insured_situation_area_crop_group_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_insured_situation_area_crop_group_month`;
+CREATE TABLE `tbl_archive_insured_situation_area_crop_group_month`
+(
+    `id`                   bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_month_str`    varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '归档年月 yyyy-MM，按月归档',
+    `crop_group_id`        bigint(20)                                                   NULL DEFAULT NULL COMMENT '作物种类id',
+    `crop_group_name`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物分类名称',
+    `area_id`              int(11)                                                      NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `insured_land_area`    decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '已投保面积',
+    `insured_self_premium` decimal(14, 2)                                               NULL DEFAULT 0.00 COMMENT '已投保自缴保费',
+    `total_loss_number`    varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '出险面积(亩)',
+    `total_sum_claim`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '赔付金额（元）',
+    `create_time`          datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`          datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_archiveMonthStr_cropGroupId` (`area_id`, `archive_month_str`, `crop_group_id`) USING BTREE COMMENT '区域月份作物分类唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '绿叶菜价格险投保情况-按区域-按月-按作物查看'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_insured_situation_area_month
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_insured_situation_area_month`;
+CREATE TABLE `tbl_archive_insured_situation_area_month`
+(
+    `id`                   bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_month_str`    varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '归档年月 yyyy-MM，按月归档',
+    `area_id`              int(11)                                                      NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `insured_land_area`    decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '已投保面积',
+    `insured_farm_count`   int(11)                                                      NULL DEFAULT NULL COMMENT '已投保主体数',
+    `insured_policy_count` int(11)                                                      NULL DEFAULT NULL COMMENT '已投保保单数',
+    `insured_sum_premium`  decimal(14, 2)                                               NULL DEFAULT 0.00 COMMENT '已投保保费',
+    `insured_self_premium` decimal(14, 2)                                               NULL DEFAULT 0.00 COMMENT '已投保自缴保费',
+    `total_loss_number`    varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '出险面积（亩）',
+    `total_sum_claim`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '赔付金额（元）',
+    `create_time`          datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`          datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_archiveMonthStr` (`area_id`, `archive_month_str`) USING BTREE COMMENT '区域月份唯一索引'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '绿叶菜价格险投保情况-按区域-按月查看'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_land_leisure_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_land_leisure_day`;
+CREATE TABLE `tbl_archive_land_leisure_day`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '所属农场id',
+    `gis_land_type_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '上海gis地块类型表id 1：粮田  2：菜田  3：经作田  4： 零星用地（其他）5：零星用地（已征地）6：零星用地（自留地/集体地）7：果园 8：林地  9：养殖（畜牧）10：养殖（水产）',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`           int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `land_count`              int(20)                                                       NULL DEFAULT NULL COMMENT '空闲地块数量',
+    `land_sum_area`           decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '空闲地块面积之和(亩)',
+    `create_time`             datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '空闲地块归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_land_subsidy_year
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_land_subsidy_year`;
+CREATE TABLE `tbl_archive_land_subsidy_year`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `legal_person`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人',
+    `legal_person_phone`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业法人联系方式',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `farm_sort_num`           int(11)                                                       NULL DEFAULT NULL COMMENT '农场排序字段',
+    `farm_acre`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '农场面积/亩',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `archive_year`            int(11)                                                       NULL DEFAULT NULL COMMENT '统计日期：年 2021',
+    `land_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块id',
+    `land_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '地块名称',
+    `gis_land_type_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块用途id',
+    `gis_land_type_name`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '地块用途名称',
+    `land_type_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块类型id',
+    `land_type_name`          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '地块类型名称',
+    `sh_gis_dkid`             varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '对应上海测绘院地块id',
+    `land_acre`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '地块面积/亩',
+    `x1`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(1月1日-3月31日)冬淡绿叶菜茬口数',
+    `y1`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(1月1日-3月31日)冬淡非绿叶菜茬口数',
+    `x2`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(4月1日-5月31日)绿叶菜茬口数',
+    `y2`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(4月1日-5月31日)非绿叶菜茬口数',
+    `x3`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(6月1日-9月30日)夏淡绿叶菜茬口数',
+    `y3`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(6月1日-9月30日)夏淡非绿叶菜茬口数',
+    `x4`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(10月1日-11月30日)绿叶菜茬口数',
+    `y4`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(10月1日-11月30日)非绿叶菜茬口数',
+    `x5`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(12月1日-12月31日)冬淡绿叶菜茬口数',
+    `y5`                      int(20)                                                       NULL DEFAULT NULL COMMENT '(12月1日-12月31日)冬淡非绿叶菜茬口数',
+    `z1`                      int(20)                                                       NULL DEFAULT NULL COMMENT '夏淡绿叶菜补贴茬口数',
+    `z2`                      int(20)                                                       NULL DEFAULT NULL COMMENT '冬淡绿叶菜补贴茬口数',
+    `z3`                      int(20)                                                       NULL DEFAULT NULL COMMENT '夏淡和冬淡非绿叶菜茬口数',
+    `x`                       int(20)                                                       NULL DEFAULT NULL COMMENT '绿叶菜茬口数',
+    `y`                       int(20)                                                       NULL DEFAULT NULL COMMENT '非绿叶菜茬口数',
+    `create_time`             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    `plant_plan_id`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '种植计划id集合，用逗号分开',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_landId_archive_year` (`land_id`, `archive_year`) USING BTREE COMMENT '地块id+统计年份',
+    INDEX `idx_farm_id` (`farm_id`) USING BTREE,
+    INDEX `idx_province_id` (`province_id`) USING BTREE,
+    INDEX `idx_city_id` (`city_id`) USING BTREE,
+    INDEX `idx_county_id` (`county_id`) USING BTREE,
+    INDEX `idx_town_id` (`town_id`) USING BTREE,
+    INDEX `idx_village_id` (`village_id`) USING BTREE,
+    INDEX `idx_company_category_id` (`company_category_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '地块统计按年归档表（地块茬口数明细归档表）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_onland_area
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_onland_area`;
+CREATE TABLE `tbl_archive_onland_area`
+(
+    `id`                       bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`                  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `onland_acre`              decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '在田面积（亩）',
+    `all_land_acre`            decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '可种植面积（亩）',
+    `move_acre`                decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '土地流转面积（亩）',
+    `agri_onland_acre`         decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '种植业在田面积（亩）',
+    `agri_onland_acre_rate`    decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '种植业在田面积占比',
+    `shucai_onland_acre`       decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '蔬菜在田面积（亩）',
+    `shucai_onland_acre_rate`  decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '蔬菜在田面积占比',
+    `fishery_onland_acre`      decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '渔业在田面积（亩）',
+    `fishery_onland_acre_rate` decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '渔业在田面积占比',
+    `statistics_mode`          tinyint(2)                                                   NULL DEFAULT NULL COMMENT '统计方式 0 手动 1 自动',
+    `create_time`              datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`              datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId` (`area_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '在田地块-按区域统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_onland_area_crop_category
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_onland_area_crop_category`;
+CREATE TABLE `tbl_archive_onland_area_crop_category`
+(
+    `id`                 bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `crop_category_id`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物小类名称',
+    `img_url`            text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci        NULL COMMENT '作物小类图片地址',
+    `onland_acre`        decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '在田面积（亩）',
+    `onland_count`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '在田地块数量（个）',
+    `statistics_mode`    tinyint(2)                                                   NULL DEFAULT NULL COMMENT '统计方式 0 手动 1 自动',
+    `create_time`        datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`        datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_cropCategoryId` (`area_id`, `crop_category_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '在田面积-区域-按作物小类统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_onland_area_crop_group
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_onland_area_crop_group`;
+CREATE TABLE `tbl_archive_onland_area_crop_group`
+(
+    `id`                 bigint(20)                                                   NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `area_id`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域id',
+    `area_name`          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区域名称',
+    `crop_group_id`      bigint(20)                                                   NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物分组名称',
+    `crop_category_id`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_category_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '作物小类名称',
+    `img_url`            text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci        NULL COMMENT '作物分组图片地址',
+    `onland_acre`        decimal(15, 2)                                               NULL DEFAULT NULL COMMENT '在田面积（亩）',
+    `onland_count`       bigint(20)                                                   NULL DEFAULT NULL COMMENT '在田地块数量（个）',
+    `statistics_mode`    tinyint(2)                                                   NULL DEFAULT NULL COMMENT '统计方式 0 手动 1 自动',
+    `create_time`        datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`        datetime                                                     NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_areaId_cropGroupId` (`area_id`, `crop_group_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '在田面积-区域-按作物分组统计'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_sell_group_day
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_sell_group_day`;
+CREATE TABLE `tbl_archive_sell_group_day`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `sell_type`               tinyint(4)                                                    NULL DEFAULT NULL COMMENT '销售类型',
+    `sell_type_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '销售去向',
+    `crop_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物id',
+    `crop_name`               varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物名称',
+    `sell_date`               date                                                          NULL DEFAULT NULL COMMENT '销售时间',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `enterprise_credit_code`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业信用代码',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `crop_subject_id`         bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物大类id',
+    `crop_category_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物小类id',
+    `crop_group_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '作物分组id',
+    `crop_group_name`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '作物分组名称',
+    `total_sales`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '总销量',
+    `crop_category_unit`      varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT NULL COMMENT '单位',
+    `create_time`             datetime                                                      NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farm_sellType_sellDate` (`farm_id`, `sell_type`, `sell_type_id`, `crop_id`, `sell_date`) USING BTREE COMMENT '农场，销售类型，销售去向，作物种类id，销售日期唯一主键'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '销售上市统计区域归档表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_subsidy_farm_acre_year
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_subsidy_farm_acre_year`;
+CREATE TABLE `tbl_archive_subsidy_farm_acre_year`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_year`            int(11)                                                       NULL DEFAULT NULL COMMENT '统计日期：年 2021',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `cn_ct_acre`              decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田面积（亩）',
+    `land_acre`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '地块总面积',
+    `x_land_acre`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田常规补贴绿叶菜补贴面积',
+    `y_land_acre`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田常规补贴非绿叶菜补贴面积',
+    `total_land_acre`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田常规补贴总补贴面积',
+    `x_add_land_acre`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田增项补贴绿叶菜补贴面积',
+    `y_add_land_acre`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田增项补贴非绿叶菜补贴面积',
+    `total_add_land_acre`     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '常年菜田增项补贴总补贴面积',
+    `sv_x_land_acre`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜补贴面积',
+    `sv_y_land_acre`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田非绿叶菜补贴面积',
+    `sv_subsidy_land_acre`    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田总补贴面积',
+    `total_x_land_acre`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '总计绿叶菜补贴面积',
+    `total_y_land_acre`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '总计非绿叶菜补贴面积',
+    `all_land_acre`           decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '总计总补贴面积',
+    `create_time`             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_landId_archive_year` (`archive_year`, `farm_id`) USING BTREE COMMENT '农场id+统计年份'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '按年-经营主体补贴面积测算（按年归档，每月一次）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_subsidy_farm_land_year
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_subsidy_farm_land_year`;
+CREATE TABLE `tbl_archive_subsidy_farm_land_year`
+(
+    `id`                      bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `archive_year`            int(11)                                                       NULL DEFAULT NULL COMMENT '统计日期：年 2021',
+    `x`                       int(20)                                                       NULL DEFAULT NULL COMMENT '绿叶菜茬口数',
+    `x_plant_plan_id`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绿叶菜补贴茬口的种植计划ID列表XX',
+    `x_month`                 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绿叶菜补贴茬口的补贴月份列表',
+    `x_land_acre`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜补贴面积',
+    `y`                       int(20)                                                       NULL DEFAULT NULL COMMENT '非绿叶菜茬口数',
+    `y_plant_plan_id`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '非绿叶菜补贴茬口的种植计划ID列表YY',
+    `y_month`                 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '非绿叶菜补贴茬口的补贴月份列表',
+    `y_land_acre`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜补贴面积',
+    `subsidy_land_acre`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '地块补贴总面积',
+    `land_acre`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '地块面积',
+    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`         tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `land_id`                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块id',
+    `land_name`               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '地块名称',
+    `gis_land_type_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块用途id',
+    `gis_land_type_name`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '地块用途名称',
+    `land_type_id`            bigint(20)                                                    NULL DEFAULT NULL COMMENT '地块类型id',
+    `shelf_status`            tinyint(4)                                                    NULL DEFAULT NULL COMMENT '地块状态:0-上架 1-下架',
+    `sh_gis_dkid`             varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '对应上海测绘院地块id',
+    `land_type_name`          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '地块类型名称',
+    `create_time`             datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`             datetime                                                      NULL DEFAULT NULL,
+    `sv_x`                    int(20)                                                       NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜补贴茬口数',
+    `sv_x_plant_plan_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜补贴茬口的种植计划ID列表',
+    `sv_x_month`              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜补贴茬口的补贴月份列表',
+    `sv_x_land_acre`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田绿叶菜补贴面积',
+    `sv_y`                    int(20)                                                       NULL DEFAULT NULL COMMENT '季节性菜田非绿叶菜补贴茬口数',
+    `sv_y_plant_plan_id`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '季节性菜田非绿叶菜补贴茬口的种植计划ID列表',
+    `sv_y_month`              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '季节性菜田非绿叶菜补贴茬口的补贴月份列表',
+    `sv_y_land_acre`          decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '季节性菜田非绿叶菜补贴面积',
+    `sv_subsidy_land_acre`    decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '地块补贴总面积',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_landId_archive_year` (`land_id`, `archive_year`) USING BTREE COMMENT '地块id+统计年份',
+    INDEX `idx_farm_id` (`farm_id`) USING BTREE,
+    INDEX `idx_province_id` (`province_id`) USING BTREE,
+    INDEX `idx_city_id` (`city_id`) USING BTREE,
+    INDEX `idx_county_id` (`county_id`) USING BTREE,
+    INDEX `idx_town_id` (`town_id`) USING BTREE,
+    INDEX `idx_village_id` (`village_id`) USING BTREE,
+    INDEX `idx_company_category_id` (`company_category_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '地块茬口数明细归档表（按年归档，每月一次）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_subsidy_farm_year
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_subsidy_farm_year`;
+CREATE TABLE `tbl_archive_subsidy_farm_year`
+(
+    `id`                               bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `company_id`                       bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业id',
+    `company_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业名称',
+    `company_category_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '企业类型id',
+    `company_category_name`            varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '企业类型名称',
+    `supervision_flag`                 tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否被监管开关 0：否（默认）  1：是',
+    `farm_id`                          bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                        varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                       varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                     varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `statistics_flag`                  tinyint(2)                                                    NULL DEFAULT NULL COMMENT '统计标识，1参与，0不参与统计',
+    `business_category_ids`            varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目id \',\'号分割',
+    `business_category_names`          varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '农场经营类目名称 \',\'号分割',
+    `archive_year`                     int(11)                                                       NULL DEFAULT NULL COMMENT '统计日期：年 2021',
+    `caitian_acre`                     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田面积（亩）',
+    `subsidy_acre_lvyecai`             decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜补贴面积（亩）',
+    `subsidy_acre_not_lvyecai`         decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '非绿叶菜补贴面积（亩）',
+    `subsidy_acre_total`               decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '总补贴面积（亩）',
+    `subsidy_acre_caitian_lvyecai`     decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田绿叶菜补贴面积（亩）',
+    `subsidy_acre_caitian_not_lvyecai` decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田非绿叶菜补贴面积（亩）',
+    `subsidy_acre_caitian_total`       decimal(15, 2)                                                NULL DEFAULT NULL COMMENT '菜田总补贴面积（亩）',
+    `create_time`                      datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`                      datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_landId_archive_year` (`farm_id`, `archive_year`) USING BTREE COMMENT '农场id+统计年份'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体补贴面积按月测算归档表（每月计算一次）'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_subsidy_farm_year_acre
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_subsidy_farm_year_acre`;
+CREATE TABLE `tbl_archive_subsidy_farm_year_acre`
+(
+    `id`           bigint(20)     NOT NULL AUTO_INCREMENT,
+    `farm_id`      bigint(20)     NULL DEFAULT NULL,
+    `archive_year` int(11)        NULL DEFAULT NULL COMMENT '归档年',
+    `x1`           decimal(15, 2) NULL DEFAULT NULL COMMENT '1月补贴面积—绿叶菜',
+    `x2`           decimal(15, 2) NULL DEFAULT NULL COMMENT '2月补贴面积—绿叶菜',
+    `x3`           decimal(15, 2) NULL DEFAULT NULL COMMENT '3月补贴面积—绿叶菜',
+    `x4`           decimal(15, 2) NULL DEFAULT NULL COMMENT '4月补贴面积—绿叶菜',
+    `x5`           decimal(15, 2) NULL DEFAULT NULL COMMENT '5月补贴面积—绿叶菜',
+    `x6`           decimal(15, 2) NULL DEFAULT NULL COMMENT '6月补贴面积—绿叶菜',
+    `x7`           decimal(15, 2) NULL DEFAULT NULL COMMENT '7月补贴面积—绿叶菜',
+    `x8`           decimal(15, 2) NULL DEFAULT NULL COMMENT '8月补贴面积—绿叶菜',
+    `x9`           decimal(15, 2) NULL DEFAULT NULL COMMENT '9月补贴面积—绿叶菜',
+    `x10`          decimal(15, 2) NULL DEFAULT NULL COMMENT '10月补贴面积—绿叶菜',
+    `x11`          decimal(15, 2) NULL DEFAULT NULL COMMENT '11月补贴面积—绿叶菜',
+    `x12`          decimal(15, 2) NULL DEFAULT NULL COMMENT '12月补贴面积—绿叶菜',
+    `y1`           decimal(15, 2) NULL DEFAULT NULL COMMENT '1月补贴面积—非叶菜',
+    `y2`           decimal(15, 2) NULL DEFAULT NULL COMMENT '2月补贴面积—非叶菜',
+    `y3`           decimal(15, 2) NULL DEFAULT NULL COMMENT '3月补贴面积—非叶菜',
+    `y4`           decimal(15, 2) NULL DEFAULT NULL COMMENT '4月补贴面积—非叶菜',
+    `y5`           decimal(15, 2) NULL DEFAULT NULL COMMENT '5月补贴面积—非叶菜',
+    `y6`           decimal(15, 2) NULL DEFAULT NULL COMMENT '6月补贴面积—非叶菜',
+    `y7`           decimal(15, 2) NULL DEFAULT NULL COMMENT '7月补贴面积—非叶菜',
+    `y8`           decimal(15, 2) NULL DEFAULT NULL COMMENT '8月补贴面积—非叶菜',
+    `y9`           decimal(15, 2) NULL DEFAULT NULL COMMENT '9月补贴面积—非叶菜',
+    `y10`          decimal(15, 2) NULL DEFAULT NULL COMMENT '10月补贴面积—非叶菜',
+    `y11`          decimal(15, 2) NULL DEFAULT NULL COMMENT '11月补贴面积—非叶菜',
+    `y12`          decimal(15, 2) NULL DEFAULT NULL COMMENT '12月补贴面积—非叶菜',
+    `update_time`  datetime       NULL DEFAULT NULL,
+    `create_time`  datetime       NULL DEFAULT NULL,
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_landId_archive_year` (`farm_id`, `archive_year`) USING BTREE COMMENT '农场id+统计年份'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体补贴面积按月测算归档表-- 补贴面积明细'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_subsidy_farm_year_acre_caitian
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_subsidy_farm_year_acre_caitian`;
+CREATE TABLE `tbl_archive_subsidy_farm_year_acre_caitian`
+(
+    `id`           bigint(20)     NOT NULL AUTO_INCREMENT,
+    `farm_id`      bigint(20)     NULL DEFAULT NULL,
+    `archive_year` int(11)        NULL DEFAULT NULL COMMENT '归档年',
+    `x1`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-1月补贴面积—绿叶菜',
+    `x2`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-2月补贴面积—绿叶菜',
+    `x3`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-3月补贴面积—绿叶菜',
+    `x4`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-4月补贴面积—绿叶菜',
+    `x5`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-5月补贴面积—绿叶菜',
+    `x6`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-6月补贴面积—绿叶菜',
+    `x7`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-7月补贴面积—绿叶菜',
+    `x8`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-8月补贴面积—绿叶菜',
+    `x9`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-9月补贴面积—绿叶菜',
+    `x10`          decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-10月补贴面积—绿叶菜',
+    `x11`          decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-11月补贴面积—绿叶菜',
+    `x12`          decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-12月补贴面积—绿叶菜',
+    `y1`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-1月补贴面积—非叶菜',
+    `y2`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-2月补贴面积—非叶菜',
+    `y3`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-3月补贴面积—非叶菜',
+    `y4`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-4月补贴面积—非叶菜',
+    `y5`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-5月补贴面积—非叶菜',
+    `y6`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-6月补贴面积—非叶菜',
+    `y7`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-7月补贴面积—非叶菜',
+    `y8`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-8月补贴面积—非叶菜',
+    `y9`           decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-9月补贴面积—非叶菜',
+    `y10`          decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-10月补贴面积—非叶菜',
+    `y11`          decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-11月补贴面积—非叶菜',
+    `y12`          decimal(15, 2) NULL DEFAULT NULL COMMENT '菜田-12月补贴面积—非叶菜',
+    `update_time`  datetime       NULL DEFAULT NULL,
+    `create_time`  datetime       NULL DEFAULT NULL,
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_landId_archive_year` (`farm_id`, `archive_year`) USING BTREE COMMENT '农场id+统计年份'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '经营主体补贴面积按月测算归档表-- 菜田补贴面积明细'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_archive_vegetable_declare
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_archive_vegetable_declare`;
+CREATE TABLE `tbl_archive_vegetable_declare`
+(
+    `id`                  bigint(11)                                                    NOT NULL AUTO_INCREMENT,
+    `archive_month`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '年月',
+    `city_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `sc_zt_acre_net`      decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜在田总面积（亩）-入网面积',
+    `sc_zt_acre_declare`  decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜在田总面积（亩）-行业检测数据',
+    `sc_zt_acre_total`    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜在田总面积（亩）-合计',
+    `lyc_zt_acre_net`     decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜在田面积（亩）-入网面积',
+    `lyc_zt_acre_declare` decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜在田面积（亩）-行业检测数据',
+    `lyc_zt_acre_total`   decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜在田面积（亩）-合计',
+    `sc_bz_acre_net`      decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜播种总面积（亩）-入网面积',
+    `sc_bz_acre_declare`  decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜播种总面积（亩）-行业检测数据',
+    `sc_bz_acre_total`    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜播种总面积（亩）-合计',
+    `lyc_bz_acre_net`     decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜播种总面积（亩）-入网面积',
+    `lyc_bz_acre_declare` decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜播种总面积（亩）-行业检测数据',
+    `lyc_bz_acre_total`   decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜播种总面积（亩）-合计',
+    `sc_output_net`       decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜总产量（吨）-入网面积',
+    `sc_output_declare`   decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜总产量（吨）-行业检测数据',
+    `sc_output_total`     decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '蔬菜总产量（吨）-合计',
+    `lyc_output_net`      decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜产量（吨）-入网面积',
+    `lyc_output_declare`  decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜产量（吨）-行业检测数据',
+    `lyc_output_total`    decimal(30, 2)                                                NULL DEFAULT NULL COMMENT '绿叶菜产量（吨）-合计',
+    `status`              varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT '0' COMMENT '申报/审核状态  0待申报 1申报中/审核中 2申报成功/审核通过 3申报失败/审核拒绝',
+    `declare_end_time`    datetime                                                      NULL DEFAULT NULL COMMENT '申报截至日期',
+    `declare_time`        datetime                                                      NULL DEFAULT NULL COMMENT '申报时间',
+    `declare_user_id`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '申报人id',
+    `declare_user_name`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '申报人姓名',
+    `check_time`          datetime                                                      NULL DEFAULT NULL COMMENT '审核时间',
+    `check_user_id`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '审核人id',
+    `check_user_name`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '审核人姓名',
+    `message`             varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '审核信息',
+    `create_time`         datetime                                                      NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`         datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_townId_archiveMonth` (`town_id`, `archive_month`) USING BTREE COMMENT '每月每个街镇一条'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '蔬菜行业管理申报表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_guarantee_spply_farm
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_guarantee_spply_farm`;
+CREATE TABLE `tbl_guarantee_spply_farm`
+(
+    `id`               bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `farm_name`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '保供主体名称/未匹配神农口袋主体使用',
+    `business_content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '申请运输范围及内容',
+    `farm_region`      varchar(127) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '保供主体区域/未匹配神农口袋主体使用',
+    `farm_id`          bigint(20)                                                    NULL DEFAULT NULL COMMENT '神农口袋主体id',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '保供主体表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_patrol_record_plan
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_patrol_record_plan`;
+CREATE TABLE `tbl_patrol_record_plan`
+(
+    `id`                                        bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `farm_id`                                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '农场id',
+    `farm_name`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '农场名称',
+    `province_id`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份id',
+    `province_name`                             varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在省份名称',
+    `city_id`                                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市id',
+    `city_name`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '所在城市名称',
+    `county_id`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县id',
+    `county_name`                               varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '区/县名称',
+    `town_id`                                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇id',
+    `town_name`                                 varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '镇名称',
+    `village_id`                                varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村id',
+    `village_name`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '村名称',
+    `farm_address`                              varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '详细地址',
+    `user_id`                                   bigint(20)                                                    NULL DEFAULT NULL COMMENT '添加检查任务用户',
+    `farm_center_lat`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '农场中心点维度值',
+    `farm_center_lng`                           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '农场中心点经度值',
+    `land_during_time`                          datetime                                                      NULL DEFAULT NULL COMMENT '地块用药时间 ，任意一个地块最后用药为该农场的最后一次用药时间',
+    `patrolled_record_thirty_day_status`        tinyint(2)                                                    NULL DEFAULT 0 COMMENT '执法记录30天内是否检查 ，0、否 1、是',
+    `patrolled_record_finally_qualified_status` tinyint(2)                                                    NULL DEFAULT 0 COMMENT '执法记录最后一次检查是否合格  0、否 1、是',
+    `patrol_record_id`                          bigint(20)                                                    NULL DEFAULT NULL COMMENT '检查记录主键id',
+    `plan_status`                               tinyint(2)                                                    NULL DEFAULT 0 COMMENT '检查状态 0、为完成 、1 已完成 ',
+    `create_by`                                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '创建人',
+    `create_time`                               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_by`                                 bigint(20)                                                    NULL DEFAULT NULL COMMENT '修改人',
+    `update_time`                               datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '执法记录检查计划表'
+  ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for tbl_subsidy_farm_blacklist
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_subsidy_farm_blacklist`;
+CREATE TABLE `tbl_subsidy_farm_blacklist`
+(
+    `id`           bigint(20)                                                   NOT NULL AUTO_INCREMENT,
+    `farm_id`      bigint(20)                                                   NULL DEFAULT NULL COMMENT '经营主体id',
+    `year`         int(11)                                                      NULL DEFAULT NULL COMMENT '年份',
+    `remark`       varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+    `create_time`  datetime                                                     NULL DEFAULT NULL COMMENT '添加时间',
+    `operate_by`   bigint(20)                                                   NULL DEFAULT NULL COMMENT '操作人',
+    `operate_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作人姓名',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE INDEX `uk_farmId_year` (`farm_id`, `year`) USING BTREE COMMENT '经营主体id+年份唯一'
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '蔬菜直报补贴黑名单'
+  ROW_FORMAT = DYNAMIC;
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-
-
-CREATE TABLE `sys_user_token` (
-                                  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-                                  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户id',
-                                  `access_token` varchar(64) NOT NULL COMMENT '访问的accessToken',
-                                  `client_type` tinyint(4) DEFAULT '1' COMMENT '客户端类型：1-webH5，2-安卓端，3-ios端',
-                                  `token_status` tinyint(4) DEFAULT '1' COMMENT '状态;1-可用，0-不可用',
-                                  `expire_time` datetime DEFAULT NULL COMMENT '失效时间，过期后不可使用',
-                                  `refresh_date_str` varchar(16) DEFAULT NULL COMMENT '刷新token日期字符串，格式：yyyy-MM-dd，如果当前刷新过了，则无需重复刷新',
-                                  `create_time` datetime DEFAULT NULL,
-                                  `update_time` datetime DEFAULT NULL,
-                                  PRIMARY KEY (`id`) USING BTREE,
-                                  UNIQUE KEY `uqi_access_token` (`access_token`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2607 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='企业用户token表';
-
-
-CREATE TABLE `tbl_admin_request_log` (
-                                         `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-                                         `request_url` varchar(255) DEFAULT NULL COMMENT '请求地址',
-                                         `request_ip` varchar(64) DEFAULT NULL COMMENT '请求ip',
-                                         `request_method` varchar(255) DEFAULT NULL COMMENT '请求方法',
-                                         `request_body` longtext COMMENT '请求参数',
-                                         `response_body` longtext COMMENT '返回参数',
-                                         `request_time` int(11) DEFAULT NULL COMMENT '消耗时长(单位:ms)',
-                                         `response_code` int(11) NOT NULL COMMENT '响应代码',
-                                         `response_msg` varchar(255) DEFAULT NULL COMMENT '响应描述信息',
-                                         `operator_user_id` bigint(20) NOT NULL COMMENT '操作人id',
-                                         `operator_user_name` varchar(64) DEFAULT NULL COMMENT '操作人姓名',
-                                         `access_token` varchar(255) DEFAULT NULL COMMENT 'token记录',
-                                         `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-                                         PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=264966 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='管理后台操作日志记录表';
