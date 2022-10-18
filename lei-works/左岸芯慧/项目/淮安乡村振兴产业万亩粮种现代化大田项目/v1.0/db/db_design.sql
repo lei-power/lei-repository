@@ -304,6 +304,7 @@ CREATE TABLE `tbl_assignment_land`
     `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
     `assignment_id` bigint(20) NOT NULL COMMENT '农事任务id',
     `land_id`       bigint(20)          DEFAULT NULL COMMENT '地块id',
+    `path`          text                DEFAULT NULL COMMENT '农场所在区域位置描图',
     `del_flag`      tinyint(1) NOT NULL DEFAULT '0' COMMENT '删除标志 0：否 1:是',
     `create_by`     bigint(20)          DEFAULT NULL COMMENT '创建人',
     `update_by`     bigint(20)          DEFAULT NULL COMMENT '修改人',
