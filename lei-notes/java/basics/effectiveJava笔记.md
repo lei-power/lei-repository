@@ -106,7 +106,9 @@
  }
 ```
 
-### 10. 重写 equals 方法时遵守通用约定
+## 3.对所有对象都通用的方法
+
+### 1. 重写 equals 方法时遵守通用约定
 - ？？？ 类是私有的或包级私有的，可以确定它的 equals 方法永远不会被调用。如果你非常厌恶风险，可以重写 equals 方法，以确保不会被意外调用
 ```java
  @Override 
@@ -152,17 +154,59 @@
 ```
 - 对于类型为非 float 或 double 的基本类型，使用 == 运算符进行比较；对于对象引用属性，递归地调用 equals 方法；对于 float 基本类型的属性，使用静态 `Float.compare(float, float)` 方法；对于 double 基本类型的属性，使用 `Double.compare(double, double)` 方法。
 
+### 2. 考虑实现Comparable接口
+- 有时，你可能会看到 `compareTo` 或 `compare` 方法依赖于两个值之间的差值，如果第一个值小于第二个值，则为负；如果两个值相等则为零，如果第一个值大于，则为正值。这是一个例子：
 
-### 10. 重写 equals 方法时遵守通用约定
+```java
+// BROKEN difference-based comparator - violates transitivity!
 
+static Comparator<Object> hashCodeOrder = new Comparator<>() {
+    public int compare(Object o1, Object o2) {
+        return o1.hashCode() - o2.hashCode();
+    }
+};
+```
+- 不要使用这种技术！它可能会导致整数最大长度溢出和 IEEE 754 浮点运算失真的危险[JLS 15.20.1,15.21.1]。 此外，由此产生的方法不可能比使用上述技术编写的方法快得多。 使用静态 `compare` 方法：
 
+```java
+// Comparator based on static compare method
+static Comparator<Object> hashCodeOrder = new Comparator<>() {
+    public int compare(Object o1, Object o2) {
+        return Integer.compare(o1.hashCode(), o2.hashCode());
+    }
+};
+```
+- 或者使用 `Comparator` 的构建方法：
 
-
-## 3.对所有对象都通用的方法
-
-
+```java
+// Comparator based on Comparator construction method
+static Comparator<Object> hashCodeOrder =
+        Comparator.comparingInt(o -> o.hashCode());
+```
+- 总而言之，无论何时实现具有合理排序的值类，你都应该让该类实现 `Comparable` 接口，以便在基于比较的集合中轻松对其实例进行排序，搜索和使用。 比较 `compareTo` 方法的实现中的字段值时，请避免使用「<」和「>」运算符。 相反，使用包装类中的静态 `compare
+` 方法或 `Comparator` 接口中的构建方法。
 
 ## 4.类和接口
+### 1.使成员的可访问性最小化
+- private —— 该成员只能在声明它的顶级类内访问。
+- package-private —— 成员可以从被声明的包中的任何类中访问。从技术上讲，如果没有指定访问修饰符（接口成员除外，它默认是公共的），这是默认访问级别。
+- protected —— 成员可以从被声明的类的子类中访问（会受一些限制 [JLS, 6.6.2]），以及它声明的包中的任何类。
+- public —— 该成员可以从任何地方被访问。
+
+### 2. 最小化可变性
+- 请注意，方法名称是介词（如 plus）而不是动词（如 add）。 这强调了方法不会改变对象的值的事实。
+- **不可变对象本质上是线程安全的；它们不需要同步。** 被多个线程同时访问它们时，不会遭到破坏。 这是实现线程安全的最简单方法。
+- 一个不可变的类可以提供静态的工厂来缓存经常被请求的实例，以避免在现有的实例中创建新的实例。 所有基本类型的包装类和 `BigInteger` 类都是这样做的。 使用这样的静态工厂会使客户端共享实例而不是创建新实例，从而减少内存占用和垃圾回收成本。 在设计新类时，选择静态工厂代替公共构造方法，可以在以后增加缓存的灵活性，而不需要修改客户端。
+
+- 不可变对象本质上是线程安全的；它们不需要同步。
+- 不仅可以共享不可变的对象，而且可以共享内部信息。
+- 不可变对象为其他对象提供了很好的构件（building blocks）
+- 不可变对象无偿地提供了的原子失败机制（详见第  76 条）。
+- 不可变类的主要缺点是对于每个不同的值都需要一个单独的对象。
+
+### 3. 组合优于继承
+
+
 ## 5.泛型
 ## 6.枚举和注解
 ## 7.函数式和流
