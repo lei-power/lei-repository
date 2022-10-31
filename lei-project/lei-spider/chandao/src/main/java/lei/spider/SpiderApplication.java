@@ -1,5 +1,6 @@
 package lei.spider;
 
+import lei.spider.processor.ChandaoProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -17,7 +18,7 @@ public class SpiderApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpiderApplication.class, args);
 
-        Spider.create(new ChandaoProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-tableContents-custom.html").thread(10).run();
+        Spider.create(new ChandaoProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-205.html").thread(1).run();
 
     }
 }
