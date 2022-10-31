@@ -1,6 +1,9 @@
 package lei.spider.processor;
 
+import java.util.ArrayList;
 import java.util.List;
+import lei.spider.model.ChanDaoTree;
+import lei.spider.pipeline.ChandaoIndexPipeLine;
 import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -20,38 +23,44 @@ public class ChandaoIndexProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
+
         Selectable custom = page.getHtml();
         //目录
-        String title = StringUtils.trim("src/main/resources/" + custom.xpath("//button[@id='currentBranch']/text()").get());
+        String title = StringUtils.trim(custom.xpath("//button[@id='currentBranch']/text()").get());
         //目录
         List<Selectable> nodes = custom.xpath("//div[@class='detail']/ul/li").nodes();
+        List<ChanDaoTree> tree = new ArrayList();
         if (nodes != null && nodes.size() > 0) {
-            genNodes(nodes, title);
+            genNodes(nodes, title, tree);
         }
-
-        // page.putField("titleList", titleList);
-
-        //        PrintWriter printWriter = new PrintWriter(new FileWriter(getFile(filename)));
-        //        printWriter.write(ToStringBuilder.reflectionToString(o));
-        //        printWriter.close();
-
+        page.putField("tree", tree);
     }
 
-    private void genNodes(List<Selectable> nodes, String title) {
+    private void genNodes(List<Selectable> nodes, String title, List<ChanDaoTree> tree) {
+        String doMain = "http://chandao.freetek.cc";
         String path = title;
         for (Selectable node : nodes) {
-            List<Selectable> subNodes = node.xpath("/ul/li").nodes();
+            List<Selectable> subNodes = node.xpath("//ul/li").nodes();
+            //不需要递归
             if (subNodes == null || subNodes.size() == 0) {
-                List<Selectable> docNodes = nodes.get(0).xpath("li[@class='doc']").nodes();
+                List<Selectable> docNodes = node.xpath("li[@class='doc']").nodes();
+                docNodes.addAll(node.xpath("li[@class='independent']").nodes());
                 if (docNodes != null && docNodes.size() > 0) {
                     for (Selectable docNode : docNodes) {
-                        Selectable xpath = docNode.xpath("/a/text()");
-                        System.err.println(xpath.toString());
+                        String xpath = docNode.xpath("//a/@title").get();
+                        System.err.println(path + "/" + StringUtils.trim(xpath));
+                        ChanDaoTree chanDaoTree = new ChanDaoTree();
+                        chanDaoTree.setName(xpath);
+                        chanDaoTree.setPath(path + "/" + StringUtils.trim(xpath));
+                        chanDaoTree.setHref(doMain + docNode.xpath("//a/@href").get());
+                        tree.add(chanDaoTree);
                     }
                 }
             }
-            genNodes(subNodes, path);
-
+            else {
+                String path2 = path + "/" + node.xpath("//a/@title").get();
+                genNodes(subNodes, path2, tree);
+            }
         }
     }
 
@@ -61,7 +70,7 @@ public class ChandaoIndexProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new ChandaoIndexProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-28.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-53.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-124.html").thread(10).run();
+        Spider.create(new ChandaoIndexProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-28.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-53.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-124.html").addPipeline(new ChandaoIndexPipeLine()).thread(10).run();
     }
 
 }

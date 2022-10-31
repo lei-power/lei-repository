@@ -8,10 +8,10 @@ import lombok.Data;
  ***/
 
 @Data
-public class tree {
+public class ChanDaoTree {
 
     private String path;
-    private int fileFlag;
     private String name;
+    private String href;
 
 }
