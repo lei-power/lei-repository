@@ -1,0 +1,35 @@
+package ${package}.biz.admin.model.req;
+
+
+import com.za.core.base.constants.RespCons;
+import com.za.core.base.model.BaseResp;
+import com.za.core.util.TextUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+
+@Data
+@ApiModel
+public class Admin${entity}ListReq{
+
+    @ApiModelProperty(value="每页个数")
+    private Integer pageSize;
+
+    @ApiModelProperty(value="第几页，从1开始")
+    private Integer pageNo;
+
+    @ApiModelProperty(value="关键字，为null或者空查询全部")
+    private String keyword;
+
+    public BaseResp checkParam(){
+        if(this.pageSize==null || this.pageSize==0){
+            return BaseResp.failByParamError();
+        }
+        if(this.pageNo==null || this.pageNo==0){
+            return BaseResp.failByParamError();
+        }
+        return BaseResp.success();
+    }
+
+}

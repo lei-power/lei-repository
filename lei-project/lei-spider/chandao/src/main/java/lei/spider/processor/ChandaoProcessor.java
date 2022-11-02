@@ -79,7 +79,7 @@ public class ChandaoProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new ChandaoProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html").addPipeline(new ChandaoPipeLine()).thread(1).run();
+        Spider.create(new ChandaoProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html").addPipeline(new ChandaoPipeLine()).thread(10).run();
     }
 
 }
