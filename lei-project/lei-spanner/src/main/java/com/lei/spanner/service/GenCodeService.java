@@ -1,6 +1,7 @@
 package com.lei.spanner.service;
 
 import com.lei.spanner.core.base.model.BaseResp;
+import com.lei.spanner.core.util.SnkdGenUtil;
 import com.lei.spanner.entity.req.GenCodeSnkoudaiReq;
 import com.lei.spanner.mapper.GenCodeServiceMapper;
 import java.io.IOException;
@@ -29,6 +30,10 @@ public class GenCodeService {
 
     @Autowired
     private GenCodeServiceMapper genCodeServiceMapper;
+
+    @Autowired
+    private SnkdGenUtil snkdGenUtil;
+
 
     //sndoudai读取excel
 
@@ -115,14 +120,22 @@ public class GenCodeService {
         if (readexcel == null || readexcel.size() == 0) {
             return BaseResp.failByParamError("excel未读取到数据或读取失败！");
         }
-        return BaseResp.success("如下表代码生成成功： " + readexcel.stream().map(GenCodeSnkoudaiReq::getTableName).collect(Collectors.joining(",")));
-        //调用生成逻辑
 
+        //调用生成逻辑
+        snkdGenUtil.snkdGen(readexcel);
+
+        return BaseResp.success("如下表代码生成成功： " + readexcel.stream().map(GenCodeSnkoudaiReq::getTableName).collect(Collectors.joining(",")));
 
     }
 
 
     public BaseResp snkdGenByJson(List<GenCodeSnkoudaiReq> reqModel) {
-        return BaseResp.success();
+        if (reqModel == null||reqModel.size()==0) {
+            return BaseResp.failByParamError("请输入正确的表信息！");
+        }
+        //调用生成逻辑
+        snkdGenUtil.snkdGen(reqModel);
+
+        return BaseResp.success("如下表代码生成成功： " + reqModel.stream().map(GenCodeSnkoudaiReq::getTableName).collect(Collectors.joining(",")));
     }
 }
