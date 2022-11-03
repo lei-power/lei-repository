@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.CBDKXXMapper">
+    <resultMap type="com.lei.spanner.entity.po.CBDKXX" id="baseResultMap">
+        <result property="dKBM" column="dKBM"/>
+        <result property="fBFBM" column="fBFBM"/>
+        <result property="cBFBM" column="cBFBM"/>
+        <result property="cBJYQQDFS" column="cBJYQQDFS"/>
+        <result property="hTMJ" column="hTMJ"/>
+        <result property="cBHTBM" column="cBHTBM"/>
+        <result property="lZHTBM" column="lZHTBM"/>
+        <result property="cBJYQZBM" column="cBJYQZBM"/>
+        <result property="yHTMJ" column="yHTMJ"/>
+        <result property="hTMJM" column="hTMJM"/>
+        <result property="yHTMJM" column="yHTMJM"/>
+        <result property="sFQQQG" column="sFQQQG"/>
+        <result property="dKLB" column="dKLB"/>
+    </resultMap>
+    <sql id="columns">
+        a.DKBM      AS "dKBM",
+        a.FBFBM     AS "fBFBM",
+        a.CBFBM     AS "cBFBM",
+        a.CBJYQQDFS AS "cBJYQQDFS",
+        a.HTMJ      AS "hTMJ",
+        a.CBHTBM    AS "cBHTBM",
+        a.LZHTBM    AS "lZHTBM",
+        a.CBJYQZBM  AS "cBJYQZBM",
+        a.YHTMJ     AS "yHTMJ",
+        a.HTMJM     AS "hTMJM",
+        a.YHTMJM    AS "yHTMJM",
+        a.SFQQQG    AS "sFQQQG",
+        a.DKLB      AS "dKLB"
+    </sql>
+
+    <select id="getBydkbm" resultMap="baseResultMap">
+            SELECT
+        	<include refid="columns"/>
+        FROM
+		    CBDKXX a
+        WHERE
+        a.DKBM=#{dkbm}
+    </select>
+</mapper>

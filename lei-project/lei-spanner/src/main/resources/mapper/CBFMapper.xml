@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.CBFMapper">
+    <resultMap type="com.lei.spanner.entity.po.CBF" id="baseResultMap">
+        <result property="cBFBM" column="cBFBM"/>
+        <result property="cBFLX" column="cBFLX"/>
+        <result property="cBFMC" column="cBFMC"/>
+        <result property="cBFZJLX" column="cBFZJLX"/>
+        <result property="cBFZJHM" column="cBFZJHM"/>
+        <result property="cBFDZ" column="cBFDZ"/>
+        <result property="yZBM" column="yZBM"/>
+        <result property="lXDH" column="lXDH"/>
+        <result property="cBFCYSL" column="cBFCYSL"/>
+        <result property="cBFDCRQ" column="cBFDCRQ"/>
+        <result property="cBFDCY" column="cBFDCY"/>
+        <result property="cBFDCJS" column="cBFDCJS"/>
+        <result property="gSJS" column="gSJS"/>
+        <result property="gSJSR" column="gSJSR"/>
+        <result property="gSSHRQ" column="gSSHRQ"/>
+        <result property="gSSHR" column="gSSHR"/>
+    </resultMap>
+    <sql id="columns">
+        a.CBFBM   AS "cBFBM",
+        a.CBFLX   AS "cBFLX",
+        a.CBFMC   AS "cBFMC",
+        a.CBFZJLX AS "cBFZJLX",
+        a.CBFZJHM AS "cBFZJHM",
+        a.CBFDZ   AS "cBFDZ",
+        a.YZBM    AS "yZBM",
+        a.LXDH    AS "lXDH",
+        a.CBFCYSL AS "cBFCYSL",
+        a.CBFDCRQ AS "cBFDCRQ",
+        a.CBFDCY  AS "cBFDCY",
+        a.CBFDCJS AS "cBFDCJS",
+        a.GSJS    AS "gSJS",
+        a.GSJSR   AS "gSJSR",
+        a.GSSHRQ  AS "gSSHRQ",
+        a.GSSHR   AS "gSSHR"
+    </sql>
+
+    <select id="getBycbfbm" resultMap="baseResultMap">
+            SELECT
+        <include refid="columns"/>
+        FROM CBF a
+        WHERE a.CBFBM = #{cbfbm}
+    </select>
+</mapper>

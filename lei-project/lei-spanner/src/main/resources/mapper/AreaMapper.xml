@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.AreaMapper">
+    <resultMap id="areas" type="com.lei.spanner.entity.po.AreaTiny">
+        <id column="id" property="id"/>
+        <result column="areaName" property="areaName"/>
+        <result column="parentId" property="parentId"/>
+        <result column="pinyin" property="pinyin"/>
+        <result column="level" property="level"/>
+        <collection property="childList" ofType="com.lei.spanner.entity.po.AreaTiny">
+            <id column="city.id" property="id"/>
+            <result column="city.areaName" property="areaName"/>
+            <result column="city.parentId" property="parentId"/>
+            <result column="city.pinyin" property="pinyin"/>
+            <result column="city.level" property="level"/>
+            <collection property="childList" ofType="com.lei.spanner.entity.po.AreaTiny">
+                <id column="county.id" property="id"/>
+                <result column="county.areaName" property="areaName"/>
+                <result column="county.parentId" property="parentId"/>
+                <result column="county.pinyin" property="pinyin"/>
+                <result column="county.level" property="level"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <sql id="columns">
+        a.id         AS "id",
+        a.area_name  AS "areaName",
+        a.parent_id  AS "parentId",
+        a.short_name AS "shortName",
+        a.area_code  AS "areaCode",
+        a.zip_code   AS "zipCode",
+        a.pinyin     AS "pinyin",
+        a.lng        AS "lng",
+        a.lat        AS "lat",
+        a.level      AS "level",
+        a.position   AS "position",
+        a.sort_num   AS "sortNum"
+    </sql>
+    <select id="getById" resultType="com.lei.spanner.entity.po.Area">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_area a
+        WHERE a.id = #{id}
+    </select>
+    <select id="getListByParentId" resultType="com.lei.spanner.entity.po.Area">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_area a
+        WHERE a.parent_id = #{parentId}
+        ORDER BY a.sort_num ASC, a.pinyin ASC
+    </select>
+    <sql id="provinceColumns">
+        a.id        AS "id",
+        a.area_name AS "areaName",
+        a.parent_id AS "parentId",
+        a.pinyin    AS "pinyin",
+        a.level     AS "level"
+    </sql>
+    <sql id="cityColumns">
+        city.id        AS "city.id",
+        city.area_name AS "city.areaName",
+        city.parent_id AS "city.parentId",
+        city.pinyin    AS "city.pinyin",
+        city.level     AS "city.level"
+    </sql>
+    <sql id="countyColumns">
+        county.id        AS "county.id",
+        county.area_name AS "county.areaName",
+        county.parent_id AS "county.parentId",
+        county.pinyin    AS "county.pinyin",
+        county.level     AS "county.level"
+    </sql>
+    <select id="getAllList" resultMap="areas">
+        SELECT
+        <include refid="provinceColumns"/>,
+        <include refid="cityColumns"/>,
+        <include refid="countyColumns"/>
+        FROM sys_area a
+                     LEFT JOIN sys_area city ON city.parent_id = a.id
+                     LEFT JOIN sys_area county ON county.parent_id = city.id
+                WHERE
+                a.parent_id = 0
+        <if test="provinceId != null">
+            AND a.id = #{provinceId}
+        </if>
+        ORDER BY a.pinyin ASC, city.pinyin ASC, county.pinyin ASC
+    </select>
+    <select id="getListByIdListAndLevel" resultType="com.lei.spanner.entity.po.Area">
+        SELECT
+        <include refid="columns"/>
+        FROM sys_area a
+        <where>
+            <if test="level != null">
+                and a.level = #{level}
+            </if>
+            <if test="idList != null">
+                AND a.id IN(
+                <foreach collection="idList" item="item" separator=",">
+                    #{item}
+                </foreach>
+                )
+            </if>
+        </where>
+    </select>
+<!--    <select id="getTopAreaByIdAndLevel" resultType="com.lei.spanner.entity.po.Area">-->
+<!--        <if test="level == 1">-->
+<!--            SELECT-->
+<!--            <include refid="columns"/>-->
+<!--            FROM sys_area a-->
+<!--            WHERE a.id = #{id}-->
+<!--        </if>-->
+<!--        <if test="level == 2">-->
+<!--            SELECT b.id        AS "id",-->
+<!--                   b.area_name AS "areaName",-->
+<!--                   b.parent_id AS "parentId",-->
+<!--                   b.pinyin    AS "pinyin",-->
+<!--                   b.level     AS "level"-->
+<!--            FROM sys_area a-->
+<!--                         INNER JOIN sys_area b ON a.parent_id = b.id-->
+<!--            WHERE a.id = #{id}-->
+<!--        </if>-->
+<!--        <if test="level == 3">-->
+<!--            select ce.id        AS "id",-->
+<!--                   ce.area_name AS "areaName",-->
+<!--                   ce.parent_id AS "parentId",-->
+<!--                   ce.pinyin    AS "pinyin",-->
+<!--                   ce.level     AS "level"-->
+<!--            from sys_area a-->
+<!--                         inner join sys_area b on a.parent_id = b.id-->
+<!--                         inner join sys_area ce on b.parent_id = ce.id-->
+<!--            where a.id = #{id}-->
+<!--        </if>-->
+<!--    </select>-->
+    <select id="getParentAreaByIdAndLevel" resultType="com.lei.spanner.entity.po.Area">
+        SELECT parent.id        AS "id",
+               parent.area_name AS "areaName",
+               parent.parent_id AS "parentId",
+               parent.pinyin    AS "pinyin",
+               parent.level     AS "level"
+        FROM sys_area a
+                     INNER JOIN sys_area parent ON a.parent_id = parent.id
+        WHERE a.id = #{areaId}
+    </select>
+</mapper>

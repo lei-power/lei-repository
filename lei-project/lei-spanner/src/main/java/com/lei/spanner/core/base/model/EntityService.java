@@ -20,7 +20,7 @@ public class EntityService {
     public static void doGenerator(ConfigContext configContext, Object data, Callback callback) {
         //配置velocity的资源加载路径
         Properties velocityPros = new Properties();
-        velocityPros.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, ClassUtil.getClassPath() + "genCode");
+        velocityPros.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, ClassUtil.getClassPath() + "genSpanner");
         velocityPros.setProperty(Velocity.ENCODING_DEFAULT, "UTF-8");
         velocityPros.setProperty(Velocity.INPUT_ENCODING, "UTF-8");
         velocityPros.setProperty(Velocity.OUTPUT_ENCODING, "UTF-8");

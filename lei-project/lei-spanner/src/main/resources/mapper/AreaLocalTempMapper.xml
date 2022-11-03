@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.AreaLocalTempMapper">
+    <resultMap type="com.lei.spanner.entity.po.AreaLocalTemp" id="baseResultMap">
+        <result property="id" column="id"/>
+        <result property="ownCode" column="ownCode"/>
+        <result property="ownName" column="ownName"/>
+        <result property="villageCode" column="villageCode"/>
+        <result property="provinceId" column="provinceId"/>
+        <result property="provinceName" column="provinceName"/>
+        <result property="cityId" column="cityId"/>
+        <result property="cityName" column="cityName"/>
+        <result property="countyId" column="countyId"/>
+        <result property="countyName" column="countyName"/>
+        <result property="townId" column="townId"/>
+        <result property="townName" column="townName"/>
+        <result property="villageId" column="villageId"/>
+        <result property="villageName" column="villageName"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+    <sql id="columns">
+        a.id            AS "id",
+        a.own_code      AS "ownCode",
+        a.own_name      AS "ownName",
+        a.village_code  AS "villageCode",
+        a.province_id   AS "provinceId",
+        a.province_name AS "provinceName",
+        a.city_id       AS "cityId",
+        a.city_name     AS "cityName",
+        a.county_id     AS "countyId",
+        a.county_name   AS "countyName",
+        a.town_id       AS "townId",
+        a.town_name     AS "townName",
+        a.village_id    AS "villageId",
+        a.village_name  AS "villageName",
+        a.create_time   AS "createTime",
+        a.update_time   AS "updateTime"
+    </sql>
+    <insert id="insert" parameterType="com.lei.spanner.entity.po.AreaLocalTemp" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO tbl_area_local_temp (id, own_code, own_name, village_code, province_id, province_name, city_id, city_name, county_id, county_name,
+                                         town_id, town_name, village_id, village_name, create_time, update_time)
+        VALUES (#{id}, #{ownCode}, #{ownName}, #{villageCode}, #{provinceId}, #{provinceName}, #{cityId}, #{cityName}, #{countyId}, #{countyName},
+                #{townId}, #{townName}, #{villageId}, #{villageName}, #{createTime}, #{updateTime})
+    </insert>
+    <update id="update" parameterType="com.lei.spanner.entity.po.AreaLocalTemp">
+        UPDATE tbl_area_local_temp
+        SET id=#{id},
+            own_code=#{ownCode},
+            own_name=#{ownName},
+            village_code=#{villageCode},
+            province_id=#{provinceId},
+            province_name=#{provinceName},
+            city_id=#{cityId},
+            city_name=#{cityName},
+            county_id=#{countyId},
+            county_name=#{countyName},
+            town_id=#{townId},
+            town_name=#{townName},
+            village_id=#{villageId},
+            village_name=#{villageName},
+            create_time=#{createTime},
+            update_time=#{updateTime}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE
+        FROM tbl_area_local_temp
+        WHERE id = #{id}
+    </delete>
+    <select id="getById" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local_temp a
+        WHERE a.id = #{id}
+    </select>
+    <select id="getListByKeywordAndPage" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local_temp a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        <if test="startIndex != null and pageSize != null">
+            LIMIT #{startIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getCountByKeywordAndPage" resultType="Long">
+        SELECT COUNT(*)
+        FROM tbl_area_local_temp a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="getByVillageCode" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local_temp a
+        WHERE a.village_code = #{code}
+    </select>
+</mapper>

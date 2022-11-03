@@ -1,0 +1,33 @@
+package ${package}.entity.req.${entityAllLower};
+
+
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+#set($hasDate=0)
+#foreach($column in $columns)
+#if($column.javaType=='Date' && $hasDate==0)
+import java.util.Date;
+#set($hasDate=1)
+#end
+#end
+
+@Data
+@ApiModel
+public class ${entity}AddReq{
+
+#foreach($column in $columns)
+#if($column.isPk!=true)
+#if($column.comment!='')
+    @ApiModelProperty("$column.comment")
+#end
+    private ${column.javaTypeBox} ${column.javaFieldName};
+#end
+#end
+
+
+
+
+}

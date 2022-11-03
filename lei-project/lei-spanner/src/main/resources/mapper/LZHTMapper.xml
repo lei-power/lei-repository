@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.LZHTMapper">
+    <resultMap type="com.lei.spanner.entity.po.LZHT" id="baseResultMap">
+        <result property="cBHTBM" column="cBHTBM"/>
+        <result property="lZHTBM" column="lZHTBM"/>
+        <result property="cBFBM" column="cBFBM"/>
+        <result property="sRFBM" column="sRFBM"/>
+        <result property="lZFS" column="lZFS"/>
+        <result property="lZQX" column="lZQX"/>
+        <result property="lZQXKSRQ" column="lZQXKSRQ"/>
+        <result property="lZQXJSRQ" column="lZQXJSRQ"/>
+        <result property="lZMJ" column="lZMJ"/>
+        <result property="lZDKS" column="lZDKS"/>
+        <result property="lZQTDYT" column="lZQTDYT"/>
+        <result property="lZHTDYT" column="lZHTDYT"/>
+        <result property="lZJGSM" column="lZJGSM"/>
+        <result property="hTQDRQ" column="hTQDRQ"/>
+        <result property="lZMJM" column="lZMJM"/>
+    </resultMap>
+    <sql id="columns">
+        a.cbhtbm   AS "cBHTBM",
+        a.lzhtbm   AS "lZHTBM",
+        a.cbfbm    AS "cBFBM",
+        a.srfbm    AS "sRFBM",
+        a.lzfs     AS "lZFS",
+        a.lzqx     AS "lZQX",
+        a.lzqxksrq AS "lZQXKSRQ",
+        a.lzqxjsrq AS "lZQXJSRQ",
+        a.lzmj     AS "lZMJ",
+        a.lzdks    AS "lZDKS",
+        a.lzqtdyt  AS "lZQTDYT",
+        a.lzhtdyt  AS "lZHTDYT",
+        a.lzjgsm   AS "lZJGSM",
+        a.htqdrq   AS "hTQDRQ",
+        a.lzmjm    AS "lZMJM"
+    </sql>
+    <insert id="insert" parameterType="com.lei.spanner.entity.po.LZHT" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO lzht (cbhtbm, lzhtbm, cbfbm, srfbm, lzfs, lzqx, lzqxksrq, lzqxjsrq, lzmj, lzdks, lzqtdyt, lzhtdyt, lzjgsm, htqdrq, lzmjm)
+        VALUES (#{cBHTBM}, #{lZHTBM}, #{cBFBM}, #{sRFBM}, #{lZFS}, #{lZQX}, #{lZQXKSRQ}, #{lZQXJSRQ}, #{lZMJ}, #{lZDKS}, #{lZQTDYT}, #{lZHTDYT}, #{lZJGSM},
+                #{hTQDRQ}, #{lZMJM})
+    </insert>
+    <update id="update" parameterType="com.lei.spanner.entity.po.LZHT">
+        UPDATE lzht
+        SET cbhtbm=#{cBHTBM},
+            lzhtbm=#{lZHTBM},
+            cbfbm=#{cBFBM},
+            srfbm=#{sRFBM},
+            lzfs=#{lZFS},
+            lzqx=#{lZQX},
+            lzqxksrq=#{lZQXKSRQ},
+            lzqxjsrq=#{lZQXJSRQ},
+            lzmj=#{lZMJ},
+            lzdks=#{lZDKS},
+            lzqtdyt=#{lZQTDYT},
+            lzhtdyt=#{lZHTDYT},
+            lzjgsm=#{lZJGSM},
+            htqdrq=#{hTQDRQ},
+            lzmjm=#{lZMJM}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE
+        FROM lzht
+        WHERE id = #{id}
+    </delete>
+    <select id="getById" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM lzht a
+        WHERE a.id = #{id}
+    </select>
+    <select id="getListByKeywordAndPage" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM lzht a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        <if test="startIndex != null and pageSize != null">
+            LIMIT #{startIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getCountByKeywordAndPage" resultType="Long">
+        SELECT COUNT(*)
+        FROM lzht a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,6 +1,7 @@
 package com.lei.spanner.config;
 
-import com.lei.spanner.config.SwaggerUtils.groupName;
+import com.lei.spanner.core.util.SwaggerUtils;
+import com.lei.spanner.core.util.SwaggerUtils.groupName;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.spring.web.plugins.Docket;

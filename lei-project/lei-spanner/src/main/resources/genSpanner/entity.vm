@@ -1,0 +1,25 @@
+package ${package}.entity.po;
+
+
+#set($hasDate=0)
+#foreach($column in $columns)
+#if($column.javaType=='Date' && $hasDate==0)
+import java.math.BigDecimal;
+import java.util.Date;
+#set($hasDate=1)
+#end
+#end
+
+import lombok.Data;
+
+@Data
+public class ${entity}{
+
+#foreach($column in $columns)
+#if($column.comment!='')
+    //${column.comment}
+#end
+    private ${column.javaTypeBox} ${column.javaFieldName};
+#end
+
+}

@@ -1,8 +1,8 @@
-package ${package}.manage;
+package ${package}.Service;
 
-import com.za.core.base.model.BaseResp;
+
 import ${package}.mapper.${entity}Mapper;
-import ${package}.po.${entity};
+import ${package}.entity.po.${entity};
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,10 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ${entity}Manage{
+public class ${entity}Service{
 
 	@Autowired
 	private ${entity}Mapper ${entityFirstLower}Mapper;
-    @Autowired
-    private AreaLocalFacadeClient areaLocalFacadeClient;
 
 	@Transactional
 	public Integer insert(${entity} entity){
@@ -108,5 +106,8 @@ public class ${entity}Manage{
      this.delete(id);
      return BaseResp.success();
      }
+
+//==============================================分割线==================================================
+
 
 }

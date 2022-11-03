@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.AreaLocalMapper">
+    <resultMap type="com.lei.spanner.entity.po.AreaLocal" id="baseResultMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parentId"/>
+        <result property="name" column="name"/>
+        <result property="sortNum" column="sortNum"/>
+        <result property="level" column="level"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="countyCenterLat" column="countyCenterLat"/>
+        <result property="countyCenterLng" column="countyCenterLng"/>
+        <result property="shTownCenterLat" column="shTownCenterLat"/>
+        <result property="shTownCenterLng" column="shTownCenterLng"/>
+    </resultMap>
+    <resultMap id="areas" type="com.lei.spanner.entity.dto.AreaLocalListAllByCountyDTO">
+        <id column="id" property="id"/>
+        <result column="areaName" property="areaName"/>
+        <result column="parentId" property="parentId"/>
+        <result column="level" property="level"/>
+        <collection property="childList" ofType="com.lei.spanner.entity.dto.AreaLocalListAllByCountyDTO">
+            <id column="village.id" property="id"/>
+            <result column="village.areaName" property="areaName"/>
+            <result column="village.parentId" property="parentId"/>
+            <result column="village.level" property="level"/>
+        </collection>
+    </resultMap>
+    <sql id="townColumns">
+        a.id        AS "id",
+        a.name      AS "areaName",
+        a.parent_id AS "parentId",
+        a.level     AS "level"
+    </sql>
+    <sql id="villageColumns">
+        village.id        AS "village.id",
+        village.name      AS "village.areaName",
+        village.parent_id AS "village.parentId",
+        village.level     AS "village.level"
+    </sql>
+    <sql id="columns">
+        a.id                 AS "id",
+        a.parent_id          AS "parentId",
+        a.name               AS "name",
+        a.sort_num           AS "sortNum",
+        a.level              AS "level",
+        a.create_time        AS "createTime",
+        a.update_time        AS "updateTime",
+        a.county_center_lat  AS "countyCenterLat",
+        a.county_center_lng  AS "countyCenterLng",
+        a.sh_town_center_lat AS "shTownCenterLat",
+        a.sh_town_center_lng AS "shTownCenterLng"
+    </sql>
+    <insert id="insert" parameterType="com.lei.spanner.entity.po.AreaLocal">
+        INSERT INTO tbl_area_local (id, parent_id, name, sort_num, level, create_time, update_time, county_center_lat, county_center_lng,
+                                    sh_town_center_lat, sh_town_center_lng)
+        VALUES (#{id}, #{parentId}, #{name}, #{sortNum}, #{level}, #{createTime}, #{updateTime}, #{countyCenterLat}, #{countyCenterLng},
+                #{shTownCenterLat}, #{shTownCenterLng})
+    </insert>
+    <update id="update" parameterType="com.lei.spanner.entity.po.AreaLocal">
+        UPDATE tbl_area_local
+        SET parent_id=#{parentId},
+            name=#{name},
+            sort_num=#{sortNum},
+            level=#{level},
+            create_time=#{createTime},
+            update_time=#{updateTime},
+            county_center_lat=#{countyCenterLat},
+            county_center_lng=#{countyCenterLng},
+            sh_town_center_lat=#{shTownCenterLat},
+            sh_town_center_lng=#{shTownCenterLng}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE
+        FROM tbl_area_local
+        WHERE id = #{id}
+    </delete>
+    <select id="getById" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local a
+        WHERE a.id = #{id}
+    </select>
+    <select id="getListByKeywordAndPage" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        <if test="startIndex != null and pageSize != null">
+            LIMIT #{startIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getCountByKeywordAndPage" resultType="Long">
+        SELECT COUNT(*)
+        FROM tbl_area_local a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="getListByParentId" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local a
+        WHERE a.parent_id = #{parentId}
+    </select>
+    <select id="getByParentIdAndName" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local a
+        <where>
+            a.parent_id = #{parentId}
+            <if test="name != null">
+                AND a.name = #{name}
+            </if>
+        </where>
+        LIMIT 1
+    </select>
+    <select id="getMaxIdByLevel" resultType="java.lang.Long">
+        SELECT IFNULL(max(a.id), 1)
+        FROM tbl_area_local a
+        WHERE a.level = #{level}
+    </select>
+    <select id="getByAreaIds" resultType="com.lei.spanner.entity.dto.AreaLocalDTO">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local a
+                WHERE
+                a.id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="getAllParentOnAreaByAreaIdAndAreaLevel" resultType="com.lei.spanner.entity.dto.AllParentOnAreaDTO">
+        <choose>
+            <when test="areaLevel == 4">
+                SELECT f.id          AS provinceid,
+                       f.`area_name` AS provincename,
+                       c.id          AS cityid,
+                       c.area_name   AS cityname,
+                       b.id          AS countyid,
+                       b.area_name   AS countyname,
+                       a.id          AS townid,
+                       a.`name`      AS townname,
+                       a.`level`     AS arealevel
+                FROM tbl_area_local a
+                             INNER JOIN sys_area b ON a.parent_id = b.id
+                             INNER JOIN sys_area c ON c.id = b.parent_id
+                             INNER JOIN sys_area f ON f.id = c.parent_id
+                WHERE a.id = #{areaId}
+                  AND a.`level` = #{areaLevel}
+            </when>
+            <otherwise>
+                SELECT f.id          AS provinceid,
+                       f.`area_name` AS provincename,
+                       c.id          AS cityid,
+                       c.area_name   AS cityname,
+                       b.id          AS countyid,
+                       b.area_name   AS countyname,
+                       d.id          AS townid,
+                       d.`name`      AS townname,
+                       a.id          AS villageid,
+                       a.`name`      AS villagename,
+                       a.`level`     AS arealevel
+                FROM tbl_area_local a
+                             INNER JOIN tbl_area_local d ON d.id = a.parent_id
+                             INNER JOIN sys_area b ON d.parent_id = b.id
+                             INNER JOIN sys_area c ON c.id = b.parent_id
+                             INNER JOIN sys_area f ON f.id = c.parent_id
+                WHERE a.id = #{areaId}
+                  AND a.`level` = #{areaLevel}
+            </otherwise>
+        </choose>
+    </select>
+    <select id="listAllByCountryId" resultMap="areas">
+        SELECT
+        <include refid="townColumns"/>,
+        <include refid="villageColumns"/>
+        FROM tbl_area_local a
+                     LEFT JOIN tbl_area_local village ON a.id = village.parent_id
+        WHERE a.parent_id = #{countryId}
+    </select>
+    <insert id="insertBatch">
+        INSERT INTO tbl_area_local (id, parent_id, name, sort_num, level, create_time, update_time, county_center_lat, county_center_lng,
+                                    sh_town_center_lat, sh_town_center_lng)
+                VALUES
+        <foreach collection="areaLocalList" item="item" separator=",">
+            (#{item.id}, #{item.parentId}, #{item.name}, #{item.sortNum}, #{item.level}, #{item.createTime}, #{item.updateTime}, #{item.countyCenterLat},
+             #{item.countyCenterLng}, #{item.shTownCenterLat}, #{item.shTownCenterLng})
+        </foreach>
+    </insert>
+</mapper>

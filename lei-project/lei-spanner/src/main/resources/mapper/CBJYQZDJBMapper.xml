@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.CBJYQZDJBMapper">
+    <resultMap type="com.lei.spanner.entity.po.CBJYQZDJB" id="baseResultMap">
+    <result property="cBJYQZBM" column="cBJYQZBM"/>
+    <result property="fBFBM" column="fBFBM"/>
+    <result property="cBFBM" column="cBFBM"/>
+    <result property="cBFS" column="cBFS"/>
+    <result property="cBQX" column="cBQX"/>
+    <result property="cBQXQ" column="cBQXQ"/>
+    <result property="cBQXZ" column="cBQXZ"/>
+    <result property="dKSYT" column="dKSYT"/>
+    <result property="cBJYQZLSH" column="cBJYQZLSH"/>
+    <result property="dJBFJ" column="dJBFJ"/>
+    <result property="yCBJYQZBH" column="yCBJYQZBH"/>
+    <result property="dBR" column="dBR"/>
+    <result property="dJSJ" column="dJSJ"/>
+</resultMap>
+
+	<sql id="columns" >
+	    a.cbjyqzbm AS "cBJYQZBM",
+	    a.fbfbm AS "fBFBM",
+	    a.cbfbm AS "cBFBM",
+	    a.cbfs AS "cBFS",
+	    a.cbqx AS "cBQX",
+	    a.cbqxq AS "cBQXQ",
+	    a.cbqxz AS "cBQXZ",
+	    a.dksyt AS "dKSYT",
+	    a.cbjyqzlsh AS "cBJYQZLSH",
+	    a.djbfj AS "dJBFJ",
+	    a.ycbjyqzbh AS "yCBJYQZBH",
+	    a.dbr AS "dBR",
+	    a.djsj AS "dJSJ"
+    </sql>
+                                                                                                                                                                
+
+	<insert id="insert" parameterType="com.lei.spanner.entity.po.CBJYQZDJB" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO
+			cbjyqzdjb (cbjyqzbm,fbfbm,cbfbm,cbfs,cbqx,cbqxq,cbqxz,dksyt,cbjyqzlsh,djbfj,ycbjyqzbh,dbr,djsj)
+		VALUES
+			(#{cBJYQZBM},#{fBFBM},#{cBFBM},#{cBFS},#{cBQX},#{cBQXQ},#{cBQXZ},#{dKSYT},#{cBJYQZLSH},#{dJBFJ},#{yCBJYQZBH},#{dBR},#{dJSJ})
+	</insert> 
+
+	<update id="update" parameterType="com.lei.spanner.entity.po.CBJYQZDJB" >
+		UPDATE cbjyqzdjb
+		SET
+		    cbjyqzbm=#{cBJYQZBM},
+		    fbfbm=#{fBFBM},
+		    cbfbm=#{cBFBM},
+		    cbfs=#{cBFS},
+		    cbqx=#{cBQX},
+		    cbqxq=#{cBQXQ},
+		    cbqxz=#{cBQXZ},
+		    dksyt=#{dKSYT},
+		    cbjyqzlsh=#{cBJYQZLSH},
+		    djbfj=#{dJBFJ},
+		    ycbjyqzbh=#{yCBJYQZBH},
+		    dbr=#{dBR},
+		    djsj=#{dJSJ}
+	    WHERE id=#{id}
+	</update>
+
+	<delete id="delete" >
+		DELETE FROM CBJYQZDJB 
+		WHERE id=#{id} 
+	</delete>
+
+    <select id="getById" resultMap="baseResultMap">
+        SELECT
+        	<include refid="columns"/>
+        FROM
+		    cbjyqzdjb a
+        WHERE
+                                                                                                                                                                                                                                                                                        a.id=#{id}
+    </select>
+
+    <select id="getListByKeywordAndPage" resultMap="baseResultMap">
+        SELECT
+        	<include refid="columns"/>
+        FROM
+		    cbjyqzdjb a
+        <where>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        <if test="startIndex!=null and pageSize!=null">
+            LIMIT #{startIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCountByKeywordAndPage" resultType="Long">
+        SELECT COUNT(*) FROM CBJYQZDJB a
+        <where>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <if test="keyword != null and keyword != ''">
+                and a.name like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

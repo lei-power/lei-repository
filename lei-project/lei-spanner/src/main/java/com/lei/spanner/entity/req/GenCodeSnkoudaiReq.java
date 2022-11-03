@@ -12,11 +12,11 @@ import lombok.Data;
 @Data
 @ApiModel
 public class GenCodeSnkoudaiReq {
-    @ApiModelProperty(value = "表名")
+    @ApiModelProperty(value = "表名 tbl_agri_machinery")
     private String tableName;
-    @ApiModelProperty(value = "文件名")
+    @ApiModelProperty(value = "文件名 AgriMachinery")
     private String fileName;
-    @ApiModelProperty(value = "包名")
+    @ApiModelProperty(value = "包名 com.za.gisdata")
     private String packageName;
 
 }

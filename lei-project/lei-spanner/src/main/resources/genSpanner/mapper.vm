@@ -1,0 +1,27 @@
+package ${package}.mapper;
+
+import ${package}.entity.po.${entity};
+import org.apache.ibatis.annotations.Param;
+import java.util.List;
+
+
+public interface ${entity}Mapper {
+
+
+	public Integer insert(${entity} entity);
+
+	public Integer update(${entity} entity);
+
+	public Integer delete(Long id);
+
+    public ${entity} getById(Long id);
+
+	public List<${entity}> getListByKeywordAndPage(
+				@Param("keyword")String keyword,
+				@Param("startIndex")Integer startIndex,
+				@Param("pageSize")Integer pageSize);
+
+	public long getCountByKeywordAndPage(
+				@Param("keyword")String keyword);
+
+}

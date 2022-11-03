@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.FBFMapper">
+    <resultMap type="com.lei.spanner.entity.po.FBF" id="baseResultMap">
+        <result property="fBFBM" column="fBFBM"/>
+        <result property="fBFMC" column="fBFMC"/>
+        <result property="fBFFZRXM" column="fBFFZRXM"/>
+        <result property="fZRZJLX" column="fZRZJLX"/>
+        <result property="fZRZJHM" column="fZRZJHM"/>
+        <result property="lXDH" column="lXDH"/>
+        <result property="fBFDZ" column="fBFDZ"/>
+        <result property="yZBM" column="yZBM"/>
+        <result property="fBFDCY" column="fBFDCY"/>
+        <result property="fBFDCRQ" column="fBFDCRQ"/>
+        <result property="fBFDCJS" column="fBFDCJS"/>
+    </resultMap>
+    <sql id="columns">
+        a.FBFBM    AS "fBFBM",
+        a.FBFMC    AS "fBFMC",
+        a.FBFFZRXM AS "fBFFZRXM",
+        a.FZRZJLX  AS "fZRZJLX",
+        a.FZRZJHM  AS "fZRZJHM",
+        a.LXDH     AS "lXDH",
+        a.FBFDZ    AS "fBFDZ",
+        a.YZBM     AS "yZBM",
+        a.FBFDCY   AS "fBFDCY",
+        a.FBFDCRQ  AS "fBFDCRQ",
+        a.FBFDCJS  AS "fBFDCJS"
+    </sql>
+
+    <select id="getByfbfbm" resultMap="baseResultMap">
+            SELECT
+        <include refid="columns"/>
+        FROM FBF a
+        WHERE a.FBFBM = #{fbfbm}
+    </select>
+</mapper>

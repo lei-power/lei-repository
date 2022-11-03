@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.QSLYZLFJMapper">
+    <resultMap type="com.lei.spanner.entity.po.QSLYZLFJ" id="baseResultMap">
+    <result property="cBJYQZBM" column="cBJYQZBM"/>
+    <result property="zLFJBH" column="zLFJBH"/>
+    <result property="zLFJMC" column="zLFJMC"/>
+    <result property="zLFJRQ" column="zLFJRQ"/>
+    <result property="fJ" column="fJ"/>
+</resultMap>
+
+	<sql id="columns" >
+	    a.cbjyqzbm AS "cBJYQZBM",
+	    a.zlfjbh AS "zLFJBH",
+	    a.zlfjmc AS "zLFJMC",
+	    a.zlfjrq AS "zLFJRQ",
+	    a.fj AS "fJ"
+    </sql>
+                                                                
+
+	<insert id="insert" parameterType="com.lei.spanner.entity.po.QSLYZLFJ" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO
+			qslyzlfj (cbjyqzbm,zlfjbh,zlfjmc,zlfjrq,fj)
+		VALUES
+			(#{cBJYQZBM},#{zLFJBH},#{zLFJMC},#{zLFJRQ},#{fJ})
+	</insert> 
+
+	<update id="update" parameterType="com.lei.spanner.entity.po.QSLYZLFJ" >
+		UPDATE qslyzlfj
+		SET
+		    cbjyqzbm=#{cBJYQZBM},
+		    zlfjbh=#{zLFJBH},
+		    zlfjmc=#{zLFJMC},
+		    zlfjrq=#{zLFJRQ},
+		    fj=#{fJ}
+	    WHERE id=#{id}
+	</update>
+
+	<delete id="delete" >
+		DELETE FROM qslyzlfj
+		WHERE id=#{id} 
+	</delete>
+
+    <select id="getById" resultMap="baseResultMap">
+        SELECT
+        	<include refid="columns"/>
+        FROM
+		    qslyzlfj a
+        WHERE
+                                                                                                                        a.id=#{id}
+    </select>
+
+    <select id="getListByKeywordAndPage" resultMap="baseResultMap">
+        SELECT
+        	<include refid="columns"/>
+        FROM
+		    qslyzlfj a
+        <where>
+                                                                                                                                                                                                                                                    <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        <if test="startIndex!=null and pageSize!=null">
+            LIMIT #{startIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCountByKeywordAndPage" resultType="Long">
+        SELECT COUNT(*) FROM qslyzlfj a
+        <where>
+                                                                                                                                                                                                                                                    <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

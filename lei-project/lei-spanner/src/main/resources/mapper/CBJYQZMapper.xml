@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.CBJYQZMapper">
+    <resultMap type="com.lei.spanner.entity.po.CBJYQZ" id="baseResultMap">
+    <result property="cBJYQZBM" column="cBJYQZBM"/>
+    <result property="fZJG" column="fZJG"/>
+    <result property="fZRQ" column="fZRQ"/>
+    <result property="qZSFLQ" column="qZSFLQ"/>
+    <result property="qZLQRQ" column="qZLQRQ"/>
+    <result property="qZLQRXM" column="qZLQRXM"/>
+    <result property="qZLQRZJLX" column="qZLQRZJLX"/>
+    <result property="qZLQRZJHM" column="qZLQRZJHM"/>
+</resultMap>
+
+	<sql id="columns" >
+	    a.cbjyqzbm AS "cBJYQZBM",
+	    a.fzjg AS "fZJG",
+	    a.fzrq AS "fZRQ",
+	    a.qzsflq AS "qZSFLQ",
+	    a.qzlqrq AS "qZLQRQ",
+	    a.qzlqrxm AS "qZLQRXM",
+	    a.qzlqrzjlx AS "qZLQRZJLX",
+	    a.qzlqrzjhm AS "qZLQRZJHM"
+    </sql>
+                                                                                                    
+
+	<insert id="insert" parameterType="com.lei.spanner.entity.po.CBJYQZ" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO
+			cbjyqz (cbjyqzbm,fzjg,fzrq,qzsflq,qzlqrq,qzlqrxm,qzlqrzjlx,qzlqrzjhm)
+		VALUES
+			(#{cBJYQZBM},#{fZJG},#{fZRQ},#{qZSFLQ},#{qZLQRQ},#{qZLQRXM},#{qZLQRZJLX},#{qZLQRZJHM})
+	</insert> 
+
+	<update id="update" parameterType="com.lei.spanner.entity.po.CBJYQZ" >
+		UPDATE cbjyqz
+		SET
+		    cbjyqzbm=#{cBJYQZBM},
+		    fzjg=#{fZJG},
+		    fzrq=#{fZRQ},
+		    qzsflq=#{qZSFLQ},
+		    qzlqrq=#{qZLQRQ},
+		    qzlqrxm=#{qZLQRXM},
+		    qzlqrzjlx=#{qZLQRZJLX},
+		    qzlqrzjhm=#{qZLQRZJHM}
+	    WHERE id=#{id}
+	</update>
+
+	<delete id="delete" >
+		DELETE FROM cbjyqz
+		WHERE id=#{id} 
+	</delete>
+
+    <select id="getById" resultMap="baseResultMap">
+        SELECT
+        	<include refid="columns"/>
+        FROM
+		    cbjyqz a
+        WHERE
+                                                                                                                                                                                    a.id=#{id}
+    </select>
+
+    <select id="getListByKeywordAndPage" resultMap="baseResultMap">
+        SELECT
+        	<include refid="columns"/>
+        FROM
+		    cbjyqz a
+        <where>
+                                                                                                                                                                                                                                                                                                                                                                                        <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        <if test="startIndex!=null and pageSize!=null">
+            LIMIT #{startIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCountByKeywordAndPage" resultType="Long">
+        SELECT COUNT(*) FROM cbjyqz a
+        <where>
+                                                                                                                                                                                                                                                                                                                                                                                        <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

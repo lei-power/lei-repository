@@ -40,4 +40,18 @@ public class GenCodeController {
     public BaseResp snkdGenByJson(@RequestBody List<GenCodeSnkoudaiReq> reqModel) {
         return genCodeService.snkdGenByJson(reqModel);
     }
+
+    @PostMapping("/spanner/json")
+    @ApiOperation(value = "lei-spanner代码生成 json入参", httpMethod = "POST", notes = "用于：spanner项目")
+    public BaseResp spannerGenByJson(@RequestBody List<GenCodeSnkoudaiReq> reqModel) {
+        return genCodeService.spannerGenByJson(reqModel);
+    }
+
+
+    @PostMapping("/spanner/excel")
+    @ApiOperation(value = "lei-spanner代码生成 excel导入", httpMethod = "POST", notes = "用于：spanner项目")
+    public BaseResp spannerGenByExcel(@RequestBody MultipartFile reqModel) {
+        return genCodeService.spannerGenByExcel(reqModel);
+    }
+
 }
