@@ -3,6 +3,8 @@ package com.lei.spanner.service;
 import com.alibaba.fastjson.JSON;
 import com.lei.spanner.core.base.constants.DictCons.Level;
 import com.lei.spanner.core.base.model.BaseResp;
+import com.lei.spanner.core.base.model.ConfigContext;
+import com.lei.spanner.core.base.model.DBHelper;
 import com.lei.spanner.core.util.DateTimeUtils;
 import com.lei.spanner.core.util.FileUtil;
 import com.lei.spanner.entity.dto.AreaLocalDTO;
@@ -495,15 +497,15 @@ public class GenAreaLocalService {
 
         log.info("发包方加载完毕，共有{}个，承包方加载完毕，共有{}个，承包地块加载完毕，共有{}个", fbfList.size(), cbfList.size(), cbdkxxList.size());
 
-       // 划分线程数，与循环次数
+        // 划分线程数，与循环次数
         int realSize = dkbmList.size();
-        int minSize=10000;
-        int count =20;//线程数
+        int minSize = 10000;
+        int count = 20;//线程数
         int rate = 5000;//倍率
-        for (int i = 1; i <4 ; i++) {
-           //不起多线程
+        for (int i = 1; i < 4; i++) {
+            //不起多线程
             if (realSize < minSize) {
-                rate=10000;
+                rate = 10000;
                 break;
             }
             if (realSize >= minSize * Math.pow(10, 3)) {
@@ -514,7 +516,7 @@ public class GenAreaLocalService {
                 rate = realSize / count;
                 for (int j = 0; j < count; j++) {
                     if ((count - j) * minSize * Math.pow(10, i) / count >= rate && (count - j - 1) * minSize * Math.pow(10, i) / count < rate) {
-                        rate = (int) ((count - j) * minSize * Math.pow(10, i)/count);
+                        rate = (int) ((count - j) * minSize * Math.pow(10, i) / count);
                     }
                 }
             }
@@ -524,9 +526,12 @@ public class GenAreaLocalService {
         AtomicInteger index = new AtomicInteger();
         ArrayList<CompletableFuture> futureList = new ArrayList<>();
         for (int i = 0; i < count + 1; i++) {
+            if (i * rate > realSize) {
+                break;
+            }
             int lineCount = i;
             int toIndex = (i + 1) * rate;
-            List<String> subList = dkbmList.subList(i * rate, toIndex > dkbmList.size()  ? dkbmList.size()  : toIndex);
+            List<String> subList = dkbmList.subList(i * rate, toIndex > dkbmList.size() ? dkbmList.size() : toIndex);
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 int flag = 0;
                 for (String sub : subList) {
@@ -549,25 +554,22 @@ public class GenAreaLocalService {
                     else {
                         cbf = cbfMap.get(cbdkxx.getCBFBM());
                     }
-                    String sql = "UPDATE a SET " +
-                            "  a.FBFBM = " + (fbf.getFBFBM() == null ? null : "'" + fbf.getFBFBM() + "'" )+
-                            " ,a.FBFMC = " +( fbf.getFBFMC() == null ? null : "'" + fbf.getFBFMC() + "'" )+
-                            " ,a.CBFBM = " + (cbf.getCBFBM() == null ? null : "'" + cbf.getCBFBM() + "'" )+
-                            " ,a.CBFMC = " + (cbf.getCBFMC() == null ? null : "'" + cbf.getCBFMC() + "'" )+
-                            " ,a.CBFZJHM = " + (cbf.getCBFZJHM() == null ? null : "'" + cbf.getCBFZJHM() + "'" )+
-                            " ,a.LXDH = " + (cbf.getLXDH() == null ? null : "'" + cbf.getLXDH() + "'") +
-                            " ,a.city_id = " + (village.getCityId() == null ? null : "'" + village.getCityId() + "'" )+
-                            " ,a.city_name = " + (village.getCityName() == null ? null : "'" + village.getCityName() + "'" )+
-                            " ,a.county_id = " + (village.getCountyId() == null ? null : "'" + village.getCountyId() + "'") +
-                            " ,a.county_name = " + (village.getCountyName() == null ? null : "'" + village.getCountyName() + "'" )+
-                            " ,a.town_id = " + (village.getCountyName() == null ? null : "'" + village.getCountyName() + "'") +
-                            " ,a.town_name = " + (village.getTownName() == null ? null : "'" + village.getTownName() + "'") +
-                            " ,a.village_id = " + (village.getVillageId() == null ? null : "'" + village.getVillageId() + "'") +
-                            " ,a.village_name = " + (village.getVillageName() == null ? null : "'" + village.getVillageName() + "'") +
-                            " FROM " + tableName + " AS a WHERE a.DKBM = " + (sub== null ? null : "'" + sub + "'") + " ;\n";
+                    String sql = "UPDATE a SET " + "  a.FBFBM = " + (fbf.getFBFBM() == null ? null : "'" + fbf.getFBFBM() + "'") + " ,a.FBFMC = " + (
+                            fbf.getFBFMC() == null ? null : "'" + fbf.getFBFMC() + "'") + " ,a.CBFBM = " + (cbf.getCBFBM() == null ? null :
+                            "'" + cbf.getCBFBM() + "'") + " ,a.CBFMC = " + (cbf.getCBFMC() == null ? null : "'" + cbf.getCBFMC() + "'") + " ,a.CBFZJHM = "
+                            + (cbf.getCBFZJHM() == null ? null : "'" + cbf.getCBFZJHM() + "'") + " ,a.LXDH = " + (cbf.getLXDH() == null ? null :
+                            "'" + cbf.getLXDH() + "'") + " ,a.city_id = " + (village.getCityId() == null ? null : "'" + village.getCityId() + "'")
+                            + " ,a.city_name = " + (village.getCityName() == null ? null : "'" + village.getCityName() + "'") + " ,a.county_id = " + (
+                            village.getCountyId() == null ? null : "'" + village.getCountyId() + "'") + " ,a.county_name = " + (
+                            village.getCountyName() == null ? null : "'" + village.getCountyName() + "'") + " ,a.town_id = " + (
+                            village.getCountyName() == null ? null : "'" + village.getCountyName() + "'") + " ,a.town_name = " + (
+                            village.getTownName() == null ? null : "'" + village.getTownName() + "'") + " ,a.village_id = " + (
+                            village.getVillageId() == null ? null : "'" + village.getVillageId() + "'") + " ,a.village_name = " + (
+                            village.getVillageName() == null ? null : "'" + village.getVillageName() + "'") + " FROM " + tableName
+                            + " AS a WHERE a.DKBM = " + (sub == null ? null : "'" + sub + "'") + " ;\n";
                     stringBuffer.append(sql);
                 }
-            },executor);
+            }, executor);
             futureList.add(future);
         }
         CompletableFuture.allOf(futureList.toArray(new CompletableFuture[futureList.size()])).exceptionally((e) -> {
@@ -690,8 +692,8 @@ public class GenAreaLocalService {
 
         processSql(tableName, dkbmList, stringBuffer);
 
-        FileUtil.writeFile(outputPath, tableName +"_确权gis更新的sql文件_"+ DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD)
-                +  ".sql",stringBuffer.toString());
+        FileUtil.writeFile(outputPath,
+                tableName + "_确权gis更新的sql文件_" + DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD) + ".sql", stringBuffer.toString());
         long end = System.currentTimeMillis();
         long s = (end - start) / 1000;
         long m = s / 60;
@@ -719,13 +721,33 @@ public class GenAreaLocalService {
 
         processSql(tableName, dkbmList, stringBuffer);
 
-        FileUtil.writeFile(outputPath, tableName +"_确权gis更新的sql文件_"+ DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD)
-                +  ".sql",stringBuffer.toString());
+        FileUtil.writeFile(outputPath,
+                tableName + "_确权gis更新的sql文件_" + DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD) + ".sql", stringBuffer.toString());
         long end = System.currentTimeMillis();
         long s = (end - start) / 1000;
         long m = s / 60;
         log.info("本次匹配地块数据共花费：{}分{}秒", m, s);
         return BaseResp.success("数据处理成功，请到D:\\GenFiles目录查看数据！" + "共花费：" + m + "分" + s + "秒");
+    }
+
+
+    public BaseResp updateGisDataQuequan(String tableName, String areaId, String areaLevel) {
+        ConfigContext configContext = new ConfigContext();
+        configContext.setDriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        configContext.setUrl("jdbc:sqlserver://121.41.213.10:1433;databasename=sde");
+        configContext.setUserName("sa");
+        configContext.setPassword("SNkoudai!@#$<>?");
+        configContext.setOutputPath(outputPath + "updateGisDataQuequan_" + new Date());
+
+        configContext.setTargetTable(tableName);
+
+        //初始化DB工具类
+        DBHelper dbHelper = new DBHelper(configContext);
+
+        //得到数据库表的元数据
+        List<Map<String, Object>> maps = dbHelper.queryMapList("SELECT DKBM,town_name FROM sde.TBL_XINJIANG_AKESU_QUEQUAN WHERE town_id='1000348';", null);
+        System.err.println("ddd");
+        return BaseResp.success();
     }
 
 }

@@ -1,7 +1,6 @@
 package com.lei.spanner.core.base.constants;
 
 import com.google.common.collect.Maps;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -2330,5 +2329,14 @@ public class DictCons {
     public static class PushModel {
         public static final Integer SCHEDULED_TASKS = 1;//自动
         public static final Integer MANUAL_OPERAT = 2; //手动
+    }
+
+    //1-确权，2-三调，3-高标准，4-轮廓  0-查全部
+    public static final Map<Integer, String> GisType = Maps.newHashMap();
+    static {
+        GisType.put(1, "QUEQUAN");
+        GisType.put(2, "SANDIAO");
+        GisType.put(3, "GAOBIAOZHUN");
+        GisType.put(4, "LUNKUO");
     }
 }

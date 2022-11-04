@@ -31,7 +31,6 @@ public class GenAreaLocalController {
     }
 
 
-
     @PostMapping("/gisFieldsAdd")
     @ApiOperation(value = "gis数据处理时，需要新增字段 type:0-确权，1-三调，2-高标准，3-轮廓", httpMethod = "POST", notes = "用于：gis数据发布流程-新增字段")
     public String gisFieldsAdd(@RequestParam("tableName") String tableName, @RequestParam("type") Integer type) {
@@ -41,14 +40,22 @@ public class GenAreaLocalController {
 
     @PostMapping("/getQueQuanUpdateSql")
     @ApiOperation(value = "获取确权数据需要更新的数据.sql文件接口,上传\"地块编码表.xlsx\"", httpMethod = "POST", notes = "用于：gis数据发布流程_获取确权数据需要更新的数据")
-    public BaseResp getQueQuanUpdateSql(@RequestBody MultipartFile excel,@RequestParam("tableName") String tableName) {
-        return genAreaLocalService.getQueQuanUpdateSql(excel,tableName);
+    public BaseResp getQueQuanUpdateSql(@RequestBody MultipartFile excel, @RequestParam("tableName") String tableName) {
+        return genAreaLocalService.getQueQuanUpdateSql(excel, tableName);
     }
 
     @PostMapping("/getQueQuanUpdateSqlByDB")
     @ApiOperation(value = "获取确权数据需要更新的数据.sql文件接口,上传\"地块编码表.xlsx\"到数据库tbl_req_data 表中", httpMethod = "POST", notes = "用于：gis数据发布流程_获取确权数据需要更新的数据")
     public BaseResp getQueQuanUpdateSqlByDB(@RequestParam("tableName") String tableName) {
         return genAreaLocalService.getQueQuanUpdateSqlByDB(tableName);
+    }
+
+
+    @PostMapping("/updateGisDataQuequan")
+    @ApiOperation(value = "根据gis表名来更新mysql的归档数据", httpMethod = "POST", notes = "用于：gis数据发布流程_更新归档数据")
+    public BaseResp updateGisDataQuequan(@RequestParam("tableName") String tableName, @RequestParam("areaId") String areaId,
+                                         @RequestParam("areaLevel") String areaLevel) {
+        return genAreaLocalService.updateGisDataQuequan(tableName, areaId, areaLevel);
     }
 
 }
