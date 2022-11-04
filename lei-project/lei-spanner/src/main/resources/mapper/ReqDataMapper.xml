@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lei.spanner.mapper.ReqDataMapper">
+    <resultMap type="com.lei.spanner.entity.po.ReqData" id="baseResultMap">
+        <result property="id" column="id"/>
+        <result property="dkbm" column="dkbm"/>
+        <result property="targetTable" column="targetTable"/>
+        <result property="targetName" column="targetName"/>
+        <result property="targetPackage" column="targetPackage"/>
+        <result property="createTime" column="createTime"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+    <sql id="columns">
+        a.id             AS "id",
+        a.dkbm           AS "dkbm",
+        a.target_table   AS "targetTable",
+        a.target_name    AS "targetName",
+        a.target_package AS "targetPackage",
+        a.create_time    AS "createTime",
+        a.update_time    AS "updateTime"
+    </sql>
+    <insert id="insert" parameterType="com.lei.spanner.entity.po.ReqData" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO tbl_req_data (id, dkbm, target_table, target_name, target_package, create_time, update_time)
+        VALUES (#{id}, #{dkbm}, #{targetTable}, #{targetName}, #{targetPackage}, #{createTime}, #{updateTime})
+    </insert>
+    <update id="update" parameterType="com.lei.spanner.entity.po.ReqData">
+        UPDATE tbl_req_data
+        SET id=#{id},
+            dkbm=#{dkbm},
+            target_table=#{targetTable},
+            target_name=#{targetName},
+            target_package=#{targetPackage},
+            create_time=#{createTime},
+            update_time=#{updateTime}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE
+        FROM tbl_req_data
+        WHERE id = #{id}
+    </delete>
+    <select id="getById" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_req_data a
+        WHERE a.id = #{id}
+    </select>
+    <select id="getListByKeywordAndPage" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_req_data a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY a.id DESC
+        <if test="startIndex != null and pageSize != null">
+            LIMIT #{startIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getCountByKeywordAndPage" resultType="Long">
+        SELECT COUNT(*)
+        FROM tbl_req_data a
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and a.name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="getDkbm" resultType="java.lang.String">
+        SELECT a.dkbm AS "dkbm"
+        FROM tbl_req_data a
+    </select>
+</mapper>

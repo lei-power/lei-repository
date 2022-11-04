@@ -31,13 +31,16 @@
         a.SFQQQG    AS "sFQQQG",
         a.DKLB      AS "dKLB"
     </sql>
-
     <select id="getBydkbm" resultMap="baseResultMap">
-            SELECT
-        	<include refid="columns"/>
-        FROM
-		    CBDKXX a
-        WHERE
-        a.DKBM=#{dkbm}
+        SELECT
+        <include refid="columns"/>
+        FROM CBDKXX a
+        WHERE a.DKBM = #{dkbm}
+    </select>
+    <select id="getAll" resultMap="baseResultMap">
+        SELECT a.DKBM      AS "dKBM",
+               a.FBFBM     AS "fBFBM",
+               a.CBFBM     AS "cBFBM"
+        FROM CBDKXX a
     </select>
 </mapper>

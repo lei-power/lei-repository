@@ -103,4 +103,9 @@
         FROM tbl_area_local_temp a
         WHERE a.village_code = #{code}
     </select>
+    <select id="getAll" resultMap="baseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM tbl_area_local_temp a
+    </select>
 </mapper>

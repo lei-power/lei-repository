@@ -45,6 +45,12 @@ public class GenAreaLocalController {
         return genAreaLocalService.getQueQuanUpdateSql(excel,tableName);
     }
 
+    @PostMapping("/getQueQuanUpdateSqlByDB")
+    @ApiOperation(value = "获取确权数据需要更新的数据.sql文件接口,上传\"地块编码表.xlsx\"到数据库tbl_req_data 表中", httpMethod = "POST", notes = "用于：gis数据发布流程_获取确权数据需要更新的数据")
+    public BaseResp getQueQuanUpdateSqlByDB(@RequestParam("tableName") String tableName) {
+        return genAreaLocalService.getQueQuanUpdateSqlByDB(tableName);
+    }
+
 }
 
 

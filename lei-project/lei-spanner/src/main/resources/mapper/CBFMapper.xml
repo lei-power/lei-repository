@@ -44,4 +44,11 @@
         FROM CBF a
         WHERE a.CBFBM = #{cbfbm}
     </select>
+    <select id="getAll" resultMap="baseResultMap">
+        SELECT a.CBFBM   as "cbfbm",
+               a.CBFMC   as "cbfmc",
+               a.CBFZJHM as "cbfzjhm",
+               a.LXDH    as "lxdh"
+        from CBF a
+    </select>
 </mapper>

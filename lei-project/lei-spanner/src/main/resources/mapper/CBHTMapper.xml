@@ -37,4 +37,20 @@
         FROM CBHT a
         WHERE a.CBHTBM = #{cbhtbm}
     </select>
+    <select id="getAll" resultMap="baseResultMap">
+            SELECT
+             a.CBHTBM  AS "cBHTBM",
+        a.FBFBM   AS "fBFBM",
+        a.CBFBM   AS "cBFBM",
+        a.CBFS    AS "cBFS",
+        a.CBQXQ   AS "cBQXQ",
+        a.CBQXZ   AS "cBQXZ",
+        a.HTZMJ   AS "hTZMJ",
+        a.CBDKZS  AS "cBDKZS",
+        a.QDSJ    AS "qDSJ",
+        a.HTZMJM  AS "hTZMJM",
+        a.YHTZMJ  AS "yHTZMJ",
+        a.YHTZMJM AS "yHTZMJM"
+        <include refid="columns"/>
+    </select>
 </mapper>

@@ -34,4 +34,9 @@
         FROM FBF a
         WHERE a.FBFBM = #{fbfbm}
     </select>
+    <select id="getAll" resultMap="baseResultMap">
+        SELECT a.FBFBM AS "fBFBM",
+               a.FBFMC AS "fBFMC"
+        FROM FBF a
+    </select>
 </mapper>

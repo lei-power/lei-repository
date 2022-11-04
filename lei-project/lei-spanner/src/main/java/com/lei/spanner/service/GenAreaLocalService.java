@@ -11,7 +11,6 @@ import com.lei.spanner.entity.po.AreaLocal;
 import com.lei.spanner.entity.po.AreaLocalTemp;
 import com.lei.spanner.entity.po.CBDKXX;
 import com.lei.spanner.entity.po.CBF;
-import com.lei.spanner.entity.po.CBHT;
 import com.lei.spanner.entity.po.FBF;
 import com.lei.spanner.mapper.AreaLocalMapper;
 import com.lei.spanner.mapper.AreaLocalTempMapper;
@@ -20,6 +19,7 @@ import com.lei.spanner.mapper.CBDKXXMapper;
 import com.lei.spanner.mapper.CBFMapper;
 import com.lei.spanner.mapper.CBHTMapper;
 import com.lei.spanner.mapper.FBFMapper;
+import com.lei.spanner.mapper.ReqDataMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,8 +29,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -69,6 +75,8 @@ public class GenAreaLocalService {
     private CBDKXXMapper cbdkxxMapper;
     @Autowired
     private CBHTMapper cbhtMapper;
+    @Autowired
+    private ReqDataMapper reqDataMapper;
 
 
     private final static String outputPath = "D:\\GenFiles";
@@ -454,6 +462,121 @@ public class GenAreaLocalService {
         return BaseResp.success();
     }
 
+    //数据的处理逻辑
+    public BaseResp processSql(String tableName, List<String> dkbmList, StringBuffer stringBuffer) {
+        //线程池隔离
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(20, 20, 1L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(10));
+        //校验下传入的数据正确性
+        if (CollectionUtils.isEmpty(dkbmList)) {
+            return BaseResp.failByParamError("传入的权属单位代码表.xls有误，请核对后再调用该接口！");
+        }
+        //获取省市信息先加载到内存
+        List<AreaLocalTemp> areaLocalList = areaLocalTempMapper.getAll();
+        if (areaLocalList == null || areaLocalList.size() == 0) {
+            return BaseResp.failByParamError("未查询到镇村信息，加载到内存失败！");
+        }
+        List<FBF> fbfList = fbfMapper.getAll();
+        if (fbfList == null || fbfList.size() == 0) {
+            return BaseResp.failByParamError("未查询到发包方表信息，加载到内存失败！");
+        }
+        List<CBDKXX> cbdkxxList = cbdkxxMapper.getAll();
+        if (cbdkxxList == null || cbdkxxList.size() == 0) {
+            return BaseResp.failByParamError("未查询到承包地块信息表信息，加载到内存失败！");
+        }
+        List<CBF> cbfList = cbfMapper.getAll();
+        if (cbfList == null || cbfList.size() == 0) {
+            return BaseResp.failByParamError("未查询到承包方表信息，加载到内存失败！");
+        }
+        //转为map
+        Map<String, FBF> fbfMap = fbfList.stream().collect(Collectors.toMap(FBF::getFBFBM, fbf -> fbf));
+        Map<String, CBF> cbfMap = cbfList.stream().collect(Collectors.toMap(CBF::getCBFBM, cbf -> cbf));
+        Map<String, CBDKXX> cbdkxxMap = cbdkxxList.stream().collect(Collectors.toMap(CBDKXX::getDKBM, cbdkxx -> cbdkxx));
+        Map<String, List<AreaLocalTemp>> areaLocalTempMap = areaLocalList.stream().collect(Collectors.groupingBy(AreaLocalTemp::getVillageCode));
+
+        log.info("发包方加载完毕，共有{}个，承包方加载完毕，共有{}个，承包地块加载完毕，共有{}个", fbfList.size(), cbfList.size(), cbdkxxList.size());
+
+       // 划分线程数，与循环次数
+        int realSize = dkbmList.size();
+        int minSize=10000;
+        int count =20;//线程数
+        int rate = 5000;//倍率
+        for (int i = 1; i <4 ; i++) {
+           //不起多线程
+            if (realSize < minSize) {
+                rate=10000;
+                break;
+            }
+            if (realSize >= minSize * Math.pow(10, 3)) {
+                return BaseResp.failByParamError("数据量超出1000w,超出了能处理的阈值！");
+            }
+            //左闭右开
+            if (minSize * Math.pow(10, i) <= realSize && minSize * Math.pow(10, i + 1) > realSize) {
+                rate = realSize / count;
+                for (int j = 0; j < count; j++) {
+                    if ((count - j) * minSize * Math.pow(10, i) / count >= rate && (count - j - 1) * minSize * Math.pow(10, i) / count < rate) {
+                        rate = (int) ((count - j) * minSize * Math.pow(10, i)/count);
+                    }
+                }
+            }
+        }
+
+        //循环处理数据
+        AtomicInteger index = new AtomicInteger();
+        ArrayList<CompletableFuture> futureList = new ArrayList<>();
+        for (int i = 0; i < count + 1; i++) {
+            int lineCount = i;
+            int toIndex = (i + 1) * rate;
+            List<String> subList = dkbmList.subList(i * rate, toIndex > dkbmList.size()  ? dkbmList.size()  : toIndex);
+            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                int flag = 0;
+                for (String sub : subList) {
+                    log.info("\n开始循环执行数据匹配第{}个线程{}\n-----------------------已执行{}个地块，还剩{}个地块;\n-----------------------共已执行{}个地块，还剩{}个地块待执行\n", lineCount, Thread.currentThread(), ++flag,
+                            subList.size() - flag, index.incrementAndGet(), dkbmList.size() - index.get());
+                    List<AreaLocalTemp> villageList = areaLocalTempMap.get(StringUtils.substring(sub, 0, 12));
+                    AreaLocalTemp village = new AreaLocalTemp();
+                    if (villageList != null && villageList.size() > 0) {
+                        village = villageList.get(0);
+                    }
+                    FBF fbf = fbfMap.get(StringUtils.substring(sub, 0, 14));
+                    if (fbf == null) {
+                        fbf = new FBF();
+                    }
+                    CBDKXX cbdkxx = cbdkxxMap.get(sub);
+                    CBF cbf = new CBF();
+                    if (cbdkxx == null) {
+                        cbdkxx = new CBDKXX();
+                    }
+                    else {
+                        cbf = cbfMap.get(cbdkxx.getCBFBM());
+                    }
+                    String sql = "UPDATE a SET " +
+                            "  a.FBFBM = " + (fbf.getFBFBM() == null ? null : "'" + fbf.getFBFBM() + "'" )+
+                            " ,a.FBFMC = " +( fbf.getFBFMC() == null ? null : "'" + fbf.getFBFMC() + "'" )+
+                            " ,a.CBFBM = " + (cbf.getCBFBM() == null ? null : "'" + cbf.getCBFBM() + "'" )+
+                            " ,a.CBFMC = " + (cbf.getCBFMC() == null ? null : "'" + cbf.getCBFMC() + "'" )+
+                            " ,a.CBFZJHM = " + (cbf.getCBFZJHM() == null ? null : "'" + cbf.getCBFZJHM() + "'" )+
+                            " ,a.LXDH = " + (cbf.getLXDH() == null ? null : "'" + cbf.getLXDH() + "'") +
+                            " ,a.city_id = " + (village.getCityId() == null ? null : "'" + village.getCityId() + "'" )+
+                            " ,a.city_name = " + (village.getCityName() == null ? null : "'" + village.getCityName() + "'" )+
+                            " ,a.county_id = " + (village.getCountyId() == null ? null : "'" + village.getCountyId() + "'") +
+                            " ,a.county_name = " + (village.getCountyName() == null ? null : "'" + village.getCountyName() + "'" )+
+                            " ,a.town_id = " + (village.getCountyName() == null ? null : "'" + village.getCountyName() + "'") +
+                            " ,a.town_name = " + (village.getTownName() == null ? null : "'" + village.getTownName() + "'") +
+                            " ,a.village_id = " + (village.getVillageId() == null ? null : "'" + village.getVillageId() + "'") +
+                            " ,a.village_name = " + (village.getVillageName() == null ? null : "'" + village.getVillageName() + "'") +
+                            " FROM " + tableName + " AS a WHERE a.DKBM = " + (sub== null ? null : "'" + sub + "'") + " ;\n";
+                    stringBuffer.append(sql);
+                }
+            },executor);
+            futureList.add(future);
+        }
+        CompletableFuture.allOf(futureList.toArray(new CompletableFuture[futureList.size()])).exceptionally((e) -> {
+            log.error("执行过程中出错了----------{}", e.getCause());
+            return null;
+        }).join();
+
+        return BaseResp.success();
+    }
 
     /**
      * 区域数据处理
@@ -552,7 +675,8 @@ public class GenAreaLocalService {
      * @return
      */
     public BaseResp getQueQuanUpdateSql(MultipartFile excel, String tableName) {
-        log.info("传入的地块代码表.xlsx ：", excel.getOriginalFilename());
+        log.info("传入的地块代码表.xlsx ：{}", excel.getOriginalFilename());
+        long start = System.currentTimeMillis();
         if (excel == null) {
             return BaseResp.failByParamError("传入的地块代码表.xlsx有误，请核对后再调用该接口！");
         }
@@ -561,56 +685,47 @@ public class GenAreaLocalService {
             return BaseResp.failByParamError("传入的权属单位代码表.xls有误，请核对后再调用该接口！");
         }
 
-        List<String> sqlList = new ArrayList<>();
-        int count=0;
-        for (String dkbm : dkbmList) {
-            log.info("开始处理数据，第{}个地块，还剩{}个地块",++count,dkbmList.size()-count);
-            //获取省市信息
-            List<AreaLocalTemp> villageList = areaLocalTempMapper.getByVillageCode(StringUtils.substring(dkbm, 0, 12));
-            if (villageList == null || villageList.size() == 0) {
-                return BaseResp.failByParamError("处理gis数据前，镇村信息应先初始化！");
-            }
-            AreaLocalTemp village = villageList.get(0);
-            CBDKXX cbdkxx = cbdkxxMapper.getBydkbm(dkbm);
-            if (cbdkxx == null) {
-                log.error("该地块编码：{}未查询到地块信息", dkbm);
-                continue;
-            }
-            CBHT cbht = cbhtMapper.getBycbhtbm(cbdkxx.getCBHTBM());
-            if (cbht == null) {
-                log.error("该地块编码：{}未查询到承包合同信息", dkbm);
-                continue;
-            }
-            FBF fbf = fbfMapper.getByfbfbm(cbht.getFBFBM());
-            if (fbf == null) {
-                log.error("该地块编码：{}未查询到发包方信息", dkbm);
-                continue;
-            }
-            CBF cbf = cbfMapper.getBycbfbm(cbht.getCBFBM());
-            if (fbf == null) {
-                log.error("该地块编码：{}未查询到承包方信息", dkbm);
-                continue;
-            }
-            String sql = "UPDATE a SET "+
-                    "  a.FBFBM = " + fbf.getFBFBM() +
-                    " ,a.FBFMC = " + fbf.getFBFMC() +
-                    " ,a.CBFBM = " + cbf.getCBFBM() +
-                    " ,a.CBFMC = " + cbf.getCBFMC() +
-                    " ,a.CBFZJHM = " + cbf.getCBFZJHM() +
-                    " ,a.LXDH = " + cbf.getLXDH() +
-                    " ,a.city_id = " + village.getCityId() +
-                    " ,a.city_name = " + village.getCityName() +
-                    " ,a.county_id = " + village.getCountyId() +
-                    " ,a.county_name = " + village.getCountyName() +
-                    " ,a.town_id = " + village.getTownId() +
-                    " ,a.town_name = " + village.getTownName() +
-                    " ,a.village_id = " + village.getVillageId() +
-                    " ,a.village_name = " + village.getVillageName() +
-                    " FROM " + tableName + " WHERE a.DKBM = "+ dkbm + " ;\n";
-            sqlList.add(sql);
-        }
-        FileUtil.writeFile(outputPath, "获取确权数据需要更新的数据.sql文件_" + tableName + "_" + DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD)
-                + ".sql", StringUtils.join(sqlList));
-        return BaseResp.success("数据处理成功，请到D:\\GenFiles目录查看数据！");
+        StringBuffer stringBuffer = new StringBuffer();
+        log.info("传入的地块代码表.xlsx 共有{}个地块", dkbmList.size());
+
+        processSql(tableName, dkbmList, stringBuffer);
+
+        FileUtil.writeFile(outputPath, tableName +"_确权gis更新的sql文件_"+ DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD)
+                +  ".sql",stringBuffer.toString());
+        long end = System.currentTimeMillis();
+        long s = (end - start) / 1000;
+        long m = s / 60;
+        log.info("本次匹配地块数据共花费：{}分{}秒", m, s);
+        return BaseResp.success("数据处理成功，请到D:\\GenFiles目录查看数据！" + "共花费：" + m + "分" + s + "秒");
     }
+
+    /**
+     * 获取更新需要的sql文件 BY DB
+     *
+     * @param excel
+     * @param tableName
+     * @return
+     */
+    public BaseResp getQueQuanUpdateSqlByDB(String tableName) {
+
+        long start = System.currentTimeMillis();
+        List<String> dkbmList = reqDataMapper.getDkbm();
+        if (dkbmList == null || dkbmList.size() == 0) {
+            return BaseResp.failByParamError("传入的权属单位代码表.xls有误，请核对后再调用该接口！");
+        }
+
+        StringBuffer stringBuffer = new StringBuffer();
+        log.info("传入的地块代码表.xlsx 共有{}个地块", dkbmList.size());
+
+        processSql(tableName, dkbmList, stringBuffer);
+
+        FileUtil.writeFile(outputPath, tableName +"_确权gis更新的sql文件_"+ DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD)
+                +  ".sql",stringBuffer.toString());
+        long end = System.currentTimeMillis();
+        long s = (end - start) / 1000;
+        long m = s / 60;
+        log.info("本次匹配地块数据共花费：{}分{}秒", m, s);
+        return BaseResp.success("数据处理成功，请到D:\\GenFiles目录查看数据！" + "共花费：" + m + "分" + s + "秒");
+    }
+
 }
