@@ -1,0 +1,4 @@
+gen:
+  package: com.gisdata
+  database: frp_user
+  tables: tabl_faaf_sdas
