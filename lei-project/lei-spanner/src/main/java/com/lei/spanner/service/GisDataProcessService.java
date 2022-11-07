@@ -1,7 +1,7 @@
 package com.lei.spanner.service;
 
 import com.lei.spanner.core.base.constants.DictCons;
-import com.lei.spanner.core.util.MssqlUtil;
+import com.lei.spanner.core.client.MsSdeSqlUtil;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class GisDataProcessService {
 
     @Autowired
-    private MssqlUtil mssqlUtil;
+    private MsSdeSqlUtil msSdeSqlUtil;
 
 
     public String showTableName(Integer type) {
@@ -28,7 +28,7 @@ public class GisDataProcessService {
            likeStr=" AND NAME LIKE '%"+prifix+"'";
         }
         String sql = "SELECT NAME FROM SYSOBJECTS WHERE XTYPE='U' AND NAME LIKE 'TBL%' "+likeStr+" ORDER BY NAME";
-        List<Map<String, Object>> list = mssqlUtil.queryBySql(sql);
+        List<Map<String, Object>> list = msSdeSqlUtil.queryBySql(sql);
         StringBuilder stringBuilder = new StringBuilder();
         for (Map<String, Object> map : list) {
             stringBuilder.append(map.get("NAME") + "\n");
