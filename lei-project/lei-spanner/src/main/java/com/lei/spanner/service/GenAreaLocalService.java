@@ -1,15 +1,15 @@
 package com.lei.spanner.service;
 
+import cn.hutool.core.io.file.FileWriter;
 import com.alibaba.fastjson.JSON;
 import com.lei.spanner.core.base.constants.DictCons.Level;
 import com.lei.spanner.core.base.model.BaseResp;
 import com.lei.spanner.core.base.model.ConfigContext;
 import com.lei.spanner.core.base.model.DBHelper;
+import com.lei.spanner.core.client.TestcSqlUtil;
 import com.lei.spanner.core.util.DateTimeUtils;
 import com.lei.spanner.core.util.FileUtil;
 import com.lei.spanner.entity.dto.AreaLocalDTO;
-import com.lei.spanner.entity.po.Area;
-import com.lei.spanner.entity.po.AreaLocal;
 import com.lei.spanner.entity.po.AreaLocalTemp;
 import com.lei.spanner.entity.po.CBDKXX;
 import com.lei.spanner.entity.po.CBF;
@@ -79,7 +79,8 @@ public class GenAreaLocalService {
     private CBHTMapper cbhtMapper;
     @Autowired
     private ReqDataMapper reqDataMapper;
-
+    @Autowired
+    private TestcSqlUtil testcSqlUtil;
 
     private final static String outputPath = "D:\\GenFiles";
 
@@ -378,19 +379,24 @@ public class GenAreaLocalService {
 
         //校验数据
         String countyId = poList.get(0).getCountyId();
-        Area area = areaMapper.getById(countyId);
-        if (area == null) {
-            return BaseResp.failByParamError("未查询到该区，请检查sys_area表中是否有该区县！，CountyId：" + countyId);
+        List<Map<String, Object>> area = testcSqlUtil.queryBySql("SELECT id,parent_id,area_name FROM `frp_user`.`sys_area` WHERE id=" + countyId + " ;");
+        if (area == null || area.size() == 0) {
+            log.error("未查询到该区，请检查sys_area表中是否有该区县！，CountyId：" + countyId);
         }
 
-        List<AreaLocal> subList = areaLocalMapper.getListByParentId(countyId);
+        List<Map<String, Object>> subList = testcSqlUtil.queryBySql(
+                "SELECT id,parent_id,`name` FROM `frp_user`.`tbl_area_local` WHERE id=" + countyId + " ;");
         if (subList != null && subList.size() > 0) {
-            return BaseResp.failByParamError("tbl_area_local表中已存在该区县下的镇村信息，请检查数据！");
+            log.error("tbl_area_local表中已存在该区县下的镇村信息，请检查数据！");
         }
 
         //处理数据
-        Long maxIdTown = areaLocalMapper.getMaxIdByLevel(Level.FOUR);
-        Long maxIdVillage = areaLocalMapper.getMaxIdByLevel(Level.FIVE);
+        Long maxIdTown = (Long) testcSqlUtil.queryBySql(
+                "SELECT IFNULL(max(a.id),1) maxId FROM `frp_user`.`tbl_area_local` a WHERE a.LEVEL=" + Level.FOUR + " ;").get(0).get("maxId");
+        Long maxIdVillage = (Long) testcSqlUtil.queryBySql(
+                "SELECT IFNULL(max(a.id),1) maxId FROM `frp_user`.`tbl_area_local` a WHERE a.LEVEL=" + Level.FIVE + " ;").get(0).get("maxId");
+
+        log.info("\n-----------------------------maxIdTown:{}\n-----------------------------maxIdVillage:{}\n", maxIdTown, maxIdVillage);
 
         Long townId = (maxIdTown == null || maxIdTown < 1000000) ? 1000000 : maxIdTown;
         Long villageId = (maxIdVillage == null || maxIdVillage < 2000000) ? 2000000 : maxIdVillage;
@@ -447,21 +453,12 @@ public class GenAreaLocalService {
                 "镇村数据处理_" + poList.get(0).getCountyName() + "_" + DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD)
                         + ".sql", stringBuilder.toString());
 
-        Area county = areaMapper.getById(countyId);
-        Area city = areaMapper.getById(county.getParentId());
-        Area province = areaMapper.getById(city.getParentId());
-
-        if (province != null && city != null && province != null) {
-            for (AreaLocalTemp po : poList) {
-                po.setProvinceId(province.getId());
-                po.setProvinceName(province.getAreaName());
-                po.setCityId(city.getId());
-                po.setCityName(city.getAreaName());
-                areaLocalTempMapper.insert(po);
-            }
-        }
 
         return BaseResp.success();
+    }
+
+    public static void main(String[] args) {
+        new FileWriter("D:\\work\\lei-repository\\lei-project\\lei-spanner\\src\\main\\resources\\josn").write("eeee");
     }
 
     //数据的处理逻辑
