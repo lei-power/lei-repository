@@ -1,0 +1,26 @@
+package ${package}.biz.gov.model.req.${entityAllLower};
+
+
+import com.za.core.base.constants.RespCons;
+import com.za.core.base.model.BaseResp;
+import com.za.core.util.TextUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+
+@Data
+@ApiModel
+public class Gov${entity}ListByAreaReq{
+
+    @ApiModelProperty(value="areaId表示省、市、区、镇、村、组区域编码")
+    private String areaId;
+
+    public BaseResp checkParam(){
+        if(TextUtils.isEmpty(areaId)){
+            return BaseResp.failByParamError();
+        }
+        return BaseResp.success();
+    }
+
+}

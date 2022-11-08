@@ -32,7 +32,7 @@ public class GenCodeController {
     @PostMapping("/snkd/excel")
     @ApiOperation(value = "神农口袋风格代码生成 excel导入", httpMethod = "POST", notes = "用于：神农口袋项目")
     public BaseResp snkdGenByExcel(@RequestBody MultipartFile reqModel) {
-            return genCodeService.snkdGenByExcel(reqModel);
+        return genCodeService.snkdGenByExcel(reqModel);
     }
 
     @PostMapping("/snkd/json")

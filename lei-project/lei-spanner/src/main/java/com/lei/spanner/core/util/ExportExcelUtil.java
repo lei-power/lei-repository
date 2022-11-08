@@ -1,19 +1,25 @@
 package com.lei.spanner.core.util;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.LinkedList;
+import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author wangkai
@@ -96,7 +102,6 @@ public class ExportExcelUtil {
                 Cell cell1 = row1.createCell(0);
                 cell1.setCellValue(secondRowName);
 
-
                 cell1.setCellStyle(headstyle);
 
                 headfont = wb.createFont();
@@ -157,13 +162,14 @@ public class ExportExcelUtil {
                     for (int j = 0; j < title.length; j++) {
                         Cell cell2 = row.createCell(j);
                         cell2.setCellValue(list1.get(j));
-//                        System.out.println(list1.get(j));
+                        //                        System.out.println(list1.get(j));
                     }
                 }
                 wb.write(fileOut);
                 fileOut.flush();
                 fileOut.close();
-            } else {
+            }
+            else {
                 FileInputStream in = new FileInputStream(fileName);
                 XSSFWorkbook wb = new XSSFWorkbook(in);
                 XSSFSheet sheet = wb.getSheetAt(0);
@@ -183,7 +189,8 @@ public class ExportExcelUtil {
                 out.close();
                 in.close();
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -253,7 +260,8 @@ public class ExportExcelUtil {
     }*/
 
 
-    public static void exportExcel4Merge(String[] title, String firstRowName, String secondRowName, String mergeNames, List<LinkedList<String>> list, String fileName, int time) {
+    public static void exportExcel4Merge(String[] title, String firstRowName, String secondRowName, String mergeNames, List<LinkedList<String>> list,
+                                         String fileName, int time) {
         try {
             if (time == 0) {
                 SXSSFWorkbook wb = new SXSSFWorkbook();
@@ -287,9 +295,8 @@ public class ExportExcelUtil {
                 sheet.addMergedRegion(townMerge);
                 CellRangeAddress villageMerge = new CellRangeAddress(2, 3, 4, 4);
                 sheet.addMergedRegion(villageMerge);
-                CellRangeAddress businessCategoryNames= new CellRangeAddress(2, 3, 5, 5);
+                CellRangeAddress businessCategoryNames = new CellRangeAddress(2, 3, 5, 5);
                 sheet.addMergedRegion(businessCategoryNames);
-
 
                 // 创建第一行
                 Row row0 = sheet.createRow(0);
@@ -422,7 +429,6 @@ public class ExportExcelUtil {
                 RegionUtil.setBorderRight(1, callRangeAddress30, sheet);   // 有边框
                 RegionUtil.setBorderTop(1, callRangeAddress30, sheet);     // 上边框
 
-
                 Row row = sheet.createRow(3);
                 row.setHeight((short) 0x200);
                 Cell cell = null;
@@ -462,13 +468,14 @@ public class ExportExcelUtil {
                     for (int j = 0; j < title.length; j++) {
                         Cell cellTwo = row.createCell(j);
                         cellTwo.setCellValue(list1.get(j));
-//                        System.out.println(list1.get(j));
+                        //                        System.out.println(list1.get(j));
                     }
                 }
                 wb.write(fileOut);
                 fileOut.flush();
                 fileOut.close();
-            } else {
+            }
+            else {
                 FileInputStream in = new FileInputStream(fileName);
                 XSSFWorkbook wb = new XSSFWorkbook(in);
                 XSSFSheet sheet = wb.getSheetAt(0);
@@ -488,11 +495,11 @@ public class ExportExcelUtil {
                 out.close();
                 in.close();
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
 
     /**
@@ -504,9 +511,7 @@ public class ExportExcelUtil {
      * @param list
      * @param fileName
      */
-    public static void archiveSubsidyFarmYearExportExcel(String[] title, String firstRowName,
-                                                         String secondRowName,
-                                                         List<LinkedList<String>> list,
+    public static void archiveSubsidyFarmYearExportExcel(String[] title, String firstRowName, String secondRowName, List<LinkedList<String>> list,
                                                          String fileName) {
         try {
             SXSSFWorkbook wb = new SXSSFWorkbook();
@@ -585,13 +590,11 @@ public class ExportExcelUtil {
             headstyle.setBorderTop(BorderStyle.THIN);
             cell0.setCellStyle(headstyle);
 
-
             // 创建第二行
             Row row1 = sheet.createRow(1);
             row1.setHeight((short) 0x200);
             Cell cell1 = row1.createCell(0);
             cell1.setCellValue(secondRowName);
-
 
             cell1.setCellStyle(headstyle);
 
@@ -607,11 +610,9 @@ public class ExportExcelUtil {
             headstyle.setBorderTop(BorderStyle.THIN);
             cell1.setCellStyle(headstyle);
 
-
             Row row = sheet.createRow(2);
             row.setHeight((short) 0x200);
             Cell cell = null;
-
 
             // 第三行
             for (int i = 0; i < title.length; i++) {
@@ -641,7 +642,6 @@ public class ExportExcelUtil {
                 cell.setCellStyle(headstyle);
             }
 
-
             int createCell = 8;
             for (int i = 1; i < 13; i++) {
                 cell = row.createCell(createCell);
@@ -668,7 +668,6 @@ public class ExportExcelUtil {
                 cell.setCellStyle(headstyle);
             }
 
-
             row = sheet.createRow(3);
             row.setHeight((short) 0x200);
 
@@ -677,7 +676,8 @@ public class ExportExcelUtil {
                 cell = row.createCell(i);
                 if ((i & 1) == 1) {
                     cell.setCellValue("非绿叶菜");
-                } else {
+                }
+                else {
                     cell.setCellValue("绿叶菜");
                 }
                 headfont = wb.createFont();
@@ -740,7 +740,8 @@ public class ExportExcelUtil {
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -762,7 +763,8 @@ public class ExportExcelUtil {
      * @param list
      * @param fileName
      */
-    public static void archiveSubsidyAreaYearExportExcel(String[] title, String firstRowName, String secondRowName, List<LinkedList<String>> list, String fileName) {
+    public static void archiveSubsidyAreaYearExportExcel(String[] title, String firstRowName, String secondRowName, List<LinkedList<String>> list,
+                                                         String fileName) {
         try {
             SXSSFWorkbook wb = new SXSSFWorkbook();
             OutputStream fileOut = new FileOutputStream(fileName);
@@ -832,13 +834,11 @@ public class ExportExcelUtil {
             headstyle.setBorderTop(BorderStyle.THIN);
             cell0.setCellStyle(headstyle);
 
-
             // 创建第二行
             Row row1 = sheet.createRow(1);
             row1.setHeight((short) 0x200);
             Cell cell1 = row1.createCell(0);
             cell1.setCellValue(secondRowName);
-
 
             cell1.setCellStyle(headstyle);
 
@@ -854,11 +854,9 @@ public class ExportExcelUtil {
             headstyle.setBorderTop(BorderStyle.THIN);
             cell1.setCellStyle(headstyle);
 
-
             Row row = sheet.createRow(2);
             row.setHeight((short) 0x200);
             Cell cell = null;
-
 
             // 第三行
             for (int i = 0; i < title.length; i++) {
@@ -887,7 +885,6 @@ public class ExportExcelUtil {
                 cell.setCellStyle(headstyle);
             }
 
-
             int createCell = 4;
             for (int i = 1; i < 13; i++) {
                 cell = row.createCell(createCell);
@@ -914,7 +911,6 @@ public class ExportExcelUtil {
                 cell.setCellStyle(headstyle);
             }
 
-
             row = sheet.createRow(3);
             row.setHeight((short) 0x200);
 
@@ -923,7 +919,8 @@ public class ExportExcelUtil {
                 cell = row.createCell(i);
                 if ((i & 1) == 1) {
                     cell.setCellValue("非绿叶菜");
-                } else {
+                }
+                else {
                     cell.setCellValue("绿叶菜");
                 }
                 headfont = wb.createFont();
@@ -981,12 +978,14 @@ public class ExportExcelUtil {
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**蔬菜直报补贴区域统计特定格式
+    /**
+     * 蔬菜直报补贴区域统计特定格式
      *
      * @param title
      * @param firstRowName
@@ -995,7 +994,8 @@ public class ExportExcelUtil {
      * @param fileName
      * @param time
      */
-    public static void VegetablesAreaExportExcel(String[] title, String firstRowName, String secondRowName, List<LinkedList<String>> list, String fileName, int time) {
+    public static void VegetablesAreaExportExcel(String[] title, String firstRowName, String secondRowName, List<LinkedList<String>> list, String fileName,
+                                                 int time) {
         try {
             SXSSFWorkbook wb = new SXSSFWorkbook();
             CreationHelper createHelper = wb.getCreationHelper();
@@ -1121,7 +1121,6 @@ public class ExportExcelUtil {
                 cell.setCellStyle(headstyle);
             }
 
-
             row = sheet.createRow(3);
             row.setHeight((short) 0x200);
 
@@ -1131,11 +1130,14 @@ public class ExportExcelUtil {
                 cell = row.createCell(i);
                 if ((i % 3) == 2) {
                     cell.setCellValue("绿叶菜补贴面积（亩次）");
-                } else if ((i % 3) == 0) {
+                }
+                else if ((i % 3) == 0) {
                     cell.setCellValue("非绿叶菜补贴面积（亩次）");
-                } else if ((i % 3) == 1 && i == 1) {
+                }
+                else if ((i % 3) == 1 && i == 1) {
                     cell.setCellValue("总补贴面积（亩次）");
-                } else {
+                }
+                else {
                     cell.setCellValue("补贴面积（亩次）");
                 }
                 headfont = wb.createFont();
@@ -1182,12 +1184,14 @@ public class ExportExcelUtil {
             fileOut.flush();
             fileOut.close();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**蔬菜直报补贴经营主体统计特定格式
+    /**
+     * 蔬菜直报补贴经营主体统计特定格式
      *
      * @param title
      * @param firstRowName
@@ -1196,7 +1200,8 @@ public class ExportExcelUtil {
      * @param fileName
      * @param time
      */
-    public static void VegetablesFarmExportExcel(String[] title, String firstRowName, String secondRowName, List<LinkedList<String>> list, String fileName, int time) {
+    public static void VegetablesFarmExportExcel(String[] title, String firstRowName, String secondRowName, List<LinkedList<String>> list, String fileName,
+                                                 int time) {
         try {
             SXSSFWorkbook wb = new SXSSFWorkbook();
             CreationHelper createHelper = wb.getCreationHelper();
@@ -1280,7 +1285,7 @@ public class ExportExcelUtil {
 
             //下面这个循环拼接title里面的未合并值
             // 第三行
-            for (int i = 0; i < title.length -4; i++) {
+            for (int i = 0; i < title.length - 4; i++) {
                 cell = row.createCell(i);
                 cell.setCellValue(title[i]);
                 headfont = wb.createFont();
@@ -1333,7 +1338,6 @@ public class ExportExcelUtil {
                 cell.setCellStyle(headstyle);
             }
 
-
             row = sheet.createRow(3);
             row.setHeight((short) 0x200);
 
@@ -1343,11 +1347,14 @@ public class ExportExcelUtil {
                 cell = row.createCell(i);
                 if ((i % 3) == 0) {
                     cell.setCellValue("绿叶菜补贴面积（亩次）");
-                } else if ((i % 3) == 1) {
+                }
+                else if ((i % 3) == 1) {
                     cell.setCellValue("非绿叶菜补贴面积（亩次）");
-                } else if ((i % 3) == 2 && i == 5) {
+                }
+                else if ((i % 3) == 2 && i == 5) {
                     cell.setCellValue("总补贴面积（亩次）");
-                } else {
+                }
+                else {
                     cell.setCellValue("补贴面积（亩次）");
                 }
                 headfont = wb.createFont();
@@ -1396,7 +1403,8 @@ public class ExportExcelUtil {
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1405,12 +1413,8 @@ public class ExportExcelUtil {
      * flag: 肥料导出和农药导出合并的行数不一样
      * 农业使用统计导出
      */
-    public static void pesticUsedFarmExport(String[] title,
-                                            String firstRowName,
-                                            String secondRowName,
-                                            String mergeNames,
-                                            List<LinkedList<String>> list,
-                                            String fileName,int flag) {
+    public static void pesticUsedFarmExport(String[] title, String firstRowName, String secondRowName, String mergeNames, List<LinkedList<String>> list,
+                                            String fileName, int flag) {
         try {
             SXSSFWorkbook wb = new SXSSFWorkbook();
             OutputStream fileOut = new FileOutputStream(fileName);
@@ -1427,11 +1431,10 @@ public class ExportExcelUtil {
             CellRangeAddress avgMerge = new CellRangeAddress(2, 2, 13, 16);
 
             //折存量
-            CellRangeAddress pureMerge=new CellRangeAddress(2, 2, 17, 20);//农药
-             if (flag==2){
+            CellRangeAddress pureMerge = new CellRangeAddress(2, 2, 17, 20);//农药
+            if (flag == 2) {
                 pureMerge = new CellRangeAddress(2, 2, 21, 24);//肥料
             }
-
 
             sheet.addMergedRegion(callRangeAddress29);
             sheet.addMergedRegion(callRangeAddress30);
@@ -1559,7 +1562,6 @@ public class ExportExcelUtil {
             cellVilige.setCellValue(title[4]); //town
             cellVilige.setCellStyle(headstyle);
 
-
             Cell companyCategory = rowMerge.createCell(5); //主体类型
             companyCategory.setCellValue(title[5]);
             companyCategory.setCellStyle(headstyle);
@@ -1631,13 +1633,14 @@ public class ExportExcelUtil {
                 for (int j = 0; j < title.length; j++) {
                     Cell cellTwo = row.createCell(j);
                     cellTwo.setCellValue(list1.get(j));
-//                        System.out.println(list1.get(j));
+                    //                        System.out.println(list1.get(j));
                 }
             }
             wb.write(fileOut);
             fileOut.flush();
             fileOut.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

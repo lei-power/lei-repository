@@ -19,7 +19,7 @@ public class DBHelper {
     private QueryRunner queryRunner;
     private ConfigContext context;
 
-    private DataSource initDataSource(ConfigContext context){
+    private DataSource initDataSource(ConfigContext context) {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(context.getDriver());
         dataSource.setUrl(context.getUrl());
@@ -28,26 +28,26 @@ public class DBHelper {
         return dataSource;
     }
 
-    public DBHelper(ConfigContext context){
+    public DBHelper(ConfigContext context) {
         this.context = context;
         dataSource = initDataSource(this.context);
         queryRunner = new QueryRunner(dataSource);
     }
 
-    public List<Map<String, Object>> descTable(){
+    public List<Map<String, Object>> descTable() {
 
         //String DESC_TABLE = String.format("desc %s",context.getTargetTable());
-        String DESC_TABLE = String.format("show full columns from  %s",context.getTargetTable());
+        String DESC_TABLE = String.format("show full columns from  %s", context.getTargetTable());
 
-
-        return queryMapList(DESC_TABLE,null);
+        return queryMapList(DESC_TABLE, null);
     }
 
     public List<Map<String, Object>> queryMapList(String sql, Object... params) {
         List<Map<String, Object>> fieldMapList;
         try {
             fieldMapList = queryRunner.query(sql, new MapListHandler(), params);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return fieldMapList;

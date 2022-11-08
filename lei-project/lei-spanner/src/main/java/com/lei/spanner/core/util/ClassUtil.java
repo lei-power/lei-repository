@@ -45,7 +45,8 @@ public class ClassUtil {
         Class<?> cls;
         try {
             cls = Class.forName(className, isInitialized, getClassLoader());
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return cls;

@@ -22,7 +22,7 @@ public interface AreaLocalTempMapper {
 
     public long getCountByKeywordAndPage(@Param("keyword") String keyword);
 
-    List<AreaLocalTemp> getByVillageCode(@Param("code")String code);
+    List<AreaLocalTemp> getByVillageCode(@Param("code") String code);
 
     List<AreaLocalTemp> getAll();
 }

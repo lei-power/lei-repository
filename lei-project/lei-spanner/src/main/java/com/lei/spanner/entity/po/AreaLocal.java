@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class AreaLocal{
+public class AreaLocal {
 
 
     //镇id，自增

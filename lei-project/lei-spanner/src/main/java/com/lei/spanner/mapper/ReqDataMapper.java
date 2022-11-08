@@ -21,5 +21,5 @@ public interface ReqDataMapper {
 
     public long getCountByKeywordAndPage(@Param("keyword") String keyword);
 
-	List<String> getDkbm();
+    List<String> getDkbm();
 }

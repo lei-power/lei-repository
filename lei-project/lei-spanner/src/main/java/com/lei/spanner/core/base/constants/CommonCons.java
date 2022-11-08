@@ -1,7 +1,6 @@
 package com.lei.spanner.core.base.constants;
 
 import com.google.common.collect.Maps;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -544,20 +543,18 @@ public class CommonCons {
         fzjgMap.put("510603", "旌阳区人民政府");
     }
 
-
-
     //===========================landowner模块end=================================================//
     // ===========================landoccupy模块start=================================================//
-//    //用于异步更新耕地占用物gis服务
-//    public static class MQCons {
-//
-//        public static final String EXCHANGE_LAND_OCCUPY = "exchange.land.occupy";
-//        public static final String ROUTING_OCCUPY_ADD = "routing.occupy.add";
-//        public static final String ROUTING_OCCUPY_EDIT = "routing.occupy.edit";
-//        //队列
-//        public static final String QUEUE_OCCUPY_ADD = "queue.occupy.add";
-//        public static final String QUEUE_OCCUPY_EDIT = "queue.occupy.edit";
-//    }
+    //    //用于异步更新耕地占用物gis服务
+    //    public static class MQCons {
+    //
+    //        public static final String EXCHANGE_LAND_OCCUPY = "exchange.land.occupy";
+    //        public static final String ROUTING_OCCUPY_ADD = "routing.occupy.add";
+    //        public static final String ROUTING_OCCUPY_EDIT = "routing.occupy.edit";
+    //        //队列
+    //        public static final String QUEUE_OCCUPY_ADD = "queue.occupy.add";
+    //        public static final String QUEUE_OCCUPY_EDIT = "queue.occupy.edit";
+    //    }
 
 
     public static final Map<String, String> occupyCategory = Maps.newHashMap();

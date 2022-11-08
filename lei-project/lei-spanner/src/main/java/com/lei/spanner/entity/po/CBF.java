@@ -1,13 +1,11 @@
 package com.lei.spanner.entity.po;
 
 
-import java.math.BigDecimal;
 import java.util.Date;
-
 import lombok.Data;
 
 @Data
-public class CBF{
+public class CBF {
 
     private String cBFBM;
     private String cBFLX;

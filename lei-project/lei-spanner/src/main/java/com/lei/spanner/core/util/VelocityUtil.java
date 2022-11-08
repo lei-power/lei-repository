@@ -11,22 +11,22 @@ import org.apache.velocity.app.Velocity;
 public class VelocityUtil {
 
 
-	public static String render(String vm, VelocityContext context) {
-		String content = "";
+    public static String render(String vm, VelocityContext context) {
+        String content = "";
 
-		Template template = null;
-		try {
-			template = Velocity.getTemplate(vm);
-			StringWriter writer = new StringWriter();
-			if (template != null)
-				template.merge(context, writer);
-			writer.flush();
-			writer.close();
-			content = writer.toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return content;
-	}
+        Template template = null;
+        try {
+            template = Velocity.getTemplate(vm);
+            StringWriter writer = new StringWriter();
+            if (template != null) { template.merge(context, writer); }
+            writer.flush();
+            writer.close();
+            content = writer.toString();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return content;
+    }
 
 }

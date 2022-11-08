@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class GaodeLocationDTO {
+
     private String province;
     private String city;
     private String adcode;

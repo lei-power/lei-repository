@@ -1,14 +1,20 @@
 package com.lei.spanner.core.util;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-
-import java.util.concurrent.*;
 
 /**
  * @author wangkai
  * @date 2021/7/21 16:29
  */
 public class ThreadPoolUtils {
+
     private static int corePoolSize = 200;
 
     private static int taskPoolSize = 20;

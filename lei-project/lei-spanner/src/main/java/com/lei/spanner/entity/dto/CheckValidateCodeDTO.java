@@ -13,6 +13,7 @@ import lombok.Data;
  */
 @Data
 public class CheckValidateCodeDTO implements Serializable {
+
     private static final long serialVersionUID = 5519103848542728183L;
     @ApiModelProperty(value = "验证码唯一标示，获取验证码接口会下发该字段", required = true)
     private String codeId;

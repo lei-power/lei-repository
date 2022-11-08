@@ -1,15 +1,15 @@
 package com.lei.spanner.core.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author wangkai
  * @date 2022/7/21 16:23
  */
 public class GisUtils {
+
     public static String getShapeStr(List<List<String>> ring) {
         if (ring == null) {
             return null;

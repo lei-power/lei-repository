@@ -1,0 +1,30 @@
+package ${package}.biz.admin.model.req;
+
+
+import com.za.core.base.constants.RespCons;
+import com.za.core.base.model.BaseResp;
+import com.za.core.util.TextUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+
+@Data
+@ApiModel
+public class Admin${entity}DelReq{
+
+    @ApiModelProperty(value="${entity}id")
+    private Long id;
+
+
+    public BaseResp checkParam(){
+
+        if(this.id==null || this.id==0L){
+            return BaseResp.failByParamError();
+        }
+
+        return BaseResp.success();
+    }
+
+
+}

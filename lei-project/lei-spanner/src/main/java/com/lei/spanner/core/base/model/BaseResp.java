@@ -17,22 +17,22 @@ import lombok.ToString;
 @ApiModel
 public class BaseResp<T> {
 
-    @ApiModelProperty(value="返回编码，0表示成功，其他取值表示失败，失败原因参见respDesc字段",required = true)
+    @ApiModelProperty(value = "返回编码，0表示成功，其他取值表示失败，失败原因参见respDesc字段", required = true)
     private int respCode;
-    @ApiModelProperty(value="返回描述",required = true)
+    @ApiModelProperty(value = "返回描述", required = true)
     private String respDesc;
-    @ApiModelProperty(value="当前服务器时间",required = true)
+    @ApiModelProperty(value = "当前服务器时间", required = true)
     private Date curDate;
 
     private T obj;
 
 
-    @JSONField(serialize=false)
-    public boolean isSuccess(){
+    @JSONField(serialize = false)
+    public boolean isSuccess() {
         return this.respCode == RespCons.GLOBAL_SUCCESS;
     }
 
-    public boolean isFailed(){
+    public boolean isFailed() {
         return !isSuccess();
     }
 
@@ -66,28 +66,27 @@ public class BaseResp<T> {
 
     public BaseResp(T obj) {
         this();
-        this.obj=obj;
+        this.obj = obj;
         this.curDate = new Date();
     }
 
     public BaseResp(int respCode, T obj) {
         this(respCode);
-        this.obj=obj;
+        this.obj = obj;
         this.curDate = new Date();
     }
 
     public BaseResp(int respCode, String respDesc, T obj) {
-        this(respCode,respDesc);
-        this.obj=obj;
+        this(respCode, respDesc);
+        this.obj = obj;
         this.curDate = new Date();
     }
-
 
     //////
 
 
     //用户编码不等于0时，返回错误状态
-    public static BaseResp returnResp(BaseResp resp){
+    public static BaseResp returnResp(BaseResp resp) {
         BaseResp returnResp = new BaseResp<>();
         returnResp.setRespCode(resp.getRespCode());
         returnResp.setRespDesc(resp.getRespDesc());
@@ -98,17 +97,18 @@ public class BaseResp<T> {
 
     /**
      * 指定编码的自定义错误
+     *
      * @param respCode
      * @return
      */
-    public static BaseResp fail(int respCode){
+    public static BaseResp fail(int respCode) {
         BaseResp returnResp = new BaseResp<>();
         returnResp.setRespCode(respCode);
         returnResp.setRespDesc(RespCons.respMap.get(respCode));
         return returnResp;
     }
 
-    public static BaseResp fail(int respCode,String respDesc){
+    public static BaseResp fail(int respCode, String respDesc) {
         BaseResp returnResp = new BaseResp<>();
         returnResp.setRespCode(respCode);
         returnResp.setRespDesc(respDesc);
@@ -116,50 +116,54 @@ public class BaseResp<T> {
     }
 
 
-
     /**
      * 获取参数错误的resp
+     *
      * @param respDesc：错误提示
      * @return
      */
-    public static BaseResp failByParamError(String respDesc){
-        if(TextUtils.isEmpty(respDesc)){
+    public static BaseResp failByParamError(String respDesc) {
+        if (TextUtils.isEmpty(respDesc)) {
             return BaseResp.fail(RespCons.GlOBAL_PARAMS_ERROR);
-        }else{
-            return BaseResp.fail(RespCons.GlOBAL_PARAMS_ERROR,respDesc);
+        }
+        else {
+            return BaseResp.fail(RespCons.GlOBAL_PARAMS_ERROR, respDesc);
         }
     }
 
     /**
      * 获取参数错误的resp
+     *
      * @return
      */
-    public static BaseResp failByParamError(){
+    public static BaseResp failByParamError() {
         return BaseResp.fail(RespCons.GlOBAL_PARAMS_ERROR);
     }
 
 
     /**
      * 服务离线错误
+     *
      * @return
      */
-    public static BaseResp failByServerOffLine(){
+    public static BaseResp failByServerOffLine() {
         return BaseResp.fail(RespCons.GLOBAL_SERVER_OFFLINE);
     }
 
     /**
      * 这个编码用户companyId，farmId等错误，导致用户无数据访问权限
+     *
      * @return
      */
-    public static BaseResp failByNoAccessAuth(){
+    public static BaseResp failByNoAccessAuth() {
         return BaseResp.fail(RespCons.GLOBAL_NO_ACCESS_AUTH);
     }
 
 
     /**
-     *获取正确编码的resp
+     * 获取正确编码的resp
      */
-    public static BaseResp success(){
+    public static BaseResp success() {
         BaseResp returnResp = new BaseResp<>();
         returnResp.setRespCode(RespCons.GLOBAL_SUCCESS);
         returnResp.setRespDesc(RespCons.respMap.get(RespCons.GLOBAL_SUCCESS));
@@ -167,9 +171,9 @@ public class BaseResp<T> {
     }
 
     /**
-     *获取正确编码的resp
+     * 获取正确编码的resp
      */
-    public static <T> BaseResp<T> success(T obj){
+    public static <T> BaseResp<T> success(T obj) {
         BaseResp<T> returnResp = new BaseResp<>();
         returnResp.setRespCode(RespCons.GLOBAL_SUCCESS);
         returnResp.setRespDesc(RespCons.respMap.get(RespCons.GLOBAL_SUCCESS));
@@ -178,9 +182,9 @@ public class BaseResp<T> {
     }
 
     /**
-     *获取正确编码的resp
+     * 获取正确编码的resp
      */
-    public static <T> BaseResp<T> success(String respDesc,T obj){
+    public static <T> BaseResp<T> success(String respDesc, T obj) {
         BaseResp<T> returnResp = new BaseResp<>();
         returnResp.setRespCode(RespCons.GLOBAL_SUCCESS);
         returnResp.setRespDesc(respDesc);

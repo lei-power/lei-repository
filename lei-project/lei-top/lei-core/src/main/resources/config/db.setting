@@ -11,13 +11,18 @@ url=jdbc:mysql://47.97.120.110:3306/frp_user?characterEncoding=utf-8&allowMultiQ
 user=root
 pass=Freetek0987!@#$
 
+
+[mysql_local]
+url=jdbc:mysql://192.168.200.128:3306/backup
+user=root
+pass=root
+remarks = true
+useInformationSchema = true
+
 [sqlserver]
 url=jdbc:sqlserver://121.41.213.10:1433;databasename=sde
 user=sa
 pass=SNkoudai!@#$<>?
-driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+remarks = true
+useInformationSchema = true
 
-[mysql_local]
-url=jdbc:mysql://192.168.200.128:3306/backup?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-user=root
-pass=root

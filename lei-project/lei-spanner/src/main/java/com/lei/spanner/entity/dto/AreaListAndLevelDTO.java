@@ -9,6 +9,7 @@ import lombok.Data;
 @ApiModel
 @Data
 public class AreaListAndLevelDTO implements Serializable {
+
     @ApiModelProperty("list")
     private List<String> idList;
     @ApiModelProperty("level")

@@ -18,11 +18,11 @@ public class ApplicationContextUtil implements ApplicationContextAware {
         context = applicationContext;
     }
 
-    public static Object getBean(String beanName){
+    public static Object getBean(String beanName) {
         return context.getBean(beanName);
     }
 
-    public static <T> T getBean(Class<T> beanType){
+    public static <T> T getBean(Class<T> beanType) {
         return context.getBean(beanType);
     }
 }

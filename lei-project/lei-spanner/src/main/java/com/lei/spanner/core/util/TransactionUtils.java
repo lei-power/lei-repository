@@ -9,8 +9,8 @@ public class TransactionUtils {
     /**
      * 手动回滚事务
      */
-    public static void rollback(String funcName){
-        log.warn("{} 方法调用出错，手动回滚事务",funcName);
+    public static void rollback(String funcName) {
+        log.warn("{} 方法调用出错，手动回滚事务", funcName);
         TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
     }
 }

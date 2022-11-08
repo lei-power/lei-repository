@@ -453,7 +453,6 @@ public class GenAreaLocalService {
                 "镇村数据处理_" + poList.get(0).getCountyName() + "_" + DateTimeUtils.convertDate2String(new Date(), DateTimeUtils.YYYY_MM_DD)
                         + ".sql", stringBuilder.toString());
 
-
         return BaseResp.success();
     }
 

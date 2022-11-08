@@ -8,13 +8,13 @@ package com.lei.spanner.core.base.constants;
  */
 public enum BusinessCategory {
 
-    GRAIN(1,"粮食"),
-    CLASSICS(2,"经作"),
-    VEGETABLE(3,"蔬菜"),
-    ANIMAL_HUSBANDRY(4,"畜牧"),
-    AQUATIC_PRODUCTS(5,"水产"),
-    OTHER(6,"其他"),
-    ERROR(520,"异常ID");
+    GRAIN(1, "粮食"),
+    CLASSICS(2, "经作"),
+    VEGETABLE(3, "蔬菜"),
+    ANIMAL_HUSBANDRY(4, "畜牧"),
+    AQUATIC_PRODUCTS(5, "水产"),
+    OTHER(6, "其他"),
+    ERROR(520, "异常ID");
 
     private int id;
 
@@ -41,11 +41,11 @@ public enum BusinessCategory {
         this.name = name;
     }
 
-    public static BusinessCategory getBusinessCategoryById(int id){
-        for (BusinessCategory businessCategory:BusinessCategory.values()){
-                if (id==businessCategory.getId()){
-                    return businessCategory;
-                }
+    public static BusinessCategory getBusinessCategoryById(int id) {
+        for (BusinessCategory businessCategory : BusinessCategory.values()) {
+            if (id == businessCategory.getId()) {
+                return businessCategory;
+            }
         }
         return ERROR;
     }

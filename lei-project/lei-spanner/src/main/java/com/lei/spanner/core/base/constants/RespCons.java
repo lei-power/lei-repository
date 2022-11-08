@@ -62,40 +62,40 @@ public class RespCons {
     public static final int VCODE_EXPIRED = 10200;//图片验证码已失效
 
     // 10300-10350 保单补录
-    public static final int  INSURANCE_PARAM_ERROR = 10300;//保单补录参数异常
-    public static final int  INSURANCE_LAND_EXIT_ERROR = 10301;//保单补录-地块已投保
-    public static final int  INSURANCE_OPERATION_ERROR = 10302;//保单补录-操作失败
-    public static final int  INSURANCE_NOT_EXIT_ERROR = 10303;//保单补录-保单不存在
-    public static final int  INSURANCE_FARM_NOT_EXIT_ERROR = 10304;//保单补录-经营主体不存在
-    public static final int  INSURANCE_LAND_NOT_EXIT_ERROR = 10305;//保单补录-地块不存在
-    public static final int  INSURANCE_SURRENDER_EXIT_ERROR = 10307;//保单补录-保单已退保
-    public static final int  INSURANCE_LAND_STATUS_ERROR = 10308;//保单补录-地块已下架
-    public static final int  INSURANCE_UPDATE_STATUS_ERROR = 10309;//保单补录-退保状态不允许编辑
-    public static final int  INSURANCE_DEL_STATUS_ERROR = 10310;//保单补录-退保状态不允许编辑
-    public static final int  INSURANCE_ADD_STATUS_ERROR = 10311;//保单补录-退保状态不允许编辑
-    public static final int  INSURANCE_LAND_STATUS_EXIT_ERROR = 10312;//保单补录-保单地块已存在
+    public static final int INSURANCE_PARAM_ERROR = 10300;//保单补录参数异常
+    public static final int INSURANCE_LAND_EXIT_ERROR = 10301;//保单补录-地块已投保
+    public static final int INSURANCE_OPERATION_ERROR = 10302;//保单补录-操作失败
+    public static final int INSURANCE_NOT_EXIT_ERROR = 10303;//保单补录-保单不存在
+    public static final int INSURANCE_FARM_NOT_EXIT_ERROR = 10304;//保单补录-经营主体不存在
+    public static final int INSURANCE_LAND_NOT_EXIT_ERROR = 10305;//保单补录-地块不存在
+    public static final int INSURANCE_SURRENDER_EXIT_ERROR = 10307;//保单补录-保单已退保
+    public static final int INSURANCE_LAND_STATUS_ERROR = 10308;//保单补录-地块已下架
+    public static final int INSURANCE_UPDATE_STATUS_ERROR = 10309;//保单补录-退保状态不允许编辑
+    public static final int INSURANCE_DEL_STATUS_ERROR = 10310;//保单补录-退保状态不允许编辑
+    public static final int INSURANCE_ADD_STATUS_ERROR = 10311;//保单补录-退保状态不允许编辑
+    public static final int INSURANCE_LAND_STATUS_EXIT_ERROR = 10312;//保单补录-保单地块已存在
 
     //10350-10400 绿色证书
-    public static final int  GREEN_CERTIFICATE_EXIT_ERROR = 10351;//证书不存在
-    public static final int  GREEN_CERTIFICATE_FARM_EXIT_ERROR = 10352;//农场未绑定证书
-    public static final int  GREEN_CERTIFICATE_KEY_ERROR = 10353;//key重复
-    public static final int  GREEN_CERTIFICATE_DEL_ERROR = 10354;//删除状态不准编辑
-    public static final int  GREEN_CERTIFICATE_ADD_ERROR = 10355;//证书添加失败
-    public static final int  GREEN_CERTIFICATE_CERTIFICATE_ERROR = 10356;//证书关联合格证
+    public static final int GREEN_CERTIFICATE_EXIT_ERROR = 10351;//证书不存在
+    public static final int GREEN_CERTIFICATE_FARM_EXIT_ERROR = 10352;//农场未绑定证书
+    public static final int GREEN_CERTIFICATE_KEY_ERROR = 10353;//key重复
+    public static final int GREEN_CERTIFICATE_DEL_ERROR = 10354;//删除状态不准编辑
+    public static final int GREEN_CERTIFICATE_ADD_ERROR = 10355;//证书添加失败
+    public static final int GREEN_CERTIFICATE_CERTIFICATE_ERROR = 10356;//证书关联合格证
 
 
     //10401-10450 马陆葡萄发码机制
-    public static final int  TRACEABLE_FARM_EXIST_ERROR = 10401;//经营主体存在异常
-    public static final int  TRACEABLE_NO_EXIST_ERROR = 10402;//编号已存在
-    public static final int  TRACEABLE_FARM_NOT_EXIST_ERROR = 10403;//经营主体不存在异常
-    public static final int  TRACEABLE_ID_NOT_EXIST_ERROR = 10404;//数据不存在异常
-    public static final int  TRACEABLE_PARAM_ERROR = 10405;//参数异常
-    public static final int  TRACEABLE_MEMBER_EXIST_ERROR = 10406;//会员已存在
-    public static final int  TRACEABLE_MEMBER_NOT_EXIST_ERROR = 10407;//会员不存在
-    public static final int  TRACEABLE_HANDLE_BUSY_ERROR = 10408;//排队生成中
-    public static final int  TRACEABLE_FARM_NO_EXIST_ERROR = 10409;//
-    public static final int  TRACEABLE_MEMBER_NO_EXIST_ERROR = 10410;//社员编号已存在
-    public static final int  TRACEABLE_CODE_TOTAL_NUM_ERROR = 10411;//朝鲜异常
+    public static final int TRACEABLE_FARM_EXIST_ERROR = 10401;//经营主体存在异常
+    public static final int TRACEABLE_NO_EXIST_ERROR = 10402;//编号已存在
+    public static final int TRACEABLE_FARM_NOT_EXIST_ERROR = 10403;//经营主体不存在异常
+    public static final int TRACEABLE_ID_NOT_EXIST_ERROR = 10404;//数据不存在异常
+    public static final int TRACEABLE_PARAM_ERROR = 10405;//参数异常
+    public static final int TRACEABLE_MEMBER_EXIST_ERROR = 10406;//会员已存在
+    public static final int TRACEABLE_MEMBER_NOT_EXIST_ERROR = 10407;//会员不存在
+    public static final int TRACEABLE_HANDLE_BUSY_ERROR = 10408;//排队生成中
+    public static final int TRACEABLE_FARM_NO_EXIST_ERROR = 10409;//
+    public static final int TRACEABLE_MEMBER_NO_EXIST_ERROR = 10410;//社员编号已存在
+    public static final int TRACEABLE_CODE_TOTAL_NUM_ERROR = 10411;//朝鲜异常
 
 
     //20007-20020小程序定义
@@ -137,7 +137,6 @@ public class RespCons {
     public static final int TEMPLATE_PERMISSION = 70101;//检查模板不可用，或已被禁用
 
 
-
     //80001-80100 销售预留
     public static final int SELL_LIST_FAIL = 80001;//销售未开放
 
@@ -150,7 +149,7 @@ public class RespCons {
     //系统内部错误
     public static final int GLOBAL_SYSTEM_ERROR = 417;//系统内部错误
 
-    public static final Boolean BOOLEAN_TEMPLATE=true;
+    public static final Boolean BOOLEAN_TEMPLATE = true;
 
     static {
         respMap.put(GLOBAL_SUCCESS, "成功");
@@ -159,7 +158,7 @@ public class RespCons {
         respMap.put(GLOBAL_NO_ACCESS_AUTH, "您的权限无法使用该功能，可联系超级管理员修改权限");
         respMap.put(GLOBAL_OTHER_ERROR, "其它错误");
         respMap.put(GLOBAL_SERVER_OFFLINE, "服务器繁忙，请稍后再试"); // 从服务离线修改为服务器繁忙，请稍后再试
-        respMap.put(GLOBAL_GOV_PLATFORM_ERROR,"没有平台登录权限");
+        respMap.put(GLOBAL_GOV_PLATFORM_ERROR, "没有平台登录权限");
         respMap.put(GLOBAL_SYSTEM_ERROR, "系统内部错误");
 
         respMap.put(SMS_VCODE_INCORRECT, "无效验证码");
@@ -179,7 +178,6 @@ public class RespCons {
         respMap.put(CONSUME_COMPANY_NO, "公司不存在");
         respMap.put(CONSUME_ADDRESS_NO, "收货地址不存在");
 
-
         respMap.put(VCODE_EXPIRED, "图片验证码已失效");
         respMap.put(CHECK_ADD_MISION, "部分农资与农事不符或已失效，或农事类型已被禁用，请重新尝试");
 
@@ -188,7 +186,6 @@ public class RespCons {
 
         respMap.put(EXPERT_NO_ACCESS_AUTH, "账号异常，请联系管理员");
         respMap.put(QUESTION_DELETE, "该问题已被删除");
-
 
         respMap.put(INSURANCE_PARAM_ERROR, "参数异常");
         respMap.put(INSURANCE_LAND_EXIT_ERROR, "所选地块已被投保，请刷新页面重新提交");
@@ -219,12 +216,11 @@ public class RespCons {
         respMap.put(TRACEABLE_MEMBER_NO_EXIST_ERROR, "社员编码重复，请修改后提交");
         respMap.put(TRACEABLE_CODE_TOTAL_NUM_ERROR, "单个社员最多发码999999个");
 
-
         respMap.put(80001, "暂不支持该作物销售");
-        respMap.put(TEMPLATE_PERMISSION,"检查模板不可使用，或已被禁用，请重新选择其他模板进行检查");
-        respMap.put(MESSAGE_EXPERT_QUESTION_DELETE,"该问题已删除");
-        respMap.put(MESSAGE_EXPERT_REPLY_DELETE,"该回复已删除");
-        respMap.put(MESSAGE_NOtiCE_DELETE,"该公告已删除");
+        respMap.put(TEMPLATE_PERMISSION, "检查模板不可使用，或已被禁用，请重新选择其他模板进行检查");
+        respMap.put(MESSAGE_EXPERT_QUESTION_DELETE, "该问题已删除");
+        respMap.put(MESSAGE_EXPERT_REPLY_DELETE, "该回复已删除");
+        respMap.put(MESSAGE_NOtiCE_DELETE, "该公告已删除");
     }
 
 }

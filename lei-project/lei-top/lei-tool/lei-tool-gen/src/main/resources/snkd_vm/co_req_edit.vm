@@ -1,0 +1,40 @@
+package ${package}.biz.co.model.req.${entityAllLower};
+
+
+import com.za.core.base.constants.RespCons;
+import com.za.core.base.model.BaseResp;
+import com.za.core.util.TextUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+#set($hasDate=0)
+#foreach($column in $columns)
+#if($column.javaType=='Date' && $hasDate==0)
+import java.util.Date;
+#set($hasDate=1)
+#end
+#end
+
+@Data
+@ApiModel
+public class Co${entity}EditReq{
+
+
+#foreach($column in $columns)
+#if($column.comment!='')
+    @ApiModelProperty("$column.comment")
+#end
+    private ${column.javaTypeBox} ${column.javaFieldName};
+#end
+
+    public BaseResp checkParam(){
+        if(this.id==null || this.id<=0L){
+            return BaseResp.failByParamError();
+        }
+
+        return BaseResp.success();
+    }
+
+
+}

@@ -3,7 +3,7 @@ package com.lei.spanner.core.util;
 import java.util.regex.Pattern;
 
 /**
- *  代替此类功能 xssEncode(s);
+ * 代替此类功能 xssEncode(s);
  */
 public class XssUtils {
 
@@ -32,22 +32,22 @@ public class XssUtils {
                     // 转义小于号
                     sb.append("＜");
                     break;
-//                case '\'':
-//                    // 转义单引号
-//                    sb.append("＇");
-//                    break;
-//                case '\"':
-//                    // 转义双引号
-//                    sb.append("＂");
-//                    break;
-//                case '&':
-//                    // 转义&
-//                    sb.append("＆");
-//                    break;
-//                case '#':
-//                    // 转义#
-//                    sb.append("＃");
-//                    break;
+                //                case '\'':
+                //                    // 转义单引号
+                //                    sb.append("＇");
+                //                    break;
+                //                case '\"':
+                //                    // 转义双引号
+                //                    sb.append("＂");
+                //                    break;
+                //                case '&':
+                //                    // 转义&
+                //                    sb.append("＆");
+                //                    break;
+                //                case '#':
+                //                    // 转义#
+                //                    sb.append("＃");
+                //                    break;
                 default:
                     sb.append(c);
                     break;
@@ -70,7 +70,8 @@ public class XssUtils {
             Pattern scriptPattern = Pattern.compile("<[\r\n| | ]*script[\r\n| | ]*>(.*?)</[\r\n| | ]*script[\r\n| | ]*>", Pattern.CASE_INSENSITIVE);
             value = scriptPattern.matcher(value).replaceAll(REPLACE_STRING);
             // Avoid anything in a src="http://www.yihaomen.com/article/java/..." type of e-xpression
-            scriptPattern = Pattern.compile("src[\r\n| | ]*=[\r\n| | ]*[\\\"|\\\'](.*?)[\\\"|\\\']", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+            scriptPattern = Pattern.compile("src[\r\n| | ]*=[\r\n| | ]*[\\\"|\\\'](.*?)[\\\"|\\\']",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
             value = scriptPattern.matcher(value).replaceAll(REPLACE_STRING);
             // Remove any lonesome </script> tag
             scriptPattern = Pattern.compile("</[\r\n| | ]*script[\r\n| | ]*>", Pattern.CASE_INSENSITIVE);

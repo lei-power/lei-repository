@@ -47,7 +47,8 @@ public class RequestUtils {
                 continue;
             }
             try {
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 requestJson = "";
             }
             break;
@@ -99,7 +100,7 @@ public class RequestUtils {
         if (clientType > 3 || clientType <= 0) {
             clientType = DictCons.ClientType.WEB;
         }
-        if (clientType == 3 ) {
+        if (clientType == 3) {
             clientType = DictCons.ClientType.WXMINI;
         }
         return clientType;
@@ -162,10 +163,8 @@ public class RequestUtils {
 
     /**
      * 从header中获取platformType：1-大数据平台,2-中台
-     *
-     *
      */
-    public static int getPlatformType () {
+    public static int getPlatformType() {
 
         HttpServletRequest request = RequestUtils.getRequest();
         String platformTypeStr = request.getHeader(REQ_PLATFORM_TYPE);
@@ -182,6 +181,7 @@ public class RequestUtils {
 
         return platformType;
     }
+
     /**
      * 获取@RequestBody注解的参数
      *
@@ -194,7 +194,6 @@ public class RequestUtils {
         if (parameterAnnotations == null) {
             return null;
         }
-
 
         Object param = null;
         for (Annotation[] index : parameterAnnotations) {

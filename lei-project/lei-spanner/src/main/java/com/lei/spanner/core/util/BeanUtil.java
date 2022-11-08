@@ -1,9 +1,8 @@
 package com.lei.spanner.core.util;
 
-import org.springframework.beans.BeanUtils;
-
 import java.util.List;
 import java.util.Objects;
+import org.springframework.beans.BeanUtils;
 
 /**
  * Description
@@ -12,6 +11,7 @@ import java.util.Objects;
  * Version 1.0
  */
 public class BeanUtil<T> {
+
     /**
      * @param sourceList
      * @param targetList
@@ -24,16 +24,18 @@ public class BeanUtil<T> {
                     T data = classObj.newInstance();
                     BeanUtils.copyProperties(item, data);
                     targetList.add(data);
-                } catch (IllegalAccessException e) {
+                }
+                catch (IllegalAccessException e) {
                     e.printStackTrace();
-                } catch (InstantiationException e) {
+                }
+                catch (InstantiationException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
 
-    public static BeanUtil init(){
+    public static BeanUtil init() {
         return new BeanUtil();
     }
 }

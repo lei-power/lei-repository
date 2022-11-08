@@ -35,14 +35,17 @@ public class PropsUtil {
             if (is != null) {
                 props.load(is);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
+        }
+        finally {
             try {
                 if (is != null) {
                     is.close();
                 }
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }

@@ -1,0 +1,39 @@
+package ${package}.biz.admin.model.req;
+
+
+import com.za.core.base.constants.RespCons;
+import com.za.core.base.model.BaseResp;
+import com.za.core.util.TextUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+#set($hasDate=0)
+#foreach($column in $columns)
+#if($column.javaType=='Date' && $hasDate==0)
+import java.util.Date;
+#set($hasDate=1)
+#end
+#end
+
+@Data
+@ApiModel
+public class Admin${entity}AddReq{
+
+#foreach($column in $columns)
+#if($column.isPk!=true)
+#if($column.comment!='')
+    @ApiModelProperty("$column.comment")
+#end
+    private ${column.javaTypeBox} ${column.javaFieldName};
+#end
+#end
+
+
+    public BaseResp checkParam(){
+
+        return BaseResp.success();
+    }
+
+
+}

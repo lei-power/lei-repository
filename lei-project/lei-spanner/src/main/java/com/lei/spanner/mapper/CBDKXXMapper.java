@@ -7,14 +7,13 @@ import java.util.List;
 public interface CBDKXXMapper {
 
 
-
-
     public CBDKXX getBydkbm(String dkbm);
+
     public List<CBDKXX> getAll();
 
     //	public List<CBDKXX> getListByKeywordAndPage(@Param("keyword") String keyword, @Param("startIndex") Integer startIndex,
-//                                                @Param("pageSize") Integer pageSize);
-//
-//	public long getCountByKeywordAndPage(@Param("keyword") String keyword);
+    //                                                @Param("pageSize") Integer pageSize);
+    //
+    //	public long getCountByKeywordAndPage(@Param("keyword") String keyword);
 
 }

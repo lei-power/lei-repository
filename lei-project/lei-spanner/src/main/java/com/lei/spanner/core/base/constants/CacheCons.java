@@ -48,10 +48,12 @@ public class CacheCons {
 
 
     //神农口袋经营主体统计缓存key
-    public static final String cache_produce_land_getFarmBusinessEntityScaleDistributionByAreaTypeAndAreaId_prefix = CACHE_PRIFIX + "p_d:land_g_f_b_e_s_d_a_t_ai:";
+    public static final String cache_produce_land_getFarmBusinessEntityScaleDistributionByAreaTypeAndAreaId_prefix =
+            CACHE_PRIFIX + "p_d:land_g_f_b_e_s_d_a_t_ai:";
 
     //种植业经营主体统计缓存key
-    public static final String cache_nongwei_zzstaticbascompany_getCompanyCountByBetweenPlotArceSumAndArea_prefix = CACHE_PRIFIX + "n_w:land_g_f_b_e_s_d_a_t_ai:";
+    public static final String cache_nongwei_zzstaticbascompany_getCompanyCountByBetweenPlotArceSumAndArea_prefix =
+            CACHE_PRIFIX + "n_w:land_g_f_b_e_s_d_a_t_ai:";
 
     //神农口袋查询农场缓存key
     public static final String cache_produce_stasticfarm_getListByFarmAreaTypeAndAreaId_prefix = CACHE_PRIFIX + "p_d:sf_g_l_b_f_a_t_a_ai:";
@@ -106,7 +108,8 @@ public class CacheCons {
     public static final String cache_produce_stasticFarm_getSumLandArceByFarmAreaTypeAndAreaId_prefix = CACHE_PRIFIX + "p_d:sf_g_s_l_a_ti:";
 
     //神农口袋在田面积缓存key
-    public static final String cache_produce_stasticFarm_getSumLandArceDisctinctOnPlantByFarmAreaTypeAndAreaId_prefix = CACHE_PRIFIX + "p_d:sf_g_s_l_a_d_p_ti:";
+    public static final String cache_produce_stasticFarm_getSumLandArceDisctinctOnPlantByFarmAreaTypeAndAreaId_prefix =
+            CACHE_PRIFIX + "p_d:sf_g_s_l_a_d_p_ti:";
 
     //农委查询查询地块信息，地块编号，地块最新种植的作物缓存key
     public static final String cache_nongwei_zzStaticBasCompany_listByCompanyCode_prefix = CACHE_PRIFIX + "n_w:zsbc_l_b_c_c:";

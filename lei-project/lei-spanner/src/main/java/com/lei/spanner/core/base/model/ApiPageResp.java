@@ -2,13 +2,12 @@ package com.lei.spanner.core.base.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by Ivan Lee .
@@ -21,12 +20,12 @@ import java.util.List;
 public class ApiPageResp<T> implements Serializable {
 
 
-    @ApiModelProperty(value="列表")
-    private List<T> list=new ArrayList<>();
+    @ApiModelProperty(value = "列表")
+    private List<T> list = new ArrayList<>();
 
 
     @ApiModelProperty(value = "总数")
-    private long totalCount=0L;
+    private long totalCount = 0L;
 
 
 }

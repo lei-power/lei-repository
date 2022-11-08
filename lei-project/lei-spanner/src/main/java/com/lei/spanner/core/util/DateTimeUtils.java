@@ -5,10 +5,21 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,7 +84,8 @@ public class DateTimeUtils {
         try {
             Date d = format.parse(format1);
             return d;
-        } catch (ParseException px) {
+        }
+        catch (ParseException px) {
             px.printStackTrace();
         }
         return date;
@@ -107,11 +119,13 @@ public class DateTimeUtils {
         if (dateFormat != null && !dateFormat.equals("")) {
             try {
                 sdf = new SimpleDateFormat(dateFormat);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
                 sdf = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
             }
-        } else {
+        }
+        else {
             sdf = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
         }
         return sdf.format(date);
@@ -126,7 +140,8 @@ public class DateTimeUtils {
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             calendar.add(Calendar.MONTH, 1);
             return sdf.format(calendar.getTime());
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
@@ -167,16 +182,19 @@ public class DateTimeUtils {
         if (dateFormat != null && !dateFormat.equals("")) {
             try {
                 sdf = new SimpleDateFormat(dateFormat);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
                 sdf = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
             }
-        } else {
+        }
+        else {
             sdf = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
         }
         try {
             return sdf.parse(stringDate);
-        } catch (ParseException pe) {
+        }
+        catch (ParseException pe) {
             pe.printStackTrace();
             return new Date(System.currentTimeMillis());
         }
@@ -197,7 +215,8 @@ public class DateTimeUtils {
             now.set(Calendar.SECOND, 0);
             now.set(Calendar.MILLISECOND, 0);
             return now.getTime();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return new Date();
         }
@@ -211,8 +230,7 @@ public class DateTimeUtils {
      * @return String 格式化后的日期字符串，格式yyyy-MM-dd HH:mm:ss
      */
     public static String formatStringDate(String oldStringDate, String oldFormat) {
-        return convertDate2String(convertString2Date(oldStringDate, oldFormat),
-                DEFAULT_DATE_FORMAT);
+        return convertDate2String(convertString2Date(oldStringDate, oldFormat), DEFAULT_DATE_FORMAT);
     }
 
     /**
@@ -223,10 +241,8 @@ public class DateTimeUtils {
      * @param newFormat     - 格式化后的日期的格式
      * @return String 格式化后的日期字符串
      */
-    public static String formatStringDate(String oldStringDate,
-                                          String oldFormat, String newFormat) {
-        return convertDate2String(convertString2Date(oldStringDate, oldFormat),
-                newFormat);
+    public static String formatStringDate(String oldStringDate, String oldFormat, String newFormat) {
+        return convertDate2String(convertString2Date(oldStringDate, oldFormat), newFormat);
     }
 
 
@@ -250,10 +266,8 @@ public class DateTimeUtils {
                 total = 31;
                 break;
             case 2:
-                if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-                    total = 29;
-                else
-                    total = 28;
+                if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) { total = 29; }
+                else { total = 28; }
                 break;
             default:
                 break;
@@ -270,15 +284,15 @@ public class DateTimeUtils {
      */
     public static boolean isValidDate(String sDate) {
         if ((sDate != null)) {
-            if (sDate.trim().length() != 8)
-                return false;
+            if (sDate.trim().length() != 8) { return false; }
             Pattern pattern = Pattern.compile(datePattern1);
             Matcher match = pattern.matcher(sDate);
             if (match.matches()) {
                 pattern = Pattern.compile(datePattern3);
                 match = pattern.matcher(sDate);
                 return match.matches();
-            } else {
+            }
+            else {
                 return false;
             }
         }
@@ -297,7 +311,8 @@ public class DateTimeUtils {
             Matcher match = pattern.matcher(sDate);
             if (match.matches()) {
                 return match.matches();
-            } else {
+            }
+            else {
                 return false;
             }
         }
@@ -321,7 +336,8 @@ public class DateTimeUtils {
             day.setTime(date);
             day.add(Calendar.DATE, day_i);
             return sdf.format(day.getTime());
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -340,7 +356,8 @@ public class DateTimeUtils {
             day.setTime(date);
             day.add(Calendar.DATE, day_i);
             return String.valueOf(day.getTime().getTime());
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -453,10 +470,8 @@ public class DateTimeUtils {
      * @return 在两者之间为ture，否则为false
      */
     public static boolean isInPeriod(Date start, Date end, Date time) {
-        if (start == null || end == null)
-            return true;
-        if (start.after(time))
-            return false;
+        if (start == null || end == null) { return true; }
+        if (start.after(time)) { return false; }
         return !time.after(end);
     }
 
@@ -466,6 +481,7 @@ public class DateTimeUtils {
      * @param date1 <String>
      * @param date2 <String>
      * @return int
+     *
      * @throws ParseException
      */
     public static int monthsBetween(Date date1, Date date2) {
@@ -483,12 +499,10 @@ public class DateTimeUtils {
         // 获取年的差值 
         int yearInterval = year1 - year2;
         // 如果 d1的 月-日 小于 d2的 月-日 那么 yearInterval-- 这样就得到了相差的年数
-        if (month1 < month2 || month1 == month2 && day1 < day2)
-            yearInterval--;
+        if (month1 < month2 || month1 == month2 && day1 < day2) { yearInterval--; }
         // 获取月数差值
         int monthInterval = (month1 + 12) - month2;
-        if (day1 < day2)
-            monthInterval--;
+        if (day1 < day2) { monthInterval--; }
         monthInterval %= 12;
         int monthsDiff = Math.abs(yearInterval * 12 + monthInterval);
         return monthsDiff;
@@ -507,7 +521,8 @@ public class DateTimeUtils {
         try {
             date1 = dateFormat.parse(dateFormat.format(date1));
             date2 = dateFormat.parse(dateFormat.format(date2));
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -718,6 +733,7 @@ public class DateTimeUtils {
      *
      * @param pTime 修要判断的时间
      * @return dayForWeek 判断结果
+     *
      * @Exception 发生异常
      */
     public static int dayForWeek(Date pTime) {
@@ -726,13 +742,15 @@ public class DateTimeUtils {
         Calendar c = Calendar.getInstance();
         try {
             c.setTime(format.parse(str));
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
         int dayForWeek = 0;
         if (c.get(Calendar.DAY_OF_WEEK) == 1) {
             dayForWeek = 7;
-        } else {
+        }
+        else {
             dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
         }
         return dayForWeek;
@@ -798,7 +816,8 @@ public class DateTimeUtils {
         int dayForWeek = 0;
         if (instance.get(Calendar.DAY_OF_WEEK) == 1) {
             dayForWeek = 7;
-        } else {
+        }
+        else {
             dayForWeek = instance.get(Calendar.DAY_OF_WEEK) - 1;
         }
         if (type == 1) {
@@ -915,7 +934,8 @@ public class DateTimeUtils {
         int d = 0;
         if (cal.get(Calendar.DAY_OF_WEEK) == 1) {
             d = -6;
-        } else {
+        }
+        else {
             d = 2 - cal.get(Calendar.DAY_OF_WEEK);
         }
         cal.add(Calendar.DAY_OF_WEEK, d);
@@ -981,9 +1001,11 @@ public class DateTimeUtils {
 
         if (result > 0) {
             return true;
-        } else if (result == 0) {
+        }
+        else if (result == 0) {
             return false;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -1006,7 +1028,8 @@ public class DateTimeUtils {
 
         if (result > 0) {
             return true;
-        } else return result == 0;
+        }
+        else { return result == 0; }
     }
 
     /**
@@ -1109,7 +1132,8 @@ public class DateTimeUtils {
         Date date = null;
         try {
             date = sdf.parse(str);
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
         Calendar calendar = Calendar.getInstance();
@@ -1162,7 +1186,8 @@ public class DateTimeUtils {
                 tempStart.add(Calendar.DAY_OF_YEAR, 1);
             }
 
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -1195,7 +1220,8 @@ public class DateTimeUtils {
                 result.add(sdf.format(curr.getTime()));
                 curr.add(Calendar.MONTH, 1);
             }
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
@@ -1419,10 +1445,8 @@ public class DateTimeUtils {
     // 获取某个日期的开始时间
     public static Timestamp getDayStartTime(Date d) {
         Calendar calendar = Calendar.getInstance();
-        if (null != d)
-            calendar.setTime(d);
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        if (null != d) { calendar.setTime(d); }
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         return new Timestamp(calendar.getTimeInMillis());
     }
@@ -1430,10 +1454,8 @@ public class DateTimeUtils {
     // 获取某个日期的结束时间
     public static Timestamp getDayEndTime(Date d) {
         Calendar calendar = Calendar.getInstance();
-        if (null != d)
-            calendar.setTime(d);
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 23, 59, 59);
+        if (null != d) { calendar.setTime(d); }
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 23, 59, 59);
         calendar.set(Calendar.MILLISECOND, 999);
         return new Timestamp(calendar.getTimeInMillis());
     }
@@ -1459,8 +1481,7 @@ public class DateTimeUtils {
         if (beginDate == null || endDate == null) {
             throw new IllegalArgumentException("getDiffDays param is null!");
         }
-        long diff = (endDate.getTime() - beginDate.getTime())
-                / (1000 * 60 * 60 * 24);
+        long diff = (endDate.getTime() - beginDate.getTime()) / (1000 * 60 * 60 * 24);
         int days = new Long(diff).intValue();
         return days;
     }
@@ -1528,14 +1549,14 @@ public class DateTimeUtils {
 
     // 获取某年某月到某年某月按天的切片日期集合(间隔天数的集合)
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static List getTimeList(int beginYear, int beginMonth, int endYear,
-                                   int endMonth, int k) {
+    public static List getTimeList(int beginYear, int beginMonth, int endYear, int endMonth, int k) {
         List list = new ArrayList();
         if (beginYear == endYear) {
             for (int j = beginMonth; j <= endMonth; j++) {
                 list.add(getTimeList(beginYear, j, k));
             }
-        } else {
+        }
+        else {
             {
                 for (int j = beginMonth; j < 12; j++) {
                     list.add(getTimeList(beginYear, j, k));
@@ -1677,7 +1698,7 @@ public class DateTimeUtils {
         return LocalDate.now().minusMonths(month).format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
-    public static String getLastYearByCurrentYear(String currentYear){
+    public static String getLastYearByCurrentYear(String currentYear) {
         String currentStr = currentYear + "-01-01";
         LocalDate localDate = LocalDate.parse(currentStr);
         return localDate.minusYears(1).format(DateTimeFormatter.ofPattern("yyyy"));
@@ -1698,22 +1719,23 @@ public class DateTimeUtils {
         return localDate.getMonth().getValue();
     }
 
-    public static String getYesterdayYearStr(){
-       return LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern(YYYY));
+    public static String getYesterdayYearStr() {
+        return LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern(YYYY));
     }
 
     /**
      * 获取指定日期的本月第一天 2022-09-01 00:00:00
+     *
      * @param date
      * @return
      */
-    public static String getFirstDayOfMonth(Date date){
+    public static String getFirstDayOfMonth(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
         Date time = calendar.getTime();
         String strDate = getStrDate(time, DEFAULT_DATE_FORMAT);
         return strDate;
@@ -1721,16 +1743,17 @@ public class DateTimeUtils {
 
     /**
      * 获取指定日期的本月最后一天 2022-09-01 23:59:59
+     *
      * @param date
      * @return
      */
-    public static String getLastDayOfMonth(Date date){
+    public static String getLastDayOfMonth(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
-        calendar.set(Calendar.DAY_OF_MONTH,calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         Date time = calendar.getTime();
         String strDate = getStrDate(time, DEFAULT_DATE_FORMAT);
         return strDate;
@@ -1738,10 +1761,11 @@ public class DateTimeUtils {
 
     /**
      * 获取指定日期的开始时间 2022-09-01 00:00:00
+     *
      * @param date
      * @return
      */
-    public static String getStartOfDayStr(Date date){
+    public static String getStartOfDayStr(Date date) {
         Date startOfDay = getStartOfDay(date);
         String strDate = getStrDate(startOfDay, DEFAULT_DATE_FORMAT);
         return strDate;
@@ -1749,10 +1773,11 @@ public class DateTimeUtils {
 
     /**
      * 获取指定日期的结束时间 2022-09-01 23:59:59
+     *
      * @param date
      * @return
      */
-    public static String getEndOfDayStr(Date date){
+    public static String getEndOfDayStr(Date date) {
         Date endOfDay = getEndOfDay(date);
         String strDate = getStrDate(endOfDay, DEFAULT_DATE_FORMAT);
         return strDate;
@@ -1760,10 +1785,11 @@ public class DateTimeUtils {
 
     /**
      * 获取指定日期的本年第一天 2022-01-01 00:00:00
+     *
      * @param date
      * @return
      */
-    public static String getFirstDayOfYear(Date date){
+    public static String getFirstDayOfYear(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.clear(Calendar.MONDAY);
@@ -1778,10 +1804,11 @@ public class DateTimeUtils {
 
     /**
      * 获取指定日期的本年最后一天 2022-12-31 23:59:59
+     *
      * @param date
      * @return
      */
-    public static String getLastDayOfYear(Date date){
+    public static String getLastDayOfYear(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
@@ -1796,12 +1823,13 @@ public class DateTimeUtils {
         return strDate;
     }
 
-    public static String getDateStr(String str,String inPattern,String onPattern) {
+    public static String getDateStr(String str, String inPattern, String onPattern) {
         SimpleDateFormat sdf = new SimpleDateFormat(inPattern);
         Date date = null;
         try {
             date = sdf.parse(str);
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
         return DateTimeUtils.getStrDate(date, onPattern);
@@ -1819,7 +1847,7 @@ public class DateTimeUtils {
         LocalDate localDate = n.minusMonths(3);
         System.out.println(localDate.toString());
         System.out.println(n.toString());
-        List<String> days = getDays(localDate.toString(),n.toString());
+        List<String> days = getDays(localDate.toString(), n.toString());
         System.out.println(days);
     }
 }

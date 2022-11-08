@@ -14,40 +14,42 @@ public class JsonUtils {
 
     /**
      * java对象转json字符串
+     *
      * @param obj java类对象
      * @return json字符串
      */
-    public static String toJson(Object obj){
+    public static String toJson(Object obj) {
         return JSON.toJSONString(obj);
     }
 
     /**
      * json字符串转java对象
+     *
      * @param jsonStr json字符串
-     * @param clazz java对象一般使用：Person.class
+     * @param clazz   java对象一般使用：Person.class
      * @param <T>
      * @return java对象
      */
-    public static <T> T toBean(String jsonStr,Class<T> clazz){
-        return JSON.parseObject(jsonStr,clazz);
+    public static <T> T toBean(String jsonStr, Class<T> clazz) {
+        return JSON.parseObject(jsonStr, clazz);
     }
 
 
-    public static <T> T toBean(String jsonStr, TypeReference<T> clazz){
-        return JSON.parseObject(jsonStr,clazz);
+    public static <T> T toBean(String jsonStr, TypeReference<T> clazz) {
+        return JSON.parseObject(jsonStr, clazz);
     }
 
     /**
      * json字符串转list<class>对象
-     * @param jsonStr  json字符串
-     * @param clazz 列表中的java对象
+     *
+     * @param jsonStr json字符串
+     * @param clazz   列表中的java对象
      * @param <T>
      * @return
      */
     public static <T> List<T> toBeanList(String jsonStr, Class<T> clazz) {
         return JSON.parseArray(jsonStr, clazz);
     }
-
 
 
 }

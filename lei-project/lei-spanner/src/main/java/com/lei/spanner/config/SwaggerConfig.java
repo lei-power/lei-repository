@@ -16,7 +16,7 @@ public class SwaggerConfig {
 
     @Bean(SwaggerUtils.groupName.spanner)
     public Docket Api() {
-        return SwaggerUtils.getDocket(groupName.spanner,"com.lei.spanner.controller","LeiGe的工具箱");
+        return SwaggerUtils.getDocket(groupName.spanner, "com.lei.spanner.controller", "LeiGe的工具箱");
     }
 
 

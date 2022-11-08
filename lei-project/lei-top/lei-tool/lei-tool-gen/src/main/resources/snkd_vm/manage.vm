@@ -1,0 +1,112 @@
+package ${package}.manage;
+
+import com.za.core.base.model.BaseResp;
+import ${package}.mapper.${entity}Mapper;
+import ${package}.po.${entity};
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
+
+@Service
+@Slf4j
+public class ${entity}Manage{
+
+	@Autowired
+	private ${entity}Mapper ${entityFirstLower}Mapper;
+    @Autowired
+    private AreaLocalFacadeClient areaLocalFacadeClient;
+
+	@Transactional
+	public Integer insert(${entity} entity){
+		return ${entityFirstLower}Mapper.insert(entity);
+	}
+
+	@Transactional
+	public Integer update(${entity} entity){
+		return ${entityFirstLower}Mapper.update(entity);
+	}
+
+	@Transactional
+	public Integer delete(Long id) {
+		return ${entityFirstLower}Mapper.delete(id);
+	}
+
+	public ${entity} getById(Long id){
+		return ${entityFirstLower}Mapper.getById(id);
+	}
+
+
+	public List<${entity}> getListByKeywordAndPage(String keyword,Integer startIndex, Integer pageSize){
+    	return ${entityFirstLower}Mapper.getListByKeywordAndPage(keyword,startIndex,pageSize);
+    }
+
+    public long getCountByKeywordAndPage(String keyword){
+    	return ${entityFirstLower}Mapper.getCountByKeywordAndPage(keyword);
+    }
+
+	//==============================================分割线==================================================
+
+     /**
+     * 添加${entity}
+     #foreach($column in $columns)
+         #if($column.javaFieldName!='id')
+             * @param ${column.javaFieldName} ： ${column.comment}
+         #end
+     #end
+     * @return
+     */
+     @Transactional
+     public BaseResp<${entity}> create${entity}(#foreach($column in $columns)#if($column.javaFieldName!='id')${column.javaTypeBox} ${column.javaFieldName}#if($foreach.hasNext),#end#end#end){
+
+     ${entity} po = new ${entity}();
+     #foreach($column in $columns)
+         #if($column.javaFieldName!='id')
+         po.set${column.javaFieldNameUF}(${column.javaFieldName});
+         #end
+     #end
+
+     this.insert(po);
+     return BaseResp.success(po);
+     }
+
+
+     /**
+     * 修改${entity}
+     #foreach($column in $columns)
+         * @param ${column.javaFieldName} ： ${column.comment}
+     #end
+     * @return
+     */
+     @Transactional
+     public BaseResp<${entity}> edit${entity}(#foreach($column in $columns)${column.javaTypeBox} ${column.javaFieldName}#if($foreach.hasNext),#end#end){
+
+     ${entity} po = this.getById(id);
+     if(po==null){
+     return BaseResp.failByParamError();
+     }
+     #foreach($column in $columns)
+         #if($column.javaFieldName!='id')
+             po.set${column.javaFieldNameUF}(${column.javaFieldName});
+         #end
+     #end
+
+     this.update(po);
+     return BaseResp.success(po);
+     }
+
+     @Transactional
+     public BaseResp remove${entity}(Long id){
+     ${entity} po = this.getById(id);
+     if(po==null){
+     return BaseResp.failByParamError();
+     }
+
+     this.delete(id);
+     return BaseResp.success();
+     }
+
+}

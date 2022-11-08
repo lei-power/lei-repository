@@ -1,32 +1,37 @@
 package com.lei.spanner.core.util;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.RegionUtil;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.RegionUtil;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 
 public class PageTask implements Runnable {
 
     private CountDownLatch countDownLatch;
     private Sheet sheet;
-    private  SXSSFWorkbook wb;
+    private SXSSFWorkbook wb;
     private String[] title;
     private String firstRowName;
     private String secondRowName;
     private List<LinkedList<String>> list;
 
-    public PageTask(CountDownLatch countDownLatch, SXSSFWorkbook wb, Sheet sheet, String[] title,String firstRowName, String secondRowName,List<LinkedList<String>> list) {
+    public PageTask(CountDownLatch countDownLatch, SXSSFWorkbook wb, Sheet sheet, String[] title, String firstRowName, String secondRowName,
+                    List<LinkedList<String>> list) {
         this.countDownLatch = countDownLatch;
         this.sheet = sheet;
-        this.wb=wb;
+        this.wb = wb;
         this.title = title;
         this.firstRowName = firstRowName;
         this.secondRowName = secondRowName;
@@ -37,9 +42,9 @@ public class PageTask implements Runnable {
     public void run() {
         try {
             //第一行合并单元格
-            CellRangeAddress callRangeAddress29 = new CellRangeAddress(0, 0, 0, title.length-1);
+            CellRangeAddress callRangeAddress29 = new CellRangeAddress(0, 0, 0, title.length - 1);
             // 第二行合并单元格
-            CellRangeAddress callRangeAddress30 = new CellRangeAddress(1, 1, 0, title.length-1);
+            CellRangeAddress callRangeAddress30 = new CellRangeAddress(1, 1, 0, title.length - 1);
 
             sheet.addMergedRegion(callRangeAddress29);
             sheet.addMergedRegion(callRangeAddress30);
@@ -74,7 +79,6 @@ public class PageTask implements Runnable {
             row1.setHeight((short) 0x200);
             Cell cell1 = row1.createCell(0);
             cell1.setCellValue(secondRowName);
-
 
             cell1.setCellStyle(headstyle);
 
@@ -124,9 +128,9 @@ public class PageTask implements Runnable {
                 headstyle.setBorderTop(BorderStyle.THIN);
 
                 // 设置列宽度
-               for(int j = 0 ; j<title.length;j++){
-                   sheet.setColumnWidth(j, 160*35+323);
-               }
+                for (int j = 0; j < title.length; j++) {
+                    sheet.setColumnWidth(j, 160 * 35 + 323);
+                }
                 cell.setCellStyle(headstyle);
             }
 
@@ -142,9 +146,11 @@ public class PageTask implements Runnable {
                 }
 
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             if (countDownLatch != null) {
                 countDownLatch.countDown();
             }

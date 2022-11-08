@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class ReqData{
+public class ReqData {
 
     //镇id，自增
     private Long id;

@@ -1,0 +1,30 @@
+package ${package}.biz.co.model.req.${entityAllLower};
+
+
+import com.za.core.base.constants.RespCons;
+import com.za.core.base.model.BaseResp;
+import com.za.core.util.TextUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+
+@Data
+@ApiModel
+public class Co${entity}DelReq{
+
+    @ApiModelProperty("主键")
+    private Long id;
+
+
+    public BaseResp checkParam(){
+
+        if(this.id==null || this.id==0L){
+            return BaseResp.failByParamError();
+        }
+
+        return BaseResp.success();
+    }
+
+
+}

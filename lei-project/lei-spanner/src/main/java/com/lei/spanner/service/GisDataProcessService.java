@@ -23,11 +23,11 @@ public class GisDataProcessService {
 
     public String showTableName(Integer type) {
         String prifix = DictCons.GisType.get(type);
-        String likeStr ="";
+        String likeStr = "";
         if (prifix != null) {
-           likeStr=" AND NAME LIKE '%"+prifix+"'";
+            likeStr = " AND NAME LIKE '%" + prifix + "'";
         }
-        String sql = "SELECT NAME FROM SYSOBJECTS WHERE XTYPE='U' AND NAME LIKE 'TBL%' "+likeStr+" ORDER BY NAME";
+        String sql = "SELECT NAME FROM SYSOBJECTS WHERE XTYPE='U' AND NAME LIKE 'TBL%' " + likeStr + " ORDER BY NAME";
         List<Map<String, Object>> list = msSdeSqlUtil.queryBySql(sql);
         StringBuilder stringBuilder = new StringBuilder();
         for (Map<String, Object> map : list) {

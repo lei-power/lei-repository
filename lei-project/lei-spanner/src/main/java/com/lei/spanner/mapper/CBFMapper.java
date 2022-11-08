@@ -7,7 +7,7 @@ import java.util.List;
 public interface CBFMapper {
 
 
-	CBF getBycbfbm(String cbfbm);
+    CBF getBycbfbm(String cbfbm);
 
     List<CBF> getAll();
 }
