@@ -35,7 +35,7 @@ public class SnkdGen {
     public void snkdGenFlow() {
         //1.读取classPath的配置文件
         //写死从本地库里取数据
-        DataSource mysql_lcoal = DbUtil.getDs("mysql_local");
+        DataSource mysql_lcoal = DbUtil.getDs("mysql_testc");
         List<Map<String, String>> sources = getSources();
 
         for (Map<String, String> source : sources) {
@@ -45,7 +45,7 @@ public class SnkdGen {
             log.info("========================开始生成表{}===================================",tableName);
 
             //得到数据库表的元数据
-            List<Map<String, Object>> resultList = MetaUtil.getTableMeta(mysql_lcoal, "tbl_area_local_temp").getColumns().stream().map(temp -> {
+            List<Map<String, Object>> resultList = MetaUtil.getTableMeta(mysql_lcoal, tableName).getColumns().stream().map(temp -> {
                 Map<String, Object> row = new HashMap<>();
                 row.put("Field", temp.getName());
                 row.put("Type", temp.getTypeName());
