@@ -73,7 +73,7 @@ CREATE TABLE `tbl_agri_machinery`
     `agri_machinery_category_id` bigint(20)           DEFAULT NULL COMMENT '农机小类id',
     `agri_machinery_type_id`     bigint(20)           DEFAULT NULL COMMENT '农机种类id',
     `agri_machinery_type_name`   varchar(64)          DEFAULT NULL COMMENT '农机种类名称',
-    `out_num`                    varchar(64) NOT NULL COMMENT '出厂编码',
+    `out_num`                    varchar(255) NOT NULL COMMENT '出厂编码',
 
     `plate_num`                  varchar(64)          DEFAULT NULL COMMENT '车牌号',
     `buy_time`                   datetime             DEFAULT NULL COMMENT '购置时间',

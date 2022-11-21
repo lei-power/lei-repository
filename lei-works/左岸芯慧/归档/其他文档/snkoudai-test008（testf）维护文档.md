@@ -69,6 +69,13 @@
 ##### 常用命令
 - /opt/software/nginx/sbin/nginx -c /opt/software/nginx/conf/nginx.conf
 
+- （1）启动命令
+- 在/usr/local/nginx/sbin目录下执行 ./nginx 
+- （2）关闭命令
+- 在/usr/local/nginx/sbin目录下执行 ./nginx  -s  stop 
+- （3）重新加载命令 
+- 在/usr/local/nginx/sbin目录下执行 ./nginx  -s  reload
+
 
 ## 工程信息
 ### 已部署服务
@@ -89,6 +96,6 @@
 |  12    |service-produce-server                 |20070              |/var/gameplat/snkoudai/service-produce-server          
 |  13    |service-user-server                     |20060             |/var/gameplat/snkoudai/service-user-server             
 |  14    |za-gateway                             |20040              |/var/gameplat/snkoudai/za-gateway                      
-|  15    |za-gateway-admin                          |20042           |/var/gameplat/snkoudai/za-gateway-admin                
-|  16    |za-gateway-consume                        |20041           |/var/gameplat/snkoudai/za-gateway-consume              
-|  17    |za-gateway-operuser                       |20044           |/var/gameplat/snkoudai/za-gateway-operuser             
+|  15    |za-gateway-admin             |20042           |/var/gameplat/snkoudai/za-gateway-admin                
+|  16    |za-gateway-consume           |20041           |/var/gameplat/snkoudai/za-gateway-consume              
+|  17    |za-gateway-operuser          |20044           |/var/gameplat/snkoudai/za-gateway-operuser             
