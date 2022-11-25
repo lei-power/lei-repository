@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 
 /***
  *@author wanglei
@@ -134,35 +136,59 @@ public class MapingVillage {
         }
         //写入文件
 
-        ExcelWriter wr = new ExcelWriter("D:\\三调—地块矢量文件镇村数据赋值.xlsx", "省市区镇村信息");
+        ExcelWriter wr = new ExcelWriter("D:\\三调—地块矢量文件镇村数据赋值" + StringUtils.right(String.valueOf(System.currentTimeMillis()), 4) + ".xlsx", "省市区镇村信息");
         wr.writeHeadRow(Arrays.asList(new String[]{"市id", "市名称", "区id", "区名称", "镇id", "镇名称", "村id", "村名称"}));
-        wr.write(areaList).flush();
-//        try {
-//
-//            BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
-//                    "D:\\三调—地块矢量文件镇村数据赋值" + StringUtils.right(String.valueOf(System.currentTimeMillis()), 4) + ".csv"), "GBK"));
-//            StringBuilder builder = new StringBuilder();
-//
-//            builder.append("市id,市名称,区id,区名称,镇id,镇名称,村id,村名称,权属单位名称,映射的村名称,SQL语句\n");
-//            for (List<String> area : areaList) {
-//                boolean containFlag = false;
-//                builder.append(StringUtils.join(area, ","));
-//                for (Entry<String, String> entry : qsdwmcToVillageMap.entrySet()) {
-//                    if (area.get(area.size() - 1).equals(entry.getValue())) {
-//                        builder.append("," + entry.getKey()).append("," + entry.getValue()).append("," + "xxx" + "\n");
-//                        containFlag = true;
-//                        break;
-//                    }
-//                }
-//                if (!containFlag) {
-//                    builder.append(",,,\n");
-//                }
-//            }
-//            fw.write(builder.toString());
-//            fw.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        wr.write(areaList);
+        wr.setSheet("镇村匹配");
+        wr.writeHeadRow(Arrays.asList(new String[]{"权属单位名称", "村名称", "市名称", "市id", "区id", "区名称", "镇id", "镇名称", "村id", "SQL语句"}));
+        List<List<String>> mapingList = new ArrayList<>();
+        AtomicLong index = new AtomicLong(2);
+        qsdwmcToVillageMap.forEach((k, v) -> {
+            List<String> maping = new ArrayList<>();
+            maping.add(k);
+            maping.add(v);
+
+            index.incrementAndGet();
+            mapingList.add(maping);
+        });
+        List<String> lines = mapingList.get(0);
+        lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,2)");
+        lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,3)");
+        lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,4)");
+        lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,5)");
+        lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,6)");
+        lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,7)");
+        lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,8)");
+        lines.add("\n"
+                + "=CONCATENATE(\"update sde.XXX  set      \"city_id = \",\"'\",C2,\"'\",\",\"\"city_name = \",\"'\",D2,\"'\",\",\"       \"county_id = \",\"'\",E2,\"'\",\",\"\"county_name = \",\"'\",F2,\"'\",\",\"   town_id = \",\"'\",G2,\"'\",\",\",\"town_name = \",\"'\",H2,\"'\",\",\",\"village_id = \",\"'\",I2,\"'\",\",\",\"village_name = \",\"'\",J2,\"'\",\" where QSDWMC = \",\"'\",A2,\"'\",\";\")");
+        mapingList.set(0,lines);
+        wr.write(mapingList).flush();
+        //        try {
+        //
+        //            BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+        //                    "D:\\三调—地块矢量文件镇村数据赋值" + StringUtils.right(String.valueOf(System.currentTimeMillis()), 4) + ".csv"), "GBK"));
+        //            StringBuilder builder = new StringBuilder();
+        //
+        //            builder.append("市id,市名称,区id,区名称,镇id,镇名称,村id,村名称,权属单位名称,映射的村名称,SQL语句\n");
+        //            for (List<String> area : areaList) {
+        //                boolean containFlag = false;
+        //                builder.append(StringUtils.join(area, ","));
+        //                for (Entry<String, String> entry : qsdwmcToVillageMap.entrySet()) {
+        //                    if (area.get(area.size() - 1).equals(entry.getValue())) {
+        //                        builder.append("," + entry.getKey()).append("," + entry.getValue()).append("," + "xxx" + "\n");
+        //                        containFlag = true;
+        //                        break;
+        //                    }
+        //                }
+        //                if (!containFlag) {
+        //                    builder.append(",,,\n");
+        //                }
+        //            }
+        //            fw.write(builder.toString());
+        //            fw.close();
+        //        } catch (IOException e) {
+        //            e.printStackTrace();
+        //        }
     }
 
     //粘贴好数据源 village、source ， 运行main方法
