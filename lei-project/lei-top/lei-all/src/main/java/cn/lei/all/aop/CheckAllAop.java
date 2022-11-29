@@ -19,11 +19,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Order(5)
 @Slf4j
-public class CheckSpannerAop {
+public class CheckAllAop {
 
     private ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    @Pointcut("execution(public * com.lei.spanner.controller..*.*(..))")
+    @Pointcut("execution(public * com.lei.all.controller..*.*(..))")
     public void controller() {}
 
     @Around(value = "controller()")

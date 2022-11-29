@@ -1,23 +1,23 @@
 spring:
   application:
-    name:lei-spanner
+    name: lei-all
   profiles:
-    active:dev
+    active: dev
   thymeleaf:
-    cache:true
-    check-template:true
-    check-template-location:true
-    content-type:text/html
-    enabled:true
-    encoding:UTF-8
-    excluded-view-names:''
-    mode:HTML5
-    prefix:classpath:/templates/
-    suffix:.html
+    cache: true
+    check-template: true
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    excluded-view-names: ''
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
   servlet:
     multipart:
-      max-request-size:100MB
-      max-file-size:200MB
+      max-request-size: 100MB
+      max-file-size: 200MB
 server:
-  port:4653
+  port: 4653
 
