@@ -1,11 +1,10 @@
 package cn.lei.all.entity.po;
 
 
-
 import lombok.Data;
 
 @Data
-public class CBF_JTCY{
+public class CBF_JTCY {
 
     private String cBFBM;
     private String cYXM;

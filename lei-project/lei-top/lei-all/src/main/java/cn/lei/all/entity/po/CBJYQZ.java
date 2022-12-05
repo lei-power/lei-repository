@@ -1,13 +1,11 @@
 package cn.lei.all.entity.po;
 
 
-import java.math.BigDecimal;
 import java.util.Date;
-
 import lombok.Data;
 
 @Data
-public class CBJYQZ{
+public class CBJYQZ {
 
     private String cBJYQZBM;
     private String fZJG;

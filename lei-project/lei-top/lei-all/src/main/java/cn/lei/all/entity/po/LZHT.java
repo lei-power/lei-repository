@@ -3,11 +3,10 @@ package cn.lei.all.entity.po;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
 import lombok.Data;
 
 @Data
-public class LZHT{
+public class LZHT {
 
     private String cBHTBM;
     private String lZHTBM;

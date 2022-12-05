@@ -26,20 +26,14 @@ public class SwaggerConfig {
         ParameterBuilder tokenPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<Parameter>();
         String title = "";
-        if(TextUtils.isEmpty(title)){
+        if (TextUtils.isEmpty(title)) {
             title = "内部系统";
         }
-        ApiInfo apiInfo = new ApiInfoBuilder()
-                .title(title)//大标题
+        ApiInfo apiInfo = new ApiInfoBuilder().title(title)//大标题
                 .version("1.0")//版本
                 .build();
 
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo)
-                .useDefaultResponseMessages(false)
-                .select()
-                .build()
-                .globalOperationParameters(pars);
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo).useDefaultResponseMessages(false).select().build().globalOperationParameters(pars);
     }
 
 

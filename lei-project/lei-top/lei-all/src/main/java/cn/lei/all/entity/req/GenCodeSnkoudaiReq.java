@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 @ApiModel
 public class GenCodeSnkoudaiReq {
+
     @ApiModelProperty(value = "表名 tbl_agri_machinery")
     private String tableName;
     @ApiModelProperty(value = "文件名 AgriMachinery")

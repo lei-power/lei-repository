@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class CBDKXX{
+public class CBDKXX {
 
     private String dKBM;
     private String fBFBM;

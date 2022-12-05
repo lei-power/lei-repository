@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class QSLYZLFJ{
+public class QSLYZLFJ {
 
     private String cBJYQZBM;
     private String zLFJBH;
