@@ -10,10 +10,10 @@ import lombok.Data;
 
 #set($hasDate=0)
 #foreach($column in $columns)
-#if($column.javaType=='Date' && $hasDate==0)
-import java.util.Date;
-#set($hasDate=1)
-#end
+    #if($column.javaType=='Date' && $hasDate==0)
+    import java.util.Date;
+        #set($hasDate=1)
+    #end
 #end
 
 @Data
@@ -22,19 +22,19 @@ public class Co${entity}EditReq{
 
 
 #foreach($column in $columns)
-#if($column.comment!='')
+    #if($column.comment!='')
     @ApiModelProperty("$column.comment")
-#end
-    private ${column.javaTypeBox} ${column.javaFieldName};
+    #end
+private ${column.javaTypeBox} ${column.javaFieldName};
 #end
 
-    public BaseResp checkParam(){
-        if(this.id==null || this.id<=0L){
-            return BaseResp.failByParamError();
-        }
+public BaseResp checkParam(){
+if(this.id==null || this.id<=0L){
+return BaseResp.failByParamError();
+}
 
-        return BaseResp.success();
-    }
+return BaseResp.success();
+}
 
 
 }

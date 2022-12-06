@@ -20,17 +20,18 @@ tags:
 
 - 数据太多导致同步调用耗时总共9分钟，导致调用方一直等待我方服务返回，无法进行后续操作
 
-为了解决同步调用问题，因此引入了CompletableFuture异步执行任务，关于CompletableFuture的用法这里就不再详细描述了，网上都能搜索到。 在任务中执行到某一步后发生了异常，遍不再有日志打印和报错，程序就直接阻塞了。下面贴上代码
+为了解决同步调用问题，因此引入了CompletableFuture异步执行任务，关于CompletableFuture的用法这里就不再详细描述了，网上都能搜索到。
+在任务中执行到某一步后发生了异常，遍不再有日志打印和报错，程序就直接阻塞了。下面贴上代码
 
 ```java
-CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
-            int a = 0;
-            int b = 100;
-            int c = b / a;
-            return true;
-        }, new ThreadPoolExecutor(5, 5, 5L,
-                TimeUnit.SECONDS, new ArrayBlockingQueue<>(50)))
-                .thenAccept(result -> System.out.println("result:" + result));
+CompletableFuture<Void> future=CompletableFuture.supplyAsync(()->{
+        int a=0;
+        int b=100;
+        int c=b/a;
+        return true;
+        },new ThreadPoolExecutor(5,5,5L,
+        TimeUnit.SECONDS,new ArrayBlockingQueue<>(50)))
+        .thenAccept(result->System.out.println("result:"+result));
 ```
 
 我们可以看到 int c = b / a; 这一行本该会抛出异常byZero，可是事实是运行调试至这一行就不再往下运行了，也没有任何的报错，经过排查了一天终于查出问题所在。
@@ -46,40 +47,39 @@ future.get();
 经查询资料可以修改为如下代码，捕获异常
 
 ```java
-CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
-            int a = 0;
-            int b = 100;
-            int c = b / a;
-            return true;
-        }, new ThreadPoolExecutor(5, 5, 5L,
-                TimeUnit.SECONDS, new ArrayBlockingQueue<>(50)))
-                .exceptionally(ex -> {
-                    System.out.println(ex);
-                    return false;
-                })
-                .thenAccept(result -> System.out.println("result:" + result));
+CompletableFuture<Void> future=CompletableFuture.supplyAsync(()->{
+        int a=0;
+        int b=100;
+        int c=b/a;
+        return true;
+        },new ThreadPoolExecutor(5,5,5L,
+        TimeUnit.SECONDS,new ArrayBlockingQueue<>(50)))
+        .exceptionally(ex->{
+        System.out.println(ex);
+        return false;
+        })
+        .thenAccept(result->System.out.println("result:"+result));
 ```
 
-
-下面就可以正常捕获到异步任务中的异常了 ![img](https://img-blog.csdnimg.cn/20201224170008438.png) 不过博主最后的做法是在异步任务中进行try catch捕获了异常，因为任务中有foreach循环，所以一个异常会中断整个任务所以没有使用上面的方法，类似如下代码
+下面就可以正常捕获到异步任务中的异常了 ![img](https://img-blog.csdnimg.cn/20201224170008438.png) 不过博主最后的做法是在异步任务中进行try
+catch捕获了异常，因为任务中有foreach循环，所以一个异常会中断整个任务所以没有使用上面的方法，类似如下代码
 
 ```java
-CompletableFuture<Boolean> future = CompletableFuture.supplyAsync(() -> {
-            for (int i = 0; i < 2; i++) {
-                try {
-                    int a = 0;
-                    int b = 100;
-                    int c = b / a;
-                } catch (Exception e) {
-                    System.out.println("Error in task: " + e);
-                }
-            }
-            return true;
-        }, new ThreadPoolExecutor(5, 5, 5L,
-                TimeUnit.SECONDS, new ArrayBlockingQueue<>(50)));
-        future.thenAccept(result -> System.out.println("result:" + result));
+CompletableFuture<Boolean> future=CompletableFuture.supplyAsync(()->{
+        for(int i=0;i< 2;i++){
+        try{
+        int a=0;
+        int b=100;
+        int c=b/a;
+        }catch(Exception e){
+        System.out.println("Error in task: "+e);
+        }
+        }
+        return true;
+        },new ThreadPoolExecutor(5,5,5L,
+        TimeUnit.SECONDS,new ArrayBlockingQueue<>(50)));
+        future.thenAccept(result->System.out.println("result:"+result));
 ```
-
 
 这样就可以正常处理任务中的循环了，推荐在异步任务中用try catch将重要代码包裹起来，防止出现阻塞的情况 ![img](https://img-blog.csdnimg.cn/20201224171010803.png)
 

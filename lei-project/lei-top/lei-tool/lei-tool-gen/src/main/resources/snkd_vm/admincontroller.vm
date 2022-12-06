@@ -1,7 +1,6 @@
 package ${package}.biz.admin.controller;
 
 
-
 import com.za.core.base.model.ApiPageResp;
 import com.za.core.base.model.BaseResp;
 import io.swagger.annotations.Api;
@@ -27,42 +26,47 @@ import ${package}.biz.admin.service.Admin${entity}Service;
 @RestController
 public class Admin${entity}Controller {
 
-	@Autowired
-	private Admin${entity}Service admin${entity}Service;
+@Autowired
+private Admin${entity}Service admin${entity}Service;
 
 
-	@PostMapping("/list")
-	@ApiOperation(value = "${entity}列表接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理")
-	public BaseResp<ApiPageResp<Admin${entity}VO>> list(@RequestBody Admin${entity}ListReq reqModel){
-    	return admin${entity}Service.list(reqModel);
+@PostMapping("/list")
+@ApiOperation(value = "${entity}列表接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理")
+public BaseResp
+<ApiPageResp
+<Admin${entity}VO>> list(@RequestBody Admin${entity}ListReq reqModel){
+  return admin${entity}Service.list(reqModel);
+  }
+
+
+  @PostMapping("/get")
+  @ApiOperation(value = "${entity}详情接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理")
+  public BaseResp
+  <Admin${entity}VO> get(@RequestBody Admin${entity}GetReq reqModel){
+    return admin${entity}Service.get(reqModel);
     }
 
 
-	@PostMapping("/get")
-	@ApiOperation(value = "${entity}详情接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理")
-	public BaseResp<Admin${entity}VO> get(@RequestBody Admin${entity}GetReq reqModel){
-		return admin${entity}Service.get(reqModel);
-	}
+    @PostMapping("/add")
+    @ApiOperation(value = "${entity}添加接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-添加")
+    public BaseResp
+    <Admin${entity}VO> add(@RequestBody Admin${entity}AddReq reqModel){
+      return admin${entity}Service.add(reqModel);
+      }
 
 
-	@PostMapping("/add")
-	@ApiOperation(value = "${entity}添加接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-添加")
-	public BaseResp<Admin${entity}VO> add(@RequestBody Admin${entity}AddReq reqModel){
-		return admin${entity}Service.add(reqModel);
-	}
+      @PostMapping("/edit")
+      @ApiOperation(value = "${entity}修改接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-修改")
+      public BaseResp
+      <Admin${entity}VO> edit(@RequestBody Admin${entity}EditReq reqModel){
+        return admin${entity}Service.edit(reqModel);
+        }
 
 
-	@PostMapping("/edit")
-	@ApiOperation(value = "${entity}修改接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-修改")
-	public BaseResp<Admin${entity}VO> edit(@RequestBody Admin${entity}EditReq reqModel){
-		return admin${entity}Service.edit(reqModel);
-	}
+        @PostMapping("/del")
+        @ApiOperation(value = "${entity}删除接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-删除")
+        public BaseResp del(@RequestBody Admin${entity}DelReq reqModel){
+        return admin${entity}Service.del(reqModel);
+        }
 
-
-	@PostMapping("/del")
-	@ApiOperation(value = "${entity}删除接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-删除")
-	public BaseResp del(@RequestBody Admin${entity}DelReq reqModel){
-		return admin${entity}Service.del(reqModel);
-	}
-
-}
+        }

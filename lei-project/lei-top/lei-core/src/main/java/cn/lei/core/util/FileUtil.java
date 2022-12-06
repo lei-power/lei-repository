@@ -14,7 +14,7 @@ public class FileUtil {
     /**
      * 将字符串写入文件
      */
-    public static void writeFile(String filePath,String fileName, String fileContent) {
+    public static void writeFile(String filePath, String fileName, String fileContent) {
         File f = new File(filePath);
 
         if (!f.exists()) {

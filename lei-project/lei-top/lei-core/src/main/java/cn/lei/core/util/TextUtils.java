@@ -1,14 +1,16 @@
 package cn.lei.core.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -89,7 +91,7 @@ public class TextUtils {
      * @return
      */
     public static boolean isPassword(String password) {
-//        String regex = "^(?![0-9]+$)(?![a-zA-Z]+$)(?![0-9!@#$%^&*]+$)(?![0-9\\u4e00-\\u9fa5]+$)(?![a-zA-Z!@#$%^&*]+$)(?![a-zA-Z\\u4e00-\\u9fa5]+$)[0-9A-Za-z!@#$%^&*\\u4e00-\\u9fa5]{6,30}$";
+        //        String regex = "^(?![0-9]+$)(?![a-zA-Z]+$)(?![0-9!@#$%^&*]+$)(?![0-9\\u4e00-\\u9fa5]+$)(?![a-zA-Z!@#$%^&*]+$)(?![a-zA-Z\\u4e00-\\u9fa5]+$)[0-9A-Za-z!@#$%^&*\\u4e00-\\u9fa5]{6,30}$";
         String regex = "^(?![a-zA-z]+$)(?!\\d+$)(?![!@#$%^&*]+$)(?![a-zA-z\\d]+$)(?![a-zA-z!@#$%^&*]+$)(?![\\d!@#$%^&*]+$)[a-zA-Z\\d!@#$%^&*]{8,30}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(password);
@@ -153,6 +155,7 @@ public class TextUtils {
      * @param front_17
      * @param verify
      * @return
+     *
      * @throws Exception
      */
     public static boolean checkVerify(String front_17, String verify) {
@@ -285,7 +288,6 @@ public class TextUtils {
         //现将中文货号替换成英文括号
         String formatStr = str.replaceAll("（", "(").replaceAll("）", ")");
 
-
         String patterStr = "\\(\\d{21}\\)";
         Pattern pattern = Pattern.compile(patterStr);
         Matcher matcher = pattern.matcher(formatStr);
@@ -303,12 +305,13 @@ public class TextUtils {
     }
 
     /**
-     * @Title: clearNoUseZeroForBigDecimal
-     * @Description: 去掉BigDecimal尾部多余的0，通过stripTrailingZeros().toPlainString()实现
      * @param str
      * @return BigDecimal
+     *
+     * @Title: clearNoUseZeroForBigDecimal
+     * @Description: 去掉BigDecimal尾部多余的0，通过stripTrailingZeros().toPlainString()实现
      */
-    public static BigDecimal clearNoUseZeroForBigDecimal(String str){
+    public static BigDecimal clearNoUseZeroForBigDecimal(String str) {
         BigDecimal decimal = new BigDecimal(BigDecimal.valueOf(Double.parseDouble(str)).stripTrailingZeros().toPlainString());
         return decimal;
     }
@@ -316,13 +319,12 @@ public class TextUtils {
     /**
      * 获取一个length位的安全随机字符串，字符串的每一个字符由0~9，a~z组成
      * 用户获取token
+     *
      * @return
      */
     public static String getSecureRandom(Integer length) throws NoSuchProviderException, NoSuchAlgorithmException {
         StringBuilder str = new StringBuilder();
-        char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
         for (int i = 0; i < length; i++) {
             str.append(chars[random.nextInt(36)]);

@@ -41,8 +41,7 @@ public class ChandaoPipeLine extends FilePersistentBase implements Pipeline {
                 strBuilder.append(content).append("</body>\n" + "</html>");
                 printWriter.write(strBuilder.toString());
                 printWriter.close();
-            }
-            catch (IOException var5) {
+            } catch (IOException var5) {
                 log.error(path + resultItems.getRequest().getUrl() + ".json" + "写入错误！！！");
             }
         }

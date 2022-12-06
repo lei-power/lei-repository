@@ -1,6 +1,6 @@
-
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET
+FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for sys_government_notice_type
@@ -8,19 +8,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `sys_government_notice_type`;
 CREATE TABLE `sys_government_notice_type`
 (
-    `id`                                bigint(20)                                                    NOT NULL AUTO_INCREMENT,
-    `name`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NOT NULL COMMENT '类型名称',
-    `status`                            tinyint(4)                                                    NOT NULL DEFAULT 1 COMMENT '状态;1-启用，0-禁用',
-    `sort_num`                          int(11)                                                       NULL     DEFAULT NULL COMMENT '排序号,越小越靠前',
-    `create_by`                         bigint(20)                                                    NULL     DEFAULT NULL,
-    `create_user_name`                  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL     DEFAULT NULL COMMENT '创建者名称',
-    `create_time`                       datetime                                                      NULL     DEFAULT NULL,
-    `update_by`                         bigint(20)                                                    NULL     DEFAULT NULL,
-    `update_user_name`                  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL     DEFAULT NULL COMMENT '修改者名称',
-    `update_time`                       datetime                                                      NULL     DEFAULT NULL,
-    `government_notice_type_identifier` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL     DEFAULT NULL COMMENT '唯一编码',
-    `applicable_platform`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL     DEFAULT '2' COMMENT '1：运营平台；2：管理中台(全选中1,2)',
-    `default_cover_img_url`             text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci         NULL COMMENT '默认封面',
+    `id`                                bigint(20) NOT NULL AUTO_INCREMENT,
+    `name`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '类型名称',
+    `status`                            tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态;1-启用，0-禁用',
+    `sort_num`                          int(11) NULL DEFAULT NULL COMMENT '排序号,越小越靠前',
+    `create_by`                         bigint(20) NULL DEFAULT NULL,
+    `create_user_name`                  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建者名称',
+    `create_time`                       datetime NULL DEFAULT NULL,
+    `update_by`                         bigint(20) NULL DEFAULT NULL,
+    `update_user_name`                  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '修改者名称',
+    `update_time`                       datetime NULL DEFAULT NULL,
+    `government_notice_type_identifier` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '唯一编码',
+    `applicable_platform`               varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '2' COMMENT '1：运营平台；2：管理中台(全选中1,2)',
+    `default_cover_img_url`             text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '默认封面',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 29
@@ -117,33 +117,33 @@ VALUES (28, '紧急通知', 1, 8721, 94, '张静峰', '2022-07-14 09:56:08', 94,
 DROP TABLE IF EXISTS `tbl_government_notice`;
 CREATE TABLE `tbl_government_notice`
 (
-    `id`                                 bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '公告表主键',
-    `government_subject_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '政府主体信息主键id',
+    `id`                                 bigint(20) NOT NULL AUTO_INCREMENT COMMENT '公告表主键',
+    `government_subject_id`              bigint(20) NULL DEFAULT NULL COMMENT '政府主体信息主键id',
     `government_subject_name`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '政府主体名称',
-    `type_id`                            bigint(20)                                                    NULL DEFAULT 0 COMMENT '关联公告类型',
-    `content`                            longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci     NULL COMMENT '公告内容',
-    `title`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '公告标题',
-    `img_url`                            text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci         NULL COMMENT '公告图片链接URL',
+    `type_id`                            bigint(20) NULL DEFAULT 0 COMMENT '关联公告类型',
+    `content`                            longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '公告内容',
+    `title`                              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '公告标题',
+    `img_url`                            text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '公告图片链接URL',
     `business_category_ids`              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '政府主体关联经营类目，逗号隔开',
     `business_category_names`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '经营类目名称，逗号隔开',
-    `publish_status`                     tinyint(4)                                                    NULL DEFAULT 1 COMMENT '发布状态：1.已发布；2：定时发布中；3：草稿 ；4：撤回',
-    `publish_time`                       datetime                                                      NULL DEFAULT NULL COMMENT '发布时间',
-    `task_time`                          datetime                                                      NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '定时任务使时间，发布状态为定时任务需传入此值',
-    `view_count`                         bigint(20)                                                    NULL DEFAULT 0 COMMENT '浏览量pv',
-    `outer_chain`                        text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci         NULL COMMENT '外链',
+    `publish_status`                     tinyint(4) NULL DEFAULT 1 COMMENT '发布状态：1.已发布；2：定时发布中；3：草稿 ；4：撤回',
+    `publish_time`                       datetime NULL DEFAULT NULL COMMENT '发布时间',
+    `task_time`                          datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '定时任务使时间，发布状态为定时任务需传入此值',
+    `view_count`                         bigint(20) NULL DEFAULT 0 COMMENT '浏览量pv',
+    `outer_chain`                        text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '外链',
     `f_ids`                              varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '附件ids',
     `publish_company`                    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '发布单位',
-    `mobile_system_notice_reminder_flag` tinyint(4)                                                    NULL DEFAULT NULL COMMENT '手机系统通知提醒。0：不提醒；1：提醒',
-    `notice_center_display`              tinyint(4)                                                    NULL DEFAULT NULL COMMENT '是否在公告中心显示。0：不显示；1：显示',
-    `client_type`                        tinyint(4)                                                    NULL DEFAULT NULL COMMENT '客户端类型：1：admin后台管理；2：管理后台',
-    `content_flag`                       tinyint(4)                                                    NULL DEFAULT NULL COMMENT '公告内容类型：1：内容；2：外链',
-    `send_all_farm_flag`                 tinyint(4)                                                    NULL DEFAULT NULL COMMENT '发送所有经营主体，与经营类目无关：1：是；0：否',
-    `create_by`                          bigint(20)                                                    NULL DEFAULT NULL,
-    `create_user_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '创建人昵称',
-    `create_time`                        datetime                                                      NULL DEFAULT NULL,
-    `update_by`                          bigint(20)                                                    NULL DEFAULT NULL,
-    `update_user_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '修改人昵称',
-    `update_time`                        datetime                                                      NULL DEFAULT NULL,
+    `mobile_system_notice_reminder_flag` tinyint(4) NULL DEFAULT NULL COMMENT '手机系统通知提醒。0：不提醒；1：提醒',
+    `notice_center_display`              tinyint(4) NULL DEFAULT NULL COMMENT '是否在公告中心显示。0：不显示；1：显示',
+    `client_type`                        tinyint(4) NULL DEFAULT NULL COMMENT '客户端类型：1：admin后台管理；2：管理后台',
+    `content_flag`                       tinyint(4) NULL DEFAULT NULL COMMENT '公告内容类型：1：内容；2：外链',
+    `send_all_farm_flag`                 tinyint(4) NULL DEFAULT NULL COMMENT '发送所有经营主体，与经营类目无关：1：是；0：否',
+    `create_by`                          bigint(20) NULL DEFAULT NULL,
+    `create_user_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建人昵称',
+    `create_time`                        datetime NULL DEFAULT NULL,
+    `update_by`                          bigint(20) NULL DEFAULT NULL,
+    `update_user_name`                   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '修改人昵称',
+    `update_time`                        datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
@@ -158,10 +158,10 @@ CREATE TABLE `tbl_government_notice`
 DROP TABLE IF EXISTS `tbl_government_notice_area_ref`;
 CREATE TABLE `tbl_government_notice_area_ref`
 (
-    `id`                   bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键id',
-    `government_notice_id` bigint(20)                                                    NULL DEFAULT NULL COMMENT '公告id',
-    `area_type`            tinyint(4)                                                    NULL DEFAULT 0 COMMENT '区域类别 0 全国 1 省 2 市 3 区 4镇 5村',
-    `area_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '地区ID',
+    `id`                   bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `government_notice_id` bigint(20) NULL DEFAULT NULL COMMENT '公告id',
+    `area_type`            tinyint(4) NULL DEFAULT 0 COMMENT '区域类别 0 全国 1 省 2 市 3 区 4镇 5村',
+    `area_id`              varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '地区ID',
     `area_name`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '地区名称',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
@@ -181,8 +181,8 @@ CREATE TABLE `tbl_government_notice_visit_history`
     `government_notice_id` bigint(20) NULL DEFAULT NULL COMMENT '公告',
     `user_id`              bigint(20) NULL DEFAULT NULL COMMENT '用户id，匿名用户访问时，此字段为null',
     `user_type`            tinyint(4) NULL DEFAULT NULL COMMENT '1：co 2：gov 3：admin(还有其他端在扩展)',
-    `create_time`          datetime   NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`          datetime   NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `create_time`          datetime NULL DEFAULT CURRENT_TIMESTAMP,
+    `update_time`          datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
@@ -191,4 +191,5 @@ CREATE TABLE `tbl_government_notice_visit_history`
   ROW_FORMAT = DYNAMIC;
 
 
-SET FOREIGN_KEY_CHECKS = 1;
+SET
+FOREIGN_KEY_CHECKS = 1;

@@ -28,14 +28,13 @@ public class ChandaoIndexPipeLine extends FilePersistentBase implements Pipeline
     public void process(ResultItems resultItems, Task task) {
         String path = System.getProperty("user.dir") + "\\lei-project\\lei-spider\\chandao\\target\\chandaoindex\\";
         try {
-            PrintWriter printWriter = new PrintWriter(new FileWriter(this.getFile(path + UUID.randomUUID() +"-chandaoindex.json")));
+            PrintWriter printWriter = new PrintWriter(new FileWriter(this.getFile(path + UUID.randomUUID() + "-chandaoindex.json")));
 
             Map<String, Object> itemsAll = resultItems.getAll();
             List<ChanDaoTree> tree = (List<ChanDaoTree>) itemsAll.get("tree");
             printWriter.write(JSON.toJSONString(tree));
             printWriter.close();
-        }
-        catch (IOException var5) {
+        } catch (IOException var5) {
             log.error(path + resultItems.getRequest().getUrl() + ".json" + "写入错误！！！");
         }
 

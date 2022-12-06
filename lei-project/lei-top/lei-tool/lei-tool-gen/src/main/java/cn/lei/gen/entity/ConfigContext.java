@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 public class ConfigContext {
 
 
-    public ConfigContext(String sourcePath, String outputPath){
-        Properties properties = PropsUtil.loadProps(sourcePath+Constant.CONFIG_PROPS);
+    public ConfigContext(String sourcePath, String outputPath) {
+        Properties properties = PropsUtil.loadProps(sourcePath + Constant.CONFIG_PROPS);
         setSourcePath(sourcePath);
         setOutputPath(outputPath);
 
@@ -35,7 +35,7 @@ public class ConfigContext {
     }
 
     public ConfigContext(String sourcePath, String outputPath, boolean a) {
-        Properties properties = PropsUtil.loadProps(sourcePath+Constant.CONFIG_PROPS);
+        Properties properties = PropsUtil.loadProps(sourcePath + Constant.CONFIG_PROPS);
         setSourcePath(sourcePath);
         setOutputPath(outputPath);
 

@@ -136,7 +136,8 @@ public class MapingVillage {
         }
         //写入文件
 
-        ExcelWriter wr = new ExcelWriter("D:\\三调—地块矢量文件镇村数据赋值" + StringUtils.right(String.valueOf(System.currentTimeMillis()), 4) + ".xlsx", "省市区镇村信息");
+        ExcelWriter wr = new ExcelWriter(
+                "D:\\三调—地块矢量文件镇村数据赋值" + StringUtils.right(String.valueOf(System.currentTimeMillis()), 4) + ".xlsx", "省市区镇村信息");
         wr.writeHeadRow(Arrays.asList(new String[]{"市id", "市名称", "区id", "区名称", "镇id", "镇名称", "村id", "村名称"}));
         wr.write(areaList);
         wr.setSheet("镇村匹配");
@@ -161,7 +162,7 @@ public class MapingVillage {
         lines.add("=VLOOKUP(B2,省市区镇村信息!A:H,8)");
         lines.add("\n"
                 + "=CONCATENATE(\"update sde.XXX  set      \"city_id = \",\"'\",C2,\"'\",\",\"\"city_name = \",\"'\",D2,\"'\",\",\"       \"county_id = \",\"'\",E2,\"'\",\",\"\"county_name = \",\"'\",F2,\"'\",\",\"   town_id = \",\"'\",G2,\"'\",\",\",\"town_name = \",\"'\",H2,\"'\",\",\",\"village_id = \",\"'\",I2,\"'\",\",\",\"village_name = \",\"'\",J2,\"'\",\" where QSDWMC = \",\"'\",A2,\"'\",\";\")");
-        mapingList.set(0,lines);
+        mapingList.set(0, lines);
         wr.write(mapingList).flush();
         //        try {
         //

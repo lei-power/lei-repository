@@ -56,8 +56,7 @@ public class ChandaoIndexProcessor implements PageProcessor {
                         tree.add(chanDaoTree);
                     }
                 }
-            }
-            else {
+            } else {
                 String path2 = path + "/" + node.xpath("//a/@title").get();
                 genNodes(subNodes, path2, tree);
             }

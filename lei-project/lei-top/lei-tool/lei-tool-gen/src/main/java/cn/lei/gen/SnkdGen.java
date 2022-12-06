@@ -42,7 +42,7 @@ public class SnkdGen {
             String tableName = source.get("tableName");
             String fileName = source.get("fileName");
             String packageName = source.get("packageName");
-            log.info("========================开始生成表{}===================================",tableName);
+            log.info("========================开始生成表{}===================================", tableName);
 
             //得到数据库表的元数据
             List<Map<String, Object>> resultList = MetaUtil.getTableMeta(mysql_lcoal, tableName).getColumns().stream().map(temp -> {
@@ -58,7 +58,7 @@ public class SnkdGen {
             System.out.println("columnDefinitionList:" + columnDefinitionList);
             //生成代码
             ConfigContext configContext = new ConfigContext();
-            configContext.setOutputPath(cn.hutool.core.io.FileUtil.getAbsolutePath("/snkd_gen")+"/");
+            configContext.setOutputPath(cn.hutool.core.io.FileUtil.getAbsolutePath("/snkd_gen") + "/");
             configContext.setSourcePath(cn.hutool.core.io.FileUtil.getAbsolutePath("snkd_vm"));
             configContext.setTargetName(fileName);
             configContext.setTargetTable(tableName);
@@ -73,7 +73,7 @@ public class SnkdGen {
 
     private List<Map<String, String>> getSources() {
         FileReader fileReader = FileReader.create(cn.hutool.core.io.FileUtil.file("classpath:table_source.csv"));
-        log.info("========================读取源信息{}===================================",fileReader.readLines());
+        log.info("========================读取源信息{}===================================", fileReader.readLines());
         //读取的文件逗号分割，按顺序为tableName，fileName,packageName
         List<Map<String, String>> mapList = fileReader.readLines().stream().map(str -> {
             String[] split = StringUtils.split(str, ",");

@@ -53,7 +53,6 @@ public class StringUtil {
     }
 
 
-
     /**
      * 将驼峰风格替换为下划线风格
      */
@@ -73,7 +72,7 @@ public class StringUtil {
      * 将下划线风格替换为驼峰风格
      */
     public static String underlineToCamelhump(String str) {
-        if(isNotEmpty(str)){
+        if (isNotEmpty(str)) {
             Matcher matcher = Pattern.compile("_[a-z]").matcher(str);
             StringBuilder builder = new StringBuilder(str);
             for (int i = 0; matcher.find(); i++) {
@@ -98,11 +97,11 @@ public class StringUtil {
      * 将字符串首字母大写
      */
     public static String firstToUpper(String str) {
-        if(isNotEmpty(str)){
-            if(str.length()>1){
+        if (isNotEmpty(str)) {
+            if (str.length() > 1) {
                 return Character.toUpperCase(str.charAt(0)) + str.substring(1);
-            }else{
-                return Character.toUpperCase(str.charAt(0))+"";
+            } else {
+                return Character.toUpperCase(str.charAt(0)) + "";
             }
         }
         return "";

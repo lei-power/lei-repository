@@ -13,18 +13,18 @@ import lombok.Data;
 @ApiModel
 public class Admin${entity}GetReq{
 
-    @ApiModelProperty(value="id")
-    private Long id;
+@ApiModelProperty(value="id")
+private Long id;
 
 
-    public BaseResp checkParam(){
+public BaseResp checkParam(){
 
-        if(this.id==null || this.id<=0L){
-            return BaseResp.failByParamError();
-        }
+if(this.id==null || this.id<=0L){
+return BaseResp.failByParamError();
+}
 
-        return BaseResp.success();
-    }
+return BaseResp.success();
+}
 
 
 }

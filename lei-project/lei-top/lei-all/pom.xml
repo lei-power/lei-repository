@@ -43,8 +43,6 @@
         </dependency>
         <!--         集成swagger相关 end-->
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>

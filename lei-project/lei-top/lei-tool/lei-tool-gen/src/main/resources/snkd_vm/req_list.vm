@@ -13,23 +13,23 @@ import lombok.Data;
 @ApiModel
 public class Gov${entity}ListReq{
 
-    @ApiModelProperty(value="每页个数")
-    private Integer pageSize;
+@ApiModelProperty(value="每页个数")
+private Integer pageSize;
 
-    @ApiModelProperty(value="第几页，从1开始")
-    private Integer pageNo;
+@ApiModelProperty(value="第几页，从1开始")
+private Integer pageNo;
 
-    @ApiModelProperty(value="关键字，为null或者空查询全部")
-    private String keyword;
+@ApiModelProperty(value="关键字，为null或者空查询全部")
+private String keyword;
 
-    public BaseResp checkParam(){
-        if(this.pageSize==null || this.pageSize==0){
-            return BaseResp.failByParamError();
-        }
-        if(this.pageNo==null || this.pageNo==0){
-            return BaseResp.failByParamError();
-        }
-        return BaseResp.success();
-    }
+public BaseResp checkParam(){
+if(this.pageSize==null || this.pageSize==0){
+return BaseResp.failByParamError();
+}
+if(this.pageNo==null || this.pageNo==0){
+return BaseResp.failByParamError();
+}
+return BaseResp.success();
+}
 
 }

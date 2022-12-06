@@ -1,7 +1,6 @@
-
-
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET
+FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for sys_resource
@@ -9,17 +8,17 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `sys_resource`;
 CREATE TABLE `sys_resource`
 (
-    `id`         int(20)                                                      NOT NULL AUTO_INCREMENT COMMENT '标识',
-    `name`       varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '资源名称',
-    `permission` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '权限标识',
-    `type`       int(2)                                                       NULL     DEFAULT NULL COMMENT '资源类型   1:菜单    2：按钮',
-    `parent_id`  int(20)                                                      NULL     DEFAULT NULL COMMENT '父资源id',
-    `web_url`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT 'web页面地址',
-    `sort_num`   int(20)                                                      NULL     DEFAULT NULL COMMENT '排序',
-    `menu_icon`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '菜单图标',
-    `icon_color` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '菜单图标颜色',
+    `id`         int(20) NOT NULL AUTO_INCREMENT COMMENT '标识',
+    `name`       varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
+    `permission` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限标识',
+    `type`       int(2) NULL DEFAULT NULL COMMENT '资源类型   1:菜单    2：按钮',
+    `parent_id`  int(20) NULL DEFAULT NULL COMMENT '父资源id',
+    `web_url`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'web页面地址',
+    `sort_num`   int(20) NULL DEFAULT NULL COMMENT '排序',
+    `menu_icon`  varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
+    `icon_color` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标颜色',
     `target`     varchar(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '_self' COMMENT '相当于 a 链接的 target 属性：_blank,_self',
-    `menu_cat`   tinyint(4)                                                   NOT NULL DEFAULT 1 COMMENT '菜单分类，只在type=1时候有效，采用位运算，取值位一下取值的和：1-web端，2-手机H5端',
+    `menu_cat`   tinyint(4) NOT NULL DEFAULT 1 COMMENT '菜单分类，只在type=1时候有效，采用位运算，取值位一下取值的和：1-web端，2-手机H5端',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 536
@@ -705,12 +704,12 @@ VALUES (535, '禁用', 'tasktype:forbidden', 2, 518, '', 1, 'ios-paper-outline',
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`
 (
-    `id`          bigint(20)                                                    NOT NULL AUTO_INCREMENT,
-    `role_name`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '角色名称',
+    `id`          bigint(20) NOT NULL AUTO_INCREMENT,
+    `role_name`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名称',
     `role_desc`   varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色描述',
-    `sort_num`    int(11)                                                       NULL DEFAULT NULL COMMENT '排序字段，越小越靠前',
-    `create_time` datetime                                                      NULL DEFAULT NULL,
-    `update_time` datetime                                                      NULL DEFAULT NULL,
+    `sort_num`    int(11) NULL DEFAULT NULL COMMENT '排序字段，越小越靠前',
+    `create_time` datetime NULL DEFAULT NULL,
+    `update_time` datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 26
@@ -2459,18 +2458,18 @@ VALUES (22, 463);
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
-    `id`                 bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '主键，采用idgen生成',
-    `username`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '登录账号',
-    `nickname`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '昵称，正式姓名',
-    `password`           varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '密码',
-    `enable`             tinyint(4)                                                    NULL     DEFAULT 1 COMMENT '是否启用：1启用，0冻结',
-    `head_url`           text CHARACTER SET utf8 COLLATE utf8_general_ci               NULL COMMENT '头像url',
-    `admin_flag`         tinyint(4)                                                    NOT NULL DEFAULT 0 COMMENT '是否超级管理员：1-是，0-否，如果是超级管理员，标识账号内置，不可修改，不可删除',
-    `login_time`         datetime                                                      NULL     DEFAULT NULL COMMENT '最近登录时间',
-    `role_id`            bigint(20)                                                    NULL     DEFAULT 0 COMMENT '角色id，如果是内置的超级管理员账号，则不需要设置该字段，该字段取0',
-    `create_time`        datetime                                                      NULL     DEFAULT NULL,
-    `update_time`        datetime                                                      NULL     DEFAULT NULL,
-    `edit_password_flag` tinyint(2)                                                    NOT NULL DEFAULT 0 COMMENT '该账号是否已强制修改密码 true 是 false 否',
+    `id`                 bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键，采用idgen生成',
+    `username`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
+    `nickname`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '昵称，正式姓名',
+    `password`           varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
+    `enable`             tinyint(4) NULL DEFAULT 1 COMMENT '是否启用：1启用，0冻结',
+    `head_url`           text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '头像url',
+    `admin_flag`         tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否超级管理员：1-是，0-否，如果是超级管理员，标识账号内置，不可修改，不可删除',
+    `login_time`         datetime NULL DEFAULT NULL COMMENT '最近登录时间',
+    `role_id`            bigint(20) NULL DEFAULT 0 COMMENT '角色id，如果是内置的超级管理员账号，则不需要设置该字段，该字段取0',
+    `create_time`        datetime NULL DEFAULT NULL,
+    `update_time`        datetime NULL DEFAULT NULL,
+    `edit_password_flag` tinyint(2) NOT NULL DEFAULT 0 COMMENT '该账号是否已强制修改密码 true 是 false 否',
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE INDEX `uqi_username` (`username`) USING BTREE
 ) ENGINE = InnoDB
@@ -2493,7 +2492,7 @@ VALUES (1, 'superadmin', '超管', 'e10adc3949ba59abbe56e057f20f883e', 1,
 DROP TABLE IF EXISTS `tbl_user_salt`;
 CREATE TABLE `tbl_user_salt`
 (
-    `user_id` bigint(20)                                                   NOT NULL,
+    `user_id` bigint(20) NOT NULL,
     `salt`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
     PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB
@@ -2505,21 +2504,22 @@ CREATE TABLE `tbl_user_salt`
 -- Records of tbl_user_salt
 -- ----------------------------
 
-SET FOREIGN_KEY_CHECKS = 1;
+SET
+FOREIGN_KEY_CHECKS = 1;
 
 
 
 CREATE TABLE `sys_user_token`
 (
-    `id`               bigint(20)  NOT NULL AUTO_INCREMENT,
-    `user_id`          bigint(20)  NOT NULL DEFAULT '0' COMMENT '用户id',
+    `id`               bigint(20) NOT NULL AUTO_INCREMENT,
+    `user_id`          bigint(20) NOT NULL DEFAULT '0' COMMENT '用户id',
     `access_token`     varchar(64) NOT NULL COMMENT '访问的accessToken',
-    `client_type`      tinyint(4)           DEFAULT '1' COMMENT '客户端类型：1-webH5，2-安卓端，3-ios端',
-    `token_status`     tinyint(4)           DEFAULT '1' COMMENT '状态;1-可用，0-不可用',
-    `expire_time`      datetime             DEFAULT NULL COMMENT '失效时间，过期后不可使用',
-    `refresh_date_str` varchar(16)          DEFAULT NULL COMMENT '刷新token日期字符串，格式：yyyy-MM-dd，如果当前刷新过了，则无需重复刷新',
-    `create_time`      datetime             DEFAULT NULL,
-    `update_time`      datetime             DEFAULT NULL,
+    `client_type`      tinyint(4) DEFAULT '1' COMMENT '客户端类型：1-webH5，2-安卓端，3-ios端',
+    `token_status`     tinyint(4) DEFAULT '1' COMMENT '状态;1-可用，0-不可用',
+    `expire_time`      datetime    DEFAULT NULL COMMENT '失效时间，过期后不可使用',
+    `refresh_date_str` varchar(16) DEFAULT NULL COMMENT '刷新token日期字符串，格式：yyyy-MM-dd，如果当前刷新过了，则无需重复刷新',
+    `create_time`      datetime    DEFAULT NULL,
+    `update_time`      datetime    DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE KEY `uqi_access_token` (`access_token`) USING BTREE
 ) ENGINE = InnoDB
@@ -2536,8 +2536,8 @@ CREATE TABLE `tbl_admin_request_log`
     `request_method`     varchar(255) DEFAULT NULL COMMENT '请求方法',
     `request_body`       longtext COMMENT '请求参数',
     `response_body`      longtext COMMENT '返回参数',
-    `request_time`       int(11)      DEFAULT NULL COMMENT '消耗时长(单位:ms)',
-    `response_code`      int(11)    NOT NULL COMMENT '响应代码',
+    `request_time`       int(11) DEFAULT NULL COMMENT '消耗时长(单位:ms)',
+    `response_code`      int(11) NOT NULL COMMENT '响应代码',
     `response_msg`       varchar(255) DEFAULT NULL COMMENT '响应描述信息',
     `operator_user_id`   bigint(20) NOT NULL COMMENT '操作人id',
     `operator_user_name` varchar(64)  DEFAULT NULL COMMENT '操作人姓名',

@@ -16,56 +16,65 @@ import java.util.List;
 @Service
 public class Gov${entity}Service {
 
-	@Autowired
-	private ${entity}Manage ${entityFirstLower}Manage;
+@Autowired
+private ${entity}Manage ${entityFirstLower}Manage;
 
-    public BaseResp<ApiPageResp<Gov${entity}VO>> list(Gov${entity}ListReq reqModel) {
-    Integer pageNo = reqModel.getPageNo();
-    Integer pageSize = reqModel.getPageSize();
-    String keyword = reqModel.getKeyword();
-    Integer startIndex = (pageNo-1)*pageSize;
-    long totalCount = ${entityFirstLower}Manage.getCountByKeywordAndPage(keyword);
-    if(totalCount==0){
-        return BaseResp.success(new ApiPageResp());
-    }
-    List<${entity}> list = ${entityFirstLower}Manage.getListByKeywordAndPage(keyword,startIndex, pageSize);
-    List<Gov${entity}VO> voList = Transfer.${entityFirstLower}ListToGov${entity}VOList(list);
-    ApiPageResp<Gov${entity}VO> respItem = new ApiPageResp(voList,totalCount);
-        return BaseResp.success(respItem);
-    }
+public BaseResp
+<ApiPageResp
+<Gov${entity}VO>> list(Gov${entity}ListReq reqModel) {
+  Integer pageNo = reqModel.getPageNo();
+  Integer pageSize = reqModel.getPageSize();
+  String keyword = reqModel.getKeyword();
+  Integer startIndex = (pageNo-1)*pageSize;
+  long totalCount = ${entityFirstLower}Manage.getCountByKeywordAndPage(keyword);
+  if(totalCount==0){
+  return BaseResp.success(new ApiPageResp());
+  }
+  List<${entity}> list = ${entityFirstLower}Manage.getListByKeywordAndPage(keyword,startIndex, pageSize);
+  List
+  <Gov${entity}VO> voList = Transfer.${entityFirstLower}ListToGov${entity}VOList(list);
+    ApiPageResp
+    <Gov${entity}VO> respItem = new ApiPageResp(voList,totalCount);
+      return BaseResp.success(respItem);
+      }
 
-    public BaseResp<Gov${entity}VO> get(Gov${entity}GetReq reqModel) {
+      public BaseResp
+      <Gov${entity}VO> get(Gov${entity}GetReq reqModel) {
         Long id = reqModel.getId();
-        ${entity} po = ${entityFirstLower}Manage.getById(id);
+          ${entity} po = ${entityFirstLower}Manage.getById(id);
         Gov${entity}VO vo = Transfer.${entityFirstLower}ToGov${entity}VO(po);
         return BaseResp.success(vo);
         }
 
-    public BaseResp<Gov${entity}VO> add(Gov${entity}AddReq reqModel) {
-        BaseResp<${entity}> resp = ${entityFirstLower}Manage.create${entity}(#foreach($column in $columns)#if($column.javaFieldName!='id') reqModel.get${column.javaFieldNameUF}()#if($foreach.hasNext),#end#end#end);
-        if(!resp.isSuccess()){
-        return BaseResp.returnResp(resp);
-        }
+        public BaseResp
+        <Gov${entity}VO> add(Gov${entity}AddReq reqModel) {
+          BaseResp<${entity}> resp = ${entityFirstLower}Manage.create${entity}(#foreach($column in $columns)#if($column.javaFieldName!='id')
+            reqModel.get${column.javaFieldNameUF}()#if($foreach.hasNext),#end#end#end);
+          if(!resp.isSuccess()){
+          return BaseResp.returnResp(resp);
+          }
 
-        ${entity} po = resp.getObj();
-        Gov${entity}VO vo = Transfer.${entityFirstLower}ToGov${entity}VO(po);
-        return BaseResp.success(vo);
-        }
+            ${entity} po = resp.getObj();
+          Gov${entity}VO vo = Transfer.${entityFirstLower}ToGov${entity}VO(po);
+          return BaseResp.success(vo);
+          }
 
 
-    public BaseResp<Gov${entity}VO> edit(Gov${entity}EditReq reqModel) {
-        BaseResp<${entity}> resp = ${entityFirstLower}Manage.edit${entity}(#foreach($column in $columns) reqModel.get${column.javaFieldNameUF}()#if($foreach.hasNext),#end#end);
-        if(!resp.isSuccess()){
-        return BaseResp.returnResp(resp);
-        }
+          public BaseResp
+          <Gov${entity}VO> edit(Gov${entity}EditReq reqModel) {
+            BaseResp<${entity}> resp = ${entityFirstLower}Manage.edit${entity}(#foreach($column in $columns) reqModel.get${column.javaFieldNameUF}
+              ()#if($foreach.hasNext),#end#end);
+            if(!resp.isSuccess()){
+            return BaseResp.returnResp(resp);
+            }
 
-        ${entity} po = resp.getObj();
-        Gov${entity}VO vo = Transfer.${entityFirstLower}ToGov${entity}VO(po);
-        return BaseResp.success(vo);
-        }
+              ${entity} po = resp.getObj();
+            Gov${entity}VO vo = Transfer.${entityFirstLower}ToGov${entity}VO(po);
+            return BaseResp.success(vo);
+            }
 
-    public BaseResp del(Gov${entity}DelReq reqModel) {
-    return ${entityFirstLower}Manage.remove${entity}(reqModel.getId());
-    }
+            public BaseResp del(Gov${entity}DelReq reqModel) {
+            return ${entityFirstLower}Manage.remove${entity}(reqModel.getId());
+            }
 
-}
+            }

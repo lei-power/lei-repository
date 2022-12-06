@@ -10,7 +10,7 @@ tags:
 
 ---
 
- [https://blog.csdn.net/cainiao_user/article/details/76423495](https://blog.csdn.net/cainiao_user/article/details/76423495)
+[https://blog.csdn.net/cainiao_user/article/details/76423495](https://blog.csdn.net/cainiao_user/article/details/76423495)
 
 &nbsp;
 
@@ -19,17 +19,16 @@ Future是Java5添加的类，用来描述一个异步计算的结果。可以用
 ```java
 public class BasicFuture {
 
-  public static void main(String[] args) throws ExecutionException, 
-  InterruptedException {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-    ExecutorService es = Executors.newFixedThreadPool(10);
-    Future<Integer> f = es.submit(() -> {
-        // 长时间的异步计算
-        // ...
-        // 然后返回结果
-        return 100;
-    });
-    f.get();
+        ExecutorService es = Executors.newFixedThreadPool(10);
+        Future<Integer> f = es.submit(() -> {
+            // 长时间的异步计算
+            // ...
+            // 然后返回结果
+            return 100;
+        });
+        f.get();
     }
 }
 ```
@@ -39,20 +38,19 @@ Future以及相关使用方法提供了异步执行任务的能力，但对于�
 很多语言像Node.js，采用回调的方式实现异步编程。Java的一些框架像Netty，自己扩展Java的Future接口，提供了addListener等多个扩展方法：
 
 ```java
-ChannelFuture future = bootstrap.connect(new InetSocketAddress(host, port));
-future.addListener(new ChannelFutureListener()
-{
-    @Override
-    public void operationComplete(ChannelFuture future) throws Exception
-    {
-        if (future.isSuccess()) {
-            // SUCCESS
+ChannelFuture future=bootstrap.connect(new InetSocketAddress(host,port));
+        future.addListener(new ChannelFutureListener()
+        {
+@Override public void operationComplete(ChannelFuture future)throws Exception
+        {
+        if(future.isSuccess()){
+        // SUCCESS
         }
-        else {
-            // FAILURE
+        else{
+        // FAILURE
         }
-    }
-});
+        }
+        });
 ```
 
 guava里面也提供了通用的扩展Future: ListenableFuture\SettableFuture以及辅助类Futures等，方便异步编程。
@@ -67,7 +65,7 @@ CompletableFuture 类实现了CompletionStage和Future接口，所以还是可�
 
 ```java
 public T get()
-public T get(long timeout, TimeUnit unit)
+public T get(long timeout,TimeUnit unit)
 public T getNow(T valueIfAbsent)
 public T join()
 ```
@@ -87,11 +85,11 @@ CompletableFuture.compleatedFuture是一个静态辅助方法，用来返回一�
 ```java
 public static CompletableFuture<Void> runAsync(Runnable runnable)
 
-public static CompletableFuture<Void> runAsync(Runnable runnable, Executor executor)
+public static CompletableFuture<Void> runAsync(Runnable runnable,Executor executor)
 
-public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier)
+public static<U> CompletableFuture<U> supplyAsync(Supplier<U> supplier)
 
-public static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier, Executor executor)
+public static<U> CompletableFuture<U> supplyAsync(Supplier<U> supplier,Executor executor)
 ```
 
 以Async结尾并且没有指定Executor的方法会使用ForkJoinPool.commonPool() 作为它的线程池执行异步代码。
@@ -103,10 +101,10 @@ supplyAsync方法以Supplier&lt;U&gt;函数式接口类型为参数，Completabl
 方法的参数类型都是函数式接口，所以可以使用lambda表达式实现异步任务。如：
 
 ```java
-CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
-    //长时间的计算任务
-    return "·00";
-});
+CompletableFuture<String> future=CompletableFuture.supplyAsync(()->{
+        //长时间的计算任务
+        return"·00";
+        });
 ```
 
 **计算结果完成时的处理**
@@ -114,13 +112,13 @@ CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
 当CompletableFuture的计算结果完成，或者抛出异常的时候，可以执行特定的Action。主要是下面的方法：
 
 ```java
-public CompletableFuture<T> whenComplete(BiConsumer<? super T,? super Throwable> action)
+public CompletableFuture<T> whenComplete(BiConsumer<? super T,?super Throwable>action)
 
-public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,? super Throwable> action)
+public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,?super Throwable>action)
 
-public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,? super Throwable> action, Executor executor)
+public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,?super Throwable>action,Executor executor)
 
-public CompletableFuture<T> exceptionally(Function<Throwable,? extends T> fn)
+public CompletableFuture<T> exceptionally(Function<Throwable,?extends T> fn)
 ```
 
 可以看到Action的类型是BiConsumer&lt;? super T,? super Throwable&gt;它可以处理正常的计算结果，或者异常情况。
@@ -129,8 +127,10 @@ public CompletableFuture<T> exceptionally(Function<Throwable,? extends T> fn)
 
 ```java
 public class BasicFuture {
+
     private static Random rand = new Random();
     private static long t = System.currentTimeMillis();
+
     static int getMoreData() {
         System.out.println("begin to start compute");
         try {
@@ -138,34 +138,36 @@ public class BasicFuture {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("end to compute,passed " + (System.currentTimeMillis()-t));
+        System.out.println("end to compute,passed " + (System.currentTimeMillis() - t));
         return rand.nextInt(1000);
+    }
+
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(BasicFuture::getMoreData);
+        Future<Integer> f = future.whenComplete((v, e) -> {
+            System.out.println(v);
+            System.out.println(e);
+        });
+
+        System.out.println(f.get());
+    }
 }
-
-
-public static void main(String[] args) throws ExecutionException,     InterruptedException {
-    CompletableFuture<Integer> future =     CompletableFuture.supplyAsync(BasicFuture::getMoreData);
-    Future<Integer> f = future.whenComplete((v,e) -> {
-    System.out.println(v);
-    System.out.println(e);
-});
-
-    System.out.println(f.get());
-}}
 ```
 
- 下面一组方法虽然也返回CompletableFuture对象，但是对象的值和原来的CompletableFuture计算的值不同，当原先的CompletableFuture的值计算完成或抛异常的时候，会触发CompletableFuture对象的计算。
+下面一组方法虽然也返回CompletableFuture对象，但是对象的值和原来的CompletableFuture计算的值不同，当原先的CompletableFuture的值计算完成或抛异常的时候，会触发CompletableFuture对象的计算。
 
 **转换**
 
-CompletableFuture可以作为monad(单子)和functor. 由于回调风格的实现，我们不必因为等待一个计算完成而阻塞着调用线程，而是告诉CompletableFuture当计算完成的时候请执行某个Function. 还可以串联起来。
+CompletableFuture可以作为monad(单子)和functor. 由于回调风格的实现，我们不必因为等待一个计算完成而阻塞着调用线程，而是告诉CompletableFuture当计算完成的时候请执行某个Function.
+还可以串联起来。
 
 ```java
-public <U> CompletableFuture<U> thenApply(Function<? super T,? extends U> fn)
+public<U> CompletableFuture<U> thenApply(Function<? super T,?extends U>fn)
 
-public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn)
+public<U> CompletableFuture<U> thenApplyAsync(Function<? super T,?extends U>fn)
 
-public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn, Executor executor)
+public<U> CompletableFuture<U> thenApplyAsync(Function<? super T,?extends U>fn,Executor executor)
 ```
 
 &nbsp;

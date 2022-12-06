@@ -1,22 +1,23 @@
-
-	public static Gov${entity}VO ${entityFirstLower}ToGov${entity}VO(${entity} po){
-		if(po==null){
-			return null;
-		}
-		Gov${entity}VO vo = new Gov${entity}VO();
-		BeanUtils.copyProperties(po,vo);
-		return vo;
-	}
-	public static List<Gov${entity}VO> ${entityFirstLower}ListToGov${entity}VOList(List<${entity}> list){
-		if(list==null || list.isEmpty()){
-			return new ArrayList<>();
-		}
-		List<Gov${entity}VO> voList = new ArrayList<>(list.size());
-		for(${entity} index:list){
-			Gov${entity}VO item = Transfer.${entityFirstLower}ToGov${entity}VO(index);
-			voList.add(item);
-		}
-		return voList;
-	}
+public static Gov${entity}VO ${entityFirstLower}ToGov${entity}VO(${entity} po){
+if(po==null){
+return null;
+}
+Gov${entity}VO vo = new Gov${entity}VO();
+BeanUtils.copyProperties(po,vo);
+return vo;
+}
+public static List
+<Gov${entity}VO> ${entityFirstLower}ListToGov${entity}VOList(List<${entity}> list){
+  if(list==null || list.isEmpty()){
+  return new ArrayList<>();
+  }
+  List
+  <Gov${entity}VO> voList = new ArrayList<>(list.size());
+    for(${entity} index:list){
+    Gov${entity}VO item = Transfer.${entityFirstLower}ToGov${entity}VO(index);
+    voList.add(item);
+    }
+    return voList;
+    }
 
 

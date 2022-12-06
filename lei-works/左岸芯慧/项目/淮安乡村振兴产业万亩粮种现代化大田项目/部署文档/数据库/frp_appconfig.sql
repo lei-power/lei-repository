@@ -1,7 +1,6 @@
-
-
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET
+FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for sys_agreement
@@ -9,15 +8,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `sys_agreement`;
 CREATE TABLE `sys_agreement`
 (
-    `id`             bigint(20)                                                   NOT NULL,
-    `type_flag`      tinyint(4)                                                   NULL DEFAULT NULL COMMENT '类型。1:服务条款,2隐私条款',
+    `id`             bigint(20) NOT NULL,
+    `type_flag`      tinyint(4) NULL DEFAULT NULL COMMENT '类型。1:服务条款,2隐私条款',
     `agreement_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '协议名称',
     `title`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-    `content`        mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL,
-    `create_by`      bigint(20)                                                   NULL DEFAULT NULL,
-    `create_time`    timestamp                                                    NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    `update_by`      bigint(20)                                                   NULL DEFAULT NULL,
-    `update_time`    timestamp                                                    NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `content`        mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+    `create_by`      bigint(20) NULL DEFAULT NULL,
+    `create_time`    timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `update_by`      bigint(20) NULL DEFAULT NULL,
+    `update_time`    timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE INDEX `unq_typeflag` (`type_flag`) USING BTREE
 ) ENGINE = InnoDB
@@ -63,28 +62,28 @@ VALUES (67, 6, '新增用户协议', '用户协议',
 DROP TABLE IF EXISTS `sys_agri_res_feedback`;
 CREATE TABLE `sys_agri_res_feedback`
 (
-    `id`                      bigint(20)                                                    NOT NULL,
-    `company_id`              bigint(20)                                                    NULL DEFAULT NULL COMMENT '提交申请的企业id',
-    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '提交申请的企业名称',
-    `agri_res_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '农资名称',
-    `first_agri_category_id`  bigint(20)                                                    NULL DEFAULT NULL COMMENT '一级农资分类id',
-    `second_agri_category_id` bigint(20)                                                    NULL DEFAULT 0 COMMENT '二级农资分类id',
+    `id`                      bigint(20) NOT NULL,
+    `company_id`              bigint(20) NULL DEFAULT NULL COMMENT '提交申请的企业id',
+    `company_name`            varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '提交申请的企业名称',
+    `agri_res_name`           varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '农资名称',
+    `first_agri_category_id`  bigint(20) NULL DEFAULT NULL COMMENT '一级农资分类id',
+    `second_agri_category_id` bigint(20) NULL DEFAULT 0 COMMENT '二级农资分类id',
     `productor`               varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT '生产厂家',
-    `img_url`                 varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci       NULL DEFAULT NULL COMMENT '农资图片',
-    `img_url_big`             varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci       NULL DEFAULT '' COMMENT '大图地址',
-    `feedback_user_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '提交人id',
-    `feedback_phone`          varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '提交人手机号',
-    `user_company_name`       varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '用户在企业中的名称',
-    `status_flag`             tinyint(4)                                                    NULL DEFAULT 1 COMMENT '1：待审核，2通过，3不通过，4忽略',
-    `submit_time`             datetime                                                      NULL DEFAULT NULL COMMENT '提交时间',
-    `check_user_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '审核人id',
-    `check_nickname`          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci  NULL DEFAULT NULL COMMENT '审核人名称',
-    `check_time`              datetime                                                      NULL DEFAULT NULL COMMENT '审核时间',
+    `img_url`                 varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT '农资图片',
+    `img_url_big`             varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '大图地址',
+    `feedback_user_id`        bigint(20) NULL DEFAULT NULL COMMENT '提交人id',
+    `feedback_phone`          varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '提交人手机号',
+    `user_company_name`       varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户在企业中的名称',
+    `status_flag`             tinyint(4) NULL DEFAULT 1 COMMENT '1：待审核，2通过，3不通过，4忽略',
+    `submit_time`             datetime NULL DEFAULT NULL COMMENT '提交时间',
+    `check_user_id`           bigint(20) NULL DEFAULT NULL COMMENT '审核人id',
+    `check_nickname`          varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '审核人名称',
+    `check_time`              datetime NULL DEFAULT NULL COMMENT '审核时间',
     `check_fail_reason`       varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '备注：审核不通过原因',
-    `msg_send_status`         tinyint(2)                                                    NULL DEFAULT 0 COMMENT '短信发送状态0：失败，1：成功',
-    `msg_send_remark`         text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci         NULL COMMENT '短信发送描述',
-    `create_time`             datetime                                                      NULL DEFAULT NULL,
-    `update_time`             datetime                                                      NULL DEFAULT NULL,
+    `msg_send_status`         tinyint(2) NULL DEFAULT 0 COMMENT '短信发送状态0：失败，1：成功',
+    `msg_send_remark`         text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '短信发送描述',
+    `create_time`             datetime NULL DEFAULT NULL,
+    `update_time`             datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -95,33 +94,41 @@ CREATE TABLE `sys_agri_res_feedback`
 -- Records of sys_agri_res_feedback
 -- ----------------------------
 INSERT INTO `sys_agri_res_feedback`
-VALUES (443, 11770, '水产养殖证', '敌敌畏', 0, 0, '合肥哈哈哈哈', NULL, '', 124593, '15555223322', '神农3322', 1, '2021-03-04 14:14:23', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (443, 11770, '水产养殖证', '敌敌畏', 0, 0, '合肥哈哈哈哈', NULL, '', 124593, '15555223322', '神农3322', 1, '2021-03-04 14:14:23', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2021-03-04 14:14:23', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (444, 11770, '水产养殖证', '敌敌畏', 0, 0, '合肥哈哈哈哈', NULL, '', 124593, '15555223322', '神农3322', 1, '2021-03-04 14:14:23', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (444, 11770, '水产养殖证', '敌敌畏', 0, 0, '合肥哈哈哈哈', NULL, '', 124593, '15555223322', '神农3322', 1, '2021-03-04 14:14:23', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2021-03-04 14:14:23', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (445, 6181, '蔬菜&果园', '哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或', 0, 0, '萨芬撒高门大户sad考核科技开发的环境奋达科技货到付款很快就大家克服哈沙几号放假和大家大家奥斯卡索拉卡', NULL, '', 116595, '15956949585', 'cc', 2,
+VALUES (445, 6181, '蔬菜&果园', '哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或', 0, 0,
+        '萨芬撒高门大户sad考核科技开发的环境奋达科技货到付款很快就大家克服哈沙几号放假和大家大家奥斯卡索拉卡', NULL, '', 116595, '15956949585', 'cc', 2,
         '2021-03-09 10:11:33', 1, '超管', '2021-03-09 14:13:52', NULL, 1, '成功', '2021-03-09 10:11:33', '2021-03-09 14:13:52');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (446, 10027, '汪健的农场', '汪健的测试农资', 0, 0, '汪健的工厂', NULL, '', 115627, '18658831890', '神农1890', 1, '2021-03-09 10:55:55', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (446, 10027, '汪健的农场', '汪健的测试农资', 0, 0, '汪健的工厂', NULL, '', 115627, '18658831890', '神农1890', 1, '2021-03-09 10:55:55', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2021-03-09 10:55:55', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (447, 10027, '汪健的农场', 'test', 0, 0, 'test——prodoctor', NULL, '', 115627, '18658831890', '神农1890', 1, '2021-03-09 10:59:30', 0, NULL, NULL, NULL, 0,
+VALUES (447, 10027, '汪健的农场', 'test', 0, 0, 'test——prodoctor', NULL, '', 115627, '18658831890', '神农1890', 1, '2021-03-09 10:59:30', 0, NULL, NULL,
+        NULL, 0,
         NULL, '2021-03-09 10:59:30', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (448, 2532, '上海演示（正义）', '32423423423423423423', 0, 0,
         '4324234234234234234234234234234234234534645653453534543253645436543256345345342543265367457547455463456546546456543654645364564564564564', NULL,
         '', 105591, '18715065755', '张涛', 1, '2021-03-10 11:13:10', 0, NULL, NULL, NULL, 0, NULL, '2021-03-10 11:13:10', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (449, 2532, '上海演示（正义）', '1222', 0, 0, '的是根深蒂固的方式', NULL, '', 105591, '18715065755', '张涛', 1, '2021-03-10 11:25:13', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (449, 2532, '上海演示（正义）', '1222', 0, 0, '的是根深蒂固的方式', NULL, '', 105591, '18715065755', '张涛', 1, '2021-03-10 11:25:13', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2021-03-10 11:25:13', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (452, 926, '磐安天海中药有限', '一二三四五一二三四五一二三四五一二三四五', 0, 0,
         '一二三四五一二三四五一二三四五一一二三四五一二三四五一二三四五一一二三四五一二三四五一二三四五一一二三四五一二三四五一二三四五一一二三四五一二三四五一二三四五一一二三四五一二三四五一二三四五一一二三四五一二三四五一二三四五一一二三四五一二三四五一二三四五一大锅饭发鬼地方个高度固定发大范甘迪官方的滚动对郭德纲',
         NULL, '', 99562, '13182341525', '多比', 1, '2021-03-10 17:02:44', 0, NULL, NULL, NULL, 0, NULL, '2021-03-10 17:02:44', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (453, 926, '磐安天海中药有限', '11', 0, 0, '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十1222', NULL,
+VALUES (453, 926, '磐安天海中药有限', '11', 0, 0,
+        '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十1222',
+        NULL,
         '', 99562, '13182341525', '多比', 1, '2021-03-10 17:03:27', 0, NULL, NULL, NULL, 0, NULL, '2021-03-10 17:03:27', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (454, 11744, 'test', '哈哈哈', 0, 0, '嘿嘿', NULL, '', 105591, '18715065755', '神农5755', 1, '2021-03-11 10:51:57', 0, NULL, NULL, NULL, 0, NULL,
@@ -130,28 +137,35 @@ INSERT INTO `sys_agri_res_feedback`
 VALUES (455, 11744, 'test', 'test', 0, 0, '哈哈哈哈', NULL, '', 105591, '18715065755', '神农5755', 1, '2021-03-11 15:18:03', 0, NULL, NULL, NULL, 0, NULL,
         '2021-03-11 15:18:03', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (456, 6181, '蔬菜&果园', '12345678912345678900', 0, 0, '给大喊大叫记得记得记得看看继续坚持坚持坚持积极参加继续坚持奖学金', NULL, '', 116595, '15956949585', 'cc', 1,
+VALUES (456, 6181, '蔬菜&果园', '12345678912345678900', 0, 0, '给大喊大叫记得记得记得看看继续坚持坚持坚持积极参加继续坚持奖学金', NULL, '', 116595,
+        '15956949585', 'cc', 1,
         '2021-03-15 09:35:00', 0, NULL, NULL, NULL, 0, NULL, '2021-03-15 09:35:00', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (457, 6181, '蔬菜&果园', '好的记得记得你', 0, 0, '给大喊大叫的聚集地', NULL, '', 116595, '15956949585', 'cc', 1, '2021-03-15 09:46:34', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (457, 6181, '蔬菜&果园', '好的记得记得你', 0, 0, '给大喊大叫的聚集地', NULL, '', 116595, '15956949585', 'cc', 1, '2021-03-15 09:46:34', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2021-03-15 09:46:34', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (458, 2579, '上海众德农产品专业合作社', '驼鹿', 0, 0, '85888', NULL, '', 109671, '19956038826', '张静峰', 1, '2021-03-15 11:16:12', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (458, 2579, '上海众德农产品专业合作社', '驼鹿', 0, 0, '85888', NULL, '', 109671, '19956038826', '张静峰', 1, '2021-03-15 11:16:12', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2021-03-15 11:16:12', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (459, 11790, '3.21.0', '一二三四五六七八九人一二三四五六七八九人', 0, 0, '厂家厂家', NULL, '', 99562, '13182341525', '神农1525', 1, '2021-03-15 11:34:00', 0, NULL, NULL,
+VALUES (459, 11790, '3.21.0', '一二三四五六七八九人一二三四五六七八九人', 0, 0, '厂家厂家', NULL, '', 99562, '13182341525', '神农1525', 1,
+        '2021-03-15 11:34:00', 0, NULL, NULL,
         NULL, 0, NULL, '2021-03-15 11:34:00', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (460, 11790, '3.21.0', '01234567890123456789', 0, 0, '厂家厂家批发零售直销企业经营范围扩大了空间感生产出来吧……不过现在还是挺期待这样子说吧……好像也一样吗……', NULL, '', 99562, '13182341525',
+VALUES (460, 11790, '3.21.0', '01234567890123456789', 0, 0,
+        '厂家厂家批发零售直销企业经营范围扩大了空间感生产出来吧……不过现在还是挺期待这样子说吧……好像也一样吗……', NULL, '', 99562, '13182341525',
         '神农1525', 1, '2021-03-15 11:36:51', 0, NULL, NULL, NULL, 0, NULL, '2021-03-15 11:36:51', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (461, 11790, '3.21.0', '1', 0, 0, '2', NULL, '', 99562, '13182341525', '神农1525', 1, '2021-03-15 11:37:25', 0, NULL, NULL, NULL, 0, NULL,
         '2021-03-15 11:37:25', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (462, 10027, '汪健的农场', '1234', 0, 0, '12434', NULL, '', 115627, '18658831890', '神农1890', 1, '2021-03-15 14:34:15', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (462, 10027, '汪健的农场', '1234', 0, 0, '12434', NULL, '', 115627, '18658831890', '神农1890', 1, '2021-03-15 14:34:15', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2021-03-15 14:34:15', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (463, 6181, '蔬菜&果园', '大家都觉得就到家', 0, 0, '还是纠结的经典咖啡减肥', NULL, '', 116595, '15956949585', 'cc', 1, '2021-03-15 14:53:26', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (463, 6181, '蔬菜&果园', '大家都觉得就到家', 0, 0, '还是纠结的经典咖啡减肥', NULL, '', 116595, '15956949585', 'cc', 1, '2021-03-15 14:53:26', 0,
+        NULL, NULL, NULL, 0, NULL,
         '2021-03-15 14:53:26', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (464, 11790, '3.21.0', '一二三四', 0, 0, '啦啦啦', NULL, '', 99562, '13182341525', '多比', 1, '2021-03-15 18:09:17', 0, NULL, NULL, NULL, 0, NULL,
@@ -163,7 +177,8 @@ INSERT INTO `sys_agri_res_feedback`
 VALUES (466, 11790, '3.21.0', '1', 0, 0, '2', NULL, '', 99562, '13182341525', '多比', 4, '2021-03-16 09:34:30', 1, '超管', '2021-03-16 18:11:06', NULL, 1,
         '成功', '2021-03-16 09:34:30', '2021-03-16 18:11:06');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (467, 11790, '3.21.0', '一二三四一二三四五天一二三四五六七一二节', 0, 0, '咯哦', NULL, '', 99562, '13182341525', '多比', 2, '2021-03-16 17:07:49', 1, '超管',
+VALUES (467, 11790, '3.21.0', '一二三四一二三四五天一二三四五六七一二节', 0, 0, '咯哦', NULL, '', 99562, '13182341525', '多比', 2, '2021-03-16 17:07:49',
+        1, '超管',
         '2021-03-16 18:11:01', NULL, 1, '成功', '2021-03-16 17:07:49', '2021-03-16 18:11:01');
 INSERT INTO `sys_agri_res_feedback`
 VALUES (468, 6181, '蔬菜&果园', '不是记得记得亟待解决记得记得记得记得就记', 0, 0,
@@ -176,7 +191,8 @@ VALUES (469, 6181, '蔬菜&果园', '不是记得记得亟待解决记得记得�
         NULL, '', 116595, '15956949585', 'cc', 3, '2021-03-17 10:24:44', 1, '超管', '2021-03-17 10:27:54', '测试', 1, '成功', '2021-03-17 10:24:44',
         '2021-03-17 10:27:54');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (485, 11636, '合肥中天', '钉钉', 0, 0, '辅导费', NULL, '', 115149, '15551711621', '神农1621', 1, '2021-07-06 17:39:29', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (485, 11636, '合肥中天', '钉钉', 0, 0, '辅导费', NULL, '', 115149, '15551711621', '神农1621', 1, '2021-07-06 17:39:29', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2021-07-06 17:39:29', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (486, 10027, '汪健的农场一二三四五一二三四五一二三四五一二三四五一二三四五', '测试添加农资', 0, 0, '汪健生产', NULL,
@@ -199,30 +215,36 @@ VALUES (490, 6181, '蔬菜&果园', '地方还放假', 0, 0, '房管局房管局
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/snkoudai/655C33FF9B8FF97C3C848641280277F2.jpg', 116595, '15956949585', 'chengqing', 1,
         '2021-07-15 14:50:06', 0, NULL, NULL, NULL, 0, NULL, '2021-07-15 14:50:06', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (491, 10027, '汪健的农场一二三四五一二三四五一二三四五一二三四五一二三四五', '1111', 0, 0, '2222', NULL, NULL, 124585, '18856262053', '汪健', 1, '2021-07-15 15:22:05', 0, NULL,
+VALUES (491, 10027, '汪健的农场一二三四五一二三四五一二三四五一二三四五一二三四五', '1111', 0, 0, '2222', NULL, NULL, 124585, '18856262053', '汪健', 1,
+        '2021-07-15 15:22:05', 0, NULL,
         NULL, NULL, 0, NULL, '2021-07-15 15:22:05', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (492, 11994, '迭代28企业迭代28企业迭代28企业迭代28企业迭代28企业迭代28企业', '地方', 0, 0, '党委', NULL, NULL, 124575, '13637088252', '神农8252', 1, '2021-07-15 18:38:27', 0,
+VALUES (492, 11994, '迭代28企业迭代28企业迭代28企业迭代28企业迭代28企业迭代28企业', '地方', 0, 0, '党委', NULL, NULL, 124575, '13637088252', '神农8252', 1,
+        '2021-07-15 18:38:27', 0,
         NULL, NULL, NULL, 0, NULL, '2021-07-15 18:38:27', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (493, 12025, '4.9.0', '复合维生素', 0, 0, '巅峰计划多少放假发动机地方发动机的说法大富豪大厦', NULL, NULL, 116595, '15956949585', '神农9585', 1, '2021-07-16 13:57:16', 0, NULL,
+VALUES (493, 12025, '4.9.0', '复合维生素', 0, 0, '巅峰计划多少放假发动机地方发动机的说法大富豪大厦', NULL, NULL, 116595, '15956949585', '神农9585', 1,
+        '2021-07-16 13:57:16', 0, NULL,
         NULL, NULL, 0, NULL, '2021-07-16 13:57:16', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (494, 12025, '4.9.0', '让我也认为', 0, 0, '收到货收到货大叔大婶收到货收到货', NULL,
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/snkoudai/1DF79E62B65CDC48126041E444D1006A.png', 116595, '15956949585', '神农9585', 1,
         '2021-07-16 13:57:54', 0, NULL, NULL, NULL, 0, NULL, '2021-07-16 13:57:54', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (495, 2578, '上海阅乡农产品专业合作社', '测试123', 0, 0, '456', NULL, NULL, 99562, '13182341525', '田方永', 4, '2021-07-16 15:53:04', 1, '超管', '2021-11-30 14:52:33',
+VALUES (495, 2578, '上海阅乡农产品专业合作社', '测试123', 0, 0, '456', NULL, NULL, 99562, '13182341525', '田方永', 4, '2021-07-16 15:53:04', 1, '超管',
+        '2021-11-30 14:52:33',
         NULL, 1, '成功', '2021-07-16 15:53:04', '2021-11-30 14:52:33');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (496, 11800, '3.23.0', '发顺丰的是', 0, 0, '发顺丰', NULL, NULL, 99562, '13182341525', '神农1525', 4, '2021-07-16 16:32:53', 1, '超管', '2021-07-27 14:37:57',
+VALUES (496, 11800, '3.23.0', '发顺丰的是', 0, 0, '发顺丰', NULL, NULL, 99562, '13182341525', '神农1525', 4, '2021-07-16 16:32:53', 1, '超管',
+        '2021-07-27 14:37:57',
         NULL, 1, '成功', '2021-07-16 16:32:53', '2021-07-27 14:37:57');
 INSERT INTO `sys_agri_res_feedback`
 VALUES (497, 11800, '3.23.0', '111', 0, 0, '222', NULL,
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/snkoudai/8419DED754A23BCCDDFD4716C455BEAA.JPG', 99562, '13182341525', '神农1525', 1,
         '2021-07-16 16:33:29', 0, NULL, NULL, NULL, 0, NULL, '2021-07-16 16:33:29', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (498, 11800, '3.23.0', '人人通', 0, 0, '同仁堂', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2021-07-16 16:33:44', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (498, 11800, '3.23.0', '人人通', 0, 0, '同仁堂', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2021-07-16 16:33:44', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2021-07-16 16:33:44', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (499, 11800, '3.23.0', '11', 0, 0, '22', NULL,
@@ -248,16 +270,20 @@ VALUES (504, 2645, '上海正义园艺有限公司', '11', 0, 0, '22', NULL,
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/snkoudai/FF34399A82CC17DF6B1B71C79FE88119.jpg', 99562, '13182341525', '史火霞', 3,
         '2021-07-20 15:35:18', 1, '超管', '2021-07-23 17:12:37', '不付费', 1, '成功', '2021-07-20 15:35:18', '2021-07-23 17:12:37');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (505, 5325, 'EAP INC LTD', '化肥', 0, 0, 'a', NULL, NULL, 129618, '18610792080', 'zt', 2, '2021-10-24 14:39:54', 1, '超管', '2021-10-24 14:43:35', NULL,
+VALUES (505, 5325, 'EAP INC LTD', '化肥', 0, 0, 'a', NULL, NULL, 129618, '18610792080', 'zt', 2, '2021-10-24 14:39:54', 1, '超管', '2021-10-24 14:43:35',
+        NULL,
         1, '成功', '2021-10-24 14:39:54', '2021-10-24 14:43:35');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (506, 5325, 'EAP INC LTD', '化肥2', 0, 0, 'b', NULL, NULL, 115580, '13876180831', '神农0831', 2, '2021-10-24 14:41:34', 1, '超管', '2021-10-24 14:43:27',
+VALUES (506, 5325, 'EAP INC LTD', '化肥2', 0, 0, 'b', NULL, NULL, 115580, '13876180831', '神农0831', 2, '2021-10-24 14:41:34', 1, '超管',
+        '2021-10-24 14:43:27',
         NULL, 1, '成功', '2021-10-24 14:41:34', '2021-10-24 14:43:27');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (508, 12164, 'js测试企业', '啊实打实', 0, 0, '阿城市', NULL, NULL, 129653, '19955157561', '神农7561', 4, '2021-11-30 15:14:14', 1, '超管', '2021-11-30 15:14:25',
+VALUES (508, 12164, 'js测试企业', '啊实打实', 0, 0, '阿城市', NULL, NULL, 129653, '19955157561', '神农7561', 4, '2021-11-30 15:14:14', 1, '超管',
+        '2021-11-30 15:14:25',
         NULL, 1, '成功', '2021-11-30 15:14:14', '2021-11-30 15:14:25');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (509, 12164, 'js测试企业', '12121', 0, 0, '1212', NULL, NULL, 129653, '19955157561', '神农7561', 3, '2021-11-30 15:14:56', 1, '超管', '2021-11-30 15:15:14',
+VALUES (509, 12164, 'js测试企业', '12121', 0, 0, '1212', NULL, NULL, 129653, '19955157561', '神农7561', 3, '2021-11-30 15:14:56', 1, '超管',
+        '2021-11-30 15:15:14',
         '阿松大', 1, '成功', '2021-11-30 15:14:56', '2021-11-30 15:15:14');
 INSERT INTO `sys_agri_res_feedback`
 VALUES (516, 12644, '11', '12', 0, 0, '2', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-05-26 17:59:51', 0, NULL, NULL, NULL, 0, NULL,
@@ -266,22 +292,28 @@ INSERT INTO `sys_agri_res_feedback`
 VALUES (518, 12650, '迭代57蔬菜预测产量归档', '11', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 3, '2022-06-02 09:38:13', 104, '史火霞',
         '2022-06-06 13:54:58', '11', 1, '成功', '2022-06-02 09:38:13', '2022-06-06 13:54:58');
 INSERT INTO `sys_agri_res_feedback`
-VALUES (519, 12650, '迭代57蔬菜预测产量归档', '测试短信', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:28:42', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (519, 12650, '迭代57蔬菜预测产量归档', '测试短信', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:28:42', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2022-06-06 14:28:42', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (521, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:59:24', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (521, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:59:24', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2022-06-06 14:59:24', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (522, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:59:33', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (522, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:59:33', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2022-06-06 14:59:33', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (523, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:59:48', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (523, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 14:59:48', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2022-06-06 14:59:48', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (524, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 15:01:00', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (524, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 15:01:00', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2022-06-06 15:01:00', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (525, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 15:06:10', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (525, 12650, '迭代57蔬菜预测产量归档', '测试农资', 0, 0, '11', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 15:06:10', 0, NULL,
+        NULL, NULL, 0, NULL,
         '2022-06-06 15:06:10', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (526, 12652, '迭代57', '11', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 15:18:35', 0, NULL, NULL, NULL, 0, NULL,
@@ -293,7 +325,8 @@ INSERT INTO `sys_agri_res_feedback`
 VALUES (528, 12652, '迭代57', '11', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-06-06 15:29:13', 0, NULL, NULL, NULL, 0, NULL,
         '2022-06-06 15:29:13', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (541, 2645, '上海正义园艺有限公司企业', '晓风呀', 0, 0, '测试', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-07-14 14:26:40', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (541, 2645, '上海正义园艺有限公司企业', '晓风呀', 0, 0, '测试', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-07-14 14:26:40', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-07-14 14:26:41', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (542, 12664, '上海趣看科技有限公司', '测试农资品类', 0, 0, '合肥史丹利', NULL,
@@ -308,10 +341,12 @@ VALUES (544, 12664, '上海趣看科技有限公司', '测试农资入库', 0, 0
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/snkoudai/62AA3D8740C953531692DBE30C887222.png', 129802, '18119675311', '神农5311', 1,
         '2022-07-14 17:27:33', 0, NULL, NULL, NULL, 0, NULL, '2022-07-14 17:27:33', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (545, 2645, '上海正义园艺有限公司企业', '222', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-07-14 17:52:18', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (545, 2645, '上海正义园艺有限公司企业', '222', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-07-14 17:52:18', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-07-14 17:52:18', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (546, 12763, '多比迭代60农企业', '多比', 0, 0, '厂家厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-07-21 15:31:41', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (546, 12763, '多比迭代60农企业', '多比', 0, 0, '厂家厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-07-21 15:31:41', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-07-21 15:31:41', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (547, 12763, '多比迭代60农企业', '多比', 0, 0, '厂家', NULL,
@@ -322,27 +357,32 @@ VALUES (548, 12763, '多比迭代60农企业', 'hello ', 0, 0, 'hsh ', NULL,
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/snkd-app/9a93698c-dfed-42d2-8d2d-77b10be81c36.jpg', 99562, '13182341525', '神农1525', 1,
         '2022-07-21 15:36:03', 0, NULL, NULL, NULL, 0, NULL, '2022-07-21 15:36:03', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (549, 12763, '多比迭代60农企业', '一二三四五六七八九十一二三四五六七八九十', 0, 0, '生产厂家生产厂家六十一二三四五一二三四五一二三四五六七八九十头摸头诺托头诺木木屋', NULL, NULL, 99562, '13182341525', '神农1525', 1,
+VALUES (549, 12763, '多比迭代60农企业', '一二三四五六七八九十一二三四五六七八九十', 0, 0,
+        '生产厂家生产厂家六十一二三四五一二三四五一二三四五六七八九十头摸头诺托头诺木木屋', NULL, NULL, 99562, '13182341525', '神农1525', 1,
         '2022-07-21 17:05:31', 0, NULL, NULL, NULL, 0, NULL, '2022-07-21 17:05:31', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (550, 12763, '多比迭代60农企业', '农资', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-07-21 17:06:31', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (550, 12763, '多比迭代60农企业', '农资', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-07-21 17:06:31', 0, NULL, NULL, NULL,
+        0, NULL,
         '2022-07-21 17:06:31', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (551, 12763, '多比迭代60农企业', '农资1', 0, 0, '厂家1', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-07-21 17:06:48', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (551, 12763, '多比迭代60农企业', '农资1', 0, 0, '厂家1', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-07-21 17:06:48', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-07-21 17:06:48', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (552, 12763, '多比迭代60农企业', '安卓农资', 0, 0, '安卓厂家', NULL,
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/snkd-app/1c78dc0a-29c4-4840-9906-3ecee36422b3.jpg', 99562, '13182341525', '神农1525', 1,
         '2022-07-21 17:32:52', 0, NULL, NULL, NULL, 0, NULL, '2022-07-21 17:32:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (553, 2645, '上海正义园艺有限公司企业', '11', 0, 0, '22', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-07-25 15:09:12', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (553, 2645, '上海正义园艺有限公司企业', '11', 0, 0, '22', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-07-25 15:09:12', 0, NULL, NULL, NULL,
+        0, NULL,
         '2022-07-25 15:09:12', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (554, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '2', NULL,
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/snkd-app/26e1e087-a9de-49bf-81db-458ba0db1ded.jpg', 129674, '15890866974', '黄浦', 1,
         '2022-07-25 15:11:11', 0, NULL, NULL, NULL, 0, NULL, '2022-07-25 15:11:11', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (555, 12782, '迭代60企业5', '测试', 0, 0, '厂家', NULL, 'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/snkd-app/853a7187-2d19-43d1-b585-aead72888811.jpg',
+VALUES (555, 12782, '迭代60企业5', '测试', 0, 0, '厂家', NULL,
+        'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/snkd-app/853a7187-2d19-43d1-b585-aead72888811.jpg',
         99562, '13182341525', '神农1525', 1, '2022-07-25 19:07:23', 0, NULL, NULL, NULL, 0, NULL, '2022-07-25 19:07:23', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (556, 12782, '迭代60企业5', '466446', 0, 0, '哦婆婆', NULL,
@@ -365,139 +405,184 @@ VALUES (560, 12799, '多比迭代60企业9泰捷', '123', 0, 0, '456', NULL,
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/snkd-app/7ddb5c94-a4bf-4c38-b4ca-de793622a571.jpg', 99562, '13182341525', '神农1525', 1,
         '2022-07-27 18:12:44', 0, NULL, NULL, NULL, 0, NULL, '2022-07-27 18:12:44', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (575, 12808, '多比迭代61企业1外采修改农事较多', '测试新增', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 10:02:52', 0, NULL, NULL, NULL, 0,
+VALUES (575, 12808, '多比迭代61企业1外采修改农事较多', '测试新增', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 10:02:52', 0,
+        NULL, NULL, NULL, 0,
         NULL, '2022-08-23 10:02:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (576, 12808, '多比迭代61企业1外采修改农事较多', '测试新增', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 10:02:52', 0, NULL, NULL, NULL, 0,
+VALUES (576, 12808, '多比迭代61企业1外采修改农事较多', '测试新增', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 10:02:52', 0,
+        NULL, NULL, NULL, 0,
         NULL, '2022-08-23 10:02:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (577, 12808, '多比迭代61企业1外采修改农事较多', '测试新增', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 10:02:52', 0, NULL, NULL, NULL, 0,
+VALUES (577, 12808, '多比迭代61企业1外采修改农事较多', '测试新增', 0, 0, '厂家', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 10:02:52', 0,
+        NULL, NULL, NULL, 0,
         NULL, '2022-08-23 10:02:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (578, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (578, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:53:46', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (579, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (579, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:53:46', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (580, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (580, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:53:46', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (581, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (581, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:53:46', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (582, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (582, 2645, '上海正义园艺有限公司企业', '331', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:53:46', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:53:46', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (583, 2645, '上海正义园艺有限公司企业', '大萨达所', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:54:02', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (583, 2645, '上海正义园艺有限公司企业', '大萨达所', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:54:02', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:54:02', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (584, 2645, '上海正义园艺有限公司企业', '大萨达所', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:54:02', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (584, 2645, '上海正义园艺有限公司企业', '大萨达所', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:54:02', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:54:02', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (585, 2645, '上海正义园艺有限公司企业', '大萨达所', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:54:02', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (585, 2645, '上海正义园艺有限公司企业', '大萨达所', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:54:02', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:54:02', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (586, 2645, '上海正义园艺有限公司企业', '打啊', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:55:49', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (586, 2645, '上海正义园艺有限公司企业', '打啊', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:55:49', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:55:49', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (587, 2645, '上海正义园艺有限公司企业', '打啊', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:55:49', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (587, 2645, '上海正义园艺有限公司企业', '打啊', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:55:49', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:55:49', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (588, 2645, '上海正义园艺有限公司企业', '打啊', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:55:49', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (588, 2645, '上海正义园艺有限公司企业', '打啊', 0, 0, '111', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 10:55:49', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 10:55:49', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (589, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '1', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:02:21', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (589, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '1', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:02:21', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:02:21', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (590, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '1', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:02:21', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (590, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '1', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:02:21', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:02:21', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (591, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '1', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:02:21', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (591, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '1', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:02:21', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:02:21', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (592, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '23', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:16:00', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (592, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '23', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:16:00', 0, NULL, NULL, NULL,
+        0, NULL,
         '2022-08-23 11:16:00', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (593, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '23', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:16:00', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (593, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '23', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:16:00', 0, NULL, NULL, NULL,
+        0, NULL,
         '2022-08-23 11:16:00', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (594, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:51', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (594, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:51', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:51', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (595, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:51', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (595, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:51', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:51', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (596, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:51', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (596, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:51', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:51', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (597, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (597, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (598, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (598, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (599, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (599, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (600, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (600, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (601, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (601, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:52', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:52', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (602, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (602, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:53', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (603, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (603, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:53', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (604, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (604, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:53', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (605, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (605, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:17:53', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:17:53', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (606, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:19:11', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (606, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:19:11', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:19:11', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (607, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:19:11', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (607, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 11:19:11', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 11:19:11', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (608, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '2', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 13:34:24', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (608, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '2', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 13:34:24', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 13:34:24', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (609, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '2', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 13:34:24', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (609, 2645, '上海正义园艺有限公司企业', '1', 0, 0, '2', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 13:34:24', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 13:34:24', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (610, 2645, '上海正义园艺有限公司企业', '333', 0, 0, '3333', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 13:34:46', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (610, 2645, '上海正义园艺有限公司企业', '333', 0, 0, '3333', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 13:34:46', 0, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-23 13:34:46', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (611, 2645, '上海正义园艺有限公司企业', '3', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 14:09:18', 0, NULL, NULL, NULL, 0, NULL,
+VALUES (611, 2645, '上海正义园艺有限公司企业', '3', 0, 0, '3', NULL, NULL, 129674, '15890866974', '黄浦', 1, '2022-08-23 14:09:18', 0, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-23 14:09:18', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (612, 12808, '多比迭代61企业1外采修改农事较多', '发顺丰的', 0, 0, '佛山市的', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:10:54', 0, NULL, NULL, NULL,
+VALUES (612, 12808, '多比迭代61企业1外采修改农事较多', '发顺丰的', 0, 0, '佛山市的', NULL, NULL, 99562, '13182341525', '神农1525', 1,
+        '2022-08-23 16:10:54', 0, NULL, NULL, NULL,
         0, NULL, '2022-08-23 16:10:54', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (613, 12808, '多比迭代61企业1外采修改农事较多', '11', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:01', 0, NULL, NULL, NULL, 0,
+VALUES (613, 12808, '多比迭代61企业1外采修改农事较多', '11', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:01', 0, NULL,
+        NULL, NULL, 0,
         NULL, '2022-08-23 16:11:01', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (614, 12808, '多比迭代61企业1外采修改农事较多', '22', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:08', 0, NULL, NULL, NULL, 0,
+VALUES (614, 12808, '多比迭代61企业1外采修改农事较多', '22', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:08', 0, NULL,
+        NULL, NULL, 0,
         NULL, '2022-08-23 16:11:08', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (615, 12808, '多比迭代61企业1外采修改农事较多', '22', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:09', 0, NULL, NULL, NULL, 0,
+VALUES (615, 12808, '多比迭代61企业1外采修改农事较多', '22', 0, 0, '22', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:09', 0, NULL,
+        NULL, NULL, 0,
         NULL, '2022-08-23 16:11:09', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (616, 12808, '多比迭代61企业1外采修改农事较多', '33', 0, 0, '33', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:15', 0, NULL, NULL, NULL, 0,
+VALUES (616, 12808, '多比迭代61企业1外采修改农事较多', '33', 0, 0, '33', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:11:15', 0, NULL,
+        NULL, NULL, 0,
         NULL, '2022-08-23 16:11:15', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (617, 12808, '多比迭代61企业1外采修改农事较多', '44', 0, 0, '44', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:12:22', 0, NULL, NULL, NULL, 0,
+VALUES (617, 12808, '多比迭代61企业1外采修改农事较多', '44', 0, 0, '44', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:12:22', 0, NULL,
+        NULL, NULL, 0,
         NULL, '2022-08-23 16:12:22', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (618, 12808, '多比迭代61企业1外采修改农事较多', '55', 0, 0, '55', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:12:27', 0, NULL, NULL, NULL, 0,
+VALUES (618, 12808, '多比迭代61企业1外采修改农事较多', '55', 0, 0, '55', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:12:27', 0, NULL,
+        NULL, NULL, 0,
         NULL, '2022-08-23 16:12:27', NULL);
 INSERT INTO `sys_agri_res_feedback`
-VALUES (619, 12808, '多比迭代61企业1外采修改农事较多', '66', 0, 0, '66', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:12:34', 0, NULL, NULL, NULL, 0,
+VALUES (619, 12808, '多比迭代61企业1外采修改农事较多', '66', 0, 0, '66', NULL, NULL, 99562, '13182341525', '神农1525', 1, '2022-08-23 16:12:34', 0, NULL,
+        NULL, NULL, 0,
         NULL, '2022-08-23 16:12:34', NULL);
 INSERT INTO `sys_agri_res_feedback`
 VALUES (620, 12808, '多比迭代61企业1外采修改农事较多', '1', 0, 0, '1', NULL,
@@ -522,14 +607,14 @@ VALUES (628, 10027, '汪健的农场一二三四五一二三四五一二三四�
 DROP TABLE IF EXISTS `sys_apk_address`;
 CREATE TABLE `sys_apk_address`
 (
-    `id`           bigint(20)                                                    NOT NULL,
-    `app_name`     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT 'app名称',
-    `app_type`     tinyint(4)                                                    NULL DEFAULT NULL COMMENT '1:企业web端',
+    `id`           bigint(20) NOT NULL,
+    `app_name`     varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'app名称',
+    `app_type`     tinyint(4) NULL DEFAULT NULL COMMENT '1:企业web端',
     `download_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '下载地址',
-    `create_time`  datetime                                                      NULL DEFAULT NULL,
-    `create_by`    bigint(20)                                                    NULL DEFAULT NULL,
-    `update_time`  datetime                                                      NULL DEFAULT NULL,
-    `update_by`    bigint(20)                                                    NULL DEFAULT NULL,
+    `create_time`  datetime NULL DEFAULT NULL,
+    `create_by`    bigint(20) NULL DEFAULT NULL,
+    `update_time`  datetime NULL DEFAULT NULL,
+    `update_by`    bigint(20) NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -549,12 +634,12 @@ VALUES (21, '企业端APP', 1, 'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/
 DROP TABLE IF EXISTS `sys_conf`;
 CREATE TABLE `sys_conf`
 (
-    `id`               bigint(20)                                                   NOT NULL AUTO_INCREMENT,
+    `id`               bigint(20) NOT NULL AUTO_INCREMENT,
     `conf_name`        varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '配置名称',
-    `conf_type`        int(11)                                                      NULL DEFAULT NULL COMMENT '类型1：溯源码',
-    `effective_second` int(11)                                                      NULL DEFAULT NULL COMMENT '有效时间(秒钟)',
-    `create_time`      datetime                                                     NULL DEFAULT NULL,
-    `update_time`      datetime                                                     NULL DEFAULT NULL,
+    `conf_type`        int(11) NULL DEFAULT NULL COMMENT '类型1：溯源码',
+    `effective_second` int(11) NULL DEFAULT NULL COMMENT '有效时间(秒钟)',
+    `create_time`      datetime NULL DEFAULT NULL,
+    `update_time`      datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 2
@@ -574,25 +659,25 @@ VALUES (1, '溯源信息过期时间', 1, -1, '2019-07-05 16:27:13', '2021-01-04
 DROP TABLE IF EXISTS `sys_crop_feedback`;
 CREATE TABLE `sys_crop_feedback`
 (
-    `id`                bigint(20)                                                    NOT NULL,
-    `company_id`        bigint(20)                                                    NULL DEFAULT NULL COMMENT '提交申请的企业id',
-    `company_name`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '提交申请的企业名称',
-    `farm_id`           bigint(20)                                                    NULL DEFAULT NULL COMMENT '提交申请的农场id',
-    `farm_name`         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '提交申请的农场名称',
-    `feedback_user_id`  bigint(20)                                                    NULL DEFAULT NULL,
-    `feedback_phone`    varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '提交人手机号',
-    `user_company_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '提交人名称',
-    `crop_name`         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL,
-    `status_flag`       tinyint(4)                                                    NULL DEFAULT 1 COMMENT '1：待审核，2通过，3不通过，4忽略',
-    `submit_time`       datetime                                                      NULL DEFAULT NULL COMMENT '提交时间',
-    `check_user_id`     bigint(20)                                                    NULL DEFAULT NULL COMMENT '审核人id',
-    `check_nickname`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '审核人名称',
-    `check_time`        datetime                                                      NULL DEFAULT NULL COMMENT '审核时间',
+    `id`                bigint(20) NOT NULL,
+    `company_id`        bigint(20) NULL DEFAULT NULL COMMENT '提交申请的企业id',
+    `company_name`      varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '提交申请的企业名称',
+    `farm_id`           bigint(20) NULL DEFAULT NULL COMMENT '提交申请的农场id',
+    `farm_name`         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '提交申请的农场名称',
+    `feedback_user_id`  bigint(20) NULL DEFAULT NULL,
+    `feedback_phone`    varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '提交人手机号',
+    `user_company_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '提交人名称',
+    `crop_name`         varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+    `status_flag`       tinyint(4) NULL DEFAULT 1 COMMENT '1：待审核，2通过，3不通过，4忽略',
+    `submit_time`       datetime NULL DEFAULT NULL COMMENT '提交时间',
+    `check_user_id`     bigint(20) NULL DEFAULT NULL COMMENT '审核人id',
+    `check_nickname`    varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '审核人名称',
+    `check_time`        datetime NULL DEFAULT NULL COMMENT '审核时间',
     `check_fail_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注：审核不通过原因',
-    `msg_send_status`   tinyint(2)                                                    NULL DEFAULT 0 COMMENT '短信发送状态0：失败，1：成功',
-    `msg_send_remark`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci         NULL COMMENT '短信发送描述',
-    `create_time`       datetime                                                      NULL DEFAULT NULL,
-    `update_time`       datetime                                                      NULL DEFAULT NULL,
+    `msg_send_status`   tinyint(2) NULL DEFAULT 0 COMMENT '短信发送状态0：失败，1：成功',
+    `msg_send_remark`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '短信发送描述',
+    `create_time`       datetime NULL DEFAULT NULL,
+    `update_time`       datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -603,241 +688,319 @@ CREATE TABLE `sys_crop_feedback`
 -- Records of sys_crop_feedback
 -- ----------------------------
 INSERT INTO `sys_crop_feedback`
-VALUES (57, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '13063458882', '超级管理员', '哈哈ヾﾉ≧∀≦)o', 2, '2019-05-05 17:42:29', 1, '超管', '2020-10-20 11:51:33', NULL, 1,
+VALUES (57, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '13063458882', '超级管理员', '哈哈ヾﾉ≧∀≦)o', 2, '2019-05-05 17:42:29', 1, '超管',
+        '2020-10-20 11:51:33', NULL, 1,
         '成功', '2019-05-05 17:42:29', '2020-10-20 11:51:33');
 INSERT INTO `sys_crop_feedback`
-VALUES (58, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '13063458882', '超级管理员', '五月五号测试', 2, '2019-05-05 17:43:37', 1, '超管', '2021-07-23 17:13:14', NULL, 1, '成功',
+VALUES (58, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '13063458882', '超级管理员', '五月五号测试', 2, '2019-05-05 17:43:37', 1, '超管',
+        '2021-07-23 17:13:14', NULL, 1, '成功',
         '2019-05-05 17:43:37', '2021-07-23 17:13:14');
 INSERT INTO `sys_crop_feedback`
-VALUES (59, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '13063458882', '超级管理员', '五月五号测试2', 4, '2019-05-05 17:43:59', 1, '超管', '2021-07-23 17:13:10', NULL, 1, '成功',
+VALUES (59, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '13063458882', '超级管理员', '五月五号测试2', 4, '2019-05-05 17:43:59', 1, '超管',
+        '2021-07-23 17:13:10', NULL, 1, '成功',
         '2019-05-05 17:43:59', '2021-07-23 17:13:10');
 INSERT INTO `sys_crop_feedback`
-VALUES (60, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '18855174855', '钱浩伟', '黄大仙', 4, '2019-05-05 22:06:33', 1, '超管', '2019-05-07 16:04:12', NULL, 0,
+VALUES (60, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '18855174855', '钱浩伟', '黄大仙', 4, '2019-05-05 22:06:33', 1, '超管',
+        '2019-05-07 16:04:12', NULL, 0,
         '参数错误', '2019-05-05 22:06:33', '2019-05-07 16:04:12');
 INSERT INTO `sys_crop_feedback`
-VALUES (61, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '一二三四五上山下海经', 4, '2019-05-07 11:25:46', 2, '管理员',
+VALUES (61, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '一二三四五上山下海经', 4,
+        '2019-05-07 11:25:46', 2, '管理员',
         '2019-05-07 15:53:09', NULL, 0, '参数错误', '2019-05-07 11:25:46', '2019-05-07 15:53:09');
 INSERT INTO `sys_crop_feedback`
-VALUES (62, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '大黄瓜🥒', 3, '2019-05-07 11:32:13', 2, '管理员',
+VALUES (62, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '大黄瓜🥒', 3,
+        '2019-05-07 11:32:13', 2, '管理员',
         '2019-05-07 14:50:24', '作物已存在', 1, '成功', '2019-05-07 11:32:13', '2019-05-07 14:50:24');
 INSERT INTO `sys_crop_feedback`
-VALUES (63, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '黄瓜', 3, '2019-05-07 11:33:04', 2, '管理员', '2019-05-08 10:02:35',
+VALUES (63, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '黄瓜', 3,
+        '2019-05-07 11:33:04', 2, '管理员', '2019-05-08 10:02:35',
         '系统中已存在黄瓜黄瓜作物种类，可通过搜索作物种类快速查找到。', 0, '短信发送失败', '2019-05-07 11:33:04', '2019-05-08 10:02:35');
 INSERT INTO `sys_crop_feedback`
-VALUES (64, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '圣女果', 3, '2019-05-07 11:51:15', 2, '管理员',
+VALUES (64, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '圣女果', 3,
+        '2019-05-07 11:51:15', 2, '管理员',
         '2019-05-07 14:52:49', '作物已存在', 1, '成功', '2019-05-07 11:51:15', '2019-05-07 14:52:49');
 INSERT INTO `sys_crop_feedback`
-VALUES (65, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '测试作物', 3, '2019-05-07 15:42:46', 4, '刘鹏', '2019-05-08 10:20:24',
+VALUES (65, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '测试作物', 3, '2019-05-07 15:42:46', 4, '刘鹏',
+        '2019-05-08 10:20:24',
         '测试二二二测试二二二测试二二二11AAb,', 0, '短信发送失败', '2019-05-07 15:42:46', '2019-05-08 10:20:24');
 INSERT INTO `sys_crop_feedback`
-VALUES (66, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '又来测试作物啦', 3, '2019-05-07 15:43:44', 2, '管理员', '2019-05-07 16:23:47',
-        '一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五', 1, '成功', '2019-05-07 15:43:44', '2019-05-07 16:23:47');
+VALUES (66, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '又来测试作物啦', 3, '2019-05-07 15:43:44', 2, '管理员',
+        '2019-05-07 16:23:47',
+        '一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五',
+        1, '成功', '2019-05-07 15:43:44', '2019-05-07 16:23:47');
 INSERT INTO `sys_crop_feedback`
-VALUES (67, 1166, '安徽左岸芯慧（史）', 2712, '嘀咕嘀咕', NULL, '15556463668', '习近平1', '测试删除农场', 4, '2019-05-07 16:34:04', 2, '管理员', '2019-05-07 16:35:02', NULL, 0,
+VALUES (67, 1166, '安徽左岸芯慧（史）', 2712, '嘀咕嘀咕', NULL, '15556463668', '习近平1', '测试删除农场', 4, '2019-05-07 16:34:04', 2, '管理员',
+        '2019-05-07 16:35:02', NULL, 0,
         '参数错误', '2019-05-07 16:34:04', '2019-05-07 16:35:02');
 INSERT INTO `sys_crop_feedback`
-VALUES (68, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '胖喵测试', 3, '2019-05-07 17:57:35', 1, '超管', '2021-07-23 17:13:21', '4有5人', 1, '成功',
+VALUES (68, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '胖喵测试', 3, '2019-05-07 17:57:35', 1, '超管',
+        '2021-07-23 17:13:21', '4有5人', 1, '成功',
         '2019-05-07 17:57:35', '2021-07-23 17:13:21');
 INSERT INTO `sys_crop_feedback`
-VALUES (69, 1542, '江西2', 2742, '1243433', NULL, '19999999999', '超级管理员', '啦啦啦', 2, '2019-05-07 18:18:49', 2, '管理员', '2019-06-03 15:12:36', NULL, 1, '成功',
+VALUES (69, 1542, '江西2', 2742, '1243433', NULL, '19999999999', '超级管理员', '啦啦啦', 2, '2019-05-07 18:18:49', 2, '管理员', '2019-06-03 15:12:36',
+        NULL, 1, '成功',
         '2019-05-07 18:18:49', '2019-06-03 15:12:36');
 INSERT INTO `sys_crop_feedback`
-VALUES (70, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '结球大白菜（直筒型', 3, '2019-05-07 22:28:21', 2, '管理员',
+VALUES (70, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '结球大白菜（直筒型', 3,
+        '2019-05-07 22:28:21', 2, '管理员',
         '2019-05-08 10:34:25', '不高兴不高兴不高兴不高兴不高兴不高兴12', 1, '成功', '2019-05-07 22:28:21', '2019-05-08 10:34:25');
 INSERT INTO `sys_crop_feedback`
-VALUES (71, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '朝天椒（紫色）', 2, '2019-05-07 22:35:09', 2, '管理员',
+VALUES (71, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '朝天椒（紫色）', 2,
+        '2019-05-07 22:35:09', 2, '管理员',
         '2019-05-08 09:58:58', NULL, 1, '成功', '2019-05-07 22:35:09', '2019-05-08 09:58:58');
 INSERT INTO `sys_crop_feedback`
-VALUES (72, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '01234567890123456789', 3, '2019-05-08 09:57:30', 2, '管理员',
-        '2019-05-08 09:57:57', '一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五', 0, '短信发送失败', '2019-05-08 09:57:30', '2019-05-08 09:57:57');
+VALUES (72, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '01234567890123456789', 3,
+        '2019-05-08 09:57:30', 2, '管理员',
+        '2019-05-08 09:57:57', '一二三四五一二三四五一二三四五一二三四五一二三四五一二三四五', 0, '短信发送失败', '2019-05-08 09:57:30',
+        '2019-05-08 09:57:57');
 INSERT INTO `sys_crop_feedback`
-VALUES (73, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '测试新增作物种类繁多', 3, '2019-05-08 10:33:47', 2, '管理员',
+VALUES (73, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '13182341525', '超级管理员', '测试新增作物种类繁多', 3,
+        '2019-05-08 10:33:47', 2, '管理员',
         '2019-05-08 10:34:15', '不高兴不高兴不高兴不高兴不高兴不高兴123', 0, '短信发送失败', '2019-05-08 10:33:47', '2019-05-08 10:34:15');
 INSERT INTO `sys_crop_feedback`
-VALUES (74, 745, '1', 1351, '1', NULL, '13735479486', '超级管理员', '测试删除员工', 2, '2019-05-08 10:38:04', 2, '管理员', '2019-05-08 10:41:49', NULL, 1, '成功',
+VALUES (74, 745, '1', 1351, '1', NULL, '13735479486', '超级管理员', '测试删除员工', 2, '2019-05-08 10:38:04', 2, '管理员', '2019-05-08 10:41:49', NULL, 1,
+        '成功',
         '2019-05-08 10:38:04', '2019-05-08 10:41:49');
 INSERT INTO `sys_crop_feedback`
-VALUES (75, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧', NULL, '13182341525', '超级管理员', '测试忽略', 4, '2019-05-08 10:46:18', 2, '管理员', '2019-05-08 10:46:31', NULL, 0,
+VALUES (75, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧', NULL, '13182341525', '超级管理员', '测试忽略', 4, '2019-05-08 10:46:18', 2, '管理员',
+        '2019-05-08 10:46:31', NULL, 0,
         '参数错误', '2019-05-08 10:46:18', '2019-05-08 10:46:31');
 INSERT INTO `sys_crop_feedback`
-VALUES (76, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧', NULL, '13182341525', '超级管理员', '1234567890123456789', 1, '2019-05-08 10:48:19', NULL, NULL, NULL, NULL, 0,
+VALUES (76, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧', NULL, '13182341525', '超级管理员', '1234567890123456789', 1, '2019-05-08 10:48:19', NULL, NULL,
+        NULL, NULL, 0,
         NULL, '2019-05-08 10:48:19', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (77, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧', NULL, '13182341525', '超级管理员', '98765432109876543210', 3, '2019-05-08 10:59:00', 2, '管理员',
         '2019-05-08 10:59:13', '一二三四五一二三四五一二三四五一二三四五', 1, '成功', '2019-05-08 10:59:00', '2019-05-08 10:59:13');
 INSERT INTO `sys_crop_feedback`
-VALUES (78, 1510, 'APP创建企业', 2701, 'APP创建农场', NULL, '13182341525', '超级管理员', '测试删除企业', 3, '2019-05-08 11:02:12', 2, '管理员', '2019-05-08 11:02:37', '不高兴', 1,
+VALUES (78, 1510, 'APP创建企业', 2701, 'APP创建农场', NULL, '13182341525', '超级管理员', '测试删除企业', 3, '2019-05-08 11:02:12', 2, '管理员',
+        '2019-05-08 11:02:37', '不高兴', 1,
         '成功', '2019-05-08 11:02:12', '2019-05-08 11:02:37');
 INSERT INTO `sys_crop_feedback`
-VALUES (79, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '13182341525', '史火霞', '01234567890123456789', 3, '2019-05-08 11:08:53', 2, '管理员',
+VALUES (79, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '13182341525', '史火霞', '01234567890123456789', 3, '2019-05-08 11:08:53', 2,
+        '管理员',
         '2019-05-24 15:12:39', '44', 1, '成功', '2019-05-08 11:08:53', '2019-05-24 15:12:39');
 INSERT INTO `sys_crop_feedback`
-VALUES (80, 745, '1', 1439, '22', NULL, '13735479486', '超级管理员', '测试修改手机号', 3, '2019-05-08 11:16:29', 2, '管理员', '2019-05-08 11:19:22', '修改手机号', 1, '成功',
+VALUES (80, 745, '1', 1439, '22', NULL, '13735479486', '超级管理员', '测试修改手机号', 3, '2019-05-08 11:16:29', 2, '管理员', '2019-05-08 11:19:22',
+        '修改手机号', 1, '成功',
         '2019-05-08 11:16:29', '2019-05-08 11:19:22');
 INSERT INTO `sys_crop_feedback`
-VALUES (81, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '西红柿', 1, '2019-05-09 13:55:46', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (81, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '西红柿', 1,
+        '2019-05-09 13:55:46', NULL, NULL, NULL, NULL, 0, NULL,
         '2019-05-09 13:55:46', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (82, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '2019-5-9测试作物', 4, '2019-05-09 14:55:24', 2, '管理员',
+VALUES (82, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '2019-5-9测试作物', 4,
+        '2019-05-09 14:55:24', 2, '管理员',
         '2019-05-24 15:10:38', NULL, 0, '参数错误', '2019-05-09 14:55:24', '2019-05-24 15:10:38');
 INSERT INTO `sys_crop_feedback`
-VALUES (83, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '18855174855', '钱浩伟', '不知火', 2, '2019-05-09 17:47:36', 2, '管理员', '2019-05-24 15:13:49', NULL, 1,
+VALUES (83, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '18855174855', '钱浩伟', '不知火', 2, '2019-05-09 17:47:36', 2, '管理员',
+        '2019-05-24 15:13:49', NULL, 1,
         '成功', '2019-05-09 17:47:36', '2019-05-24 15:13:49');
 INSERT INTO `sys_crop_feedback`
-VALUES (84, 1166, '安徽左岸芯慧（史）', 2744, '2', NULL, '13182341525', '超级管理员', '（大黄瓜）', 3, '2019-05-10 10:47:14', 2, '管理员', '2019-06-03 15:13:07', '11', 1, '成功',
+VALUES (84, 1166, '安徽左岸芯慧（史）', 2744, '2', NULL, '13182341525', '超级管理员', '（大黄瓜）', 3, '2019-05-10 10:47:14', 2, '管理员',
+        '2019-06-03 15:13:07', '11', 1, '成功',
         '2019-05-10 10:47:14', '2019-06-03 15:13:07');
 INSERT INTO `sys_crop_feedback`
 VALUES (85, 1166, '安徽左岸芯慧（史）', 2744, '2', NULL, '13182341525', '超级管理员', '（大黄瓜）', 1, '2019-05-10 10:50:46', NULL, NULL, NULL, NULL, 0, NULL,
         '2019-05-10 10:50:46', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (86, 1166, '安徽左岸芯慧（史）', 2744, '2', NULL, '13182341525', '超级管理员', '大', 3, '2019-05-10 10:51:29', 1, '超管', '2019-05-24 18:11:42', '1321', 1, '成功',
+VALUES (86, 1166, '安徽左岸芯慧（史）', 2744, '2', NULL, '13182341525', '超级管理员', '大', 3, '2019-05-10 10:51:29', 1, '超管', '2019-05-24 18:11:42',
+        '1321', 1, '成功',
         '2019-05-10 10:51:29', '2019-05-24 18:11:42');
 INSERT INTO `sys_crop_feedback`
-VALUES (87, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '哈哈', 3, '2019-05-10 11:55:55', 1, '超管', '2019-05-24 18:11:28', '131', 1, '成功',
+VALUES (87, 1488, '胖小喵喵的企业', 2662, '农场1', NULL, '15256982729', '超级管理员', '哈哈', 3, '2019-05-10 11:55:55', 1, '超管', '2019-05-24 18:11:28',
+        '131', 1, '成功',
         '2019-05-10 11:55:55', '2019-05-24 18:11:28');
 INSERT INTO `sys_crop_feedback`
-VALUES (88, 1166, '安徽左岸芯慧（史）', 2696, 'web创建1111', NULL, '13182341525', '超级管理员', '大黄瓜（新）', 1, '2019-05-13 10:13:33', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (88, 1166, '安徽左岸芯慧（史）', 2696, 'web创建1111', NULL, '13182341525', '超级管理员', '大黄瓜（新）', 1, '2019-05-13 10:13:33', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2019-05-13 10:13:33', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (89, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '45646', 1, '2019-05-13 11:36:51', NULL, NULL, NULL, NULL, 0,
+VALUES (89, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '45646', 1, '2019-05-13 11:36:51',
+        NULL, NULL, NULL, NULL, 0,
         NULL, '2019-05-13 11:36:51', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (90, 1247, '熊猫溯源', 2777, '熊猫溯源', NULL, '13182341525', '超级管理员', '1', 3, '2019-05-13 11:44:36', 2, '管理员', '2019-06-03 15:12:28', '不高兴', 1, '成功',
+VALUES (90, 1247, '熊猫溯源', 2777, '熊猫溯源', NULL, '13182341525', '超级管理员', '1', 3, '2019-05-13 11:44:36', 2, '管理员', '2019-06-03 15:12:28',
+        '不高兴', 1, '成功',
         '2019-05-13 11:44:36', '2019-06-03 15:12:28');
 INSERT INTO `sys_crop_feedback`
-VALUES (91, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '1', 1, '2019-05-13 12:37:54', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (91, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '1', 1, '2019-05-13 12:37:54',
+        NULL, NULL, NULL, NULL, 0, NULL,
         '2019-05-13 12:37:54', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (92, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '2', 4, '2019-05-13 12:38:11', 2, '管理员', '2019-06-03 15:12:57',
+VALUES (92, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '2', 4, '2019-05-13 12:38:11', 2,
+        '管理员', '2019-06-03 15:12:57',
         NULL, 0, '参数错误', '2019-05-13 12:38:11', '2019-06-03 15:12:57');
 INSERT INTO `sys_crop_feedback`
-VALUES (93, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '3', 3, '2019-05-13 12:38:45', 2, '管理员', '2019-06-03 15:12:46',
+VALUES (93, 1166, '安徽左岸芯慧（史）', 2063, '左岸芯慧左岸芯慧左岸芯慧左岸芯慧左岸芯慧', NULL, '15556463668', '习近平1', '3', 3, '2019-05-13 12:38:45', 2,
+        '管理员', '2019-06-03 15:12:46',
         '不高兴', 1, '成功', '2019-05-13 12:38:45', '2019-06-03 15:12:46');
 INSERT INTO `sys_crop_feedback`
-VALUES (94, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '18855174855', '钱浩伟', '魔鬼椒', 4, '2019-05-13 19:41:54', 2, '管理员', '2019-06-03 17:02:47', NULL, 0,
+VALUES (94, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '18855174855', '钱浩伟', '魔鬼椒', 4, '2019-05-13 19:41:54', 2, '管理员',
+        '2019-06-03 17:02:47', NULL, 0,
         '参数错误', '2019-05-13 19:41:54', '2019-06-03 17:02:47');
 INSERT INTO `sys_crop_feedback`
-VALUES (95, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '胖喵测试', 4, '2019-05-14 15:46:56', 2, '管理员', '2019-06-03 15:12:09',
+VALUES (95, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '胖喵测试', 4,
+        '2019-05-14 15:46:56', 2, '管理员', '2019-06-03 15:12:09',
         NULL, 0, '参数错误', '2019-05-14 15:46:56', '2019-06-03 15:12:09');
 INSERT INTO `sys_crop_feedback`
-VALUES (96, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '西红柿', 3, '2019-05-14 15:47:25', 4, '刘鹏', '2019-05-14 15:48:21',
+VALUES (96, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '西红柿', 3,
+        '2019-05-14 15:47:25', 4, '刘鹏', '2019-05-14 15:48:21',
         '重复了', 1, '成功', '2019-05-14 15:47:25', '2019-05-14 15:48:21');
 INSERT INTO `sys_crop_feedback`
-VALUES (97, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '西红柿', 4, '2019-05-14 15:48:58', 2, '管理员', '2019-05-30 16:47:09',
+VALUES (97, 1488, '胖小喵喵的企业', 2663, '有好多好多任务呀有好多好多任务呀有好多好', NULL, '15256982729', '超级管理员', '西红柿', 4,
+        '2019-05-14 15:48:58', 2, '管理员', '2019-05-30 16:47:09',
         NULL, 0, '参数错误', '2019-05-14 15:48:58', '2019-05-30 16:47:09');
 INSERT INTO `sys_crop_feedback`
-VALUES (98, 1584, '江天农业啦啦', 2866, '鹅湖香米', NULL, '19999999999', '超级管理员', '测试新增', 4, '2019-05-30 16:46:41', 2, '管理员', '2019-05-30 16:47:06', NULL, 0, '参数错误',
+VALUES (98, 1584, '江天农业啦啦', 2866, '鹅湖香米', NULL, '19999999999', '超级管理员', '测试新增', 4, '2019-05-30 16:46:41', 2, '管理员',
+        '2019-05-30 16:47:06', NULL, 0, '参数错误',
         '2019-05-30 16:46:41', '2019-05-30 16:47:06');
 INSERT INTO `sys_crop_feedback`
-VALUES (99, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧', NULL, '13063458882', '王存兰', '非官方新增', 1, '2019-06-27 10:36:33', 4, '刘鹏',
+VALUES (99, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧', NULL, '13063458882', '王存兰', '非官方新增', 1,
+        '2019-06-27 10:36:33', 4, '刘鹏',
         '2019-06-27 11:36:21', NULL, 0, '短信发送失败', '2019-06-27 10:36:33', '2019-06-27 11:36:21');
 INSERT INTO `sys_crop_feedback`
-VALUES (100, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', 'lp测试', 3, '2019-06-27 11:37:39', 4, '刘鹏', '2019-06-27 11:50:28', '2222', 1,
+VALUES (100, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', 'lp测试', 3, '2019-06-27 11:37:39', 4, '刘鹏',
+        '2019-06-27 11:50:28', '2222', 1,
         '成功', '2019-06-27 11:37:39', '2019-06-27 11:50:28');
 INSERT INTO `sys_crop_feedback`
-VALUES (101, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '11111111111', 3, '2019-06-27 11:44:48', 4, '刘鹏', '2019-06-27 11:47:51',
+VALUES (101, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '11111111111', 3, '2019-06-27 11:44:48', 4, '刘鹏',
+        '2019-06-27 11:47:51',
         '1232131', 1, '成功', '2019-06-27 11:44:48', '2019-06-27 11:47:51');
 INSERT INTO `sys_crop_feedback`
-VALUES (102, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '12321321312', 1, '2019-06-27 11:51:20', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (102, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '12321321312', 1, '2019-06-27 11:51:20', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-06-27 11:51:20', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (103, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '321321312', 1, '2019-06-27 11:54:55', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (103, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '321321312', 1, '2019-06-27 11:54:55', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-06-27 11:54:55', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (104, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '321321312', 1, '2019-06-27 11:55:35', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (104, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '321321312', 1, '2019-06-27 11:55:35', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-06-27 11:55:35', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (105, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '131321', 1, '2019-06-27 12:06:53', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (105, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '131321', 1, '2019-06-27 12:06:53', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-06-27 12:06:53', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (106, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '1456312', 2, '2019-06-27 12:07:32', 4, '刘鹏', '2019-06-27 12:13:44', NULL, 1,
+VALUES (106, 1377, '测试演示数据', 2437, '11111111', NULL, '13063458882', '超级管理员', '1456312', 2, '2019-06-27 12:07:32', 4, '刘鹏',
+        '2019-06-27 12:13:44', NULL, 1,
         '成功', '2019-06-27 12:07:32', '2019-06-27 12:13:44');
 INSERT INTO `sys_crop_feedback`
-VALUES (107, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '官方提交', 2, '2019-06-27 13:54:29', 2, '管理员', '2019-06-27 13:54:47', NULL, 1,
+VALUES (107, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '官方提交', 2, '2019-06-27 13:54:29', 2, '管理员',
+        '2019-06-27 13:54:47', NULL, 1,
         '成功', '2019-06-27 13:54:29', '2019-06-27 13:54:47');
 INSERT INTO `sys_crop_feedback`
-VALUES (108, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '官方不通过', 3, '2019-06-27 13:56:22', 2, '管理员', '2019-06-27 13:56:30', 'add', 1,
+VALUES (108, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '官方不通过', 3, '2019-06-27 13:56:22', 2, '管理员',
+        '2019-06-27 13:56:30', 'add', 1,
         '成功', '2019-06-27 13:56:22', '2019-06-27 13:56:30');
 INSERT INTO `sys_crop_feedback`
-VALUES (109, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '非官方', 2, '2019-06-27 13:58:08', 2, '管理员', '2019-06-27 13:59:03', NULL, 1,
+VALUES (109, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '非官方', 2, '2019-06-27 13:58:08', 2, '管理员',
+        '2019-06-27 13:59:03', NULL, 1,
         '成功', '2019-06-27 13:58:08', '2019-06-27 13:59:03');
 INSERT INTO `sys_crop_feedback`
-VALUES (110, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '非官方不通过', 3, '2019-06-27 13:59:26', 2, '管理员', '2019-06-27 13:59:33', '111',
+VALUES (110, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '非官方不通过', 3, '2019-06-27 13:59:26', 2, '管理员',
+        '2019-06-27 13:59:33', '111',
         1, '成功', '2019-06-27 13:59:26', '2019-06-27 13:59:33');
 INSERT INTO `sys_crop_feedback`
-VALUES (111, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧', NULL, '13182341525', '王存兰', 'AQ新增', 1, '2019-06-27 14:04:46', NULL, NULL, NULL, NULL, 0,
+VALUES (111, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧', NULL, '13182341525', '王存兰', 'AQ新增', 1, '2019-06-27 14:04:46',
+        NULL, NULL, NULL, NULL, 0,
         NULL, '2019-06-27 14:04:46', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (112, 817, '合肥诺伊农业科技有限公司', 2223, '好农场', NULL, '13182341525', '史火霞', '啦啦啦', 2, '2019-06-27 17:06:56', 2, '管理员', '2019-06-27 17:09:40', NULL, 1, '成功',
+VALUES (112, 817, '合肥诺伊农业科技有限公司', 2223, '好农场', NULL, '13182341525', '史火霞', '啦啦啦', 2, '2019-06-27 17:06:56', 2, '管理员',
+        '2019-06-27 17:09:40', NULL, 1, '成功',
         '2019-06-27 17:06:56', '2019-06-27 17:09:40');
 INSERT INTO `sys_crop_feedback`
-VALUES (113, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '非官方', 3, '2019-06-27 17:13:58', 2, '管理员', '2019-06-27 17:14:13', '66', 1,
+VALUES (113, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '非官方', 3, '2019-06-27 17:13:58', 2, '管理员',
+        '2019-06-27 17:14:13', '66', 1,
         '成功', '2019-06-27 17:13:58', '2019-06-27 17:14:13');
 INSERT INTO `sys_crop_feedback`
-VALUES (114, 1601, '艾米', 2897, '艾米', NULL, '13182341525', '超级管理员', '官方', 2, '2019-06-27 17:15:15', 2, '管理员', '2019-06-27 17:15:25', NULL, 1, '成功',
+VALUES (114, 1601, '艾米', 2897, '艾米', NULL, '13182341525', '超级管理员', '官方', 2, '2019-06-27 17:15:15', 2, '管理员', '2019-06-27 17:15:25', NULL, 1,
+        '成功',
         '2019-06-27 17:15:15', '2019-06-27 17:15:25');
 INSERT INTO `sys_crop_feedback`
-VALUES (115, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '测试短信', 3, '2019-07-02 13:37:04', 2, '管理员', '2019-07-02 13:37:19', '55',
+VALUES (115, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '测试短信', 3, '2019-07-02 13:37:04', 2, '管理员',
+        '2019-07-02 13:37:19', '55',
         1, '成功', '2019-07-02 13:37:04', '2019-07-02 13:37:19');
 INSERT INTO `sys_crop_feedback`
-VALUES (116, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '测试通过', 2, '2019-07-02 13:38:18', 2, '管理员', '2019-07-02 13:38:27', NULL,
+VALUES (116, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '测试通过', 2, '2019-07-02 13:38:18', 2, '管理员',
+        '2019-07-02 13:38:27', NULL,
         1, '成功', '2019-07-02 13:38:18', '2019-07-02 13:38:27');
 INSERT INTO `sys_crop_feedback`
-VALUES (117, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '测试', 3, '2019-07-02 13:39:44', 2, '管理员', '2019-07-02 13:39:53', '55', 1,
+VALUES (117, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '测试', 3, '2019-07-02 13:39:44', 2, '管理员',
+        '2019-07-02 13:39:53', '55', 1,
         '成功', '2019-07-02 13:39:44', '2019-07-02 13:39:53');
 INSERT INTO `sys_crop_feedback`
-VALUES (118, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '官方', 2, '2019-07-02 13:40:39', 2, '管理员', '2019-07-02 13:40:57', NULL, 1,
+VALUES (118, 1690, '艾米APP创建', 2994, '艾米APP创建', NULL, '13182341525', '1318234152', '官方', 2, '2019-07-02 13:40:39', 2, '管理员',
+        '2019-07-02 13:40:57', NULL, 1,
         '成功', '2019-07-02 13:40:39', '2019-07-02 13:40:57');
 INSERT INTO `sys_crop_feedback`
-VALUES (119, 1582, '安徽左岸', 2861, '鹅湖香米种植基地', NULL, '13182341525', '超级管理员', '喔喔', 3, '2019-07-02 14:39:11', 2, '管理员', '2019-07-02 14:39:21', '55', 1, '成功',
+VALUES (119, 1582, '安徽左岸', 2861, '鹅湖香米种植基地', NULL, '13182341525', '超级管理员', '喔喔', 3, '2019-07-02 14:39:11', 2, '管理员',
+        '2019-07-02 14:39:21', '55', 1, '成功',
         '2019-07-02 14:39:11', '2019-07-02 14:39:21');
 INSERT INTO `sys_crop_feedback`
-VALUES (122, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧55', NULL, '13182341525', '王存兰', '命名', 1, '2019-08-01 16:15:23', NULL, NULL, NULL, NULL, 0,
+VALUES (122, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧55', NULL, '13182341525', '王存兰', '命名', 1, '2019-08-01 16:15:23',
+        NULL, NULL, NULL, NULL, 0,
         NULL, '2019-08-01 16:15:23', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (123, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '苹果种苗', 1, '2019-08-23 22:25:23', NULL, NULL,
+VALUES (123, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '苹果种苗',
+        1, '2019-08-23 22:25:23', NULL, NULL,
         NULL, NULL, 0, NULL, '2019-08-23 22:25:23', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (133, 1935, '江天哈哈哈', 3334, '鹅湖', NULL, '19999999999', '超级管理员', '青苹果', 1, '2019-09-19 09:46:58', NULL, NULL, NULL, NULL, 0, NULL,
         '2019-09-19 09:46:58', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (134, 1969, '测试新版物联网', 3406, '测试新版物联网多比', NULL, '18855174855', '浩伟', '钱浩伟的测试', 1, '2019-11-24 20:38:04', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (134, 1969, '测试新版物联网', 3406, '测试新版物联网多比', NULL, '18855174855', '浩伟', '钱浩伟的测试', 1, '2019-11-24 20:38:04', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2019-11-24 20:38:04', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (135, 1982, '测试地块轮廓绘制', 3435, '测试地块轮廓绘制', NULL, '13182341525', '超级管理员', '新增', 1, '2019-12-02 11:39:02', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (135, 1982, '测试地块轮廓绘制', 3435, '测试地块轮廓绘制', NULL, '13182341525', '超级管理员', '新增', 1, '2019-12-02 11:39:02', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2019-12-02 11:39:02', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (136, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '花牛', 1, '2019-12-05 17:04:21', NULL, NULL, NULL,
+VALUES (136, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '花牛', 1,
+        '2019-12-05 17:04:21', NULL, NULL, NULL,
         NULL, 0, NULL, '2019-12-05 17:04:21', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (137, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '哈哈', 1, '2019-12-06 11:05:40', NULL, NULL, NULL,
+VALUES (137, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '哈哈', 1,
+        '2019-12-06 11:05:40', NULL, NULL, NULL,
         NULL, 0, NULL, '2019-12-06 11:05:40', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (138, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '23', 1, '2019-12-24 11:43:57', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (138, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '23', 1, '2019-12-24 11:43:57', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-12-24 11:43:57', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (139, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试种类', 1, '2019-12-24 11:44:54', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (139, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试种类', 1, '2019-12-24 11:44:54', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2019-12-24 11:44:54', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (140, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试', 1, '2019-12-24 11:46:02', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (140, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试', 1, '2019-12-24 11:46:02', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-12-24 11:46:02', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (141, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '又要测试啦', 1, '2019-12-24 11:49:24', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (141, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '又要测试啦', 1, '2019-12-24 11:49:24', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2019-12-24 11:49:24', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (142, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '又来测试了', 1, '2019-12-24 11:50:12', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (142, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '又来测试了', 1, '2019-12-24 11:50:12', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2019-12-24 11:50:12', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (143, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', 'skjhfjds', 1, '2019-12-30 15:30:50', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (143, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', 'skjhfjds', 1, '2019-12-30 15:30:50', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2019-12-30 15:30:50', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (144, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', 'www', 1, '2019-12-30 15:31:35', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (144, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', 'www', 1, '2019-12-30 15:31:35', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-12-30 15:31:35', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (145, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', 'sss', 1, '2019-12-30 15:32:07', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (145, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', 'sss', 1, '2019-12-30 15:32:07', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2019-12-30 15:32:07', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (146, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '小辣椒', 1, '2019-12-30 15:47:30', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (146, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '小辣椒', 1, '2019-12-30 15:47:30', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2019-12-30 15:47:30', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (147, 2350, 'test2.0', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '测试新增', 1, '2020-01-06 10:47:22', NULL, NULL, NULL, NULL, 0, NULL,
@@ -846,49 +1009,61 @@ INSERT INTO `sys_crop_feedback`
 VALUES (148, 2350, 'test2.0', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '啦啦啦啦', 1, '2020-01-06 10:47:49', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-01-06 10:47:49', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (149, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试作物提交', 1, '2020-01-06 14:23:57', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (149, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试作物提交', 1, '2020-01-06 14:23:57', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-01-06 14:23:57', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (150, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试', 1, '2020-01-06 14:25:33', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (150, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '测试', 1, '2020-01-06 14:25:33', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-01-06 14:25:33', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (151, 2350, 'test2.0', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '大黄瓜1', 1, '2020-01-06 14:26:43', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-01-06 14:26:43', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (152, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '大黄瓜瓜', 1, '2020-01-06 14:29:01', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (152, 1953, '胖喵の美食公司', 3359, '胖喵的秘密花园', NULL, '15256982729', '超级管理员', '大黄瓜瓜', 1, '2020-01-06 14:29:01', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-01-06 14:29:01', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (153, 2350, 'test2.0', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '测试新在', 1, '2020-01-06 16:40:08', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-01-06 16:40:08', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (154, 1956, '啦啦的屋屋', 3373, '新版物联网 传感 视频 控制哈哈哈哈哈哈可', NULL, '18055373268', '超级管理员', '我来测试', 1, '2020-01-07 11:54:05', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (154, 1956, '啦啦的屋屋', 3373, '新版物联网 传感 视频 控制哈哈哈哈哈哈可', NULL, '18055373268', '超级管理员', '我来测试', 1, '2020-01-07 11:54:05',
+        NULL, NULL, NULL, NULL, 0, NULL,
         '2020-01-07 11:54:05', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (155, 2350, 'test2.09999很看好可', 3487, '5555', NULL, '13182341525', '超级管理员', '测试all绿绿绿', 1, '2020-01-07 18:57:37', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (155, 2350, 'test2.09999很看好可', 3487, '5555', NULL, '13182341525', '超级管理员', '测试all绿绿绿', 1, '2020-01-07 18:57:37', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-01-07 18:57:37', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (156, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '测试新增', 1, '2020-01-07 20:07:06', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (156, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '测试新增', 1, '2020-01-07 20:07:06', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2020-01-07 20:07:06', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (157, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '测试新增啦啦啦', 1, '2020-01-07 20:07:40', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (157, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '测试新增啦啦啦', 1, '2020-01-07 20:07:40', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-01-07 20:07:40', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (158, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '1111', 2, '2020-01-07 20:08:01', 1, '超管', '2021-07-28 11:15:33',
+VALUES (158, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '1111', 2, '2020-01-07 20:08:01', 1, '超管',
+        '2021-07-28 11:15:33',
         NULL, 1, '成功', '2020-01-07 20:08:01', '2021-07-28 11:15:33');
 INSERT INTO `sys_crop_feedback`
-VALUES (159, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '大', 1, '2020-01-07 20:10:18', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (159, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '13182341525', '超级管理员', '大', 1, '2020-01-07 20:10:18', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-01-07 20:10:18', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (160, 2363, '蔬百味', 3497, '蔬百味', NULL, '18911112222', '超级管理员', '食用花', 1, '2020-01-08 20:53:10', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-01-08 20:53:10', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (161, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '大象', 1, '2020-01-09 16:14:15', NULL, NULL, NULL,
+VALUES (161, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '大象', 1,
+        '2020-01-09 16:14:15', NULL, NULL, NULL,
         NULL, 0, NULL, '2020-01-09 16:14:15', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (162, 2368, '测试2.0APP', 3504, '测试2.0APP', NULL, '13182345125', '超级管理员', '大黄酚', 1, '2020-01-09 17:55:38', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (162, 2368, '测试2.0APP', 3504, '测试2.0APP', NULL, '13182345125', '超级管理员', '大黄酚', 1, '2020-01-09 17:55:38', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-01-09 17:55:38', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (163, 2368, '测试2.0APP', 3504, '测试2.0APP', NULL, '13182345125', '超级管理员', '大黄KKK', 1, '2020-01-09 17:56:07', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (163, 2368, '测试2.0APP', 3504, '测试2.0APP', NULL, '13182345125', '超级管理员', '大黄KKK', 1, '2020-01-09 17:56:07', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-01-09 17:56:07', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (164, 2368, '测试2.0APP', 3504, '测试2.0APP', NULL, '13182345125', '超级管理员', '法官', 1, '2020-01-09 17:56:10', NULL, NULL, NULL, NULL, 0, NULL,
@@ -897,118 +1072,152 @@ INSERT INTO `sys_crop_feedback`
 VALUES (165, 2368, '测试2.0APP', 3504, '测试2.0APP', NULL, '13182345125', '超级管理员', '大', 1, '2020-01-10 11:40:48', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-01-10 11:40:48', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (166, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '11111111111', '管理员', '哒哒哒哒', 1, '2020-01-11 19:46:56', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (166, 2350, 'test2.09999很看好可', 3478, 'test2.0', NULL, '11111111111', '管理员', '哒哒哒哒', 1, '2020-01-11 19:46:56', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-01-11 19:46:56', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (167, 2408, '测试主流成', 3572, '测试主流程', NULL, '19393656236', '超级管理员', '樱花🌸', 1, '2020-01-14 15:24:18', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-01-14 15:24:18', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (168, 2476, '啦啦啦啦我们可以', 3676, '好哒啦', NULL, '13182341525', '超级管理员啦啦啦', '测试新增', 1, '2020-03-11 15:43:56', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (168, 2476, '啦啦啦啦我们可以', 3676, '好哒啦', NULL, '13182341525', '超级管理员啦啦啦', '测试新增', 1, '2020-03-11 15:43:56', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-03-11 15:43:56', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (169, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '哇哈哈', 1, '2020-03-11 17:21:29', NULL, NULL,
+VALUES (169, 1166, '安徽左岸芯慧（史）安徽左岸芯慧（史）安徽左岸', 2063, '（勿删）左岸芯慧（勿删）左岸芯慧（勿删）左岸芯', NULL, '13182341525', '王存兰', '哇哈哈',
+        1, '2020-03-11 17:21:29', NULL, NULL,
         NULL, NULL, 0, NULL, '2020-03-11 17:21:29', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (170, 2476, '啦啦啦啦我们可以明后', 3676, '好哒啦', NULL, '13182341525', '超级管理员啦啦啦', '测试', 1, '2020-03-19 13:42:44', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (170, 2476, '啦啦啦啦我们可以明后', 3676, '好哒啦', NULL, '13182341525', '超级管理员啦啦啦', '测试', 1, '2020-03-19 13:42:44', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-03-19 13:42:44', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (171, 1790, '合肥诺伊农业科技有限公司', 3111, '合肥诺伊农业科技有限公司', NULL, '13182341525', '超级管理员', '测试新增', 1, '2020-04-08 15:55:34', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (171, 1790, '合肥诺伊农业科技有限公司', 3111, '合肥诺伊农业科技有限公司', NULL, '13182341525', '超级管理员', '测试新增', 1, '2020-04-08 15:55:34',
+        NULL, NULL, NULL, NULL, 0, NULL,
         '2020-04-08 15:55:34', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (172, 732, '洛伊公司', 1330, '逻辑农庄', NULL, '18355113144', '超级管理员', 'HAHA', 2, '2020-04-23 19:59:21', 1, '超管', '2020-04-23 20:00:52', NULL, 1, '成功',
+VALUES (172, 732, '洛伊公司', 1330, '逻辑农庄', NULL, '18355113144', '超级管理员', 'HAHA', 2, '2020-04-23 19:59:21', 1, '超管', '2020-04-23 20:00:52',
+        NULL, 1, '成功',
         '2020-04-23 19:59:21', '2020-04-23 20:00:52');
 INSERT INTO `sys_crop_feedback`
-VALUES (173, 2561, '测试海尔私有化部署', 3804, '测试海尔私有化部署', NULL, '13182341525', '神农1525', '测试新增', 2, '2020-04-23 20:13:12', 1, '超管', '2020-04-23 20:13:48', NULL,
+VALUES (173, 2561, '测试海尔私有化部署', 3804, '测试海尔私有化部署', NULL, '13182341525', '神农1525', '测试新增', 2, '2020-04-23 20:13:12', 1, '超管',
+        '2020-04-23 20:13:48', NULL,
         1, '成功', '2020-04-23 20:13:12', '2020-04-23 20:13:48');
 INSERT INTO `sys_crop_feedback`
-VALUES (174, 2561, '测试海尔私有化部署', 3804, '测试海尔私有化部署', NULL, '13182341525', '神农1525', '不通过', 3, '2020-04-23 20:14:17', 1, '超管', '2020-04-23 20:14:32', '不高兴',
+VALUES (174, 2561, '测试海尔私有化部署', 3804, '测试海尔私有化部署', NULL, '13182341525', '神农1525', '不通过', 3, '2020-04-23 20:14:17', 1, '超管',
+        '2020-04-23 20:14:32', '不高兴',
         1, '成功', '2020-04-23 20:14:17', '2020-04-23 20:14:32');
 INSERT INTO `sys_crop_feedback`
-VALUES (175, 2561, '测试海尔私有化部署', 3804, '测试海尔私有化部署', NULL, '13182341525', '神农1525', '777', 2, '2020-04-23 20:41:57', 1, '超管', '2020-04-23 20:42:07', NULL, 1,
+VALUES (175, 2561, '测试海尔私有化部署', 3804, '测试海尔私有化部署', NULL, '13182341525', '神农1525', '777', 2, '2020-04-23 20:41:57', 1, '超管',
+        '2020-04-23 20:42:07', NULL, 1,
         '成功', '2020-04-23 20:41:57', '2020-04-23 20:42:07');
 INSERT INTO `sys_crop_feedback`
-VALUES (176, 2563, '测试新增', 3808, '测试新增', NULL, '13735479486', '神农9486', '测试新增', 2, '2020-04-24 10:30:28', 1, '超管', '2020-04-24 10:30:38', NULL, 1, '成功',
+VALUES (176, 2563, '测试新增', 3808, '测试新增', NULL, '13735479486', '神农9486', '测试新增', 2, '2020-04-24 10:30:28', 1, '超管', '2020-04-24 10:30:38',
+        NULL, 1, '成功',
         '2020-04-24 10:30:28', '2020-04-24 10:30:38');
 INSERT INTO `sys_crop_feedback`
-VALUES (177, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '13182341525', '史火霞', '测试不通过', 3, '2020-04-24 10:31:30', 1, '超管', '2020-04-24 10:31:45', '啦啦啦啦',
+VALUES (177, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '13182341525', '史火霞', '测试不通过', 3, '2020-04-24 10:31:30', 1, '超管',
+        '2020-04-24 10:31:45', '啦啦啦啦',
         1, '成功', '2020-04-24 10:31:30', '2020-04-24 10:31:45');
 INSERT INTO `sys_crop_feedback`
-VALUES (178, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '13182341525', '史火霞', '666', 2, '2020-04-24 10:32:10', 1, '超管', '2020-04-24 10:32:31', NULL, 1,
+VALUES (178, 817, '合肥诺伊农业科技有限公司', 1568, '合肥诺伊有机蔬果', NULL, '13182341525', '史火霞', '666', 2, '2020-04-24 10:32:10', 1, '超管',
+        '2020-04-24 10:32:31', NULL, 1,
         '成功', '2020-04-24 10:32:10', '2020-04-24 10:32:31');
 INSERT INTO `sys_crop_feedback`
-VALUES (179, 2585, '测试主流程啦啦啦', 3842, '测试主流程', NULL, '13182341525', '多比咯哦哦', '测试新鲜', 1, '2020-05-19 11:33:05', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (179, 2585, '测试主流程啦啦啦', 3842, '测试主流程', NULL, '13182341525', '多比咯哦哦', '测试新鲜', 1, '2020-05-19 11:33:05', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2020-05-19 11:33:05', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (180, 2573, '江西绿海油脂有限公司', 3824, '迭代15优先级1', NULL, '13182341525', '神农', '好测试', 1, '2020-05-25 13:59:45', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (180, 2573, '江西绿海油脂有限公司', 3824, '迭代15优先级1', NULL, '13182341525', '神农', '好测试', 1, '2020-05-25 13:59:45', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2020-05-25 13:59:45', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (181, 2601, '测试快速创建溯源', 3865, '快速溯源', NULL, '13182341525', '神农1525', '测试新增', 1, '2020-06-01 14:20:33', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (181, 2601, '测试快速创建溯源', 3865, '快速溯源', NULL, '13182341525', '神农1525', '测试新增', 1, '2020-06-01 14:20:33', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-06-01 14:20:33', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (182, 2594, '测试地块名称', 3857, '测试地块名称', NULL, '13182341525', '神农1525', '测试大黄瓜', 1, '2020-06-01 16:39:10', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (182, 2594, '测试地块名称', 3857, '测试地块名称', NULL, '13182341525', '神农1525', '测试大黄瓜', 1, '2020-06-01 16:39:10', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2020-06-01 16:39:10', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (183, 2639, '迭代15', 3917, '迭代15PK路兔兔土建冷库', NULL, '15656568585', '神农8585', '测试具体', 1, '2020-06-15 12:02:31', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (183, 2639, '迭代15', 3917, '迭代15PK路兔兔土建冷库', NULL, '15656568585', '神农8585', '测试具体', 1, '2020-06-15 12:02:31', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2020-06-15 12:02:31', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (184, 2708, '无农场', 4016, '5', NULL, '13182341525', '神农1525', '测试新增', 1, '2020-06-22 16:06:41', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-06-22 16:06:41', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (185, 2712, '测试加工环节', 4018, '测试加工环节', NULL, '13182341525', '神农1525', '啦啦啦', 1, '2020-06-28 10:45:57', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (185, 2712, '测试加工环节', 4018, '测试加工环节', NULL, '13182341525', '神农1525', '啦啦啦', 1, '2020-06-28 10:45:57', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-06-28 10:45:57', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (186, 2344, '青春有你', 3485, '啦啦啦', NULL, '18715065755', '刘雨昕', '你弄', 2, '2020-07-02 11:02:13', 1, '超管', '2020-07-02 11:04:34', NULL, 1, '成功',
+VALUES (186, 2344, '青春有你', 3485, '啦啦啦', NULL, '18715065755', '刘雨昕', '你弄', 2, '2020-07-02 11:02:13', 1, '超管', '2020-07-02 11:04:34', NULL, 1,
+        '成功',
         '2020-07-02 11:02:13', '2020-07-02 11:04:34');
 INSERT INTO `sys_crop_feedback`
-VALUES (187, 2593, '正义园艺', 3855, '地块多农场', NULL, '18655178750', '李海峰', 'ceshi', 3, '2020-07-16 14:38:35', 1, '超管', '2020-07-16 14:49:45', '5', 1, '成功',
+VALUES (187, 2593, '正义园艺', 3855, '地块多农场', NULL, '18655178750', '李海峰', 'ceshi', 3, '2020-07-16 14:38:35', 1, '超管', '2020-07-16 14:49:45', '5',
+        1, '成功',
         '2020-07-16 14:38:35', '2020-07-16 14:49:45');
 INSERT INTO `sys_crop_feedback`
 VALUES (188, 2593, '正义园艺', 3855, '地块多农场', NULL, '18655178750', '李海峰', 'hahah', 1, '2020-07-16 16:31:16', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-07-16 16:31:16', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (189, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试作物审核', 2, '2020-07-16 16:35:06', 1, '超管', '2020-07-16 16:35:26', NULL, 1,
+VALUES (189, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试作物审核', 2, '2020-07-16 16:35:06', 1, '超管',
+        '2020-07-16 16:35:26', NULL, 1,
         '成功', '2020-07-16 16:35:06', '2020-07-16 16:35:26');
 INSERT INTO `sys_crop_feedback`
-VALUES (190, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试不通过', 3, '2020-07-16 16:36:06', 1, '超管', '2020-07-16 16:36:17', '不高兴', 1,
+VALUES (190, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试不通过', 3, '2020-07-16 16:36:06', 1, '超管',
+        '2020-07-16 16:36:17', '不高兴', 1,
         '成功', '2020-07-16 16:36:06', '2020-07-16 16:36:17');
 INSERT INTO `sys_crop_feedback`
-VALUES (191, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试通过', 2, '2020-07-16 16:36:46', 1, '超管', '2020-07-16 16:36:54', NULL, 1,
+VALUES (191, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试通过', 2, '2020-07-16 16:36:46', 1, '超管',
+        '2020-07-16 16:36:54', NULL, 1,
         '成功', '2020-07-16 16:36:46', '2020-07-16 16:36:54');
 INSERT INTO `sys_crop_feedback`
-VALUES (192, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '测试通过', 3, '2020-07-16 16:38:14', 1, '超管', '2020-07-16 16:39:53', 'ng', 1,
+VALUES (192, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '测试通过', 3, '2020-07-16 16:38:14', 1, '超管',
+        '2020-07-16 16:39:53', 'ng', 1,
         '成功', '2020-07-16 16:38:14', '2020-07-16 16:39:53');
 INSERT INTO `sys_crop_feedback`
-VALUES (193, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '测试不通过', 3, '2020-07-16 16:38:55', 1, '超管', '2020-07-16 16:39:14',
+VALUES (193, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '测试不通过', 3, '2020-07-16 16:38:55', 1, '超管',
+        '2020-07-16 16:39:14',
         '不通过不通过', 1, '成功', '2020-07-16 16:38:55', '2020-07-16 16:39:14');
 INSERT INTO `sys_crop_feedback`
-VALUES (194, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试测试审核通过', 2, '2020-07-16 16:40:59', 1, '超管', '2020-07-16 16:42:09', NULL,
+VALUES (194, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '测试测试审核通过', 2, '2020-07-16 16:40:59', 1, '超管',
+        '2020-07-16 16:42:09', NULL,
         1, '成功', '2020-07-16 16:40:59', '2020-07-16 16:42:09');
 INSERT INTO `sys_crop_feedback`
-VALUES (195, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '非官方新增', 2, '2020-07-16 16:42:41', 1, '超管', '2020-07-16 16:43:13', NULL, 1,
+VALUES (195, 2823, '测试所有溯源码', 4141, '测试所有溯源码', NULL, '13182341525', '神农1525', '非官方新增', 2, '2020-07-16 16:42:41', 1, '超管',
+        '2020-07-16 16:43:13', NULL, 1,
         '成功', '2020-07-16 16:42:41', '2020-07-16 16:43:13');
 INSERT INTO `sys_crop_feedback`
-VALUES (196, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '非官方新增', 3, '2020-07-16 16:42:55', 1, '超管', '2020-07-16 16:43:35',
+VALUES (196, 1639, '（勿删）有遥感地块', 2937, '（勿删）有遥感地块', NULL, '13182341525', '超级管理员', '非官方新增', 3, '2020-07-16 16:42:55', 1, '超管',
+        '2020-07-16 16:43:35',
         '非官方不通过', 1, '成功', '2020-07-16 16:42:55', '2020-07-16 16:43:35');
 INSERT INTO `sys_crop_feedback`
-VALUES (197, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '玉雪新增', 2, '2020-07-16 16:45:34', 1, '超管', '2020-07-16 16:45:54', NULL, 1,
+VALUES (197, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '玉雪新增', 2, '2020-07-16 16:45:34', 1, '超管',
+        '2020-07-16 16:45:54', NULL, 1,
         '成功', '2020-07-16 16:45:34', '2020-07-16 16:45:54');
 INSERT INTO `sys_crop_feedback`
-VALUES (198, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '玉雪新增不通过', 3, '2020-07-16 16:46:08', 1, '超管', '2020-07-16 16:46:22', '玉雪不通过',
+VALUES (198, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', '玉雪新增不通过', 3, '2020-07-16 16:46:08', 1, '超管',
+        '2020-07-16 16:46:22', '玉雪不通过',
         1, '成功', '2020-07-16 16:46:08', '2020-07-16 16:46:22');
 INSERT INTO `sys_crop_feedback`
-VALUES (199, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', 'lalll', 3, '2020-07-16 16:49:04', 1, '超管', '2020-07-16 16:50:50', '不通过', 1,
+VALUES (199, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', 'lalll', 3, '2020-07-16 16:49:04', 1, '超管',
+        '2020-07-16 16:50:50', '不通过', 1,
         '成功', '2020-07-16 16:49:04', '2020-07-16 16:50:50');
 INSERT INTO `sys_crop_feedback`
-VALUES (200, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', 'tongg', 2, '2020-07-16 16:51:20', 1, '超管', '2020-07-16 16:51:30', NULL, 1,
+VALUES (200, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', 'tongg', 2, '2020-07-16 16:51:20', 1, '超管',
+        '2020-07-16 16:51:30', NULL, 1,
         '成功', '2020-07-16 16:51:20', '2020-07-16 16:51:30');
 INSERT INTO `sys_crop_feedback`
-VALUES (201, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', 'shoubudao', 1, '2020-07-16 16:52:56', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (201, 1684, '测试新增企业777', 2984, '测试新增企业', NULL, '13735479486', '超级管理员', 'shoubudao', 1, '2020-07-16 16:52:56', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-07-16 16:52:56', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (210, 2927, '有企业无农场', 4344, '5', NULL, '11111111111', '张三', '测试新增作物', 1, '2020-07-28 18:15:19', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-07-28 18:15:19', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (211, 1166, '安徽左岸芯慧（史）', 2063, '（勿删）左岸芯慧', NULL, '13182341525', '习近平在', '西红柿', 1, '2020-08-29 17:18:01', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (211, 1166, '安徽左岸芯慧（史）', 2063, '（勿删）左岸芯慧', NULL, '13182341525', '习近平在', '西红柿', 1, '2020-08-29 17:18:01', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2020-08-29 17:18:01', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (212, 2344, '青春有你', 3462, '阿胶小鸡小鸡', NULL, '18715065755', '刘雨昕', 'hh', 1, '2020-09-10 10:05:27', NULL, NULL, NULL, NULL, 0, NULL,
@@ -1023,49 +1232,62 @@ INSERT INTO `sys_crop_feedback`
 VALUES (215, 3646, '主流程1222', 5160, '主流程', NULL, '13182341525', '神农1525', '辣鸡', 1, '2020-10-12 19:54:19', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-10-12 19:54:19', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (216, 3675, '上海上海市金山区', 5194, '蔬菜种植基地', NULL, '15956949585', '神农9585', '杂交稻', 1, '2020-10-27 18:11:37', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (216, 3675, '上海上海市金山区', 5194, '蔬菜种植基地', NULL, '15956949585', '神农9585', '杂交稻', 1, '2020-10-27 18:11:37', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2020-10-27 18:11:37', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (217, 3675, '上海上海市金山区', 5194, '蔬菜种植基地', NULL, '15956949585', '神农9585', '螃蟹', 1, '2020-10-28 09:41:57', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (217, 3675, '上海上海市金山区', 5194, '蔬菜种植基地', NULL, '15956949585', '神农9585', '螃蟹', 1, '2020-10-28 09:41:57', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-10-28 09:41:57', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (218, 3677, '果园企业', 5198, '稻田种植基地', NULL, '15956949585', '神农9585', '稻子', 1, '2020-10-28 11:09:17', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-10-28 11:09:17', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (219, 3675, '上海上海市金山区', 5200, '养殖业', NULL, '15956949585', '神农9585', '羊驼', 2, '2020-10-30 10:24:54', 1, '超管', '2020-12-16 11:29:33', NULL, 1, '成功',
+VALUES (219, 3675, '上海上海市金山区', 5200, '养殖业', NULL, '15956949585', '神农9585', '羊驼', 2, '2020-10-30 10:24:54', 1, '超管', '2020-12-16 11:29:33',
+        NULL, 1, '成功',
         '2020-10-30 10:24:54', '2020-12-16 11:29:33');
 INSERT INTO `sys_crop_feedback`
 VALUES (220, 3676, '上海上海市松江区', 5260, '龙虾', NULL, '15855162271', '神农2271', '龙虾', 1, '2020-11-16 11:22:52', NULL, NULL, NULL, NULL, 0, NULL,
         '2020-11-16 11:22:52', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (430, 11626, '666', 12764, '666', NULL, '15855162271', '神农2271', '大龙虾', 2, '2020-11-25 10:40:57', 1, '超管', '2020-11-25 10:43:41', NULL, 1, '成功',
+VALUES (430, 11626, '666', 12764, '666', NULL, '15855162271', '神农2271', '大龙虾', 2, '2020-11-25 10:40:57', 1, '超管', '2020-11-25 10:43:41', NULL, 1,
+        '成功',
         '2020-11-25 10:40:57', '2020-11-25 10:43:41');
 INSERT INTO `sys_crop_feedback`
-VALUES (431, 11626, '666', 12764, '666', NULL, '15855162271', '神农2271', '大龙虾', 4, '2020-11-25 10:44:37', 1, '超管', '2020-11-25 10:46:32', NULL, 1, '成功',
+VALUES (431, 11626, '666', 12764, '666', NULL, '15855162271', '神农2271', '大龙虾', 4, '2020-11-25 10:44:37', 1, '超管', '2020-11-25 10:46:32', NULL, 1,
+        '成功',
         '2020-11-25 10:44:37', '2020-11-25 10:46:32');
 INSERT INTO `sys_crop_feedback`
-VALUES (432, 1394, '安徽农业有限公司', 2276, '滨湖玉米地', NULL, '15349867208', '超级管理员', '渔业', 1, '2020-12-02 09:58:28', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (432, 1394, '安徽农业有限公司', 2276, '滨湖玉米地', NULL, '15349867208', '超级管理员', '渔业', 1, '2020-12-02 09:58:28', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-12-02 09:58:28', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (433, 926, '磐安天海中药有限', 2025, '磐安天海中药有限公司', NULL, '13182341525', '多比', '测试新增', 1, '2020-12-16 14:27:22', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (433, 926, '磐安天海中药有限', 2025, '磐安天海中药有限公司', NULL, '13182341525', '多比', '测试新增', 1, '2020-12-16 14:27:22', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2020-12-16 14:27:22', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (434, 2916, '安徽飞远公司', 3853, '飞远农场', NULL, '18756946301', '神农6301', '测试新增', 1, '2020-12-16 14:33:10', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (434, 2916, '安徽飞远公司', 3853, '飞远农场', NULL, '18756946301', '神农6301', '测试新增', 1, '2020-12-16 14:33:10', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-12-16 14:33:10', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (435, 2916, '安徽飞远公司', 3853, '飞远农场', NULL, '18756946301', '神农6301', '大大大大黄瓜', 1, '2020-12-16 14:38:31', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (435, 2916, '安徽飞远公司', 3853, '飞远农场', NULL, '18756946301', '神农6301', '大大大大黄瓜', 1, '2020-12-16 14:38:31', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-12-16 14:38:31', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (436, 2916, '安徽飞远公司', 3853, '飞远农场', NULL, '18756946301', '神农6301', '测试新增', 1, '2020-12-16 14:38:40', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (436, 2916, '安徽飞远公司', 3853, '飞远农场', NULL, '18756946301', '神农6301', '测试新增', 1, '2020-12-16 14:38:40', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-12-16 14:38:40', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (437, 11696, '测试wkwebview8888', 12860, '测试wk', NULL, '13879232488', '神农2488', '测试新增', 1, '2020-12-22 10:46:01', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (437, 11696, '测试wkwebview8888', 12860, '测试wk', NULL, '13879232488', '神农2488', '测试新增', 1, '2020-12-22 10:46:01', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-12-22 10:46:01', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (438, 11696, '测试wkwebview8888', 12860, '测试wk', NULL, '13879232488', '神农2488', '大黄瓜1', 1, '2020-12-22 10:46:18', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (438, 11696, '测试wkwebview8888', 12860, '测试wk', NULL, '13879232488', '神农2488', '大黄瓜1', 1, '2020-12-22 10:46:18', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-12-22 10:46:18', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (439, 11696, '测试wkwebview8888', 12860, '测试wk', NULL, '13182341525', '多比', '大黄瓜1', 1, '2020-12-22 10:46:35', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (439, 11696, '测试wkwebview8888', 12860, '测试wk', NULL, '13182341525', '多比', '大黄瓜1', 1, '2020-12-22 10:46:35', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2020-12-22 10:46:35', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (441, 11761, '测试19-1', 12942, '测试19-1', NULL, '13182341525', '神农1525', '5', 1, '2021-02-27 15:44:33', NULL, NULL, NULL, NULL, 0, NULL,
@@ -1074,7 +1296,8 @@ INSERT INTO `sys_crop_feedback`
 VALUES (442, 11767, '主流程333', 12949, '主流程', NULL, '14556565656', '神农56', '大黄瓜1', 1, '2021-03-03 17:29:15', NULL, NULL, NULL, NULL, 0, NULL,
         '2021-03-03 17:29:15', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (470, 11801, '测试3.21.0主流程11', 13011, '测试3.21.0主流程', NULL, '13182341525', '多比', '新增', 1, '2021-03-19 10:15:24', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (470, 11801, '测试3.21.0主流程11', 13011, '测试3.21.0主流程', NULL, '13182341525', '多比', '新增', 1, '2021-03-19 10:15:24', NULL, NULL, NULL, NULL,
+        0, NULL,
         '2021-03-19 10:15:24', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (474, 11818, '3.24.0', 13040, '3.24.0', NULL, '13182341525', '神农1525', '55', 1, '2021-03-31 15:39:54', NULL, NULL, NULL, NULL, 0, NULL,
@@ -1083,31 +1306,37 @@ INSERT INTO `sys_crop_feedback`
 VALUES (475, 11818, '3.24.0', 13040, '3.24.0', NULL, '13182341525', '神农1525', '66', 1, '2021-03-31 15:40:05', NULL, NULL, NULL, NULL, 0, NULL,
         '2021-03-31 15:40:05', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (507, 12164, 'js测试企业', 13519, 'js测试农场', NULL, '19955157561', '神农7561', '测试加种类', 3, '2021-11-30 15:08:14', 1, '超管', '2021-11-30 15:08:34', '种类名有误',
+VALUES (507, 12164, 'js测试企业', 13519, 'js测试农场', NULL, '19955157561', '神农7561', '测试加种类', 3, '2021-11-30 15:08:14', 1, '超管',
+        '2021-11-30 15:08:34', '种类名有误',
         1, '成功', '2021-11-30 15:08:14', '2021-11-30 15:08:34');
 INSERT INTO `sys_crop_feedback`
 VALUES (510, 12164, 'js测试企业', 13519, 'js测试农场', NULL, '19955157561', '神农7561', 'qqqq', 1, '2021-11-30 15:23:36', NULL, NULL, NULL, NULL, 0, NULL,
         '2021-11-30 15:23:36', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (511, 12164, 'js测试企业', 13519, 'js测试农场', NULL, '19955157561', '神农7561', '苹果皮个苹果', 3, '2021-11-30 15:32:38', 1, '超管', '2021-11-30 15:49:33', '测试发短信',
+VALUES (511, 12164, 'js测试企业', 13519, 'js测试农场', NULL, '19955157561', '神农7561', '苹果皮个苹果', 3, '2021-11-30 15:32:38', 1, '超管',
+        '2021-11-30 15:49:33', '测试发短信',
         1, '成功', '2021-11-30 15:32:38', '2021-11-30 15:49:33');
 INSERT INTO `sys_crop_feedback`
 VALUES (512, 12420, 'TEST', 13837, 'TEST', NULL, '18625706122', '神农', 'test', 1, '2022-03-07 15:27:14', NULL, NULL, NULL, NULL, 0, NULL,
         '2022-03-07 15:27:14', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (513, 12422, 'test', 13840, 'test基地', NULL, '18625706122', '神农6122', '虾米', 3, '2022-03-07 16:26:10', 1, '超管', '2022-03-07 16:31:40', '1', 1, '成功',
+VALUES (513, 12422, 'test', 13840, 'test基地', NULL, '18625706122', '神农6122', '虾米', 3, '2022-03-07 16:26:10', 1, '超管', '2022-03-07 16:31:40', '1', 1,
+        '成功',
         '2022-03-07 16:26:10', '2022-03-07 16:31:40');
 INSERT INTO `sys_crop_feedback`
-VALUES (514, 12494, '测试YYF-001', 13920, '合肥科技生产基地+1', NULL, '15605589603', '神农9603', '石斑鱼', 1, '2022-04-07 10:07:21', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (514, 12494, '测试YYF-001', 13920, '合肥科技生产基地+1', NULL, '15605589603', '神农9603', '石斑鱼', 1, '2022-04-07 10:07:21', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2022-04-07 10:07:21', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (515, 12494, '测试YYF-001', 13920, '合肥科技生产基地+1', NULL, '15605589603', '神农9603', '阳光玫瑰', 1, '2022-04-07 10:08:38', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (515, 12494, '测试YYF-001', 13920, '合肥科技生产基地+1', NULL, '15605589603', '神农9603', '阳光玫瑰', 1, '2022-04-07 10:08:38', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2022-04-07 10:08:38', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (517, 12644, '11', 14104, '合格证22', NULL, '13182341525', '神农1525', '11', 1, '2022-05-26 18:00:16', NULL, NULL, NULL, NULL, 0, NULL,
         '2022-05-26 18:00:16', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (520, 12650, '迭代57蔬菜预测产量归档', 14114, '迭代57蔬菜预测产量归档农场', NULL, '13182341525', '神农1525', '测试作物', 1, '2022-06-06 14:29:37', NULL, NULL, NULL, NULL, 0,
+VALUES (520, 12650, '迭代57蔬菜预测产量归档', 14114, '迭代57蔬菜预测产量归档农场', NULL, '13182341525', '神农1525', '测试作物', 1, '2022-06-06 14:29:37',
+        NULL, NULL, NULL, NULL, 0,
         NULL, '2022-06-06 14:29:37', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (529, 12652, '迭代57', 14117, '迭代57', NULL, '13182341525', '神农1525', 'dada', 1, '2022-06-06 15:29:40', NULL, NULL, NULL, NULL, 0, NULL,
@@ -1119,16 +1348,20 @@ INSERT INTO `sys_crop_feedback`
 VALUES (531, 12652, '迭代57', 14117, '迭代57', NULL, '13182341525', '神农1525', '测试作物', 1, '2022-06-06 15:31:28', NULL, NULL, NULL, NULL, 0, NULL,
         '2022-06-06 15:31:28', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (540, 2605, '上海泰捷水产养殖专业合作社', 3531, '上海泰捷水产养殖专业合作社光明', NULL, '18616553920', '戴聪', 'ddd', 1, '2022-07-06 15:57:18', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (540, 2605, '上海泰捷水产养殖专业合作社', 3531, '上海泰捷水产养殖专业合作社光明', NULL, '18616553920', '戴聪', 'ddd', 1, '2022-07-06 15:57:18',
+        NULL, NULL, NULL, NULL, 0, NULL,
         '2022-07-06 15:57:18', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (561, 12808, '多比迭代61企业1外采', 14301, '多比迭代61农场1外采', NULL, '13182341525', '神农1525', '搜到搜索多', 1, '2022-07-28 17:30:59', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (561, 12808, '多比迭代61企业1外采', 14301, '多比迭代61农场1外采', NULL, '13182341525', '神农1525', '搜到搜索多', 1, '2022-07-28 17:30:59', NULL,
+        NULL, NULL, NULL, 0, NULL,
         '2022-07-28 17:30:59', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (562, 12808, '多比迭代61企业1外采', 14301, '多比迭代61农场1外采', NULL, '13182341525', '神农1525', '份数份数发多少', 1, '2022-07-28 17:31:46', NULL, NULL, NULL, NULL, 0,
+VALUES (562, 12808, '多比迭代61企业1外采', 14301, '多比迭代61农场1外采', NULL, '13182341525', '神农1525', '份数份数发多少', 1, '2022-07-28 17:31:46', NULL,
+        NULL, NULL, NULL, 0,
         NULL, '2022-07-28 17:31:46', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (563, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增', 1, '2022-08-02 17:51:38', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (563, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增', 1, '2022-08-02 17:51:38', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-02 17:51:38', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (564, 12400, '戴聪企业', 13812, '戴聪农场', NULL, '18616553920', '神农3920', 'zuowu1', 1, '2022-08-03 10:01:10', NULL, NULL, NULL, NULL, 0, NULL,
@@ -1146,22 +1379,28 @@ INSERT INTO `sys_crop_feedback`
 VALUES (568, 12400, '戴聪企业', 13812, '戴聪农场', NULL, '18616553920', '神农3920', '呱呱呱', 1, '2022-08-03 10:28:14', NULL, NULL, NULL, NULL, 0, NULL,
         '2022-08-03 10:28:14', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (569, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增', 1, '2022-08-03 16:03:13', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (569, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增', 1, '2022-08-03 16:03:13', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-03 16:03:13', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (570, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '大黄瓜11', 1, '2022-08-03 16:03:58', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (570, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '大黄瓜11', 1, '2022-08-03 16:03:58', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-03 16:03:58', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (571, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增1233', 1, '2022-08-03 16:46:58', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (571, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增1233', 1, '2022-08-03 16:46:58', NULL, NULL,
+        NULL, NULL, 0, NULL,
         '2022-08-03 16:46:58', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (572, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增555', 1, '2022-08-03 16:47:05', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (572, 12816, '多比迭代61企业4', 14310, '多比迭代61农场4', NULL, '13182341525', '神农1525', '测试新增555', 1, '2022-08-03 16:47:05', NULL, NULL,
+        NULL, NULL, 0, NULL,
         '2022-08-03 16:47:05', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (573, 12842, '测试主流程', 14359, '测试主流程', NULL, '15556463667', '神农3667', '测试新增', 1, '2022-08-10 14:03:30', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (573, 12842, '测试主流程', 14359, '测试主流程', NULL, '15556463667', '神农3667', '测试新增', 1, '2022-08-10 14:03:30', NULL, NULL, NULL, NULL, 0,
+        NULL,
         '2022-08-10 14:03:30', NULL);
 INSERT INTO `sys_crop_feedback`
-VALUES (574, 12838, '多比迭代61企业15', 14344, '多比迭代61农场15', NULL, '13182341525', '神农1525', '黄瓜黄瓜', 1, '2022-08-10 14:56:43', NULL, NULL, NULL, NULL, 0, NULL,
+VALUES (574, 12838, '多比迭代61企业15', 14344, '多比迭代61农场15', NULL, '13182341525', '神农1525', '黄瓜黄瓜', 1, '2022-08-10 14:56:43', NULL, NULL, NULL,
+        NULL, 0, NULL,
         '2022-08-10 14:56:43', NULL);
 INSERT INTO `sys_crop_feedback`
 VALUES (623, 12856, '62迭代', 14373, '6201', NULL, '18625706122', '六六6201', 'zuowu', 1, '2022-08-25 16:16:55', NULL, NULL, NULL, NULL, 0, NULL,
@@ -1177,9 +1416,9 @@ CREATE TABLE `sys_demo_farm`
     `company_id`  bigint(20) NULL DEFAULT NULL COMMENT '企业id',
     `farm_id`     bigint(20) NULL DEFAULT NULL COMMENT '农场id',
     `create_by`   bigint(20) NULL DEFAULT NULL,
-    `create_time` datetime   NULL DEFAULT NULL,
+    `create_time` datetime NULL DEFAULT NULL,
     `update_by`   bigint(20) NULL DEFAULT NULL,
-    `update_time` datetime   NULL DEFAULT NULL,
+    `update_time` datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE INDEX `unq_farm_id` (`farm_id`) USING BTREE
 ) ENGINE = InnoDB
@@ -1218,9 +1457,9 @@ CREATE TABLE `sys_demo_land`
     `farm_id`     bigint(20) NULL DEFAULT NULL COMMENT '农场id',
     `land_id`     bigint(20) NULL DEFAULT NULL COMMENT '地块id',
     `create_by`   bigint(20) NULL DEFAULT NULL,
-    `create_time` datetime   NULL DEFAULT NULL,
+    `create_time` datetime NULL DEFAULT NULL,
     `update_by`   bigint(20) NULL DEFAULT NULL,
-    `update_time` datetime   NULL DEFAULT NULL,
+    `update_time` datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE INDEX `unq_land_id` (`land_id`) USING BTREE
 ) ENGINE = InnoDB
@@ -1238,18 +1477,18 @@ CREATE TABLE `sys_demo_land`
 DROP TABLE IF EXISTS `sys_farmer_comment`;
 CREATE TABLE `sys_farmer_comment`
 (
-    `id`                       bigint(20)                                                    NOT NULL,
+    `id`                       bigint(20) NOT NULL,
     `content`                  varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评价内容',
-    `commentator`              varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '评论人姓名',
-    `commentator_company_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '评论人企业名称',
+    `commentator`              varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评论人姓名',
+    `commentator_company_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评论人企业名称',
     `commentator_company_logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评论人企业logo',
-    `commentator_position`     varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '评论人职位',
-    `sort_num`                 int(10)                                                       NULL DEFAULT NULL,
-    `status_flag`              tinyint(2)                                                    NULL DEFAULT NULL COMMENT '0:禁用，1启用',
-    `create_by`                bigint(20)                                                    NULL DEFAULT NULL,
-    `create_time`              datetime                                                      NULL DEFAULT NULL,
-    `update_by`                bigint(20)                                                    NULL DEFAULT NULL,
-    `update_time`              datetime                                                      NULL DEFAULT NULL,
+    `commentator_position`     varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评论人职位',
+    `sort_num`                 int(10) NULL DEFAULT NULL,
+    `status_flag`              tinyint(2) NULL DEFAULT NULL COMMENT '0:禁用，1启用',
+    `create_by`                bigint(20) NULL DEFAULT NULL,
+    `create_time`              datetime NULL DEFAULT NULL,
+    `update_by`                bigint(20) NULL DEFAULT NULL,
+    `update_time`              datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -1260,20 +1499,30 @@ CREATE TABLE `sys_farmer_comment`
 -- Records of sys_farmer_comment
 -- ----------------------------
 INSERT INTO `sys_farmer_comment`
-VALUES (4, '神农口袋的“可视农场”非常棒，每次领导/会员过来农场考察/游玩，先打开大屏幕给他们介绍下农场的地块分布、当前种植品种、以及每个地块的当前生产状况，非常直观。溯源也非常好用，可向会员展示作物生产全过程。', '张淑芳', '合肥诺伊有机',
-        'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/374ca512-31b4-4435-94ea-7534411e5423.jpg', '运营总监', 1, 1, 4, '2019-03-04 11:43:49', 2,
+VALUES (4,
+        '神农口袋的“可视农场”非常棒，每次领导/会员过来农场考察/游玩，先打开大屏幕给他们介绍下农场的地块分布、当前种植品种、以及每个地块的当前生产状况，非常直观。溯源也非常好用，可向会员展示作物生产全过程。',
+        '张淑芳', '合肥诺伊有机',
+        'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/374ca512-31b4-4435-94ea-7534411e5423.jpg', '运营总监', 1, 1, 4, '2019-03-04 11:43:49',
+        2,
         '2019-09-18 10:14:00');
 INSERT INTO `sys_farmer_comment`
-VALUES (5, '神农口袋帮助田庄实现了精细化管理，每一个地块上一次什么时候使用了投入品，用量是多少，都能完整记录并追溯，让农事操作安排有条不紊。还可以统计每个地块的农资投入成本，对我们核算成本、收益帮助不小。', '康玮', '谷米田庄',
+VALUES (5,
+        '神农口袋帮助田庄实现了精细化管理，每一个地块上一次什么时候使用了投入品，用量是多少，都能完整记录并追溯，让农事操作安排有条不紊。还可以统计每个地块的农资投入成本，对我们核算成本、收益帮助不小。',
+        '康玮', '谷米田庄',
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/3c1516b9-7cc2-4765-ac30-e4d4ae7ab7d4.jpg', '总经理', 2, 1, 4, '2019-03-04 11:44:59', 2,
         '2019-04-23 10:21:01');
 INSERT INTO `sys_farmer_comment`
-VALUES (6, '之前管理农场会员全靠微信群管理，工作量大且低效，客服收集会员的下单菜品后要进行汇总然后发给基地，协作很不顺畅、易出错。神农口袋帮我们解决了这一系列问题，客户、客服、销售和基地之间沟通效率提高不少。', '蒋国平', '北京食为先',
+VALUES (6,
+        '之前管理农场会员全靠微信群管理，工作量大且低效，客服收集会员的下单菜品后要进行汇总然后发给基地，协作很不顺畅、易出错。神农口袋帮我们解决了这一系列问题，客户、客服、销售和基地之间沟通效率提高不少。',
+        '蒋国平', '北京食为先',
         'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/3e6d2fe2-d655-460f-9246-2f0c487f669d.jpg', '董事长', 3, 1, 4, '2019-03-04 11:46:04', 2,
         '2019-04-23 10:21:03');
 INSERT INTO `sys_farmer_comment`
-VALUES (12, '田园综合体目前占地1万亩，管理起来很费劲，神农口袋把所有地块、大棚数字化展示，通过可视化的方式展示园区规划、作物生长状况、物联网设备监测数据，给田园综合体增加了科技元素和现代化的管理方式。', '李超然', '江西巴夫洛田园综合体',
-        'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/9e4a36ef-01a0-4a75-8ecb-efe09af345fc.jpg', '副总经理', 4, 1, 2, '2019-04-19 10:31:47', 104,
+VALUES (12,
+        '田园综合体目前占地1万亩，管理起来很费劲，神农口袋把所有地块、大棚数字化展示，通过可视化的方式展示园区规划、作物生长状况、物联网设备监测数据，给田园综合体增加了科技元素和现代化的管理方式。',
+        '李超然', '江西巴夫洛田园综合体',
+        'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/9e4a36ef-01a0-4a75-8ecb-efe09af345fc.jpg', '副总经理', 4, 1, 2, '2019-04-19 10:31:47',
+        104,
         '2022-04-08 17:59:51');
 INSERT INTO `sys_farmer_comment`
 VALUES (32, '1111', '1', '1', 'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/75d7fc34-722f-4d0c-8878-a37dda083fc6.jpg', '1', 1, 1, 122,
@@ -1285,16 +1534,16 @@ VALUES (32, '1111', '1', '1', 'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/z
 DROP TABLE IF EXISTS `sys_login_banner`;
 CREATE TABLE `sys_login_banner`
 (
-    `id`                bigint(20)                                                    NOT NULL,
-    `login_banner_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '登录页banner名称',
+    `id`                bigint(20) NOT NULL,
+    `login_banner_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '登录页banner名称',
     `big_img_url`       varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'banner图片(大图)',
     `small_img_url`     varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'banner图片(小图)',
-    `status_flag`       tinyint(2)                                                    NULL DEFAULT NULL COMMENT '0：禁用，1启用',
-    `sort_num`          int(10)                                                       NULL DEFAULT NULL,
-    `create_by`         bigint(20)                                                    NULL DEFAULT NULL,
-    `create_time`       datetime                                                      NULL DEFAULT NULL,
-    `update_by`         bigint(20)                                                    NULL DEFAULT NULL,
-    `update_time`       datetime                                                      NULL DEFAULT NULL,
+    `status_flag`       tinyint(2) NULL DEFAULT NULL COMMENT '0：禁用，1启用',
+    `sort_num`          int(10) NULL DEFAULT NULL,
+    `create_by`         bigint(20) NULL DEFAULT NULL,
+    `create_time`       datetime NULL DEFAULT NULL,
+    `update_by`         bigint(20) NULL DEFAULT NULL,
+    `update_time`       datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -1319,14 +1568,14 @@ VALUES (3, '222', 'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/60
 DROP TABLE IF EXISTS `sys_qrcode_example`;
 CREATE TABLE `sys_qrcode_example`
 (
-    `id`          bigint(20)                                                    NOT NULL,
-    `qrcode_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '溯源码名称',
-    `qrcode_type` tinyint(4)                                                    NULL DEFAULT NULL COMMENT '溯源码类型,1溯源码',
+    `id`          bigint(20) NOT NULL,
+    `qrcode_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '溯源码名称',
+    `qrcode_type` tinyint(4) NULL DEFAULT NULL COMMENT '溯源码类型,1溯源码',
     `qrcode_url`  varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '溯源url',
-    `create_by`   bigint(20)                                                    NULL DEFAULT NULL,
-    `create_time` datetime                                                      NULL DEFAULT NULL,
-    `update_by`   bigint(20)                                                    NULL DEFAULT NULL,
-    `update_time` datetime                                                      NULL DEFAULT NULL,
+    `create_by`   bigint(20) NULL DEFAULT NULL,
+    `create_time` datetime NULL DEFAULT NULL,
+    `update_by`   bigint(20) NULL DEFAULT NULL,
+    `update_time` datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -1349,18 +1598,18 @@ VALUES (43, '!@#$', 100, 'https://www.snkoudai.com/', 104, '2022-06-22 20:35:05'
 DROP TABLE IF EXISTS `sys_website_banner`;
 CREATE TABLE `sys_website_banner`
 (
-    `id`                    bigint(20)                                                    NOT NULL,
+    `id`                    bigint(20) NOT NULL,
     `img_url`               varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
     `title`                 varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主标题',
     `sub_title`             varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '副标题',
     `gradients_color_start` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '渐变开始',
     `gradients_color_end`   varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '渐变结束',
-    `sort_num`              int(10)                                                       NULL DEFAULT NULL COMMENT '排序',
-    `status_flag`           tinyint(4)                                                    NULL DEFAULT NULL COMMENT '0禁用，1启用',
-    `create_by`             bigint(20)                                                    NULL DEFAULT NULL,
-    `create_time`           datetime                                                      NULL DEFAULT NULL,
-    `update_by`             bigint(20)                                                    NULL DEFAULT NULL,
-    `update_time`           datetime                                                      NULL DEFAULT NULL,
+    `sort_num`              int(10) NULL DEFAULT NULL COMMENT '排序',
+    `status_flag`           tinyint(4) NULL DEFAULT NULL COMMENT '0禁用，1启用',
+    `create_by`             bigint(20) NULL DEFAULT NULL,
+    `create_time`           datetime NULL DEFAULT NULL,
+    `update_by`             bigint(20) NULL DEFAULT NULL,
+    `update_time`           datetime NULL DEFAULT NULL,
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
   CHARACTER SET = utf8mb4
@@ -1383,4 +1632,5 @@ INSERT INTO `sys_website_banner`
 VALUES (21, 'https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/zuoan-test/88669401-37ef-4aaf-8a57-249562465d57.jpg', '1', '1', '1', '1', 1, 0, 122,
         '2022-04-08 18:06:05', 122, '2022-04-08 18:06:05');
 
-SET FOREIGN_KEY_CHECKS = 1;
+SET
+FOREIGN_KEY_CHECKS = 1;

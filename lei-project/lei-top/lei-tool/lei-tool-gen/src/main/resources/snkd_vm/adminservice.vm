@@ -28,66 +28,75 @@ import java.util.List;
 @Slf4j
 public class Admin${entity}Service {
 
-	@Autowired
-	private ${entity}Manage ${entityFirstLower}Manage;
+@Autowired
+private ${entity}Manage ${entityFirstLower}Manage;
 
-	public BaseResp<ApiPageResp<Admin${entity}VO>> list(Admin${entity}ListReq reqModel) {
+public BaseResp
+<ApiPageResp
+<Admin${entity}VO>> list(Admin${entity}ListReq reqModel) {
 
-		Integer pageNo = reqModel.getPageNo();
-		Integer pageSize = reqModel.getPageSize();
-		String keyword = reqModel.getKeyword();
+  Integer pageNo = reqModel.getPageNo();
+  Integer pageSize = reqModel.getPageSize();
+  String keyword = reqModel.getKeyword();
 
-		Integer startIndex = (pageNo-1)*pageSize;
+  Integer startIndex = (pageNo-1)*pageSize;
 
-    	long totalCount = ${entityFirstLower}Manage.getCountByKeywordAndPage(keyword);
-		if(totalCount==0){
-			return BaseResp.success(new ApiPageResp());
-		}
+  long totalCount = ${entityFirstLower}Manage.getCountByKeywordAndPage(keyword);
+  if(totalCount==0){
+  return BaseResp.success(new ApiPageResp());
+  }
 
-		List<${entity}> list = ${entityFirstLower}Manage.getListByKeywordAndPage(keyword,startIndex, pageSize);
+  List<${entity}> list = ${entityFirstLower}Manage.getListByKeywordAndPage(keyword,startIndex, pageSize);
 
-		List<Admin${entity}VO> voList = Transfer.${entityFirstLower}ListToAdmin${entity}VOList(list);
+  List
+  <Admin${entity}VO> voList = Transfer.${entityFirstLower}ListToAdmin${entity}VOList(list);
 
-		ApiPageResp<Admin${entity}VO> respItem = new ApiPageResp(voList,totalCount);
+    ApiPageResp
+    <Admin${entity}VO> respItem = new ApiPageResp(voList,totalCount);
 
-		return BaseResp.success(respItem);
-	}
+      return BaseResp.success(respItem);
+      }
 
-	public BaseResp<Admin${entity}VO> get(Admin${entity}GetReq reqModel) {
+      public BaseResp
+      <Admin${entity}VO> get(Admin${entity}GetReq reqModel) {
 
-		Long id = reqModel.getId();
-		${entity} po = ${entityFirstLower}Manage.getById(id);
+        Long id = reqModel.getId();
+          ${entity} po = ${entityFirstLower}Manage.getById(id);
 
-		Admin${entity}VO vo = Transfer.${entityFirstLower}ToAdmin${entity}VO(po);
+        Admin${entity}VO vo = Transfer.${entityFirstLower}ToAdmin${entity}VO(po);
 
-		return BaseResp.success(vo);
-	}
+        return BaseResp.success(vo);
+        }
 
-	public BaseResp<Admin${entity}VO> add(Admin${entity}AddReq reqModel) {
-		BaseResp<${entity}> resp = ${entityFirstLower}Manage.create${entity}(#foreach($column in $columns)#if($column.javaFieldName!='id') reqModel.get${column.javaFieldNameUF}()#if($foreach.hasNext),#end#end#end);
-		if(!resp.isSuccess()){
-			return BaseResp.returnResp(resp);
-		}
+        public BaseResp
+        <Admin${entity}VO> add(Admin${entity}AddReq reqModel) {
+          BaseResp<${entity}> resp = ${entityFirstLower}Manage.create${entity}(#foreach($column in $columns)#if($column.javaFieldName!='id')
+            reqModel.get${column.javaFieldNameUF}()#if($foreach.hasNext),#end#end#end);
+          if(!resp.isSuccess()){
+          return BaseResp.returnResp(resp);
+          }
 
-		${entity} po = resp.getObj();
-		Admin${entity}VO vo = Transfer.${entityFirstLower}ToAdmin${entity}VO(po);
-		return BaseResp.success(vo);
-	}
+            ${entity} po = resp.getObj();
+          Admin${entity}VO vo = Transfer.${entityFirstLower}ToAdmin${entity}VO(po);
+          return BaseResp.success(vo);
+          }
 
 
-	public BaseResp<Admin${entity}VO> edit(Admin${entity}EditReq reqModel) {
-		BaseResp<${entity}> resp = ${entityFirstLower}Manage.edit${entity}(#foreach($column in $columns) reqModel.get${column.javaFieldNameUF}()#if($foreach.hasNext),#end#end);
-		if(!resp.isSuccess()){
-			return BaseResp.returnResp(resp);
-		}
+          public BaseResp
+          <Admin${entity}VO> edit(Admin${entity}EditReq reqModel) {
+            BaseResp<${entity}> resp = ${entityFirstLower}Manage.edit${entity}(#foreach($column in $columns) reqModel.get${column.javaFieldNameUF}
+              ()#if($foreach.hasNext),#end#end);
+            if(!resp.isSuccess()){
+            return BaseResp.returnResp(resp);
+            }
 
-		${entity} po = resp.getObj();
-		Admin${entity}VO vo = Transfer.${entityFirstLower}ToAdmin${entity}VO(po);
-		return BaseResp.success(vo);
-	}
+              ${entity} po = resp.getObj();
+            Admin${entity}VO vo = Transfer.${entityFirstLower}ToAdmin${entity}VO(po);
+            return BaseResp.success(vo);
+            }
 
-	public BaseResp del(Admin${entity}DelReq reqModel) {
-		return ${entityFirstLower}Manage.remove${entity}(reqModel.getId());
-	}
+            public BaseResp del(Admin${entity}DelReq reqModel) {
+            return ${entityFirstLower}Manage.remove${entity}(reqModel.getId());
+            }
 
-}
+            }

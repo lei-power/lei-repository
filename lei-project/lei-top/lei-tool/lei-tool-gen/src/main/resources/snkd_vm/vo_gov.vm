@@ -3,16 +3,16 @@ package ${package}.biz.gov.model.vo.${entityAllLower};
 
 #set($hasDate=0)
 #foreach($column in $columns)
-#if($column.javaType=='Date' && $hasDate==0)
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+    #if($column.javaType=='Date' && $hasDate==0)
+    import io.swagger.annotations.ApiModel;
+    import io.swagger.annotations.ApiModelProperty;
+    import lombok.Data;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-#set($hasDate=1)
-#end
+    import java.io.Serializable;
+    import java.math.BigDecimal;
+    import java.util.Date;
+        #set($hasDate=1)
+    #end
 #end
 
 import io.swagger.annotations.ApiModel;
@@ -29,7 +29,7 @@ public class Gov${entity}VO implements Serializable{
     #if($column.comment!='')
     @ApiModelProperty("$column.comment")
     #end
-    private ${column.javaTypeBox} ${column.javaFieldName};
+private ${column.javaTypeBox} ${column.javaFieldName};
 #end
 
 }

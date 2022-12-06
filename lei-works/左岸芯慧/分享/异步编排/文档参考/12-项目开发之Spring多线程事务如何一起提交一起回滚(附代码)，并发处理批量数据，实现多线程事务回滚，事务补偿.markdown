@@ -12,24 +12,23 @@ tags:
 
 **目录**
 
- [前言](#%E5%89%8D%E8%A8%80)
+[前言](#%E5%89%8D%E8%A8%80)
 
- [基于CountDownLatch](#%E5%9F%BA%E4%BA%8ECountDownLatch)
+[基于CountDownLatch](#%E5%9F%BA%E4%BA%8ECountDownLatch)
 
- [基于回调函数](#%E5%9F%BA%E4%BA%8E%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0)
+[基于回调函数](#%E5%9F%BA%E4%BA%8E%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0)
 
- [基于spring上下文中获取事务管理器](#%E5%9F%BA%E4%BA%8Espring%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E8%8E%B7%E5%8F%96%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8)
+[基于spring上下文中获取事务管理器](#%E5%9F%BA%E4%BA%8Espring%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E8%8E%B7%E5%8F%96%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8)
 
- [封装的工具类](#%E5%B0%81%E8%A3%85%E7%9A%84%E5%B7%A5%E5%85%B7%E7%B1%BB)
+[封装的工具类](#%E5%B0%81%E8%A3%85%E7%9A%84%E5%B7%A5%E5%85%B7%E7%B1%BB)
 
- [使用的核心代码](#%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81)
+[使用的核心代码](#%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81)
 
- [测试代码](#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81)
+[测试代码](#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81)
 
- [结果](#%E7%BB%93%E6%9E%9C%EF%BC%9A)
+[结果](#%E7%BB%93%E6%9E%9C%EF%BC%9A)
 
- [测试成功的情况](#%E6%B5%8B%E8%AF%95%E6%88%90%E5%8A%9F%E7%9A%84%E6%83%85%E5%86%B5)
-
+[测试成功的情况](#%E6%B5%8B%E8%AF%95%E6%88%90%E5%8A%9F%E7%9A%84%E6%83%85%E5%86%B5)
 
 ### 前言
 
@@ -41,7 +40,7 @@ tags:
 
 **PS:测试已通过，若拆分后的部分数据操作抛错，则全部数据回滚，即多线程事务回滚，检查数据库无数据插入。**
 
-### 
+###  
 
 ### 基于CountDownLatch
 
@@ -85,7 +84,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Author by mocar小师兄
- * @DESC:  从已有的spring上下文取得已实例化的bean
+ * @DESC: 从已有的spring上下文取得已实例化的bean
  */
 @Component
 public class ApplicationContextProvider implements ApplicationContextAware {
@@ -101,7 +100,7 @@ public class ApplicationContextProvider implements ApplicationContextAware {
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        log.info("spring上下文applicationContext正在初始化,application:{}" ,applicationContext);
+        log.info("spring上下文applicationContext正在初始化,application:{}", applicationContext);
         ApplicationContextProvider.applicationContext = applicationContext;
         log.info("spring上下文applicationContext初始化完成!");
     }
@@ -111,8 +110,8 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
     }
 
-    public static Object getBean(String name){
-        if(applicationContext==null){
+    public static Object getBean(String name) {
+        if (applicationContext == null) {
             log.warn("applicationContext是空的");
             return null;
         }
@@ -120,7 +119,7 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
     }
 
-    public static <T> T getBean(Class<T> clazz){
+    public static <T> T getBean(Class<T> clazz) {
         return getApplicationContext().getBean(clazz);
 
     }
@@ -158,6 +157,7 @@ import java.util.concurrent.atomic.AtomicReference;
  **/
 //@Component 不能交给spring管理
 public class TransactionMultipartExecutor<T> {
+
     private static final Logger log = LoggerFactory.getLogger(TransactionMultipartExecutor.class);
 
     /**
@@ -216,7 +216,7 @@ public class TransactionMultipartExecutor<T> {
     }
 
     public TransactionMultipartExecutor(int singleCount, List<T> list) {
-        if (singleCount <= 0 || CollectionUtils.isEmpty(list)){
+        if (singleCount <= 0 || CollectionUtils.isEmpty(list)) {
             throw new RuntimeException("Illegal parameter");
         }
         //transactionManager = ContextLoader.getCurrentWebApplicationContext().getBean(PlatformTransactionManager.class);
@@ -224,7 +224,7 @@ public class TransactionMultipartExecutor<T> {
         this.singleCount = singleCount;
         this.list = list;
         this.listSize = list.size();
-        this.runSize = (this.listSize%this.singleCount)==0 ? this.listSize/this.singleCount : this.listSize/this.singleCount + 1;
+        this.runSize = (this.listSize % this.singleCount) == 0 ? this.listSize / this.singleCount : this.listSize / this.singleCount + 1;
     }
 
     public void excute() throws InterruptedException {
@@ -260,12 +260,12 @@ public class TransactionMultipartExecutor<T> {
                         /*if (random.nextInt(2) == 1) {
                             throw new RuntimeException("模拟异常抛出错误回滚");
                         }*/
-                        log.warn("多线程事务批量操作执行成功,线程名:{},操作成功数量:{}",Thread.currentThread().getName(), list.size());
+                        log.warn("多线程事务批量操作执行成功,线程名:{},操作成功数量:{}", Thread.currentThread().getName(), list.size());
                     } catch (Exception e) {
                         // 接收异常,处理异常
                         isError.set(true);
                         //e.printStackTrace();
-                        log.error("多线程事务批量操作抛错,线程名:{},操作失败数量:{},报错信息:{},{}",Thread.currentThread().getName(),list.size(),e.toString(), e);
+                        log.error("多线程事务批量操作抛错,线程名:{},操作失败数量:{},报错信息:{},{}", Thread.currentThread().getName(), list.size(), e.toString(), e);
                     }
                     //计数器减一
                     end.countDown();
@@ -304,6 +304,7 @@ public class TransactionMultipartExecutor<T> {
 
     //抽象线程类
     public abstract class MyThread<T> implements Runnable {
+
         //list:总数据分割后某线程负责执行的数据
         private List<T> list;
         private CountDownLatch begin, end;
@@ -333,6 +334,7 @@ public class TransactionMultipartExecutor<T> {
 
     //回调接口定义
     public interface CallBack<T> {
+
         void method(List<T> list);
     }
 
@@ -369,18 +371,17 @@ public class TransactionMultipartExecutor<T> {
 ### 使用的核心代码
 
 ```java
-TransactionMultipartExecutor<Plant> executor = new TransactionMultipartExecutor<>(2,plants);
-        executor.setCallBack(new TransactionMultipartExecutor.CallBack<Plant>() {
-            @Override
-            public void method(List<Plant> list) {
-                plantService.insertPlantBatch(list);
-            }
+TransactionMultipartExecutor<Plant> executor=new TransactionMultipartExecutor<>(2,plants);
+        executor.setCallBack(new TransactionMultipartExecutor.CallBack<Plant>(){
+@Override public void method(List<Plant> list){
+        plantService.insertPlantBatch(list);
+        }
 
         });
-        try {
-            executor.excute();
-        } catch (Exception e) {
-            e.printStackTrace();
+        try{
+        executor.excute();
+        }catch(Exception e){
+        e.printStackTrace();
         }
 ```
 
@@ -389,34 +390,32 @@ TransactionMultipartExecutor<Plant> executor = new TransactionMultipartExecutor<
 ### 测试代码
 
 ```java
-@Test
-    public void testTransactionExecutorRollback(){
+@Test public void testTransactionExecutorRollback(){
         //监控耗时
-        StopWatch sw = new StopWatch();
+        StopWatch sw=new StopWatch();
         sw.start();
-        List<Plant> plants = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Plant plant = getTestData("mocar00" + i);
-            plants.add(plant);
+        List<Plant> plants=new ArrayList<>();
+        for(int i=0;i< 5;i++){
+        Plant plant=getTestData("mocar00"+i);
+        plants.add(plant);
         }
-        TransactionMultipartExecutor<Plant> executor = new TransactionMultipartExecutor<>(2,plants);
-        executor.setCallBack(new TransactionMultipartExecutor.CallBack<Plant>() {
-            @Override
-            public void method(List<Plant> list) {
-                plantService.insertPlantBatch(list);
-            }
+        TransactionMultipartExecutor<Plant> executor=new TransactionMultipartExecutor<>(2,plants);
+        executor.setCallBack(new TransactionMultipartExecutor.CallBack<Plant>(){
+@Override public void method(List<Plant> list){
+        plantService.insertPlantBatch(list);
+        }
 
         });
-        try {
-            executor.excute();
-        } catch (Exception e) {
-            e.printStackTrace();
+        try{
+        executor.excute();
+        }catch(Exception e){
+        e.printStackTrace();
         }
-        System.out.println("总耗时:" + sw.getTime() + " 毫秒");
-    }
+        System.out.println("总耗时:"+sw.getTime()+" 毫秒");
+        }
 
-    private Plant getTestData(String plantId){
-        Plant plant = new Plant();
+private Plant getTestData(String plantId){
+        Plant plant=new Plant();
         plant.setId(SnowFlakeGenerateIDUtils.getSnowId());
         plant.setPlantId(plantId);
         plant.setPlantName(plantId);
@@ -428,13 +427,12 @@ TransactionMultipartExecutor<Plant> executor = new TransactionMultipartExecutor<
         plant.setCreateUser("mocar");
         plant.setModifyUser("mocar");
         return plant;
-    }
+        }
 ```
 
-### 
+###  
 
 ### 结果：
-
 
 ![img](https://img-blog.csdnimg.cn/2020111817392456.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NldmVuNzExMTE=,size_16,color_FFFFFF,t_70)
 
@@ -443,7 +441,6 @@ TransactionMultipartExecutor<Plant> executor = new TransactionMultipartExecutor<
 &nbsp;
 
 ### 测试成功的情况
-
 
 ![img](https://img-blog.csdnimg.cn/20201118174412172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NldmVuNzExMTE=,size_16,color_FFFFFF,t_70)
 

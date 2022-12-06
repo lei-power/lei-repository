@@ -10,15 +10,15 @@ import org.apache.velocity.app.VelocityEngine;
  * @Description:
  * @date 2015/12/18
  */
-public class EntityService{
+public class EntityService {
 
-    public static void doGenerator(ConfigContext configContext, Object data,Callback callback) {
+    public static void doGenerator(ConfigContext configContext, Object data, Callback callback) {
         //配置velocity的资源加载路径
         Properties velocityPros = new Properties();
         velocityPros.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, configContext.getSourcePath());
         velocityPros.setProperty(Velocity.ENCODING_DEFAULT, "UTF-8");
         velocityPros.setProperty(Velocity.INPUT_ENCODING, "UTF-8");
-        velocityPros.setProperty(Velocity.OUTPUT_ENCODING, "UTF-8"); 
+        velocityPros.setProperty(Velocity.OUTPUT_ENCODING, "UTF-8");
         Velocity.init(velocityPros);
 
         //封装velocity数据
@@ -28,8 +28,8 @@ public class EntityService{
 
         String entity = configContext.getTargetName();
         String entityFirstLower = entity;
-        if(!Character.isLowerCase(entity.charAt(0))){
-            entityFirstLower =  (new StringBuilder()).append(Character.toLowerCase(entity.charAt(0))).append(entity.substring(1)).toString();
+        if (!Character.isLowerCase(entity.charAt(0))) {
+            entityFirstLower = (new StringBuilder()).append(Character.toLowerCase(entity.charAt(0))).append(entity.substring(1)).toString();
         }
 
         context.put("entityFirstLower", entityFirstLower);

@@ -24,37 +24,42 @@ import java.util.List;
 @RestController
 public class Gov${entity}Controller {
 
-	@Autowired
-	private Gov${entity}Service gov${entity}Service;
+@Autowired
+private Gov${entity}Service gov${entity}Service;
 
-    @PostMapping("/list")
-    @ApiOperation(value = "${entity}列表接口", httpMethod = "POST", notes = "用于：中台管理-${entity}管理")
-    public BaseResp<ApiPageResp<Gov${entity}VO>> list(@RequestBody Gov${entity}ListReq reqModel){
-        return gov${entity}Service.list(reqModel);
-    }
+@PostMapping("/list")
+@ApiOperation(value = "${entity}列表接口", httpMethod = "POST", notes = "用于：中台管理-${entity}管理")
+public BaseResp
+<ApiPageResp
+<Gov${entity}VO>> list(@RequestBody Gov${entity}ListReq reqModel){
+  return gov${entity}Service.list(reqModel);
+  }
 
-    @PostMapping("/get")
-    @ApiOperation(value = "${entity}详情接口", httpMethod = "POST", notes = "用于：中台管理-${entity}管理")
-    public BaseResp<Gov${entity}VO> get(@RequestBody Gov${entity}GetReq reqModel){
-        return gov${entity}Service.get(reqModel);
+  @PostMapping("/get")
+  @ApiOperation(value = "${entity}详情接口", httpMethod = "POST", notes = "用于：中台管理-${entity}管理")
+  public BaseResp
+  <Gov${entity}VO> get(@RequestBody Gov${entity}GetReq reqModel){
+    return gov${entity}Service.get(reqModel);
     }
 
     @PostMapping("/add")
     @ApiOperation(value = "${entity}添加接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-添加")
-     public BaseResp<Gov${entity}VO> add(@RequestBody Gov${entity}AddReq reqModel){
-        return gov${entity}Service.add(reqModel);
-     }
+    public BaseResp
+    <Gov${entity}VO> add(@RequestBody Gov${entity}AddReq reqModel){
+      return gov${entity}Service.add(reqModel);
+      }
 
-    @PostMapping("/edit")
-    @ApiOperation(value = "${entity}修改接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-修改")
-    public BaseResp<Gov${entity}VO> edit(@RequestBody Gov${entity}EditReq reqModel){
+      @PostMapping("/edit")
+      @ApiOperation(value = "${entity}修改接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-修改")
+      public BaseResp
+      <Gov${entity}VO> edit(@RequestBody Gov${entity}EditReq reqModel){
         return gov${entity}Service.edit(reqModel);
-    }
+        }
 
-    @PostMapping("/del")
-    @ApiOperation(value = "${entity}删除接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-删除")
-    public BaseResp del(@RequestBody Gov${entity}DelReq reqModel){
+        @PostMapping("/del")
+        @ApiOperation(value = "${entity}删除接口", httpMethod = "POST", notes = "用于：平台管理-${entity}管理-删除")
+        public BaseResp del(@RequestBody Gov${entity}DelReq reqModel){
         return gov${entity}Service.del(reqModel);
-    }
+        }
 
-}
+        }
