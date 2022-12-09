@@ -1,6 +1,7 @@
 package cn.lei.gen;
 
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.file.FileReader;
 import cn.hutool.db.DbUtil;
 import cn.hutool.db.meta.MetaUtil;
@@ -11,6 +12,7 @@ import cn.lei.gen.entity.ColumnHelper;
 import cn.lei.gen.entity.ConfigContext;
 import cn.lei.gen.entity.EntityService;
 import cn.lei.gen.entity.VelocityUtil;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +37,7 @@ public class SnkdGen {
     public void snkdGenFlow() {
         //1.读取classPath的配置文件
         //写死从本地库里取数据
-        DataSource mysql_lcoal = DbUtil.getDs("mysql_testc");
+        DataSource mysql_lcoal = DbUtil.getDs("mysql_local");
         List<Map<String, String>> sources = getSources();
 
         for (Map<String, String> source : sources) {
@@ -58,7 +60,7 @@ public class SnkdGen {
             System.out.println("columnDefinitionList:" + columnDefinitionList);
             //生成代码
             ConfigContext configContext = new ConfigContext();
-            configContext.setOutputPath(cn.hutool.core.io.FileUtil.getAbsolutePath("/snkd_gen") + "/");
+            configContext.setOutputPath(this.getClass().getResource("/").getPath()+"/snkd_gen" + DateUtil.formatTime(new Date())+"/");
             configContext.setSourcePath(cn.hutool.core.io.FileUtil.getAbsolutePath("snkd_vm"));
             configContext.setTargetName(fileName);
             configContext.setTargetTable(tableName);
@@ -72,7 +74,7 @@ public class SnkdGen {
     }
 
     private List<Map<String, String>> getSources() {
-        FileReader fileReader = FileReader.create(cn.hutool.core.io.FileUtil.file("classpath:table_source.csv"));
+        FileReader fileReader = FileReader.create(cn.hutool.core.io.FileUtil.file("classpath:snkd_sources"));
         log.info("========================读取源信息{}===================================", fileReader.readLines());
         //读取的文件逗号分割，按顺序为tableName，fileName,packageName
         List<Map<String, String>> mapList = fileReader.readLines().stream().map(str -> {

@@ -13,7 +13,7 @@ pass=Freetek0987!@#$
 
 
 [mysql_local]
-url=jdbc:mysql://192.168.200.128:3306/backup
+url=jdbc:mysql://192.168.200.128:3306/backup?useSSL=false
 user=root
 pass=root
 remarks = true
