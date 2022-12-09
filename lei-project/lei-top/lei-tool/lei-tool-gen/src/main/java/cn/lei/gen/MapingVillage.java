@@ -19,7 +19,10 @@ import org.apache.commons.lang3.StringUtils;
  *@Date 2022/11/22 15:42
  ***/
 
-
+/**
+ * 废弃了数据处理用代码不太方便，还是用excel好点
+ */
+@Deprecated
 public class MapingVillage {
 
     //区域关键字

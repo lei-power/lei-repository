@@ -4,7 +4,7 @@ showParams=true
 sqlLevel=info
 
 #默认数据源
-url=jdbc:sqlite:D:\work\lei-repository\lei-project\lei-top\lei-db\src\main\resources\lei-db.db
+url=jdbc:sqlite:D:\top\lei-repository\lei-project\lei-top\lei-db\src\main\resources\lei-db.db
 
 [mysql_testc]
 url=jdbc:mysql://47.97.120.110:3306/frp_user?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
