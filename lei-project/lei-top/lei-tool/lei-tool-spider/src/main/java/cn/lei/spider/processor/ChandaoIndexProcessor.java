@@ -19,8 +19,8 @@ import us.codecraft.webmagic.selector.Selectable;
 public class ChandaoIndexProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(100)
-            .addCookie("Cookie", "lang=zh-cn; device=desktop; keepLogin=on; za=wanglei; theme=default; checkedItem=; docFilesViewType=card; lastDocModule=417; lastProject=130; preExecutionID=131; storyPreExecutionID=131; goback=%7B%22qa%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-browse-4-0-unclosed-0-openedBy_asc-43-20.html%22%2C%22doc%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-483.html%3Ftid%3Dlqrwpwmw%23app%3Ddoc%22%2C%22execution%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-view-4432.html%3Ftid%3D9un8fb32%23app%3Dexecution%22%2C%22project%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-219.html%22%7D; preProductID=26; preBranch=all; tab=doc; zentaosid=6cd054f5007f1fa3a2adf6804790d344; zp=45f93f501141aaa721213ea7112308651e145f74; windowWidth=1920; windowHeight=977")
-            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36");
+                            .addCookie("Cookie", "lang=zh-cn; device=desktop; keepLogin=on; za=wanglei; theme=default; checkedItem=; docFilesViewType=card; lastDocModule=417; lastProject=130; preExecutionID=131; storyPreExecutionID=131; goback=%7B%22qa%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-browse-4-0-unclosed-0-openedBy_asc-43-20.html%22%2C%22doc%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-483.html%3Ftid%3Dlqrwpwmw%23app%3Ddoc%22%2C%22execution%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-view-4432.html%3Ftid%3D9un8fb32%23app%3Dexecution%22%2C%22project%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-219.html%22%7D; preProductID=26; preBranch=all; tab=doc; zentaosid=6cd054f5007f1fa3a2adf6804790d344; zp=45f93f501141aaa721213ea7112308651e145f74; windowWidth=1920; windowHeight=977")
+                            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36");
 
 
     @Override
@@ -71,7 +71,12 @@ public class ChandaoIndexProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new ChandaoIndexProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-28.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-53.html").addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-124.html").addPipeline(new ChandaoIndexPipeLine()).thread(10).run();
+        Spider.create(new ChandaoIndexProcessor())
+              .addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html")
+              .addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-28.html")
+              .addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-53.html")
+              .addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-124.html")
+              .addPipeline(new ChandaoIndexPipeLine()).thread(10).run();
     }
 
 }

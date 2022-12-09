@@ -28,7 +28,8 @@ import us.codecraft.webmagic.selector.Selectable;
 
 public class ChandaoProcessor implements PageProcessor {
 
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(100).addCookie("Cookie", "lang=zh-cn; device=desktop; keepLogin=on; za=wanglei; theme=default; checkedItem=; preProductID=10; docFilesViewType=card; lastDocModule=417; goback=%7B%22qa%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-browse-4-0-unclosed-0-openedBy_asc-43-20.html%22%2C%22doc%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-388.html%3Ftid%3Dqefoq8tq%23app%3Ddoc%22%2C%22execution%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-view-4432.html%3Ftid%3D9un8fb32%23app%3Dexecution%22%2C%22project%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-219.html%22%7D; preBranch=24; zentaosid=e2ab29bd482ff7e061970c67675aaddd; zp=33758e4bb789be91b2c48563d132af78d984fd01; tab=doc; windowWidth=1920; windowHeight=977");
+    private Site site = Site.me().setRetryTimes(3).setSleepTime(100)
+                            .addCookie("Cookie", "lang=zh-cn; device=desktop; keepLogin=on; za=wanglei; theme=default; checkedItem=; preProductID=10; docFilesViewType=card; lastDocModule=417; goback=%7B%22qa%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-browse-4-0-unclosed-0-openedBy_asc-43-20.html%22%2C%22doc%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-388.html%3Ftid%3Dqefoq8tq%23app%3Ddoc%22%2C%22execution%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-view-4432.html%3Ftid%3D9un8fb32%23app%3Dexecution%22%2C%22project%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-219.html%22%7D; preBranch=24; zentaosid=e2ab29bd482ff7e061970c67675aaddd; zp=33758e4bb789be91b2c48563d132af78d984fd01; tab=doc; windowWidth=1920; windowHeight=977");
 
     private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
@@ -40,7 +41,7 @@ public class ChandaoProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
 
-        String path = System.getProperty("user.dir") + "\\lei-project\\lei-spider\\chandao\\target\\chandaoindex\\";
+        String path = System.getProperty("user.dir") + "/lei-project/lei-top/lei-tool/lei-tool-spider/target/chandao/";
         File[] files = new File(path).listFiles();
         List<ChanDaoTree> tree = new ArrayList<>();
         for (File file : files) {
@@ -50,7 +51,8 @@ public class ChandaoProcessor implements PageProcessor {
             tree.addAll(parse);
             reader.close();
         }
-        List<ChanDaoTree> treeList = tree.stream().filter(distinctByKey(ChanDaoTree::getHref)).collect(Collectors.toList());
+        List<ChanDaoTree> treeList = tree.stream().filter(distinctByKey(ChanDaoTree::getHref))
+                                         .collect(Collectors.toList());
         ChanDaoTree daoTree = new ChanDaoTree();
         String url = page.getUrl().get();
         for (ChanDaoTree chanDaoTree : treeList) {
@@ -79,7 +81,9 @@ public class ChandaoProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new ChandaoProcessor()).addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html").addPipeline(new ChandaoPipeLine()).thread(10).run();
+        System.err.println(System.getProperty("user.dir"));
+        Spider.create(new ChandaoProcessor())
+              .addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html")
+              .addPipeline(new ChandaoPipeLine()).thread(10).run();
     }
-
 }

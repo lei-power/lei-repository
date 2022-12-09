@@ -30,7 +30,7 @@ public class ChandaoPipeLine extends FilePersistentBase implements Pipeline {
         String content = (String) result.get("content");
         List<String> fujainList = (List<String>) result.get("fujainList");
         ChanDaoTree chanDaoTree = (ChanDaoTree) result.get("chanDaoTree");
-        String path = System.getProperty("user.dir") + "\\lei-project\\lei-spider\\chandao\\target\\chandao\\";
+        String path = System.getProperty("user.dir") + "lei-project/lei-top/lei-tool/lei-tool-spider/target/chandao/";
 
         if (chanDaoTree != null) {
             try {

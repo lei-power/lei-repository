@@ -26,9 +26,10 @@ public class ChandaoIndexPipeLine extends FilePersistentBase implements Pipeline
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        String path = System.getProperty("user.dir") + "\\lei-project\\lei-spider\\chandao\\target\\chandaoindex\\";
+        String path = System.getProperty("user.dir") + "/lei-project/lei-top/lei-tool/lei-tool-spider/target/chandao/";
         try {
-            PrintWriter printWriter = new PrintWriter(new FileWriter(this.getFile(path + UUID.randomUUID() + "-chandaoindex.json")));
+            PrintWriter printWriter = new PrintWriter(new FileWriter(this.getFile(
+                    path + UUID.randomUUID() + "-chandaoindex.json")));
 
             Map<String, Object> itemsAll = resultItems.getAll();
             List<ChanDaoTree> tree = (List<ChanDaoTree>) itemsAll.get("tree");
