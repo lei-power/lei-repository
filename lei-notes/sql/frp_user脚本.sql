@@ -1,4 +1,4 @@
--- 联表查询到市区镇村的信息
+# 联表查询到市区镇村的信息
 SELECT city.id          city_id,
        city.area_name   city_name,
        county.id        county_id,
@@ -12,21 +12,19 @@ FROM tbl_area_local village
          INNER JOIN sys_area county ON town.parent_id = county.id
          INNER JOIN sys_area city ON county.parent_id = city.id;
 
-
-SELECT
-    a.county_name,
-    b.county_name,
-    a.town_name,
-    b.town_name,
-    a.village_name,
-    b.village_name,
-    a.village_code,
-    b.village_id
-FROM
-    frp_test.tbl_area_testc b
-        INNER JOIN frp_test.tbl_area_all a ON a.county_name = b.county_name
-        AND a.town_name = b.town_name
-        AND b.village_name LIKE CONCAT(
-                '',
-                a.village_name,
-                '%');
+@formatter:off
+# frp_test 匹配中间操作
+SELECT a.county_name,
+       b.county_name,
+       a.town_name,
+       b.town_name,
+       a.village_name,
+       b.village_name,
+       a.village_code,
+       b.village_id
+FROM frp_test.tbl_area_testc b
+    INNER JOIN frp_test.tbl_area_all a
+    ON  a.county_name = b.county_name
+    AND a.town_name = b.town_name
+    AND b.village_name LIKE CONCAT('',a.village_name,'%');
+@formatter:off
