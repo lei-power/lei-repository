@@ -1,105 +1,105 @@
-1. ���̱߳��ģ��
-1.1 �߳� ���� ��Դ�ࣨ��Դ���ھ۲�����
-1.2 �̼߳�ͨ�� �������
-1.2.1�ж� �ɻ� ֪ͨ ����̷߳�ֹ��ٻ�����while����{}
+1. 多线程编程模板
+1.1 线程 操作 资源类（资源类内聚操作）
+1.2 线程间通信 具体操作
+1.2.1判断 干活 通知 多个线程防止虚假唤醒用while（）{}
 
-2.1 ���ϵ������̲߳���ȫ��дʱ���� copyOnWrite д��ʱ����һ��������д�꽫ָ��ָ��������
+2.1 集合的新增线程不安全，写时复制 copyOnWrite 写的时候复制一个容器，写完将指针指向新容器
 
 
-JUC��һ��:
-	�عˣ�JVM
-		1.	JVM ��ϵ�ṹ
+JUC第一天:
+	回顾：JVM
+		1.	JVM 体系结构
 				
-		2.	�ܹ�����ÿ���ṹ������
+		2.	能够解析每个结构的作用
 				
-		3.	��ε���
-				�ѣ�
-					��������
-						��ͨ GC 
-					��������
+		3.	如何调优
+				堆：
+					新生区：
+						普通 GC 
+					养老区：
 						Full GC
-					Ԫ�ռ䣺
+					元空间：
 						
-		4.	GC	:	�ִ��ռ��㷨��
-				�������������㷨��
-				�������������������������
+		4.	GC	:	分代收集算法！
+				新生区：复制算法！
+				养老区：标记清除！标记整理！
 		
-�ص㣺
-	1.	ʲô��JUC {java.util.concurrent�ڲ��������ʹ�õĹ�����}!
+重点：
+	1.	什么是JUC {java.util.concurrent在并发编程中使用的工具类}!
 	
-	2.	wait/sleep������!
-			wait �ͷ���Դ���� Object
-			sleep ���ͷ���Դ����Thread
+	2.	wait/sleep的区别!
+			wait 释放资源锁！ Object
+			sleep 不释放资源锁！Thread
 			
-	3.	����������!
+	3.	并发，并行!
 			
-	4.	��д��Ʊ�İ�����
+	4.	编写卖票的案例！
 		
-	5.	lock �ӿ� ������synchronized��
-			ֱ�ӽ�synchronized lock.lock(); lock.unlock();
+	5.	lock 接口 来代替synchronized：
+			直接将synchronized lock.lock(); lock.unlock();
 		
-	6.	��ķ�����ʽ��
-			���������� �� ->  ��ߣ������Ĳ��� ���ұߣ� ������ʵ�֣�
+	6.	拉姆达表达式：
+			操作符区分 ： ->  左边：方法的参数 ，右边： 方法的实现！
 			
-			�����﷨������С���ţ�����д���Ҽ�ͷ->����ش�����{...}
+			基本语法：拷贝小括号（），写死右箭头->，落地大括号{...}
 			
-			����ʽ�ӿڱ�ʾ��@FunctionalInterface ����ӿ���ֻ����һ������{���󷽷�}��
+			函数式接口表示：@FunctionalInterface 这个接口中只能有一个方法{抽象方法}！
 			
-			����ʽ�ӿ����ܷ���ʵ�ֵķ�����
+			函数式接口中能否有实现的方法？
 			
-	7.	�̼߳�ͨ�ţ�
-			һ���̶߳�һ����+1 ��һ���̶߳�һ����-1
-			�����̲߳�����ʱ��û���⣡
+	7.	线程间通信：
+			一个线程对一个数+1 ，一个线程对一个数-1
+			两个线程操作的时候，没问题！
 			
-			�������4���̣߳�������2������������������ٻ��ѣ�
-			�����������if�ж������ĳ�while��
+			如果换成4个线程，则会出现2的情况！这种情况：虚假唤醒！
+			解决方案：将if判断条件改成while！
 			
-			java8�°�ʵ�֣�
-				lock �ӿ� ������synchronized��
+			java8新版实现：
+				lock 接口 来代替synchronized：
 				lock.newCondition();
 				await()			wait()
 				signalAll()		notifyAll();
 			
 --------------------------------------------------------------------------------------------
-�ܽ᣺
-	���磺
-		1.	�����⣡
+总结：
+	上午：
+		1.	面试题！
 			
-		2.	lock �ӿڵ�ʹ�ã�
-				lock �ӿ� ������synchronized
+		2.	lock 接口的使用！
+				lock 接口 来代替synchronized
 				
-				lock �ӿ� ������synchronized��
+				lock 接口 来代替synchronized：
 				lock.newCondition();
 				await()			wait()
 				signalAll()		notifyAll();
 		
-���磺
-	1.	�̶߳��ƻ�ͨ�ţ�
-			demo: AA��ӡ5�Σ�BB��ӡ10�Σ�CC��ӡ15��
-				......��10�� 
+下午：
+	1.	线程定制化通信！
+			demo: AA打印5次，BB打印10次，CC打印15次
+				......来10轮 
 			
-			a.	�̲߳�����Դ��
+			a.	线程操作资源类
 			
-			b.	�жϣ��ɻ֪ͨ
+			b.	判断，干活，通知
 			
-			ʵ��˼·��
-			1����˳��֪ͨ����Ҫ�б�ʶλ
-			2����һ����Lock��3��Կ��Condition
-			3���жϱ�־λ
-			4������߳���+�ڼ���+�ڼ���
-			5���޸ı�־λ��֪ͨ��һ��
+			实现思路：
+			1、有顺序通知，需要有标识位
+			2、有一个锁Lock，3把钥匙Condition
+			3、判断标志位
+			4、输出线程名+第几次+第几轮
+			5、修改标志位，通知下一个
 			
-				lock �ӿ� ������synchronized��
+				lock 接口 来代替synchronized：
 				lock.newCondition();
 				await()			wait()
 				signalAll()		notifyAll();
 				signal()		notify();
 				
-	2.	�������ǲ���ȫ��
+	2.	集合类是不安全的
 			a.	Vector;
 			b.	Collections.synchronizedList(new ArrayList<>());
-			c.	CopyOnWriteArrayList;	дʱ���ƣ�
-				�ײ�Դ�룺ԭ��
+			c.	CopyOnWriteArrayList;	写时复制！
+				底层源码：原理
 				public boolean add(E e) {
 					final ReentrantLock lock = this.lock;
 					lock.lock();
@@ -115,7 +115,7 @@ JUC��һ��:
 					}
 				}
 				
-				//	��λ��ѡ��
+				//	有位置选择！
 				public void add(int index, E element) {
 					final ReentrantLock lock = this.lock;
 					lock.lock();
@@ -142,7 +142,7 @@ JUC��һ��:
 					}
 				}
 				
-			�ڶ��̵߳�����£����Ҫд�룬�޸����ݣ�CopyOnWriteArrayList; ���Ҫ��Collections.synchronizedList(); �ٶȿ죬����������
+			在多线程的情况下：如果要写入，修改数据！CopyOnWriteArrayList; 相对要比Collections.synchronizedList(); 速度快，性能提升！
 			
 			ArrayList ---> CopyOnWriteArrayList();
 			HashSet ---> CopyOnWriteArraySet();
@@ -150,77 +150,77 @@ JUC��һ��:
 			
 
 
-JUC �ڶ��죺
-	�عˣ�
-		��һ�죺
-			�����⣺
-				�̣߳�����
-				����������
-				wait/sleep������!
+JUC 第二天：
+	回顾：
+		第一天：
+			面试题：
+				线程，进程
+				并发，并行
+				wait/sleep的区别!
 				
-			lock �ӿڣ�
+			lock 接口：
 				lock.lock();
 				try {
-					//	ִ�еĴ����
+					//	执行的代码块
 				}finally{
 					lock.unlock();
 				}
 				
-			�̵߳�ͨ�ţ�
-				java8�°�ʵ�֣�
-				lock �ӿ� ������synchronized��
+			线程的通信：
+				java8新版实现：
+				lock 接口 来代替synchronized：
 				Condition c1 = lock.newCondition();
 				await()			wait()
 				signal()		notify()
 				signalAll()		notifyAll()
 				
-			���ϰ�ȫ�ࣺ
+			集合安全类：
 				ArrayList ---> CopyOnWriteArrayList();
 				HashSet ---> CopyOnWriteArraySet();
 				HashMap ---> ConcurrentHashMap<>();
 
-1.	���İ�������� *****
-		 1 ��׼���ʣ��ȴ�ӡ���Ż����ʼ�
-		 2 ͣ4���ڶ��ŷ����ڣ��ȴ�ӡ���Ż����ʼ�
-		 3 ������ͨ��hello���������ȴ���Ż���hello
-		 4 �����������ֻ����ȴ�ӡ���Ż����ʼ�
-		 5 ������̬ͬ��������1���ֻ����ȴ�ӡ���Ż����ʼ�
-		 6 ������̬ͬ��������2���ֻ����ȴ�ӡ���Ż����ʼ�
-		 7 1����̬ͬ������,1����ͨͬ��������1���ֻ����ȴ�ӡ���Ż����ʼ�
-		 8 1����̬ͬ������,1����ͨͬ��������2���ֻ����ȴ�ӡ���Ż����ʼ�
+1.	锁的八种情况： *****
+		 1 标准访问，先打印短信还是邮件
+		 2 停4秒在短信方法内，先打印短信还是邮件
+		 3 新增普通的hello方法，是先打短信还是hello
+		 4 现在有两部手机，先打印短信还是邮件
+		 5 两个静态同步方法，1部手机，先打印短信还是邮件
+		 6 两个静态同步方法，2部手机，先打印短信还是邮件
+		 7 1个静态同步方法,1个普通同步方法，1部手机，先打印短信还是邮件
+		 8 1个静态同步方法,1个普通同步方法，2部手机，先打印短信还是邮件
 				
-		a.	���ֻ����ͨͬ��������ʱ��
-				ִ��˳�򣺰��մ���д��˳��ȥִ�У� ��ǰ���Ķ����� this��
+		a.	如果只有普通同步方法的时候！
+				执行顺序：按照代码写的顺序去执行！ 当前锁的对象是 this！
 		
-		b.	�������ͨ������ͬ��������ʱ��
-				��������£����մ���˳��ִ�У����ͬ����������˯�ߣ�����ִ����ͨ������
+		b.	如果有普通方法和同步方法的时候！
+				正常情况下：按照代码顺序执行，如果同步方法中有睡眠，则先执行普通方法！
 				
-		c.	������ͬһ�����������ͨ��ͬ������ʱ��
-				���ʣ�ÿ�δ��������ʱ�򣬶��ᴴ�������Լ���������������ǵ�ǰ���� this��
+		c.	当不是同一个对象调用普通的同步方法时：
+				本质：每次创建对象的时候，都会创建属于自己的锁！这个锁就是当前对象 this！
 				
-		d.	��̬ͬ��������ǰ������Class.class
+		d.	静态同步方法当前锁对象：Class.class
 		
-2.	Callable�ӿ�
-		2.1	��ö��̵߳ķ������֣� *****
-			4��
-			��1���̳�Thread��
-			��2��runnable�ӿ�
-			��3��Callable�ӿ�
-			��4���̳߳�
-		Callable�����ӿ�	
+2.	Callable接口
+		2.1	获得多线程的方法几种？ *****
+			4种
+			（1）继承Thread类
+			（2）runnable接口
+			（3）Callable接口
+			（4）线程池
+		Callable函数接口	
 		
 		
 		
-		2.2	FutureTask ��Runable һ��ʵ���࣡ͨ������������һ���ȽϺ�ʱ������ ����δ���������ջ�ȡ�����******
-			ʹ��get();������ȡ����������ͨ��������󣬲���ֻ����һ�Σ�
+		2.2	FutureTask 是Runable 一个实现类！通常用它来计算一个比较耗时的任务！ 计算未来任务！最终获取结果！******
+			使用get();方法获取到计算结果！通常放在最后，并且只计算一次！
 						
-			�ҵ��м��ˣ�Runnable��
-			Thread ���캯��
+			找到中间人：Runnable！
+			Thread 构造函数
 			Thread(Runnable target, String name) 
 		
-			FutureTask(Callable<V> callable)��
+			FutureTask(Callable<V> callable)！
 			
-			//	ʵ����Runnable �ӿ�
+			//	实现了Runnable 接口
 			new Thread(()->{
 				  phone.getHello();
 			},"BB").start();
@@ -232,184 +232,184 @@ JUC �ڶ��죺
 			new Thread(f,"FF").start();
 		
 		
-		2.3 ������:callable�ӿ���runnable�ӿڵ�����*****
+		2.3 面试题:callable接口与runnable接口的区别？*****
 		 
-		 ��  ��1���Ƿ��з���ֵ
-						callable ��
-			   ��2���Ƿ����쳣
-						callable ��
-			   ��3����ط�����һ����һ����run��һ����call
+		 答：  （1）是否有返回值
+						callable 有
+			   （2）是否抛异常
+						callable 有
+			   （3）落地方法不一样，一个是run，一个是call
 						callable -- call .
 						
 		
-		2.4	���ʹ�ã�*****
-			// ����һ��FutureTask �����Ҫʵ��һ��callable ����ʽ�ӿ�
+		2.4	如何使用！*****
+			// 创建一个FutureTask 这个需要实现一个callable 函数式接口
 			FutureTask<Integer> futureTask = new FutureTask<Integer>(()->{
 				System.out.println(Thread.currentThread().getName()+"  come in callable");
 				Thread.sleep(1000);
-				//  ���÷���ֵ
+				//  设置返回值
 				return 1024;
 			});
-			//  FutureTask ��Runnable ��ʵ����
+			//  FutureTask 是Runnable 的实现类
 			new Thread(futureTask,"AA").start();
-			//  �����ڵ��ý��֮ǰ�жϵ�ǰ�����Ƿ��Ѿ���ɣ����û����ɣ���ȴ�
+			//  可以在调用结果之前判断当前任务是否已经完成！如果没用完成，则等待
 			while (!futureTask.isDone()){
-				System.out.println("�ȴ�.....");
+				System.out.println("等待.....");
 			}
 			System.out.println(futureTask.get());
 			
 			
-3.	JUCǿ��ĸ����� - ���˽⡿
-		3.1	CountDownLatch	���ټ��� ��¼�̸߳���
-			countDownLatch.countDown();	//	�߳��� ��һ
-			countDownLatch.await(); //	֪���̵߳ĸ���Ϊ0 ��ʱ�򣬾Ͳ��ȴ��ˡ�
+3.	JUC强大的辅助类 - 【了解】
+		3.1	CountDownLatch	减少计数 记录线程个数
+			countDownLatch.countDown();	//	线程数 减一
+			countDownLatch.await(); //	知道线程的个数为0 的时候，就不等待了。
 			
-		3.2	CyclicBarrier ѭ��դ��
-			cyclicBarrier.await(); //	���û�������ʼ��ֵ��ʱ����ô�ͻ�ȴ���
+		3.2	CyclicBarrier 循环栅栏
+			cyclicBarrier.await(); //	如果没有满足初始化值的时候，那么就会等待！
 			
-		3.3	Semaphore �ź���
-			semaphore.acquire();	//	��ȡ����Դ
-			semaphore.release();	// �ͷ���Դ
+		3.3	Semaphore 信号量
+			semaphore.acquire();	//	获取到资源
+			semaphore.release();	// 释放资源
 		
 -----------------------------------------------------------------------------------
 JUC 
-���磺
-	1.ReentrantReadWriteLock ��д�� -- �˽�
+下午：
+	1.ReentrantReadWriteLock 读写锁 -- 了解
 		readWriteLock.writeLock().lock();
 		readWriteLock.readLock().lock();
 		
 	2.BlockingQueue *****
-		���У��Ƚ��ȳ�
-		�������У�
-		add(e):��ʱ�׳�IIIegalStableException��queue full
-		remove()����ʱ�Ƴ��׳�nosuchElementException
-		element����
+		队列：先进先出
+		阻塞队列：
+		add(e):满时抛出IIIegalStableException：queue full
+		remove()：空时移除抛出nosuchElementException
+		element（）
 		
-		offer(e):�ɹ�ture ʧ��false
-		poll�������ɹ�����Ԫ�أ�ʧ�ܷ���null
-		peek����
+		offer(e):成功ture 失败false
+		poll（）：成功返回元素，失败返回null
+		peek（）
 		
-		put��������ʱ����
-		take��������ʱ����
+		put（）：满时阻塞
+		take（）：空时阻塞
 		
 		
-			put: ����Ԫ��
-			take: ��ȡԪ��
-			a.	�������ǿյģ��Ӷ����л�ȡԪ�صĲ������ᱻ����
-			b.	�����������ģ��Ӷ���������Ԫ�صĲ������ᱻ����
+			put: 添加元素
+			take: 获取元素
+			a.	当队列是空的，从队列中获取元素的操作将会被阻塞
+			b.	当队列是满的，从队列中添加元素的操作将会被阻塞
 			
-		�������е�Ӧ�ó�����
-			�̳߳أ�
+		阻塞队列的应用场景：
+			线程池！
 			
 		
-		������ʾ��
+		代码演示：
 			put();
 			take();
 			
-	3.�̳߳أ�
-		�򵥶��壺���������н����������У�����߳�������������������������������߳��ŶӵȺ򣬵������߳�ִ����ϣ��ٴӶ�����ȡ��������ִ�С�
+	3.线程池：
+		简单定义：处理过程中将任务放入队列，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中取出任务来执行。
 		
-		�̳߳����ƣ�
-			�̸߳���;������󲢷���;�����̡߳�***** �����̵߳���������
+		线程池优势：
+			线程复用;控制最大并发数;管理线程。***** 管理线程的生命周期
 		
-		�̳߳����ࣺ
-			��һ�֣�Executors.newFixedThreadPool(10);	��ʼ���̳߳صĴ�С.
+		线程池种类：
+			第一种：Executors.newFixedThreadPool(10);	初始化线程池的大小.
 					    public static ExecutorService newFixedThreadPool(int nThreads) {
 							return new ThreadPoolExecutor(nThreads, nThreads,
 														  0L, TimeUnit.MILLISECONDS,
 														  new LinkedBlockingQueue<Runnable>());
 						}
 								
-			�ڶ��֣�Executors.newSingleThreadExecutor();	һ�أ�һ�̣߳�
+			第二种：Executors.newSingleThreadExecutor();	一池，一线程！
 						public static ExecutorService newSingleThreadExecutor() {
 							return new FinalizableDelegatedExecutorService
 								(new ThreadPoolExecutor(1, 1,
 														0L, TimeUnit.MILLISECONDS,
 														new LinkedBlockingQueue<Runnable>()));
 						}
-			�����֣�Executors.newCachedThreadPool();  ִ���첽�������񣬿�����.
+			第三种：Executors.newCachedThreadPool();  执行异步短期任务，可扩容.
 						public static ExecutorService newCachedThreadPool() {
 							return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
 														  60L, TimeUnit.SECONDS,
 														  new SynchronousQueue<Runnable>());
 						}
 						
-			���ִ����̳߳صķ�ʽ���ײ㶼��new ThreadPoolExecutor();
+			三种创建线程池的方式：底层都是new ThreadPoolExecutor();
 			
 			
-			���̳߳أ�ʹ����һ�֣������ã�
-				�Զ����̳߳أ�
+			用线程池：使用哪一种？都不用！
+				自定义线程池：
 					new ThreadPoolExecutor(0, Integer.MAX_VALUE,
 														  60L, TimeUnit.SECONDS,
 														  new SynchronousQueue<Runnable>());
 				
 			
 			
-JUC �����죺
-	�عˣ�
-		1.	���İ���״̬
+JUC 第三天：
+	回顾：
+		1.	锁的八种状态
 				
-		2.	Callable ����ʽ�ӿ� {�����߳����ַ�ʽ֮һ��}
+		2.	Callable 函数式接口 {创建线程四种方式之一！}
 				
-		3.	�������У�
+		3.	阻塞队列：
 				
-		4.	�̳߳أ�
+		4.	线程池：
 				
-		5.	��д���˽⣡
+		5.	读写锁了解！
 				
-1.	��������̳߳�֪ʶ��
-	1.1	�����˽�ThreadPoolExecutor������һ��class
-			//  �����̳߳أ����ȷ����ǰ�����̳߳ظ�����
+1.	继续完成线程池知识：
+	1.1	深入了解ThreadPoolExecutor！它是一个class
+			//  创建线程池：如何确定当前核心线程池个数：
 			ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
-					2,  //  �����̳߳�
-					5,  //  ����̳߳�
-					3L, //  �����̵߳Ĵ��ʱ��
-					TimeUnit.SECONDS, //  �����̴߳��ʱ�䵥λ
-					new ArrayBlockingQueue<>(3), //  �������и���
-					Executors.defaultThreadFactory(),   //  ʹ��Ĭ�ϵ��̳߳ع���
-					new ThreadPoolExecutor.AbortPolicy() //  Ĭ��ֵ��ֱ�ӷ����쳣����ֹ���У�
-					//  new ThreadPoolExecutor.DiscardOldestPolicy() // �����ȴ���õ����񣬳��Լ����µ�����
-					//  new ThreadPoolExecutor.CallerRunsPolicy() //    ������ִ������
-					//  new ThreadPoolExecutor.DiscardPolicy()  //  ��������û���κ��쳣��
+					2,  //  核心线程池
+					5,  //  最大线程池
+					3L, //  空闲线程的存活时间
+					TimeUnit.SECONDS, //  空闲线程存活时间单位
+					new ArrayBlockingQueue<>(3), //  阻塞队列个数
+					Executors.defaultThreadFactory(),   //  使用默认的线程池工程
+					new ThreadPoolExecutor.AbortPolicy() //  默认值：直接发生异常，阻止运行！
+					//  new ThreadPoolExecutor.DiscardOldestPolicy() // 抛弃等待最久的任务，尝试加入新的任务！
+					//  new ThreadPoolExecutor.CallerRunsPolicy() //    调用者执行任务！
+					//  new ThreadPoolExecutor.DiscardPolicy()  //  丢弃任务，没有任何异常！
 			);
 				
-	1.2	�̳߳صײ㹤��ԭ����*****
+	1.2	线程池底层工作原理：*****
 			
-	1.3	�̳߳صľܾ����ԣ�
-			��������������+�������̳߳���������
-			    new ThreadPoolExecutor.AbortPolicy() //  Ĭ��ֵ��ֱ�ӷ����쳣����ֹ���У�
-                //  new ThreadPoolExecutor.DiscardOldestPolicy() // �����ȴ���õ����񣬳��Լ����µ�����
-                //  new ThreadPoolExecutor.CallerRunsPolicy() //    ������ִ������
-                //  new ThreadPoolExecutor.DiscardPolicy()  //  ��������û���κ��쳣��
-	FixedThredPool��SingleThreadPool �������г���ΪInter.max.value ����oom
-	CachedThreadPool��ScheduledThreadPool ����߳���ΪIntrger.MAX_VALUE ,����OOM
+	1.3	线程池的拒绝策略：
+			条件：阻塞队列+最大核心线程池数已满！
+			    new ThreadPoolExecutor.AbortPolicy() //  默认值：直接发生异常，阻止运行！
+                //  new ThreadPoolExecutor.DiscardOldestPolicy() // 抛弃等待最久的任务，尝试加入新的任务！
+                //  new ThreadPoolExecutor.CallerRunsPolicy() //    调用者执行任务！
+                //  new ThreadPoolExecutor.DiscardPolicy()  //  丢弃任务，没有任何异常！
+	FixedThredPool、SingleThreadPool 工作队列长度为Inter.max.value 导致oom
+	CachedThreadPool、ScheduledThreadPool 最大线程数为Intrger.MAX_VALUE ,导致OOM
 	
 			
 			
-2.	java8�عˣ�*****
-	2.1	�Ĵ���ʽ�ӿڣ�
-		//  �����ͣ�û�з���ֵ��
-        //  ����С���ţ�д���Ҽ�ͷ����ش����ţ�
+2.	java8回顾：*****
+	2.1	四大函数式接口：
+		//  消费型：没有返回值！
+        //  复制小括号，写死右箭头，落地大括号！
         Consumer<String> consumer = (t)->{
             System.out.println(t);
         };
         consumer.accept("hello");
 
-        //  �����ͣ�û�в�����
+        //  供给型：没有参数！
         //  Supplier T get();
         Supplier<String> supplier = ()->{
             return UUID.randomUUID().toString();
         };
         System.out.println(supplier.get());
 
-        //  ����ʽ�ӿ�
+        //  函数式接口
         //  Function<T, R> R apply(T t)
         Function<Integer,Integer> function =(t)->{
             return t*2;
         };
         System.out.println(function.apply(6));
 
-        //  �϶��ͽӿ�
+        //  断定型接口
         //  Predicate<T> boolean test(T t);
         Predicate<String> predicate = (t)->{
             return t.startsWith("f");
@@ -418,29 +418,29 @@ JUC �����죺
         System.out.println(predicate.test("full outer join"));
 		
 		
-	2.2	Stream ��������
-			���壺������Դ�ļ��㣡
-			�ص㣺
-				a.	����洢Ԫ��
-				b.	������������ı�ԭ�е����ݣ���������µ�����Դ
-				c.	�����ӳٵ�
+	2.2	Stream 流操作！
+			定义：对数据源的计算！
+			特点：
+				a.	不会存储元素
+				b.	经过操作不会改变原有的数据，而会产生新的数据源
+				c.	操作延迟的
 				
-			Stream ����ʾ��
-				1.	����һ��User����
-					java ��һ��������Ӧ���е� �����ԣ�get,set ���������췽��������
+			Stream 流演示！
+				1.	创建一个User对象。
+					java 中一个对象中应该有的 ：属性，get,set 方法，构造方法。。。
 			
-3.	��֧�ϲ���ܣ� �˽�
-		3.1	ForkJoinPool:	��֧�ϲ���   fork(); join();
-		3.2	ForkJoinTask:	���ĳһ���	get();
-		3.3	RecursiveTask�� �ݹ����񣺼̳к����ʵ�ֵݹ�(�Լ����Լ�)���õ�����
+3.	分支合并框架： 了解
+		3.1	ForkJoinPool:	分支合并池   fork(); join();
+		3.2	ForkJoinTask:	完成某一项功能	get();
+		3.3	RecursiveTask： 递归任务：继承后可以实现递归(自己调自己)调用的任务
 		
 
-4.	�첽���� *****
-		CompletableFuture : �첽��������FutureTask �������ƣ�
-		�첽�޷���ֵ��runAsync();
-		�첽�з���ֵ��supplyAsync();
-		������һ���̷߳��صĽ������whenComplete
-		�����쳣��exceptionally
+4.	异步编排 *****
+		CompletableFuture : 异步处理，与FutureTask 功能类似！
+		异步无返回值：runAsync();
+		异步有返回值：supplyAsync();
+		接收上一个线程返回的结果集：whenComplete
+		处理异常：exceptionally
 	
 		
 		
