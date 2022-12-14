@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221123 全国农业数字驾驶仓设计文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <div> 
+   <h1 class="heading-1 ace-line old-record-id-V8Y4diAWCoesw2xczoYcwx5Snre" id="anchor1"><strong>1、背景</strong></h1> 
+   <div class="ace-line old-record-id-YqkKdeG6gogEw8xuZk1c5n7Hndb">
+    给访客、合作伙伴、投资机构、潜在客户介绍公司业务发展情况时，可视化的展示目前已交付使用的系统成果；
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-DQyGdK0mioG6w0xqcpscqjtJnaf" id="anchor3"><strong>2、功能简介</strong></h1> 
+   <div class="ace-line old-record-id-JYCGdCue6oO8asxAxjycSfWqntg">
+    本文档主要介绍全国农业数据驾驶舱任务流程和详细设计
+   </div> 
+   <div class="ace-line old-record-id-OoY0dCuO8oOMwQxoRjZc5VOJnVb">
+    1、可视化展示目前已交付使用系统分布情况及地理位置信息；
+   </div> 
+   <div class="ace-line old-record-id-LMGEdqWcwoCAcOx4QETcdPmcnrH">
+    2、通过数据展示系统服务区域数、经营主体以及覆盖土地情况；
+   </div> 
+   <div class="ace-line old-record-id-R202dmKemoso2Gxghm1c5aLwnxf">
+    3、展示使用系统带来的具体农业监管数据，包括合格证、农安监管、农业生产作业统计情况；
+   </div> 
+   <div class="ace-line old-record-id-BUYEdGAGQoW2Y0xee1TcN21gnhe">
+    4、支持免登录切换查看区域下所有系统详细信息；
+   </div> 
+   <div class="ace-line old-record-id-BkcudyckeogCqaxas5ucwI3hn8c">
+    产品需求文档参考链接：
+    <a href="/zentao/doc-objectLibs-product-2-159-467.html?tid=p5lbzf7o" target="_blank" rel="noreferrer noopener"><span style="color:#337FE5;">《全国数字农业驾驶舱设计文档》</span></a>
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-IEGsdUsuQo4q0oxLlKVcxNPbnuS" id="anchor10"><strong>3、参与人员</strong></h1> 
+   <div class="ace-line old-record-id-AeiYdyc8EokMSaxqkl7cVsG3n4f">
+    后端：刘洋、丁文清
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-EwcQdmCW2oCksExicJ2cHcRSnfh" id="anchor12">4、数据库设计E-R图</h1> 
+   <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12135.png" alt="" width="250" height="279" title=""></p> 
+   <h1 class="heading-1 ace-line old-record-id-IGkcdi84UoUY4Oxa2IRcBJghnyb" id="anchor14">5、页面数据取值规则</h1> 
+   <div> 
+    <table class="ace-table" style="border:none;width:auto;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-NQW4diwMIoq8yexWwwTc5UqqnYb">
+         序号
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CeAEdUq0ioAe0mxowRXcsWabnCo">
+         展示字段
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-DOaqdEGA2ooA48xOQ9lcLbponYf">
+         统计方式
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-ZgUEdsASwoKowmx0Oj2cjRzknye">
+         备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-ZucwdaIg4oAYCqxkbcpcdm8fnUe">
+         1
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-RQmCdsgaMoaG6yxwbUuca95fntc">
+         生产作业数据累计上报条数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-TW6ydmi6IoaUKCxoxw5ccAPlnmf">
+         实时拉取农事动态表
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-MkgadSoMUocKQgxuWZGci1yknce">
+         查询农场实时经营动态表：frp_produce(tbl_farm_real_time_dynamic)，需要10s刷新一次（前端轮询调用）
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-EeyudquiioOMWGxoF8Ccxg5BnBg">
+         2
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-F0KydSOA8oS22Qxg2L9clmcrnYK">
+         本月合格证开具数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-VCkKduqowomcUGxSCZ2c0SJgn62">
+         可以实时查 合格证业务表 ，也可以查合格证归档表
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-JmAmdOysUoSiMOxPIqacJg9qnw1">
+         查询合格证归档表: frp_archive（tbl_archive_certificate），一条合格证生成记录就是一次开具记录
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-DougdkkSeoqKSIxaLpYc9bqvnPL">
+         3
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-T0ymdcKo6oUYKCxmsMmcTRJKnad">
+         本月农安监管检查次数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-PmUmdGaauoKgqOxA5QvcVCrWnVc">
+         可以实时查 检查记录业务表 ，也可以查 检查统计的归档表
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Z222doMMYoawugxWwHhcRLMcnkh">
+         查询监管检查统计的归档表：frp_gisdate_archive(tbl_archive_jianguan_record)
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-QCeedOcSWoq8eexmzwEcgEAznhV">
+         4
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-FMOsdOgUcoAcakxOA0qcOvq2njc">
+         本月新增经营主体数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-HSAodg20oomEsyxgVVlcwLwSnZb">
+         查询全国gis经营主体表
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> <p>查询frp_gisdata_archive库tbl_gisfarm表</p> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-WEYkd82qmogu4mxM3kvcl7oSnMc">
+         5
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-L2cmdKg8woGyQCxsPgxczDIPnQb">
+         应用场景业务系统数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-PA48dScsyoWe6ixQfMCcDhWbnPc">
+         查询所有落地项目（是否自建=是）
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-AgQOdgMyuoaAc2xyiuLc3Ta7nFf">
+         <br>
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-NYKAdu464oeEyKxMr7sctU5Oncd" id="anchor105">6、部分流程时序图</h1> 
+   <p>6.1、项目详情跳转大屏流程</p> 
+   <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12136.png" alt="" width="250" height="94" title=""></p> 
+   <p><br></p> 
+   <p>6.2、项目获取访问地址流程</p> 
+   <p><br></p> 
+   <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12138.png" alt="" width="250" height="192" title=""></p> 
+   <div class="ace-line old-record-id-LGG8dEyAcom240xA5uYc11ERnsf">
+    <br>
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-C0qadSCm4oqYAUxG0MZc4Glin5b" id="anchor113">7、其他设计补充</h1> 
+   <div class="ace-line old-record-id-KCOydy0GSoqGsGxaobzcRWZanBf">
+    1、目前县域业务运营数据表中，县域项目落地数、覆盖农业生产现状用地面积、覆盖高标准农田面积、覆盖永久基本田面积、覆盖两区划定面积，属于预留字段，界面未显示；
+   </div> 
+   <div class="ace-line old-record-id-N8iYdKuKiokOQexWqkRcKrLcn7c">
+    2、开发设计补充
+   </div> 
+   <div class="ace-line old-record-id-GiwkdGUU4oyMmuxJcoMcQTImnbr">
+    数据库建表位置：frp_operate库
+   </div> 
+   <p>代码开发服务：service-operate-server</p> 
+   <p>所属分支：feature/xianyu_cockpit</p> 
+   <p><br></p> 
+   <div class="ace-line text-indent old-record-id-O86cdcGyOo2SOsxSY8GcVCOUnJb"> 
+    <h1 class="heading-1 ace-line old-record-id-C0qadSCm4oqYAUxG0MZc4Glin5b" style="color:#313C52;" id="anchor121">8、开发计划</h1> 
+    <p><br></p> 
+    <div> 
+     <table class="ace-table" style="border:none;width:auto;"> 
+      <tbody> 
+       <tr> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-WgsidOsSEog0WexgZiCcUo6GnDd">
+          需求名称
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-LA0cdAmKCoauyaxwFQwcVWmBnhf">
+          功能
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-M84IdoyacomCyUx89t7cAJkenNd">
+          负责人
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-CWuUdUsAUoy4y4xgLnqcRudSnzg">
+          开发周期
+         </div> </td> 
+       </tr> 
+       <tr> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-Zuc6d4yw4o8MU8xoDXZcyVY3nqf">
+          县域全国看板直查业务运营数据表统计数据 + 查询神农口袋业务数据
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-KOS8daYEAoy46cxolOHczYcgnGh">
+          新增
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-JOK8d2iQEoCGe2xmMJacJg7pnac">
+          丁文清
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-NSIidSE4QoMekqx6aD0ca0rpnVg">
+          2022/11/24——2022-11-24
+         </div> </td> 
+       </tr> 
+       <tr> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-VAm8dWs8SocsE8x7KNXcOL8Sni6">
+          查询区域下落地项目详情内容
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-B8kmdwA2yoOc6ExsDCFcIeSCngb">
+          新增
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-VsuWdSyy6ocUCYxMNINcJ1vNn9e">
+          丁文清
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-WyS2dmqoaoKmWKxmQQ8c3BlVnIg">
+          2022/11/25——2022-11-25
+         </div> </td> 
+       </tr> 
+       <tr> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-EOoudYgcso66UGxCWHYc05DGnue">
+          <span>系统</span>免登录切换功能
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-BEiOdwiiMos4G8xY7zWckN5dnKb">
+          新增
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-VGmmdcoMyoAQIgx6h5OcRxk5nvd">
+          丁文清
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-ZecAdIGeOo2uYYxUI6Pc9SNZnkR">
+          2022/11/25——2022-11-25
+         </div> </td> 
+       </tr> 
+      </tbody> 
+     </table> 
+    </div> 
+    <span class="lark-record-clipboard"></span> 
+    <br> 
+   </div> 
+   <div class="ace-line old-record-id-W6UedIsYCosm0UxyOuxcB1gonzg">
+    <br>
+   </div> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1、背景">1、背景</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2、功能简介">2、功能简介</a> </li>
+    <li class="text-ellipsis"><a href="#anchor10" title="3、参与人员">3、参与人员</a> </li>
+    <li class="text-ellipsis"><a href="#anchor12" title="4、数据库设计E-R图">4、数据库设计E-R图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor14" title="5、页面数据取值规则">5、页面数据取值规则</a> </li>
+    <li class="text-ellipsis"><a href="#anchor105" title="6、部分流程时序图">6、部分流程时序图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor113" title="7、其他设计补充">7、其他设计补充</a> </li>
+    <li class="text-ellipsis"><a href="#anchor121" title="8、开发计划">8、开发计划</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

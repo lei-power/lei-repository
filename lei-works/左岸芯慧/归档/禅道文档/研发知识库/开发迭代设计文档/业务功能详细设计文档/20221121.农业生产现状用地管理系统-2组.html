@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221121.农业生产现状用地管理系统-2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 本文档主要介绍农业生产现状用地系统主要的功能
+  <br> 1、在中台按村的维度，画出村所有的生产地块，这个生产地块跟神农口袋tbl_land表没有关系，是一个全新的地块功能
+  <br> 
+  <p>2、这次只做新增地块、作废地块、<span>变更轮廓</span>和同步地块到gis服务，合并地块、拆分地块下个迭代做</p> 
+  <p>3、生产地块同步到神农口袋操作流程</p> 
+  <p>3.1、<span>由运维人员或者有权限的人员在中台画生产地块</span></p> 
+  <p><span>3.2、地块画完后可以通过经营边界自动关联或者手动选择地块关联经营主体</span></p> 
+  <p><span>3.3、通过已有开户功能，将经营主体在神农口袋企业端创建农场和农场管理员</span></p> 
+  <p><span>3.4、最后，将生产地块同步到神农口袋地块表</span></p> 
+  <p><span>4、本次生产地块需要发布gis服务，并且实时同步</span></p> 
+  <p><br></p> 
+  <p>需求文档：</p> 
+  <p><a href="/zentao/execution-story-131.html?tid=hde901mw" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/execution-story-131.html?tid=hde901mw</a></p> 
+  <p><br></p> 
+  <p>UE</p> 
+  <p><a href="https://mastergo.com/file/76400247967818?page_id=42%3A0490" target="_blank" rel="noreferrer noopener">https://mastergo.com/file/76400247967818?page_id=42%3A0490</a></p> 
+  <p><br></p> 
+  <p>关系图</p> 
+  <p><a href="https://gitmind.cn/app/docs/mc4np2ps" target="_blank" rel="noreferrer noopener">https://gitmind.cn/app/docs/mc4np2ps</a></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">序号<br></td> 
+     <td style="border:1px solid #ddd;">功能<br></td> 
+     <td style="border:1px solid #ddd;">描述<br></td> 
+     <td style="border:1px solid #ddd;">备注<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1</td> 
+     <td style="border:1px solid #ddd;">地块用途</td> 
+     <td style="border:1px solid #ddd;">地块用途表新增轮廓色值字段</td> 
+     <td style="border:1px solid #ddd;">需要对原有的地块用途的增改列表做修改</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">地块用途区域配置关联</td> 
+     <td style="border:1px solid #ddd;"> <p>新增一张地块用途和区域关联配置表，以后地块用途是根据区域来筛选。</p> <p>区域可以配置省市区（没有镇村）</p> </td> 
+     <td style="border:1px solid #ddd;"> <p>需要对之前功能用到地块用途的接口做修改，详情见</p> <p><a href="/zentao/execution-storyView-594-131.html?tid=a1bxt2fy" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/execution-storyView-594-131.html?tid=a1bxt2fy</a></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;">生产地块日志</td> 
+     <td style="border:1px solid #ddd;">只记录当前地块的操作，不记录隐形操作。比如：变更地块轮廓：当前版本变更地块轮廓是先作废变更前地块，然后再新增变更后地块，所以日志只记录当前操作类型为 变更地块轮廓，不记录作废地块的操作类型</td> 
+     <td style="border:1px solid #ddd;">变更前和变更后的记录再变更记录表里体现</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">4</td> 
+     <td style="border:1px solid #ddd;">生产地块变更记录</td> 
+     <td style="border:1px solid #ddd;">这个需要记录所有操作类型，包括隐形操作。<span>比如：变更地块轮廓：当前版本变更地块轮廓是先作废变更前地块，然后再新增变更后地块，所以变更记录表同时需要记录当前操作类型为 变更地块轮廓，还要记录作废地块的操作类型，作废地块（自动作废）</span></td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <p><a href="/zentao/doc-objectLibs-product-26-158-457.html?tid=nqmodq1a#app=product" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-product-26-158-457.html?tid=nqmodq1a#app=product</a></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11844.png" alt="" width="300" height="64" title=""></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">5</td> 
+     <td style="border:1px solid #ddd;">生产地块新增、编辑、作废</td> 
+     <td style="border:1px solid #ddd;">这次操作需要实时同步到生产地块gis服务</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">6</td> 
+     <td style="border:1px solid #ddd;">生产地块变更记录详情列表</td> 
+     <td style="border:1px solid #ddd;"> <p>这个查询需要同时查询变更记录表的变更前地块编码和变更后地块编码字段，</p> <p>然后将查询到的数据判断变更前和变更后的地块编码是否一样，如果一样，去重。</p> <p><br></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11830.png" alt="" width="150" height="117" title=""><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">7</td> 
+     <td style="border:1px solid #ddd;">同步生产地块到神农口袋</td> 
+     <td style="border:1px solid #ddd;"> <p>只有生产地块为红色标识的才可以同步到神农口袋，其他颜色，不可选择。</p> <p>神农口袋地块为红色标识的，是可以根据情况来下架（当前地块正在种植作物，不可以下架）</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11846.png" alt="" width="150" height="85" title=""><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">8</td> 
+     <td style="border:1px solid #ddd;">gis经营主体与生产地块绑定关系</td> 
+     <td style="border:1px solid #ddd;"> <p>1、可以通过经营地界或者手动选择地块进行绑定</p> <p>2、如果经营主体与生产地块已经绑定了关系，后来将绑定的地块变更了轮廓，则需要将变更前的绑定关系移除掉，重新绑定新的地块</p> <p><span>3、如果经营主体与生产地块已经绑定了关系，后来将绑定的地块拆分了地块，则需要将变更前的绑定关系移除掉，重新绑定拆分后新的地块（这次不做拆分）</span></p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <br>
+  <br>
+  <br> 
+  <h1 id="anchor100">2、参与人员与时间</h1> 
+  <br> 服务端：王恺
+  <br>
+  <br>迭代时间：2022-11-21到 待定
+  <br>
+  <br>
+  <br>
+  <br> 
+  <h1 id="anchor103">3、用例图</h1> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11842.jpeg" alt="" width="400" height="890" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor106">4、ER图</h1> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11863.jpeg" alt="" width="400" height="242" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor111">4.1、数据库表</h2> 
+  <p><a href="https://www.processon.com/view/link/637cc3095653bb3a841872d2" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/637cc3095653bb3a841872d2</a></p> 
+  <p><br></p> 
+  <h3>frp_agriproduceland库</h3> 
+  <pre class="prettyprint lang-java"># 农业生产地块表
+CREATE TABLE `tbl_agri_produce_land` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `land_code` varchar(32) NOT NULL COMMENT '地块编码',
+  `land_acre` decimal(16,2) DEFAULT NULL COMMENT '地块面积',
+  `gis_land_type_id` bigint(20) DEFAULT NULL COMMENT '地块用途id',
+  `path` text COMMENT '地块轮廓',
+ `land_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '地块状态 0-正常 1：作废',
+  `province_id` varchar(64) DEFAULT NULL COMMENT '省id',
+`province_name` varchar(64) DEFAULT NULL COMMENT '省名称',
+  `city_id` varchar(64) DEFAULT NULL COMMENT '市id',
+	`city_name` varchar(64) DEFAULT NULL COMMENT '市名称',
+  `county_id` varchar(64) DEFAULT NULL COMMENT '区id',
+	`county_name` varchar(64) DEFAULT NULL COMMENT '区名称',
+  `town_id` varchar(64) DEFAULT NULL COMMENT '镇id',
+	 `town_name` varchar(64) DEFAULT NULL COMMENT '镇名称',
+  `village_id` varchar(64) DEFAULT NULL COMMENT '村id',
+  `village_name` varchar(64) DEFAULT NULL COMMENT '村名称',
+  `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除 1-是 0-否',
+  `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
+  `update_by` bigint(20) DEFAULT NULL COMMENT '更新人',
+  `delete_by` bigint(20) DEFAULT NULL COMMENT '删除人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `delete_time` datetime DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='农业生产地块表';</pre> 
+  <p><br></p> 
+  <p><br></p> 
+  <pre class="prettyprint lang-java"># 农业生产地块操作记录表
+CREATE TABLE `tbl_agri_produce_land_operator_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `agri_produce_land_id` bigint(20) DEFAULT NULL COMMENT '生产地块id',
+ `operator_type` varchar(2) DEFAULT NULL COMMENT '操作类型 1：新增地块  2：编辑地块信息 3：变更地块轮廓  4：拆分地块  5：合并地块  6：作废地块',
+  `operator_user_id` bigint(20) DEFAULT NULL COMMENT '操作人id',
+	`operator_user_full_name` varchar(64) DEFAULT NULL COMMENT '操作人姓名',
+	`operator_time` datetime DEFAULT NULL COMMENT '操作时间',
+  `remark` text COMMENT '操作内容',
+	`address` text COMMENT '地块所属位置（按照/分隔）',
+  `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除 1-是 0-否',
+  `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
+  `update_by` bigint(20) DEFAULT NULL COMMENT '更新人',
+  `delete_by` bigint(20) DEFAULT NULL COMMENT '删除人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `delete_time` datetime DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='农业生产地块操作记录表';</pre> 
+  <pre class="prettyprint lang-java"># 农业生产地块变更记录表
+CREATE TABLE `tbl_agri_produce_land_modify_record` (
+&nbsp; `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键', <span> </span> `land_code_before` varchar(32) NOT NULL COMMENT '变更前生产地块编码', <span> </span> `land_code_after` varchar(32) NOT NULL COMMENT '变更后生产地块编码', <span> </span> `land_acre_before` decimal(16,2) DEFAULT NULL COMMENT '变更前地块面积', <span> </span>&nbsp; `land_acre_after` decimal(16,2) DEFAULT NULL COMMENT '变更后地块面积', <span> </span>`address_after` text COMMENT '变更后地块所属位置（按照/分隔）', <span> </span>`modify_time` datetime DEFAULT NULL COMMENT '变更时间', <span> </span> `modify_user_id` bigint(20) DEFAULT NULL COMMENT '变更人id', <span> </span>`modify_user_full_name` varchar(64) DEFAULT NULL COMMENT '变更人姓名', <span> </span>`modify_operator_type` varchar(2) DEFAULT NULL COMMENT '变更操作类型&nbsp;
+1：新增地块&nbsp; 2：编辑地块信息 3：变更地块轮廓&nbsp; 4：拆分地块&nbsp; 5：合并地块&nbsp; 6：作废地块（人工操作） 7：作废地块（系统自动操作）',
+&nbsp; `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除 1-是 0-否',
+&nbsp; `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
+&nbsp; `update_by` bigint(20) DEFAULT NULL COMMENT '更新人',
+&nbsp; `delete_by` bigint(20) DEFAULT NULL COMMENT '删除人',
+&nbsp; `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+&nbsp; `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+&nbsp; `delete_time` datetime DEFAULT NULL COMMENT '删除时间',
+&nbsp; PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='农业生产地块变更记录表';
+</pre> 
+  <p><br></p> 
+  <p>地块编码游标表</p> 
+  <p>还在找产品确定</p> 
+  <h3>frp_gisdata库</h3> 
+  <pre class="prettyprint lang-js"># gis主体与农业生产地块关联表
+CREATE TABLE `tbl_gisfarm_agri_produce_land_ref` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `gisfarm_id` bigint(20) DEFAULT NULL COMMENT 'gis经营主体id',
+ `agri_produce_land_code` varchar(32) NOT NULL COMMENT '农业生产地块编码',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='gis主体与农业生产地块关联表';</pre> 
+  <p> </p>
+  <pre class="prettyprint lang-js"># gis主体与生产地块关联变更记录表
+CREATE TABLE `tbl_gisfarm_agri_produce_land_modify_record` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `gisfarm_id` bigint(20) DEFAULT NULL COMMENT 'gis经营主体id',
+ `agri_produce_land_code` varchar(32) NOT NULL COMMENT '农业生产地块编码',
+ 	 `modify_user_id` bigint(20) DEFAULT NULL COMMENT '变更人id',
+	`modify_user_full_name` varchar(64) DEFAULT NULL COMMENT '变更人姓名',
+	`modify_operator_type` varchar(2) DEFAULT NULL COMMENT '变更操作类型 1：关联  2：取消关联 ',
+	`modify_time` datetime DEFAULT NULL COMMENT '变更时间',
+  `del_flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除 1-是 0-否',
+  `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
+  `update_by` bigint(20) DEFAULT NULL COMMENT '更新人',
+  `delete_by` bigint(20) DEFAULT NULL COMMENT '删除人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `delete_time` datetime DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='gis主体与生产地块关联变更记录表';</pre> 
+  <h3>frp_produce库</h3> 
+  <pre class="prettyprint lang-js"># 地块用途区域配置表
+CREATE TABLE `tbl_gis_land_type_area_config` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+	`area_id` varchar(32) DEFAULT NULL COMMENT '区域id',
+  `gis_land_type_id` bigint(20) DEFAULT NULL COMMENT '地块用途id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='地块用途区域配置表';</pre> 
+  <p><br></p> 
+  <h3></h3> 
+  <h1 id="anchor222">5、时序图</h1> 
+  <h2 id="anchor223">5.1、新增生产地块</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11661.jpeg" alt="" width="400" height="457" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor226">5.2、编辑生产地块基本信息</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11845.jpeg" alt="" width="400" height="459" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor229">5.3、变更轮廓</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11843.jpeg" alt="" width="400" height="488" title=""></p> 
+  <h2 id="anchor231">5.4、作废地块</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11662.jpeg" alt="" width="400" height="457" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor234">6、服务端开发</h1> 
+  <h2 id="anchor235">6.1、新增开发服务</h2> 
+  <p>农业生产地块服务：service-agriproduceland-server</p> 
+  <p><br></p> 
+  <h2 id="anchor238">6.2、新增数据库</h2> 
+  <p><span>农业生产地块数据库：frp_<span>agriproduceland</span></span></p> 
+  <p><span><br></span></p> 
+  <h1 id="anchor241"><span>7、接口</span></h1> 
+  <h1></h1> 
+  <table class="table table-kindeditor ke-select-col" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">序号<br></td> 
+     <td style="border:1px solid #ddd;">接口类型</td> 
+     <td style="border:1px solid #ddd;">接口<br></td> 
+     <td style="border:1px solid #ddd;">入参</td> 
+     <td style="border:1px solid #ddd;">截图</td> 
+     <td style="border:1px solid #ddd;">开发接口的服务</td> 
+     <td style="border:1px solid #ddd;">备注</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1、</td> 
+     <td style="border:1px solid #ddd;">新增</td> 
+     <td style="border:1px solid #ddd;">农业生产地块新增</td> 
+     <td style="border:1px solid #ddd;"> <p>区域id<span style="color:inherit;">，</span></p> <p><span style="color:inherit;">地块用途id，</span></p> <p><span style="color:inherit;">轮廓路径</span></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11823.png" alt="" width="150" height="71" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11834.png" alt="" width="150" height="60" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;">异步将生产地块信息同步到gis服务</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块编辑（基本信息）</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>生产地块id，</p> <p>区域id<span style="color:inherit;">，</span></p> <p><span style="color:inherit;">地块用途id</span></p> <p><br></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11824.png" alt="" width="150" height="62" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11835.png" alt="" width="150" height="45" title=""></p> </td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><span><span>异步将生产地块信息同步到gis服务</span></span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块<span>编辑（轮廓）</span></span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>生产地块id，</span></p> <p><span>轮廓路径</span></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11825.png" alt="" width="150" height="66" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11836.png" alt="" width="150" height="45" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><span><span>异步将生产地块信息同步到gis服务</span></span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">4</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块作废</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>生产地块id</span><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11826.png" alt="" width="150" height="60" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><span><span>异步将生产地块信息同步到gis服务</span></span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">5</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块列表</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>区域id，</span></p> <p>地块状态，</p> <p>keywords：地块编码模糊查询，</p> <p>pageSize,</p> <p>pageNo</p> <p><br></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11827.png" alt="" width="150" height="80" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">6</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块详情</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>生产地块id</span><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11828.png" alt="" width="150" height="75" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">7</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块操作日志</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>生产地块id，</span></p> <p><br></p> <p>keywords：关键字模糊查询，</p> <p>pageSize,</p> <p>pageNo<span></span></p> <p><br></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11829.png" alt="" width="150" height="82" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">8</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块变更记录</span><br></td> 
+     <td style="border:1px solid #ddd;">地块编码</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11830.png" alt="" width="150" height="117" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-agriproduceland-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">9</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;">农业生产地块绑定经营主体</td> 
+     <td style="border:1px solid #ddd;"> <p>参<span style="color:inherit;">考</span></p> <p>/gov/gisfarmQuequanLandRef/addBatch</p> <p>接口</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11831.png" alt="" width="150" height="68" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-gisdata-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">10</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;">判断经营主体是否绑定过生产地块</td> 
+     <td style="border:1px solid #ddd;">经营主体id</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11832.png" alt="" width="150" height="79" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-gisdata-server</span><br></td> 
+     <td style="border:1px solid #ddd;">这个接口用来判断是否自动关联</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">11</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农业生产地块同步神农口袋</span><br></td> 
+     <td style="border:1px solid #ddd;">参考/gov/gisfarm/syncLand接口</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11833.png" alt="" width="150" height="68" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-gisdata-server</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">12</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;">按区域查询地块用途列表</td> 
+     <td style="border:1px solid #ddd;">区域id</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11837.png" alt="" width="150" height="70" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-produce-server</span><br></td> 
+     <td style="border:1px solid #ddd;">admin/co/gov端都需要新增这个列表接口</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">13</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;">下架神农口袋地块</td> 
+     <td style="border:1px solid #ddd;">landId</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11838.png" alt="" width="150" height="47" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-produce-server</span><br></td> 
+     <td style="border:1px solid #ddd;">在生产地块同步到神农口袋对比图里，可以下架神农口袋地块</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">14</td> 
+     <td style="border:1px solid #ddd;"><span>新增</span><br></td> 
+     <td style="border:1px solid #ddd;">区域关联地块用途</td> 
+     <td style="border:1px solid #ddd;"> <p>区域id，</p> <p>地块用途id集合</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11839.png" alt="" width="150" height="89" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-produce-server</span><br></td> 
+     <td style="border:1px solid #ddd;">关联和解绑可以用一个接口，前端每次传全部绑定的地块用途id，代码先删除当前区域已绑定的地块用途，然后插入新的，如果全部解绑，传地块用途id空集合，删掉当前区域所有地块用途绑定数据</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">15</td> 
+     <td style="border:1px solid #ddd;">修改</td> 
+     <td style="border:1px solid #ddd;">地块用途新增/修改/列表</td> 
+     <td style="border:1px solid #ddd;"> <p>参考</p> <p>/admin/gisLandType/edit</p> <p><span>/admin/gisLandType/add</span></p> <p><span>/admin/gisLandType/list</span></p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span>service-produce-server</span><br></td> 
+     <td style="border:1px solid #ddd;">这个接口新增了轮廓色值，需要对原有接口修改</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <p><span style="color:#E53333;"><strong>后面继续在列表补充接口</strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor436">8、生产地块gis服务</h1> 
+  <h2 id="anchor437">8.1、新增生产地块gis服务</h2> 
+  <p>字段</p> 
+  <p>字段跟农业生产地块字段一致，但需要在gis服务新增一个字段，地块用途名称，这样前端就不需要再另外去查询了</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor100" title="2、参与人员与时间">2、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor103" title="3、用例图">3、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor106" title="4、ER图">4、ER图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor111" title="4.1、数据库表">4.1、数据库表</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor222" title="5、时序图">5、时序图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor223" title="5.1、新增生产地块">5.1、新增生产地块</a> </li>
+      <li class="text-ellipsis"><a href="#anchor226" title="5.2、编辑生产地块基本信息">5.2、编辑生产地块基本信息</a> </li>
+      <li class="text-ellipsis"><a href="#anchor229" title="5.3、变更轮廓">5.3、变更轮廓</a> </li>
+      <li class="text-ellipsis"><a href="#anchor231" title="5.4、作废地块">5.4、作废地块</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor234" title="6、服务端开发">6、服务端开发</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor235" title="6.1、新增开发服务">6.1、新增开发服务</a> </li>
+      <li class="text-ellipsis"><a href="#anchor238" title="6.2、新增数据库">6.2、新增数据库</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor241" title="7、接口">7、接口</a> </li>
+    <li class="text-ellipsis"><a href="#anchor436" title="8、生产地块gis服务">8、生产地块gis服务</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor437" title="8.1、新增生产地块gis服务">8.1、新增生产地块gis服务</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

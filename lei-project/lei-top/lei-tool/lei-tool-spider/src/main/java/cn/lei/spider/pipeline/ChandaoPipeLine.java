@@ -30,14 +30,12 @@ public class ChandaoPipeLine extends FilePersistentBase implements Pipeline {
         String content = (String) result.get("content");
         List<String> fujainList = (List<String>) result.get("fujainList");
         ChanDaoTree chanDaoTree = (ChanDaoTree) result.get("chanDaoTree");
-        String path = System.getProperty("user.dir") + "lei-project/lei-top/lei-tool/lei-tool-spider/target/chandao/";
+        String path = System.getProperty("user.dir") + "\\lei-project\\lei-top\\lei-tool\\lei-tool-spider\\target\\chandao\\";
 
         if (chanDaoTree != null) {
             try {
                 PrintWriter printWriter = new PrintWriter(new FileWriter(this.getFile(path + this.getFile(chanDaoTree.getPath() + ".html"))));
-                StrBuilder strBuilder = new StrBuilder(
-                        "<!DOCTYPE html>\n" + "<html lang=\"en\">\n" + "<head>\n" + "  <meta charset=\"UTF-8\">\n" + "  <title>" + chanDaoTree.getName()
-                                + "</title>\n" + "</head> <body>");
+                StrBuilder strBuilder = new StrBuilder("<!DOCTYPE html>\n" + "<html lang=\"en\">\n" + "<head>\n" + "  <meta charset=\"UTF-8\">\n" + "  <title>" + chanDaoTree.getName() + "</title>\n" + "</head> <body>");
                 strBuilder.append(content).append("</body>\n" + "</html>");
                 printWriter.write(strBuilder.toString());
                 printWriter.close();

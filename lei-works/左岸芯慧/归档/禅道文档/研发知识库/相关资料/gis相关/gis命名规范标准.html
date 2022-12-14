@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis命名规范标准</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1></h1> 
+  <h1 id="anchor1">1、概要</h1> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 随着公司业务的开阔范围越来越多，gis数据也是从区县到市级的扩展，就会带来了一个问题，我们怎么去维护这么多的数据</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor5">2、问题</h1> 
+  <p>1、动态和切片怎么命名</p> 
+  <p>2、数据库表怎么命名<br>3、动态服务和切片服务怎么管理</p> 
+  <p>4、省级、市级、区级、镇级、村级gis数据怎么展示？数据源从哪获取</p> 
+  <p>5、省级、市级、区级、镇级、村级哪些级别只能看数据，哪些级别可以修改数据</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor12">3、制定gis规范标准</h1> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-size:10px;">序</span><span style="font-size:10px;">号</span></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-size:10px;">分</span><span style="font-size:10px;">类</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-size:10px;">数据库表</span><span style="font-size:10px;">命名</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-size:10px;">动态服务命</span><span style="font-size:10px;">名</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-size:10px;">切片服务命名</span><br></th> 
+     <th style="background-color:#F1F1F1;border:1px solid #DDDDDD;"><span style="font-size:10px;">说明</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">1</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">确权数据</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">tbl_jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="font-size:10px;">市级切片</span></p> <p><span style="font-size:10px;">jiangxi_shangrao_quequan_tile</span></p> <p><span style="font-size:10px;">区级切片</span></p> <p><span style="font-size:10px;">jiangxi_shangrao_xinzhou_quequan_tile</span></p> <br> </td> 
+     <td style="border:1px solid #ddd;"> <p><span style="color:#E53333;font-size:10px;"><strong>数据库表说明：</strong></span></p> <p><span style="font-size:10px;">1、如果拿到市级确权矢量数据，将上饶市所有区县的数据全部合并成市级数据，数据库就只建市级数据表，并添加省市区镇村字段，筛选数据的时候，可以根据区域来筛选。如果后面当前市新增了区县，比如A县，就直接将A县的数据添加到tbl_jiangxi_shangrao_quequan表中</span></p> <p><span style="font-size:10px;">2、一个市就一张表数据，一个省有多个市数据，分别创建对应的市级表数据</span></p> <p><span style="color:#E53333;font-size:10px;"><strong>动态服务说明：</strong></span></p> <p><span style="font-size:10px;">jiangxi_shangrao_quequan：动态服务名称，根据数据库表名对应，按市级发布，每一个市只会发布一个动态服务</span></p> <p><span style="color:#E53333;font-size:10px;"><strong>切片服务说明：</strong></span></p> <p><span style="font-size:10px;">1、jiangxi_shangrao_quequan_tile：市级切片命名</span><br><span style="font-size:10px;">2、jiangxi_shangrao_xinzhou_quequan_tile：区级切片命名</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">2</span></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">三调数据</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">tbl_jiangxi_shangrao_sandiao</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">jiangxi_shangrao_sandiao</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="font-size:10px;">市级切片</span></p> <p><span style="font-size:10px;">jiangxi_shangrao_sandiao_tile</span></p> <p><span style="font-size:10px;">区级切片</span></p> <p><span style="font-size:10px;">jiangxi_shangrao_xinzhou_sandiao_tile</span></p> <p><br></p> <p><span style="font-size:10px;">市级分类切片</span></p> <p><span style="font-size:10px;">jiangxi_shangrao_sandiao_gd_tile</span></p> <p><span style="font-size:10px;">区级分类切片</span></p> <p><span style="font-size:10px;">jiangxi_shangrao_xinzhou_sandiao_gd_tile</span></p> <br> </td> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;color:#E53333;font-size:10px;">数据库表说明：</span> <p><span style="font-size:10px;">1、如果拿到市级确权矢量数据，将上饶市所有区县的数据全部合并成市级数据，数据库就只建市级数据表，并添加省市区镇村字段，筛选数据的时候，可以根据区域来筛选。如果后面当前市新增了区县，比如A县，就直接将A县的数据添加到tbl_jiangxi_shangrao_sandiao表中</span></p> <span style="font-size:10px;">2、一个市就一张表数据，一个省有多个市数据，分别创建对应的市级表数据</span> <p><span style="font-weight:700;color:#E53333;font-size:10px;">动态服务说明：</span></p> <p><span style="font-size:10px;">jiangxi_shangrao_sandiao：动态服务名称，根据数据库表名对应，按市级发布，每一个市只会发布一个动态服务</span></p> <p><span style="font-weight:700;color:#E53333;font-size:10px;">切片服务说明：</span></p> <p><br></p> <p><span style="font-size:10px;">1、jiangxi_shangrao_sandiao_tile：市级切片命名</span></p> <p><span style="font-size:10px;">2</span><span style="font-size:10px;">、jiangxi_shangrao_xinzhou_sandiao_tile：区级切片命名</span></p> <p><span style="font-size:10px;">3、jiangxi_shangrao_sandiao_gd_tile：市级三调耕地切片，gd:耕地拼音缩写，所有按分类切片都是分类拼音缩写</span></p> <p><span style="font-size:10px;">4、jiangxi_shangrao_xinzhou_sandiao_gd_tile：区级三调耕地切片，gd:耕地拼音缩写，所有按分类切片都是分类拼音缩写</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">3</span></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">高标准数据</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">tbl_jiangxi_shangrao_gaobiaozhun</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:10px;">jiangxi_shangrao_gaobiaozhun</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="font-size:10px;">市级切片</span></p> <p class="ql-direction-ltr ql-long-35567033"><span class="ql-author-35567033" style="font-size:10px;">jiangxi_shangrao_gaobiaozhun_tile</span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="font-size:10px;">区级切片</span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;"></span></p> <p class="ql-direction-ltr ql-long-35567033"><span class="ql-author-35567033" style="font-size:10px;">jiangxi_shangrao_xinzhou_gaobiaozhun_tile</span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;"><br></span></p> <span style="font-size:10px;">市级按年份切片</span> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:10px;"><span style="color:#494949;font-size:10px;">jiangxi_shangrao_gaobiaozhun_2020_tile</span></span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:10px;">区级按年份切片</span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:10px;"><span style="color:#494949;font-size:10px;">jiangxi_shangrao_xinzhou_gaobiaozhun_2020_tile</span></span></p> <br> </td> 
+     <td style="border:1px solid #ddd;"> <p><span style="color:#E53333;font-size:10px;"><strong>数据库表说明：</strong></span></p> <p><span style="font-size:10px;">1、如果拿到市级高标准矢量数据，将上饶市所有区县的数据全部合并成市级数据，数据库就只建市级数据表，并添加省市区镇村字段，筛选数据的时候，可以根据区域来筛选。如果后面当前市新增了区县，比如A县，就直接将A县的数据添加到tbl_jiangxi_shangrao_gaobiaozhun表中</span></p> <p><span style="font-size:10px;">2、一个市就一张表数据，一个省有多个市数据，分别创建对应的市级表数据</span></p> <p><span style="color:#E53333;font-size:10px;"><strong>动态服务说明：</strong></span></p> <p><span style="font-size:10px;">jiangxi_shangrao_gaobiaozhun：动态服务名称，根据数据库表名对应，按市级发布，每一个市只会发布一个动态服务</span></p> <p><span style="color:#E53333;font-size:10px;"><strong>切片服务说明：</strong></span></p> <p><br></p> <p><span style="font-size:10px;">1、</span><span style="color:#494949;font-size:10px;">jiangxi_shangrao_gaobiaozhun_tile</span><span style="font-size:10px;">：市级切片命名</span></p> <p><span style="font-size:10px;">2、</span><span style="color:#494949;font-size:10px;">jiangxi_shangrao_xinzhou_gaobiaozhun_tile</span><span style="font-size:10px;">：区级切片命名</span></p> <p><span style="font-size:10px;">3、</span><span style="color:#494949;font-size:10px;">jiangxi_shangrao_gaobiaozhun_2020_tile</span><span style="font-size:10px;">：市级按年份切片，2020：表示年份</span></p> <p><span style="font-size:10px;">4、</span><span style="color:#494949;font-size:10px;">jiangxi_shangrao_xinzhou_gaobiaozhun_2020_tile</span><span style="font-size:10px;">：区级按年份切片，2020：表示年份</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <h2 id="anchor112">3.1、数据库命名规范</h2> 
+  <p><br></p> 
+  <p><span style="color:#E53333;">不管拿到的矢量数据是区级还是市级（省级的数据大概率也是各个市级一起组合给），数据库就只建一张市级表，因为市级是一个最折中的一个区间，数据不会很大也不会很小，比如江西省上饶市为例：</span></p> 
+  <h3></h3> 
+  <table style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>分类</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>数据库表名称</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>说明</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1</td> 
+     <td>确权数据</td> 
+     <td> <p>tbl_jiangxi_shangrao_quequan</p> &nbsp;&nbsp; <p><br></p> <br> </td> 
+     <td> <p><span>1、如果拿到市级确权矢量数据，将上饶市所有区县的数据全部合并成市级数据，数据库就只建市级数据表，并添加省市区镇村字段，筛选数据的时候，可以根据区域来筛选。如果后面当前市新增了区县，比如A县，就直接将A县的数据添加到tbl_jiangxi_shangrao_quequan表中</span></p> <p><br></p> 2、一个市就一张表数据，一个省有多个市数据，分别创建对应的市级表数据 </td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>三调数据</td> 
+     <td> <p>tbl_jiangxi_shangrao_sandiao</p> <p><br></p> <br> </td> 
+     <td> <p><span><span>1、</span>如果拿到市级三调矢量数据，将上饶市所有区县的数据全部合并成市级数据，数据库就只建市级数据表，并添加省市区镇村字段，筛选数据的时候，可以根据区域来筛选。如果后面当前市新增了区县，比如A县，就直接将A县的数据添加到tbl_jiangxi_shangrao_sandiao表中</span></p> <p><br></p> <span>2、一个市就一张表数据，一个省有多个市数据，分别创建对应的市级表数据</span><br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>高标准数据</td> 
+     <td> <p>tbl_jiangxi_shangrao_gaobiaozhun</p> <p><br></p> <br> </td> 
+     <td> <p><span><span>1、</span>如果拿到市级高标准矢量数据，将上饶市所有区县的数据全部合并成市级数据，数据库就只建市级数据表，并添加省市区镇村字段，筛选数据的时候，可以根据区域来筛选。如果后面当前市新增了区县，比如A县，就直接将A县的数据添加到tbl_jiangxi_shangrao_gaobiaozhun表中</span></p> <span>2、一个市就一张表数据，一个省有多个市数据，分别创建对应的市级表数据</span><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <br> 
+  <h2 id="anchor169">3.2、动态服务命名规范</h2> 
+  <p><span style="color:#E53333;">动态服务数据源跟数据库表保持一致，一张表是一个动态服务服务，所有数据增删改查入口，都是从这个动态服务里执行</span></p> 
+  <table style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序</span><span>号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>分类</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>动态服务名称</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>说明</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1</td> 
+     <td>确权数据</td> 
+     <td> <p>jiangxi/jiangxi_shangrao_quequan</p> </td> 
+     <td> <p>jiangxi：文件夹名称，所有江西省的gis服务都放在这个文件夹里</p> <p>jiangxi_shangrao_quequan：动态服务名称，根据数据库表名对应，按市级发布，每一个市只会发布一个动态服务</p> </td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>三调数据</td> 
+     <td> <p>jiangxi/jiangxi_shangrao_sandiao</p> </td> 
+     <td> <p>jiangxi：文件夹名称，所有江西省的gis服务都放在这个文件夹里</p> <p>jiangxi_shangrao_sandiao：动态服务名称，根据数据库表名对应，按市级发布，每一个市只会发布一个动态服务</p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>高标准数据</td> 
+     <td> <p>jiangxi/jiangxi_shangrao_gaobiaozhun</p> </td> 
+     <td> <p>jiangxi：文件夹名称，所有江西省的gis服务都放在这个文件夹里</p> <p>jiangxi_shangrao_gaobiaozhun：动态服务名称，根据数据库表名对应，按市级发布，每一个市只会发布一个动态服务</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <h3></h3> 
+  <h2 id="anchor219">3.3、切片服务命名规范</h2> 
+  <p><span style="color:#E53333;">切片服务数据源跟数据库保持一致，切片服务可以根据区、镇、村、分类等等不同的纬度进行切片，但是数据源都是一样，只有数据库一张表</span></p> 
+  <table style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序</span><span>号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>分</span><span>类</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>切片服务名称</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>说明</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1</td> 
+     <td>确权数据</td> 
+     <td> <p>市级切片</p> <p>jiangxi/jiangxi_shangrao_quequan_tile</p> <p>区级切片</p> <p>jiangxi/jiangxi_shangrao_xinzhou_quequan_tile</p> <br> </td> 
+     <td> <p>1、需要给市级整体切一个切片</p> <p>2、jiangxi：文件夹名称，所有江西省的gis服务都放在这个文件夹里</p> <p>3、jiangxi_shangrao_quequan_tile：市级切片命名</p> <p>4、jiangxi_shangrao_xinzhou_quequan_tile：区级切片命名</p> </td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>三调数据<br></td> 
+     <td> <p>市级切片</p> <p>jiangxi/jiangxi_shangrao_sandiao_tile</p> <p>区级切片</p> <p>jiangxi/jiangxi_shangrao_xinzhou_sandiao_tile</p> <p><br></p> <p>市级分类切片</p> <p>jiangxi/jiangxi_shangrao_sandiao_gd_tile</p> <p>区级分类切片</p> <p>jiangxi/jiangxi_shangrao_xinzhou_sandiao_gd_tile</p> </td> 
+     <td> <p>1、需要给市级整体切一个切片</p> <p>2、jiangxi：文件夹名称，所有江西省的gis服务都放在这个文件夹里</p> <p>3、jiangxi_shangrao_sandiao_tile：市级切片命名</p> <p>4、jiangxi_shangrao_xinzhou_sandiao_tile：区级切片命名</p> <p>5、jiangxi_shangrao_sandiao_gd_tile：市级三调耕地切片，gd:耕地拼音缩写，所有按分类切片都是分类拼音缩写</p> <p>6、jiangxi/jiangxi_shangrao_xinzhou_sandiao_gd_tile：区级三调耕地切片，gd:耕地拼音缩写，所有按分类切片都是分类拼音缩写</p> </td> 
+    </tr> 
+    <tr> 
+     <td>3、</td> 
+     <td>高标准数据</td> 
+     <td> <p>市级切片</p> <p><span> </span></p> <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">jiangxi/jiangxi_shangrao_gaobiaozhun_tile</span></p> <p class="ql-direction-ltr ql-long-35567033"><span><span style="font-size:14.6667px;">区级切片</span></span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:13px;"><span> </span></span></p> <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">jiangxi/jiangxi_shangrao_xinzhou_gaobiaozhun_tile</span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:13px;"><br></span></p> 市级按年份切片 <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:13px;"><span style="color:#494949;">jiangxi/jiangxi_shangrao_gaobiaozhun_2020_tile</span></span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:13px;">区级按年份切片</span></p> <p class="ql-direction-ltr ql-long-35567033"><span style="color:#3C4353;font-size:13px;"><span style="color:#494949;">jiangxi/jiangxi_shangrao_xinzhou_gaobiaozhun_2020_tile</span></span></p> </td> 
+     <td> <p>1、需要给市级整体切一个切片</p> <p>2、jiangxi：文件夹名称，所有江西省的gis服务都放在这个文件夹里</p> <p>3、<span style="color:#494949;">jiangxi_shangrao_gaobiaozhun_tile</span>：市级切片命名</p> <p>4、<span style="color:#494949;">jiangxi_shangrao_xinzhou_gaobiaozhun_tile</span>：区级切片命名</p> <p>5、<span style="color:#494949;">jiangxi_shangrao_gaobiaozhun_2020_tile</span>：市级按年份切片，2020：表示年份</p> <p>6、<span style="color:#494949;">jiangxi_shangrao_xinzhou_gaobiaozhun_2020_tile</span>：区级<span>按年份切片，2020：表示年份</span></p> <br> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor304">4、数据展示</h1> 
+  <p><span style="color:#E53333;">我们将市级数据作为中间层来规划，市级账号登陆使用市级切片服务，查询服务使用市级动态服务查询。区级和镇村级都展示区级的切片服务，查询都是用市级动态服务查询</span></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序</span><span>号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>展示平</span><span>台</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>账号级别</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>示例图片</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>切片展示服务</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>动态数据查询服务</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>能否修改数据</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>说明</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1</td> 
+     <td style="border:1px solid #ddd;">中台</td> 
+     <td style="border:1px solid #ddd;">市级</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4631.png" alt="" width="400" height="193" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>jiangxi/jiangxi_shangrao_quequan_tile</span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>不可以修改数据，只能</p> <p>查看整体数据</p> </td> 
+     <td style="border:1px solid #DDDDDD;"> <p>如果是市级账号登陆，所有涉及到gis展示的地方，</p> <p>我们统一使用市级的切片展示和市级的动态服务查询</p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">中台</td> 
+     <td style="border:1px solid #ddd;">区县级</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4631.png" alt="" width="400" height="193" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_xinzhou_quequan_tile</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;">可以修改数据，查看的切片是区县级切片服务</td> 
+     <td style="border:1px solid #DDDDDD;"> <p>如果是区级账号登陆，所有涉及到gis展示的地方，</p> <p>我们统一使用区级的切片展示和市级的动态服务查询，动态服务只使用市级的动态服务</p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;">中台</td> 
+     <td style="border:1px solid #ddd;">镇村级</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4631.png" alt="" width="400" height="193" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_xinzhou_quequan_tile</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>可以修改数据，查看的切片是区县级切片服务，跟区级保持一致</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"> <p>如果是区级账号登陆，所有涉及到gis展示的地方，</p> <p>我们统一使用区级的切片展示和市级的动态服务查询，动态服务只使用市级的动态服务，跟区级保持一致</p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">4</td> 
+     <td style="border:1px solid #ddd;">大数据平台</td> 
+     <td style="border:1px solid #ddd;">市级</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4632.png" alt="" width="400" height="360" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_quequan_tile</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>不可以修改数据，只能</p> <p>查看整体数据</p> <br> </td> 
+     <td style="border:1px solid #DDDDDD;"> <p>如果是市级账号登陆，所有涉及到gis展示的地方，</p> <p>我们统一使用市级的切片展示和市级的动态服务查询</p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">5</td> 
+     <td style="border:1px solid #ddd;">大数据平台</td> 
+     <td style="border:1px solid #ddd;">区县级</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4632.png" alt="" width="400" height="360" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_xinzhou_quequan_tile</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>不可以修改数据，只能</p> <p>查看整体数据</p> <br> </td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <p>如果是区级账号登陆，所有涉及到gis展示的地方，</p> <p>我们统一使用区级的切片展示和市级的动态服务查询，动态服务只使用市级的动态服务</p> <p><br></p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">6</td> 
+     <td style="border:1px solid #ddd;">大数据平台</td> 
+     <td style="border:1px solid #ddd;">镇村级</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4632.png" alt="" width="400" height="360" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_xinzhou_quequan_tile</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>jiangxi/jiangxi_shangrao_quequan</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>不可以修改数据，只能</p> <p>查看整体数据</p> <br> </td> 
+     <td style="border:1px solid #ddd;"> <p>如果是区级账号登陆，所有涉及到gis展示的地方，</p> <p>我们统一使用区级的切片展示和市级的动态服务查询，动态服务只使用市级的动态服务，跟区级保持一致</p> <br> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor429">5、已发布的各省市gis服务地址</h1> 
+  <p><br></p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp;<a href="https://shimo.im/mindmaps/XKq4M7n5P9uNr7kN" target="_blank" rel="noreferrer noopener">https://shimo.im/mindmaps/XKq4M7n5P9uNr7kN</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor5" title="2、问题">2、问题</a> </li>
+    <li class="text-ellipsis"><a href="#anchor12" title="3、制定gis规范标准">3、制定gis规范标准</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor112" title="3.1、数据库命名规范">3.1、数据库命名规范</a> </li>
+      <li class="text-ellipsis"><a href="#anchor169" title="3.2、动态服务命名规范">3.2、动态服务命名规范</a> </li>
+      <li class="text-ellipsis"><a href="#anchor219" title="3.3、切片服务命名规范">3.3、切片服务命名规范</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor304" title="4、数据展示">4、数据展示</a> </li>
+    <li class="text-ellipsis"><a href="#anchor429" title="5、已发布的各省市gis服务地址">5、已发布的各省市gis服务地址</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

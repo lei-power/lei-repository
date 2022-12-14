@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis数据发布流程-数据库赋值-三调</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1></h1> 
+  <h1 id="anchor1">1、概要</h1> 
+  <p>本文档主要介绍，三调—地类图斑矢量文件入库后怎么给新增加的字段赋值，新增字段如下：</p> 
+  <p><br></p> 
+  <table style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th>字段&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th> 
+     <th>注释&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>city_id<br></td> 
+     <td>市编码<br></td> 
+    </tr> 
+    <tr> 
+     <td>city_name<br></td> 
+     <td>市名称<br></td> 
+    </tr> 
+    <tr> 
+     <td>county_id<br></td> 
+     <td>区id<br></td> 
+    </tr> 
+    <tr> 
+     <td>county_name<br></td> 
+     <td>区名称<br></td> 
+    </tr> 
+    <tr> 
+     <td>town_id<br></td> 
+     <td>镇id<br></td> 
+    </tr> 
+    <tr> 
+     <td>town_name<br></td> 
+     <td>镇名称<br></td> 
+    </tr> 
+    <tr> 
+     <td>village_id<br></td> 
+     <td>村id<br></td> 
+    </tr> 
+    <tr> 
+     <td>village_name<br></td> 
+     <td>村名称<br></td> 
+    </tr> 
+    <tr> 
+     <td>YJDLBM<br></td> 
+     <td>一级地类编码<br></td> 
+    </tr> 
+    <tr> 
+     <td>YJDLMC<br></td> 
+     <td>一级地类名称<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor54"><br>2、赋值</h2> 
+  <p>赋值过程主要分为两部分，给市区镇村信息赋值，以及给一级地类信息赋值</p> 
+  <h2 id="anchor56">2.1&nbsp;市区镇村信息赋值</h2> 
+  <p>市区镇村信息赋值的要点是根据矢量文件的权属单位名称（QSDWMC）字段来提取出村一级的关键信息来匹配到已经入库了的市区镇村信息；</p> 
+  <p><br></p> 
+  <table style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th> <p>步骤</p> </th> 
+     <th>概述</th> 
+     <th>详情</th> 
+     <th>示例</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1</td> 
+     <td>提取已经入库了的市区镇村信息<br></td> 
+     <td> <p>1. 在mysql的frp_user库下将“XXX”修改为目标市名称后<span style="background-color:transparent;">执行以下语句：</span></p> <p><br></p> <p><br></p> <pre class="prettyprint lang-js">-- ---------------------------------------------------------------
+
+#解决GROUP_CONCAT函数字符串255长度限制
+SET SESSION group_concat_max_len=100000000;
+
+# 将‘XXX’ 替换为目标的市一级名称 
+SELECT GROUP_CONCAT(local_area.area SEPARATOR ';') FROM
+(
+SELECT CONCAT_WS(',',shi.id,shi.area_name,qu.id,qu.area_name,zhen.id,zhen.name,cun.id,cun.name) as area,1 as id 
+FROM(
+SELECT id,`name`,parent_id FROM `tbl_area_local` WHERE parent_id IN 
+(
+SELECT id FROM `tbl_area_local` WHERE parent_id IN (
+SELECT id FROM `sys_area` WHERE parent_id IN (
+SELECT id FROM `sys_area` WHERE area_name='XXX')) )) cun
+left JOIN 
+(SELECT id,`name`,parent_id FROM `tbl_area_local` WHERE parent_id IN (
+SELECT id FROM `sys_area` WHERE parent_id IN (
+SELECT id FROM `sys_area` WHERE area_name='XXX')) )zhen
+ON cun.parent_id = zhen.id
+left JOIN
+(SELECT id,`area_name`,parent_id FROM `sys_area` WHERE parent_id IN (
+SELECT id FROM `sys_area` WHERE area_name='XXX') )qu
+ON zhen.parent_id = qu.id
+left JOIN
+(SELECT id,`area_name` FROM `sys_area` WHERE area_name='XXX' )shi
+ON qu.parent_id = shi.id) as local_area
+GROUP BY id;
+
+-- ---------------------------------------------------------------</pre> <p><br></p> <p>2. 将获取的结果字符串留存备用，定义为“市区镇村信息”</p> <p><br></p> </td> 
+     <td> <p>以上饶市为例：</p> <p><img src="http://chandao.freetek.cc/zentao/file-read-11744.png?tid=amrpsxp2" alt="" width="350" height="224" title=""></p> <p>“市区镇村信息” =&nbsp;361100,上饶市,361127,余干县,1000254,杨埠镇,2004779,高家村;361100,上饶市,361127,余干县,1000261,白马桥乡,2004780,店上村; ...</p> </td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>提取已经入库了的矢量文件的权属单位名称（QSDWMC）字段<br></td> 
+     <td> <p>1. 在sqlserver的sde库下<span>将“XXX</span><span>”修改为目标表名称后</span>执行以下语句：</p> <p><br></p> <p><br></p> <pre class="prettyprint lang-js">-- ---------------------------------------------------------------
+SELECT
+STUFF((
+SELECT ',' + T.NAME
+FROM  (SELECT  DISTINCT QSDWMC AS NAME,1 AS FLAG FROM [SDE].[XXX] )  T
+WHERE A.FLAG = T.FLAG
+FOR XML PATH('')), 1, 1, '') AS AREANAMES 
+FROM  (SELECT  DISTINCT QSDWMC AS NAME,1 AS FLAG FROM [SDE].[XXX] )  A
+GROUP BY  FLAG;
+
+-- ---------------------------------------------------------------</pre> <p>2. 将获取的结果字符串留存备用，定义为“权属单位名称信息”</p> 
+      <div></div> <br> </td> 
+     <td> <p>以上饶市为例：</p> <p><img src="http://chandao.freetek.cc/zentao/file-read-11743.png?tid=amrpsxp2" alt="" width="350" height="149" title=""></p> <p>“权属单位名称信息” =&nbsp;农科新社区居民委员会,石门街镇南门村,珠湖乡荣七村,峡山林场合港村,清湖乡湖琳村,汪二镇林场,抱坞亭村民委员会,低源村委会, ...</p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>将1，2步骤生成字符串粘贴到代码相应位置运行生成目标excel文件</td> 
+     <td> <p>1. 将附件的MapingVillage.java 文件下载，用idea打开；</p> <p>2. 将“市区镇村信息”粘贴到village字段；</p> <p>3.将“权属单位名称信息”粘贴到&nbsp;source&nbsp;字段；</p> <p>4. 运行main方法在桌面生成“村级映射_uuid.xlsx”文件；</p> </td> 
+     <td> <p>以上饶市为例：</p> <p><img src="http://chandao.freetek.cc/zentao/file-read-11775.png?tid=amrpsxp2" alt="" width="350" height="166" title=""></p> <p>结果：</p> <p><img src="http://chandao.freetek.cc/zentao/file-read-11747.png?tid=amrpsxp2" alt="" width="350" height="88" title=""></p> </td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>生成的excel中有未匹配到的列，找产品经理沟通，让其协调资源补全，然后，利用excel的批量生成功能生成sql语句</td> 
+     <td> <p>1.填充未匹配到村信<span style="background-color:transparent;">息</span></p> <p><span style="background-color:transparent;">2.<span>利用excel的批量生成功能生成sql语句</span></span></p> </td> 
+     <td> <p>以上饶市为例：</p> <p><img src="http://chandao.freetek.cc/zentao/file-read-11750.png?tid=amrpsxp2" alt="" width="350" height="118" title=""></p> <p>图中红框为未匹配到村信息，确认匹配后，在<span>利用excel的批量生成功能生成sql</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>将excel中生成的sql语句粘贴到sqlserver的控制台运行</td> 
+     <td> <p>1.将生成的excel中的sql粘贴到控制<span style="background-color:transparent;">台</span></p> <p><span style="background-color:transparent;">2.运行</span></p> </td> 
+     <td> <p><span>以上饶市为例：</span></p> <p><img src="http://chandao.freetek.cc/zentao/file-read-11751.png?tid=amrpsxp2" alt="" width="350" height="164" title=""></p> <p>运行后可以看到控制台修改结果；</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <h2 id="anchor192">2.2&nbsp;一级地类信息赋值</h2> 
+  <p>一级地类信息赋值共有8个类型，利用矢量文件的DLBM字段映射；</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#EEEEEE;">步骤</span><br></th> 
+     <th style="background-color:#F1F1F1;border:1px solid #DDDDDD;"><span style="font-weight:700;background-color:#EEEEEE;">概述</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#EEEEEE;">详情</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#EEEEEE;">示例</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1<br></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="background-color:transparent;">在sqlserver的控制台运行</span><span style="background-color:transparent;">sql</span><span style="background-color:transparent;">语句</span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p>SQL语句如下，<span>将“XXX</span><span>”修改为目标市名称后执行：</span></p> <p><span><br></span></p> <p><span> </span></p> <pre class="prettyprint lang-js">-- ---------------------------------------------------------------
+UPDATE XXX
+SET YJDLBM='01',YJDLMC='耕地' WHERE DLBM IN ('0101','0102','0103');
+
+UPDATE XXX<span></span> SET YJDLBM='02',YJDLMC='园地' WHERE DLBM IN ('0201','0201K','0202','0202K','0203','0203K','0204','0204K');
+
+UPDATE XXX
+SET YJDLBM='03',YJDLMC='林地' WHERE DLBM IN ('0301','0301K','0302','0302K','0303','0304','0305','0306','0307','0307K');
+
+UPDATE XXX
+SET YJDLBM='04',YJDLMC='草地' WHERE DLBM IN ('0401','0402','0403','0403K');
+
+UPDATE XXX
+SET YJDLBM='10',YJDLMC='交通运输用地' WHERE DLBM IN ('1006');
+
+UPDATE XXX
+SET YJDLBM='11',YJDLMC='水域及水利设施用地' WHERE DLBM IN ('1103','1104','1104A','1104K','1107','1107A');
+
+UPDATE XXX
+SET YJDLBM='12',YJDLMC='其他土地' WHERE DLBM IN ('1202','1203');
+
+UPDATE XXX
+SET YJDLBM='07',YJDLMC='住宅用地' WHERE DLBM IN ('0702');
+
+-- ---------------------------------------------------------------</pre> <br> <p><br></p> </td> 
+     <td style="border:1px solid #DDD;"><img src="http://chandao.freetek.cc/zentao/file-read-11752.png?tid=amrpsxp2" alt="" width="350" height="200" title=""><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1、概要">1、概要</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor54" title="2、赋值">2、赋值</a> </li>
+      <li class="text-ellipsis"><a href="#anchor56" title="2.1&nbsp;市区镇村信息赋值">2.1&nbsp;市区镇村信息赋值</a> </li>
+      <li class="text-ellipsis"><a href="#anchor192" title="2.2&nbsp;一级地类信息赋值">2.2&nbsp;一级地类信息赋值</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

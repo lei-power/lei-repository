@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220823 旌阳农业部数据推送v1.0 功能详细设计文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">一、迭代需求</h1> 
+  <p>1.、将神农口袋旌阳区农林牧渔种养计划数据推送到旌阳区农业部</p> 
+  <p>2、每天通过定时任务进行推送</p> 
+  <p><br></p> 
+  <p>需求文档：<a href="/zentao/projectstory-view-427.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/projectstory-view-427.html</a></p> 
+  <h1 id="anchor5">二、参与人员与时间</h1> 
+  <p><br></p> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:12pt;"><span style="font-size:14px;">服务端：王恺</span></span></p> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:12pt;"><span style="font-size:14px;">迭代时间：</span><span style="font-size:14px;">2022-08-21</span><span style="font-size:14px;">到</span><span style="font-size:14px;">2022-08-25</span></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor11">三、用例图</h2> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor14">四、数据库ER图</h1> 
+  <p>数据库链接：<a href="https://www.processon.com/mindmap/630335377d9c0808a2e10863" target="_blank" rel="noreferrer noopener">https://www.processon.com/mindmap/630335377d9c0808a2e10863</a></p> 
+  <h2 id="anchor16">1、数据库表结构</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8121.png" alt="" width="600" height="498" title=""></p> 
+  <h2 id="anchor18">2、ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8103.jpeg" alt="" width="600" height="327" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor21">五、时序图</h1> 
+  <h2 id="anchor22">1、神农口袋数据入库和转换坐标系时序图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7972.jpeg" alt="" width="600" height="854" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor25">2、申报用户数据推送时序图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7974.jpeg" alt="" width="600" height="773" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor28">3、申报数据推送时序图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7973.jpeg" alt="" width="600" height="773" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor31">六、项目搭建</h1> 
+  <h2 id="anchor32">1、新建springboot工程</h2> 
+  <p>名称：za-nybpush</p> 
+  <p><br></p> 
+  <h2 id="anchor35">2、新建数据库</h2> 
+  <p>名称：frp_nybpush</p> 
+  <p><br></p> 
+  <h1 id="anchor38">七、开发周期</h1> 
+  <p>1、2022-8-24~2022-8-25：接口开发</p> 
+  <p>2、2022-8-25：接口测试</p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="一、迭代需求">一、迭代需求</a> </li>
+    <li class="text-ellipsis"><a href="#anchor5" title="二、参与人员与时间">二、参与人员与时间</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor11" title="三、用例图">三、用例图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor14" title="四、数据库ER图">四、数据库ER图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor16" title="1、数据库表结构">1、数据库表结构</a> </li>
+      <li class="text-ellipsis"><a href="#anchor18" title="2、ER图">2、ER图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor21" title="五、时序图">五、时序图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor22" title="1、神农口袋数据入库和转换坐标系时序图">1、神农口袋数据入库和转换坐标系时序图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor25" title="2、申报用户数据推送时序图">2、申报用户数据推送时序图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor28" title="3、申报数据推送时序图">3、申报数据推送时序图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor31" title="六、项目搭建">六、项目搭建</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor32" title="1、新建springboot工程">1、新建springboot工程</a> </li>
+      <li class="text-ellipsis"><a href="#anchor35" title="2、新建数据库">2、新建数据库</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor38" title="七、开发周期">七、开发周期</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

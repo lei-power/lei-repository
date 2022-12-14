@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220714 旌阳土地承包系统 功能详细设计文档2 -2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">一、迭代需求简述</h1> 
+  <p>本次迭代的主要需求：</p> 
+  <p>1.地块新增、编辑、上下架信息等维护；</p> 
+  <p>2.新增承包方信息更新登记、家庭成员更新登记、补录地块登记、分割地块登记、地块轮廓更新登记、征战用登记；</p> 
+  <p>3.注销登记注销类型新增土地灭失和土地经有批准权限的人民政府或土地主管部门转为建设用地；</p> 
+  <p>4.gis服务：1、将旌阳确权服务重新发布为德阳市gis服务，新增上下架字段；</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2、新增德阳市旌阳区界址点服务</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3、原旌阳区轮廓服务改为德阳市轮廓服务，前端逐渐替换</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>产品需求文档参考链接：<a href="https://shimo.im/docs/368JygvKpXkJWpCp/read" target="_blank" rel="noreferrer noopener">https://shimo.im/docs/368JygvKpXkJWpCp/read</a></p> 
+  <p>产品UE参考链接：<a href="https://5x3o54.axshare.com/#id=j6wolj&amp;p=%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE&amp;g=1" target="_blank" rel="noreferrer noopener">https://5x3o54.axshare.com/#id=j3ncm4&amp;p=新增_3&amp;g=1</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor15">二、参与人员与时间</h1> 
+  <p>服务端：王恺、王磊</p> 
+  <p>迭代时间：</p> 
+  <p>涉及到的服务端：管理中台</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor22">三、用例图</h1> 
+  <h3 style="color:#3C4353;">1.基础数据管理</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5468.png" alt="" width="400" height="175" title=""></p> 
+  <p><br></p> 
+  <h3 style="color:#3C4353;">2.登记管理</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5467.png" alt="" width="400" height="344" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor32">四、数据库设计ER图</h1> 
+  <p><br></p> 
+  <h2 id="anchor34">1、新增地块ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5522.jpeg" alt="" width="400" height="190" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor37">2、承包方家庭成员信息更新登记ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5456.jpeg" alt="" width="400" height="297" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor40">3、承包方信息更新登记ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5457.jpeg" alt="" width="400" height="232" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor43">4、补录地块登记ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5458.jpeg" alt="" width="400" height="227" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor46">5、分割地块登记ER图</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5523.jpeg" alt="" width="400" height="274" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor50">6、更新地块轮廓登记ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5524.jpeg" alt="" width="400" height="207" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor53">7、征占用登记ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5525.jpeg" alt="" width="400" height="226" title=""></p> 
+  <h2 style="color:#3C4353;" id="anchor55">五、审核流程状态转化图</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3172.png" alt="" width="400" height="374" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>注：</p> 
+  <p>.状态图有四个状态：1-草稿、2-待审核、3-已通过、4-被驳回</p> 
+  <p>.状态图有九个动作：1-保存草稿：新增、2-提交审核：新增、3-保存草稿：编辑、4-提交审核、5-撤回、6-审核通过、7-审核驳回或定时器自动驳回、8-重新提交、9-删除</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor67">六、核心流程时序</h1> 
+  <h2 id="anchor68">1、登记和审核时序</h2> 
+  <h3>1.1、补录地块登记和审核</h3> 
+  <p>登记</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5463.jpeg" alt="" width="400" height="561" title=""></p> 
+  <p>审核</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5464.jpeg" alt="" width="400" height="485" title=""></p> 
+  <p><br></p> 
+  <h3>1.2、家庭成员更新登记和审核</h3> 
+  <p>登记</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5465.jpeg" alt="" width="400" height="561" title=""></p> 
+  <p><br></p> 
+  <p>审核</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5466.jpeg" alt="" width="400" height="660" title=""></p> 
+  <p><br></p> 
+  <h3>1.3、承包方信息更新登记时序</h3> 
+  <p>登记</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5512.jpeg" alt="" width="400" height="561" title=""></p> 
+  <p><br></p> 
+  <p>审核</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5513.jpeg" alt="" width="400" height="409" title=""></p> 
+  <p><br></p> 
+  <h3>1.4、分割地块登记时序</h3> 
+  <p>登记</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5514.jpeg" alt="" width="400" height="561" title=""></p> 
+  <p><br></p> 
+  <p>审核</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5515.jpeg" alt="" width="400" height="485" title=""></p> 
+  <p><br></p> 
+  <h3>1.5、更新地块轮廓登记时序</h3> 
+  <p>登记</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5516.jpeg" alt="" width="400" height="561" title=""></p> 
+  <p><br></p> 
+  <p>审核</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5517.jpeg" alt="" width="400" height="493" title=""></p> 
+  <p><br></p> 
+  <h3>1.6、征占用地块登记时序</h3> 
+  <p>登记</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5518.jpeg" alt="" width="400" height="561" title=""></p> 
+  <p><br></p> 
+  <p>审核</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5519.jpeg" alt="" width="400" height="485" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor112">2、其他时序</h2> 
+  <h3>2.1、新增地块登记</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5520.jpeg" alt="" width="400" height="487" title=""></p> 
+  <p><br></p> 
+  <h3>2.2、新增界址点时序</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5521.jpeg" alt="" width="400" height="454" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor119">七、GIS服务架构设计</h1> 
+  <p>1、新增德阳市确权gis服务</p> 
+  <p>表名：<span>tbl_sichuan_deyang_quequan</span></p> 
+  <p><span>新增字段：city_id：市id</span></p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; city_name：市名称</span></p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shelf_status：地块状态:0-上架 1-下架</span></p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;create_by：创建人id<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;update_by：更新人id</span></p> 
+  <p><span><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span>shelf_by：下架人id</span><br></span></p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span>shelf_time：下架时间</span></span></p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#444444;font-family:'微软雅黑';background-color:#FFFFFF;">create_time : 创建时间</span></span></p> 
+  <p><span><span style="color:#444444;font-family:'微软雅黑';background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;update_time : 更新时间</span><br></span></p> 
+  <div>
+   <br>
+  </div> 2、新增德阳市界址点gis服务 
+  <p>表名：tbl_sichuan_deyang_quequan_jzd</p> 
+  <p>新增字段：id：唯一标识，自己进行id编码</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; city_id : 市id<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; county_id : 区id<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; city_name : 市名称<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; county_name : 区名称</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="color:#444444;font-family:'微软雅黑';background-color:#FFFFFF;">del_flag : 是否删除 0-否 1-是</span><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; create_by：创建人<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; update_by：更新人<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; create_time : 创建时间<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; update_time : 更新时间<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="color:#444444;font-family:'微软雅黑';background-color:#FFFFFF;">delete_time：删除时间</span></p> 
+  <p><span style="color:#444444;font-family:'微软雅黑';background-color:#FFFFFF;"><br></span></p> 
+  <p><span><span style="background-color:#FFFFFF;">3、新增地块</span></span></p> 
+  <p><span><span style="background-color:#FFFFFF;"><br></span></span></p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="一、迭代需求简述">一、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor15" title="二、参与人员与时间">二、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor22" title="三、用例图">三、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor32" title="四、数据库设计ER图">四、数据库设计ER图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor34" title="1、新增地块ER图">1、新增地块ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor37" title="2、承包方家庭成员信息更新登记ER图">2、承包方家庭成员信息更新登记ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor40" title="3、承包方信息更新登记ER图">3、承包方信息更新登记ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor43" title="4、补录地块登记ER图">4、补录地块登记ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor46" title="5、分割地块登记ER图">5、分割地块登记ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor50" title="6、更新地块轮廓登记ER图">6、更新地块轮廓登记ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor53" title="7、征占用登记ER图">7、征占用登记ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor55" title="五、审核流程状态转化图">五、审核流程状态转化图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor67" title="六、核心流程时序">六、核心流程时序</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor68" title="1、登记和审核时序">1、登记和审核时序</a> </li>
+      <li class="text-ellipsis"><a href="#anchor112" title="2、其他时序">2、其他时序</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor119" title="七、GIS服务架构设计">七、GIS服务架构设计</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

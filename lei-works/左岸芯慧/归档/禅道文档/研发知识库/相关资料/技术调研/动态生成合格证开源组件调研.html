@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>动态生成合格证开源组件调研</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p>一、开源组件调研结果</p> 
+  <p>&nbsp; &nbsp; &nbsp; 开源市场并未有关于动态生成图片的组件或者工具类</p> 
+  <p><br></p> 
+  <p>二、手动绘画的弊端</p> 
+  <p>&nbsp; &nbsp; &nbsp; java提供了<span style="color:#333333;">awt.Graphics的类库，其功能很久之前已经完善。但是在浏览资料和之前的经验来看，后端绘图过程有几个难点。</span></p> 
+  <p><span style="color:#333333;">&nbsp; &nbsp; &nbsp;1.</span><span style="color:#333333;">Graphics的文字样式不是很全面对于一些特殊的样式字体后端并不能满足。</span><span style="color:#333333;"></span></p> 
+  <p><span style="color:#333333;">&nbsp; &nbsp; &nbsp;2.像素问题。生成的图片模糊（如下图，第一张是前端生成，第二张是后端生成），早在神农猫的时候，前后端实现对比，前端实现的图片比后端清晰。</span></p> 
+  <p><span style="color:#333333;">&nbsp; &nbsp; &nbsp;3.生成图片的时间，对于后端来说<span style="color:#333333;">Graphics2D的性能并不是很好，需要花费一定的时间，再加上接口调用的时间，整体流程没有想象中的迅速。</span></span></p> 
+  <p><span style="color:#333333;"><span style="color:#333333;">&nbsp; &nbsp; &nbsp;<img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11241.png" alt="" width="500" height="865" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11242.png" alt="" width="500" height="794" title=""></span></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;">三、总结</span></p> 
+  <p><span style="color:#333333;">&nbsp; &nbsp; &nbsp;对于之前的经验和调研来看，绘图之类的工作可以让前端来做。这一点并不是后端的强项，加上awt.swing早已被人们淡忘，已经很少有人使用，迭代更新已经停滞，对于后端的门槛也是有一定的难度的。</span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11356.png" alt=""><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span>html2image、cssbox 在实践中发现生成的图片样式丢失，不太好用</span></p> 
+  <p><span><br></span></p> 
+  <p><span>wkhtmltox 支持的效果要好很多</span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11357.png" alt=""><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;">主要问题：</span></p> 
+  <p><span>后端处理图片流程如下：</span></p> 
+  <div style="font-size:14px;"> 
+   <ol> 
+    <li>定义并保存模板</li> 
+    <li>前端传参：模板属性，二维码，公章标签</li> 
+    <li>后端根据参数，生成公章，二维码图片的base64，替换到模板的对应位置</li> 
+    <li>最后根据html生成图片</li> 
+    <li>上传到阿里云，或者转成base64</li> 
+    <li>另外：如果前端根据比例做缩放的话，后端还需要动态处理；</li> 
+   </ol> 
+  </div> 
+  <p style="font-size:14px;"><strong>如果后端实现，整个过程实践不可控，需要异步处理</strong></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+  <p><span style="color:#333333;"><br></span></p> 
+ </div> 
+</div></body>
+</html>

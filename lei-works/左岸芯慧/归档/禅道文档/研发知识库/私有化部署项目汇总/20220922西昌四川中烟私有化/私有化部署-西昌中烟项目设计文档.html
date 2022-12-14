@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>私有化部署-西昌中烟项目设计文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、计划安排</h1> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">流程</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">参与人员</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">排期/天</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">1、总体设计</span><br></td> 
+     <td style="border:1px solid #ddd;">王恺</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">2、项目实施启动会</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">3、环境搭建</span><br></td> 
+     <td style="border:1px solid #ddd;">王恺</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">4、项目部署</span><br></td> 
+     <td style="border:1px solid #ddd;">王恺</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">5、项目自测</span><br></td> 
+     <td style="border:1px solid #ddd;">王恺、丁文清</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">6、数据配置</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>王恺、丁文清</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;"><span style="font-size:14px;background-color:#FFFFFF;">7、测试</span><br></td> 
+     <td style="border:1px solid #DDD;">史火霞</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h1 id="anchor56">2、资源规划</h1> 
+  <h2 id="anchor57">2.1、甲方资源清单</h2> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;">参见《私有化部署-西昌中烟项目甲方资源清单》文档。</span></p> 
+  <p><a href="/zentao/doc-objectLibs-custom-0-37-421.html?tid=3wnwm32q" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-421.html?tid=3wnwm32q</a></p> 
+  <p><br></p> 
+  <h2 id="anchor61">2.2、服务部署规划</h2> 
+  <p>后端服务部署</p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">服务名称</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">端口号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">部署目录</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">服务器</span></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">部署说明</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1<br></td> 
+     <td style="border:1px solid #ddd;">za-bigscreen<br></td> 
+     <td style="border:1px solid #ddd;">30070</td> 
+     <td style="border:1px solid #ddd;"><span>/var/gameplat/za-bigscreen</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>绿色溯源应用服务器</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <p>前端服务部署</p> 
+  <table class="table table-kindeditor ke-select-col" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">序号</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">前端资源<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">目录<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">服务器<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">部署说明<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1<br></td> 
+     <td style="border:1px solid #ddd;">大屏<br></td> 
+     <td style="border:1px solid #ddd;">/www/xcgov/web/<br></td> 
+     <td style="border:1px solid #ddd;"><span>绿色溯源应用服务器</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 软件部署 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">序号</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">中间件名称<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">版本<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">目录<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">服务器<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">账号密码</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">常用命令<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1<br></td> 
+     <td style="border:1px solid #ddd;">mysql<br></td> 
+     <td style="border:1px solid #ddd;">5.7<br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">/opt/software/mysql</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>绿色溯源数据库服务器</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;"> </span> <p style="font-size:14px;background-color:#FFFFFF;">账号：root</p> <p style="font-size:14px;background-color:#FFFFFF;">密码：xcq#?sZa#f1013<span style="font-size:13px;background-color:transparent;"></span></p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">jdk</td> 
+     <td style="border:1px solid #ddd;">1.8</td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">/opt/software/jdk1.8</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>绿色溯源数据库服务器</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;">jdk</td> 
+     <td style="border:1px solid #ddd;">1.8<br></td> 
+     <td style="border:1px solid #ddd;"><span>/opt/software/jdk1.8</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>绿色溯源应用服务器</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">4</td> 
+     <td style="border:1px solid #ddd;">nginx</td> 
+     <td style="border:1px solid #ddd;">1.14.1<br></td> 
+     <td style="border:1px solid #ddd;">/usr/local/nginx_new/<br></td> 
+     <td style="border:1px solid #ddd;"><span>绿色溯源应用服务器</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h1 id="anchor163">3、nginx代理列表</h1> 
+  <p> </p>
+  <table class="table table-kindeditor ke-select-col" style="width:100%;"> 
+   <tbody>
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">序号</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">代理目标名称<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">代理目标地址</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">代理二级地址</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">访问方式</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">备注</th> 
+    </tr> 
+   </tbody>
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1<br></td> 
+     <td style="border:1px solid #ddd;">神农口袋正式服阿里云oss</td> 
+     <td style="border:1px solid #ddd;">https://snkoudai.oss-cn-hangzhou.aliyuncs.com/<br></td> 
+     <td style="border:1px solid #DDD;">snkoudai-oss<br></td> 
+     <td style="border:1px solid #ddd;">http://10.164.62.135/snkoudai-oss/xxx.jpg<br></td> 
+     <td style="border:1px solid #DDD;">xxx.jpg：文件名</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">物联网阿里云oss</td> 
+     <td style="border:1px solid #ddd;">https://zaiot.oss-cn-hangzhou.aliyuncs.com/<br></td> 
+     <td style="border:1px solid #DDD;">zaiot-oss<br></td> 
+     <td style="border:1px solid #ddd;"><span>http://10.164.62.135/</span><span><span>zaiot-oss</span>/xxx.jpg</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>xxx.jpg：文件名</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;">欧科齐oss</td> 
+     <td style="border:1px solid #ddd;">https://zzoukeqi.oss-cn-beijing.aliyuncs.com/<br></td> 
+     <td style="border:1px solid #DDD;">oukeqi-oss<br></td> 
+     <td style="border:1px solid #ddd;"><span>http://10.164.62.135/</span><span><span><span>oukeqi-oss</span></span>/xxx.jpg</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>xxx.jpg：文件名</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">4</td> 
+     <td style="border:1px solid #DDD;">神农口袋地图</td> 
+     <td style="border:1px solid #DDD;">https://map.snkoudai.com/<br></td> 
+     <td style="border:1px solid #DDD;">sn-map<br></td> 
+     <td style="border:1px solid #DDD;"><span>http://10.164.62.135/</span><span><span><span><span>sn-map</span></span></span>/xxx</span><br></td> 
+     <td style="border:1px solid #DDD;">xxx：地图路径</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">5</td> 
+     <td style="border:1px solid #DDD;">本地服务器文件夹（图片）</td> 
+     <td style="border:1px solid #DDD;">/var/gameplat/picture/<br></td> 
+     <td style="border:1px solid #DDD;">image<br></td> 
+     <td style="border:1px solid #DDD;"><span>http://10.164.62.135/</span><span><span><span><span>image</span></span></span>/xxx.jpg</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>xxx.jpg：文件名</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">6</td> 
+     <td style="border:1px solid #DDD;"><span>本地服务器文件夹（视频）</span><br></td> 
+     <td style="border:1px solid #DDD;">/var/gameplat/video/job_video/<br></td> 
+     <td style="border:1px solid #DDD;">video<br></td> 
+     <td style="border:1px solid #DDD;"><span>http://10.164.62.135/</span><span><span><span><span><span>video</span></span></span></span>/xxx.mp4</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>xxx.mp4：视频名称</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">7</td> 
+     <td style="border:1px solid #DDD;">神农口袋视频地址</td> 
+     <td style="border:1px solid #DDD;">https://hls01open.ys7.com/openlive<br></td> 
+     <td style="border:1px solid #DDD;">openlive<br></td> 
+     <td style="border:1px solid #DDD;"><span>http://10.164.62.135/</span><span><span><span><span><span>openlive</span>p</span></span></span>/xxx</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>xxx：视频流地址</span><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、计划安排">1、计划安排</a> </li>
+    <li class="text-ellipsis"><a href="#anchor56" title="2、资源规划">2、资源规划</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor57" title="2.1、甲方资源清单">2.1、甲方资源清单</a> </li>
+      <li class="text-ellipsis"><a href="#anchor61" title="2.2、服务部署规划">2.2、服务部署规划</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor163" title="3、nginx代理列表">3、nginx代理列表</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>【需求示例】神农口袋申报数据功能需求示例</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1><br></h1> 
+  <h1 id="anchor1">1.功能概述（用户故事）</h1> 
+  <p><br></p> 
+  <p><span style="font-size:14px;">应对旌阳农业部的刁难，我们需要尽快将对方的数据上报功能，移植到我们的系统。</span></p> 
+  <p><br></p> 
+  <p><span style="font-size:14px;">大概思路：</span></p> 
+  <p><br></p> 
+  <p><span style="font-size:14px;">1.农户能够在神农口袋的app进入申报页面，按照农业部那边定义的申报字段填写申报表单，我们的服务端系统存储该申报数据。</span></p> 
+  <p><br></p> 
+  <p><span style="font-size:14px;">2.农户申报后，可以看到自己的申报记录。</span></p> 
+  <p><br></p> 
+  <p><span style="font-size:14px;">3.申报字段里，有些基础信息需要直接使用农业部提供的基础库（如地块类型，种养品种，种植制度等）</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor15">2.需求设计</h1> 
+  <p><br></p> 
+  <h2 id="anchor17">2.1 用例图</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9271.png" alt=""></p> 
+  <p><br></p> 
+  <p>本次开发功能比较简单，主要的使用人群就是，农场农户。干得唯一的事情，就是耕地用途申报，并对申报的数据进行管理。</p> 
+  <h2 id="anchor22">2.2 ER图</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9262.png" alt="" width="500" height="238" title=""></p> 
+  <p><br></p> 
+  <p><span style="font-size:14px;">1.其中“</span><strong><span style="font-size:14px;">耕地用户申报表</span></strong><span style="font-size:14px;">”示本次操作的核心主表</span></p> 
+  <p><span style="font-size:14px;">2.地块类型表，种养品种表，种植制度表，为农业部提供的基础数据表，我们系统直接沿用</span></p> 
+  <p><span style="font-size:14px;">3.从功能来看，基本上业务独立与以前神农口袋，唯一共用的就是这些属于都属于农场所有，由农场下的员工进行操作产生。</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor32">2.3 业务交互逻辑</h2> 
+  <p><br></p> 
+  <h3>2.3.1 添加申报</h3> 
+  <p><span style="font-size:14px;">（1）按照页面表单结构填写数据，注意其中的</span><strong><span style="font-size:14px;">申报位置为当前用户的定位信息</span></strong></p> 
+  <p><span style="font-size:14px;">（2）页面上地块类型、种植种类、剩余时刻、种植制度，<strong><span style="color:#E53333;">几个下拉框要实现联动</span></strong>，具体联动机制参见后续页面下拉框描述。</span></p> 
+  <p>（3）服务端保存数据为未推送状态，后续要实现<span>定时</span>向农业部推送数据。</p> 
+  <p>（4）农业部需要推送用户数据，本次也同步保存推送用户，具体字段参见推送用户表。<br>（5）页面中的申报页面，属于<span style="color:#E53333;"><strong>批量操作</strong></span>，一次性选择多个地块，<strong><span style="color:#E53333;">服务端依据每一个地块生成一个申报记录</span></strong>。</p> 
+  <p><br></p> 
+  <p>备注：添加功能受功能权限控制，权限在管理后台配置，具体那些角色具备该功能，后续页面需求会标注</p> 
+  <h3><br>2.3.2 删除申报</h3> 
+  <p>（1）满足以下条件才能删除：数据未推送给农业部。</p> 
+  <p><br></p> 
+  <p><span>备注：删除功能受功能权限控制，权限在管理后台配置，具体那些角色具备该功能，后续页面需求会标注</span></p> 
+  <h3><br>2.3.2 查看申报</h3> 
+  <p>（1）申报列表：分页拉去本农场的申报记录</p> 
+  <p>（2）申报详情页：按照申报信息字段进行展示</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor52">3.需求文档</h1> 
+  <p><br></p> 
+  <p>从前面设计来看，本次只有一个需求，即耕地用户申报需求。</p> 
+  <p><br></p> 
+  <h2 id="anchor56">3.1 管理耕地用途申报</h2> 
+  <p><br></p> 
+  <p>需求描述：</p> 
+  <p>1.农户完成申报要求</p> 
+  <p>2.农户管理已经申报的记录，比如删除</p> 
+  <p>3.农户能够查看自己的申报记录，比如列表、详情</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>管理耕地用户申报需求，全部都是由农户端来完成，本次需求只涉及神农口袋农户端（具体来说就是，神农口袋app）</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>以下按照前后页面顺序讲解。</p> 
+  <p><br></p> 
+  <h3>3.1.1 农户端</h3> 
+  <p><strong>1.入口页</strong></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9265.png" alt="" width="282" height="500" title=""></p> 
+  <p><br></p> 
+  <p>页面逻辑：</p> 
+  <p>（1）页面入口，只有农场所在地区域是旌阳的能够显示，其他则隐藏</p> 
+  <p>（2）该入口，不受运营商配置影响，不需要运营商配置</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><strong>2.申报增加页</strong></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9266.png" alt="" width="500" height="257" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>页面逻辑：</p> 
+  <p>（1）添加按钮，受功能权限控制，无权限则不显示，添加按钮。提交接口也会提示无功能权限。</p> 
+  <p>（2）页面各个字段交互，详细见下表。</p> 
+  <p>（3）该页面属于批量添加，按照地块拆分多个申报记录。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9267.png" alt=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><strong>3.申报列表页</strong></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9269.png" alt="" width="500" height="477" title=""></p> 
+  <p><br></p> 
+  <p>页面逻辑：</p> 
+  <p>（1）分页拉取农场下的申报记录，按照申报时间降序，每页10条，下拉刷新数据，上拉加载下一页。</p> 
+  <p>（2）<span style="font-size:14px;background-color:#FFFFFF;">展示字段信息：“作物种类/养殖种类/产业用地”名称、地块名称、地块类型、申报地块面积、申报时间（即：创建时间）</span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;">（3）该页面有数据暂时有数据，无数据展示空页面。</span></p> 
+  <p><br></p> 
+  <p><strong>4.申报详情页</strong></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9270.png" alt="" width="173" height="500" title=""></p> 
+  <p><br></p> 
+  <p>页面逻辑：</p> 
+  <p>（1）感觉页面字段暂时信息。</p> 
+  <p>（2）图片可以点击查看大图</p> 
+  <p>（3）字段有值，则显示，无值则该字段模块隐藏</p> 
+  <p><br></p> 
+  <p>备注：删除按钮，需求参加删除需求</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><strong>5.申报删除</strong></p> 
+  <p><br></p> 
+  <p>无独立页面，入口位于详情页右上方，或者列表页。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>逻辑：</p> 
+  <p>（1）删除按钮受页面权限控制，无权限则隐藏，无权限，服务端提示“无权限调用该接口”</p> 
+  <p>（2）点击删除按钮，触发，二次确认逻辑。</p> 
+  <p><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Alert弹框：“确定要删除该填报信息吗？”</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 点击【确定】，判断该条申报数据如果已经被推送，Toast提示：“删除失败，已经过了删除时效”，如果未被推送，Toast提示：“删除成功”。&nbsp;</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;点击【取消】，未删除</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor131">3.2 管理农户权限</h2> 
+  <p>该功能前期开发已经实现，本次只需要在管理后台进行配置即可。</p> 
+  <p><br></p> 
+  <h3>3.2.1 管理后台</h3> 
+  <p><br></p> 
+  <p><strong>1.耕地用途申报相关权限</strong></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <ul>
+   <li><strong>企业资源</strong>菜单：分别在后台录入权限：耕地用途添加、耕地用途删除权限</li> 
+   <li><strong>企业角色</strong>菜单：给以下角色<span style="font-size:14px;background-color:#FFFFFF;"><strong>超级管理员、管理员、农场负责人、生产负责人</strong>授权分配<span>耕地用途添加、耕地用途删除权限。</span></span></li> 
+  </ul>
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1.功能概述（用户故事）">1.功能概述（用户故事）</a> </li>
+    <li class="text-ellipsis"><a href="#anchor15" title="2.需求设计">2.需求设计</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor17" title="2.1 用例图">2.1 用例图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor22" title="2.2 ER图">2.2 ER图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor32" title="2.3 业务交互逻辑">2.3 业务交互逻辑</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor52" title="3.需求文档">3.需求文档</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor56" title="3.1 管理耕地用途申报">3.1 管理耕地用途申报</a> </li>
+      <li class="text-ellipsis"><a href="#anchor131" title="3.2 管理农户权限">3.2 管理农户权限</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

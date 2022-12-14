@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>（说明）私有化部署——短信模板配置清单说明</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0"><span style="color:inherit;">1、短信签名清单</span></h1> 
+  <p><span style="color:inherit;">签名可以根据实际情况合并使用，如以下两个产品的签名可以合并统一使用一个。</span></p> 
+  <p> </p>
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">系统</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">短信签名<span style="color:#E53333;">（示例）</span></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">说明</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">神农口袋<br></td> 
+     <td style="border:1px solid #ddd;">神农口袋</td> 
+     <td style="border:1px solid #DDD;">用于神农口袋产品的短信发送签名使用</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">物联网</td> 
+     <td style="border:1px solid #ddd;"><span>左岸物联网</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>用于物联网产品的短信发送签名使用</span><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h1 id="anchor25">2、短信模板清单</h1> 
+  <p> </p>
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#F1F1F1;">业务系统</th> 
+     <th style="background-color:#F1F1F1;">短信模板</th> 
+     <th style="background-color:#F1F1F1;">模板内容</th> 
+     <th style="background-color:#F1F1F1;">变量属性</th> 
+     <th style="background-color:#F1F1F1;">关联签名<span style="color:#E53333;">（示例）</span></th> 
+     <th style="background-color:#F1F1F1;">场景说明</th> 
+     <td style="border:1px solid #ddd;">模板类型</td> 
+     <td style="border:1px solid #ddd;">模板CODE <span style="color:#E53333;">（示例）</span></td> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>农机智慧管理系统<br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">农机作业任务提醒</span><br></td> 
+     <td>收到${farm}的${work}的作业任务，面积${area}亩，电话：${phone}，地址：${address}。如果需要拒绝该任务可联系服务中心${stationphone}。<br></td> 
+     <td><br>farm-其他；work-其他；area-其他；phone-电话号码；address-其他；stationphone-电话号码；<br><br></td> 
+     <td><span>神农口袋</span><br></td> 
+     <td>农机调度系统当服务站管理员给农机手派发任务后，系统向对应农机手发送农机作业任务短信提醒。<br></td> 
+     <td style="border:1px solid #ddd;">通知短信</td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_257671356</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">农机作业批量任务提醒</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">收到${work}的作业任务，面积${area}亩。如果需要拒绝该任务可联系服务中心${stationphone}。</span><br></td> 
+     <td><br>work-其他；area-其他；stationphone-电话号码；<br><br></td> 
+     <td><span>神农口袋</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">农机调度系统当服务站管理员给农机手批量派发任务后，系统向对应农机手发送农机作业任务短信提醒。</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_257766332</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">农机订单订阅通知</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">温馨提醒：农机服务中心${companyName}从昨天上午9点截止到当前一共有${orderNum}个农机作业服务申请，请及时关注。</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">companyName-其他；orderNum-其他；</span><br></td> 
+     <td><span>神农口袋</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">农业经营主体申请农机作业订单后通知对应服务站工作人员。</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_253470074</span><br></td> 
+    </tr> 
+    <tr> 
+     <td>左岸物联网</td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">告警消息通知</span><span class="next-icon next-icon-edit next-xs table-edit-template-name ml4" style="font-family:NextIcon;color:#333333;font-size:12px;background-color:#F9F9FA;"></span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">您管理的基地有一条告警消息：${message}，当前数值为${value}，请及时处理。</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">message-其他；value-其他；</span><br></td> 
+     <td><span>左岸物联网</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">左岸物联网基地平台线上链接：http://www.zaxhiot.com/base。 使用场景：已部署农业智能物联网的基地，支持根据自身农业生产需要的环境条件，设置温度、湿度、光照、二氧化碳浓度、土壤离子浓度等指标的适宜阈值，传感器监测到指标数值不在适宜阈值范围时，自动触发告警消息，通过短信通知给基地生产负责人员。</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_238137955</span><br></td> 
+    </tr> 
+    <tr> 
+     <td>神农口袋</td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">农资审核通过</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">您在${productName}上提交的农资“${agriResName}”已审核通过，记农事时已可使用。</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">productName-其他；agriResName-其他；</span><br></td> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">用于农资申请审核通过，网站地址：https://snkoudai.com/</span></span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_207745451</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">农资审核不通过</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">您在${productName}上提交的农资“${agriResName}”未通过审核，原因：${failReason}。</span><br></td> 
+     <td><br>productName-其他；agriResName-其他；failReason-其他；<br><br></td> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">用于农资申请审核不通过场景，网站地址：https://snkoudai.com/，另外我们的原因咋喜欢呀</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">新增农资申请提醒审核人员</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">有用户新增了“${agriResName}”的农资，请尽快审核！</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">agriResName-其他；</span><br></td> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">用于新增农资申请的提醒短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_207745444</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">作物种类审核通过</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">您在${productName}上提交的“${cropName}”已审核通过，快去添加种植计划吧！</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">productName-其他；cropName-其他；</span><br></td> 
+     <td><br></td> 
+     <td><br>用于种植作物申请审核通过<br><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_168410197</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">作物种类审核不通过</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">您在${productName}上提交的“${cropName}”未通过审核，原因：${failReason}。</span><br></td> 
+     <td><br>productName-其他；cropName-其他；failReason-其他；<br><br></td> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">用于种植作物申请审核不通过场景</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_168415161</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">新增作物种类申请提醒审核人员</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">有用户新增了“${cropName}”的作物，请尽快审核！</span><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">cropName-其他</span><br></td> 
+     <td><br></td> 
+     <td><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">用于新增作物种类申请的提醒短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_168410190</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">员工加入通知</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">您已在${channelName}上成为“${companyName}”的团队成员，快来一起管理农场吧。</span></span><br></td> 
+     <td style="border:1px solid #ddd;"><br>channelName-其他；companyName-其他；<br><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br>员工加入通知<br><br></td> 
+     <td style="border:1px solid #ddd;"><span>通知短信</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_168410184</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">神农口袋项目短信验证码</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">您的验证码是${code}，5分钟内有效，若非本人操作可忽略。</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">用户神农口袋网站，注册登录，密码找回时，短信验证码验证。</span><br></td> 
+     <td style="border:1px solid #ddd;">验证码</td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_149097486</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">密码找回验证码</span></span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">你的验证码为：${code},请勿泄漏于他人。</span><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span>验证码</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#333333;font-family:'-apple-system', BlinkMacSystemFont;">SMS_121146344</span><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、短信签名清单">1、短信签名清单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor25" title="2、短信模板清单">2、短信模板清单</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

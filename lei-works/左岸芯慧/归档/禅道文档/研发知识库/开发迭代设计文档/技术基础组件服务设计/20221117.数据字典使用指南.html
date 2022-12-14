@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221117.数据字典使用指南</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">0.文档文明</h1> 
+  <p><br></p> 
+  <p>本文档主要用于对数据字典功能，在前后端集成使用时给予必要的指导操作说明</p> 
+  <p><br></p> 
+  <h1 id="anchor4">1.前置依赖</h1> 
+  <p><br></p> 
+  <p>数据字典的详细功能设计请参考：<a href="/zentao/doc-objectLibs-custom-0-37-455.html?tid=ol4bahtw" target="_blank" rel="noreferrer noopener">《数据字典 功能详细设计文档》</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor10">2.前端集成场景</h1> 
+  <p><br></p> 
+  <h2 id="anchor12">2.1 可视化查看枚举相关信息</h2> 
+  <p><br></p> 
+  <p>在中台如下面截图菜单中，我们已经集成了查看枚举类型和每一个枚举类型对应的枚举取值功能。</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11442.png" alt="" width="500" height="244" title=""></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11455.png" alt="" width="500" height="244" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;"><strong>说明</strong></span>：</p> 
+  <p>1.该页面列举了系统里已经在使用的所有的枚举类型</p> 
+  <p>2.点击列表记录后面的“查看”按钮，能够看到该枚举类型对应的所有在使用中的枚举取值。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor27">2.2 接口相关</h2> 
+  <p><br></p> 
+  <h3>2.2.1 接口位置</h3> 
+  <p><br></p> 
+  <p>数据字典这一块的接口位于：基础服务中。</p> 
+  <p>一共提供两个接口：1.获取所有枚举类型列表接口。2.根据枚举类型值获取该类型对应的所有枚举取值列表。</p> 
+  <p><br></p> 
+  <p><img src="http://chandao.freetek.cc/zentao/file-read-4906.png?tid=cwdm5eia" alt="" width="400" height="221" title=""></p> 
+  <p><br></p> 
+  <h3>2.2.2 接口说明</h3> 
+  <p><strong>1.</strong><span><strong>获取所有枚举类型列表接口</strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><strong>接口名称</strong></td> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">获取所有枚举类型列表接口</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><strong>接口地址</strong><strong></strong></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">&nbsp;http://govtest.snkoudai.com/api/foundation/dict/listOfDictType</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">请求参数示例</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <pre>{
+    "keyword": "",
+    "pageNo": 1,
+    "pageSize": 10
+}</pre> <p><br></p> <p><br></p> <p><br></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11456.png" alt=""></p> <p><br></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">返回参数示例</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <pre>{
+    "respCode": 0,
+    "respDesc": "成功",
+    "curDate": 1656643536811,
+    "obj": {
+        "list": [
+            {
+                "id": 1,
+                "dictName": "所有权性质",
+                "dictType": "1",
+                "createTime": null,
+                "updateTime": null
+            },
+            {
+                "id": 2,
+                "dictName": "地块类别",
+                "dictType": "2",
+                "createTime": null,
+                "updateTime": null
+            }
+        ],
+        "totalCount": 22
+    },
+    "success": true
+}</pre> <p><br></p> <p><br></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11457.png" alt=""></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><strong>2.</strong><span><strong>根据枚举类型值获取该类型对应的所有枚举取值列表</strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><strong>接口名称</strong><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">根据枚举类型值获取该类型对应的所有枚举取值列表</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><strong>接口地址</strong></td> 
+     <td style="border:1px solid #ddd;"><span>http://govtest.snkoudai.com/api/foundation/dict/listByDictType</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">请求参数示例</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <p><br></p> <pre>{
+    "dictType": "8"
+}</pre> <p><br></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11459.png" alt=""></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">返回参数示例</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <pre>{
+    "respCode": 0,
+    "respDesc": "成功",
+    "curDate": 1656644174450,
+    "obj": [
+        {
+            "id": 73,
+            "dictType": "8",
+            "dictLabel": "男",
+            "dictValue": "1",
+            "sortNum": 0,
+            "createTime": null,
+            "updateTime": null
+        },
+        {
+            "id": 74,
+            "dictType": "8",
+            "dictLabel": "女",
+            "dictValue": "2",
+            "sortNum": 0,
+            "createTime": null,
+            "updateTime": null
+        }
+    ],
+    "success": true
+}</pre> <p><br></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11460.png" alt=""></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor163">2.3 前端场景</h2> 
+  <p><br></p> 
+  <h3>2.3.1 场景说明</h3> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>前端使用数据字典最经典的场景：</p> 
+  <p><br></p> 
+  <ol> 
+   <li>在某些业务列表中，服务端下发了某一枚举类型的取值id,需要根据枚举字典得到它的展示名称</li> 
+   <li>在下拉框中，展示某一枚举类型对应的所有取值列表</li> 
+  </ol> 
+  <p><br></p> 
+  <p><br></p> 
+  <h3>2.3.2 场景解决方案</h3> 
+  <p><br></p> 
+  <p>上面所说的两种场景解决方案相同如下：</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤1<br></td> 
+     <td style="border:1px solid #ddd;"> <p>确定dictType的取值。</p> <p>可以根据该字段的名称，比如性别，订单状态等信息，去字典类型列表也进行查询，得到dictType的取值。</p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤2</td> 
+     <td style="border:1px solid #ddd;">使用dictType值调用 “<strong><span style="font-size:18px;">接口2</span></strong>”获取该枚举类型对应的所有枚举值列表</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤3</td> 
+     <td style="border:1px solid #ddd;"> <p>场景1：根据业务下发的id和列表中的id进行匹配，获取对应的现实名称</p> <p>场景2：直接将列表展示在下拉框里即可。</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <p><br></p> 
+  <h3>2.3.3 场景示例</h3> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">示例1</td> 
+     <td style="border:1px solid #ddd;"> <p>在中台土地承包系统--承包方管理--新增承包方中，通过字典表获取性别:</p> <p>可以在中台字典表或者接口获取性别的字典类型数值，得到详细字典性别列表</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11449.png" alt="" width="300" height="141" title="">&nbsp; &nbsp;<img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11450.png" alt="" width="300" height="85" title=""></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">示例2</td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">在新增或者编辑性别的时候，传字典表里dictValue的值：</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11452.png" alt="" width="300" height="146" title="">&nbsp;&nbsp;<img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11453.png" alt="" width="300" height="77" title=""></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">示例3</td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">在性别展示的时候，使用dictLable字段值</span><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11454.png" alt="" width="300" height="88" title=""><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor238">3.后端集成场景</h1> 
+  <p>详情见文档：<a href="/zentao/doc-objectLibs-custom-0-37-455.html?tid=xwwgn5bk#app=doc" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-455.html?tid=xwwgn5bk#app=doc</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="0.文档文明">0.文档文明</a> </li>
+    <li class="text-ellipsis"><a href="#anchor4" title="1.前置依赖">1.前置依赖</a> </li>
+    <li class="text-ellipsis"><a href="#anchor10" title="2.前端集成场景">2.前端集成场景</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor12" title="2.1 可视化查看枚举相关信息">2.1 可视化查看枚举相关信息</a> </li>
+      <li class="text-ellipsis"><a href="#anchor27" title="2.2 接口相关">2.2 接口相关</a> </li>
+      <li class="text-ellipsis"><a href="#anchor163" title="2.3 前端场景">2.3 前端场景</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor238" title="3.后端集成场景">3.后端集成场景</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

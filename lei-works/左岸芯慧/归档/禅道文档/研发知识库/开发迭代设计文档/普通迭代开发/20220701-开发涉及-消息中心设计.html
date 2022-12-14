@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220701-开发涉及-消息中心设计</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p><span> </span></p> 
+  <h1></h1> 
+  <p style="font-size:16pt;"><span class="ql-author-74090444">石墨文档地址&nbsp;</span></p> 
+  <p style="font-size:16pt;"><span class="ql-author-74090444"><span>https://shimo.im/docs/dPkpKaQmvrHOzNqO/ 《消息中心接口设计》#文件名(含中文)，可复制链接后用石墨文档 App 或小程序打开</span></span></p> 
+  <p style="font-size:16pt;"><span class="ql-author-74090444"></span></p> 
+  <p style="font-size:16pt;"><span class="ql-author-74090444">1 需求文档</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-74090444" href="https://s03zdy2o4k.feishu.cn/docx/doxcnz03EMPaqB2tILZvpcFd8Nc" target="_blank" rel="noreferrer noopener">https://s03zdy2o4k.feishu.cn/docx/doxcnz03EMPaqB2tILZvpcFd8Nc</a></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1></h1> 
+  <div class="ql-direction-ltr" style="font-size:16pt;">
+   <span class="ql-author-74090444">2.UML图</span>
+  </div> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">2.1.1、消息中心1.0架构设计</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5016.png" alt=""></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">2.1.2、消息中心2.0架构图</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5017.png" alt=""></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">2.2、消息推送时序图</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5018.png" alt=""></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">2.3、消息推送状态图</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5020.png" alt=""></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">2.4、表设计</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5030.png" alt=""></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1></h1> 
+  <div class="ql-direction-ltr" style="font-size:16pt;">
+   <span class="ql-author-74090444">2.开发计划</span>
+  </div> 
+  <table>
+   <tbody>
+    <tr>
+     <td class="ql-sheet-cell" width="144"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">需求名称</span></p> </td> 
+     <td class="ql-sheet-cell" width="282"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">功能</span></p> </td> 
+     <td class="ql-sheet-cell" width="121"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">开发周期</span></p> </td> 
+     <td class="ql-sheet-cell" width="64"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">负责人</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="144"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息发送</span></p> </td> 
+     <td class="ql-sheet-cell" width="282"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息初始化、入库</span></p> </td> 
+     <td class="ql-sheet-cell" width="121"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">7.4~7.5</span></p> </td> 
+     <td class="ql-sheet-cell" width="64"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">姬帅</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="144"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息操作</span></p> </td> 
+     <td class="ql-sheet-cell" width="282"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息列表、消息详情、标记已读等业务操作接口</span></p> </td> 
+     <td class="ql-sheet-cell" width="121"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">7.6~7.8</span></p> </td> 
+     <td class="ql-sheet-cell" width="64"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">姬帅</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="144"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息推送</span></p> </td> 
+     <td class="ql-sheet-cell" width="282"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">第三方推送，如极光推送、阿里大鱼短信</span></p> </td> 
+     <td class="ql-sheet-cell" width="121"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">7.11~7.12</span></p> </td> 
+     <td class="ql-sheet-cell" width="64"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">姬帅</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="144"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">老接口升级改造</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+     <td class="ql-sheet-cell" width="282"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">涉及第三方推送的地方改成调message；</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">专家问答改成调用message</span><span class="ql-cursor"></span></p> </td> 
+     <td class="ql-sheet-cell" width="121"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">尚未整理，待定</span></p> </td> 
+     <td class="ql-sheet-cell" width="64"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">姬帅</span></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1></h1> 
+  <div class="ql-direction-ltr" style="font-size:16pt;">
+   <span class="ql-author-74090444">3.接口设计</span>
+  </div> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444"><span> </span></span></p> 
+  <p class="ql-direction-ltr ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444"><span> </span></span></p>
+  <p class="ql-direction-ltr ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">注意：</span></p> 
+  <p class="ql-direction-ltr ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">1.查询用户消息表时要关联消息表，过滤删除字段和发送时间</span></p> 
+  <p class="ql-direction-ltr ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">2.这里的接口全部都是针对站内信的，短信和极光推送只要记一个状态，没有展示和操作的地方</span></p> 
+  <table>
+   <tbody>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">接口名</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">功能</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">参数(swagger为准)</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">地址</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息数量</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">查询用户全部未读消息数量</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">用户id，端编码</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">/center/message/receiver/getMessageCount</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息类型及每种类型未读数</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">返回每种消息类型最新的一条消息的标题、时间、数量</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">用户id，端编码</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-74090444" href="http://localhost:20011/swagger-ui.html#!/message45receiver45controller/getTypeMessageCountUsingPOST" target="_blank" rel="noreferrer noopener">/center/message/receiver/getTypeMessageCount</a></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">类型消息列表</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">返回该类型所有消息的详情（传空返回所有类型的消息,消息接收时间倒叙分页展示）</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">用户id、消息类型</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">center/message/receiver/getTypeMessageList</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息类型列表</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">返回所有消息类型</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">无</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">/center/message/type/list</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息标为已读</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">单个消息标为已读</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">messageReceiverId</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">center/message/receiver/markRead</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">全部已读</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">该用户所有消息标为已读</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">用户id</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">center/message/receiver/allMarkRead</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">取消发送</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">取消发送消息，消息推送状态改为取消</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">messageCode</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-74090444" href="http://localhost:20011/swagger-ui.html#!/message45controller/cancelUsingPOST" target="_blank" rel="noreferrer noopener">/center/message/cancel</a></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">消息展示端列表</span></p> </td> 
+     <td class="ql-sheet-cell" width="297"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">返回所有消息展示端</span></p> </td> 
+     <td class="ql-sheet-cell" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">无</span></p> </td> 
+     <td class="ql-sheet-cell" width="334"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">/center/message/client/list</span></p> </td> 
+    </tr>
+   </tbody>
+  </table> 
+ </div> 
+</div></body>
+</html>

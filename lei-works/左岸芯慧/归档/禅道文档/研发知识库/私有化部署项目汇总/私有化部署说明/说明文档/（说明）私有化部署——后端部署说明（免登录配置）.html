@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>（说明）私有化部署——后端部署说明（免登录配置）</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍大数据平台免登录登陆实现方式</p> 
+  <p><br></p> 
+  <h1 id="anchor3">2、实现流程</h1> 
+  <h2 id="anchor4">2.1、创建政府主体</h2> 
+  <p>1、登陆神农口袋管理平台</p> 
+  <p>2、如果没有主体，请选择平台管理-----&gt;政府端主体----&gt;添加，这样新增一个主体</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6706.png" alt="" width="600" height="260" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor9">2.2、创建用户</h2> 
+  <p>点击主体详情</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6750.png" alt="" width="600" height="247" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>选择用户信息----&gt;添加-----&gt;添加账户</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6751.png" alt="" width="600" height="287" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor17">2.3、大数据平台登陆</h2> 
+  <h3>（1）、登陆大数据平台</h3> 
+  <p>使用上一步再管理后台创建的账号密码登陆大数据平台</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6752.png" alt="" width="600" height="275" title=""></p> 
+  <h3>（2）、复制token</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6753.png" alt="" width="600" height="281" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor24">2.4、服务端配置文件和数据库修改</h2> 
+  <h3>（1）、代码配置文件修改</h3> 
+  <p>在service-governmentuser工程配置文件，添加上面复制的token，多个英文逗号分隔，修改完成后，重新部署到服务器</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6475.png" alt="" width="600" height="240" title=""></p> 
+  <h3>（2）、数据库表修改</h3> 
+  <p>去frp_governmentuser库---&gt;tbl_governmentuser_token表，找到免登录token，将过期时间改为2099年</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6476.png" alt="" width="600" height="159" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor32">2.5、免token登陆方式</h2> 
+  <p> </p>
+  <p>url格式：大数据平台地址?token=免登录token</p> 
+  <p>示例：http://govtest.snkoudai.com/home/overview?token=gov_token_104_1_97d8b994a7e04c73b7ba23a2be8734d0</p> 
+  <p><span style="color:#E53333;font-size:14px;">注意：</span><span style="color:#E53333;font-size:14px;">免登录账号：需要单独申请一个账号作为免登录账号，这个账号只能在一个浏览器使用，其他浏览器同时登陆这个账号时，会把免登陆的账号挤掉，免登陆就会失效，所以一旦生成免登录token，以后登陆都是用这个登陆方式</span></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2、实现流程">2、实现流程</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor4" title="2.1、创建政府主体">2.1、创建政府主体</a> </li>
+      <li class="text-ellipsis"><a href="#anchor9" title="2.2、创建用户">2.2、创建用户</a> </li>
+      <li class="text-ellipsis"><a href="#anchor17" title="2.3、大数据平台登陆">2.3、大数据平台登陆</a> </li>
+      <li class="text-ellipsis"><a href="#anchor24" title="2.4、服务端配置文件和数据库修改">2.4、服务端配置文件和数据库修改</a> </li>
+      <li class="text-ellipsis"><a href="#anchor32" title="2.5、免token登陆方式">2.5、免token登陆方式</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

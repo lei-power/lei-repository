@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>202200812-开发设计-迭代v4.70.0（双柏县数字农业云平台）</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h2 id="anchor0">1 需求文档<br></h2> 
+  <p><span style="color:#000000;font-size:12px;"><strong><span style="font-weight:700;color:#000000;font-size:12px;"><span style="font-size:14px;">文档地址：</span><a class="ke-insertfile" href="/zentao/projectstory-story-84.html" target="_blank" rel="noreferrer noopener"><span style="font-size:14px;">http://chandao.freetek.cc/zentao/projectstory-story-84.html</span></a></span><br></strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor4">2 开发计划<br></h2> 
+  <table style="width:auto;">
+   <tbody>
+    <tr>
+     <th> <p><span style="color:#000000;font-size:12px;"><strong>需求名称</strong></span></p> </th> 
+     <th> <p><span style="color:#000000;font-size:12px;"><strong>功能</strong></span></p> </th> 
+     <th> <p><span style="color:#000000;font-size:12px;"><strong>负责人</strong></span></p> </th> 
+     <th> <p><span style="color:#000000;font-size:12px;"><strong>开发周期</strong></span></p> </th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td> <p><a href="/zentao/projectstory-view-319.html"><span style="color:#000000;font-size:12px;"><strong>耕地保护大屏优化</strong></span></a></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>维护</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>王恺&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>8.12-8.23&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong></span></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>打造普通县域通用版的农业总览页面</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>新增</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>王恺</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>8.12-8.23</strong></span></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><a href="/zentao/projectstory-view-398.html"><span style="color:#000000;font-size:12px;"><strong>合格证开具明细页</strong></span></a></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>新增</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>王恺</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>8.12-8.23</strong></span></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>基础数据管理-经营主体管理-登记确权地块</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>维护</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>王恺</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>8.12-8.23</strong></span></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><a href="/zentao/projectstory-view-405.html"><span style="color:#000000;font-size:12px;"><strong>企业版数字大屏</strong></span></a></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>新增</strong></span></p> </td> 
+     <td> <p><span style="color:#000000;font-size:12px;"><strong>王恺</strong></span></p> </td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>8.12-8.23</strong></span><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <br>
+  <br>
+  <h2 id="anchor75">3 接口设计</h2> 
+  <table style="width:auto;">
+   <tbody>
+    <tr>
+     <th><span style="color:#000000;font-size:12px;"><strong>接口名称</strong></span><br></th> 
+     <th><span style="color:#000000;font-size:12px;"><strong>功能</strong></span><br></th> 
+     <th><span style="color:#000000;font-size:12px;"><strong>地址</strong></span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td> <p><a href="http://govtestc.snkoudai.com/swagger-ui.html#!/gov45archive45arable45land45occupy45month45controller/listByAreaUsingPOST_2"><span style="color:#000000;font-size:12px;"><strong>占用物处理趋势接口</strong></span></a></p> </td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>修改</strong></span><br></td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>api/archive/gov/archiveArableLandOccupyMonth/listByArea</strong></span><br></td> 
+    </tr>
+    <tr>
+     <td><a href="http://govtestc.snkoudai.com/swagger-ui.html#!/gov45archive45jianguan45print45controller/statisticsByAreaAndDateUsingPOST"> </a> <p><span style="color:#000000;font-size:12px;"><strong><a href="http://govtestc.snkoudai.com/swagger-ui.html#!/gov45archive45jianguan45print45controller/statisticsByAreaAndDateUsingPOST">农产品质量监管模块-合格证打印张数统计</a></strong></span></p> </td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>废弃</strong></span><br></td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>api/gisdata/gov/archiveJianguanPrint/statisticsByAreaAndDate</strong></span><br></td> 
+    </tr>
+    <tr>
+     <td><span style="color:#000000;font-size:12px;"><strong>合格证开具数量，重量按地区、年份、月份统计详情</strong></span><br></td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>新增</strong></span></td> 
+     <td><strong>api/gisdata/gov/archivePrintAreaYearMonth/getByAreaAndYear</strong><br></td> 
+    </tr>
+    <tr>
+     <td><span style="color:#000000;font-size:12px;"><strong><span style="font-weight:700;color:#000000;">合格证开具数量，重量按地区、年份、月份统计列表</span></strong></span><br></td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>新增</strong></span><br></td> 
+     <td><strong></strong><strong>api/gisdata/gov/archivePrintAreaYearMonth/listByAreaAndYear</strong><strong></strong><br></td> 
+    </tr>
+    <tr>
+     <td><span style="color:#000000;font-size:12px;"><strong>合格证开具数量，重量按地区，按年，按主体类型统计详情</strong></span><br></td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>新增</strong></span><br></td> 
+     <td><span style="font-weight:700;color:#000000;">api/gisdata/gov/archivePrintAreaYearCategory/getByAreaAndYear&nbsp;&nbsp;</span><br></td> 
+    </tr>
+    <tr>
+     <td><span style="color:#000000;font-size:12px;"><strong>合格证开具数量，重量按地区，按年，按主体名称统计列表</strong></span><br></td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>新增</strong></span><br></td> 
+     <td><strong>api/gisdata/gov/archivePrintAreaYearFarm/listByAreaAndYear</strong><br></td> 
+    </tr>
+    <tr>
+     <td><span style="color:#000000;font-size:12px;"><strong>合格证扫码动态列表</strong></span><br></td> 
+     <td><span style="color:#000000;font-size:12px;"><strong>新增</strong></span><br></td> 
+     <td><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">价格监测</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;color:#000000;">新增</span></td> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">api/operate/co/crop/price</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">农产品溯源</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;color:#000000;">新增</span><span style="font-weight:700;color:#000000;"></span></td> 
+     <td style="border:1px solid #ddd;"><span style="font-weight:700;">api/produce/co/qrCode/listByFarmId&nbsp;</span><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><strong></strong></p> 
+  <p><br></p> 
+  <p><strong>企业端大屏</strong></p> 
+  <p><strong>农场介绍：api/produce/co/farm/get&nbsp;<br>生产资源：api/produce/co/farm/statisticsFarmAcreAndOnPlantingAcre<br>种养品类：api/produce/co/farm/onPlantingByFarmId<br>本年农事作业：api/produce/co/mission/stasticMissionCategoryByFarmIdAndPeriod<br>价格监测：api/operate/co/crop/price&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 新增co端接口<br>绿色认证：https://test.snkoudai.com/api/produce/co/greenFoodCertificate/queryByFarmId&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br>农产品溯源：api/produce/co/qrCode/listByFarmId&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;新增co端接口<br>环境监测：api/produce/co/iotAccess/device/detail<br>视频监控：api/produce/co/iotAccess/camera/list<br></strong></p> 
+  <p><br></p> 
+  <h2 id="anchor115">4 数据库表设计</h2> 
+  <p><span style="font-size:12px;">合格证开具数量，重量按地区，按年、<span style="font-size:12px;">按月</span>归档表&nbsp; &nbsp; &nbsp;</span><br><span style="font-size:12px;">合格证开具数量，重量按地区，按年，按主体类型归档表</span><br><span style="font-size:12px;">合格证开具数量，重量按地区，按年，按主体名称归档表</span></p> 
+  <p><span style="color:#000000;">合格证扫码动态表</span></p> 
+  <p><span style="font-size:12px;"><br></span></p> 
+  <p><span style="font-size:12px;"><br></span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7241.png" alt=""></p> 
+  <p><span style="font-size:12px;"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></span></p> 
+  <h2 id="anchor122">5 代码功能设计</h2> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <div>
+   <br>
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1 需求文档">1 需求文档</a> </li>
+    <li class="text-ellipsis"><a href="#anchor4" title="2 开发计划">2 开发计划</a> </li>
+    <li class="text-ellipsis"><a href="#anchor75" title="3 接口设计">3 接口设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor115" title="4 数据库表设计">4 数据库表设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor122" title="5 代码功能设计">5 代码功能设计</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

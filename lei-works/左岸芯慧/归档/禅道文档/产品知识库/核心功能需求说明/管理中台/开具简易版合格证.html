@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>开具简易版合格证</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor0">需求背景：</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;">上海市场监督管理处，提出目前神农口袋开具外采合格证流程比较繁琐，提出以下几点优化意见：</p> 
+  <ol style="font-size:14px;background-color:#FFFFFF;"> 
+   <li>要求神农口袋简化开具合格证流程</li> 
+   <li>计划在上海市建立100多个服务点（可能以镇划分服务点），为小散户代开并打印合格证</li> 
+   <li>服务点开具的合格证是单独的模板，且支持单独统计其开具数量以及重量</li> 
+  </ol> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor7">总体设计思路：</h2> 
+  <ol style="font-size:14px;background-color:#FFFFFF;"> 
+   <li>在管理中台增加开具合格证功能，该渠道开具的合格证称为“简易版合格证”。</li> 
+   <li>开具“简易版合格证”使用的是，新增一个合格证模板</li> 
+   <li>开具合格证流程：</li> 
+  </ol> 
+  <ul style="font-size:14px;background-color:#FFFFFF;"> 
+   <li>选择经营主体，如果该经营主体在未在神农口袋注册账号，支持在管理中台自动创建神农口袋账号</li> 
+   <li>该经营主体自动纳入到开具简易版合格证白名单中，后期可自己在神农口袋开具简易版合格证</li> 
+   <li>录入开具简易版合格证信息</li> 
+   <li>开具并打印出简易版合格证</li> 
+   <li>同时生成外采入库、销售记录、合格证开具记录</li> 
+  </ul> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-10242.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10242.png?tid=9sl1w50y" alt="" width="1200" height="665" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="font-weight:700;">UE地址：</span><a href="https://www.figma.com/file/2HPrASqmgl1ZwAfobpunjd/" target="_blank" rel="noreferrer noopener">https://www.figma.com/file/2HPrASqmgl1ZwAfobpunjd/</a>神农口袋-管理中台?node-id=11725:73669</p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor22">详细设计：</h2> 
+  <h3 style="color:#3C4353;background-color:#FFFFFF;" id="anchor23">1、运营后台：</h3> 
+  <span style="font-weight:700;font-size:14px;background-color:#FFFFFF;">管理中台菜单：</span>
+  <br> 
+  <ul style="font-size:14px;background-color:#FFFFFF;"> 
+   <li>新增“便民服务”一级菜单</li> 
+   <li>在“便民服务”菜单下面增加二级菜单：<span style="color:#E53333;">“简易合格证开具”和“简易合格证开具记录”</span></li> 
+  </ul> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="font-weight:700;">高级配置-&gt;合格证样式-&gt;新增/编辑：</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">“模板类型”值：<span style="color:#E53333;">增加“简易合格证”</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="font-weight:700;">高级配置-&gt;合格证样式：新增“简易合格证”合格证模板</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">服务端和前端评估下：</span><br><span style="color:#E53333;">1）神农口袋 web端和App端 打印合格证选择模板是否拉取“简易合格证”合格证模板，期望不拉取。</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">2）</span><span style="color:#E53333;">数字大屏-&gt;农场详情页-合格证/溯源：如果该农场开具了简易版合格证，期望也能正常展示。</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">3）管理中台：经营主体管理 /经营主体信息 /经营主体详情：查看合格证，如果该农场开具了简易版合格证，期望也能正常展示。</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">3）归档表：“24.1 合格证统计-按经营主体按日归档表”、“24.2 合格证统计-按绿色证书按月归档”、“29.1 销售上市统计区域归档表”、"34. 经营主体采收开证按作物按日统计"能正常归档数据</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">4）管理中台：合格证打印统计页、入网地块统计-区域统计、信息直报统计-异常主体统计 能正常展示。</span></p> 
+  <h3 style="color:#3C4353;background-color:#FFFFFF;" id="anchor38">2、管理中台</h3> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;"><span style="color:#E53333;">简易合格证开具列记录页</span></h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">列表拉取逻辑：拉取该政府监管区域、<span style="color:#E53333;">参与统计的经营主体、白名单，且</span>开具了类型是<span style="color:#E53333;">“简易合格证”</span>的合格证记录。</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">排序：按照创建时间降序排列</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">开具日期和创建时间 支持排序</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">筛选条件：</p> 
+  <ul style="font-size:14px;background-color:#FFFFFF;"> 
+   <li>区域筛选条件：所管辖区域的下级筛选器。</li> 
+   <li>开具日期：时间段范围筛选</li> 
+   <li><span style="color:#E53333;">经营主体：下拉筛选+搜索，默认值是“全部经营主体”，选项值拉取规则：</span><span style="color:#E53333;">监管区域+</span><span style="color:#E53333;">参与统计+白名单，排序按照农场ID降序排列，加分页，每页8000条。</span></li> 
+   <li><span style="color:#E53333;">搜索：支持合格证编号，关键字模糊搜索</span></li> 
+  </ul> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="font-weight:700;">列表字段：</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">合格证编号</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">农产品名称：</span><span style="color:#E53333;">：获取合格证 产品名称</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">开具数量（重量）：</span><span style="color:#E53333;">获取合格证&nbsp; 数量（重量）</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">开具日期：</span><span style="color:#E53333;">获取合格证 开具日期</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">经营主体名称：获取农场名称</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">产地</span><span style="color:#E53333;">：获取合格证 产地</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">联系方式：获取合格证 联系方式</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">创建时间：创建合格证时间</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">操作：【查看】【补打印】【退回】</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">权限：运营后台增加<span style="color:#CCCCCC;">【</span><span style="color:#CCCCCC;">查看</span><span style="color:#CCCCCC;">】</span><span style="color:#CCCCCC;">【补打印</span><span style="color:#CCCCCC;">】</span>【退回】功能权限</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">【查看】：点击【查看】，Alert弹框展示“承诺达标合格证” 与管理中台 “经营主体管理 /经营主体信息 /经营主体详情”样式一致。如下图：</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-10284.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10284.png?tid=9sl1w50y" alt="" width="300" height="251" title=""></a><a href="http://chandao.freetek.cc/zentao/file-read-10285.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10285.png?tid=9sl1w50y" alt="" width="300" height="304" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">【补打印】：点击【补打印】，调用电脑打印程序，打印合格证</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">【退回】：参照运营后台的退回操作，Alert弹框，二次确认：“确定要退回已开具的合格证吗？”点击【确定】，退回成功，点击【取消】，关闭Alert弹框，未退回。</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 功能设计参照文档：<a href="http://jira.zaxhplat.com.cn/browse/SH-570" target="_blank" rel="noreferrer noopener">[SH-570] 已打印合格证数据可退回&nbsp;</a><a href="http://chandao.freetek.cc/zentao/file-read-10275.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10275.png?tid=9sl1w50y" alt=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h3 style="color:#313C52;background-color:#FFFFFF;" id="anchor68"><span style="color:#E53333;">简易版合格证开具页</span></h3> 
+  <p style="font-size:14px;background-color:#FFFFFF;">新增“开具简易版合格证白名单表”</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">字段：id、farm_id</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">权限：运营后台增加【添加经营主体】【开具合格证】功能权限</p> 
+  <table class="table table-kindeditor" style="font-size:14px;background-color:#FFFFFF;width:973.333px;color:#313C52;"> 
+   <tbody> 
+    <tr> 
+     <td><br></td> 
+     <td>字段名称</td> 
+     <td>组件</td> 
+     <td>拉取逻辑<br></td> 
+     <td>交互<br></td> 
+    </tr> 
+    <tr> 
+     <td colspan="1" rowspan="2">筛选条件</td> 
+     <td>区域筛选<br></td> 
+     <td>下拉+单选<br></td> 
+     <td>所管辖区域的下级筛选器。<br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>搜索<br></td> 
+     <td>经营主体名称，关键字模糊搜索<br></td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td rowspan="3" colspan="1">列表</td> 
+     <td>经营主体名称</td> 
+     <td><br></td> 
+     <td rowspan="3" colspan="1">1、列表拉取规则：拉取监管区域+参与统计+白名单 的农场<br> <p>2、排序：按照添加时间降序排列</p> <p>3、分页：与管理中台其他页面保持一致。</p> <p>4、联系方式：拉取该农场所在企业“企业法人联系方式”</p> </td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>所在地</td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>联系方式</td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>操作</td> 
+     <td>添加经营主体</td> 
+     <td>按钮</td> 
+     <td> <p><br></p> <br> </td> 
+     <td> <p><span style="color:#E53333;">点击【添加经营主体】，alert弹框 添加白名单经营主体，字段如下：</span></p> <p><br></p> <p><span style="font-weight:700;color:#E53333;">表单字段：</span></p> 
+      <ul> 
+       <li><span style="color:#E53333;">经营主体：搜索+下拉单选，拉取监管区域+</span><span style="color:#E53333;">参</span><span style="color:#E53333;">与</span><span style="color:#E53333;">统</span><span style="color:#E53333;">计的农场，按照ID降序，取前100个。</span></li> 
+       <li><span style="color:#E53333;">所在地：</span><span style="color:#E53333;">回显农场所在地，所在地行政区划支持显示到村，如：市/区县/镇/村，如果村镇没有值，就不显示。</span></li> 
+      </ul> <span style="color:#E53333;"></span> <p>&nbsp; &nbsp; &nbsp; 点击【确定】，判断白名单里是否已经存在了，如果不存在，添加成功，如果已经存在，Toast提示：已经是简易版合格证白名单经营主体。</p> <p><br></p> <p><a href="http://chandao.freetek.cc/zentao/file-read-10276.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10276.png?tid=9sl1w50y" alt="" width="300" height="153" title=""></a></p> <p>点击【新增】，Alert弹框，新增经营主体</p> <p><a href="http://chandao.freetek.cc/zentao/file-read-10271.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10271.png?tid=9sl1w50y" alt="" width="300" height="224" title=""></a></p> <p><span style="font-weight:700;">表单字段：</span></p> 
+      <ul> 
+       <li><span style="color:#E53333;">经营主体：长度30个字</span></li> 
+       <li>所在地：回显“政府监管区域”+该政府监管区的下一级行政区划&nbsp;</li> 
+      </ul> <p>&nbsp; &nbsp; &nbsp;&nbsp;<span style="color:#E53333;">&nbsp;“&nbsp;</span><span style="color:#E53333;">该政府监管区的</span><span style="color:#E53333;">下一级行政区划”拉取逻辑：</span><span style="color:#E53333;">取“政府主体-&gt;管理区域”+该区域的下级行政区划，如果管理区域到“区”了，则选项值是“区”下面的“镇+村”联动；如果管理区域到“镇”了，则选项值是“镇”下面的“村”；如果管理区域到“村”了，所在地不显示。</span></p> <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp;&nbsp;</span>&nbsp;“&nbsp;该政府监管区的下一级行政区划”下拉选框显示逻辑：<span style="color:#E53333;"></span><span style="color:#E53333;">&nbsp;监管区域下一级区域有值就显示，没有值就不显示</span></p> 
+      <ul> 
+       <li>联系方式：11位，前端按照手机号码规则校验</li> 
+      </ul> <p><span style="font-weight:700;">点击【提交】，处理以下数据：</span></p> <p>1、用户表：通过“手机号”在用户表（tbl_user）查询，如果用户表（tbl_user）该手机号已经存在则选择该账号，如果用户表该手机号不存在则创建账号</p> <p>2、企业表：该手机号下，<span style="color:#E53333;">创建企业。</span><span style="color:#FFFFFF;">用“经营主体名称”匹配“企业名称”，如果匹配上，则不创建企业，如果未匹配上，则创建企业，</span></p> <p>“企业名称”值 = 经营主体名称值</p> <p>是否被监管=“是”</p> <p>“企业法人联系方式”值=手机号</p> <p>“创建人”=手机号用户</p> <p>3、农场表：该企业下，<span style="color:#E53333;">创</span><span style="color:#E53333;">建农场</span><span style="color:#E53333;">。</span><span style="color:#CCCCCC;"><span style="color:#FFFFFF;">用“经营主体名称”匹配</span><span style="color:#FFFFFF;">“农场名称”，如果匹配上，则不创建农场，如果未匹配上，则创建农场，</span></span></p> <p>“农场名称”值 = “经营主体名称”值</p> <p>“统计标识”值=<span style="color:#E53333;">“</span><span style="color:#E53333;">参与统计”</span></p> <p>“省/市/区/街镇/村”=“所在地” 值</p> <p><br></p> <p>“创建人”=手机号用户</p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#E53333;">开具合格证</span></td> 
+     <td><span style="color:#E53333;">按钮</span></td> 
+     <td><br></td> 
+     <td><span style="color:#E53333;">点击【开具合格证】，跳转到合格证开具页面</span></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><span style="color:#E53333;">查看开具记录</span></td> 
+     <td><span style="color:#E53333;">按钮</span></td> 
+     <td><br></td> 
+     <td><span style="color:#E53333;">点击【查看开具记录】，带着筛选条件（农场ID），跳转到开具记录页查询开具记录</span></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td><br></td> 
+     <td><br></td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-10279.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10279.png?tid=9sl1w50y" alt="" width="1200" height="696" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="font-weight:700;">开具合格证表单页（第一步）</span></p> 
+  <table class="table table-kindeditor" style="font-size:14px;background-color:#FFFFFF;width:1427.05px;color:#313C52;"> 
+   <tbody> 
+    <tr> 
+     <td><br></td> 
+     <td>字段<br></td> 
+     <td>组件</td> 
+     <td>默认值</td> 
+     <td>值拉取规则</td> 
+     <td>交互</td> 
+    </tr> 
+    <tr> 
+     <td colspan="1" rowspan="3">开具经营主体信息</td> 
+     <td><span style="color:#E53333;">经营主体</span></td> 
+     <td>文本</td> 
+     <td>显示“--”</td> 
+     <td><span style="color:#E53333;">回显</span></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td><span style="color:#E53333;">所在地</span></td> 
+     <td><span style="color:#E53333;">文</span><span style="color:#E53333;">本</span></td> 
+     <td><span style="color:#E53333;">显示“--”</span></td> 
+     <td><span style="color:#E53333;">回显农场所在地，所在地行政区划支持显示到村，如：省/市/区县/镇/村，如果村镇没有值，就不显示。</span></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>联系方式<br></td> 
+     <td>文本<br></td> 
+     <td>显示“--”<br></td> 
+     <td>回显农场所属企业的客服电话<br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td rowspan="8" colspan="1">农产品信息</td> 
+     <td>农产品</td> 
+     <td>下拉选择+搜索，单选</td> 
+     <td>空</td> 
+     <td>拉取所有上架的作物种类。</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>产品来源</td> 
+     <td>单选</td> 
+     <td>自我种植</td> 
+     <td>自我种植 / 外部采购</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>供应商</td> 
+     <td>下拉选择+搜索，单选</td> 
+     <td>隐藏</td> 
+     <td> <p><br></p> </td> 
+     <td> <p>显示条件：“产品来源”值=外部采购</p> <p>隐藏条件：“产品来源”值=自我种植</p> <p>点击出现下拉框,并可进行模糊搜索供应商名称，点击选择。</p> </td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>供应商详细地址</td> 
+     <td>文本</td> 
+     <td>隐藏<br></td> 
+     <td> <p><br></p> <p>回显供应商地址</p> </td> 
+     <td> <p>显示条件：“产品来源”值=外部采购</p> <p>隐藏条件：“产品来源”值=自我种植</p> <br> </td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>新增</td> 
+     <td>按钮</td> 
+     <td>隐藏<br></td> 
+     <td> 
+      <div class="ace-line old-record-id-doxcnTg3bvWfT7CMN8pSlVnQn5B"></div> </td> 
+     <td> <p>显示条件：“产品来源”值=外部采购</p> <p>隐藏条件：“产品来源”值=自我种植</p> <p><a href="http://chandao.freetek.cc/zentao/file-read-10255.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10255.png?tid=9sl1w50y" alt="" width="500" height="117" title=""></a></p> <p>点击【新增】，Alert弹框新增供应商信息</p> <p>手动输入公司名称和公司地址。</p> <p>公司名称长度：50个字。</p> <p>处理数据：供应企业表（tbl_supply_enterprise）：如果新增了供应企业，则插入供应企业数据。</p> </td> 
+    </tr> 
+    <tr> 
+     <td>数量<br></td> 
+     <td>输入框<br></td> 
+     <td> 
+      <div class="old-record-id-doxcnaFp71dSEUutFknbGelvyIf">
+       <br>
+      </div> </td> 
+     <td> 
+      <div class="ace-line old-record-id-doxcnTg3bvWfT7CMN8pSlVnQn5B">
+       <span style="color:#E53333;">仅可输入正数，（农业、渔业）支持1位小数，（畜牧业、林业）支持正整数;</span>
+      </div> <p><br></p> <p><span style="color:#E53333;">农业、渔业前端写死单位是公斤</span></p> <p><span style="color:#E53333;">林业、畜牧单位是根据</span>农产品对应作物小类的单位而进行动态变化。</p> </td> 
+    </tr> 
+    <tr> 
+     <td>开具日期<br></td> 
+     <td><br></td> 
+     <td> 
+      <div> 
+       <div class="ace-line old-record-id-doxcneV28PMSjl7Z9c1CiH4S07e">
+        默认为进入此页面时间
+        <br>
+       </div> 
+      </div> <span class="lark-record-clipboard"></span></td> 
+     <td>小于等于当前时间<br></td> 
+    </tr> 
+    <tr> 
+     <td>销售去向<br></td> 
+     <td>下拉选择+二级联动<br></td> 
+     <td><br></td> 
+     <td> <p><span style="font-weight:700;">本地去向与作物大类联动，具体如下：</span></p> <p><span style="font-weight:700;">农业：</span></p> <p>本地：田头销售/超市/企业事业单位/菜场/批发市场/粮管所 外地：</p> <p><span style="font-weight:700;">林业、水产和畜牧：</span></p> <p>本地：田头销售/超市/企业事业单位/批发市场/其他</p> <p>外地：</p> </td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td><br></td> 
+     <td>保存，并进入下一步</td> 
+     <td><br></td> 
+     <td><br></td> 
+     <td><br></td> 
+     <td> <p>点击【保存，并进入下一步】</p> <p>1、跳转至下一步</p> <p>2、处理以下数据：</p> <p>&nbsp; &nbsp; &nbsp; 1）外采农产品入库，按照之前的逻辑（需求文档参见：<a href="https://zaxhplat.feishu.cn/wiki/wikcnuPZCziknqaaRryjBdVyKLh" target="_blank" rel="noreferrer noopener">农产品库存-外采</a>），对以下这些表操作：</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 外采信息表（tbl_outsourcing_info）:插入1条外采入库数据</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;库存表（tbl_stock）：更新库存</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;库存日志表（tbl_stock_log）：插入1条入库记录</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p> <p>&nbsp; &nbsp; &nbsp; 2）销售外采入库的农产品，按照之前的逻辑（需求文档参见：<a href="https://zaxhplat.feishu.cn/wiki/wikcnuPZCziknqaaRryjBdVyKLh" target="_blank" rel="noreferrer noopener">农产品库存-外采</a>），对以下这些表操作：</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;外采信息表（tbl_outsourcing_info）：扣减该作物可销售数量</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;库存表（tbl_stock）：扣减该作物剩余库存数量</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;库存日志表（tbl_stock_log）：插入出入记录</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;销售批次表（tbl_sell_group）：插入销售记录<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;销售记录（tbl_sell_record_*）：农林牧渔销售记录表插入销售记录</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-10277.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10277.png?tid=9sl1w50y" alt="" width="1200" height="379" title=""></a></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">开具合格证表单页（第二步）</h4> 
+  <span style="font-size:14px;background-color:#FFFFFF;">业务逻辑参考&nbsp;</span>
+  <a href="http://jira.zaxhplat.com.cn/browse/SH-286" target="_blank" rel="noreferrer noopener">批量开具合格证</a>
+  <span style="font-size:14px;background-color:#FFFFFF;">&nbsp;和&nbsp;</span>
+  <a href="http://jira.zaxhplat.com.cn/browse/SH-315" target="_blank" rel="noreferrer noopener">开具绿色认证版合格证</a>
+  <span style="font-size:14px;background-color:#FFFFFF;">&nbsp;需求文档</span>
+  <span style="font-size:14px;background-color:#FFFFFF;"></span> 
+  <p style="font-size:14px;background-color:#FFFFFF;">本次只拉取“类型”是“<span style="color:#E53333;">简易合格证</span>”的合格证模板</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;">联系方式：获取该农场所属企业的“</span><span style="color:#E53333;">企业法人联系方式</span><span style="color:#E53333;">”</span></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-10278.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10278.png?tid=9sl1w50y" alt=""></a></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;"></h2> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor351"><span style="background-color:#FFE500;">溯源H5展示逻辑不变</span></h2> 
+  <span style="font-size:14px;background-color:#FFFFFF;"></span>
+  <a href="http://chandao.freetek.cc/zentao/file-read-10241.png?tid=9sl1w50y" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-10241.png?tid=9sl1w50y" alt="" width="200" height="433" title=""></a>
+  <br> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">参考文档：</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">外采入库需求文档：<a href="https://zaxhplat.feishu.cn/wiki/wikcnuPZCziknqaaRryjBdVyKLh" target="_blank" rel="noreferrer noopener">‌⁡‌⁣‌⁤⁢﻿⁢⁤‌⁢⁡﻿‍⁢⁡⁢⁤⁤﻿⁤‍‍⁣‬⁤⁡⁣⁣⁡⁣‍‌⁣﻿⁤⁤⁡农产品库存-外采</a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">开具合格证需求文档：<a href="https://zaxhplat.feishu.cn/wiki/wikcnaslF07HSQcctWESwqCtTt1" target="_blank" rel="noreferrer noopener">‍⁢﻿⁤⁡‌‍‌‍⁤‍﻿⁡‌⁡‬‌⁤⁤⁣‌⁤⁢⁤⁢﻿⁤‬⁢⁤⁡﻿‬⁡‬⁤⁡‍采收-库存-销售-合格证&nbsp;</a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">运营后台的退回操作，功能设计文档：<a href="http://jira.zaxhplat.com.cn/browse/SH-570" target="_blank" rel="noreferrer noopener">[SH-570] 已打印合格证数据可退回&nbsp;</a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">批量开具合格证：<a href="http://jira.zaxhplat.com.cn/browse/SH-286" target="_blank" rel="noreferrer noopener">http://jira.zaxhplat.com.cn/browse/SH-286</a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">合格统计文档：<a href="http://jira.zaxhplat.com.cn/browse/SH-296" target="_blank" rel="noreferrer noopener">http://jira.zaxhplat.com.cn/browse/SH-296</a></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="需求背景：">需求背景：</a> </li>
+    <li class="text-ellipsis"><a href="#anchor7" title="总体设计思路：">总体设计思路：</a> </li>
+    <li class="text-ellipsis"><a href="#anchor22" title="详细设计：">详细设计：</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor23" title="1、运营后台：">1、运营后台：</a> </li>
+      <li class="text-ellipsis"><a href="#anchor38" title="2、管理中台">2、管理中台</a> </li>
+      <li class="text-ellipsis"><a href="#anchor68" title="简易版合格证开具页">简易版合格证开具页</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor351" title="溯源H5展示逻辑不变">溯源H5展示逻辑不变</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis数据发布流程-发布gis服务</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍数据处理过后，如何发布gis服务</p> 
+  <p><br></p> 
+  <h4></h4> 
+  <h1 id="anchor4">2、发布</h1> 
+  <h2 id="anchor5">2.1 发布gis服务</h2> 
+  <h3>(1)、发布动态服务</h3> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤<br></td> 
+     <td style="border:1px solid #ddd;">步骤名称</td> 
+     <td style="border:1px solid #ddd;">描述<br></td> 
+     <td style="border:1px solid #ddd;">操作截图<br></td> 
+     <td style="border:1px solid #ddd;">说明<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤一</td> 
+     <td style="border:1px solid #ddd;">创建颜色</td> 
+     <td style="border:1px solid #ddd;">发布时，根据某个字段提前设置gis服务地块颜色</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11622.png" alt="" width="150" height="81" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p>颜色参考：</p> <p><a href="https://shimo.im/docs/HwKWY6H9JVXxrRGv" target="_blank" rel="noreferrer noopener">https://shimo.im/docs/HwKWY6H9JVXxrRGv</a></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤二</td> 
+     <td style="border:1px solid #ddd;">保存</td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <p><span>将文件保存为mxd文件，位置在c盘</span></p> <p>c:/arcgisFile/xmd</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11626.png" alt="" width="150" height="161" title=""></p> </td> 
+     <td style="border:1px solid #ddd;"> <p>保存文件名称跟动态服务名称一样</p> <p>动态服务命名参考：</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-115.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-115.html</a></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤三</td> 
+     <td style="border:1px solid #ddd;">共享服务</td> 
+     <td style="border:1px solid #ddd;"> <p><span>1）鼠标右键点击mxd文件，选择“共享为服务</span>”</p> <p><span>2）选择服务器和命名</span></p> <p><span><span>3）选择文件夹</span><br></span></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11629.png" alt="" width="150" height="118" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11630.png" alt="" width="150" height="131" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11631.png" alt="" width="150" height="133" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤四</td> 
+     <td style="border:1px solid #ddd;">设置参数</td> 
+     <td style="border:1px solid #ddd;"> <p><span>1）需要勾选：功能：feature access 选</span>项</p> <p>2）高级选项：改成false</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11015.png" alt="" width="150" height="154" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11632.png" alt="" width="150" height="103" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤五</td> 
+     <td style="border:1px solid #ddd;">发布</td> 
+     <td style="border:1px solid #ddd;">点击发布</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11633.png" alt="" width="150" height="116" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤六</td> 
+     <td style="border:1px solid #ddd;">查看发布地址<br></td> 
+     <td style="border:1px solid #ddd;"> <p>登陆arcgis server管理后台,找到发布的文件夹</p> <p>arcgis server登陆地址：</p> <p><a href="https://gis.snkoudai.com/arcgis/manager" target="_blank" rel="noreferrer noopener">https://gis.snkoudai.com/arcgis/manager</a></p> <p><br></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11635.png" alt="" width="150" height="69" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h4><br></h4> 
+  <h3>(2)、发布切片服务</h3> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>步骤</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>步骤名称</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>描述</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>操作截图</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>说明</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>步骤一</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>创建颜色</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>发布时，根据某个字段提前设置gis服务地块颜色</span><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11622.png" alt="" width="150" height="81" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p>颜色参考：</p> <p><a href="https://shimo.im/docs/HwKWY6H9JVXxrRGv" target="_blank" rel="noreferrer noopener">https://shimo.im/docs/HwKWY6H9JVXxrRGv</a></p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>步骤二</span><br></td> 
+     <td style="border:1px solid #ddd;">设置发布类型</td> 
+     <td style="border:1px solid #ddd;"> <p>如果发布全部数据，当前步骤省略</p> <p>如果只发布矢量数据中其中几个分类，需要执行当前步骤</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11638.png" alt="" width="150" height="79" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤三</td> 
+     <td style="border:1px solid #ddd;">保存<br></td> 
+     <td style="border:1px solid #ddd;"> <p>将文件保存为mxd文件，位置在c盘</p> <p>c:/arcgisFile/xmd</p> <br> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11626.png" alt="" width="150" height="161" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p>保存文件名称跟切片服务名称一样</p> <p>切片服务命名参考：</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-115.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-115.html</a></p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤四</td> 
+     <td style="border:1px solid #ddd;"><span>共享服务</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>1）鼠标右键点击mxd文件，选择“共享为服务”</p> <p>2）选择服务器和命名</p> <p>3）选择文件夹</p> <br> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11629.png" alt="" width="150" height="118" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11630.png" alt="" width="150" height="131" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11631.png" alt="" width="150" height="133" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤五</td> 
+     <td style="border:1px solid #ddd;"><span>设置参数</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>1）需要勾选：功能：feature access 选项</p> <p>2）高级选项：改成false<span></span></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11015.png" alt="" width="150" height="154" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11632.png" alt="" width="150" height="103" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤六</td> 
+     <td style="border:1px solid #ddd;">构建缓存<br></td> 
+     <td style="border:1px solid #ddd;"> <p>1）确定切片方案</p> <p>2）输入切片比例</p> <p>3）计算缓存大小</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11641.png" alt="" width="150" height="119" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11642.png" alt="" width="150" height="82" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11643.png" alt="" width="150" height="79" title=""><br></td> 
+     <td style="border:1px solid #ddd;">切片比例见文档附件</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤七</td> 
+     <td style="border:1px solid #ddd;"><span>发布</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>点击发布</span><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11633.png" alt="" width="150" height="116" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤八</td> 
+     <td style="border:1px solid #ddd;">查看切片进度</td> 
+     <td style="border:1px solid #ddd;"> <p>登陆arcgis server管理后台,找到发布的文件夹</p> <p>arcgis server登陆地址：</p> <p><a href="https://gis.snkoudai.com/arcgis/manager" target="_blank" rel="noreferrer noopener">https://gis.snkoudai.com/arcgis/manager</a></p> <br> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11644.png" alt="" width="150" height="99" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">步骤九</td> 
+     <td style="border:1px solid #ddd;">查看发布地址<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11645.png" alt="" width="150" height="74" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <h4><br></h4> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor4" title="2、发布">2、发布</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor5" title="2.1 发布gis服务">2.1 发布gis服务</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

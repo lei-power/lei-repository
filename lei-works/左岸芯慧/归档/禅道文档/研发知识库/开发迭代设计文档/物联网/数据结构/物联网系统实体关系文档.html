@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>物联网系统实体关系文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor2">1.ER关系图</h1> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12462.png" alt=""></p> 
+  <p>ER关系说明</p> 
+  <p><br></p> 
+  <p>1、后台用户组织：用于承载后台用的用户角色资源权限。</p> 
+  <p>2、运营商用户组织：用于承载运营商平台的用户角色资源权限。</p> 
+  <p>3、基地用户组织：用于承载物联网基地的角色资源、用户和基地的关联关系。</p> 
+  <p>4、核心业务关系：用于承载物联网真实设备的映射抽象、显示和告警管理等。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor12">2.数据字典</h1> 
+  <p><br></p> 
+  <p>参见附件</p> 
+  <p><a href="/zentao/doc-objectLibs-custom-0-37-573.html?tid=n42y8i9c#app=doc" target="_blank" rel="noreferrer noopener">《物联网数据结构字典》</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor18">3.部分核心表解释</h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">表名称</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">解释</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">产品物模型表<br></td> 
+     <td style="border:1px solid #ddd;">物模型描述的是设备在云端的功能描述，包括设备的属性、服务和事件。</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">摄像头设备序列号表</td> 
+     <td style="border:1px solid #ddd;">平台添加的摄像头分为直播地址和序列号添加，该表用于维护摄像头的序列号验证码信息。序列号添加的设备可以通过摄像头服务商API管理。</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">产品表</td> 
+     <td style="border:1px solid #ddd;">产品是设备的集合，指一组具有相同功能的设备。<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">设备型号表</td> 
+     <td style="border:1px solid #ddd;">左岸物联网将产品变成通用的结构，所以产品不具备描述某类具体能力的设备。设备型号表则是用于定义一组功能的设备。示例：【神农探针】<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">设备型号属性表</td> 
+     <td style="border:1px solid #ddd;">设备型号表的子表，定义设备型号下的通道和关联指标。<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">指标表</td> 
+     <td style="border:1px solid #ddd;">定义传感器、控制器的基础属性，单位、数据类型等等。<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">设备表</td> 
+     <td style="border:1px solid #ddd;">映射真实的网关设备。<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">设备属性表</td> 
+     <td style="border:1px solid #ddd;">网关设备下的通道定义，每个通道关联一个指标用来描述该通道的类型和信息。<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor2" title="1.ER关系图">1.ER关系图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor12" title="2.数据字典">2.数据字典</a> </li>
+    <li class="text-ellipsis"><a href="#anchor18" title="3.部分核心表解释">3.部分核心表解释</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

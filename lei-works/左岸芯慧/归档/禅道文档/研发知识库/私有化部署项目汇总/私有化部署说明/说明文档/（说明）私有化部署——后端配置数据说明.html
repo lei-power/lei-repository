@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>（说明）私有化部署——后端配置数据说明</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">0、文档适用范围</h1> 
+  <p>本文档用于后端服务部署阶段、用以参考初始化系统业务所需要的基础数据和相关依赖的配置数据说明。</p> 
+  <p><br></p> 
+  <h1 id="anchor3">1、基础数据</h1> 
+  <h2 id="anchor4">1.1、神农口袋</h2> 
+  <p> </p>
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">数据库</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">数据表</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">数据表说明</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">是否必须</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">关联业务系统</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">frp_produce<br></td> 
+     <td style="border:1px solid #ddd;">sys_crop_category<br></td> 
+     <td style="border:1px solid #ddd;">种养小类表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_crop_subject<br></td> 
+     <td style="border:1px solid #ddd;">种养大类表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_land_type<br></td> 
+     <td style="border:1px solid #ddd;">地块类型<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_mission_category<br></td> 
+     <td style="border:1px solid #ddd;">农事类型<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_mission_category_crop_subject_ref<br></td> 
+     <td style="border:1px solid #ddd;">农事类型与农作大类关联表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_plant_standard<br></td> 
+     <td style="border:1px solid #DDD;">种植标准<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_unit<br></td> 
+     <td style="border:1px solid #DDD;">计量单位（如公斤，克等在该表统一维护）<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_web_sys_config<br></td> 
+     <td style="border:1px solid #DDD;">网站配置信息表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">t_gis_nyd_detail<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_agri_leisure_config<br></td> 
+     <td style="border:1px solid #DDD;">农资阈值配置表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_agri_res<br></td> 
+     <td style="border:1px solid #DDD;">农资表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_agri_res_effective<br></td> 
+     <td style="border:1px solid #DDD;">农资有效成分表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_agri_res_sku<br></td> 
+     <td style="border:1px solid #DDD;">农资库表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_area_dict<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_barcode_group<br></td> 
+     <td style="border:1px solid #DDD;">条形码组表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_barcode_group_attr<br></td> 
+     <td style="border:1px solid #DDD;">条形码属性表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_barcode_template<br></td> 
+     <td style="border:1px solid #DDD;">条形码模板表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_barcode_template_attr<br></td> 
+     <td style="border:1px solid #DDD;">条形码模板属性表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_barcode_template_attr_ref<br></td> 
+     <td style="border:1px solid #DDD;">模板属性关联表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_certificate_attr<br></td> 
+     <td style="border:1px solid #DDD;">合格证属性表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_certificate_template<br></td> 
+     <td style="border:1px solid #DDD;">合格证模板表</td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_certificate_template_attr<br></td> 
+     <td style="border:1px solid #DDD;">合格证模板属性表</td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_certificate_template_attr_ref<br></td> 
+     <td style="border:1px solid #DDD;">合格证模板属性关联表</td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_crop_group<br></td> 
+     <td style="border:1px solid #DDD;">作物分组表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_farmshow_model<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_farmshow_model_page<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_farmshow_page<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_insure<br></td> 
+     <td style="border:1px solid #DDD;">保险险种<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_insure_area_ref<br></td> 
+     <td style="border:1px solid #DDD;">保险服务范围地区关联表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_insure_bank<br></td> 
+     <td style="border:1px solid #DDD;">保险公司投保支持大行表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_insure_bank_branch<br></td> 
+     <td style="border:1px solid #DDD;">保险公司投保支持大行支行表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_insure_company<br></td> 
+     <td style="border:1px solid #DDD;">保险公司表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_insure_crop_group<br></td> 
+     <td style="border:1px solid #DDD;">可投保作物保险表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_insure_crop_group_rule<br></td> 
+     <td style="border:1px solid #DDD;">保险险种可投保作物规则<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_user</td> 
+     <td style="border:1px solid #DDD;">sys_agreement<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_area<br></td> 
+     <td style="border:1px solid #DDD;">省市行政区域表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">oauth_client_details<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_banner<br></td> 
+     <td style="border:1px solid #DDD;">系统banner表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_dict_data<br></td> 
+     <td style="border:1px solid #DDD;">字典数据表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_dict_type<br></td> 
+     <td style="border:1px solid #DDD;">字典类型表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_area_local<br></td> 
+     <td style="border:1px solid #DDD;">地方区域表（镇村）<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_resource<br></td> 
+     <td style="border:1px solid #DDD;">资源表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_role<br></td> 
+     <td style="border:1px solid #DDD;">角色表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_role_resource_ref<br></td> 
+     <td style="border:1px solid #DDD;">角色资源关联表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_archive<br></td> 
+     <td style="border:1px solid #DDD;">tbl_archive_area_config<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_appconfig<br></td> 
+     <td style="border:1px solid #DDD;">sys_agreement<br></td> 
+     <td style="border:1px solid #DDD;">协议表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_apk_address<br></td> 
+     <td style="border:1px solid #DDD;">apk下载地址配置表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_conf<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_login_banner<br></td> 
+     <td style="border:1px solid #DDD;">登录页banner表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_qrcode_example<br></td> 
+     <td style="border:1px solid #DDD;">示例配置表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_website_banner<br></td> 
+     <td style="border:1px solid #DDD;">官网banner配置表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_adminuser<br></td> 
+     <td style="border:1px solid #DDD;">sys_resource<br></td> 
+     <td style="border:1px solid #DDD;">资源表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_role<br></td> 
+     <td style="border:1px solid #DDD;">角色表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_role_resource_ref<br></td> 
+     <td style="border:1px solid #DDD;">角色资源关联表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_expert<br></td> 
+     <td style="border:1px solid #DDD;">sys_area_conf<br></td> 
+     <td style="border:1px solid #DDD;">专家系统开放地区<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">sys_expert_conf<br></td> 
+     <td style="border:1px solid #DDD;">专家模块配置表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_expert_type<br></td> 
+     <td style="border:1px solid #DDD;">专家类型表<br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_governmentuser<br></td> 
+     <td style="border:1px solid #DDD;">sys_government_notice_type<br></td> 
+     <td style="border:1px solid #DDD;">公告类型表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_gis_type<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_gis_type_img<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_government_dashboad_template<br></td> 
+     <td style="border:1px solid #DDD;">政府主体仪表盘模板表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_government_resource<br></td> 
+     <td style="border:1px solid #DDD;">资源表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_government_role<br></td> 
+     <td style="border:1px solid #DDD;">角色表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_government_role_resource_ref<br></td> 
+     <td style="border:1px solid #DDD;">角色资源关联表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_government_show_menu_template<br></td> 
+     <td style="border:1px solid #DDD;">政府端主体展示菜单模板表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_message<br></td> 
+     <td style="border:1px solid #DDD;">tbl_message_client<br></td> 
+     <td style="border:1px solid #DDD;">消息展示端<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_message_type<br></td> 
+     <td style="border:1px solid #DDD;">消息类型<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_message_type_client_code_ref<br></td> 
+     <td style="border:1px solid #DDD;">消息类型端类型关联表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_notice<br></td> 
+     <td style="border:1px solid #DDD;">sys_government_notice_type<br></td> 
+     <td style="border:1px solid #DDD;">公告类型表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_government_notice_area_ref<br></td> 
+     <td style="border:1px solid #DDD;">政府公告范围地区关联表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_operate<br></td> 
+     <td style="border:1px solid #DDD;">tbl_nc_area<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_nc_crop<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_nc_crop_category<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_nc_market<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_ttj_crop<br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">N</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">frp_operuser<br></td> 
+     <td style="border:1px solid #DDD;">tbl_operate_login_banner<br></td> 
+     <td style="border:1px solid #DDD;">运营商主体登录banner<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_operate_resource<br></td> 
+     <td style="border:1px solid #DDD;">资源表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_operate_role<br></td> 
+     <td style="border:1px solid #DDD;">角色表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_operate_role_resource_ref<br></td> 
+     <td style="border:1px solid #DDD;">角色资源关联表<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;">tbl_operate_traceability_config<br></td> 
+     <td style="border:1px solid #DDD;">企业溯源配置<br></td> 
+     <td style="border:1px solid #DDD;">Y</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <h2 id="anchor581">1.2、物联网</h2> 
+  <p> </p>
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">数据库</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">数据表</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">数据表说明</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">是否必须</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">关联业务系统</span><br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">zaiot_adminuser<br></td> 
+     <td style="border:1px solid #ddd;">sys_resource<br></td> 
+     <td style="border:1px solid #ddd;">资源表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_role<br></td> 
+     <td style="border:1px solid #ddd;">角色表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_role_resource_ref<br></td> 
+     <td style="border:1px solid #ddd;">角色资源关联表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">zaiot_iot<br></td> 
+     <td style="border:1px solid #ddd;">sys_area<br></td> 
+     <td style="border:1px solid #ddd;">省市行政区域表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_dict_data<br></td> 
+     <td style="border:1px solid #ddd;"><span>字典数据表</span><br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"><span>sys_dict_type</span><br></td> 
+     <td style="border:1px solid #ddd;">字典类型表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_resource<br></td> 
+     <td style="border:1px solid #ddd;">资源表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_role<br></td> 
+     <td style="border:1px solid #ddd;">角色表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">sys_role_resource_ref<br></td> 
+     <td style="border:1px solid #ddd;">角色资源关联表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_ali_iot_rule<br></td> 
+     <td style="border:1px solid #ddd;">阿里云物联网规则引擎表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_ali_iot_rule_action<br></td> 
+     <td style="border:1px solid #ddd;">阿里云物联网规则引擎动作表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_company_resource<br></td> 
+     <td style="border:1px solid #ddd;">基地资源表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_company_role<br></td> 
+     <td style="border:1px solid #ddd;">基地角色<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_corporation_resource<br></td> 
+     <td style="border:1px solid #ddd;">企业资源表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_corporation_role<br></td> 
+     <td style="border:1px solid #ddd;">企业角色<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_device_model<br></td> 
+     <td style="border:1px solid #ddd;">设备型号表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_device_model_product<br></td> 
+     <td style="border:1px solid #ddd;">设备型号产品表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_device_model_property<br></td> 
+     <td style="border:1px solid #ddd;">设备型号属性表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_gate_category<br></td> 
+     <td style="border:1px solid #ddd;">网关分类表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_meta_device<br></td> 
+     <td style="border:1px solid #ddd;">元设备表（新终端出厂设备表）<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_metric<br></td> 
+     <td style="border:1px solid #ddd;">指标表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_metric_category<br></td> 
+     <td style="border:1px solid #ddd;">指标分类<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_metric_convert<br></td> 
+     <td style="border:1px solid #ddd;">指标显示配置<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_metric_convert_rule<br></td> 
+     <td style="border:1px solid #ddd;">指标显示配置规则表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_operator_resource<br></td> 
+     <td style="border:1px solid #ddd;">运营商资源表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_operator_role<br></td> 
+     <td style="border:1px solid #ddd;">运营商角色<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_product<br></td> 
+     <td style="border:1px solid #ddd;">产品表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_product_thing_model_property<br></td> 
+     <td style="border:1px solid #ddd;">阿里云产品物模型属性表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_ref_company_role_resource<br></td> 
+     <td style="border:1px solid #ddd;">基地端角色资源关联表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_ref_corporation_role_resource<br></td> 
+     <td style="border:1px solid #ddd;">企业端角色资源关联表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_ref_operator_role_resource<br></td> 
+     <td style="border:1px solid #ddd;">运营商角色资源关联表<br></td> 
+     <td style="border:1px solid #ddd;">Y</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_sensor<br></td> 
+     <td style="border:1px solid #ddd;">传感器设备表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_sensor_channel<br></td> 
+     <td style="border:1px solid #ddd;">传感器设备通道表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">tbl_sensor_productor<br></td> 
+     <td style="border:1px solid #ddd;">传感器厂家表<br></td> 
+     <td style="border:1px solid #ddd;">N</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="0、文档适用范围">0、文档适用范围</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="1、基础数据">1、基础数据</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor4" title="1.1、神农口袋">1.1、神农口袋</a> </li>
+      <li class="text-ellipsis"><a href="#anchor581" title="1.2、物联网">1.2、物联网</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

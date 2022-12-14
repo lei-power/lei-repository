@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>服务端私有化部署-服务配置修改</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;本文档主要介绍部署私有化项目时，服务端项目需要修改的一些配置，以下内容是基于荔湖乡丰项目</p> 
+  <h1 id="anchor2">2、配置修改流程</h1> 
+  <h2 id="anchor3">2.1、新建部署分支</h2> 
+  <p>确定部署版本号后，从神农口袋项目release分支新迁一个分支，命名：release/lihuxiangfeng_v4.54.0&nbsp;</p> 
+  <p>分支命名规范：前缀是私有化项目拼音全程，后缀是部署的版本号，中间用英文下划线分割</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6457.png" alt="" width="400" height="73" title=""></p> 
+  <h2 id="anchor8">2.2、新建配置文件</h2> 
+  <p>需要部署的工程新建配置文件application-lhxfprod.properties</p> 
+  <p>拷贝自application-test.properties</p> 
+  <p>命名规范：application-{交付项目缩写加prod后缀}.properties</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6458.png" alt="" width="400" height="99" title=""></p> 
+  <h2 id="anchor13">2.3、删除多余的配置文件</h2> 
+  <p>删掉多余的配置文件，只保留application.properties和application-lhxfprod.properties 这两个配置文件</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6459.png" alt="" width="400" height="140" title=""></p> 
+  <h2 id="anchor16">2.4、<span>properties文件修改</span></h2> 
+  <h3>2.4.1、修改链接eureka注册方式</h3> 
+  <p>（1）、如果是容器化部署</p> 
+  <p><span style="color:#E53333;">service-adminuser-server.snkoudai：这个是容器服务地址</span></p> 
+  <p><span style="color:#E53333;">注册中心地址改为：私有化eureka注册地址</span></p> 
+  <p><span> </span></p> 
+  <pre>eureka.client.serviceUrl.defaultZone=http://za-eureka.snkoudai:20010/eureka/
+如果是容器化部署时需要设置每个微服务的地址，否则不需要设置
+eureka.instance.prefer-ip-address=true
+#配置容器服务地址，名称为当前服务的名称，名称自己定义（以service-adminuser-server工程为例）
+eureka.instance.ip-address=service-adminuser-server.snkoudai</pre> 
+  <p>（2）、常规部署</p> 
+  <pre>eureka.client.serviceUrl.defaultZone=http://za-eureka.snkoudai:20010/eureka/
+如果是容器化部署时需要设置每个微服务的地址，否则不需要设置
+eureka.instance.prefer-ip-address=true</pre> 
+  <h3>2.4.2、修改mysql</h3> 
+  <p>ip、账号、密码都替换私有化的账号</p> 
+  <p><span style="color:#E53333;">useSSL改为false</span></p> 
+  <p>#数据源基础配置&nbsp;</p> 
+  <p><span> </span></p> 
+  <pre>#数据源基础配置
+spring.datasource.url=jdbc:mysql://172.27.87.32:3309/frp_adminuser?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true&amp;useSSL=false
+spring.datasource.username=mz5bk5vb
+spring.datasource.password=6RcgIz=4b_h</pre> 
+  <h3>2.4.3、修改消息队列</h3> 
+  <p>rabbitmq的账号都替换成私有化账号</p> 
+  <p><span> </span></p> 
+  <pre># 消息队列配置
+spring.rabbitmq.host=rabbitmq.snkoudai
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=admin
+spring.rabbitmq.password=ujkmZ8pdhswBgoki5</pre> 
+  <h3>2.4.4、修改redis</h3> 
+  <p>redis账号都替换成私有化账号</p> 
+  <p><span> </span></p> 
+  <pre># Redis服务器地址
+spring.redis.host=redis.snkoudai
+#redis 链接密码
+spring.redis.pool.password=9vwkRtocdKbtsvd7h
+spring.redisson.address=redis://redis.snkoudai:6379</pre> 
+  <p><span style="color:#E53333;">注意：如果私有化部署redis需要新增密码，需要修改以下配置</span></p> 
+  <p><span style="color:#E53333;"> </span></p> 
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">工程</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;"></span><span style="font-weight:700;background-color:#F1F1F1;">序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">修改的类</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">截图</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">备注</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;" rowspan="2">service-foundation-server<br></td> 
+     <td style="border:1px solid #ddd;">1</td> 
+     <td style="border:1px solid #ddd;"><span>RedissonAutoConfiguration</span><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6462.png" alt="" width="400" height="167" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;"><span>RedisConfig</span><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6463.png" alt="" width="400" height="175" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <br>
+  <h3>2.4.5、修改文件上传地址</h3> 
+  <p>foundation项目配置文件中对象存储上传地址内网地址修改为外网地址</p> 
+  <p>ali.oss.endpoint：这个地址是外网地址，前端上传文件的时候是用这个地址上传</p> 
+  <p>ali.oss.endpoint.inner：这个地址是内网地址，服务端上传时通过这个地址上传</p> 
+  <p>在私有化部署的时候，将内网地址改成外网地址</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6464.png" alt="" width="400" height="171" title=""></p> 
+  <p><br></p> 
+  <h3 style="color:#3C4353;">2.4.6、修改物联网地址</h3> 
+  <p>在sevice-produce配置文件里修改物联网地址为对方地址</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6479.png" alt="" width="400" height="164" title=""></p> 
+  <h3>2.4.7、修改短信验证码不为演示模式</h3> 
+  <p><span style="font-family:SimSun;font-size:14px;">在service-foundation-server工程修改</span></p> 
+  <p><span style="font-family:SimSun;font-size:14px;">是否演示模式：true-演示模式，false-正式运营模式&nbsp;&nbsp;</span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6466.png" alt="" width="400" height="141" title=""></p> 
+  <p><br></p> 
+  <p><span style="color:#E53333;">注意：<span style="font-family:SimSun;font-size:14px;">true-演示模式，默认验证码：8888</span></span></p> 
+  <p><span style="color:#E53333;"><span style="font-family:SimSun;font-size:14px;">&nbsp; &nbsp;false-正式运营模式</span>，要实时接收到短信，还需要修改SmsSendManage代码</span></p> 
+  <p><span style="color:#E53333;"> </span></p> 
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">工程</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">修改的类</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">修改的方法</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">截图</th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;" rowspan="8"><span>service-foundation-server</span><br></td> 
+     <td style="border:1px solid #ddd;">1</td> 
+     <td style="border:1px solid #ddd;">SmsSendManage<br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>短信验证码</span></p> <p>sendSmsVcode</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6467.png" alt="" width="400" height="166" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;"><span>SmsSendManage</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>企业添加用户短信</span></p> <p>sendSmsAdduser</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6468.png" alt="" width="400" height="200" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;"><span>SmsSendManage</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>作物申请审核成功</span></p> <p>sendSmsCropCheckPass</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6469.png" alt="" width="400" height="185" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">4</td> 
+     <td style="border:1px solid #ddd;"><span>SmsSendManage</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>作物申请审核不成功</span></p> <p>sendSmsCropCheckNoPass</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6470.png" alt="" width="400" height="174" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">5</td> 
+     <td style="border:1px solid #ddd;"><span>SmsSendManage</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>农作物添加审核通知</span></p> <p>sendSmsCropAddNotify</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6471.png" alt="" width="400" height="156" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">6</td> 
+     <td style="border:1px solid #ddd;"><span>SmsSendManage</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>农资添加申请发送短信给管理员</span></p> <p>sendSmsAgriResApplyNotify</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6472.png" alt="" width="400" height="164" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">7</td> 
+     <td style="border:1px solid #ddd;"><span>SmsSendManage</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>农资申请审核成功</span></p> <p>sendSmsAgriResCheckPass</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6473.png" alt="" width="400" height="149" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">8</td> 
+     <td style="border:1px solid #ddd;"><span>SmsSendManage</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>农资申请审核失败</span></p> <p>sendSmsAgriResCheckNoPass</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6474.png" alt="" width="400" height="185" title=""><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+  <h3 style="color:#3C4353;"><br></h3> 
+  <h3 style="font-size:11pt;color:#494949;">2.4.8、免登陆token处理</h3> 
+  <p><br></p> 
+  <p><span style="color:#E53333;font-size:14px;">免登陆处理流程，请参考下面链接</span></p> 
+  <p><a href="/zentao/doc-objectLibs-custom-0-37-208.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-208.html</a></p> 
+  <p><span style="color:#E53333;font-size:14px;">注：免登陆token是非必改项，不管是有需求还是没有需求，免登录的这个字段再配置文件里必须存在，否则再部署的时候会报错</span></p> 
+  <p><span style="color:#E53333;font-size:14px;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6756.png" alt="" width="400" height="160" title=""><br></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor162">2.5、代码修改</h2> 
+  <h3>2.5.1、修改运营商配置</h3> 
+  <p><span></span></p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">将测试服frp_operuser库下tbl_operate_subject表里的第一条运营商记录复制到对应的数据库，并修改prduct_name和domain_name字段内容</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">domain_name要和代码中的域名：snkoudai.zc.gov.cn 保持一致</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;"><span>这个domain是神农口袋企业web端域名</span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6477.png" alt="" width="400" height="121" title=""></p> 
+  <p><br></p> 
+  <p>修改<span style="font-family:SimSun;font-size:14px;">service-foundation工程</span>SmsService类</p> 
+  <p>这个domain是神农口袋企业web端域名</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6478.png" alt="" width="400" height="148" title=""></p> 
+  <h3><br></h3> 
+  <h1 id="anchor174">3、排除无需部署的项目列表</h1> 
+  <h2 id="anchor175">3.1、无需部署工程列表</h2> 
+  <p><span></span></p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">1、za-service-monitor</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">2、<span style="font-size:11pt;">service-customer-task</span></p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">3、service-userlog-server</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">4、service-nongwei-server</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;"><br></p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6480.png" alt="" width="400" height="764" title=""></p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;"><br></p> 
+  <h2 style="font-size:11pt;color:#494949;" id="anchor184">3.2、gis相关服务</h2> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">gis相关的服务是全国性项目，可按需求定制化部署，如果对方没有gis相关需求，可以不用部署</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;"><span></span></p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">1.service-landowner-server</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">2.service-landoccupy-server</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">3.service-gisdata-server</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;">4.service-gissde-server</p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;"><br></p> 
+  <p class="ql-long-68879921" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6481.png" alt="" width="400" height="696" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor2" title="2、配置修改流程">2、配置修改流程</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor3" title="2.1、新建部署分支">2.1、新建部署分支</a> </li>
+      <li class="text-ellipsis"><a href="#anchor8" title="2.2、新建配置文件">2.2、新建配置文件</a> </li>
+      <li class="text-ellipsis"><a href="#anchor13" title="2.3、删除多余的配置文件">2.3、删除多余的配置文件</a> </li>
+      <li class="text-ellipsis"><a href="#anchor16" title="2.4、properties文件修改">2.4、properties文件修改</a> </li>
+      <li class="text-ellipsis"><a href="#anchor162" title="2.5、代码修改">2.5、代码修改</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor174" title="3、排除无需部署的项目列表">3、排除无需部署的项目列表</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor175" title="3.1、无需部署工程列表">3.1、无需部署工程列表</a> </li>
+      <li class="text-ellipsis"><a href="#anchor184" title="3.2、gis相关服务">3.2、gis相关服务</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

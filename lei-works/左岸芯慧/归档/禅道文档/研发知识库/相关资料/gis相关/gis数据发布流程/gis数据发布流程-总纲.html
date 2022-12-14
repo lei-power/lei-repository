@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis数据发布流程-总纲</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>当我们从各地拿到三调、确权、高标准数据的时候，我们该怎么样去梳理数据、整理数据，然后发布成gis服务，在这里我们做一个流程规范</p> 
+  <p><br></p> 
+  <p>gis相关资料见附件</p> 
+  <p><br></p> 
+  <h1 id="anchor5">2、数据分析</h1> 
+  <p>从拿到数据--&gt;分析--&gt;入库--&gt;发布gis服务，我们需要经过以下几个步骤</p> 
+  <p>第一步：镇村数据入神农口袋mysqk库,tbl_area_local表</p> 
+  <p>第二步：找产品确认，录入的镇村是否正确</p> 
+  <p>第三步：arcmap对矢量数据进行转换：转成wgs84格式</p> 
+  <p>第四步：对转换后的矢量数据添加字段，例如：省市区镇村</p> 
+  <p>第五步：将处理的矢量数据入库：sqlserver数据库</p> 
+  <p>第六步：填充新增字段数据</p> 
+  <p>第七步：<span>将入库后的数据发布成gis服务</span></p> 
+  <p><span>第八步：gis发布地址整理</span></p> 
+  <h2 id="anchor15">2.1、数据执行步骤</h2> 
+  <p><br></p> 
+  <table class="table table-kindeditor ke-select-col" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">步骤</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">描述<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">截图<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">备注<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第一步<br></td> 
+     <td style="border:1px solid #ddd;">镇村数据入库</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"> <p>详情见链接</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-332.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-332.html</a></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第二步</td> 
+     <td style="border:1px solid #ddd;">镇村数据确认</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">找产品确认第一步镇村录入的数据是否正确，如果有不正确的，让产品在管理后台镇村录入地方修改</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第三步</td> 
+     <td style="border:1px solid #ddd;">矢量数据格式转换</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9349.png" alt="" width="200" height="63" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="color:#000000;">详情见链接</span></p> <p><span style="color:#000000;"><a href="/zentao/doc-objectLibs-custom-0-37-335.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-335.html</a></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第四步</td> 
+     <td style="border:1px solid #ddd;">添加字段</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9350.png" alt="" width="200" height="63" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="color:#000000;">详情见链接</span></p> <p><span style="color:#000000;"><a href="/zentao/doc-objectLibs-custom-0-37-335.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-335.html</a></span></p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第五步</td> 
+     <td style="border:1px solid #ddd;">数据入库</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9351.png" alt="" width="200" height="39" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="color:#000000;">详情见链接</span></p> <p><span style="color:#000000;"><a href="/zentao/doc-objectLibs-custom-0-37-335.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-335.html</a></span></p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDD;">第六步</td> 
+     <td style="border:1px solid #DDD;">字段数据填充</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+     <td style="border:1px solid #DDD;"> <p>详情见链接</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-481.html?tid=7wr31ooi" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-481.html?tid=7wr31ooi</a></p> <br> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"> <p><span><br></span></p> <p><span>第七步</span></p> <p><br></p> </td> 
+     <td style="border:1px solid #ddd;"><span>将入库后的数据发布成gis服务</span></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"> <p>详情见链接</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-428.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-428.html</a></p> <p><br></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第八步</td> 
+     <td style="border:1px solid #ddd;">gis发布地址整理</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;"> <p>详情建链接</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-449.html?tid=p43zb0y6#app=doc" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-449.html?tid=p43zb0y6#app=doc</a></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3><br></h3> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor5" title="2、数据分析">2、数据分析</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor15" title="2.1、数据执行步骤">2.1、数据执行步骤</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>【此文档为示例】20220210迭代1.4服务端功能详细设计（保险策略、投保流程）-3组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;">注意：此文档为示例文档，文档模板及要求参考下图所示文档模板。</span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;">务必严格按照要求的格式书写设计文档！！！！包括标题与正文！！！！！</span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="font-size:20px;"><b>文档模板：<a href="/zentao/doc-objectLibs-custom-0-37-73.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-73.html</a></b></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2287.png" alt="" width="450" height="402" title=""><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <h1 id="anchor13"><span style="color:inherit;font-size:20px;font-weight:700;">1、迭代需求简述</span></h1> 
+  <p><br></p> 
+  <p>本次迭代的主要需求：</p> 
+  <p>1.对接安信农保的保险下单全流程接口</p> 
+  <p>2.管理后台配置保险（蔬菜价格险）策略</p> 
+  <p>3.农户可以在神农口袋web端进行蔬菜价格险的在线下单、支付、查看保单等操作。</p> 
+  <p><br></p> 
+  <p>产品需求文档参考链接：https://www.baidu.com</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor23">2、参与人员与时间</h1> 
+  <p>服务端：严加强、陈英建</p> 
+  <p>迭代时间：2021-12-01到2022-02-10</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor30">3、用例图</h1> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2288.png" alt="" width="400" height="212" title=""></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2289.png" alt="" width="400" height="268" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor34">4、数据库设计ER图</h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-2280.png" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2280.png" alt=""></a></p> 
+  <p><br></p> 
+  <p>简要说明：</p> 
+  <p>ER图中分成几个部分：</p> 
+  <p><br></p> 
+  <ol>
+   <li>投保准备相关表：保险公司，保险银行，保险银行支行</li> 
+   <li>投保策略：险种，险种区域投保范围配置表，险种作物分组配置表，险种作物分组投保规则表</li> 
+   <li>投保结果：农户订单，农户保单，农户订单与地块绑定表</li> 
+  </ol>
+  <p><br></p> 
+  <h1 id="anchor46">5、核心流程时序</h1> 
+  <p><br></p> 
+  <p>在保险模块汇总，比较核心的时序流程有：用户投保、保单支付、保单状态维护等等。下面的时序图供参考。</p> 
+  <p><br></p> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-2281.png" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2281.png" alt="" width="400" height="283" title=""></a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>部分核心流程简要描述</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor59">6、其他设计补充材料</h1> 
+  <p><br></p> 
+  <h2 id="anchor61">6.1 农户保险订单状态转化图</h2> 
+  <p>农户订单多种状态，状态流转如下。</p> 
+  <p>简要描述：</p> 
+  <p>xxxxxx</p> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-2282.png" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2282.png" alt="" width="300" height="162" title=""></a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor68">6.2.农户保单状态转化图</h2> 
+  <p><br></p> 
+  <p>简要描述：</p> 
+  <p>xxxxxxx</p> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-2282.png" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2282.png" alt="" width="300" height="162" title=""></a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor75">6.3.其他资料补充</h2> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>安心农保的接口文档参考：</p> 
+  <p class="ql-long-26020151" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-26020151" href="https://shimo.im/folder/1d3aVJ5egGU6Daqg/" target="_blank" rel="noreferrer noopener">https://shimo.im/folder/1d3aVJ5egGU6Daqg/</a><span class="ql-author-26020151">&nbsp;《安信接口对接文档》</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor13" title="1、迭代需求简述">1、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor23" title="2、参与人员与时间">2、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor30" title="3、用例图">3、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor34" title="4、数据库设计ER图">4、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor46" title="5、核心流程时序">5、核心流程时序</a> </li>
+    <li class="text-ellipsis"><a href="#anchor59" title="6、其他设计补充材料">6、其他设计补充材料</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor61" title="6.1 农户保险订单状态转化图">6.1 农户保险订单状态转化图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor68" title="6.2.农户保单状态转化图">6.2.农户保单状态转化图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor75" title="6.3.其他资料补充">6.3.其他资料补充</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GIS数据接入规范</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span> 
+  <h1 class="ql-long-12253893"></h1> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:16pt;">
+   <span class="ql-author-12253893">一、确权数据</span>
+  </div> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <span class="ql-author-12253893">1、用哪个图层数据</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">用DK图层</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-long-12253893" style="font-size:14pt;">
+   <strong class="ql-author-12253893">2、地块编码用哪个字段</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;">DK图层中的DKBM字段</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-long-12253893" style="font-size:14pt;">
+   <strong class="ql-author-12253893">3、地块类型用哪个字段</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;">DK图层中的TDYT</p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#CCCCCC;" width="308"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">DK图层中的TDYT字段</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#CCCCCC;" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">神农口袋中的地块类型</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">1：种植业</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大田</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">2：林业</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">山地</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">3：畜牧业</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">养殖区</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">4：渔业</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">鱼塘</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">5：非农业用途</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="308"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大田</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-long-12253893" style="font-size:14pt;">
+   <strong class="ql-author-12253893">4、地块导入到神农口袋后的默认地块名称</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;">DKMC(DKBM)</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">如果有相同的，则：</span>DKMC_五位随机数(DKBM)</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-long-12253893" style="font-size:14pt;">
+   <strong class="ql-author-12253893">5、GIS服务的地块默认颜色</strong>
+  </div> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">黄色系1（双柏、庆云）</span></li> 
+  </ul> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">地块类别</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">承包地块</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（246.197.103）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.170.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">自留地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.234.190）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.211.127）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">机动地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.170.190）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.127.127）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">开荒地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（245.122.122）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（222.89.112）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">其他集体土地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.255.115）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.255.190）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">黄色系2</span><span class="ql-author-12253893">（上饶） </span><strong class="ql-author-12253893">通用版本</strong></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893"></span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">地块类别</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="193"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">承包地块</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="193"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.255.115）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">自留地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（246.197.103）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="193"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.170.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">机动地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.170.190）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="193"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.127.127）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">开荒地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.234.190）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="193"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.211.127）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">其他集体土地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（223.168.255）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="193"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（223.115.255）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">绿色系（旌阳）</span></li> 
+  </ul> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">地块类别</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">承包地块</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（66.170.54）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（53.154.33）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">自留地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（56.196.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（90.193.80）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">机动地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（85.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（130.255.39）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">开荒地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（170.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（176.253.26）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">其他集体土地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.255.115）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">红色系</s></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">地块类别</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">填充色值</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">轮廓色值</s></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">承包地块</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（245.122.122）</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（222.89.112）</s></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">自留地</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（246.197.103）</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（255.170.0）</s></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">机动地</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（255.170.190）</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（255.127.127）</s></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">开荒地</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（255.234.190）</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（255.211.127）</s></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">其他集体土地</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="161"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（255.255.115）</s></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="184"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">RGB（255.255.190）</s></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">GIS服务发布的时候，不带透明度；</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">前端调用的时候，地图放大到一定比例尺时加60%的透明度。</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-long-12253893" style="font-size:14pt;">
+   <strong class="ql-author-12253893">6、神农口袋中默认地块类型的颜色取值</strong>
+  </div> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#CCCCCC;" width="317"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">神农口袋中的地块类型</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#CCCCCC;" width="299"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">默认颜色取值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="317"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大田</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="299"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="317"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大棚</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="299"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="317"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">果园</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="299"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="317"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">鱼塘</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="299"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="317"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">山地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="299"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="317"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">养殖区</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="299"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <span class="ql-author-12253893">7、在GIS服务中扩展字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">我们发布DK图层的时候，需要在DK的数据库表结构中增加以下6个字段，以便于搜索：</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">1）承包方代码（CBFBM）</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">2）承包方名称 （CBFMC）</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">3）承包方证件号码 （CBFZJHM）</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">4）承包方联系方式（LXDH）</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">5）地块类型（取值：粮田、菜田、果园、经作田、畜牧、水产、其他）</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">6）</span><s class="ql-author-12253893">是否入网 </s><span class="ql-author-12253893"> 是否已流转（取值：是、否）</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">7）是否在田（取值：是、否）</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">8）是否包含大棚（取值：是、否）</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">9）街镇名称</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">10）街镇编码</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">11）村名称</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">12）村编码</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">13）组名称</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">14）组编码</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">15）经营主体名称</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">16）经营主体在神农口袋中的农场ID</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">17）经营主体的负责人姓名</s></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><s class="ql-author-12253893">18）经营主体的负责人联系方式</s></p> 
+  <h1></h1> 
+  <div style="font-size:16pt;">
+   &nbsp;
+  </div> 
+  <h1 class="ql-long-12253893"></h1> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:16pt;">
+   <span class="ql-author-12253893">二、三调数据</span>
+  </div> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <span class="ql-author-12253893">1、用哪个图层数据</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">用DLTB图层（只使用耕地、园地、林地、水域及水利设施用地的子图层）</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <strong class="ql-author-12253893">2、GIS服务的地块默认颜色</strong>
+  </div> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">地块类型</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">取值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">耕地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">01</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（191.177.29）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.243.118）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">园地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">02</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（250.114.114）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（168.56.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">林地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">03</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（251.185.163）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（221.111.76）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">草地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">04</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（170.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（176.253.26）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">水域及水利设施用地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">11</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（72.151.232）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（131.163.235）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">交通运输用地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">10</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（44.219.134）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（85.255.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">其它土地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">12</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（105.140.158）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（144.164.174）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">地块类型</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">取值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">农村宅基地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">072</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（197.0.255）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（233.115.255）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893"><a class="ql-attachment-link" href="https://uploader.shimo.im/f/X2HX6nUBP7KZNGRn.pdf"> 土地利用现状分类标准(GBT-21010-2017）.pdf </a></span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893"><a class="ql-attachment-link" href="https://uploader.shimo.im/f/BjqpwJHT7MbTZosK.doc"> 国土调查数据库标准（试行修订稿）2019.4.10.doc </a>（第16页）</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">GIS服务发布的时候，不带透明度；</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">前端调用的时候，地图放大到一定比例尺时加60%的透明度。</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <span class="ql-author-12253893">3、在GIS服务中扩展字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">我们发布DLTB图层的时候，需要在DLTB的数据库表结构中增加以下字段：</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">1）土地利用一级分类名称（取“土地利用现状分类标准”中的一级类名称）</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">2）土地利用一级分类编码（取“土地利用现状分类标准”中的一级类编码）</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">3）街镇名称</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">4）街镇编码</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">5）村名称</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">6）村编码</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">注：街镇名称、街镇编码、村名称、村编码 用确权数据里的编码和名称</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-12253893"></h1> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:16pt;">
+   <span class="ql-author-12253893">三、两区划定数据</span>
+  </div> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <span class="ql-author-12253893">1、用哪个图层数据</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">LQPK、LQDK、</span>LQBZP、TJGCDZDW</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2></h2> 
+  <div style="font-size:14pt;">
+   &nbsp;
+  </div> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <strong class="ql-author-12253893">2、GIS服务的地块默认颜色</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><strong class="ql-author-12253893">1）</strong><span class="ql-author-12253893">LQDK</span></p> 
+  <p class="ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893"></span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="186"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">LQLX（两区类型）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="188"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="241"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="186"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">水稻功能区</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="188"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（255.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="241"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（230.230.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="186"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">水稻和小麦复种区</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="188"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（152.230.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="241"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（112.168.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="186"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">油菜籽保护区</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="188"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（0.230.169）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="241"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（0.169.132）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="186"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">水稻和油菜籽复种区</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="188"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（85.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="241"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">RGB（76.230.0）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">GIS服务发布的时候，不带透明度；</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">前端调用的时候，地图放大到一定比例尺时加60%的透明度。</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><strong class="ql-author-12253893">2）</strong><span class="ql-author-12253893">LQPK</span></p> 
+  <p class="ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893"></span></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="188"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="241"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="188"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">透明</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="241"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><strong class="ql-author-12253893">3）LQBZP</strong></p> 
+  <p class="ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893"></span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><strong class="ql-author-12253893">4）TJGCDZDW</strong></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-12253893"></h2> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:14pt;">
+   <span class="ql-author-12253893">3、在GIS服务中扩展字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">我们发布图层的时候，需要在数据库表结构中增加以下字段：</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">1）街镇名称</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">2）街镇编码</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">3）村名称</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">4）村编码</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-12253893"></h1> 
+  <div class="ql-direction-ltr ql-long-12253893" style="font-size:16pt;">
+   <span class="ql-author-12253893">四、上海市测绘院的GIS</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">1、地块导入工具的查询条件</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">1）主体名称（合作社/农企/家庭农场/村集体）</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">农用地服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">同时查询DPCOMPANY、DPREGION、ZHUTINAME这3个字段，只要有一个字段匹配，则查询出对应地块。</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大棚服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">查询COMPANY字段</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">2）统一社会信用代码</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">查询ZHUTIID</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">3）农户姓名</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">查询ZHUTIDAIBI</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">4）农户身份证号</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">DAIBIAOID</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">5）地块ID</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">农用地服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">查询DKID</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大棚服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">DPDKID</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">2、地块导入到神农口袋后的地块类型</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">如果是农用地服务:</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0101粮田：大田</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0102菜田：大田</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0103经作田：大田</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0201果园：果园</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0901养殖（畜牧）：养殖区</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0902养殖（水产）：鱼塘</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N03林地：山地</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0109零星用地（其他）：大田</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0110零星用地（已征地）：大田</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">N0111零星用地（自留地/集体地）：大田</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">如果是大棚服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">TYPE如果是“大棚”，则神农口袋地块类型是“大棚”。否则都是“大田”。</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">3、地块导入到神农口袋后的地块用途</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">农用地服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">GIS地块的LANDTYPE值复制到神农口袋的地块用途。</span></p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">如果LANDTYPE没值，则神农口袋的地块用途是菜田。</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大棚服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">因为没有LANDTYPE字段，默认神农口袋的地块用途都是菜田。</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">4、地块导入后神农口袋后的面积</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">农用地服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">取GIS地块的AREAMU作为神农口袋的地块面积</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大棚服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">取GIS地块的AREAMU作为神农口袋的地块面积</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">5、地块导入后神农口袋后的地块名称</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">农用地服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">DKID_随机数</span><span style="color:#E53333;">（貌似是这样，待研发确认）</span></p> 
+  <ul> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">大棚服务</span></li> 
+  </ul> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">CODE2(CODE1)</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-6442575"></h1> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:16pt;">
+   <span class="ql-author-6442575">四、耕地质量等级</span>
+  </div> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">1、用哪个图层数据</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">使用「耕地资源管理单元图」图层（耕地质量监管-数据库成果-VectorFile文件夹下），并关联评价结果表（ ProgenyDB.mdb）</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">2、地块编码用哪个字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">OBJECTID字段</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">3、地块类型用哪个字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">关联后的质量等级字段进行图层分类</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">4、GIS服务的地块默认颜色</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">1）旌阳版</span></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">地块类型</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">取值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">填充色值-RGB</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">轮廓色值-RGB</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">一等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">1</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（45 199 50）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（76 230 0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">二等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">2</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（38 166 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（56 194 0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">三等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">3</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（0 200 112）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（0 209 120）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">四等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">4</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（76 230 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（107 227 3）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">五等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">5</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（237 191 69）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（255 219 101）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">六等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">6</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（255 189 8）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（230 152 0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">七等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">7</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（255 110 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（214 110 0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">八等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">8</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（255 0 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（199 0 0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">九等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">9</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（169 0 230）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（76 0 115）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">十等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">10</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（</span><span class="ql-author-12253893">49</span><span class="ql-author-6442575"> 2</span><span class="ql-author-12253893">7</span><span class="ql-author-6442575"> </span><span class="ql-author-12253893">146</span><span class="ql-author-6442575">）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（</span><span class="ql-author-12253893">41</span><span class="ql-author-6442575"> </span><span class="ql-author-12253893">20</span><span class="ql-author-6442575"> 1</span><span class="ql-author-12253893">31</span><span class="ql-author-6442575">）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-12253893" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">2）通用版</span></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">地块类型</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">填充色值-RGB</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">轮廓色值-RGB</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">一等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（49&nbsp; 170&nbsp; 9）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（41&nbsp; 148&nbsp; 5）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">二等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（89&nbsp; 184&nbsp; 4）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（75&nbsp; 156&nbsp; 2）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">三等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（123&nbsp; 208&nbsp; 1）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（103&nbsp; 173&nbsp; 1）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">四等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（172&nbsp; 222&nbsp; 3）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（140&nbsp; 180&nbsp; 3）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">五等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（229&nbsp; 244 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（185&nbsp; 197&nbsp; 2）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">六等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（251&nbsp; 223&nbsp; 3）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（205&nbsp; 182&nbsp; 1）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">七等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（255&nbsp; 165&nbsp; 9）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（218&nbsp; 139&nbsp; 3）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">八等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（251&nbsp; 118&nbsp; 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（209&nbsp; 100&nbsp; 2）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">九等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（255&nbsp; 53&nbsp; 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（204&nbsp; 44&nbsp; 2）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">十等地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（215&nbsp; 13&nbsp; 11）&nbsp;</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-12253893">（180&nbsp; 7&nbsp; 6）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">5、在GIS服务中扩展字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">我们发布图层的时候，需要在数据库表结构中增加以下字段：</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">1）质量等级</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">2）街镇名称-映射成最新的</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">3）街镇编码-映射成最新的</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">4）村名称-暂无数据源</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">5）村编码-暂无数据源</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-6442575"></h1> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:16pt;">
+   <span class="ql-author-6442575">五、耕地类别划分</span>
+  </div> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">1、用哪个图层数据</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">使用「旌阳区-矢量数据库」图层（土地安全利用-类别划分成果-矢量数据库下），LBHF图层</span></p> 
+  <p class="ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575"></span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">2、地块编码用哪个字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">LBHF图层的DLBM字段</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">3、地块类型用哪个字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">LBHF图层的质量类别字段进行图层分类</span></p> 
+  <blockquote class="ql-long-6442575"> 
+   <div class="ql-blockquote-item ql-direction-ltr ql-long-6442575">
+    <span class="ql-author-6442575">优先保护类为</span>Ⅰ
+    <span class="ql-author-6442575">，安全利用类为</span>Ⅱ
+    <span class="ql-author-6442575">，严格管控类为</span>Ⅲ
+   </div> 
+  </blockquote> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">4、GIS服务的地块默认颜色</span>
+  </div> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">地块类别</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">取值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">填充色值-RGB</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">轮廓色值-RGB</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">优先保护类</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575 ql-font-simsun" style="font-family:SimSun, STSong, '宋体', '宋体-简', '宋体-繁', '华文宋体', sans-serif;">Ⅰ</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（76 230 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（56 204 0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">安全利用类</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575 ql-font-simsun" style="font-family:SimSun, STSong, '宋体', '宋体-简', '宋体-繁', '华文宋体', sans-serif;">Ⅱ</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（255 255 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（230 230 0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="131"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">严格管控类</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="59"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575 ql-font-simsun" style="font-family:SimSun, STSong, '宋体', '宋体-简', '宋体-繁', '华文宋体', sans-serif;">Ⅲ</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="202"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（255 110 0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="222"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">（214 110 0）&nbsp;</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-6442575"></h2> 
+  <div class="ql-direction-ltr ql-long-6442575" style="font-size:14pt;">
+   <span class="ql-author-6442575">5、在GIS服务中扩展字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">我们发布图层的时候，需要在数据库表结构中增加以下字段：</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">1）街镇名称-需映射成最新的</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">2）街镇编码-需映射成最新的</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">3）村名称-需映射成最新的</span></p> 
+  <p class="ql-direction-ltr ql-long-6442575" style="font-size:11pt;color:#494949;"><span class="ql-author-6442575">4）村编码-需映射成最新的</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-44017836"></h1> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:16pt;">
+   <span class="ql-author-44017836">六、高标准农田数据</span>
+  </div> 
+  <h2 class="ql-long-44017836"></h2> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:14pt;">
+   <span class="ql-author-44017836">1、用哪个图层数据</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">旌阳区高标准农田GIS图层将11-18年及19-20年矢量数据叠加合并为一套图层</span></p> 
+  <h2 class="ql-long-44017836"></h2> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:14pt;">
+   <span class="ql-author-44017836">2、GIS服务的地块默认颜色</span>
+  </div> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="156"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">地类编码（DLBM）</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836 ql-font-simsun" style="font-family:SimSun, STSong, '宋体', '宋体-简', '宋体-繁', '华文宋体', sans-serif;">按《土地利用现状分类GB/T 21010-</span><span class="ql-author-44017836 ql-font-simsun" style="color:#1C7231;font-family:SimSun, STSong, '宋体', '宋体-简', '宋体-繁', '华文宋体', sans-serif;">2017</span><span class="ql-author-44017836 ql-font-simsun" style="font-family:SimSun, STSong, '宋体', '宋体-简', '宋体-繁', '华文宋体', sans-serif;"> 执行，</span><span class="ql-author-44017836">非必填</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="85"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">取值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="198"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="156"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">水田</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="85"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">0101</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（191.177.29）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="198"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.243.118）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="156"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">旱地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="85"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">0103</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（250.114.114）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="198"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（168.56.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="156"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">水浇地</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="85"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">0102</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（251.185.163）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="198"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（221.111.76）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="156"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">其它</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="85"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">为空或有非以上值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（105.140.158）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="198"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（144.164.174）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 class="ql-long-44017836"></h2> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:14pt;">
+   <span class="ql-author-44017836">3、在GIS服务中扩展字段</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">我们发布高标准农田图层的时候，需要在高标准农田图层的数据库表结构中增加以下字段：</span></p> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">1）土地利用一级分类名称（取“土地利用现状分类标准”中的一级类名称）</span></p> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">2）土地利用一级分类编码（取“土地利用现状分类标准”中的一级类编码）</span></p> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">3）街镇名称</span></p> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">4）街镇编码</span></p> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">5）村名称</span></p> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">6）村编码</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-44017836"></h1> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:16pt;">
+   <span class="ql-author-44017836">七、作物种植分布图斑/作物产业地图所在村</span>
+  </div> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">作物分组类型</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">轮廓色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">水稻</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（244 222 103）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（249 254 126）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">玉米</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.170.190）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.127.127）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">大豆</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（85.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（76.230.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">小麦</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（191 189 42）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（253 251 107）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">油菜</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（142 199 62）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（211 254 151）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">马家柚</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（239 162 62）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（253 209 153）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">红芽芋</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（239 154 154）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（254 196 196）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">茶叶</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（91 251 75）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（159 250 150）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">循环用色</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">雷竹笋</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（244 222 103）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（249 254 126）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">山茶油</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.170.190）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（255.127.127）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">水产</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（85.255.0）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（76.230.0）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="103"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">畜牧</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="160"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（191 189 42）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="176"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">RGB（253 251 107）</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-44017836"></h1> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:16pt;">
+   <span style="color:#494949;font-size:11pt;"><br> </span> 
+   <div class="ql-direction-ltr ql-long-44017836" style="background-color:#FFFFFF;font-size:16pt;">
+    <span class="ql-author-44017836">九、管理中台-基础数据管理-经营主体管理-圈定经营地界轮廓</span>
+   </div> 
+   <table style="font-size:14px;background-color:#FFFFFF;color:#313C52;"> 
+    <tbody> 
+     <tr> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">轮廓操作类型</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="147"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">填充色值</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">轮廓色值</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="166"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">参考</span></p> </td> 
+     </tr> 
+     <tr> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">新增地界</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="147"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">fill: rgb(0,246,255)</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">fill-opacity: 0.2</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">stroke: rgb(0,246,255)</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">fill-opacity: 1</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">stroke-width：3.5</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="166"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836"></span></p> </td> 
+     </tr> 
+     <tr> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">不可操作</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">（当前经营主体已圈定地界）</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="147"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">fill: rgb(102,155,161)</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">fill-opacity: 0.8</span></p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">stroke: rgb(180,220,224)</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">fill-opacity: 1</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+      <td class="ql-sheet-cell" rowspan="1" colspan="1" width="166"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836"></span></p> </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <br> &nbsp;
+  </div> 
+  <p style="font-size:11pt;color:#494949;"><span style="font-size:11pt;">&nbsp;</span></p> 
+  <h1 class="ql-long-44017836"></h1> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:16pt;">
+   <span class="ql-author-44017836">十、三农看板-农业生产-遥感监测-产量预测</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-44017836" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">建议：亩产最高的地方红色，最低的地方蓝色，然后中间连续过渡。根据旌阳区作物亩产从287到591公斤/亩</span></p> 
+  <table class="ke-select-row"> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">序号</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">亩产量（公斤/亩）</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">边界色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#41464B;">1</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#41464B;">0=&lt;X&lt;=250</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(0,176,255)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(90,201,251)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">2</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">250&lt;X&lt;=300</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(17,163,116)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(66,232,179)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">3</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">300</span><span style="color:#000000;">&lt;X&lt;=</span><span class="ql-author-44017836" style="color:#000000;">350</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(106,228,4)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(157,253,76)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">4</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">350</span><span style="color:#000000;">&lt;X&lt;=</span><span class="ql-author-44017836" style="color:#000000;">400</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(178,255,89)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(206,254,150)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">5</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">400</span><span style="color:#000000;">&lt;X&lt;=</span><span class="ql-author-44017836" style="color:#000000;">450</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(211,230,33)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(241,252,137)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">6</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">450</span><span style="color:#000000;">&lt;X&lt;=5</span><span class="ql-author-44017836" style="color:#000000;">00</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(255,214,0)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(252,230,118)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">7</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span style="color:#000000;">5</span><span class="ql-author-44017836" style="color:#000000;">00</span><span style="color:#000000;">&lt;X&lt;=</span><span class="ql-author-44017836" style="color:#000000;">5</span><span style="color:#000000;">5</span><span class="ql-author-44017836" style="color:#000000;">0</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(255,109,0)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(252,169,107)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">8</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">5</span><span style="color:#000000;">5</span><span class="ql-author-44017836" style="color:#000000;">0</span><span style="color:#000000;">&lt;X&lt;=</span><span class="ql-author-44017836" style="color:#000000;">600</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#000000;">rgb(246,64,61)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836"><span style="color:#000000;">rgb(252,</span><span style="color:#000000;">119,119)</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#41464B;">9</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#41464B;">600</span><span style="color:#41464B;">&lt;X&lt;=</span><span class="ql-author-44017836" style="color:#41464B;">650</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(213,0,0)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(255,53,53)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#41464B;">10</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836" style="color:#41464B;">650&lt;X&lt;=700</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(213,0,249)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(229,101,251)</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="79"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">11</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="150"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">700&lt;X</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="140"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(101,31,255)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(136,82,254)</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-44017836"></h1> 
+  <div class="ql-direction-ltr ql-long-44017836" style="font-size:16pt;">
+   <span class="ql-author-44017836">十一、时空大数据-地块分析-经营主体分析\经营主体地界GIS</span>
+  </div> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="151"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">填充色值</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">边界色值</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="151"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(244,222,103)</span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="142"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-44017836">rgb(249,254,126)</span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;"><br></p> 
+  <p style="font-size:11pt;color:#494949;">十二、地块用途色值</p> 
+  <p style="font-size:11pt;color:#494949;"> </p>
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><br></td> 
+     <td style="border:1px solid #ddd;">填充色值\边界色值（<span style="color:#444444;font-family:'微软雅黑';font-size:18px;background-color:#FCFCFC;">十六进制</span>）</td> 
+     <td style="border:1px solid #ddd;"><span style="color:#494949;">填充色值（RGB）</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#494949;">边界色值(RGB)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">粮田</td> 
+     <td style="border:1px solid #ddd;"> <p>#017eff</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span style="color:#333333;font-size:14px;">rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">1,126,255</span><span style="color:#333333;font-size:14px;">)</span></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12650.png" alt=""></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">1,126,255</span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">菜田</td> 
+     <td style="border:1px solid #ddd;"> <p>#fcff38</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span><span style="color:#333333;font-size:14px;">rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">252,255,56)</span></span></p> <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12649.png" alt=""></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span><span style="color:#333333;font-size:14px;">rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">252,255,56</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">经作田</td> 
+     <td style="border:1px solid #ddd;"> <p>#64c3a4</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">100,195,164)</span></span></p> <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12648.png" alt=""></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">100,195,164</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">零星用地（其他）</td> 
+     <td style="border:1px solid #ddd;">#fac907</td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">250,201,7</span></span><span>)</span></p> <p><span style="color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12651.png" alt=""></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">250,201,7</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">零星用地（已征地）</td> 
+     <td style="border:1px solid #ddd;">#e800ef</td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">232,0,239</span></span><span></span><span>)</span></p> <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12653.png" alt=""><br></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">232,0,239</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>零星用地（自留地/集体地）</span><br></td> 
+     <td style="border:1px solid #ddd;">#dc7079</td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">220,112,121</span></span><span>)</span></p> <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12654.png" alt=""><br></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">220,112,121</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">果园</td> 
+     <td style="border:1px solid #ddd;"> <p>#65f50b</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">101,245,11)</span></span></p> <p><span style="color:#FF0000;font-family:'微软雅黑';font-size:18px;background-color:#FCFCFC;"><span style="color:#FF0000;font-family:'微软雅黑';font-size:18px;background-color:#FCFCFC;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12656.png" alt=""><br></span></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">101,245,11</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">林地</td> 
+     <td style="border:1px solid #ddd;"> <p>#6570a4</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">101,112,164</span></span><span>)</span></p> <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12657.png" alt=""><br></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">101,112,164</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">养殖（畜牧），即 栏舍</td> 
+     <td style="border:1px solid #ddd;"> <p>#017ea4</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">1,126,164</span></span><span>)</span></p> <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12658.png" alt=""><br></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">1,126,164</span></span><span>)</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>养殖（水产），即 池塘</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>#e8f44b</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">232,244,75</span></span><span>)</span></p> <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12659.png" alt=""><span style="color:#333333;font-size:14px;"></span></span></p> </td> 
+     <td style="border:1px solid #ddd;"><span>rgb(</span><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;"><span style="color:#333333;font-family:'微软雅黑';font-size:14px;background-color:#FCFCFC;">232,244,75</span></span><span>)</span><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220412 管棚 功能详细设计文档-1组-1组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span> 
+  <h1 class="ql-long-74090444"></h1> 
+  <h1 style="font-size:16pt;" id="anchor2"><span class="ql-author-74090444">1.迭代需求简介</span></h1> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-74090444" href="http://101.132.97.141:8080/browse/SH-249" target="_blank" rel="noreferrer noopener">http://101.132.97.141:8080/browse/SH-249</a></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-74090444"></h1> 
+  <h1 style="font-size:16pt;" id="anchor8"><strong class="ql-author-74090444">2.参与人员开发时间</strong></h1> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><strong class="ql-author-74090444">刘洋，姬帅</strong></p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;">2022-04-14到2022-04-25</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 id="anchor13">3.用例图</h1> 
+  <p style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2628.jpeg" alt="" width="400" height="251" title=""></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-74090444"></h1> 
+  <h1 style="font-size:16pt;" id="anchor17"><strong class="ql-author-74090444">4.表设计总览</strong></h1> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2616.png" alt="" width="500" height="243" title=""></p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">1.应产品需求项目表冗余农场名，但不冗余省市区</span></p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">2.管棚区表和管棚镇表用于保存区域id和编码中的code对应关系，方便后期扩展维护</span></p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">3.管棚区表维护当前区管棚自增流水号</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-74090444"></h1> 
+  <h1 style="font-size:16pt;" id="anchor26"><strong class="ql-author-74090444">5.部分接口时序图</strong></h1> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><br></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;<img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2736.jpeg" alt=""></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;"><br></p> 
+  <h1 class="ql-long-74090444"></h1> 
+  <h1 style="font-size:16pt;" id="anchor32"><strong class="ql-author-74090444">6.接口列表</strong></h1> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">项目列表接口&nbsp; gov/greenhouseProject/list</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">添加项目接口&nbsp; gov/greenhouseProject/add</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">修改时展示信息（修改展示，失效展示） gov/greenhouseProject/getInfo</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">修改接口 gov/greenhouseProject/edit</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">列表查看信息接口 gov/greenhouse/getInfo</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">失效接口(失效后地块解绑) gov/greenhouseProject/disable</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">根据项目id获取分页管棚(列表查看信息页) gov/greenhouse/list</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">关联地块接口 gov/greenhouse/relationLand</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">查看农场下已关联的land_Id集合（列表查看信息显示已绑定地块；扫码后的管棚地块）gov/greenhouse/listRelationLand</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;"><span class="ql-author-74090444">扫码展示接口 gov/greenhouse/getDetail</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-74090444"></h1> 
+  <h1 style="font-size:16pt;" id="anchor56"><strong class="ql-author-74090444">6.上线准备</strong></h1> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;">1、初始化tbl_shed_county表，自增流水号置为0</p> 
+  <p class="ql-long-74090444" style="font-size:11pt;color:#494949;">2、初始化<span class="ql-author-74090444">tbl_greenhouse_town_code表</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor2" title="1.迭代需求简介">1.迭代需求简介</a> </li>
+    <li class="text-ellipsis"><a href="#anchor8" title="2.参与人员开发时间">2.参与人员开发时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor13" title="3.用例图">3.用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor17" title="4.表设计总览">4.表设计总览</a> </li>
+    <li class="text-ellipsis"><a href="#anchor26" title="5.部分接口时序图">5.部分接口时序图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor32" title="6.接口列表">6.接口列表</a> </li>
+    <li class="text-ellipsis"><a href="#anchor56" title="6.上线准备">6.上线准备</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

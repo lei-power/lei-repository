@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220210  旌阳土地承包系统 功能详细设计文档1 - 2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h2></h2> 
+  <h2></h2> 
+  <h2 id="anchor2">一、迭代需求简述<span></span></h2> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><span style="font-size:14px;">本次迭代的主要需</span><span style="font-size:14px;">求：</span><span></span></span></p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;text-indent:-18pt;"><span style="font-size:12pt;"><span><span style="font-size:14px;">1.</span></span></span><span style="font-size:12pt;"><span style="font-size:14px;">发包方、承包方、承包方家庭成员、承包地块信息等维护；</span><span></span></span></p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;text-indent:-18pt;"><span style="font-size:12pt;"><span><span style="font-size:14px;">2.</span></span></span><span style="font-size:12pt;"><span style="font-size:14px;">初始登记、其他方式登记、互换登记、转让登记、分户登记、合户登记、变更户主登记、注销登记</span><span style="font-size:14px;">8</span><span style="font-size:14px;">种登记流程的实现；</span><span></span></span></p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;text-indent:-18pt;"><span style="font-size:12pt;"><span><span style="font-size:14px;">3.</span></span></span><span style="font-size:12pt;"><span style="font-size:14px;">承包合同、登记簿、权证的管理；</span><span></span></span></p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;text-indent:-18pt;"><span style="font-size:12pt;"><span><span style="font-size:14px;">4.</span></span></span><span style="font-size:12pt;"><span style="font-size:14px;">权证的初发、补发、换发以及权证打印；</span><span></span></span></p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;text-indent:-18pt;"><span style="font-size:12pt;"><span><span style="font-size:14px;">5.</span></span></span><span style="font-size:12pt;"><span style="font-size:14px;">外设指南和土地承包区域配置管理。</span><span></span></span></p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;text-indent:-18pt;"><span style="font-size:12pt;"><br></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><span style="font-size:14px;">产品需求文档参考链接：</span><a href="https://shimo.im/docs/368JygvKpXkJWpCp/read" target="_blank" rel="noreferrer noopener"><span style="font-size:14px;">https://shimo.im/docs/368JygvKpXkJWpCp/read</span></a></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><span style="font-size:14px;">产品</span><span style="font-size:14px;">UE</span><span style="font-size:14px;">参考链接：</span><a href="https://5x3o54.axshare.com/#id=j6wolj&amp;p=%E8%B0%83%E6%9F%A5%E6%95%B0%E6%8D%AE&amp;g=1" target="_blank" rel="noreferrer noopener"><span style="font-size:14px;">https://5x3o54.axshare.com/#id=j6wolj&amp;p=调查数据&amp;g=1</span></a></span></p> 
+  <p class="MsoNormal"><br></p> 
+  <p class="MsoNormal"><br></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"></span></p> 
+  <h2 id="anchor16">二、参与人员与时间<span></span></h2> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><span style="font-size:14px;">服务端：王恺、王磊</span><span></span></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><span style="font-size:14px;">迭代时间：</span><span style="font-size:14px;">2022-2-10</span><span style="font-size:14px;">到</span><span style="font-size:14px;">2022-5-9</span></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><span style="font-size:14px;">涉及到的服务端端：管理中台、管理后台</span><span></span></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><br></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"><br></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"></span></p> 
+  <p class="MsoNormal"><span style="font-size:12pt;"></span></p> 
+  <h2 id="anchor24">三、用例图</h2> 
+  <h3 id="anchor25">1.基础数据管理</h3> 
+  <p class="MsoNormal"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3235.png" alt="" width="400" height="581" title=""></p> 
+  <h3 id="anchor27">2.登记管理</h3> 
+  <p class="MsoNormal"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3236.png" alt="" width="400" height="515" title=""></p> 
+  <h3 id="anchor29">3.审核管理</h3> 
+  <p class="MsoNormal"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3237.png" alt="" width="400" height="247" title=""></p> 
+  <h3 id="anchor31">4.admin后台管理</h3> 
+  <p class="MsoNormal"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3238.png" alt="" width="400" height="380" title=""></p> 
+  <p class="MsoNormal"><br></p> 
+  <p class="MsoNormal"><span style="font-size:14px;"><br></span></p> 
+  <p class="MsoNormal"><span style="font-size:14px;">注：</span></p> 
+  <p class="MsoNormal"><span style="font-size:14px;">1.基础数据部分是对线下收集用来初始入库的数据进行管理；</span></p> 
+  <p class="MsoNormal"><span style="font-size:14px;">2.登记管理是登记科员在登记流程中可以操作的动作以及可查看的数据；</span></p> 
+  <p class="MsoNormal"><span style="font-size:14px;">3.审核管理是审核科员在登记流程中可以操作的动作以及可查看的数据；</span></p> 
+  <p class="MsoNormal"><span style="font-size:14px;">4.admin后台管理是指在运维人员在管理后台可以配置的功能。</span></p> 
+  <p class="MsoNormal"><br></p> 
+  <p class="MsoNormal"><br></p> 
+  <p class="MsoNormal"><br></p> 
+  <h2><span></span><span></span></h2> 
+  <h2><span></span><span></span></h2> 
+  <h2><span></span><span></span></h2> 
+  <h2><span></span><span></span></h2> 
+  <h2 id="anchor47">四、数据库设计<span>ER</span>图<span></span></h2> 
+  <p><span><span style="font-size:14px;">说明：ER图中，方框代表实体，连接线代表实体间的关系，爪形的一端代表多方，双竖线一端代表一方，可用来表示</span><span style="font-size:14px;">一对一、</span><span style="font-size:14px;">一对多等关系。</span></span></p> 
+  <p><span><span style="font-size:14px;"><br></span></span></p> 
+  <h3 id="anchor50">1.基础数据</h3> 
+  <h4><span></span></h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3190.png" alt="" width="400" height="627" title=""></p> 
+  <p><br></p> 
+  <h3 id="anchor54">2.登记流程</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3191.png" alt="" width="400" height="382" title=""></p> 
+  <p><br></p> 
+  <h3 id="anchor57">3.辅助部分</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3195.png" alt="" width="400" height="293" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span>注：</span></p> 
+  <p><span style="font-size:13.3333px;">1.基础数据 是指在线下就已经确定好了，然后操作员将确定好的信息录入到土地承包确权系统里。这部分数据在代码业务上都是直接更新原始数据，不做记录修改日志，<span style="font-size:13.3333px;">这里新增了一张承包经营权登记簿日志记录表，主要记录登记簿操作的记录。</span></span></p> 
+  <p>2.登记流程 是指在九种登记流程中将过程中的数据以及历史记录下来的表，<span style="font-size:13.3333px;">所有登记都需要经过审核，只有审核通过了，才能登记入簿。</span></p> 
+  <p class="MsoNormal"><span class="ql-author-35567033"><span style="font-size:10pt;">3.辅助部分 这部分的表主要是辅助系统运行的，包括编码游标表、文件存储记录表、字典表等。</span></span></p> 
+  <p class="MsoNormal"><span class="ql-author-35567033"><span style="font-size:10pt;"><br></span></span></p> 
+  <p class="MsoNormal"><span class="ql-author-35567033"><span style="font-size:10pt;"><br></span></span></p> 
+  <p class="MsoNormal" align="left" style="text-align:left;"><span></span><span></span></p> 
+  <p class="MsoNormal" align="left" style="text-align:left;"><span></span></p> 
+  <p class="MsoNormal" align="left" style="text-align:left;"><span></span></p> 
+  <h2 id="anchor70">五、审核流程状态转化图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3172.png" alt="" width="400" height="374" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>注：</p> 
+  <p>.状态图有四个状态：<span>1-草稿、2-待审核、3-已通过、4-被驳回</span></p> 
+  <p>.状态图有九个动作：<span>1-保存草稿：新增、2-提交审核：新增、</span><span>3-保存草稿：编辑、4-提交审核、</span><span>5-撤回、6-审核通过、7-审核驳回或定时器自动驳回、</span><span>8-重新提交、9-删除</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p class="MsoNormal" align="left" style="text-align:left;"><span></span><span></span></p> 
+  <p class="MsoNormal" align="left" style="text-align:left;"><span></span></p> 
+  <p class="MsoNormal"><span></span></p> 
+  <p class="ql-long-35567033" style="text-indent:22pt;"><span style="font-size:11pt;color:#494949;"></span></p> 
+  <p class="MsoNormal"><span style="font-size:11pt;color:#494949;"></span></p> 
+  <h2><span></span></h2> 
+  <h2 id="anchor85">六、核心流程时序<span></span></h2> 
+  <p><br></p> 
+  <h3 id="anchor87">1.承包方新增</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3630.png" alt="" width="400" height="629" title=""></p> 
+  <p><span style="color:inherit;font-size:16px;font-weight:700;">2.承</span><span style="color:inherit;font-size:16px;font-weight:700;">包合同新增</span></p> 
+  <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3631.png" alt="" width="400" height="426" title=""><br></span></p> 
+  <p><span style="color:inherit;font-size:16px;font-weight:700;">3.登记流程新增</span></p> 
+  <p><span style="font-size:16px;font-weight:700;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3633.png" alt="" width="400" height="1200" title=""><br></span></p> 
+  <p><span style="font-size:16px;font-weight:700;">7.登记流程审核</span></p> 
+  <p><span style="font-size:16px;font-weight:700;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3681.png" alt="" width="400" height="1200" title=""><br></span></p> 
+  <p><br></p> 
+  <h2><span></span></h2> 
+  <h2><span></span></h2> 
+  <h2 id="anchor98">七、系统架构设计<span></span></h2> 
+  <h3 id="anchor99"><span style="font-size:16px;">1.新增服务</span></h3> 
+  <p><span style="font-size:14px;">服务名称：service-landowner</span></p> 
+  <h3 id="anchor101"><span style="font-size:16px;">2.新增数据库</span></h3> 
+  <p><span style="font-size:14px;">数据库名称：frp_landowner</span></p> 
+  <p><br></p> 
+  <h2><span></span></h2> 
+  <h2><span></span></h2> 
+  <br>
+  <br> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor2" title="一、迭代需求简述">一、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor16" title="二、参与人员与时间">二、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor24" title="三、用例图">三、用例图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor25" title="1.基础数据管理">1.基础数据管理</a> </li>
+      <li class="text-ellipsis"><a href="#anchor27" title="2.登记管理">2.登记管理</a> </li>
+      <li class="text-ellipsis"><a href="#anchor29" title="3.审核管理">3.审核管理</a> </li>
+      <li class="text-ellipsis"><a href="#anchor31" title="4.admin后台管理">4.admin后台管理</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor47" title="四、数据库设计ER图">四、数据库设计ER图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor50" title="1.基础数据">1.基础数据</a> </li>
+      <li class="text-ellipsis"><a href="#anchor54" title="2.登记流程">2.登记流程</a> </li>
+      <li class="text-ellipsis"><a href="#anchor57" title="3.辅助部分">3.辅助部分</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor70" title="五、审核流程状态转化图">五、审核流程状态转化图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor85" title="六、核心流程时序">六、核心流程时序</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor87" title="1.承包方新增">1.承包方新增</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor98" title="七、系统架构设计">七、系统架构设计</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor99" title="1.新增服务">1.新增服务</a> </li>
+      <li class="text-ellipsis"><a href="#anchor101" title="2.新增数据库">2.新增数据库</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

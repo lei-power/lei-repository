@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220907.农情监测（遥感） 功能详细设计文档-2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、迭代需求</h1> 
+  <p>1、旌阳农业部为了需要了解旌阳各类作物生长分布情况，在大数据平台新增一个农情监测菜单，菜单下内容分为作物种植分布和产量预测两个单元内容查看</p> 
+  <p>2、数据来源：（1）底图影像是由珈和提供</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（2）种植分布和产量预测数据是由珈和通过影像进行算法分析得到旌阳镇村所有作物的分布和产量预测</p> 
+  <p>3、农情监测数据是由作物分组决定的，1、选择区域类型（产量预测或种植分布）</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2、选择区域作物分组（水稻或小麦）</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3、根据区域id、作物分组id、类型筛选当前作物分组的历史数据</p> 
+  <p>4、四周模快数据：所有周边数据都是通过影像分析出来的数据，进行手动按区域归档，归档范围：区/县、镇、村</p> 
+  <p>5、种植分布里的占用耕地面积比例计算：</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 左侧种植分布模块百分比是&nbsp; ：全区的小麦种植面积/全区耕地面积<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 右侧种植面积区域分布模块百分比是&nbsp; ：各镇的小麦种植面积/各镇耕地面积<br>6、gis发布：需要将珈和提供的种植分布和产量预测矢量数据，发布成gis动态服务，这里不需要发布切片服务，前端直接通过动态服务进行筛选展示</p> 
+  <p>7、农情监测新建的表放在：frp_landoccupy数据库</p> 
+  <p>&nbsp; &nbsp; &nbsp; 开发服务在service-landoccupy服务开发</p> 
+  <p>8、农情监测归档的表在：frp_gisdata_archive数据库</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp;开发服务在：service-gisdata服务开发</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><a href="/zentao/story-view-451.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/story-view-451.html</a></p> 
+  <p><a href="/zentao/story-view-452.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/story-view-452.html</a></p> 
+  <p><br></p> 
+  <h1 id="anchor19">2、参与人员与时间</h1> 
+  <p><br></p> 
+  <p>服务端：王恺</p> 
+  <p>迭代时间：2022-09-07到2022-09-09</p> 
+  <p><br></p> 
+  <h1 id="anchor24">3、用例图</h1> 
+  <h2 id="anchor25">3.1、管理后台</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9318.jpeg" alt="" width="400" height="352" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor28">3.2、大数据平台</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9316.jpeg" alt="" width="400" height="204" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor31">4、数据库ER图</h1> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9857.jpeg" alt="" width="400" height="132" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor35">4.1、历史记录相关表</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9858.png" alt="" width="400" height="247" title=""></p> 
+  <h2 id="anchor38">4.2、数据归档相关表</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9164.png" alt="" width="400" height="451" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor42">5、时序图</h1> 
+  <h2 id="anchor43">5.1、管理后台-区域作物分组</h2> 
+  <h3>5.1.1、新增接口</h3> 
+  <p>按区域新增作物分组，<span>作物分组做重复校验</span></p> 
+  <h3>5.1.2、修改接口</h3> 
+  <p>根据id，修改区域和作物分组，作物分组做重复校验</p> 
+  <h3>5.1.3、删除接口</h3> 
+  <p>判断作物id有没有在历史表里使用，如果有绑定，不能删除</p> 
+  <p><br></p> 
+  <h2 id="anchor51">5.2、管理后台-区域类型</h2> 
+  <h2 id="anchor52">5.2.1、新增接口</h2> 
+  <p>按区域新增区域监测类型，类型做重复校验</p> 
+  <h3>5.2.2、删除接口</h3> 
+  <p>判断类型有没有在历史表里使用，如果有绑定，不能删除</p> 
+  <h2 id="anchor56">5.3、管理后台-历史记录</h2> 
+  <h3>5.3.1、新增接口</h3> 
+  <p>新增历史接口</p> 
+  <h3>5.3.2、修改接口</h3> 
+  <p>新增修改接口</p> 
+  <h2 id="anchor61">5.4、大数据平台-种植分布</h2> 
+  <h3>5.4.1、详情</h3> 
+  <p>新增详情接口</p> 
+  <h2 id="anchor64">5.5、大数据平台-产量预测</h2> 
+  <h3>5.5.1、详情</h3> 
+  <p>新增详情接口</p> 
+  <h1 id="anchor67">5、流程图</h1> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9319.jpeg" alt="" width="400" height="555" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor71">6、接口</h1> 
+  <p><br></p> 
+  <table>
+   <tbody>
+    <tr>
+     <th>序号</th> 
+     <th>接口</th> 
+     <th>开发服务</th> 
+     <th>开发时间</th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td><br></td> 
+     <td><br></td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、迭代需求">1、迭代需求</a> </li>
+    <li class="text-ellipsis"><a href="#anchor19" title="2、参与人员与时间">2、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor24" title="3、用例图">3、用例图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor25" title="3.1、管理后台">3.1、管理后台</a> </li>
+      <li class="text-ellipsis"><a href="#anchor28" title="3.2、大数据平台">3.2、大数据平台</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor31" title="4、数据库ER图">4、数据库ER图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor35" title="4.1、历史记录相关表">4.1、历史记录相关表</a> </li>
+      <li class="text-ellipsis"><a href="#anchor38" title="4.2、数据归档相关表">4.2、数据归档相关表</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor42" title="5、时序图">5、时序图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor43" title="5.1、管理后台-区域作物分组">5.1、管理后台-区域作物分组</a> </li>
+      <li class="text-ellipsis"><a href="#anchor51" title="5.2、管理后台-区域类型">5.2、管理后台-区域类型</a> </li>
+      <li class="text-ellipsis"><a href="#anchor52" title="5.2.1、新增接口">5.2.1、新增接口</a> </li>
+      <li class="text-ellipsis"><a href="#anchor56" title="5.3、管理后台-历史记录">5.3、管理后台-历史记录</a> </li>
+      <li class="text-ellipsis"><a href="#anchor61" title="5.4、大数据平台-种植分布">5.4、大数据平台-种植分布</a> </li>
+      <li class="text-ellipsis"><a href="#anchor64" title="5.5、大数据平台-产量预测">5.5、大数据平台-产量预测</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor67" title="5、流程图">5、流程图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor71" title="6、接口">6、接口</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

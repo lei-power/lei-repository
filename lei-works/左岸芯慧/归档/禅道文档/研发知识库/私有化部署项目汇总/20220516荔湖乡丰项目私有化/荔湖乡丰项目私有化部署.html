@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>荔湖乡丰项目私有化部署</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1 前置工作及说明</h1> 
+  <h2 id="anchor1">1.1 私有化工作部署计划安排<img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3794.jpg" alt=""></h2> 
+  <p><br></p> 
+  <div>
+   一般情况下需要3周时间
+  </div> 
+  <div> 
+   <ul> 
+    <li>第一周：环境沟通，甲方按照我方提供的配置清单说明当前是否能正常提供，如果有特殊场景或者限制不能提供的，这时我方技术人员需要接入，跟甲方进一步沟通了解，看是否有其他方案可以代替，最终需要双方达成一致共识才能继续进行。</li> 
+    <li>第二周：环境准备。甲方就上一周沟通达成共识后，开始准备环境和必要的资源和账号等</li> 
+    <li>第三周：部署实施。我方就甲方提供的环境资源配置开始部署安装项目和软件</li> 
+   </ul> 
+  </div> 
+  <h2 id="anchor11">1.2 环境配置及软件安装</h2> 
+  <p>神农口袋、物联网服务都需要依赖必要的相关中间件和数据库等服务，在部署前需要先准备好，以下是清单明细</p> 
+  <table style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td>名称<br></td> 
+     <td>版本</td> 
+     <td>备注</td> 
+    </tr> 
+    <tr> 
+     <td>mysql-神农口袋</td> 
+     <td>5.7<br></td> 
+     <td><span>连接地址：172.27.87.32:3309&nbsp; &nbsp;&nbsp;<span>用户名：mz5bk5vb&nbsp;</span><span>密码：6RcgIz=4b_h&nbsp; &nbsp;(<span>允许堡垒机和容器平台宿主机ip连接</span>)</span></span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">mysql-物联网</td> 
+     <td style="border:1px solid #DDDDDD;">5.7.33</td> 
+     <td style="border:1px solid #DDDDDD;">连接地址：172.27.87.32:3309&nbsp; &nbsp;用户名：fh9zrsc3&nbsp; &nbsp;密码：USr3qf2%_lo （维护方式：通过堡垒机维护 源ip地址限制：允许堡垒机和容器平台宿主机ip连接<span>）</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">redis-物联网<br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>4.0.14</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>连接地址：</span>redis.baseiot:6379&nbsp; &nbsp;密码：qomuLSywhn01uiarg<br></td> 
+    </tr> 
+    <tr> 
+     <td>redis-神农口袋</td> 
+     <td>4.0.11<br></td> 
+     <td><span><span>连接地址：</span>redis.snkoudai:6379&nbsp;&nbsp;<span>密码：9vwkRtocdKbtsvd7h</span></span><br></td> 
+    </tr> 
+    <tr> 
+     <td>rabbitmq<br></td> 
+     <td>3.6.8<br></td> 
+     <td><span><span>连接地址：</span>rabbitmq.snkoudai:5672&nbsp;&nbsp;<span>账号/密码：admin/ujkmZ8pdhswBgoki5</span></span><br></td> 
+    </tr> 
+    <tr> 
+     <td>erlang<br></td> 
+     <td>19.3<br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>nginx<br></td> 
+     <td>1.14.2<br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>jdk<br></td> 
+     <td>1.8<br></td> 
+     <td><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor62">1.3 域名准备</h2> 
+  <span> </span> 
+  <p><br></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="80"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><strong class="ql-author-37613752">服务</strong></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><strong class="ql-author-37613752">域名</strong></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><strong class="ql-author-37613752">IP地址</strong></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><strong class="ql-author-37613752">备注</strong></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" rowspan="3" colspan="1" width="80"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">神农口袋</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">snkoudai.zc.gov.cn</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.191:20040</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">神农口袋企业端（可以分配ssl证书，也可以不分配）</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">guanli.zc.gov.cn</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.191:20042</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">神农口袋管理后台</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">suyuan.zc.gov.cn</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.191:20040</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">神农口袋溯源h5页面</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" rowspan="4" colspan="1" width="80"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">物联网</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">baseiot.zc.gov.cn</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.197:20040</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">物联网基地端</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">adminiot.zc.gov.cn</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.197:20040</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">物联网管理后台</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">operiot.zc.gov.cn</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.197:20040</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">物联网运营商端</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">openiot.zc.gov.cn</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.197:20044</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="272"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">第三方接口服务</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="80"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">大数据平台</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="131"> <p class="ql-vertical-top ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">xiangfeng5g.zc.gov.cn</span></p> <p class="ql-vertical-top" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+     <td class="ql-sheet-cell ql-vertical-top selected" width="174"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-37613752">172.16.118.191:20043</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="272"> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> nginx 地址：172.27.11.27 
+  <h2 id="anchor182">1.3 交付计划</h2> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">事项<br></td> 
+     <td style="border:1px solid #DDDDDD;">负责人</td> 
+     <td style="border:1px solid #DDDDDD;">时间点</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"> <p>新建分支</p> <p>（分支名<span>：{交付项目}_{签出的最新分支版本号},例如：<span>lihuxiangfeng_v4.54.0</span><span>）</span></span></p> <p>&nbsp; 备注：删除多余配置文件&nbsp;&nbsp;</p> </td> 
+     <td style="border:1px solid #DDDDDD;"><span>后端（</span><span>王恺、张俊</span><span>）前端（</span><span>谢泽发</span><span>）</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>5.27下班前</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"> <p>前后端提供部署包甲方指定服务器目录中</p> <p>（交付包位置：那先上传到172.27.87.166的snkoudai目录里）</p> </td> 
+     <td style="border:1px solid #DDDDDD;">后端（<span>王恺、张俊</span>）前端（<span>谢泽发</span>）</td> 
+     <td style="border:1px solid #DDDDDD;">5.27下班前</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">部署事项及问题排查</td> 
+     <td style="border:1px solid #DDDDDD;"><span><span>后端（</span><span>王恺、张俊</span><span>）前端（</span><span>谢泽发</span><span>）</span></span><br></td> 
+     <td style="border:1px solid #DDDDDD;">看甲方进度，需要随时跟进</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">初始数据录入及配置</td> 
+     <td style="border:1px solid #DDDDDD;">产品部门</td> 
+     <td style="border:1px solid #DDDDDD;">等甲方全部部署完成</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor219">1.4 甲方环境</h2> 
+  <h3>1.4.1 操作步骤说明</h3> 
+  <p>一、vpn登陆<br>参考 附件《深信服VPN安装和使用指南》<br>二、堡垒机登陆<br>参考<span>&nbsp;附件</span>《06-启明星辰_安全运维审计系统（双因子堡垒机）_用户操作手册》<br>三、镜像操作台登陆<br>参考<span>&nbsp;附件</span>《镜像操作与规范》<br>四、镜像仓库登陆<br>参考<span>&nbsp;附件</span>《镜像操作与规范》<br>五、容器云平台登陆<br>参考<span>&nbsp;附件</span>《PaaS 产品操作手册 v4.1》</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><br></td> 
+     <td style="border:1px solid #DDDDDD;">账号</td> 
+     <td style="border:1px solid #DDDDDD;">密码<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;" rowspan="3" colspan="1"> <p>VPN账号密码</p> <p>地址：https://vpn1.zengcheng.gov.cn:3300</p> </td> 
+     <td style="border:1px solid #DDDDDD;"><span>zhangjun</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>zj123456!</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>wangkai</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>wk123456!</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>caizheng</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"> <p>zaxh#cz123</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <td><br></td> 
+     <td>账号</td> 
+     <td>密码<br></td> 
+    </tr> 
+    <tr> 
+     <td rowspan="6" colspan="1"> <p>堡垒机</p> <p>地址：<span>https://172.27.11.249</span></p> </td> 
+     <td>zhangjun<br></td> 
+     <td><span>!@#qazWSX123</span><br></td> 
+    </tr> 
+    <tr> 
+     <td>wangkai<br></td> 
+     <td><span>!@#qazWSX123</span><br></td> 
+    </tr> 
+    <tr> 
+     <td>caizheng<br></td> 
+     <td> <p><span>Zaxh#cz123</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>liuyang</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>!@#qazWSX123</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>chenxiaolei</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>0:e8]$4{~M3MDw</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>黎泳豪</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>B*1SF5:dd&lt;t</span><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <td><br></td> 
+     <td>账号</td> 
+     <td>密码<br></td> 
+    </tr> 
+    <tr> 
+     <td rowspan="6" colspan="1"> <p>时速云平台</p> <p>地址：<span>https://tce.zc.gov.cn</span></p> </td> 
+     <td>zhangjun<br></td> 
+     <td><span>krLj.Ht$c84</span><br></td> 
+    </tr> 
+    <tr> 
+     <td>wangkai<br></td> 
+     <td><span>kpi4},6APel</span><br></td> 
+    </tr> 
+    <tr> 
+     <td>caizheng<br></td> 
+     <td> <p>Zaxh#cz123</p> </td> 
+    </tr> 
+    <tr> 
+     <td>liuyang<br></td> 
+     <td>!@#qazWSX123<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <td><br></td> 
+     <td>账号</td> 
+     <td>密码<br></td> 
+    </tr> 
+    <tr> 
+     <td rowspan="6" colspan="1"> <p><span>镜像操作台：172.27.87.166</span></p> <p><span><br></span></p> <p><br></p> </td> 
+     <td><span>chaizheng</span><br></td> 
+     <td><span>19nANdh@*ip</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><span>liuyang</span><br></td> 
+     <td><span>TS0xy4iq,-t</span><br></td> 
+    </tr> 
+    <tr> 
+     <td><span>chenxiaolei</span><br></td> 
+     <td> <p><span>rE7!c5Aayq(</span></p> </td> 
+    </tr> 
+    <tr> 
+     <td><span>liyonghao</span><br></td> 
+     <td><span>Cm2nw6t$)Ff</span></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <br> 
+  <p><br></p> 
+  <p>镜像仓库：registry.zc.gov.cn/snkoudai,registry.zc.gov.cn/baseiot,registry.zc.gov.cn/xiangfeng5g<br>登陆方式：从172.27.87.166登陆，执行docker login registry.zc.gov.cn<br>账号密码：同172.27.87.166</p> 
+  <p>容器云平台：https://tce.zc.gov.cn<br>登陆方式：从堡垒机登陆<br>账号密码：同172.27.87.166</p> 
+  <p><br></p> 
+  <p>镜像操作台：172.27.87.166<br>操作系统：CentOS<br>登陆方式：从堡垒机登陆<br>备注：这台操作台用于操作更新应用文件，封装镜像，和推送镜像到镜像仓库<br>账号 密码<br>chaizheng 19nANdh@*ip<br>liuyang TS0xy4iq,-t<br>chenxiaolei rE7!c5Aayq(<br>liyonghao Cm2nw6t$)Ff</p> 
+  <p>堡垒机登陆地址：https://172.27.11.249<br>使用人：柴政<br>堡垒机用户名：chaizheng<br>堡垒机初始密码：Zaxh#cz123<br>使用人：刘洋<br>堡垒机用户名：liuyang<br>堡垒机初始密码：!@#qazWSX123<br><br>使用人：陈晓垒<br>堡垒机用户名：chenxiaolei<br>堡垒机初始密码：0:e8]$4{~M3MDw<br><br>使用人：黎泳豪<br>堡垒机用户名：liyonghao<br>堡垒机初始密码：B*1SF5:dd&lt;t</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>日志下载方式，通过ftp下载</p> 
+  <p>神农口袋日志下载地址：<br>ftp地址：172.27.4.183:10201<br>连接方式：filezilla客户端<br>账号：snkoudai<br>密码：A_g2!q4fpHw</p> 
+  <p><br></p> 
+  <p>物联网日志下载地址：<br>ftp地址：172.27.4.183:10201<br>连接方式：filezilla客户端<br>账号：baseiot<br>密码：oRl9~)jq8pS</p> 
+  <p><br></p> 
+  <p>王恺堡垒机账号</p> 
+  <p>地址：https://172.27.11.249/client/index/maintenance</p> 
+  <p>账号：wangkai</p> 
+  <p>密码：<span>!@#qazWSX123</span></p> 
+  <p><span><br></span></p> 
+  <p><span>王恺时速云平台</span></p> 
+  <p><span>账号：wangkai</span></p> 
+  <p>密码：<span style="font-size:14px;background-color:#FFFFFF;">!@#qazWSX123</span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><br></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;">王恺ftp上传</span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;">账号：wangkai</span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;">密码：<span style="font-size:14px;background-color:#FFFFFF;">wk1qaz&lt;&gt;?</span> </span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>张俊堡垒机账号</p> 
+  <p>地址：https://172.27.11.249/client/index/maintenance</p> 
+  <p>账号：zhangjun</p> 
+  <p>密码：<span>!@#qazWSX123</span></p> 
+  <p><b><br></b></p> 
+  <p>张俊时速云平台</p> 
+  <p>账号:&nbsp;zhangjun</p> 
+  <p>密码:&nbsp;krLj.Ht$c84</p> 
+  <h1 id="anchor395">2 服务部署-神农口袋</h1> 
+  <h2 id="anchor396">2.1 神农口袋部署图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3792.jpg" alt=""></p> 
+  <h1></h1> 
+  <h2 id="anchor399">2.2 环境检查</h2> 
+  <p>确认是否已经准备好 nginx、redis、rabbitmq、mysql、jdk1.8 等基础依赖</p> 
+  <h3>2.2.1 脚本初始化</h3> 
+  <p>第一步：在mysql数据库中创建如下数据库</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <div> 
+   <ul> 
+    <li>frp_adminuser</li> 
+    <li>frp_appconfig</li> 
+    <li>frp_archive</li> 
+    <li>frp_customer</li> 
+    <li>frp_expert</li> 
+    <li>frp_gisdata_archive</li> 
+    <li>frp_governmentuser</li> 
+    <li>frp_jn_chain</li> 
+    <li>frp_landowner</li> 
+    <li>frp_notice</li> 
+    <li>frp_operate</li> 
+    <li>frp_operuser</li> 
+    <li>frp_patrol</li> 
+    <li>frp_produce</li> 
+    <li>frp_user</li> 
+   </ul> 
+  </div> 
+  <p><br></p> 
+  <p><br></p> 
+  <div></div> 
+  <p><br></p> 
+  <p>第二部：执行sql脚本，每个sql文件名就是对应的数据库</p> 
+  <p>在附件</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h3>2.2.2 jar包配置文件修改</h3> 
+  <p>jar包在第一次交付时，会根据当前环境统一更改了，不需要再次去修改。</p> 
+  <p>如果后期服务环境有变动，则需要手动的去jar包中找到 application-prod.properties 配置文件来修改。</p> 
+  <p><br></p> 
+  <h2 id="anchor436">2.3 后端服务部署</h2> 
+  <p>由于服务之间有相关的依赖顺序，为了能顺利快速完成部署，请按照如下顺序来部署</p> 
+  <h3>2.3.1 第一批服务</h3> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td>序号<br></td> 
+     <td>服务名称</td> 
+     <td>端口</td> 
+    </tr> 
+    <tr> 
+     <td>1</td> 
+     <td>za-eureka<br></td> 
+     <td>20010<br></td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>za-gateway<br></td> 
+     <td>20040<br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>za-gateway-admin<br></td> 
+     <td>20042<br></td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>za-gateway-consume<br></td> 
+     <td>20041<br></td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>za-gateway-government<br></td> 
+     <td>20043<br></td> 
+    </tr> 
+    <tr> 
+     <td>6</td> 
+     <td>za-gateway-operuser<br></td> 
+     <td>20044<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3>2.3.2 第二批服务</h3> 
+  <h3></h3> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td>序号<br></td> 
+     <td>服务名称<br></td> 
+     <td>端口<br></td> 
+    </tr> 
+    <tr> 
+     <td>1</td> 
+     <td>service-idgen-server<br></td> 
+     <td>20150<br></td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>service-user-server<br></td> 
+     <td>20060<br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>service-governmentuser-server<br></td> 
+     <td>20140<br></td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>service-adminuser-server<br></td> 
+     <td>20061<br></td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>service-operuser-server<br></td> 
+     <td>20210<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 2.3.3 第三批服务 
+  <p><br></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td>序号<br></td> 
+     <td>服务名称<br></td> 
+     <td>端口<br></td> 
+    </tr> 
+    <tr> 
+     <td>1</td> 
+     <td>service-gissde-server<br></td> 
+     <td>20250<br></td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>service-gisdata-server<br></td> 
+     <td>20240<br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>service-foundation-server<br></td> 
+     <td>20050<br></td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>service-appconfig-server<br></td> 
+     <td>20130<br></td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>service-operate-server<br></td> 
+     <td>20110<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3>2.3.4 第四批服务</h3> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td>序号<br></td> 
+     <td>服务名称<br></td> 
+     <td>端口<br></td> 
+    </tr> 
+    <tr> 
+     <td>1</td> 
+     <td>service-archive-server<br></td> 
+     <td>20230<br></td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>service-notice-server<br></td> 
+     <td>20890<br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>service-patrol-server<br></td> 
+     <td>20880<br></td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>service-nongwei-server<br></td> 
+     <td>20160<br></td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>service-landowner-server<br></td> 
+     <td>20260<br></td> 
+    </tr> 
+    <tr> 
+     <td>6</td> 
+     <td>service-produce-server<br></td> 
+     <td>20070<br></td> 
+    </tr> 
+    <tr> 
+     <td>7</td> 
+     <td>service-expert-server<br></td> 
+     <td>20220<br></td> 
+    </tr> 
+    <tr> 
+     <td>8</td> 
+     <td>service-customer-server<br></td> 
+     <td>20090<br></td> 
+    </tr> 
+    <tr> 
+     <td>9</td> 
+     <td>service-jnchain-server<br></td> 
+     <td>20081<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor605">2.4 前端服务部署</h2> 
+  <p>神农口袋相关端部署：</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><strong>服务名称</strong><br></td> 
+     <td style="border:1px solid #DDDDDD;"><strong>部署地址</strong><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span></span><span>web企业端 部署地址</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/snkoudai/web</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web政府端 部署地址</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/gov/web</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web政府管理中台</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/gov/admin</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web admin运营后台</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/admin/web/snkoudai_admin</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web 溯源平台</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/consume/h5/tracesource</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web 溯源H5</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/consume/h5/suyuan</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web 一物一码H5</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/consume/h5/ywym</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web 溯源H5</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/consume/h5/hgz</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>web 农场秀H5</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>/www/consume/h5/farmshow</span><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor653">2.5 Nginx配置</h2> 
+  <h3>2.5.1&nbsp;神农口袋企业端-www.snkoudai.zc.gov.cn</h3> 
+  <p>替换：172.16.118.191 ----&gt;替换成第一批部署服务&nbsp;za-gateway-admin&nbsp;的ip地址</p> 
+  <p><br></p> 
+  <p>server {<br>&nbsp; &nbsp; &nbsp; &nbsp; listen&nbsp; &nbsp; &nbsp; &nbsp;80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_name&nbsp;www.snkoudai.zc.gov.cn;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /api/&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }</p> 
+  <p><br>&nbsp; &nbsp; &nbsp; &nbsp; location /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp;location /snkdApi {&nbsp;&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rewrite "^/snkdApi/(.*)$" /api/$1 break;&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; location /web-client {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;alias&nbsp; &nbsp; &nbsp; &nbsp;/www/snkoudai/web-client/;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;try_files $uri $uri/ @webClientRouter;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;location @webClientRouter {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rewrite ^.*$ /web-client/index.html last;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; location / {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rewrite ^(.*)$ https://${server_name}$1 permanent;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }</p> 
+  <h3><br>2.5.2&nbsp;神农口袋管理后台-admin.zc.gov.cn</h3> 
+  <p>替换：172.16.118.191&nbsp;----&gt;替换成第一批部署服务service-governmentuser-server&nbsp;的ip地址</p> 
+  <p><br></p> 
+  <p>server{<br>&nbsp; &nbsp; &nbsp; &nbsp; listen 80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_nameadmin.zc.gov.cn;<br>&nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; # root /www/admin/web/snkoudai_admin;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /api/&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20042;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; location /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20042;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20042;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20042;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location / {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; root /www/admin/web/snkoudai_admin;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if ($http_user_agent ~* "(mobile|nokia|iphone|ipad|android|samsung|htc|blackberry)") {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rewrite ^(.*)$ http://admin.zc.gov.cn;<br>&nbsp; &nbsp; &nbsp; &nbsp; }</p> 
+  <p><br>&nbsp; &nbsp; &nbsp; &nbsp; try_files $uri $uri/ /index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br><br>&nbsp; &nbsp; &nbsp;location /shanghaiArcGIS {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass https://mape.shanghai-map.net;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rewrite "^/shanghaiArcGIS/(.*)$" /ArcGIS/$1 break;<br>&nbsp; &nbsp; &nbsp; }<br><br>&nbsp;}</p> 
+  <h3>2.5.3&nbsp;神农口袋溯源h5页面-suyuan.zc.gov.cn</h3> 
+  <p>server {<br>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;listen 80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_name&nbsp;suyuan.zc.gov.cn;<br>&nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; root /www/consume/h5;<br>&nbsp; &nbsp; &nbsp; &nbsp; location / {<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }</p> 
+  <h3><br>2.5.4&nbsp;大数据平台-xiangfeng5g.zc.gov.cn</h3> 
+  <p>替换：172.16.118.191&nbsp;----&gt;替换成第一批部署服务&nbsp;za-gateway-government&nbsp;的ip地址</p> 
+  <p><br></p> 
+  <p>server{<br>&nbsp; &nbsp; &nbsp; &nbsp; listen 80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_namexiangfeng5g.zc.gov.cn;<br>&nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br><br>client_max_body_size 1024M;<br>&nbsp; &nbsp; &nbsp; &nbsp; gzip on;<br>&nbsp; &nbsp; &nbsp; &nbsp; gzip_min_length 1k;<br>&nbsp; &nbsp; &nbsp; &nbsp; gzip_buffers 4 16k;<br>&nbsp; &nbsp; &nbsp; &nbsp; #gzip_http_version 1.0;<br>&nbsp; &nbsp; &nbsp; &nbsp; gzip_comp_level 2;<br>&nbsp; &nbsp; &nbsp; &nbsp; gzip_types text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;<br>&nbsp; &nbsp; &nbsp; &nbsp; gzip_vary off;<br>&nbsp; &nbsp; &nbsp; &nbsp; gzip_disable "MSIE [1-6]\.";<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /api/&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20043;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; location /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20043;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20043;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.191:20043;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location / {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; add_header Cache-Control no-cache;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; add_header Pragma no-cache;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; add_header Expires 0;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; root /www/gov/web/;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try_files $uri $uri/ @router;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; }</p> 
+  <p><br>&nbsp; &nbsp; &nbsp; &nbsp; location /areas {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://datavmap-public.oss-cn-hangzhou.aliyuncs.com;<br>&nbsp; &nbsp; &nbsp; &nbsp; }</p> 
+  <p><br>&nbsp; &nbsp; &nbsp; &nbsp; location /freetekApi {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://xiangfeng5g.zc.gov.cn/api;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #rewrite "^/freetekApi$" /api break;<br>&nbsp; &nbsp; &nbsp; &nbsp; }</p> 
+  <p><br>&nbsp; &nbsp; &nbsp; &nbsp; location /shanghaiArcGIS {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass https://mape.shanghai-map.net;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rewrite "^/shanghaiArcGIS/(.*)$" /ArcGIS/$1 break;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp;&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp;location /admin {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alias /www/gov/admin/;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try_files $uri $uri/ @adminrouter;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br><br>&nbsp; &nbsp; &nbsp; location @adminrouter {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;rewrite ^.*$ /admin/index.html last;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; location @router {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rewrite ^.*$ /index.html last;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; }</p> 
+  <h1 id="anchor673">3 服务部署-物联网</h1> 
+  <h2 id="anchor674">3.1 物联网部署图</h2> 
+  <h2 id="anchor675"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3798.png" alt=""><br>3.2 环境检查</h2> 
+  <p><br></p> 
+  <h2 id="anchor677">3.3 数据脚本初始化</h2> 
+  <p>在mysql数据中中执行如下脚本，执行中间确保所有sql能正常运行</p> 
+  <p><br></p> 
+  <p>v3.10.0&nbsp;数据库脚本</p> 
+  <p>https://shimo.im/docs/ZzkLVZYY0zCvax3Q#anchor-Z6uF</p> 
+  <h2 id="anchor682">3.4 后端服务部署</h2> 
+  <p>如果服务部署有先后顺序，则需要说明下现部署jar包的顺序</p> 
+  <p><br></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td> <p>序号</p> </td> 
+     <td> <p>服务名称</p> </td> 
+     <td> <p>端口号</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>0</p> </td> 
+     <td> <p>zaiot-eureka</p> </td> 
+     <td> <p>20010</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>1</p> </td> 
+     <td> <p>service-iotnew-server</p> </td> 
+     <td> <p>20052</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>2</p> </td> 
+     <td> <p>service-foundation-server</p> </td> 
+     <td> <p>20050</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>3</p> </td> 
+     <td> <p>service-adminuser-server</p> </td> 
+     <td> <p>20051</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>4</p> </td> 
+     <td> <p>service-alarm-server</p> </td> 
+     <td> <p>20054</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>5</p> </td> 
+     <td> <p>service-task-server</p> </td> 
+     <td> <p>20053</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>6</p> </td> 
+     <td> <p>zaiot-backend-admin</p> </td> 
+     <td> <p>20032</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>7</p> </td> 
+     <td> <p>zaiot-backend-open</p> </td> 
+     <td> <p>20034</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>8</p> </td> 
+     <td> <p>zaiot-backend-oper</p> </td> 
+     <td> <p>20033</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>9</p> </td> 
+     <td> <p>zaiot-backend-co</p> </td> 
+     <td> <p>20031</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>10</p> </td> 
+     <td> <p>zaiot-gateway-aggr&nbsp;</p> </td> 
+     <td> <p>20040</p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p>11</p> </td> 
+     <td> <p>zaiot-gateway-open</p> </td> 
+     <td> <p>20044</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor832">3.5 前端服务部署</h2> 
+  <h2></h2> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><strong>服务端</strong><br></td> 
+     <td style="border:1px solid #DDDDDD;"><strong>部署地址</strong></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">物联网基地端<br></td> 
+     <td style="border:1px solid #DDDDDD;">&nbsp;/www/corp/web/base<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">物联网运营商端<br></td> 
+     <td style="border:1px solid #DDDDDD;">/www/operator/web<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">物联网管理后台<br></td> 
+     <td style="border:1px solid #DDDDDD;">/www/admin/web<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <h2 id="anchor856">3.6 Nginx配置</h2> 
+  <h3>3.6.1&nbsp;基地小程序配置</h3> 
+  <p><br></p> 
+  <p>1、需要配置SSL证书;</p> 
+  <p>2、将http://172.16.118.197替换为zaiot-gateway-aggr网关所在服务ip</p> 
+  <p><br></p> 
+  <p>server {<br>&nbsp; &nbsp; &nbsp; &nbsp; listen&nbsp; &nbsp; &nbsp; &nbsp;80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_name&nbsp; xxx;<br>&nbsp; &nbsp; &nbsp; &nbsp; rewrite ^(.*)$ https://${server_name}$1 permanent;<br>&nbsp; &nbsp; }<br><br><br>&nbsp; &nbsp; server {<br>&nbsp; &nbsp; &nbsp; &nbsp; listen&nbsp; &nbsp; 443 ssl;<br>&nbsp; &nbsp; &nbsp; &nbsp; listen&nbsp; &nbsp; [::]:443 ssl;</p> 
+  <p><br>&nbsp; &nbsp; &nbsp; &nbsp; server_name xxx;<br>&nbsp; &nbsp; &nbsp; &nbsp; root&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/usr/share/nginx/html;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; ssl_certificate "xxx";<br>&nbsp; &nbsp; &nbsp; &nbsp; ssl_certificate_key "xxx";<br>&nbsp; &nbsp; &nbsp; &nbsp; ssl_session_cache shared:SSL:1m;<br>&nbsp; &nbsp; &nbsp; &nbsp; ssl_session_timeout&nbsp; 10m;<br>&nbsp; &nbsp; &nbsp; &nbsp; ssl_ciphers HIGH:!aNULL:!MD5;<br>&nbsp; &nbsp; &nbsp; &nbsp; ssl_prefer_server_ciphers on;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; # Load configuration files for the default server block.<br>&nbsp; &nbsp; &nbsp; &nbsp; include /etc/nginx/default.d/*.conf;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /api {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location&nbsp; /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; error_page 404 /404.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location = /40x.html {<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; error_page 500 502 503 504 /50x.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location = /50x.html {<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }</p> 
+  <h3>3.6.2&nbsp;运营商端配置</h3> 
+  <p>1、将&nbsp;http://172.16.118.197&nbsp;替换为&nbsp;zaiot-gateway-aggr&nbsp;网关所在服务ip</p> 
+  <p>2、将&nbsp;root /www/operator/web/替换为运营商前端静态资源所在目录</p> 
+  <p><br></p> 
+  <p>server{<br>&nbsp; &nbsp; &nbsp; &nbsp; listen 80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_name operiot.zc.gov.cn ;<br>&nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /api/&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location&nbsp; /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br><br>&nbsp; &nbsp; &nbsp; &nbsp; location / {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; root /www/operator/web/;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try_files $uri $uri/ /index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp;</p> 
+  <h3>3.6.3 管理后台</h3> 
+  <h3></h3> 
+  <h3></h3> 
+  <p><br></p> 
+  <p>1、将&nbsp;http://172.16.118.197&nbsp;替换为&nbsp;zaiot-gateway-aggr&nbsp;网关所在服务ip</p> 
+  <p>2、将&nbsp;root /www/admin/web/&nbsp;替换为后台前端静态资源所在目录</p> 
+  <p><br></p> 
+  <p>server{<br>&nbsp; &nbsp; &nbsp; &nbsp; listen 80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_name adminiot.zc.gov.cn;<br>&nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; # root /www/admin/web;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /api/&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; location&nbsp; /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location / {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; root /www/admin/web/;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try_files $uri $uri/ /index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }</p> 
+  <h3></h3> 
+  <h3>3.6.4 基地WEB</h3> 
+  <p><br></p> 
+  <p>1、将&nbsp;http://172.16.118.197&nbsp;替换为&nbsp;zaiot-gateway-aggr&nbsp;网关所在服务ip</p> 
+  <p>2、将&nbsp;/www/corp/web/base&nbsp;替换为基地前端静态资源所在目录</p> 
+  <p><br></p> 
+  <p>server{<br>&nbsp; &nbsp; &nbsp; &nbsp; listen 80;<br>&nbsp; &nbsp; &nbsp; &nbsp; server_name www.baseiot.zc.gov.cn&nbsp;;<br>&nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /api/&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; location&nbsp; /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20040;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; location ^~/base{<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alias /www/corp/web/base;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try_files $uri $uri/ /base/index.html;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; location ~ ^/$ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 301 http://test.zaxhiot.com/base;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>}</p> 
+  <h3>3.6.5&nbsp;开放平台</h3> 
+  <h3></h3> 
+  <p>1、将&nbsp;http://172.16.118.197&nbsp;替换为&nbsp;zaiot-gateway-open&nbsp;网关所在服务ip</p> 
+  <p>server {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; listen 80;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; server_name openiot.zc.gov.cn;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location /api/&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://172.16.118.197:20044;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location&nbsp; /webjars/ {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://172.16.118.197:20044;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location /swagger-ui.html&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://172.16.118.197:20044;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; location /swagger-resources&nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://172.16.118.197:20044;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Host $host;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header X-Real-Ip $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header X-Forwarded-For $remote_addr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_set_header Via "nginx";<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp;}</p> 
+  <p><br></p> 
+  <h2 id="anchor889">3.7 账号密码</h2> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#F1F1F1;border:1px solid #DDDDDD;">系统</th> 
+     <th style="background-color:#F1F1F1;border:1px solid #DDDDDD;">平台端</th> 
+     <th style="background-color:#F1F1F1;border:1px solid #DDDDDD;">访问地址</th> 
+     <th style="background-color:#F1F1F1;border:1px solid #DDDDDD;">账号<br></th> 
+     <th style="background-color:#F1F1F1;border:1px solid #DDDDDD;">密码<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;" rowspan="3" colspan="1">物联网</td> 
+     <td style="border:1px solid #DDDDDD;"><span>管理后台</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>adminiot.zc.gov.cn</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>superadmin</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"> <p>ZAXHiot@123456</p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>运营商后台</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"> <p>operiot.zc.gov.cn</p> </td> 
+     <td style="border:1px solid #DDDDDD;"><span>admin</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>zaxhIOT@654321</span><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;"><span>基地WEB端</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><span>baseiot.zc.gov.cn</span><br></td> 
+     <td style="border:1px solid #DDDDDD;">手机号</td> 
+     <td style="border:1px solid #DDDDDD;">验证码（如果是演示环境为 8888）<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;" rowspan="4" colspan="1">神农口袋</td> 
+     <td style="border:1px solid #DDDDDD;">管理后台</td> 
+     <td style="border:1px solid #DDDDDD;"><a class="ql-link ql-author-35567033" href="http://guanli.zc.gov.cn/login" target="_blank" rel="noreferrer noopener">http://guanli.zc.gov.cn/login</a><br></td> 
+     <td style="border:1px solid #DDDDDD;">superadmin<br></td> 
+     <td style="border:1px solid #DDDDDD;">@#?lhxf*&amp;<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">大数据平台</td> 
+     <td style="border:1px solid #DDDDDD;"><a class="ql-link ql-author-35567033" href="http://xiangfeng5g.zc.gov.cn/login" target="_blank" rel="noreferrer noopener">http://xiangfeng5g.zc.gov.cn/login</a><br></td> 
+     <td style="border:1px solid #DDDDDD;">lhxf<br></td> 
+     <td style="border:1px solid #DDDDDD;">lhxf@123<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">企业生产操作平台<br></td> 
+     <td style="border:1px solid #DDDDDD;"><a class="ql-link ql-author-35567033" href="http://snkoudai.zc.gov.cn/" target="_blank" rel="noreferrer noopener">http://snkoudai.zc.gov.cn/</a><br></td> 
+     <td style="border:1px solid #DDDDDD;">手机号</td> 
+     <td style="border:1px solid #DDDDDD;">验证码<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #DDDDDD;">溯源</td> 
+     <td style="border:1px solid #DDDDDD;"><span>suyuan.zc.gov.cn</span><br></td> 
+     <td style="border:1px solid #DDDDDD;"><br></td> 
+     <td style="border:1px solid #DDDDDD;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <p><span> </span></p> 
+  <h1 class="ql-long-35567033"></h1> 
+  <div class="ql-direction-ltr ql-long-35567033" style="font-size:16pt;">
+   <span class="ql-author-35567033">神农口袋</span>
+  </div> 
+  <h2 class="ql-long-35567033"></h2> 
+  <div class="ql-direction-ltr ql-long-35567033" style="font-size:14pt;">
+   <span class="ql-author-35567033">管理后台</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">网址：</span><a class="ql-link ql-author-35567033" href="http://guanli.zc.gov.cn/login" target="_blank" rel="noreferrer noopener">http://guanli.zc.gov.cn/login</a></p> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">账号：superadmin</span></p> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">密码：@#?lhxf*&amp;</span></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-35567033"></h2> 
+  <div class="ql-direction-ltr ql-long-35567033" style="font-size:14pt;">
+   <span class="ql-author-35567033">大数据平台</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">网址：</span><a class="ql-link ql-author-35567033" href="http://xiangfeng5g.zc.gov.cn/login" target="_blank" rel="noreferrer noopener">http://xiangfeng5g.zc.gov.cn/login</a></p> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">账号：lhxf</span></p> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">密码：lhxf@123</span></p> 
+  <h2></h2> 
+  <div style="font-size:14pt;">
+   &nbsp;
+  </div> 
+  <h2 class="ql-long-35567033"></h2> 
+  <div class="ql-direction-ltr ql-long-35567033" style="font-size:14pt;">
+   <span class="ql-author-35567033">企业生产操作平台</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">网址：</span><a class="ql-link ql-author-35567033" href="http://snkoudai.zc.gov.cn/" target="_blank" rel="noreferrer noopener">http://snkoudai.zc.gov.cn/</a></p> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">使用手机号注册</span></p> 
+  <p class="ql-direction-ltr ql-long-35567033" style="font-size:11pt;color:#494949;"><span class="ql-author-35567033">验证码：根据发送的短信实时填写</span></p> 
+  <p><br></p> 
+  <p>神农口袋域名</p> 
+  <p>snkoudai.zc.gov.cn<br>guanli.zc.gov.cn<br>suyuan.zc.gov.cn<br>xiangfeng5g.zc.gov.cn</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor980">4、部署遇到的问题</h1> 
+  <h2 id="anchor981">4.1 k8s等容器化部署时服务间通过IP调用问题</h2> 
+  <p>eureka客户端的配置 eureka.instance.prefer-ip-address=true时，如果在容器环境下，需要将 ip-address 设置为对应的容器地址。</p> 
+  <p><br></p> 
+  <h2 id="anchor984">4.2 服务中用到字体生成图片</h2> 
+  <p>如果所在服务用到字体生成图片，需要确认服务所在环境是否存在该字体。如果不存在，可以在构建镜像时指定。</p> 
+  <p><br></p> 
+  <h2 id="anchor987">4.3 数据库连接指定是否使用SSL</h2> 
+  <p>Caused by: sun.security.validator.ValidatorException: PKIX path building failed</p> 
+  <p>以上错误是由于数据库链接指定了SSL=true，但源应用程序不信任目标应用程序的证书，因为在源应用程序的JVM信任库中找不到该证书或证书链。</p> 
+  <p>解决方式一：修改 useSSL=false</p> 
+  <p><br></p> 
+  <h2 id="anchor992"><strong>4.4、神农口袋</strong><span><strong>jar包配置文件修改详细步骤</strong></span></h2> 
+  <p>https://shimo.im/docs/vVqRVrX958FMYNqy/ 《jar包配置文件修改详细步骤》，可复制链接后用石墨文档 App 或小程序打开</p> 
+  <p><br></p> 
+  <h2 id="anchor995">4.5、物联网和神农口袋的服务一起私有化，需要注意修改神农口袋调用物联网服务地址</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4456.png" alt=""></p> 
+  <div> 
+   <div class="gtx-trans-icon"></div> 
+  </div> 
+  <div> 
+   <div class="gtx-trans-icon"></div> 
+  </div> 
+  <div>
+   <br>
+  </div> 
+  <div> 
+   <div class="gtx-trans-icon"></div> 
+  </div> 
+  <div>
+   <br>
+  </div> 
+  <div>
+   <br>
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1 前置工作及说明">1 前置工作及说明</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor1" title="1.1 私有化工作部署计划安排">1.1 私有化工作部署计划安排</a> </li>
+      <li class="text-ellipsis"><a href="#anchor11" title="1.2 环境配置及软件安装">1.2 环境配置及软件安装</a> </li>
+      <li class="text-ellipsis"><a href="#anchor62" title="1.3 域名准备">1.3 域名准备</a> </li>
+      <li class="text-ellipsis"><a href="#anchor182" title="1.3 交付计划">1.3 交付计划</a> </li>
+      <li class="text-ellipsis"><a href="#anchor219" title="1.4 甲方环境">1.4 甲方环境</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor395" title="2 服务部署-神农口袋">2 服务部署-神农口袋</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor396" title="2.1 神农口袋部署图">2.1 神农口袋部署图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor399" title="2.2 环境检查">2.2 环境检查</a> </li>
+      <li class="text-ellipsis"><a href="#anchor436" title="2.3 后端服务部署">2.3 后端服务部署</a> </li>
+      <li class="text-ellipsis"><a href="#anchor605" title="2.4 前端服务部署">2.4 前端服务部署</a> </li>
+      <li class="text-ellipsis"><a href="#anchor653" title="2.5 Nginx配置">2.5 Nginx配置</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor673" title="3 服务部署-物联网">3 服务部署-物联网</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor674" title="3.1 物联网部署图">3.1 物联网部署图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor675" title="3.2 环境检查">3.2 环境检查</a> </li>
+      <li class="text-ellipsis"><a href="#anchor677" title="3.3 数据脚本初始化">3.3 数据脚本初始化</a> </li>
+      <li class="text-ellipsis"><a href="#anchor682" title="3.4 后端服务部署">3.4 后端服务部署</a> </li>
+      <li class="text-ellipsis"><a href="#anchor832" title="3.5 前端服务部署">3.5 前端服务部署</a> </li>
+      <li class="text-ellipsis"><a href="#anchor856" title="3.6 Nginx配置">3.6 Nginx配置</a> </li>
+      <li class="text-ellipsis"><a href="#anchor889" title="3.7 账号密码">3.7 账号密码</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor980" title="4、部署遇到的问题">4、部署遇到的问题</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor981" title="4.1 k8s等容器化部署时服务间通过IP调用问题">4.1 k8s等容器化部署时服务间通过IP调用问题</a> </li>
+      <li class="text-ellipsis"><a href="#anchor984" title="4.2 服务中用到字体生成图片">4.2 服务中用到字体生成图片</a> </li>
+      <li class="text-ellipsis"><a href="#anchor987" title="4.3 数据库连接指定是否使用SSL">4.3 数据库连接指定是否使用SSL</a> </li>
+      <li class="text-ellipsis"><a href="#anchor992" title="4.4、神农口袋jar包配置文件修改详细步骤">4.4、神农口袋jar包配置文件修改详细步骤</a> </li>
+      <li class="text-ellipsis"><a href="#anchor995" title="4.5、物联网和神农口袋的服务一起私有化，需要注意修改神农口袋调用物联网服务地址">4.5、物联网和神农口袋的服务一起私有化，需要注意修改神农口袋调用物联网服务地址</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

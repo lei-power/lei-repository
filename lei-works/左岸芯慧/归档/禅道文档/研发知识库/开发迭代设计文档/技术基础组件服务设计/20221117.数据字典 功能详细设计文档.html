@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221117.数据字典 功能详细设计文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">0.文档说明</h1> 
+  <p><br></p> 
+  <p>本文档主要介绍数据字典功能的详细设计。便于架构人员、开发人员、产品人员理解数据字典的数据结构，接口实现。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor6">1.数据字典功能介绍</h1> 
+  <p>&nbsp; &nbsp; &nbsp; 再开发业务的时候，数据库表有很多字段的字典都通过1、2、3等数字来表示字段代表含义，这样是可以用，但是很难去维护，一旦数据库表注释不及更新，就需要通过代码来判断含义</p> 
+  <p>。然后前端还需要定义一套字典映射，这样开发起来非常难以维护，所以，我们服务端就新增了字典表去统一维护。前端通过接口去拿数据，就不需要单独再定义一套映射</p> 
+  <p><br></p> 
+  <h1 id="anchor10">2.功能架构图</h1> 
+  <p><br></p> 
+  <h1 id="anchor12">3.数据结构及ER图</h1> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12233.jpeg" alt="" width="400" height="109" title=""></p> 
+  <p><strong>字典类型表</strong></p> 
+  <pre class="prettyprint lang-js">CREATE TABLE `sys_dict_type` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `dict_name` varchar(255) DEFAULT NULL COMMENT '字典名称',
+  `dict_type` varchar(255) DEFAULT NULL COMMENT '字典类型',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `uk_dict_type` (`dict_type`) USING BTREE COMMENT '字典类型唯一索引'
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='字典类型表';</pre> 
+  <p><br></p> 
+  <p><strong>字典数据表</strong></p> 
+  <pre class="prettyprint lang-js">CREATE TABLE `sys_dict_data` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `dict_type` varchar(255) DEFAULT NULL COMMENT '字典类型',
+  `dict_label` varchar(255) DEFAULT NULL COMMENT '字典标签',
+  `dict_value` varchar(255) DEFAULT NULL COMMENT '字典键值',
+  `sort_num` int(20) DEFAULT '0' COMMENT '排序字段',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=401 DEFAULT CHARSET=utf8mb4 COMMENT='字典数据表';</pre> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor39">4.接口设计</h1> 
+  <h2></h2> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">序号</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">接口描述<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">接口地址<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">备注<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1<br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">获取所有枚举类型列表接口</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">&nbsp;http://<span style="color:#E53333;">xxx</span>.snkoudai.com/api/foundation/dict/listOfDictType</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>xxx：表示使用的域名前缀</p> <p>如果是testc服务器：就用<span>&nbsp;http://<strong><span style="color:#E53333;">govtestc</span></strong>.snkoudai.com/api/foundation/dict/listOfDictType</span></p> <p>详情见2.2.2接口说明</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-454.html?tid=r0vr0tgg" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-454.html?tid=r0vr0tgg</a></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">根据枚举类型值获取该类型对应的枚举列表<br></td> 
+     <td style="border:1px solid #ddd;"><span style="font-size:14px;background-color:#FFFFFF;">http://<span style="color:#E53333;">xxx</span>.snkoudai.com/api/foundation/dict/listByDictType</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <p>xxx：表示使用的域名前缀</p> <p>如果是testc服务器：就用<span>&nbsp;http://<strong><span style="color:#E53333;">govtestc</span></strong>.snkoudai.com<span>/api/foundation/dict/listByDictType</span></span><span></span></p> <p><br></p> <p>详情见2.2.2接口说明</p> <p><span><a href="/zentao/doc-objectLibs-custom-0-37-454.html?tid=r0vr0tgg" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-454.html?tid=r0vr0tgg</a></span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <h1 id="anchor78">5、字典表维护</h1> 
+  <p>目前字典表只支持<strong><span style="color:#E53333;">数据库手动维护</span></strong>，目前没有在管理后台新增功能对字典新增、编辑、删除</p> 
+  <h2 id="anchor80">5.1、代码接口</h2> 
+  <p>代码写在 service-foundation-server 工程&nbsp;&nbsp;</p> 
+  <p>数据库：frp_user库</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12236.png" alt="" width="400" height="171" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor85">5.2、服务端字典维护</h2> 
+  <p>数据库：frp_user库</p> 
+  <p>1、先在sys_dict_type表定义字典类型，dict_name:字典名称（可以和其他名称一样，但是不建议，尽量唯一值），dict_type：字典类型（唯一值，不能重复）</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12241.png" alt="" width="400" height="212" title=""></p> 
+  <p>2、然后再字典数据表里，添加字典枚举值</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12242.png" alt="" width="400" height="180" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="0.文档说明">0.文档说明</a> </li>
+    <li class="text-ellipsis"><a href="#anchor6" title="1.数据字典功能介绍">1.数据字典功能介绍</a> </li>
+    <li class="text-ellipsis"><a href="#anchor10" title="2.功能架构图">2.功能架构图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor12" title="3.数据结构及ER图">3.数据结构及ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor39" title="4.接口设计">4.接口设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor78" title="5、字典表维护">5、字典表维护</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor80" title="5.1、代码接口">5.1、代码接口</a> </li>
+      <li class="text-ellipsis"><a href="#anchor85" title="5.2、服务端字典维护">5.2、服务端字典维护</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

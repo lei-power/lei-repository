@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220428 旌阳耕地保护 功能详细设计文档 -2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1></h1> 
+  <h1 id="anchor1">一、迭代需求简述</h1> 
+  <p>&nbsp;</p> 
+  <p>本次迭代的主要需求：</p> 
+  <p>1、通过达摩院AI对旌阳影像进行建筑物、水体、道路、林地等等识别</p> 
+  <p>2、将识别的shp文件与旌阳三调数据对别，获取有交集的识别shp文件</p> 
+  <p>3、中台对异常地块进行处理</p> 
+  <p>&nbsp;</p> 
+  <p>产品需求文档参考链接：</p> 
+  <p><a href="/zentao/story-view-152.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/story-view-152.html</a></p> 
+  <p>&nbsp;</p> 
+  <h1></h1> 
+  <h1 id="anchor12">二、参与人员与时间</h1> 
+  <p>服务端：王恺、王磊</p> 
+  <p>迭代时间：待定</p> 
+  <p>&nbsp;</p> 
+  <p>&nbsp;</p> 
+  <p>&nbsp;</p> 
+  <p>&nbsp;</p> 
+  <h1></h1> 
+  <h1 id="anchor20">三、用例图</h1> 
+  <p><a href="https://www.processon.com/view/link/627388f20e3e7407296a765c" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/627388f20e3e7407296a765c</a></p> 
+  <p><br></p> 
+  <p>&nbsp;<img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2854.jpeg" alt="" width="300" height="830" title=""></p> 
+  <p>&nbsp;</p> 
+  <h1></h1> 
+  <h1 id="anchor26">四、数据库设计ER图</h1> 
+  <p>数据库设计链接：<a href="https://www.processon.com/view/link/6269082c1e08535fe533c900" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/6269082c1e08535fe533c900</a></p> 
+  <p>&nbsp;</p> 
+  <p>ER图链接：<a href="https://www.processon.com/view/link/626a4f70079129397f246bf2" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/626a4f70079129397f246bf2</a></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3115.jpeg" alt="" width="400" height="115" title=""></p> 
+  <p>&nbsp;</p> 
+  <p>&nbsp;</p> 
+  <p>&nbsp;</p> 
+  <p>&nbsp;</p> 
+  <h1 style="color:#3C4353;" id="anchor36">五、状态转化图</h1> 
+  <p><a href="https://www.processon.com/view/link/6273873163768906ff9ce476" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/6273873163768906ff9ce476</a></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3234.jpeg" alt="" width="400" height="180" title=""></p> 
+  <p><br></p> 
+  <p>&nbsp;</p> 
+  <h1></h1> 
+  <h1 id="anchor42">六、核心流程时序</h1> 
+  <h2 id="anchor43">1.自动化分析</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3674.png" alt="" width="400" height="452" title=""></p> 
+  <p> </p>
+  <h2 style="color:#3C4353;" id="anchor46">2.录入需要复核、录入无需复核</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3534.png" alt="" width="400" height="596" title=""></p> 
+  <h2 id="anchor49">3.筛查需要复核、筛查无需复核</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3535.png" alt="" width="400" height="601" title=""></p> 
+  <h2 id="anchor51">4.复核、重新复核</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3533.png" alt="" width="400" height="560" title=""></p> 
+  <h2 id="anchor53">5.审核驳回、审核通过</h2> 
+  <div>
+   <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3537.png" alt="" width="400" height="627" title="">
+   <br>
+  </div> 
+  <h2><br></h2> 
+  <h1></h1> 
+  <h1 id="anchor57">七、其他设计补充材料</h1> 
+  <h2></h2> 
+  <h2 id="anchor59"><span style="color:inherit;">1、流程图</span></h2> 
+  <p><a href="https://www.processon.com/view/link/6274826d5653bb072375d4b6" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/62776457e0b34d0758644bb3</a></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3112.jpeg" alt="" width="400" height="944" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2></h2> 
+  <p>&nbsp;</p> 
+  <h1></h1> 
+  <h1 id="anchor67">八、开发设计</h1> 
+  <h2 id="anchor68">1、新建 土地占用服务</h2> 
+  <p>&nbsp; &nbsp; &nbsp;服务名称：<span>service-landoccupy</span></p> 
+  <h2 id="anchor70">2、新建土地占用数据库</h2> 
+  <p>&nbsp; &nbsp; &nbsp;数据库名称：<span>frp_landoccupy&nbsp;</span></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="一、迭代需求简述">一、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor12" title="二、参与人员与时间">二、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor20" title="三、用例图">三、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor26" title="四、数据库设计ER图">四、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor36" title="五、状态转化图">五、状态转化图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor42" title="六、核心流程时序">六、核心流程时序</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor43" title="1.自动化分析">1.自动化分析</a> </li>
+      <li class="text-ellipsis"><a href="#anchor46" title="2.录入需要复核、录入无需复核">2.录入需要复核、录入无需复核</a> </li>
+      <li class="text-ellipsis"><a href="#anchor49" title="3.筛查需要复核、筛查无需复核">3.筛查需要复核、筛查无需复核</a> </li>
+      <li class="text-ellipsis"><a href="#anchor51" title="4.复核、重新复核">4.复核、重新复核</a> </li>
+      <li class="text-ellipsis"><a href="#anchor53" title="5.审核驳回、审核通过">5.审核驳回、审核通过</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor57" title="七、其他设计补充材料">七、其他设计补充材料</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor59" title="1、流程图">1、流程图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor67" title="八、开发设计">八、开发设计</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor68" title="1、新建 土地占用服务">1、新建 土地占用服务</a> </li>
+      <li class="text-ellipsis"><a href="#anchor70" title="2、新建土地占用数据库">2、新建土地占用数据库</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220614-开发设计-迭代v4.60.0</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p class="keywords"> <span class="label label-outline">产权交易</span> </p> 
+  <h1 id="anchor0">1 需求文档</h1> 
+  <p><a href="https://lanhuapp.com/web/#/item/project/stage?tid=c93073b0-754d-436b-910f-0e43eef76835&amp;pid=2fad23bd-5e58-4da0-8513-070e69f3d432" target="_blank" rel="noreferrer noopener">https://lanhuapp.com/web/#/item/project/stage?tid=c93073b0-754d-436b-910f-0e43eef76835&amp;pid=2fad23bd-5e58-4da0-8513-070e69f3d432</a></p> 
+  <h1 id="anchor2">2 开发计划</h1> 
+  <table>
+   <tbody>
+    <tr>
+     <th>需求名称</th> 
+     <th>功能</th> 
+     <th>开发周期</th> 
+     <th>负责人</th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>数字三农-农村管理-产权交易</td> 
+     <td>功能维护</td> 
+     <td>6.14-6.22</td> 
+     <td>王恺</td> 
+    </tr>
+    <tr>
+     <td></td> 
+     <td><br></td> 
+     <td></td> 
+     <td></td> 
+    </tr>
+   </tbody>
+  </table>
+  <h1 id="anchor15">3 接口设计</h1> 
+  <table class="ke-select-col">
+   <tbody>
+    <tr>
+     <th>需求名称</th> 
+     <th>功能</th> 
+     <th>地址</th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>数字三农-农村管理-产权交易</td> 
+     <td>修改</td> 
+     <td><a href="https://test.snkoudai.com/api/produce/co/agriResSku/add"></a> 
+      <div>
+       api/gisdata/gov/archiveChanquanTradingArea/listByAra&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;区域成交对比
+       <br>
+      </div> </td> 
+    </tr>
+    <tr>
+     <td></td> 
+     <td>修改</td> 
+     <td>api/gisdata/gov/archiveChanquanTradingMode/listByArea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 成交方式统计<br></td> 
+    </tr>
+    <tr>
+     <td></td> 
+     <td>修改</td> 
+     <td>api/gisdata/gov/archiveChanquanTradingMonth/listByMonth&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;成交趋势<br></td> 
+    </tr>
+    <tr>
+     <td><br></td> 
+     <td>修改<br></td> 
+     <td>api/gisdata/gov/archiveChanquanTradingScaleArea/ScaleAreaByArea&nbsp; &nbsp; &nbsp; &nbsp;关键指标&amp;&amp;地图详情<br></td> 
+    </tr>
+    <tr>
+     <td><br></td> 
+     <td>修改<br></td> 
+     <td>api/gisdata/gov/archiveChanquanTradingTop/listByArea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;成交商品TOP10排行<br></td> 
+    </tr>
+    <tr>
+     <td><br></td> 
+     <td>修改<br></td> 
+     <td>POST /gov/archiveChanquanTradingCategory/listByArea&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;成交商品类别排行<br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <h1 id="anchor39">4 数据库表设计</h1> 
+  <p>修改脚本：</p> 
+  <p><br></p> 
+  <pre class="prettyprint">-- 成交流入方表--成交流入方对比模块
+ALTER TABLE `tbl_archive_chanquan_trading_inflow` CHANGE `village_collective_cooperative_count` family_farm_count INT ( 11 ) DEFAULT '0' COMMENT '家庭农场数量（宗）';
+</pre> 
+  <p><br></p> 
+  <p>统计脚本：</p> 
+  <p><br></p> 
+  <pre class="prettyprint">--  成交排行榜---成交商品top10排行模块 归档
+TRUNCATE tbl_archive_chanquan_trading_top;
+INSERT INTO tbl_archive_chanquan_trading_top(`area_id`, `archive_year`, `project_name`, `total_amount`)
+SELECT `area_id`,DATE_FORMAT(auth_date,'%Y') `archive_year`, `project_name`,total_price `total_amount` FROM `tbl_archive_chanquan_trading_detail`;
+
+
+-- 按区域统计不同规模交易表---统计成交金额、宗数、面积
+TRUNCATE tbl_archive_chanquan_trading_scale_area;
+INSERT INTO tbl_archive_chanquan_trading_scale_area(`area_id`, `archive_year`, `total_amount`, `total_count`, `total_acre`)
+SELECT area_id,DATE_FORMAT(auth_date,'%Y') archive_year,SUM(total_price) total_amount, COUNT(*) total_count,IFNULL(SUM(acre),0) total_acre FROM `tbl_archive_chanquan_trading_detail` GROUP BY area_id,DATE_FORMAT(auth_date,'%Y')
+UNION ALL
+SELECT 510603 area_id,DATE_FORMAT(auth_date,'%Y') archive_year,SUM(total_price) total_amount, COUNT(*) total_count,IFNULL(SUM(acre),0) total_acre FROM `tbl_archive_chanquan_trading_detail` GROUP BY DATE_FORMAT(auth_date,'%Y');
+
+-- 每月成交量表---成交趋势模块
+TRUNCATE tbl_archive_chanquan_trading_month;
+INSERT INTO tbl_archive_chanquan_trading_month(`area_id`, `archive_month`, `total_count`)
+SELECT '510603' area_id,DATE_FORMAT(auth_date,'%Y-%m') archive_month, COUNT(*) total_count FROM `tbl_archive_chanquan_trading_detail` GROUP BY DATE_FORMAT(auth_date,'%Y-%m');
+
+
+-- 成交方式统计表---成交方式模块
+TRUNCATE tbl_archive_chanquan_trading_mode;
+INSERT INTO tbl_archive_chanquan_trading_mode(`area_id`, `archive_year`, `type`, `type_name`, `total_count`)
+SELECT '510603' area_id,DATE_FORMAT(auth_date,'%Y') archive_year,NULL `type`,trading_mode type_name, COUNT(*) total_count FROM `tbl_archive_chanquan_trading_detail` GROUP BY trading_mode,DATE_FORMAT(auth_date,'%Y');
+
+
+-- 最新交易表---地图上轮播展示模块
+TRUNCATE tbl_archive_chanquan_trading_latest;
+INSERT INTO tbl_archive_chanquan_trading_latest(`area_id`, `area_name`, `archive_year`, `project_name`, `total_amount`, `auth_date`, `trading_mode`)
+SELECT `area_id`, `area_name`,DATE_FORMAT(auth_date,'%Y') `archive_year`, `project_name`,total_price `total_amount`, `auth_date`, `trading_mode` FROM `tbl_archive_chanquan_trading_detail` WHERE project_name IS NOT NULL;
+
+
+-- 成交流入方表--成交流入方对比模块
+TRUNCATE tbl_archive_chanquan_trading_inflow;
+INSERT INTO tbl_archive_chanquan_trading_inflow(`area_id`, `archive_year`, `total_count`, `family_farm_count`, `village_committee_count`, `state_organs_count`, `company_legal_person_count`, `professional_cooperative_count`, `natural_person_count`)
+SELECT 510603 area_id,
+temp.archive_year,
+sum(CASE WHEN temp.inflow_party_category LIKE '%家庭农场%' THEN temp.total ELSE 0 END) +
+sum(CASE WHEN temp.inflow_party_category LIKE '%村民委员会%' THEN temp.total ELSE 0 END) +
+sum(CASE WHEN temp.inflow_party_category LIKE '%国家机关%' THEN temp.total ELSE 0 END) +
+sum(CASE WHEN temp.inflow_party_category LIKE '%企业法人%' THEN temp.total ELSE 0 END) +
+sum(CASE WHEN temp.inflow_party_category LIKE '%专业合作社%' THEN temp.total ELSE 0 END) +
+sum(CASE WHEN temp.inflow_party_category LIKE '%自然人%' THEN temp.total ELSE 0 END)  total_count,
+sum(CASE WHEN temp.inflow_party_category LIKE '%家庭农场%' THEN temp.total ELSE 0 END) 'family_farm_count',
+sum(CASE WHEN temp.inflow_party_category LIKE '%村民委员会%' THEN temp.total ELSE 0 END) 'village_committee_count',
+sum(CASE WHEN temp.inflow_party_category LIKE '%国家机关%' THEN temp.total ELSE 0 END) 'state_organs_count',
+sum(CASE WHEN temp.inflow_party_category LIKE '%企业法人%' THEN temp.total ELSE 0 END) 'company_legal_person_count',
+sum(CASE WHEN temp.inflow_party_category LIKE '%专业合作社%' THEN temp.total ELSE 0 END) 'professional_cooperative_count',
+sum(CASE WHEN temp.inflow_party_category LIKE '%自然人%' THEN temp.total ELSE 0 END) 'natural_person_count'
+FROM
+(
+SELECT  inflow_party_category,DATE_FORMAT(auth_date,'%Y') archive_year,COUNT(*) total
+FROM `tbl_archive_chanquan_trading_detail` GROUP BY inflow_party_category,DATE_FORMAT(auth_date,'%Y'))temp GROUP BY temp.archive_year;
+
+
+-- 商品分类表---成交商品类别排行模块
+TRUNCATE tbl_archive_chanquan_trading_category;
+INSERT INTO tbl_archive_chanquan_trading_category(`area_id`, `archive_year`, `type`, `type_name`, `total_amount`, `total_count`, `total_acre`)
+SELECT 510603 `area_id`,DATE_FORMAT(auth_date,'%Y') `archive_year`,NULL `type`,category `type_name`,SUM(total_price) `total_amount`,COUNT(*) `total_count`,IFNULL(SUM(acre), 0) `total_acre`
+FROM `tbl_archive_chanquan_trading_detail` GROUP BY category,DATE_FORMAT(auth_date,'%Y');
+
+
+-- 商品分类表---成交商品类别排行模块
+TRUNCATE tbl_archive_chanquan_trading_area;
+INSERT INTO tbl_archive_chanquan_trading_area(`area_id`, `area_name`, `archive_year`, `total_count`)
+SELECT area_id,max(area_name),DATE_FORMAT(auth_date,'%Y') archive_year, COUNT(*) total_count FROM `tbl_archive_chanquan_trading_detail` GROUP BY area_id,DATE_FORMAT(auth_date,'%Y');</pre> 
+  <p><br></p> 
+  <h1 id="anchor114">5 代码功能设计</h1> 
+  <p>涉及服务：service-gisdata-server</p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1 需求文档">1 需求文档</a> </li>
+    <li class="text-ellipsis"><a href="#anchor2" title="2 开发计划">2 开发计划</a> </li>
+    <li class="text-ellipsis"><a href="#anchor15" title="3 接口设计">3 接口设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor39" title="4 数据库表设计">4 数据库表设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor114" title="5 代码功能设计">5 代码功能设计</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

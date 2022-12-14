@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>5、霍城县数字化云平台项目服务器软件安装</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;本文档主要介绍jdk、mysql、rabbitmq、redis、nginx软件在Centos7上安装流程</p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor3">2、软件版本</h1> 
+  <table style="width:1924.8px;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">序号</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">软件</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">版本号</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">安装方式</span><br></th> 
+     <th style="background-color:#F1F1F1;">附件地址</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1<br></td> 
+     <td>jdk</td> 
+     <td>1.8</td> 
+     <td>离线安装</td> 
+     <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/jdk-8u11-linux-x64.tar.gz" target="_blank" rel="noreferrer noopener">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/jdk-8u11-linux-x64.tar.gz</a><br></td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>mysql</td> 
+     <td>5.7</td> 
+     <td>在线安装</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>rabbitmq</td> 
+     <td>3.7.5</td> 
+     <td>离线安装</td> 
+     <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/rabbitmq.zip" target="_blank" rel="noreferrer noopener">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/rabbitmq.zip</a><br></td> 
+    </tr> 
+    <tr> 
+     <td>3.1</td> 
+     <td>rabbitmq<br></td> 
+     <td>3.8.1</td> 
+     <td>离线安装</td> 
+     <td>见附件</td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>elang</td> 
+     <td>19.3<br></td> 
+     <td>离线安装</td> 
+     <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/rabbitmq.zip" target="_blank" rel="noreferrer noopener">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/rabbitmq.zip</a><br></td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>redis</td> 
+     <td>5.0.3</td> 
+     <td>离线安装</td> 
+     <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/redis-5.0.3.tar.gz" target="_blank" rel="noreferrer noopener">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/redis-5.0.3.tar.gz</a><br></td> 
+    </tr> 
+    <tr> 
+     <td>6</td> 
+     <td>nginx</td> 
+     <td>1.14.1</td> 
+     <td>离线安装</td> 
+     <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/nginx.zip" target="_blank" rel="noreferrer noopener">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/nginx.zip</a><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h1 style="color:#3C4353;" id="anchor66">3、软件安装</h1> 
+  <p>前置说明：</p> 
+  <p>1）创建安装文件夹</p> 
+  <p>mkdir&nbsp;/opt/software</p> 
+  <p>2）上传安装文件</p> 
+  <p>使用ftp将文件上传到/opt/software文件夹</p> 
+  <h2 style="color:#3C4353;" id="anchor72">3.1、jdk安装</h2> 
+  <h4 style="color:#3C4353;">1）、解压tar包</h4> 
+  <p>tar -zxvf jdk-8u11-linux-x64.tar.gz</p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">2）、修改解压后的包名称</h4> 
+  <p>mv jdk1.8.0_11 jdk1.8</p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">3）、修改profile文件</h4> 
+  <div>
+   vim /etc/profile
+  </div> 
+  <div>
+   增加以下环境变量
+  </div> 
+  <div>
+   export JAVA_HOME=/opt/software/jdk1.8
+  </div> 
+  <div>
+   export JRE_HOME=/$JAVA_HOME/jre
+  </div> 
+  <div>
+   export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+  </div> 
+  <p>export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">4）、刷新配置文件</h4> 
+  <p>source /etc/profile</p> 
+  <h2 style="color:#3C4353;" id="anchor89">3.2、mysql安装</h2> 
+  <h4 style="color:#3C4353;">1）、获取mysql的5.7源</h4> 
+  <p>cd /opt/software</p> 
+  <p>wget&nbsp;<a href="http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm">http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm</a></p> 
+  <p>rpm -ivh mysql57-community-release-el7-8.noarch.rpm</p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">2）、安装mysql-server</h4> 
+  <div>
+   yum -y install mysql-server
+  </div> 
+  <div>
+   提示是否继续安装一直Y
+  </div> 
+  <p><br></p> 
+  <div>
+   默认配置文件路径：&nbsp;
+  </div> 
+  <div>
+   配置文件：/etc/my.cnf&nbsp;
+  </div> 
+  <div>
+   日志文件：/var/log/var/log/mysqld.log&nbsp;
+  </div> 
+  <div>
+   服务启动脚本：/usr/lib/systemd/system/mysqld.service&nbsp;
+  </div> 
+  <p>socket文件：/var/run/mysqld/mysqld.pid</p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">3）、修改配置文件</h4> 
+  <div>
+   vim /etc/my.cnf
+  </div> 
+  <p><br></p> 
+  <div>
+   修改编码
+  </div> 
+  <div>
+   [client]
+  </div> 
+  <div>
+   default-character-set=utf8
+  </div> 
+  <div>
+   [mysql.server]
+  </div> 
+  <div>
+   default-character-set=utf8
+  </div> 
+  <div>
+   [mysql]
+  </div> 
+  <div>
+   default-character-set=utf8
+  </div> 
+  <div>
+   [mysqld]
+  </div> 
+  <div>
+   character-set-server=utf8
+  </div> 
+  <div>
+   log-bin=mysql-bin
+  </div> 
+  <div>
+   server-id=1
+  </div> 
+  <div>
+   binlog-ignore-db=mysql
+  </div> 
+  <div>
+   binlog-do-db = demo
+  </div> 
+  <div>
+   character-set-client-handshake = FALSE
+  </div> 
+  <div>
+   character-set-server = utf8mb4
+  </div> 
+  <div>
+   collation-server = utf8mb4_unicode_ci
+  </div> 
+  <div>
+   init_connect=’SET NAMES utf8mb4'
+  </div> 
+  <div>
+   skip_ssl # 配置不使用ssl
+  </div> 
+  <div>
+   sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+  </div> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6502.png" alt="" width="400" height="490" title=""></p> 
+  <h4 style="color:#3C4353;">4）、启动MySQL</h4> 
+  <p>启动service mysqld start (重启命令service mysqld restart)</p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">5）、获取系统默认密码</h4> 
+  <p>grep "password" /var/log/mysqld.log</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6503.png" alt="" width="400" height="135" title=""></p> 
+  <h4 style="color:#3C4353;">6）、修改密码</h4> 
+  <div>
+   进入mysql 命令 mysql -uroot -p 输入回车之后输入第五步获得的密码
+  </div> 
+  <p>修改mysql密码 命令&nbsp;alter user 'root'@'localhost' identified by 'Root!!2018';&nbsp;&nbsp;</p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">7）、外网访问</h4> 
+  <div>
+   （1）、use mysql;
+  </div> 
+  <div>
+   （2）、update user set host = '%' where user = 'root';
+  </div> 
+  <div>
+   （3）、flush privileges;
+  </div> 
+  <h2 style="color:#3C4353;" id="anchor143">3.3、rabbitmq安装</h2> 
+  <h3 style="color:#3C4353;">1、安装Elang</h3> 
+  <h4 style="color:#3C4353;">（1)、上传附件</h4> 
+  <p>上传附件到服务器/opt/software文件夹<a href="http://erlang.org/download/otp_src_19.3.tar.gz"></a></p> 
+  <h4 style="color:#3C4353;">（2）、安装依赖</h4> 
+  <div> 
+   <p>yum -y install make gcc gcc-c++ kernel-devel m4 ncurses-devel openssl-devel unixODBC-devel</p> 
+   <h4>（3）、解压文件</h4> 
+   <div>
+    tar -xvzf otp_src_19.3.tar.gz&nbsp;
+   </div> 
+  </div> 
+  <h4 style="color:#3C4353;">（4）、编译</h4> 
+  <div>
+   cd /opt/software/otp_src_19.3
+  </div> 
+  <div>
+   ./configure --prefix=/usr/erlang --without-javac&nbsp;
+  </div> 
+  <div>
+   make
+  </div> 
+  <p>make install</p> 
+  <h4 style="color:#3C4353;">（5）、验证是否安装成功</h4> 
+  <div>
+   cd /usr/erlang/
+  </div> 
+  <div>
+   ./bin/erl
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6508.jpeg" alt="" width="400" height="56" title=""> 
+  <h3 style="color:#3C4353;">2、安装rabbitmq</h3> 
+  <h4 style="color:#3C4353;">（1）、上传附件</h4> 
+  <p>上传附件到服务器/opt/software文件夹</p> 
+  <h4 style="color:#3C4353;">（2）、解压</h4> 
+  <p>tar -xvf&nbsp;rabbitmq-server-generic-unix-3.7.5.tar&nbsp;</p> 
+  <h4 style="color:#3C4353;">（3）、改名</h4> 
+  <h4 style="color:#3C4353;"></h4> 
+  <p>mv&nbsp;&nbsp;rabbitmq_server-3.7.5&nbsp;&nbsp;rabbitmq_server</p> 
+  <h4 style="color:#3C4353;">（4）、修改配置环境</h4> 
+  <div>
+   vim /etc/profile
+  </div> 增加以下环境变量 
+  <div>
+   export PATH=$PATH:/opt/software/rabbitmq_server/sbin
+  </div> 
+  <p>export RABBITMQ_HOME=/opt/software/rabbitmq_server</p> 
+  <h4 style="color:#3C4353;">（5）、刷新配置</h4> 
+  <div>
+   source /etc/profile
+  </div> 
+  <h4 style="color:#3C4353;">（6）、命令</h4> 
+  <div>
+   【开启rabbitmq服务】: rabbitmq-server -detached
+  </div> 
+  <div>
+   【查看服务状态：】: rabbitmqctl status
+  </div> 
+  <p>【开启rabbitmq：】:rabbitmqctl start_app</p> 
+  <p>【关闭rabbitmq】:rabbitmqctl stop_app</p> 
+  <p><br></p> 
+  <p>测试是否安装成功</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6509.png" alt="" width="400" height="29" title=""></p> 
+  <h4 style="color:#3C4353;">（7）、开启管理插件</h4> 
+  <div>
+   rabbitmq-plugins enable rabbitmq_management
+  </div> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6510.png" alt="" width="400" height="64" title=""></p> 
+  <h4 style="color:#3C4353;">（8）、查看插件集合</h4> 
+  <div>
+   rabbitmq-plugins list
+  </div> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6512.png" alt="" width="400" height="76" title=""></p> 
+  <h4 style="color:#3C4353;">（9）、登陆可视化界面</h4> 
+  <div>
+   http://ip:15672
+  </div> 
+  <h4 style="color:#3C4353;">（10）、用户管理</h4> 
+  <div>
+   查看所有用户
+  </div> 
+  <div>
+   rabbitmqctl list_users
+  </div> 
+  <div>
+   &nbsp;
+  </div> 
+  <div>
+   添加一个用户
+  </div> 
+  <div>
+   rabbitmqctl add_user zhaobl 123456
+  </div> 
+  <div>
+   &nbsp;
+  </div> 
+  <div>
+   配置权限
+  </div> 
+  <div>
+   rabbitmqctl set_permissions -p "/" zhaobl ".*" ".*" ".*"
+  </div> 
+  <div>
+   &nbsp;
+  </div> 
+  <div>
+   查看用户权限
+  </div> 
+  <div>
+   rabbitmqctl list_user_permissions zhaobl
+  </div> 
+  <div>
+   &nbsp;
+  </div> 
+  <div>
+   设置tag
+  </div> 
+  <div>
+   rabbitmqctl set_user_tags zhaobl administrator
+  </div> 
+  <div>
+   &nbsp;
+  </div> 
+  <div>
+   删除用户（安全起见，删除默认用户）
+  </div> 
+  <div>
+   rabbitmqctl delete_user guest
+  </div> 
+  <p><br></p> 
+  <h3 style="color:#3C4353;">4、安装rabbitmq-3.8.1</h3> 
+  <p><br></p> 
+  <p style="margin-left:0cm;">①rpm -ivh erlang-21.3.8.9-1.el7.x86_64.rpm&nbsp;<br>②rpm -ivh socat-1.7.3.2-1.el6.lux.x86_64.rpm</p> 
+  <div>
+   ③rpm -ivh rabbitmq-server-3.8.1-1.el7.noarch.rpm&nbsp;
+   <br>
+  </div> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;" id="anchor219">3.4、redis安装</h2> 
+  <h4 style="color:#3C4353;">（1）、上传附件</h4> 
+  <p>上传附件到服务器/opt/software文件夹</p> 
+  <h4 style="color:#3C4353;">（2）、解压</h4> 
+  <p>tar -zxvf redis-5.0.3.tar.gz</p> 
+  <h4 style="color:#3C4353;">（3）、编译</h4> 
+  <p>cd /opt/software/redis-5.0.3</p> 
+  <p>make</p> 
+  <p>make install PREFIX=/usr/local/redis</p> 
+  <h4 style="color:#3C4353;">（4）、修改配置文件</h4> 
+  <p>vim redis.conf</p> 
+  <p><br></p> 
+  <div>
+   把 daemonize no&nbsp;改为 daemonize yes
+  </div> 
+  <div>
+   protected-mode =yes 改为 protected-mode =no
+  </div> 
+  <p>将bind 127.0.0.1注释掉</p> 
+  <p>设置密码、将requirepass 注释去掉，并设置对应的密码，此处设置为 requirepass hcszypt@Za111!</p> 
+  <h4 style="color:#3C4353;">（5）启动</h4> 
+  <div style="font-size:14px;">
+   /usr/local/redis/bin/redis-server /opt/software/redis/redis.conf &amp;
+  </div> 
+  <h2 style="color:#3C4353;" id="anchor237">3.5、nginx安装</h2> 
+  <h4 style="color:#3C4353;">（1）、上传附件</h4> 
+  <p>上传附件到服务器/opt/software文件夹</p> 
+  <h4 style="color:#3C4353;">（2）、openssl安装</h4> tar zxvf openssl-fips-2.0.10.tar.gz 
+  <p>cd openssl-fips-2.0.10</p> 
+  <p>./config &amp;&amp; make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;">（3）、pcre安装</h4> 
+  <p>tar zxvf pcre-8.40.tar.gz</p> 
+  <p>cd pcre-8.40</p> 
+  <p>./configure &amp;&amp; make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;">（4）、zlib安装</h4> 
+  <p>tar zxvf zlib-1.2.11.tar.gz</p> 
+  <p>cd zlib-1.2.11</p> 
+  <p>./configure &amp;&amp; make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;">（5）、nginx安装</h4> 
+  <p>tar zxvf nginx-1.14.1.tar.gz</p> 
+  <p>cd nginx-1.14.1</p> 
+  <p>./configure --prefix=/opt/software/nginx (<span style="color:#E56600;">如果执行此命令没有配置成功ssl模块,尝试使用此命令 </span><span style="color:#E56600;">&nbsp;./configure --prefix=/opt/software/nginx --with-http_ssl_module --with-http_v2_module</span>)</p> 
+  <p>make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;">（6）、启动</h4> 
+  <p>/opt/software/nginx/sbin/nginx -c /opt/software/nginx/conf/nginx.conf</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <div> 
+   <div class="gtx-trans-icon"></div> 
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2、软件版本">2、软件版本</a> </li>
+    <li class="text-ellipsis"><a href="#anchor66" title="3、软件安装">3、软件安装</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor72" title="3.1、jdk安装">3.1、jdk安装</a> </li>
+      <li class="text-ellipsis"><a href="#anchor89" title="3.2、mysql安装">3.2、mysql安装</a> </li>
+      <li class="text-ellipsis"><a href="#anchor143" title="3.3、rabbitmq安装">3.3、rabbitmq安装</a> </li>
+      <li class="text-ellipsis"><a href="#anchor219" title="3.4、redis安装">3.4、redis安装</a> </li>
+      <li class="text-ellipsis"><a href="#anchor237" title="3.5、nginx安装">3.5、nginx安装</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

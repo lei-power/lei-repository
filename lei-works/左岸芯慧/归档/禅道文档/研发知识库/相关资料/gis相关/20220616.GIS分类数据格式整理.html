@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220616.GIS分类数据格式整理</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1></h1> 
+  <h1 id="anchor1">1、概要</h1> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;如果神农口袋推广到其他地区，需要展示大屏数据，我们需要哪些数据<span>做个整理</span>，方便售前去当地部门拿到准确数据</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor6">2、确权数据</h1> 
+  <p><br></p> 
+  <p>依赖：<span style="color:#E53333;font-size:18px;"><strong>确权数据</strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="color:#E53333;">校验数据完整性可以通过两种方式：</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;第一种：通过文件夹打开校验数据完整性</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;第二种：通过arcgis软件打开校验数据完整性</span></p> 
+  <h2 id="anchor14">2.1 数据样式</h2> 
+  <p><br></p> 
+  <p>通常确权数据客户提供时基本如下面文件夹所示：</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4386.png" alt=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table style="width:auto;">
+   <tbody>
+    <tr>
+     <th style="text-align:center;background-color:#F1F1F1;border:1px solid #DDDDDD;">文件夹<br></th> 
+     <th style="text-align:center;background-color:#F1F1F1;border:1px solid #DDDDDD;"><span style="font-weight:700;"><span style="font-size:14px;">文件夹里内容</span></span><br></th> 
+     <th style="text-align:center;background-color:#F1F1F1;border:1px solid #DDDDDD;"><span style="font-weight:700;"><span style="font-size:14px;">arcgis软件打开</span></span><br></th> 
+     <th style="text-align:center;background-color:#F1F1F1;border:1px solid #DDDDDD;"><span style="font-weight:700;"><span style="font-size:14px;">说明</span></span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>汇总表格</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4470.png" alt="" width="550" height="117" title=""><br></td> 
+     <td><br></td> 
+     <td>每个地区的汇总表格里都会有这6个类型数据表格，都必须要有<br></td> 
+    </tr>
+    <tr>
+     <td>权属数据</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4471.png" alt="" width="550" height="41" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4410.png" alt="" width="400" height="308" title=""><br></td> 
+     <td>arcgis软件打开mdb数据后，会有这些表数据，都必须要有</td> 
+    </tr>
+    <tr>
+     <td>矢量数据</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4472.png" alt="" width="300" height="359" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5037.png" alt="" width="400" height="256" title=""><br></td> 
+     <td> <p>arcgis软件打开后，需要这几个矢量文件，其他矢量文件可有可无</p> <p><strong><span style="color:#E53333;">详情见下面2.2标题</span></strong></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+  <h2 id="anchor40">2.2&nbsp;矢量文件样式</h2> 
+  <p><br></p> 
+  <table style="width:auto;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">序号</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>矢量文件名称</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>名称解释</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>第一步：文件夹打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>第二步：arcgis软件打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>是否必要</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>1</td> 
+     <td>DK</td> 
+     <td>地块图层矢量数据（地块轮廓）</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4444.png" alt="" width="400" height="75" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4481.png" alt="" width="400" height="100" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td>2</td> 
+     <td>XJXZQ</td> 
+     <td>县级行政区矢量数据（区县轮廓）</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4438.png" alt="" width="400" height="83" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4483.png" alt="" width="400" height="105" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td>3</td> 
+     <td>XJQY</td> 
+     <td>乡级区域矢量数据（乡镇轮廓）<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4440.png" alt="" width="400" height="85" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4484.png" alt="" width="400" height="100" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td>4</td> 
+     <td>CJQY</td> 
+     <td>村级区域矢量数据（村轮廓）</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4443.png" alt="" width="400" height="84" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4485.png" alt="" width="400" height="102" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td>5</td> 
+     <td>ZJQY</td> 
+     <td>组级区域矢量数据（组轮廓）</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4467.png" alt="" width="400" height="78" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4486.png" alt="" width="400" height="107" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td>6</td> 
+     <td>JZX</td> 
+     <td>界址线矢量数据（界址线）</td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4469.png" alt="" width="400" height="75" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4487.png" alt="" width="400" height="91" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">7</td> 
+     <td style="border:1px solid #ddd;">JZD</td> 
+     <td style="border:1px solid #ddd;">界址点矢量数据（界址点）</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5038.png" alt="" width="400" height="85" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5039.png" alt="" width="400" height="81" title=""><br></td> 
+     <td style="border:1px solid #ddd;">是</td> 
+    </tr>
+   </tbody>
+  </table>
+  <h1><br></h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1></h1> 
+  <h1 id="anchor94">3、三调数据</h1> 
+  <p><br></p> 
+  <p>依赖：<span style="font-size:18px;color:#E53333;"><strong>三调数据</strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="color:#E53333;">校验数据完整性可以通过两种方式：</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;第一种：通过文件夹打开校验数据完整性</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;第二种：通过arcgis软件打开校验数据完整性</span></p> 
+  <h2 id="anchor102">3.1 数据样式</h2> 
+  <h3>shp文件格式</h3> 
+  <table style="width:auto;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>量文件名程</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>名称解释&nbsp;</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>&nbsp;文件夹打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>arcgis软件打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>是否必要</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>1</td> 
+     <td>DLTB（shp文件）<br></td> 
+     <td>地类图斑（地块矢量数据shp类型）<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4474.png" alt="" width="400" height="107" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4489.png" alt="" width="400" height="262" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+  <p><br></p> 
+  <h3>gdb文件格式</h3> 
+  <table style="width:auto;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序</span><span>号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>矢量文件名程</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>名称解释&nbsp;</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>文件夹打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>arcgis软件打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>是否必要</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>1</td> 
+     <td>DLTB（gdb文件）<br></td> 
+     <td>&nbsp;地类图斑（地块矢量数据gdb类型）<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4492.png" alt="" width="269" height="300" title=""><br></td> 
+     <td> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4493.png" alt="" width="346" height="400" title=""></p> <p><strong><span style="color:#E53333;">详情见下面3.2标题</span></strong></p> </td> 
+     <td>是</td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+  <p><strong><span style="color:#E53333;font-size:16px;">注：以上两种方式都能获取到三调数据，只要有一种方式满足就可以</span></strong></p> 
+  <h2></h2> 
+  <p><br></p> 
+  <h2 id="anchor138">3.2 矢量文件样式</h2> 
+  <p><br></p> 
+  <table style="width:auto;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>矢量文件名称</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>名称解释</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>第一步：文件夹打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>第二步：arcgis软件打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>是否必要</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>1</td> 
+     <td>DLTB<br></td> 
+     <td>地块图层矢量数据（地块轮廓）<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4474.png" alt="" width="500" height="118" title=""><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4489.png" alt="" width="400" height="262" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td>2</td> 
+     <td>XZQ<br></td> 
+     <td>行政区矢量数据<br></td> 
+     <td><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4477.png" alt="" width="400" height="186" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+    <tr>
+     <td>3</td> 
+     <td>CJDCQ<br></td> 
+     <td>村级调查区矢量数据<br></td> 
+     <td><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4478.png" alt="" width="400" height="204" title=""><br></td> 
+     <td>是</td> 
+    </tr>
+   </tbody>
+  </table>
+  <br>
+  <h1 id="anchor164"><br>4、影像数据</h1> 
+  <p><br></p> 
+  <p>依赖：<span style="color:#E53333;font-size:18px;"><strong>卫星影像</strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="color:#E53333;">校验数据完整性可以通过两种方式：</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;第一种：通过文件夹打开校验数据完整性</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;第二种：通过arcgis软件打开校验数据完整性</span></p> 
+  <h2 id="anchor172">4.1 影像格式</h2> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>影像格式</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>坐标系</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>文件夹打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>arcgis软件打开</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>是否必要</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;">1</td> 
+     <td style="border:1px solid #ddd;">后缀是：<span style="color:#E53333;font-size:18px;"><strong>tif</strong></span></td> 
+     <td style="border:1px solid #ddd;"> <p><span style="color:#E53333;font-size:18px;"><strong>wgs_1984</strong></span></p> <p><br></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4504.png" alt=""><br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4503.png" alt="" width="400" height="218" title=""><br></td> 
+     <td style="border:1px solid #ddd;">是</td> 
+    </tr>
+   </tbody>
+  </table>
+  <br>
+  <p><br></p> 
+  <h2><br></h2> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor6" title="2、确权数据">2、确权数据</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor14" title="2.1 数据样式">2.1 数据样式</a> </li>
+      <li class="text-ellipsis"><a href="#anchor40" title="2.2&nbsp;矢量文件样式">2.2&nbsp;矢量文件样式</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor94" title="3、三调数据">3、三调数据</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor102" title="3.1 数据样式">3.1 数据样式</a> </li>
+      <li class="text-ellipsis"><a href="#anchor138" title="3.2 矢量文件样式">3.2 矢量文件样式</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor164" title="4、影像数据">4、影像数据</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor172" title="4.1 影像格式">4.1 影像格式</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

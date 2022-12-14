@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gis数据——高标准农田 + 两区划定 + 遥感监测</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <div> 
+   <h1 class="heading-1 ace-line old-record-id-EAegd2eO8osmyexoHvgc3vl9n2g" id="anchor1">一、高标准农田</h1> 
+   <div class="ace-line old-record-id-JcmKdw0quocImuxaXfHcS13onpb">
+    高标准农田依赖数据：高标准农田
+   </div> 
+   <div class="ace-line old-record-id-DSasdyCkOoSwcixsTfXcoxiongc">
+    两区划定数据关联系统：神农看板-&gt;数字底座-&gt;高标准农田
+   </div> 
+   <div class="ace-line old-record-id-IUAQdowUwo0EuOxaW6Bc62ELnah">
+    高标准展示内容：
+   </div> 
+   <div> 
+    <table class="ace-table" style="border:none;width:auto;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-IOSMdiKO0ogkIsxQoJKcNiDlnfb">
+         累计建设面积
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-TKQ8dYK0UosIaIxKaVEcCmKYnte">
+         取【高标准农田表（TBL_SICHUAN_DEYANG_JINGYANG_GAOBIAOZHUN）-DKMJM】，按【XMNF=所选年份】且【XMBH=所选项目】累计求和
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-HWimdgYuWooSCWxkfqBcPFbRn7c">
+         累计地块数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-QE02dUeK8oYMc0xuYwQcE2YHnpe">
+         取【高标准农田表（TBL_SICHUAN_DEYANG_JINGYANG_GAOBIAOZHUN）-XMBH、BSM】组成唯一标识，按【XMNF=所选年份】且【XMBH=所选项目】累计求和
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CkAWdy6A0oWK2mxAFZ2c5kpBnNc">
+         累计建设项目数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-RWswdeeuyoeswixqAT6cozMmnlg">
+         取【高标准农田表（TBL_SICHUAN_DEYANG_JINGYANG_GAOBIAOZHUN）-XMBH】，按【XMNF=所选年份】且【XMBH=所选项目】累计求和
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Xs0ud26CCoaGemxUvtzcO8e4nGe">
+         地类分布范围统计
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-SesAdy2QSoA8K6xqtppcpVMJndb">
+         取【高标准农田表（TBL_SICHUAN_DEYANG_JINGYANG_GAOBIAOZHUN）-DLBM】，按所属值为【水田（0101）、旱地（0103）、水浇地（0102）、其他（其他值）】分组统计。
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-TYkidIoYmoi6E8xAlZycnwKunvg">
+         质量等级范围统计
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CUaUdEmM0ogAOyxquUMcE019nCd">
+         取【高标准农田表（TBL_SICHUAN_DEYANG_JINGYANG_GAOBIAOZHUN）-DLBM】，按所属值为【水田（0101）、旱地（0103）、水浇地（0102）、其他（其他值）】分组统计。
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-FYOgdwoSgoK8scxmxrmckCQ5nab">
+         地块面积统计
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-ZGkUdUeQSoyw0yxM5hScanaDnge">
+         取【高标准农田表（TBL_SICHUAN_DEYANG_JINGYANG_GAOBIAOZHUN）-DKMJM】，按0~5、5~10、...45~50、&gt;=50分组累计【DKMJM】
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-SwEmdCQcwoe4gQxgNamcWpAynee">
+         地块数统计
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-AuoEdWo0aoQUmIx2HTZcoyQmnOc">
+         取【高标准农田表（TBL_SICHUAN_DEYANG_JINGYANG_GAOBIAOZHUN）-DKMJM】，按0~5、5~10、...45~50、&gt;=50分组累计【XMBH-BSM】。
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-SqqIdE8eqoE6wMxuomRcmNv2nRg" id="anchor67">二、两区划定</h1> 
+   <div class="ace-line old-record-id-MOusd6CoKo2wGqxo3aTc5GYqn1c">
+    两区划定依赖数据：两区划定 + 三调
+   </div> 
+   <div class="ace-line old-record-id-M6eAdqcSkoEi4YxaQPocQ2C8nth">
+    定义："两区"是依据国家主体功能区规划、土地利用总体规划和优势农产品区域布局等规划，以永久基本农田为基础，划定用于确保国家粮食安全和保障大豆、棉花、油菜籽、糖料蔗及天然橡胶等重要农产品有效供给的生产区域。两区在空间上包括区、片块、两区地块三个层级，单个粮食生产功能区（重要农产品生产保护区）内可包含若干片块，单个片块内可包含若干两区地块；
+   </div> 
+   <div> 
+    <table class="ace-table ke-select-col" style="border:none;width:auto;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-WQEud6IcUoiY2SxGEPrcXcMynVh">
+         两区片块
+        </div> 
+        <div class="ace-line old-record-id-DW8qdE0iiouCsKxmmVIcxUgVncf">
+         <br>
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GgO8dQacIookymxU65Xcp8Y3nIU">
+         在“两区”内划定的相对集中连片耕地，具有明确的经营主体、管护主体或能够进行统一生产管理。单个两区片块可跨越村组区域界线，但原则上不得跨越乡级区域界线。
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-IS0ed0G2woGuQOx8VoccB7fpnsd">
+         两区地块
+        </div> 
+        <div class="ace-line old-record-id-IsoGdqwWgoGIw2xaegGcdsqrnYg">
+         <br>
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CW2SdyuoQoQcKcxozPCcy8JHnEb">
+         在“两区”片块范围内，以实际宽度不小于1米的农村道路、沟渠、水系等线状地物或行政区域界线为边界所划定的具体的空间种植单元。
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-NGiidCaKqoU26Mxkb45cn6gWnNf">
+         两区划定
+        </div> 
+        <div class="ace-line old-record-id-Dmcid2AquoGKOqxCoCncG8Yvntd">
+         <br>
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-MkO0d6COYoskOExA79vcY5NYnNc">
+         按照《“两区”划定技术规程（试行）》规定程序，以永久基本农田数据库和土地承包经营权确权登记数据库为基础，以两区地块为基本空间单元，确定“两区”空间位置、面积，并结合实际记录“两区”作物类型、权属以及农田灌排工程等基本信息。
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+   <div class="ace-line old-record-id-RA0AdUiKaoGYUcx2lMncfsCcnve">
+    两区划定数据包含内容：
+   </div> 
+   <div> 
+    <table class="ace-table" style="border:none;width:auto;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-UI22dU0wQoa04GxwTRhc0ng7nXe">
+         县/乡/村区域属性结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-IkEsdGMaqosoa4xeoufcvWzdndd">
+         标识码、要素代码、行政区代码、行政区名称、备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GSqKdM4KyoOuo2xiUfuckQownWg">
+         区域界线属性结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-MGOudYWcKoSOC4xkDiiclmognWe">
+         标识码、要素代码、界线类型、界线性质、界线说明
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-JQ6CdcEYcomcyExkLmmc2y7snlg">
+         两区属性结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-LCigd0oa4okCYWxMTnNc3Tr3nFc">
+         标识码、要素代码、两区代码、备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Os88d8WakouYOKxK26OcdKFSnhd">
+         两区片块属性结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GOIwdsqUaogWGaxOUlhcG2IWn8d">
+         标识码、要素代码、两区片块代码、两区片块名称、两区片块面积、备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-JY0kdw2uQoqyUMx0gpscih4Ynkc">
+         两区地块属性结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-M2YadQomko0qIox2Xxwc0rsbnvg">
+         标识码、要素代码、两区片块代码、区划区域类型、两区地块代码、两区地块名称、两区地块面积、是否高标准农田、质量等级代码、经营主体名称、经营主体类型、备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-NQOUd4SAIomM6YxKcIScHl3knee">
+         基本农田图斑属性结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-F86mdOyMYoyyCaxYl5KcGHunnrc">
+         标识码、要素代码、基本农田图斑编号、地类编码、地类名称、坡度级别、级别农田面积、
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-WSAwdam4So6MQMx8LbNcDJ9KnMh">
+         两区统计信息结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-SgUKdyIWWo4kSIxOxQCcNEmLneb">
+         两区代码、两区类型、两区面积、划定时间、两区片块数、两区地块数、
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-JwgmdkYa4oCWcuxcCK6c4Y89nQQ">
+         两区片块管护责任结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Ng0cdMes8oUiSWxucwvckUQ7n4g">
+         两区片块代码、两区片块名称、高标准农田建设情况、高标准农田占比、责任主体类型、责任主体名称、责任主体代表名称、责任代表联系方式、责任代表住址、责任代表证件类型、责任代表证件号码、涉及行政村、起始时间、结束时间、标志牌编号、备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-EQqad4uQ2oUoaixERJycZyiYnec">
+         公示情况记录结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CoI6dwYYUoQyEKxOOCdc6OiXn3f">
+         行政区代码、调查员、审核员、审核时间、公示时间、公示周期、公示图、备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-WCEId8IuqogaqqxK64qcKSRwn6g">
+         天然橡胶地块内容结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-QiacdE6YmoKSgSx6L8VcR0s9nxd">
+         两区地块代码、胶园等级代码、种植品种、权属证宗地号、种植时间
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-NK8edmaiAo8seWxcNrncrEOln6g">
+         村级面积统计结构
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CoegdoYCqo2YwwxYdZTcg4FcnCf">
+         村级区域代码、功能区面积、水稻功能区面积、小麦功能区面积、玉米功能区面积、小麦玉米复种面积、保护区面积、大豆保护区面积、小麦大豆复种面积、棉花保护区面积、糖料蔗保护区面积、油菜籽保护区面积、水稻油菜复种面积、天然橡胶保护区面积、备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CYkUdKcsooUaGyxW6DGcM0S6nSd">
+         耕地坡度分级
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-BmMkdwaOooU0Owxw7A6c9hGxnye">
+         ≤2°、2°～ 6°、6°～ 15°、15°～ 25°、＞25°
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-S2yadu0qgow4a8xeCHCcRKxjnNg">
+         两区类型
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-G4COd8U86oKcAOxaaEPcGRJYnqg">
+         功能区、水稻功能区、小麦功能区、水稻和小麦复种区、玉米功能区、小麦和玉米复种区、保护区、大豆保护区、小麦和大豆复种区、棉花保护区、油菜籽保护区、水稻和油菜籽复种区、糖料这保护区、天然橡胶保护区
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+   <div class="ace-line old-record-id-QKsudOGqyom42axm2ikc5mm4nIh">
+    两区划定数据关联系统：神农看板-&gt;数字底座-&gt;土地利用
+   </div> 
+   <div class="ace-line old-record-id-VAAodgMGKo6e6uxsFWVcRKnKn0b">
+    两区划定展示内容：
+   </div> 
+   <div class="ace-line old-record-id-R8yudGGwKoUqYoxQpBocC9cOnwb">
+    <strong>1、两区划定结合三调数据（农用地-耕地 ）和确权数据，展示以永久基本农田为基础，划定确保国家粮食安全和保障的水稻、大豆、棉花、油菜籽及天然橡胶、糖料蔗等重要农产品有效供给区域；</strong>
+   </div> 
+   <div class="ace-line old-record-id-WkKadi4iEoSk0UxozP3crTq2nSc">
+    <strong>2、包括两区总面积、粮食生产功能区和重要农产品保护区、两区复种作物类型占比分析、两区耕地坡度级别统计、区域下各城镇两区面积分析；</strong>
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-QgSMd288yoeU6gxCMsncz72Bn8e" id="anchor218">三、影像（遥感地图）</h1> 
+   <div class="ace-line old-record-id-QUOYdu4S2oWgkIxyI9ZcSIESnKc">
+    遥感监测依赖数据：卫星影像数据 + 三调数据
+   </div> 
+   <div class="ace-line old-record-id-OYmcduOYOoWc8kxMJWucyTYnn4g">
+    影像数据关联系统功能：农业生产-&gt;遥感监测
+   </div> 
+   <div class="ace-line old-record-id-DoWSdGUiwok04ExmYCHcq3vingg">
+    <strong>遥感监测展示内容：</strong>
+   </div> 
+   <div> 
+    <table class="ace-table" style="border:none;width:auto;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-KqKidAS0youuq4xCc4bczjBGnnf">
+         种植面积
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-OQmIdoOg6o8gKUxQJh4clidtnSf">
+         按【作物分组】、【批次】、【区域】归档 到【种植地块区域归档表】，然后按【选定作物分组】、【选定批次】、【选定区域】展示种植面积
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-AGUGdmq2MoCUyexsHT0cu1StnRb">
+         占地面积比例
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-M2mWdKgquoaGwIxIdZ1cFKNwnvd">
+         按【作物分组】、【批次】、【区域】归档 到【种植地块区域归档表】，然后按【选定作物分组】、【选定批次】、【选定区域】累计求和【种植面积】/【选定区域】的耕地总面积，得到比例
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-J4QId6mUioa688xOuwTcDT9VnDc">
+         种植地块数
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-RGYsdkk46oM28MxyAlwcXE1Qn2f">
+         按【作物分组】、【批次】、【区域】归档 到【种植地块区域归档表】，然后按【选定作物分组】、【选定批次】、【选定区域】展示种植地块数
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-UwMGda4ygo6YoyxGqA1cBJejnwe">
+         种植面积趋势
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Z8OAd8QQMoeUS0xem1jcmtSHnie">
+         按【作物分组】、【批次】、【区域】归档 到【种植地块区域归档表】，然后按【选定作物分组】在全区、所有批次下展示种植面积的趋势。X轴取 遥感监测历史表 - 影像拍摄时间 ，Y轴为面积（单位：万亩）
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="2" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-SEkudG8sMomWqWxKifjc6NIgnzh">
+         <br>
+        </div> 
+        <div class="ace-line old-record-id-L8QAdocY8oA0YuxsfRfcWq8GnYb">
+         <br>
+        </div> 
+        <div class="ace-line old-record-id-DQwgdGyEMo8AscxMzB8coKAjnGf">
+         种植面积区域统计
+        </div> 
+        <div class="ace-line old-record-id-I4WadeIa2oWCUMxELbhcZB9Xncf">
+         <br>
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-HWuqdUQCcogU86xag1FcPNP5n5e">
+         按【作物分组】、【批次】、【区域】归档 到【种植地块区域归档表】，然后按【选定作物分组】、【选定批次】、【选定区域下所有区域】的【种植地块数】
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-G8mCdsQc6oQk8IxABjZcknagnbh">
+         按【作物分组】、【批次】、【区域】归档 到【种植地块区域归档表】，然后按【选定作物分组】、【选定批次】、【选定区域下所有区域】的【种植面积】
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-EqiCd8Eg2ogCE0xAFm4c7d25n0b">
+         种植面积区域分布
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-S4SSdewSwo48IOx8pKBcMxF0nQc">
+         按【作物分组】、【批次】、【区域】归档 到【种植地块区域归档表】，然后按【选定作物分组】、【选定批次】、【选定区域下所有区域】的【种植面积】/当年【选定作物分组】、【选定批次】、【选定区域】的【耕地总面积】，得到比例
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="一、高标准农田">一、高标准农田</a> </li>
+    <li class="text-ellipsis"><a href="#anchor67" title="二、两区划定">二、两区划定</a> </li>
+    <li class="text-ellipsis"><a href="#anchor218" title="三、影像（遥感地图）">三、影像（遥感地图）</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

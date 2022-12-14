@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>服务端bug分类与处理规范</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p>对于服务端人员来说，常见bug可以分成几种类型</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor3"><strong>1.类似空指针异常、取错字段、文字错误等等bug</strong></h1> 【处理】些种都可以统一归为低级bug，只要员工在开发时细心一点，基本都能解决。这类bug的处理是，允许发生，但是要控制数量，一次迭代里要控制到个位数。同时要求员工对自己提高要求，在多次迭代中此类bug成下降趋势。如果数量持续过多，就需要这个员工自行反思自己的开发习惯。
+  <br>
+  <br>
+  <h1 id="anchor4">2.逻辑错误类bug</h1> 【处理】这类bug比较顽固，一旦出现，特别是在提测或者上线前发现，极大可能会引起上线延期的情况，所以此类bug一定要严防，通常此类bug都可以通过在设计阶段的详细设计来解决。需要员工达到：
+  <strong>敲代码时头脑里已有清晰的处理思路</strong>才能减少此类bug的出现。
+  <br> 如果有部分员工确实缺少设计经验，就需要其他人员来进行详细设计，他来按照设计文档编码执行即可。
+  <br>
+  <br>
+  <h1 id="anchor5">3.业务类bug</h1> 
+  <p>【处理】此类bug多数因为员工对于业务不熟导致，一旦出现也会引起较大的业务问题，需要控制。解决方法，要让员工在开发迭代中增加对系统的了解，不能只对自己开发模块熟悉，其他模块全局都要熟悉。特别是新员工，最好是入职前两周不要安排开发任务，让他熟悉梳理系统业务。加深系统的理解。</p> 
+  <p><br></p> 
+  <h1 id="anchor8">4.上线前准备工作类bug</h1> 
+  <p>上线前准备sql脚本，nginx配置，数据库配置，数据库基础数据，管理后台的菜单url等等。</p> 
+  <p>【处理】此类bug可以认为是bug，也可以认为部署bug，但是一旦出现，为让我们的测试和运营人员很头疼，导致功能无法测试或者无法使用，影响较大。此类问题的处理，需要有迭代的负责人承担起对应工作，比如上线的sql脚本，可能是多人创建表，但是最终要迭代的服务端负责人承担起汇总的职责，在汇总阶段要尽量详细。</p> 
+  <p>如果长期此类bug较多，需要提高服务端负责人这方面的流程意识。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor3" title="1.类似空指针异常、取错字段、文字错误等等bug">1.类似空指针异常、取错字段、文字错误等等bug</a> </li>
+    <li class="text-ellipsis"><a href="#anchor4" title="2.逻辑错误类bug">2.逻辑错误类bug</a> </li>
+    <li class="text-ellipsis"><a href="#anchor5" title="3.业务类bug">3.业务类bug</a> </li>
+    <li class="text-ellipsis"><a href="#anchor8" title="4.上线前准备工作类bug">4.上线前准备工作类bug</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

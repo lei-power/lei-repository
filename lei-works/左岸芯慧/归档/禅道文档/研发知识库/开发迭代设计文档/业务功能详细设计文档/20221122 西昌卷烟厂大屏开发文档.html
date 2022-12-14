@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221122 西昌卷烟厂大屏开发文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <div> 
+   <div class="ace-line old-record-id-NOHvdxzzzomTrmxQhwycghrvn0f"> 
+    <div> 
+     <h1 class="heading-1 ace-line old-record-id-O24edGo8OoQe0UxkpB8cAHZ7nZd" id="anchor3"><strong>1、功能简介</strong></h1> 
+     <div class="ace-line old-record-id-SweSdM8C0oEmIYxwTd4cVgfrnte">
+      本文档主要介绍西昌中烟的任务流程和详细设计
+     </div> 
+     <div class="ace-line old-record-id-BGwEdWAu8o2MEoxq8yUcU0QZnvc">
+      1、西昌中烟是一个私有化项目，跟之前的私有化项目不一样，这里只需要在大屏展示数据，数据源是从多个项目组相互调用，需要新建一个单独的git仓库和springboot服务
+     </div> 
+     <div class="ace-line old-record-id-N2aOdCGO2oQiQoxgLB5cgLU2n1g">
+      2、新建的springboot项目需要多数据源
+     </div> 
+     <div class="ace-line old-record-id-X2y4dyakWoEuqsx8WFmcLh5inyc">
+      3、需要登陆和免登录功能，新建用户目前是在数据库创建
+     </div> 
+     <h1 class="heading-1 ace-line old-record-id-BCksd00aKoM6mkxABfqc9HFSnef" id="anchor8"><strong>2、参与人员</strong></h1> 
+     <div class="ace-line old-record-id-Hiw2dEg2kom6uuxYP8hcR83Xnod">
+      前端：谢泽发、吴金明、孙光青
+     </div> 
+     <div class="ace-line old-record-id-WGC2duUiMokQ2KxWmHzccxfxnPb">
+      后端：王恺、丁文清
+     </div> 
+     <h1 class="heading-1 ace-line old-record-id-XooEd2kmwowO6Sxyia0cxERanqd" id="anchor11">3、项目账号信息</h1> 
+     <div class="ace-line old-record-id-KukIdWSsWoQkyqxSMkocRoiUn7e">
+      vpn账号 + 堡垒机 + 数据库 + 服务器信息
+     </div> 
+     <div class="ace-line old-record-id-NeGUdWa2yoQMkexcM9HcOSLPnLx">
+      参考文档：《
+      <a href="/zentao/doc-objectLibs-custom-0-37-338.html?tid=4zxnm46s" target="_blank" rel="noreferrer noopener"><span style="color:#337FE5;">20220922西昌中烟私有化部署项目</span></a>》
+     </div> 
+     <h1 class="heading-1 ace-line old-record-id-Aa6Qd46oqoCcqcxEDJwcc4qMnsh" id="anchor14">4、数据库设计E-R图</h1> 
+     <p>4.1、用户账号e-r图</p> 
+     <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11670.png" alt="" width="250" height="127" title=""></p> 
+     <p>4.2、糖香料配置e-r图</p> 
+     <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11673.png" alt="" width="250" height="152" title=""></p> 
+     <p>4.3、卷烟优质品率e-r图</p> 
+     <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11672.png" alt="" width="250" height="152" title=""></p> 
+     <p><span class="lark-record-clipboard"></span></p> 
+     <h1 class="heading-1 ace-line old-record-id-QEeadOM2UoQKwkx2PPLc2RWon6f" id="anchor22">5、系统各数据源对应页面内容</h1> 
+     <div> 
+      <table class="ace-table" style="border:none;width:500px;"> 
+       <tbody> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HiOadeQOko64m8xwrd6cFgxZnne">
+           序号
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-VOYcduiMkoMueOx44IBcypg6nid">
+           数据源
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-F0m0dC0Aqom0agxsdxZcvo58nVc">
+           页面内容
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YikkdsEcsoMismx02WYcnC4Anve">
+           备注
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-J2Gwdkw8soIKquxS3zrcbz43nAL">
+           1
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YKwQdEYm4oEQKIx4qcacTybcnQb">
+           神农系统
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HiCcdGY6soKYCaxwlUxc2pL9nUg">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-IMUYd6uQIoCAeaxeYwbc7FrZnWg">
+           <br>
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HY2Ado4MKou8ScxiOq1cRPBxnte">
+           2
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-LsUAdsyGaoOmioxuGtucMKkanch">
+           自建mysql数据库
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-PEg4dgYYCoKK6cxUrVncU5pqnCg">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-AKUKdM8kOo8EAIxMlA7cT8oYnRd">
+           <br>
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-XCcEdc6cEoYcQux8bMJcnxOqnnz">
+           3
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NGE4di2AgoWqKOxQD5KcanyGnnb">
+           mes系统
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-O0aQdgQuGo0GyWxk37UcOezQnrd">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-GSGGduMkcoEuWgxUx4GcUPyKn7c">
+           <br>
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HQQgdOggyoMCAqxsZRYcaygennf">
+           4
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-IOUEdMA4EoyuaAxQ7WxcVo2xnXb">
+           第三方提供接口
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DE6ady6CsoQOykxcRp2cNyBRnDd">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Sw2EdwkEqo4CQAxsNB0coAPRnrf">
+           <br>
+          </div> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+     <h1 class="heading-1 ace-line old-record-id-YqsydeuyooIYQUxwpWRc3BHrnPh" id="anchor99">6、核心流程时序图</h1> 
+     <h2 class="heading-2 ace-line old-record-id-PCO8dEMIco2yuIx8cgicWRmRnQb" id="anchor100"><strong>6.1、创建账号流程图</strong></h2> 
+     <div class="image-uploaded gallery old-record-id-VkKOd6CcqoIgIyxagZScnhJQnUf">
+      <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11674.png" alt="" width="250" height="380" title="">
+      <br>
+     </div> 
+     <h2 class="heading-2 ace-line old-record-id-KyGgdKMa4owIaMxquE6caZZdnMg" id="anchor102"><strong>6.2、登陆时序图</strong></h2> 
+     <div class="image-uploaded gallery old-record-id-PkKgdGuIqokmWIxQB9NcKairnGd">
+      <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11675.png" alt="" width="250" height="148" title="">
+      <br>
+     </div> 
+     <div class="ace-line old-record-id-VG4IdO2MyoO4Y2xgD3yc3RjKn3d"></div> 
+     <h1 class="heading-1 ace-line old-record-id-OOWwdsu4IoKGi6xQb4LcoWbZnTd" id="anchor105">7、其他设计补充</h1> 
+     <div class="ace-line old-record-id-E0mCdAcGWoCsAox3K44cMZIDngW">
+      7.1、区域查询内容areaId 与前端约定规范
+     </div> 
+     <div class="ace-line old-record-id-PWkWdSsYwo6G8Yx2TXCcuWQNnZf">
+      <br>
+     </div> 
+     <div class="ace-line old-record-id-N6a2dsM0cosuYGxecAZcUz2gnMc">
+      <br>
+     </div> 
+     <h1 class="heading-1 ace-line old-record-id-SuKGdMsaWoAc8AxltMacXEngnDv" id="anchor109">8、其他资料补充</h1> 
+     <div class="ace-line old-record-id-MymOdKwU8oo0KCxEBalcmC58nnh">
+      海康威视对接参考文档：
+      <span style="color:#337FE5;"><a href="https://open.hikvision.com/docs/docId?productId=618cf0a9ec4acb67a0a10fd6&amp;version=%2Fab5e866f57254292b774e177a8bb3332&amp;curNodeId=d3afe28c-83c1-4b9d-8fe5-225b471031ba" target="_blank" rel="noreferrer noopener"><span style="color:#337FE5;">《海康威视在线文档》</span></a></span>
+     </div> 
+     <div class="ace-line old-record-id-SMUgd0wqKou6OgxqYd7caaQlnqf">
+      对应播放摄像头indexCode
+     </div> 
+     <div> 
+      <table class="ace-table" style="border:none;width:500px;"> 
+       <tbody> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-MmIKdk0EOoKOSoxMvr9c9W4XnHd">
+           页面
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-MiOSdIUawouCcIxuLmTcU8Mdnab">
+           cameraName
+          </div> </td> 
+         <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-RqcQdkKMWoOie4x4WLYcEFiTnqb">
+           cameraIndexCode
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-H6qydKm2koEIAIx0aPtcJSF1nDc">
+           糖香料厨房
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YY0md28k6oqEkMxS4ylcpw98n2a">
+           59.240工艺糖香料房01
+          </div> </td> 
+         <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Kai4da0MkoY4kOxFL8qcfLaQnyV">
+           3361043fbe144ea0882e1335efe0e812
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-L8Ccdw82uokeaex4ABkcqlKInHd">
+           糖香料厨房
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-S02WdWuMioOEQ0xUyDfcHwEsnYb">
+           59.240工艺糖香料房02
+          </div> </td> 
+         <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-AkyUdE8EYoU4uyxc9nscqUt7nJk">
+           a5f9501436fc40d4b634da5a5ec04e78
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-PMU0dkEWioMIqMxgZ3zcCcknnCc">
+           自然醇化库
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-N0sedwi0SoKaCyxMvx5cascVnud">
+           59.241工艺科原料库1三楼01
+          </div> </td> 
+         <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Pyq4d6kmuoCuEgxkNPyc2tiynbh">
+           378b36c0addb4c0e9471a0f978393e15
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-SkKMd8ieGoAkOgx44UMcfws2nbd">
+           手工包装作业间
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-EcC2dkacioAwYExm8XTces0enVf">
+           59.242工艺科卷包手工烟01
+          </div> </td> 
+         <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-GMA6dkk6koOkYEx2t6bcUNHrnwc">
+           3dc7916549f847ff90a1e49b3e4c326c
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-RqcSdmKoAoIW26x8n9Rc2Bw7nTe">
+           手工包装作业间
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NqoOd4i2Io604GxwBaAcaKbJnMg">
+           59.242工艺科卷包手工烟02
+          </div> </td> 
+         <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-L4cydUMQKowE0yxKcnncmGNunHg">
+           00629dd5c5444ea5b596cc8bd5463a00
+          </div> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+     <div class="ace-line old-record-id-VmmwdgIi0o0YKsxMZ61cxcbonag">
+      请求地址：/api/video/v2/cameras/previewURLs（POST）
+      <span style="color:#D83931;">目前使用v2版本接口</span>
+     </div> 
+     <div> 
+      <table class="ace-table" style="border:none;width:auto;"> 
+       <tbody> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-OMi8diksEoOY26x2lwVcIh1Znaf">
+           参数名称
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-OiSqdoW0AoOO0yxCckocE5cUnFg">
+           类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NSk4dU8cgoCQEsxgxIGcLQAJnSf">
+           是否必填
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-LOsud6OmeoM2kOxqKyycJobJnje">
+           描述信息
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-KQK6doUAuosaqqxkVT1cBlTJn20">
+           备注
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-A4O8dwQ2eoY4wAx9yWjcPTIOngA">
+           cameraIndexCode
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Eo40d4oAQoikGyx2F9ic2cqYnBc">
+           string
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-XgIgdwEwCoIIa0xCJLWcFkmwnWm">
+           true
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-GekidCOMyoqosMxMzkFc3zl9n1b">
+           监控点唯一标识，#API@分页获取监控点资源@#接口获取返回参数cameraIndexCode
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-FgUed4EsyowcAWxzeahc9Tjkntg">
+           根据对应摄像头indexCode传值
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-AwqidqSOcoEIuqxQRrOcvI5Bnmd">
+           streamType
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HCYsds2oAoYoQ4x0GRmc2qaqnud">
+           integer
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-CWIidcayao0W8QxvMpIclRElndn">
+           false
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-L0MadwYSmomKK6xg9XUc8tJRnyh">
+           码流类型，0:主码流 1:子码流 2:第三码流 参数不填，默认为主码流
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-JKwUda6qyoEG8ixkNLWc17Wsnig">
+           默认0
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Se4ydO0oao2SOAxWCu3c4Nc8nre">
+           protocol
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-I4UodqWa4o8MOcxOMn6cAwKPn9d">
+           string
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-GqwadmqgAoisaqxYdHxcVjgwnmc">
+           false
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-USmUd86umo8oKgx3EkAcluFVnAx">
+           取流协议（应用层协议），“hik”:HIK私有协议，使用视频SDK进行播放时，传入此类型；“rtsp”:RTSP协议；“rtmp”:RTMP协议；“hls”:HLS协议（HLS协议只支持海康SDK协议、EHOME协议、ONVIF协议接入的设备；只支持H264视频编码和AAC音频编码）。参数不填，默认为HIK协议
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-GMcAd2Ok2oI0Gsx7p1Ac2Z7tndn">
+           固定使用hls视频流，由前端处理流文件播放
+          </div> 
+          <div class="ace-line old-record-id-Bmcmdem6AoCQQ0xAFDKcDPFanLg">
+           <br>
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-H2s0daOMuooC62x88gucczkynWx">
+           transmode
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-D4YYdsKYmo66Wux060ccvUjNnMf">
+           integer
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-P8SEdUoQYoSUG8xkbGLcQBENnig">
+           false
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-QeEAd2YEeoyI06xqoUucz3Qnncc">
+           传输协议（传输层协议），0:UDP 1:TCP 默认是TCP 注： GB28181 2011及以前版本只支持UDP传输
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-VA6Gd6wgqoCeskxgJO5cXGNbnDd">
+           默认tcp
+          </div> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+     <div class="ace-line old-record-id-T8qcd0k22o62yAxmUwTchdQgn6c">
+      <br>
+     </div> 
+    </div> 
+    <span class="lark-record-clipboard"></span>
+   </div> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor3" title="1、功能简介">1、功能简介</a> </li>
+    <li class="text-ellipsis"><a href="#anchor8" title="2、参与人员">2、参与人员</a> </li>
+    <li class="text-ellipsis"><a href="#anchor11" title="3、项目账号信息">3、项目账号信息</a> </li>
+    <li class="text-ellipsis"><a href="#anchor14" title="4、数据库设计E-R图">4、数据库设计E-R图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor22" title="5、系统各数据源对应页面内容">5、系统各数据源对应页面内容</a> </li>
+    <li class="text-ellipsis"><a href="#anchor99" title="6、核心流程时序图">6、核心流程时序图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor100" title="6.1、创建账号流程图">6.1、创建账号流程图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor102" title="6.2、登陆时序图">6.2、登陆时序图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor105" title="7、其他设计补充">7、其他设计补充</a> </li>
+    <li class="text-ellipsis"><a href="#anchor109" title="8、其他资料补充">8、其他资料补充</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

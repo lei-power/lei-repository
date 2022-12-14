@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>【文档样板】迭代设计开发文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p><br></p> 
+  <p>文档标题命名格式：</p> 
+  <p><strong><span style="font-size:24px;color:#337FE5;">&nbsp; &nbsp; &nbsp;【迭代时间】【迭代名称】服务端开发设计（功能关键词）-【组别】</span></strong></p> 
+  <p>示例：</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; <span style="font-weight:700;"><span style="color:#337FE5;font-size:18px;">20220210</span></span><strong><span style="color:#337FE5;font-size:18px;">迭代</span></strong><strong><span style="color:#337FE5;font-size:18px;">1.4</span></strong><span style="color:#337FE5;font-size:18px;"><strong>服务端开发设计</strong></span><strong><span style="color:#337FE5;font-size:18px;">（保险策略、投保流程）-3</span></strong><span style="color:#337FE5;font-size:18px;"><strong>组</strong></span></p> 
+  <p><span><strong><span style="color:#337FE5;font-size:18px;">&nbsp; &nbsp; &nbsp;&nbsp;<span style="font-weight:700;"><span style="color:#337FE5;font-size:18px;">20211210</span></span></span></strong><span><strong><span style="color:#337FE5;font-size:18px;">迭代53</span></strong><span style="color:#337FE5;font-size:18px;"><strong>服务端开发设计</strong></span><strong><span style="color:#337FE5;font-size:18px;"></span></strong></span><span style="color:#337FE5;font-size:18px;"><strong>（管棚、项目）-1</strong></span><span style="color:#337FE5;font-size:18px;"><strong>组</strong></span></span></p> 
+  <p><span style="color:#337FE5;font-size:18px;"><strong>&nbsp; &nbsp; &nbsp; <span style="font-weight:700;"><span style="color:#337FE5;font-size:18px;">20220301</span></span>迭代V2.0服务端开发设计（产权管理，承包）-2组</strong></span></p> 
+  <p><span><strong><span style="color:#337FE5;font-size:18px;">&nbsp; &nbsp; &nbsp; <span style="font-weight:700;"><span style="color:#337FE5;font-size:18px;">20220410</span></span>迭代1.8服务端开发设计（物联网告警）-4组</span></strong></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor10">1、迭代需求简述</h1> 
+  <p><span style="color:#E53333;">【此处可以通过简单语言罗列开发需求，也可以直接放置产品的需求文档链接】</span></p> 
+  <p><br></p> 
+  <p>本次迭代的主要需求：</p> 
+  <p>1.对接安信农保的保险下单全流程接口</p> 
+  <p>2.管理后台配置保险（蔬菜价格险）策略</p> 
+  <p>3.农户可以在神农口袋web端进行蔬菜价格险的在线下单、支付、查看保单等操作。</p> 
+  <p><br></p> 
+  <p>产品需求文档参考链接：https://www.baidu.com</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor21">2、参与人员与时间</h1> 
+  <p><br></p> 
+  <p>服务端：严加强、陈英建</p> 
+  <p>迭代时间：2021-12-01到2022-02-10</p> 
+  <p>涉及到的服务端端：管理后台、企业端</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor29">3、用例图</h1> 
+  <p><span style="color:#E53333;">【此处主要放置本地迭代开发涉及到的用例图，如保险模块用例图如下】</span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2288.png" alt="" width="400" height="212" title=""></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2289.png" alt="" width="400" height="268" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor37">4、数据库设计ER图</h1> 
+  <p><span style="color:#E53333;">【此处主要放置本次迭代开发中参与到的数据库ER图，并对ER图做简要说明】</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2280.png" alt="" width="400" height="369" title=""></p> 
+  <p><br></p> 
+  <p>简要说明：</p> 
+  <p>ER图中分成几个部分：</p> 
+  <p><br></p> 
+  <ol>
+   <li>投保准备相关表：保险公司，保险银行，保险银行支行</li> 
+   <li>投保策略：险种，险种区域投保范围配置表，险种作物分组配置表，险种作物分组投保规则表</li> 
+   <li>投保结果：农户订单，农户保单，农户订单与地块绑定表</li> 
+  </ol>
+  <p><br></p> 
+  <h1 id="anchor50">5、核心流程时序</h1> 
+  <p><span style="color:#E53333;">【此处主要放置本次迭代开发核心的时序关系】</span></p> 
+  <p><br></p> 
+  <p>在保险模块汇总，比较核心的时序流程有：用户投保、保单支付、保单状态维护等等。下面的时序图供参考。</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2281.png" alt="" width="400" height="283" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>部分核心流程简要描述</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor64">6、其他设计补充材料</h1> 
+  <p><span style="color:#E53333;">【此模块并非必须，一般不是很复杂的迭代开发，上面四部分详细描述后，基本就已经完成，对于一些特殊模块需要交代的，增加次部分处理】</span></p> 
+  <p><br></p> 
+  <h2 id="anchor67">6.1.农户保险订单状态转化图</h2> 
+  <p>农户订单多种状态，状态流转如下。</p> 
+  <p>简要描述：</p> 
+  <p>xxxxxx</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2282.png" alt="" width="400" height="217" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor74">6.2.农户保单状态转化图</h2> 
+  <p><br></p> 
+  <p>简要描述：</p> 
+  <p>xxxxxxx</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2282.png" alt="" width="400" height="217" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor81">6.3.其他资料补充</h2> 
+  <p><span style="color:#E53333;">【此模块并非必须，可以将本次迭代依赖的第三方接口，补充资料，调研资料，以附件或者链接的形式维护在此处】</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>安心农保的接口文档参考：<span> </span></p> 
+  <p class="ql-long-26020151" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-26020151" href="https://shimo.im/folder/1d3aVJ5egGU6Daqg/" target="_blank" rel="noreferrer noopener">https://shimo.im/folder/1d3aVJ5egGU6Daqg/</a><span class="ql-author-26020151"> 《安信接口对接文档》</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor10" title="1、迭代需求简述">1、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor21" title="2、参与人员与时间">2、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor29" title="3、用例图">3、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor37" title="4、数据库设计ER图">4、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor50" title="5、核心流程时序">5、核心流程时序</a> </li>
+    <li class="text-ellipsis"><a href="#anchor64" title="6、其他设计补充材料">6、其他设计补充材料</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor67" title="6.1.农户保险订单状态转化图">6.1.农户保险订单状态转化图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor74" title="6.2.农户保单状态转化图">6.2.农户保单状态转化图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor81" title="6.3.其他资料补充">6.3.其他资料补充</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

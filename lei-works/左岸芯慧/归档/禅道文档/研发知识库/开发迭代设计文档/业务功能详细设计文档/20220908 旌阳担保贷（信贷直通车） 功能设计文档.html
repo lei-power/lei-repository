@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220908 旌阳担保贷（信贷直通车） 功能设计文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span> 
+  <h1 style="font-size:16pt;" id="anchor1">1、迭代需求简述</h1> 
+  <h1 id="anchor2"><span> </span></h1> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">本次迭代的主要需求：</span></p> 
+  <p class="ql-direction-ltr ql-text-indent-1 ql-long-26020151" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-26020151">农场直报&nbsp;、联合会服务&nbsp;、政府分险&nbsp;、农担担保&nbsp;、银行授信，多方合作的家庭农场信贷直通车服务体系。</span></p> 
+  <p style="font-size:11pt;color:#494949;"><br></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">产品需求文档参考链接：</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">产品ue:</span><a class="ql-link ql-author-26020151" href="https://m20kml.axshare.com/#id=2orikf&amp;p=%E5%AE%A1%E6%A0%B8%E7%94%B3%E8%AF%B7%EF%BC%88%E5%86%9C%E4%B8%9A%E5%B1%80%EF%BC%89&amp;g=1" target="_blank" rel="noreferrer noopener">https://m20kml.axshare.com/#id=2orikf&amp;p=审核申请（农业局）&amp;g=1</a></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;">需求文档：<a href="https://tkk7kjbip4.feishu.cn/docx/BtJidSefloxzLpxIW1wcbNE9ntb">https://tkk7kjbip4.feishu.cn/docx/BtJidSefloxzLpxIW1wcbNE9ntb</a></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><br></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span style="color:inherit;font-size:16pt;font-weight:700;">2、参与人员与时间</span></p> 
+  <p><span class="ql-author-26020151"><span></span></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">服务端：严家强</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">迭代时间：</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><br></span></p> 
+  <p><span style="color:inherit;font-size:16pt;font-weight:700;">3、</span><span style="color:inherit;font-size:16pt;font-weight:700;">用例图</span></p> 
+  <h2 id="anchor16"><span style="color:inherit;font-size:16pt;">3.1 农户端用例（CO端）</span></h2> 
+  <p><span style="color:inherit;font-size:16pt;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8853.png" alt=""><br></span></p> 
+  <h2 id="anchor18"><span style="color:inherit;font-size:16pt;">3.2 gov端</span></h2> 
+  <p><span style="color:inherit;font-size:16pt;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8859.png" alt="" width="500" height="333" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9024.png" alt="" width="500" height="346" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8856.png" alt="" width="500" height="232" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8858.png" alt="" width="500" height="331" title=""><br></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="color:inherit;font-size:18px;font-weight:700;">3.3 admin端</span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9116.png" alt="" width="500" height="426" title=""></p> 
+  <p><br></p> 
+  <p><span style="color:inherit;font-size:16pt;font-weight:700;">4、数据库设计ER图</span></p> 
+  <p><span class="ql-author-26020151"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9100.png" alt="" width="500" height="269" title=""><br></span></p> 
+  <p><span class="ql-author-26020151"><br></span></p> 
+  <p><span style="color:inherit;font-size:16pt;font-weight:700;">5、状态图</span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9023.png" alt="" width="500" height="120" title=""></p> 
+  <p><br></p> 
+  <h1 style="font-size:16pt;" id="anchor31"><span class="ql-author-26020151">6、核心流程时序</span></h1> 
+  <p><span class="ql-author-26020151"> </span></p> 
+  <h2 id="anchor33"><br>6.1 管理贷款申请相关时序</h2> 
+  <h3>6.1.1 提交申请时序</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9020.png" alt="" width="500" height="480" title=""></p> 
+  <p>注意：这里提交的经营主体信息的镇村信息，要匹配当前农场的区信息，如果不能保持一致，则添加不成功。</p> 
+  <h3>6.1.2 取消时序</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9049.png" alt="" width="500" height="519" title=""></p> 
+  <p>step:修改贷款申请表</p> 
+  <p>填充的字段：</p> 
+  <p><span> </span>`canceled_time` datetime DEFAULT NULL COMMENT '取消申请时间',<br><span> </span>`canceled_user_id` VARCHAR (255) DEFAULT NULL COMMENT '取消申请的人'</p> 
+  <p><br></p> 
+  <p>修改的字段：</p> 
+  <p><span> </span>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消'；值修改为：70</p> 
+  <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.1.2 修改并重新提交</span></p> 
+  <p><span style="font-size:16px;font-weight:700;"></span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9118.png" alt="" width="500" height="492" title=""></p> 
+  <p><span>step:修改贷款申请表</span></p> 
+  <p><br></p> 
+  <p><span>填充的字段：</span></p> `reapply_time` datetime DEFAULT NULL COMMENT '修改并重新提交时间',
+  <br>
+  <span> </span> 
+  <p>`reapply_user_id` BIGINT (20) DEFAULT NULL COMMENT '修改并重新提交的人',</p> 
+  <p><br></p> 
+  <p>修改的字段：</p> 
+  <p>1.表单快照修改的数据</p> 
+  <p>2.业务字段如下：</p> 
+  <p><span> </span>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消'；值修改为：10</p> 
+  <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+  <p><br></p> 
+  <p>置空的字段：这里审核流程环节所有的字段值置空</p> 
+  <p>`federation_check_time` datetime DEFAULT NULL COMMENT '联合会审核时间',<br><span> </span>`federation_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '联合会审核人',<br><span> </span>`federation_check_result` VARCHAR (127) DEFAULT NULL COMMENT '联合会审核结果：1：通过；2：驳回',<br><span> </span>`federation_view` VARCHAR (255) DEFAULT NULL COMMENT '联合会审核意见',<br><span> </span>`bank_check_time` datetime DEFAULT NULL COMMENT '银行审核时间',<br><span> </span>`bank_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '银行审核人',<br><span> </span>`bank_check_result` VARCHAR (127) DEFAULT NULL COMMENT '银行审核结果：1：通过；2：驳回',<br><span> </span>`bank_view` VARCHAR (255) DEFAULT NULL COMMENT '银行审核意见',<br><span> </span>`agri_office_check_time` datetime DEFAULT NULL COMMENT '农业局审核时间',<br><span> </span>`agri_office_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '农业局审核人',<br><span> </span>`agri_office_check_result` VARCHAR (127) DEFAULT NULL COMMENT '农业局审核结果：1：通过；2：驳回',<br><span> </span>`agri_office_view` VARCHAR (255) DEFAULT NULL COMMENT '农业局审核意见',<br><span> </span>`agri_insurance_company_check_time` datetime DEFAULT NULL COMMENT '农担公司审核时间',<br><span> </span>`agri_insurance_company_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '农担公司审核人',<br><span> </span>`agri_insurance_company_check_result` VARCHAR (127) DEFAULT NULL COMMENT '农担公司审核结果：1：通过；2：驳回',<br><span> </span>`agri_insurance_company_view` VARCHAR (255) DEFAULT NULL COMMENT '农担公司审核意见',</p> 
+  <p><br></p> 
+  <p>`file_id1` VARCHAR (255) DEFAULT NULL COMMENT '项目推荐确认审核表id（银行审核通过可能有值）',<br><span> </span>`file_id2` VARCHAR (255) DEFAULT NULL COMMENT '“家庭农场信贷直通车”信贷项目确认函id（农业局<span>审核通过可能有值</span>）',<br><span> </span>`file_id3` VARCHAR (255) DEFAULT NULL COMMENT '同意担保决议函附件id（农担公司<span>审核通过可能有值</span><span></span>）',</p> 
+  <p><br></p> 
+  <p><span style="color:inherit;font-size:16px;font-weight:700;">6.1.3 联合会审核通过</span></p> 
+  <p>此处时序比较简单，归纳如下：</p> 
+  <p>1.校验：申请单是否存在；状态是否为待联合会审核。<br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+  <p><br></p> 
+  <p>说明：</p> 
+  <p>修改的字段：</p> 
+  <p><span> </span><span>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；</span><br><span>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消'</span>；值修改为：<span>20</span></p> 
+  <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+  <p><br></p> 填充的字段： 
+  <p>`federation_check_time` datetime DEFAULT NULL COMMENT '联合会审核时间',<br><span> </span>`federation_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '联合会审核人',<br><span> </span>`federation_check_result` VARCHAR (127) DEFAULT NULL COMMENT '联合会审核结果：1：通过；2：驳回',<br><span> </span>`federation_view` VARCHAR (255) DEFAULT NULL COMMENT '联合会审核意见',</p> 
+  <p><br></p> 
+  <p><span style="color:inherit;font-size:16px;font-weight:700;">6.1.4 联合会审核驳回</span></p> 
+  <p>此处时序比较简单，归纳如下：</p> 
+  <p><span>1.校验：申请单是否存在；状态是否为待联合会审核。</span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+  <p><br></p> 
+  <p>说明：</p> 
+  <p>修改的字段：</p> 
+  <p><span>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；</span><br><span>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消'</span>, 值修改为：60</p> 
+  <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+  <p><br></p> 
+  <span>填充的字段：</span> 
+  <p>`federation_check_time` datetime DEFAULT NULL COMMENT '联合会审核时间',<br>`federation_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '联合会审核人',<br>`federation_check_result` VARCHAR (127) DEFAULT NULL COMMENT '联合会审核结果：1：通过；2：驳回',<br>`federation_view` VARCHAR (255) DEFAULT NULL COMMENT '联合会审核意见',</p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.1.5 银行审核通过</span></p> 
+  <p><span>此处时序比较简单，归纳如下：</span></p> 
+  <p><span>1.校验：申请单是否存在；状态是否为待银行审核。</span><br><span>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。</span><br><span>3.tbl_loan_action_log表新增一条日志。</span></p> 
+  <p><span><br></span></p> 
+  <p><span>说明：</span></p> 
+  <p>修改的字段：</p> 
+  <p><span>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；</span><br><span>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消'</span><span>, 值修改为：30</span></p> 
+  <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+  <p><br></p> 
+  <span>填充的字段：</span> 
+  <p>`bank_check_time` datetime DEFAULT NULL COMMENT '银行审核时间',<br><span> </span>`bank_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '银行审核人',<br><span> </span>`bank_check_result` VARCHAR (127) DEFAULT NULL COMMENT '银行审核结果：1：通过；2：驳回',<br><span> </span>`bank_view` VARCHAR (255) DEFAULT NULL COMMENT '银行审核意见',</p> 
+  <p>`file_id1` VARCHAR (255) DEFAULT NULL COMMENT '项目推荐确认审核表id（上传的附件）',</p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.1.6&nbsp;银行审核驳回</span></p> 
+  <p>此处时序比较简单，归纳如下：</p> 
+  <p><span>1.校验：申请单是否存在；状态是否为待银行审核。</span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+  <p><br></p> 
+  <p>说明：</p> 
+  <p>修改的字段：</p> 
+  <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：60</p> 
+  <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+  <p><br></p> 
+  <span>填充的字段：</span>
+  <span></span> 
+  <p>`bank_check_time` datetime DEFAULT NULL COMMENT '银行审核时间',<br>`bank_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '银行审核人',<br>`bank_check_result` VARCHAR (127) DEFAULT NULL COMMENT '银行审核结果：1：通过；2：驳回',<br>`bank_view` VARCHAR (255) DEFAULT NULL COMMENT '银行审核意见',</p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.1.7 农业局审核通过</span></p> 
+  <div> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为待农业局审核。</span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：40</p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span> 
+   <p>`agri_office_check_time` datetime DEFAULT NULL COMMENT '农业局审核时间',<br><span> </span>`agri_office_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '农业局审核人',<br><span> </span>`agri_office_check_result` VARCHAR (127) DEFAULT NULL COMMENT '农业局审核结果：1：通过；2：驳回',<br><span> </span>`agri_office_view` VARCHAR (255) DEFAULT NULL COMMENT '农业局审核意见',</p> 
+   <p>`file_id2` VARCHAR (255) DEFAULT NULL COMMENT '“家庭农场信贷直通车”信贷项目确认函id',</p> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.8 农业局审核驳回</span></p> 
+   <div> 
+    <p>此处时序比较简单，归纳如下：</p> 
+    <p><span>1.校验：申请单是否存在；状态是否为待农业局审核。</span><span></span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+    <p><br></p> 
+    <p>说明：</p> 
+    <p>修改的字段：</p> 
+    <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：60</p> 
+    <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+    <p><br></p> 填充的字段： 
+    <p>`agri_office_check_time` datetime DEFAULT NULL COMMENT '农业局审核时间',<br>`agri_office_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '农业局审核人',<br>`agri_office_check_result` VARCHAR (127) DEFAULT NULL COMMENT '农业局审核结果：1：通过；2：驳回',<br>`agri_office_view` VARCHAR (255) DEFAULT NULL COMMENT '农业局审核意见',</p> 
+   </div> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.9 农担公司审核通过</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为待农担公司审核。</span><span></span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：50</p> 
+   <p><span></span></p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span> 
+   <p>`agri_insurance_company_check_time` datetime DEFAULT NULL COMMENT '农担公司审核时间',<br><span> </span>`agri_insurance_company_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '农担公司审核人',<br><span> </span>`agri_insurance_company_check_result` VARCHAR (127) DEFAULT NULL COMMENT '农担公司审核结果：1：通过；2：驳回',<br><span> </span>`agri_insurance_company_view` VARCHAR (255) DEFAULT NULL COMMENT '农担公司审核意见',</p> 
+   <p><span> </span>`file_id3` VARCHAR (255) DEFAULT NULL COMMENT '同意担保决议函附件id',</p> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.10 农担公司审核驳回</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为待农担公司审核。</span><span></span><span></span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：60</p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span>
+   <span></span> 
+   <p>`agri_insurance_company_check_time` datetime DEFAULT NULL COMMENT '农担公司审核时间',<br>`agri_insurance_company_check_user_id` BIGINT (20) DEFAULT NULL COMMENT '农担公司审核人',<br>`agri_insurance_company_check_result` VARCHAR (127) DEFAULT NULL COMMENT '农担公司审核结果：1：通过；2：驳回',<br>`agri_insurance_company_view` VARCHAR (255) DEFAULT NULL COMMENT '农担公司审核意见',</p> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.11 银行上传合同</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为待签合同。</span><span></span><span></span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：51</p> 
+   <p><br></p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span>
+   <span></span>
+   <span></span> 
+   <p>`upload_loan_contract_time` datetime DEFAULT NULL COMMENT '银行上传借款合同时间',<br>`upload_loan_contract_user_id` BIGINT (20) DEFAULT NULL COMMENT '银行上传借款合同操作人',<br>`upload_loan_contract_view` VARCHAR (255) DEFAULT NULL COMMENT '银行上传借款合同意见',</p> 
+   <p>`file_id4` VARCHAR (255) DEFAULT NULL COMMENT '借款合同',</p> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.12 农担公司同意放款</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为待同意放款。</span><span></span><span></span><span></span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：52</p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span> 
+   <p>`agree_loan_time` datetime DEFAULT NULL COMMENT '同意放款时间',<br><span> </span>`agree_loan_user_id` BIGINT (20) DEFAULT NULL COMMENT '同意放款操作人',<br><span> </span>`agri_insurance_company_view` VARCHAR (255) DEFAULT NULL COMMENT '农担公司同意放款审核意见',</p> 
+   <p>`file_id5` VARCHAR (255) DEFAULT NULL COMMENT '同意放(用)款通知书id',</p> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.13 银行放款</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为待放款。</span><span></span><span></span><span></span><span></span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51:待同意放款；52：待放款；53：已放款；54：还款完成；60：审核驳回；70：已取消', 值修改为：53</p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span> 
+   <p>`sign_make_loan_time` datetime DEFAULT NULL COMMENT '标记已放款时间',<br><span> </span>`sign_make_loan_user_id` BIGINT (20) DEFAULT NULL COMMENT '标记已放款操作人',<br><span> </span>`sign_make_loan_view` VARCHAR (255) DEFAULT NULL COMMENT '标记已放款审核意见',</p> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.14 标记还款异常</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为已放款。</span><span></span><span></span><span></span><span></span><br>1.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>2.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span>
+   <span></span> 
+   <p><span>`repayment_flag` TINYINT (4) DEFAULT NULL COMMENT '还款标签：1：正常；2：异常(该值只有已放款状态才有值)',值修改为：2</span></p> 
+   <p><span><br></span></p> 
+   <p><span> </span></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.16 恢复正常还款</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p><span>1.校验：申请单是否存在；状态是否为已放款。</span><span></span><span></span><span></span><span></span><span></span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL,</p> 
+   <p><br></p> 
+   <span>填充的字段：</span>
+   <span></span> 
+   <p>`repayment_flag` TINYINT (4) DEFAULT NULL COMMENT '还款标签：1：正常；2：异常(该值只有已放款状态才有值)',值修改为：1</p> 
+   <p><br></p> 
+   <p><span style="font-size:16px;font-weight:700;">6.1.17 农担公司标记还款完成</span></p> 
+   <p>此处时序比较简单，归纳如下：</p> 
+   <p>1.<span>校验：申请单是否存在；状态是否为已放款；校验还款标签是否正常。</span><br>2.修改贷款申请表为指定状态，维护部分业务字段。具体业务字段参加本条说明。<br>3.tbl_loan_action_log表新增一条日志。</p> 
+   <p><br></p> 
+   <p>说明：</p> 
+   <p>修改的字段：</p> 
+   <p>`apply_status` VARCHAR (255) DEFAULT NULL COMMENT '申请状态：10：待联合会审核；20：待银行审核；30：待农业局审核；40：待农担公司审核；<br>50：待签合同；51：待放款；52：已放款；53：还款异常；54：还款完成；60：审核驳回；70：已取消',<span>&nbsp;值修改为：54</span></p> 
+   <p>`update_by` BIGINT (20) DEFAULT NULL,<br>`update_time` datetime DEFAULT NULL</p> 
+   <p><br></p> 
+   <p><span>填充的字段：</span></p> 
+   <p><span> </span>`mark_repayment_completed_time` datetime DEFAULT NULL COMMENT '标记完成还款时间',<br><span> </span>`mark_repayment_completed_user_id` VARCHAR (255) DEFAULT NULL COMMENT '标记完成还款操作人',<br><span> </span>`mark_repayment_completed_view` VARCHAR (255) DEFAULT NULL COMMENT '标记完成还款意见',</p> 
+   <p>`file_id6` VARCHAR (255) DEFAULT NULL COMMENT '解保通知书id',</p> 
+  </div> 
+  <h2 id="anchor246">6.2 管理贷款人员基本信息表相关时序</h2> 
+  <h3>6.2.1 tbl_loan_member_info修改/添加</h3> 
+  <p>按照farmId,如果该记录存在，则修改<span>其</span>数据</p> 
+  <p>如果记录不存在，则插入该数据</p> 
+  <p><br></p> 
+  <p><span style="font-size:18px;font-weight:700;">6.3 管理贷款申请主体表相关时序</span></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.3.1&nbsp;tbl_company_loan_basic_info修改/添加</span></p> 
+  <p>按照企业companyId,如果该记录存在，则修改<span>其</span>数据</p> 
+  <p>如果记录不存在，则插入该数据</p> 
+  <p><br></p> 
+  <p><span style="font-size:18px;font-weight:700;">6.4 管理贷款申请主体经营信息表相关时序</span></p> 
+  <h3 style="color:#3C4353;">6.4.1&nbsp;tbl_farm_loan_business_info修改/添加</h3> 
+  <p>按照企业<span>farmId</span>,如果该记录存在，则修改<span>其</span>数据</p> 
+  <p>如果记录不存在，则插入该数据</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="font-size:18px;font-weight:700;">6.5 管理贷款申请土地流转合同表相关时序</span></p> 
+  <h3 style="color:#3C4353;">6.5.1&nbsp;tbl_loan_land_transfer_contract修改/添加</h3> 
+  <p>按照企业farmId,如果该记录存在，则修改其数据</p> 
+  <p>如果记录不存在，则插入该数据&nbsp;</p> 
+  <p><br></p> 
+  <p><span style="font-size:18px;font-weight:700;">6.6 区域放贷表相关时序</span></p> 
+  <h3 style="color:#3C4353;">6.6.1&nbsp;tbl_loan_area添加</h3> 
+  <p>按照区县id，如果该记录存在，则添加不成功，如果记录不存在，则插入数据。</p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.6.2 tbl_loan_area删除</span></p> 按照区县id，如果记录存在并且该地区没有贷款申请单，则可以删除。 
+  <p><br></p> 
+  <p><span style="font-size:18px;font-weight:700;">6.7 区域放贷机构表相关时序</span></p> 
+  <h3 style="color:#3C4353;">6.7.1&nbsp;tbl_loan_area_bank添加</h3> 
+  <p>按照区县id添加记录。</p> 
+  <p>这里的上下架状态需要注意一下。</p> 
+  <p>对于co端农户在申请贷款的时候只拉取上架状态的放贷机构。</p> 
+  <p>对于gov端的农户可以查询所有状态的房贷机构对应的贷款申请单。</p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.7.2 </span><span style="font-size:16px;font-weight:700;">tbl_loan_area_bank</span><span style="font-size:16px;font-weight:700;">修改</span></p> 
+  <p>1.校验放贷机构是否存在；</p> 
+  <p>2.修改记录</p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.7.3&nbsp;</span><span style="font-size:16px;font-weight:700;">tbl_loan_area_bank上架</span></p> 
+  <p>1.校验放贷机构是否存在；</p> 
+  <p>2.修改上下架状态</p> 
+  <p><br></p> 
+  <p><span style="font-size:16px;font-weight:700;"><span style="font-size:16px;font-weight:700;">6.7.4&nbsp;</span><span style="font-size:16px;font-weight:700;">tbl_loan_area_bank上下架</span><br></span></p> 
+  <p>1.校验放贷机构是否存在；</p> 
+  <p>2.修改上下架状态</p> 
+  <h2 style="color:#3C4353;" id="anchor292">6.8 人员与放贷机构关联表相关时序</h2> 
+  <p><span style="font-size:16px;font-weight:700;">6.8.1&nbsp;tbl_loan_area_bank_user_ref添加</span></p> 
+  <p>按照放贷机构id和政府端用户添加记录。</p> 
+  <h3 style="color:#3C4353;">6.8.1&nbsp;tbl_loan_area_bank_user_ref删除</h3> 
+  <p>按照房贷机构id和政府端用户id删除记录。</p> 
+  <p><br></p> 
+  <p><span style="font-size:18px;font-weight:700;">6.9 区域放贷配置推广页相关时序</span></p> 
+  <p><span style="font-size:16px;font-weight:700;">6.9.1&nbsp;tbl_loan_area_spread添加</span></p> 
+  <p><span>校验记录是否存在，不存在则按照区域id添加记录</span></p> 
+  <h3 style="color:#3C4353;">6.9.1&nbsp;tbl_loan_area_spread修改</h3> 
+  <p>校验记录是否存在，存在则按照区域id修改记录</p> 
+  <h1 style="font-size:16pt;" id="anchor303"><span class="ql-author-26020151">七、其他设计补充材料<img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8837.jpg" alt=""></span></h1> 
+  <p><span class="ql-author-26020151">评估时间</span></p> 
+  <p><span class="ql-author-26020151"><br></span></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;">功能<br></td> 
+     <td style="border:1px solid #ddd;">人员<br></td> 
+     <td style="border:1px solid #ddd;">天数<br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">admin端：信贷直通车地区配置、放贷区域机构配置、人员关联机构的增删改查、模块服务搭建、接口自测</td> 
+     <td style="border:1px solid #ddd;">严家强</td> 
+     <td style="border:1px solid #ddd;">2天<br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">co端：农场信息基本信息、经营信息、土地流转、家庭成员实体表的增删改查、接口自测</td> 
+     <td style="border:1px solid #ddd;">严家强<br></td> 
+     <td style="border:1px solid #ddd;">1天<br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">co端：查询地区配置放贷、根据区域查询银行配置、查看放贷详情、查询是否存在申请单、查询申请单列表、查询申请单详情、查询log日志、接口自测</td> 
+     <td style="border:1px solid #ddd;">严家强<br></td> 
+     <td style="border:1px solid #ddd;">2天<br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">co端：添加申请单、取消申请、修改并重新提交申请、接口自测</td> 
+     <td style="border:1px solid #ddd;">严家强<br></td> 
+     <td style="border:1px solid #ddd;">2天<br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">gov端（联合会、银行、农业局、农担公司）：列表、列表搜索框、详情、日志记录<span>、接口自测</span></td> 
+     <td style="border:1px solid #ddd;">严家强</td> 
+     <td style="border:1px solid #ddd;">1.5天<br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">gov端<span>（联合会、银行、农业局、农担公司）：<span>、</span><span>审核(添加操作记录)、</span>上传合同<span>(添加操作记录)</span>、标记已放款<span>(添加操作记录)</span>、同意放款<span>(添加操作记录)</span>、完成放款（<span>添加操作记录</span>）<span>、标记还款异常&nbsp;</span><span>(添加操作记录)、接口自测</span></span></td> 
+     <td style="border:1px solid #ddd;"><span>严家强</span><br></td> 
+     <td style="border:1px solid #ddd;">2.5天</td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">gov端：导出记录&nbsp; +&nbsp; &nbsp;导出项目库&nbsp; &nbsp;备注：这个耗时比较长</td> 
+     <td style="border:1px solid #ddd;">未定</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <br>
+  <p><span class="ql-author-26020151"><br></span></p> 
+  <p><span class="ql-author-26020151"><br></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1、迭代需求简述">1、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor2" title=" ">#anchor2</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor16" title="3.1 农户端用例（CO端）">3.1 农户端用例（CO端）</a> </li>
+      <li class="text-ellipsis"><a href="#anchor18" title="3.2 gov端">3.2 gov端</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor31" title="6、核心流程时序">6、核心流程时序</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor33" title="6.1 管理贷款申请相关时序">6.1 管理贷款申请相关时序</a> </li>
+      <li class="text-ellipsis"><a href="#anchor246" title="6.2 管理贷款人员基本信息表相关时序">6.2 管理贷款人员基本信息表相关时序</a> </li>
+      <li class="text-ellipsis"><a href="#anchor292" title="6.8 人员与放贷机构关联表相关时序">6.8 人员与放贷机构关联表相关时序</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor303" title="七、其他设计补充材料">七、其他设计补充材料</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

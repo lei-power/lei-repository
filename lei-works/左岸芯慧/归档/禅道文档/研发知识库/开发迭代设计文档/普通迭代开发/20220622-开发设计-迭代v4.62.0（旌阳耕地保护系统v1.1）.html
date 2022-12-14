@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220622-开发设计-迭代v4.62.0（旌阳耕地保护系统v1.1）</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 style="text-indent:2em;" id="anchor0">1 需求文档</h1> 
+  <p style="text-indent:2em;">需求说明：<a href="https://shimo.im/docs/3lvI5CHy7pAn01fs" target="_blank" rel="noreferrer noopener">https://shimo.im/docs/3lvI5CHy7pAn01fs</a></p> 
+  <p style="text-indent:2em;">归档表说明：<a href="https://shimo.im/docs/B1Aw1vj8O4ToXqm8" target="_blank" rel="noreferrer noopener">https://shimo.im/docs/B1Aw1vj8O4ToXqm8</a></p> 
+  <h1 style="text-indent:2em;" id="anchor3">2 开发计划</h1> 
+  <p style="text-indent:2em;"> </p>
+  <table>
+   <tbody>
+    <tr>
+     <th>需求名称</th> 
+     <th>功能</th> 
+     <th>开发周期</th> 
+     <th>负责人</th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>耕地保护系统中台统计&amp;数字大屏需求</td> 
+     <td>新增</td> 
+     <td>6.20-6.22</td> 
+     <td>王恺</td> 
+    </tr>
+    <tr>
+     <td>耕地保护系统V1.0补充需求</td> 
+     <td>维护</td> 
+     <td>6.22-6.24<br></td> 
+     <td>王恺</td> 
+    </tr>
+   </tbody>
+  </table>
+  <h1 style="text-indent:2em;" id="anchor17">3 接口设计</h1> 
+  <p style="text-indent:2em;"> </p>
+  <table>
+   <tbody>
+    <tr>
+     <th>需求名称</th> 
+     <th>功能</th> 
+     <th>地址</th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>中台-占用耕地统计</td> 
+     <td>新增</td> 
+     <td><a href="https://test.snkoudai.com/api/produce/co/agriResSku/add"></a> 
+      <div>
+       /gov/archiveArableLandOccupyDay/statisticsOfArea
+       <br>
+      </div> </td> 
+    </tr>
+    <tr>
+     <td>大数据平台-各区域占用情况</td> 
+     <td>新增</td> 
+     <td>/gov/archiveArableLandOccupyDay/statisticsOfArea<br></td> 
+    </tr>
+    <tr>
+     <td>大数据平台-耕地保护监管占用耕地面积概览和占用情况分析</td> 
+     <td>新增</td> 
+     <td>/gov/archiveArableLandOccupyDay/getByArea<br></td> 
+    </tr>
+    <tr>
+     <td>占用物处理趋势接口<br></td> 
+     <td>新增<br></td> 
+     <td>/gov/archiveArableLandOccupyMonth/listByArea<br></td> 
+    </tr>
+    <tr>
+     <td>占用物处理情况分析接口<br></td> 
+     <td>新增<br></td> 
+     <td>/gov/archiveArableLandOccupyMonthFull/listByArea<br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <h1 style="text-indent:2em;" id="anchor39">4 数据库表设计</h1> 
+  <p style="text-indent:2em;">-- 占用耕地按日归档表<br>CREATE TABLE `frp_archive`.`tbl_archive_arable_land_occupy_day`<br>(<br>&nbsp; &nbsp; `id`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',<br>&nbsp; &nbsp; `arable_land_batch_record_id`&nbsp; &nbsp; &nbsp;bigint(20) NOT NULL COMMENT '耕地占用批次信息id',<br>&nbsp; &nbsp; `arable_land_batch_record_name`&nbsp; &nbsp;varchar(64)&nbsp; &nbsp; DEFAULT NULL COMMENT '耕地占用批次信息名称',<br>&nbsp; &nbsp; `area_id`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;varchar(64)&nbsp; &nbsp; DEFAULT NULL COMMENT '区域id',<br>&nbsp; &nbsp; `area_name`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;varchar(64)&nbsp; &nbsp; DEFAULT NULL COMMENT '区域名称',<br>&nbsp; &nbsp; `total_land_acre`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;decimal(16, 2) DEFAULT NULL COMMENT '三调耕地总面积（汇总统计该区域所有三调耕地地块的面积之和) 单位：亩',<br>&nbsp; &nbsp; `total_occupy_arable_land_acre`&nbsp; &nbsp;decimal(16, 2) DEFAULT NULL COMMENT '占用耕地面积（汇总统计该区域所有占用物占用耕地的面积之和) 单位：亩',<br>&nbsp; &nbsp; `total_building_arable_land_acre` decimal(16, 2) DEFAULT NULL COMMENT '建筑物占用耕地面积（汇总统计该区域所有建筑物占用物占用耕地的面积之和) 单位：亩',<br>&nbsp; &nbsp; `total_ford_arable_land_acre`&nbsp; &nbsp; &nbsp;decimal(16, 2) DEFAULT NULL COMMENT '水体占用耕地面积（汇总统计该区域所有水体占用物占用耕地的面积之和) 单位：亩',<br>&nbsp; &nbsp; `total_forest_arable_land_acre`&nbsp; &nbsp;decimal(16, 2) DEFAULT NULL COMMENT '林地占用耕地面积（汇总统计该区域所有林地占用物占用耕地的面积之和) 单位：亩',<br>&nbsp; &nbsp; `total_other_arable_land_acre`&nbsp; &nbsp; decimal(16, 2) DEFAULT NULL COMMENT '其他占用耕地面积（汇总统计该区域所有其他占用物占用耕地的面积之和) 单位：亩',<br>&nbsp; &nbsp; `land_occupy_count`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int(11)&nbsp; &nbsp; &nbsp; &nbsp; DEFAULT '0' COMMENT '占用物数量',<br>&nbsp; &nbsp; `create_time`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;datetime&nbsp; &nbsp; &nbsp; &nbsp;DEFAULT NULL COMMENT '创建时间',<br>&nbsp; &nbsp; `update_time`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;datetime&nbsp; &nbsp; &nbsp; &nbsp;DEFAULT NULL COMMENT '修改时间',<br>&nbsp; &nbsp; PRIMARY KEY (`id`) USING BTREE,<br>&nbsp; &nbsp; UNIQUE KEY `batch_area_uk` (`arable_land_batch_record_id`, `area_id`) USING BTREE COMMENT '批次id和区域id联合主键',<br>&nbsp; &nbsp; KEY `total_occupy_arable_land_acre_idx` (`total_occupy_arable_land_acre`) USING BTREE<br>) ENGINE = InnoDB<br>&nbsp; AUTO_INCREMENT = 1<br>&nbsp; DEFAULT CHARSET = utf8mb4 COMMENT ='占用耕地按日归档表';<br><br><br>-- 占用耕地处理按月归档表（增量）<br>CREATE TABLE `frp_archive`.`tbl_archive_arable_land_occupy_month`<br>(<br>&nbsp; &nbsp; `id`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',<br>&nbsp; &nbsp; `archive_month_str`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;varchar(64) DEFAULT NULL COMMENT '按月统计时间:例如：2020-01',<br>&nbsp; &nbsp; `arable_land_batch_record_id`&nbsp; &nbsp;bigint(20) NOT NULL COMMENT '耕地占用批次信息id',<br>&nbsp; &nbsp; `arable_land_batch_record_name` varchar(64) DEFAULT NULL COMMENT '耕地占用批次信息名称',<br>&nbsp; &nbsp; `area_id`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;varchar(64) DEFAULT NULL COMMENT '区域id',<br>&nbsp; &nbsp; `area_name`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;varchar(64) DEFAULT NULL COMMENT '区域名称',<br>&nbsp; &nbsp; `total_check_count`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int(11)&nbsp; &nbsp; &nbsp;DEFAULT '0' COMMENT '统计该区域所有占用物筛查次数',<br>&nbsp; &nbsp; `total_review_count`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int(11)&nbsp; &nbsp; &nbsp;DEFAULT '0' COMMENT '统计该区域所有占用物复核次数',<br>&nbsp; &nbsp; `total_audit_count`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int(11)&nbsp; &nbsp; &nbsp;DEFAULT '0' COMMENT '统计该区域所有占用物审核次数',<br>&nbsp; &nbsp; `create_time`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;datetime&nbsp; &nbsp; DEFAULT NULL COMMENT '创建时间',<br>&nbsp; &nbsp; `update_time`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;datetime&nbsp; &nbsp; DEFAULT NULL COMMENT '修改时间',<br>&nbsp; &nbsp; PRIMARY KEY (`id`) USING BTREE,<br>&nbsp; &nbsp; UNIQUE KEY `batch_area_date_uk` (`arable_land_batch_record_id`, `area_id`, `archive_month_str`) USING BTREE COMMENT '批次和区域时间联合主键'<br>) ENGINE = InnoDB<br>&nbsp; AUTO_INCREMENT = 1<br>&nbsp; DEFAULT CHARSET = utf8mb4 COMMENT ='占用耕地处理按月归档表（增量）';<br><br>-- 占用耕地处理按月归档表（全量）<br>CREATE TABLE `frp_archive`.`tbl_archive_arable_land_occupy_month_full`<br>(<br>&nbsp; &nbsp; `id`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',<br>&nbsp; &nbsp; `arable_land_batch_record_id`&nbsp; &nbsp;bigint(20) NOT NULL COMMENT '耕地占用批次信息id',<br>&nbsp; &nbsp; `arable_land_batch_record_name` varchar(64) DEFAULT NULL COMMENT '耕地占用批次信息名称',<br>&nbsp; &nbsp; `area_id`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;varchar(64) DEFAULT NULL COMMENT '区域id',<br>&nbsp; &nbsp; `area_name`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;varchar(64) DEFAULT NULL COMMENT '区域名称',<br>&nbsp; &nbsp; `total_check_count`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int(11)&nbsp; &nbsp; &nbsp;DEFAULT '0' COMMENT '统计该区域所有占用物筛查次数',<br>&nbsp; &nbsp; `total_review_count`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int(11)&nbsp; &nbsp; &nbsp;DEFAULT '0' COMMENT '统计该区域所有占用物复核次数',<br>&nbsp; &nbsp; `total_audit_count`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int(11)&nbsp; &nbsp; &nbsp;DEFAULT '0' COMMENT '统计该区域所有占用物审核次数',<br>&nbsp; &nbsp; `create_time`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;datetime&nbsp; &nbsp; DEFAULT NULL COMMENT '创建时间',<br>&nbsp; &nbsp; `update_time`&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;datetime&nbsp; &nbsp; DEFAULT NULL COMMENT '修改时间',<br>&nbsp; &nbsp; PRIMARY KEY (`id`) USING BTREE,<br>&nbsp; &nbsp; UNIQUE KEY `batch_area_uk` (`arable_land_batch_record_id`, `area_id`) USING BTREE COMMENT '批次id,区域id联合主键'<br>) ENGINE = InnoDB<br>&nbsp; AUTO_INCREMENT = 1<br>&nbsp; DEFAULT CHARSET = utf8mb4 COMMENT ='占用耕地处理按月归档表（全量）';<br><br><br>-- 1.批次表里新增批次结束时间<br>ALTER TABLE `frp_landoccupy`.`tbl_arable_land_batch_record` ADD COLUMN `end_date` date DEFAULT NULL COMMENT '批次结束日期' AFTER `analysis_date`;<br>UPDATE `frp_landoccupy`.`tbl_arable_land_batch_record` SET `end_date` = '2023-06-30' WHERE `id` = 1;<br><br>-- 2.日志表<br>ALTER TABLE `frp_landoccupy`.`tbl_arable_land_occupy_operator_log` ADD COLUMN `arable_land_batch_record_id` BIGINT (20) NOT NULL COMMENT '耕地占用批次信息id' AFTER `id`;<br>UPDATE `tbl_arable_land_occupy_operator_log` SET arable_land_batch_record_id=1;<br><br>-- 3.动作新增编辑<br>INSERT INTO `frp_user`.`sys_dict_data` (`dict_type`,`dict_label`,`dict_value`,`sort_num`,`create_time`,`update_time`) VALUES ('24','编辑','9',0,NULL,NULL);<br><br>-- frp_governmentuser<br>UPDATE tbl_government_show_menu_template SET sort_num = 19 WHERE id&nbsp; = 2015;<br><br>UPDATE tbl_government_show_menu_template SET sort_num = 20 WHERE id&nbsp; = 2010;</p> 
+  <h1 style="text-indent:2em;" id="anchor41">5 代码功能设计</h1> 
+  <p style="text-indent:2em;"><br></p> 
+  <div>
+   <br>
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1 需求文档">1 需求文档</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2 开发计划">2 开发计划</a> </li>
+    <li class="text-ellipsis"><a href="#anchor17" title="3 接口设计">3 接口设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor39" title="4 数据库表设计">4 数据库表设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor41" title="5 代码功能设计">5 代码功能设计</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

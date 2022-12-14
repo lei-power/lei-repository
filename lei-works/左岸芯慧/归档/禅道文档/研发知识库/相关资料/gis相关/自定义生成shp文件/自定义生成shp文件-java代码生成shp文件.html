@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义生成shp文件-java代码生成shp文件</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍java代码怎么将经纬度生成shp矢量数据，下面以神农口袋农场数据生成shp文件为例</p> 
+  <h1 id="anchor2">2、springboot集成所需依赖</h1> 
+  <h2 id="anchor3">2.1、依赖</h2> 
+  <p><strong><span style="color:#E53333;font-size:18px;">pom.xml</span></strong></p> 
+  <p><br></p> 
+  <pre class="prettyprint lang-java"> &lt;dependency&gt;
+            &lt;groupId&gt;org.geotools&lt;/groupId&gt;
+            &lt;artifactId&gt;gt-epsg-hsql&lt;/artifactId&gt;
+            &lt;version&gt;23.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.geotools&lt;/groupId&gt;
+            &lt;artifactId&gt;gt-shapefile&lt;/artifactId&gt;
+            &lt;version&gt;25.4&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.geotools&lt;/groupId&gt;
+            &lt;artifactId&gt;gt-swing&lt;/artifactId&gt;
+            &lt;version&gt;25.4&lt;/version&gt;
+        &lt;/dependency&gt;
+&lt;dependency&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;groupId&gt;org.locationtech.jts&lt;/groupId&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;artifactId&gt;jts-core&lt;/artifactId&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;version&gt;1.18.1&lt;/version&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/dependency&gt;
+
+
+
+
+&lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;osgeo&lt;/id&gt;
+            &lt;name&gt;OSGeo Release Repository&lt;/name&gt;
+            &lt;url&gt;https://repo.osgeo.org/repository/release/&lt;/url&gt;
+            &lt;snapshots&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/snapshots&gt;
+            &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
+        &lt;/repository&gt;
+        &lt;repository&gt;
+            &lt;id&gt;osgeo-snapshot&lt;/id&gt;
+            &lt;name&gt;OSGeo Snapshot Repository&lt;/name&gt;
+            &lt;url&gt;https://repo.osgeo.org/repository/snapshot/&lt;/url&gt;
+            &lt;snapshots&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/snapshots&gt;
+            &lt;releases&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/releases&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;</pre> 
+  <p><br></p> 
+  <h2 id="anchor48">2.2、封装坐标转换工具类</h2> 
+  <p><span style="color:#E53333;font-size:18px;"><strong>WKTUTil工具类</strong></span></p> 
+  <pre class="prettyprint lang-java">import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.io.ParseException;
+import org.locationtech.jts.io.WKTReader;
+import org.locationtech.jts.io.WKTWriter;
+
+public class WKTUtil {
+    private static final double x_PI = 3.14159265358979324 * 3000.0 / 180.0;
+    private static final double PI = 3.1415926535897932384626;
+    private static final double a = 6378245.0;
+    private static final double ee = 0.00669342162296594323;
+
+    public static String geomToWkt(Geometry geometry) {
+        WKTWriter writer = new WKTWriter();
+        return writer.write(geometry);
+    }
+
+    public static Geometry wktToGeom(String wkt) throws ParseException {
+        Geometry geometry = null;
+        WKTReader reader = new WKTReader();
+        geometry = reader.read(wkt);
+        return geometry;
+    }
+
+    /**
+     * GCJ02 转 WGS84
+     *
+     * @param lng 经度
+     * @param lat 纬度
+     * @return WGS84坐标：[经度，纬度]
+     */
+    public static double[] transformGCJ02ToWGS84(double lng, double lat) {
+        if (outOfChina(lng, lat)) {
+            return new double[]{lng, lat};
+        } else {
+            double dLat = transformLat(lng - 105.0, lat - 35.0);
+            double dLng = transformLng(lng - 105.0, lat - 35.0);
+            double radLat = lat / 180.0 * PI;
+            double magic = Math.sin(radLat);
+            magic = 1 - ee * magic * magic;
+            double sqrtMagic = Math.sqrt(magic);
+            dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * PI);
+            dLng = (dLng * 180.0) / (a / sqrtMagic * Math.cos(radLat) * PI);
+            double mgLat = lat + dLat;
+            double mgLng = lng + dLng;
+            return new double[]{lng * 2 - mgLng, lat * 2 - mgLat};
+        }
+    }
+    /**
+     * 判断坐标是否不在国内
+     *
+     * @param lng 经度
+     * @param lat 纬度
+     * @return 坐标是否在国内
+     */
+    public static boolean outOfChina(double lng, double lat) {
+        return (lng &lt; 72.004 || lng &gt; 137.8347) || (lat &lt; 0.8293 || lat &gt; 55.8271);
+    }
+
+    private static double transformLat(double lng, double lat) {
+        double ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * Math.sqrt(Math.abs(lng));
+        ret += (20.0 * Math.sin(6.0 * lng * PI) + 20.0 * Math.sin(2.0 * lng * PI)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(lat * PI) + 40.0 * Math.sin(lat / 3.0 * PI)) * 2.0 / 3.0;
+        ret += (160.0 * Math.sin(lat / 12.0 * PI) + 320 * Math.sin(lat * PI / 30.0)) * 2.0 / 3.0;
+        return ret;
+    }
+
+    private static double transformLng(double lng, double lat) {
+        double ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * lng + 0.1 * lng * lat + 0.1 * Math.sqrt(Math.abs(lng));
+        ret += (20.0 * Math.sin(6.0 * lng * PI) + 20.0 * Math.sin(2.0 * lng * PI)) * 2.0 / 3.0;
+        ret += (20.0 * Math.sin(lng * PI) + 40.0 * Math.sin(lng / 3.0 * PI)) * 2.0 / 3.0;
+        ret += (150.0 * Math.sin(lng / 12.0 * PI) + 300.0 * Math.sin(lng / 30.0 * PI)) * 2.0 / 3.0;
+        return ret;
+    }
+}
+</pre> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor127">2.3、封装Shape生成工具类</h2> 
+  <p><span style="font-size:18px;color:#E53333;"><strong>ShapeUtil工具类</strong></span></p> 
+  <p><br></p> 
+  <pre class="prettyprint lang-java">import com.wk.module.excel.pojo.Farm;
+import org.geotools.data.FeatureWriter;
+import org.geotools.data.Transaction;
+import org.geotools.data.shapefile.ShapefileDataStore;
+import org.geotools.data.shapefile.ShapefileDataStoreFactory;
+import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
+import org.geotools.referencing.CRS;
+import org.locationtech.jts.geom.*;
+import org.opengis.feature.simple.SimpleFeature;
+import org.opengis.feature.simple.SimpleFeatureType;
+
+import java.io.File;
+import java.io.Serializable;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+public class ShapeUtil {
+
+
+    /**
+     * 生成shape文件
+     *
+     * @param shpPath 生成shape文件路径（包含文件名称）
+     * @param encode  编码
+     * @param geoType 图幅类型，Point和Rolygon
+     */
+    public static void write2Shape(String shpPath, String encode, String geoType, List&lt;Farm&gt; farmList) {
+        try {
+            //创建shape文件对象
+            File file = new File(shpPath);
+            Map&lt;String, Serializable&gt; params = new HashMap&lt;&gt;();
+            params.put(ShapefileDataStoreFactory.URLP.key, file.toURI().toURL());
+            ShapefileDataStore ds = (ShapefileDataStore) new ShapefileDataStoreFactory().createNewDataStore(params);
+            //定义图形信息和属性信息
+            SimpleFeatureTypeBuilder tb = new SimpleFeatureTypeBuilder();
+
+            //设置shp文件坐标系
+            tb.setCRS(CRS.decode("EPSG:4326"));
+            tb.setName("shapefile");
+
+            //在这里新增字段
+            tb.add("farm_id", Integer.class);
+            tb.add("farm_name", String.class);
+
+            if ("Polygon".equals(geoType)) {
+                tb.add("the_geom", Polygon.class);
+            } else if ("MultiPolygon".equals(geoType)) {
+                tb.add("the_geom", MultiPolygon.class);
+            } else if ("Point".equals(geoType)) {
+                tb.add("the_geom", Point.class);
+            } else if ("MultiPoint".equals(geoType)) {
+                tb.add("the_geom", MultiPoint.class);
+            } else if ("LineString".equals(geoType)) {
+                tb.add("the_geom", LineString.class);
+            } else if ("MultiLineString".equals(geoType)) {
+                tb.add("the_geom", MultiLineString.class);
+            } else {
+                throw new Exception("Geometry中没有该类型：" + geoType);
+            }
+
+            ds.createSchema(tb.buildFeatureType());
+            //设置编码
+            Charset charset = Charset.forName(encode);
+            ds.setCharset(charset);
+            //设置Writer
+            FeatureWriter&lt;SimpleFeatureType, SimpleFeature&gt; writer = ds.getFeatureWriter(ds.getTypeNames()[0], Transaction.AUTO_COMMIT);
+            for (Farm farm : farmList) {
+                String farmCenterLng = farm.getFarmCenterLng();
+                String farmCenterLat = farm.getFarmCenterLat();
+                StringBuilder sb = new StringBuilder();
+                sb.append("POINT (");
+
+                //坐标系转换
+                double[] doubles = WKTUtil.transformGCJ02ToWGS84(Double.valueOf(farmCenterLng), Double.valueOf(farmCenterLat));
+                String newpath = doubles[0] + " " + doubles[1];
+                String s1 = "POINT (" + newpath + ")";
+                Geometry geom = WKTUtil.wktToGeom(s1);
+                SimpleFeature feature = writer.next();
+                feature.setAttribute("the_geom", geom);
+
+                //上面新增字段名称，这里给名称赋值
+                feature.setAttribute("farm_id", farm.getId());
+                feature.setAttribute("farm_name", farm.getFarmName());
+
+            }
+
+            writer.write();
+            writer.close();
+            ds.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+</pre> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor231">2.4、执行生成shp文件</h2> 
+  <p><span style="font-size:18px;">生成点shp文件：</span><span style="font-size:18px;">ShapeUtil.write2Shape(url, "GBK", "<span style="color:#E53333;">Point</span>", farmList);</span></p> 
+  <p><span><span style="font-size:18px;">生成面shp文件：</span><span style="font-size:18px;">ShapeUtil.write2Shape(url, "GBK", "</span><span style="font-size:18px;color:#E53333;">Polygon</span><span style="font-size:18px;">", farmList);</span></span></p> 
+  <p><span><span style="font-size:18px;">生成线shp文件：</span><span style="font-size:18px;">ShapeUtil.write2Shape(url, "GBK", "</span><span style="font-size:18px;color:#E53333;">LineString</span><span style="font-size:18px;">", farmList);</span></span></p> 
+  <p><span><span style="font-size:18px;">编码：如果中文有乱码，请将GBK改成UTF-8</span></span></p> 
+  <pre class="prettyprint lang-java">public void exportShp()  {
+        //查询所有农场列表
+        List&lt;Farm&gt; farmList = farmMapper.getList();
+        //生成的shp文件位置
+        String shpPath = "D:\\tmp\\farmPoint.shp";
+        //编码设置GBK，类型设置Point
+        ShapeUtil.write2Shape(shpPath, "GBK", "Point", farmList);
+    }</pre> 
+  <p><br></p> 
+  <p>生成的shp文件存放位置</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9573.png" alt="" width="400" height="105" title=""></p> 
+  <p><br></p> 
+  <p>arcmap软件打开</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9576.png" alt="" width="400" height="166" title=""></p> 
+  <h2 id="anchor252">2.5、弊端</h2> 
+  <p>这种方式有个弊端，如果字段长度太长，会直接报错，不能生成shp文件，暂时没有找到代码方式解决</p> 
+  <p>比如，新增：province_name</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9567.png" alt="" width="400" height="171" title=""></p> 
+  <p><br></p> 
+  <p>在这里赋值</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9568.png" alt="" width="400" height="91" title=""></p> 
+  <p><br></p> 
+  <p>执行的时候，就会提示<span>province_name字段太长，直接报错</span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9571.png" alt="" width="400" height="161" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor263">2.6、解决弊端的另外方式</h2> 
+  <p>虽然代码方式暂未找到方式解决，我们可以从其他方式解决</p> 
+  <h3>方式一</h3> 
+  <p>可以先把能生成shp文件字段加入代码中，然后生成shp文件，比如，上面就先生成farm_id和farm_name字段，然后通过arcmap软件打开，通过软件的方式添加</p> 
+  <p><br></p> 
+  <p>（1）直接打开shp文件添加字段是失败的，因为shp格式的文件有字段限制，所以，我们需要转换成mdb或者gdb格式文件</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9583.png" alt="" width="400" height="200" title=""></p> 
+  <p><br></p> 
+  <p>（2）转换成mdb格式</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9585.png" alt="" width="400" height="198" title=""></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9586.png" alt="" width="400" height="290" title=""></p> 
+  <p>（3）添加字段</p> 
+  <p>这样字段就能添加进去了</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9587.png" alt="" width="400" height="238" title=""></p> 
+  <p><br></p> 
+  <p>（4）数据赋值</p> 
+  <p>数据赋值只能将文件导入到数据库后，通过sql脚本去更新</p> 
+  <p><br></p> 
+  <h3>方式二</h3> 
+  <p>可以在代码里将字段名称缩写，比如<span>province_na</span><span>me可以缩写为pro_name</span></p> 
+  <p><span><br></span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9593.png" alt="" width="400" height="313" title=""></p> 
+  <p><br></p> 
+  <h3>(1)arcmap添加<span>字段</span></h3> 
+  <p><span>arcmap添加<span>province_na</span><span>me</span>字段，然后赋值</span></p> 
+  <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9594.png" alt="" width="400" height="179" title=""></span></p> 
+  <h3><span>（2）删除pro_name字段</span></h3> 
+  <h3><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9595.png" alt="" width="400" height="230" title=""></span></h3> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor2" title="2、springboot集成所需依赖">2、springboot集成所需依赖</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor3" title="2.1、依赖">2.1、依赖</a> </li>
+      <li class="text-ellipsis"><a href="#anchor48" title="2.2、封装坐标转换工具类">2.2、封装坐标转换工具类</a> </li>
+      <li class="text-ellipsis"><a href="#anchor127" title="2.3、封装Shape生成工具类">2.3、封装Shape生成工具类</a> </li>
+      <li class="text-ellipsis"><a href="#anchor231" title="2.4、执行生成shp文件">2.4、执行生成shp文件</a> </li>
+      <li class="text-ellipsis"><a href="#anchor252" title="2.5、弊端">2.5、弊端</a> </li>
+      <li class="text-ellipsis"><a href="#anchor263" title="2.6、解决弊端的另外方式">2.6、解决弊端的另外方式</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221009.西昌中烟功能详细设计文档-2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍西昌中烟的任务流程和详细设计</p> 
+  <p>1、西昌中烟是一个私有化项目，跟之前的私有化项目不一样，这里只需要在大屏展示数据，数据源是从多个项目组相互调用，需要新建一个单独的git仓库和springboot服务</p> 
+  <p>2、新建的springboot项目需要多数据源</p> 
+  <p>3、需要登陆和免登录功能，新建用户目前是在数据库创建</p> 
+  <p>4、本项目不需要其他中间件（redis、rabbitmq），只需要在对方服务器安装一个mysql5.7</p> 
+  <p><br></p> 
+  <p>西昌中烟开放的白名单</p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <th>序号<br></th> 
+     <th>开放白名单<br></th> 
+     <th>对应端口</th> 
+     <th>使用功能<br></th> 
+     <th>备注<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1<br></td> 
+     <td>http://gov.snkoudai.com<br></td> 
+     <td>80</td> 
+     <td>访问神农口袋真正式服数据</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>https://snkoudai.oss-cn-hangzhou.aliyuncs.com<br></td> 
+     <td>80<br></td> 
+     <td>神农口袋正式服图片地址</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>https://zaiot.oss-cn-hangzhou.aliyuncs.com/<br></td> 
+     <td>80<br></td> 
+     <td>物联网图片地址</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>https://map.snkoudai.com<br></td> 
+     <td>80<br></td> 
+     <td>地图地址</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>http://openapi.zaxhiot.com<br></td> 
+     <td>80<br></td> 
+     <td>物联网正式服地址</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>6</td> 
+     <td>https://webapi.amap.com<br></td> 
+     <td>80</td> 
+     <td>高德</td> 
+     <td><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <h1 id="anchor64">2、参与人员</h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:10px;"><span style="font-size:12px;">前端：谢泽发、吴金明、孙光青</span><br></span><span style="font-size:12px;">后端：王恺、丁文清</span></p> 
+  <p><br></p> 
+  <p>迭代时间：2022-10-09到 2022-10-31</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor72">3、项目账号信息</h1> 
+  <div>
+   vpn账号 + 堡垒机 + 数据库 + 服务器信息
+  </div> 
+  <div>
+   参考文档：《
+   <a href="/zentao/doc-objectLibs-custom-0-37-338.html?tid=4zxnm46s" target="_blank" rel="noreferrer noopener">20220922西昌中烟私有化部署项目</a>》
+  </div> 
+  <p><br></p> 
+  <p>其他账号信息</p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">序号<br></td> 
+     <td style="border:1px solid #ddd;">描述</td> 
+     <td style="border:1px solid #ddd;">账号</td> 
+     <td style="border:1px solid #ddd;">备注<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">1</td> 
+     <td style="border:1px solid #ddd;">获取神农口袋token信息</td> 
+     <td style="border:1px solid #ddd;">账号：xichang@wk<br>密码：xichang@wk1023<br>请求地址：http://gov.snkoudai.com<br></td> 
+     <td style="border:1px solid #ddd;"> <p>代码里通过接口调用神农口袋登陆接口，</p> <p>获取登陆token，失效时间2小时</p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">获取虫情token信息</td> 
+     <td style="border:1px solid #ddd;"><span>账号：</span>agriculture<br><span>密码：</span>Auth@666.cn<br><span>请求地址：</span>http://10.164.62.140:8899<br></td> 
+     <td style="border:1px solid #ddd;"> <p>代码里通过接口调用虫情登陆接口，获取</p> <p>登陆token，失效时间30分钟</p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;">西昌内部摄像头密钥和地址<br></td> 
+     <td style="border:1px solid #ddd;">appkey=22936790<br>appsecret=O1qusfLjZbWo8xP2dN1h<br>地址：10.164.58.240:443<br></td> 
+     <td style="border:1px solid #ddd;"> <p>获取西昌内部视像头播放地址，视频流hls，</p> <p>可以在页面播放，失效时间5分钟，前端需要</p> <p>写一个定时器，快到5分钟了，需要重新请求接口</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <p><br></p> 
+  <h1 id="anchor118">4、项目架构</h1> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12167.jpeg" alt="" width="400" height="235" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor122">5、对接数据说明</h1> 
+  <h2 id="anchor123">5.1、按数据源展示</h2> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <th><span style="font-size:10px;">序</span><span style="font-size:10px;">号</span></th> 
+     <th><span style="font-size:10px;">数据源</span></th> 
+     <th><span style="font-size:10px;">模块</span></th> 
+     <th><span style="font-size:10px;">截图</span></th> 
+     <th><span style="font-size:10px;">对接</span><span style="font-size:10px;">方式</span><br></th> 
+     <th><span style="font-size:10px;">地址</span></th> 
+     <th><span style="font-size:10px;">备注</span></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td><span style="font-size:10px;">1</span><br></td> 
+     <td> 
+      <div> 
+       <div>
+        <span style="font-size:10px;">神农系统</span>
+       </div> 
+      </div> <br> </td> 
+     <td> <p><span style="font-size:10px;">烟叶种植基地-烟叶种植记录</span></p> <p><span style="font-size:10px;">烟叶种植基地-农场地块</span></p> <p><span style="font-size:10px;">烟叶种植基地-实时气象监测</span></p> <p><span style="font-size:10px;">烟叶种植基地-实时视频监控</span></p> <p><span style="font-size:10px;">烟叶种植基地-实时虫情监测</span></p> <p><span style="font-size:10px;">烟叶种植基地-实时环境监测</span></p> <span style="font-size:10px;">自然醇化库-实时视频监控</span> <p><span style="font-size:10px;">糖香料厨房-实时视频监控</span></p> <p><span style="font-size:10px;">手工包装作业间-实时视频监</span></p> <p><span style="font-size:10px;">手工包装作业间-溯源生成记录</span></p> <br> </td> 
+     <td> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9902.png" alt="" width="100" height="61" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9905.png" alt="" width="100" height="56" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9911.png" alt="" width="100" height="39" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9915.png" alt="" width="100" height="67" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9924.png" alt="" width="100" height="49" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9936.png" alt="" width="100" height="35" title=""></p> </td> 
+     <td><span style="font-size:10px;">远程接口</span></td> 
+     <td> 
+      <div> 
+       <div> 
+        <div> 
+         <p><span style="font-size:10px;">烟叶种植基地-烟叶种植记录：</span></p> 
+         <p><span style="font-size:10px;">/api/produce/gov/mission/listCompleteByFarmId</span></p> 
+         <p><span style="font-size:10px;">烟叶种植基地-农场地块：</span></p> 
+         <p><span style="font-size:10px;">/api/produce/gov/farm/get/map</span></p> 
+         <p><span style="font-size:10px;">手工包装作业间-单个经营主体溯源生成记录</span></p> 
+         <p><span style="font-size:10px;">api/produce/gov/qrCodeAgri/listQrCodeByCondition</span></p> 
+         <p><span style="font-size:10px;">手工包装作业间-经营主体溯源记录统计：</span></p> 
+         <p><span style="font-size:10px;">api/archive/gov/archive/farmBarCodeDay/list</span></p> 
+         <p><span style="font-size:10px;">烟叶种植基地-实时虫情监测历史数据：</span></p> 
+         <p><span style="font-size:10px;">api/archive/gov/iotAccessThird/device/bugAnalyHistory</span></p> 
+         <p><span style="font-size:10px;">烟叶种植基地-实时虫情监测列表数据：</span></p> 
+         <p><span style="font-size:10px;">api/archive/gov/iotAccessThird/device/bugList</span></p> 
+         <div>
+          <span style="font-size:10px;">烟叶种植基地-实时环境 +气象监测</span>
+         </div> 
+         <p><span style="font-size:10px;">&nbsp;&nbsp;物联网设备(网关)列表：</span></p> 
+         <p><span style="font-size:10px;">api/produce/gov/iotAccess/device/list</span></p> 
+         <p><span style="font-size:10px;">&nbsp;&nbsp;物联网设备(网关)详情：</span></p> 
+         <p><span style="font-size:10px;">api/produce/gov/iotAccess/device/detail</span></p> 
+         <p><span style="font-size:10px;">&nbsp;&nbsp;物联网摄像头列表：</span></p> 
+         <p><span style="font-size:10px;">api/produce/gov/iotAccess/camera/list</span></p> 
+         <p><span style="font-size:10px;">&nbsp;&nbsp;第三方设备列表：</span></p> 
+         <p><span style="font-size:10px;">api/produce/gov/iotAccessThird/device/list</span></p> 
+         <p><span style="font-size:10px;">&nbsp;&nbsp;第三方设备详情：</span></p> 
+         <p><span style="font-size:10px;">api/produce/gov/iotAccessThird/device/getDetail</span></p> 
+         <p><span style="font-size:10px;">&nbsp;&nbsp;第三方设备历史数据：</span></p> 
+         <p><span style="font-size:10px;">api/produce/gov/iotAccessThird/device/history</span></p> 
+        </div> 
+       </div> 
+      </div> <br> </td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td><span style="font-size:10px;">2</span></td> 
+     <td> <p><span style="font-size:10px;">服务端配置系统</span></p> <p><br></p> </td> 
+     <td> <p><span style="font-size:10px;">自然醇化库-原料出入库记</span></p> <p><span style="font-size:10px;">自然醇化库-原料库存总览录</span></p> <p><br></p> <p><span style="font-size:10px;">糖香料厨房-糖香料配置及使用记录</span></p> <p><span style="font-size:10px;">糖香料厨房-糖香料配置工艺</span></p> <p><span style="font-size:10px;">烟叶储考房-烟叶初考监控</span></p> </td> 
+     <td> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9918.png" alt="" width="100" height="56" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9919.png" alt="" width="100" height="51" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9925.png" alt="" width="100" height="57" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10105.png" alt="" width="100" height="43" title=""></p> </td> 
+     <td> <p><span style="font-size:10px;">自建表</span></p> <p><span style="font-size:10px;">本地mysql存储数据</span></p> </td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td><span style="font-size:10px;">3</span></td> 
+     <td> 
+      <div> 
+       <div>
+        <span style="font-size:10px;">西昌卷烟厂虫情监测系统</span>
+       </div> 
+      </div> </td> 
+     <td> <p><span style="font-size:10px;">自然醇化库-实时虫情监测</span></p> <p><span style="font-size:10px;">糖香料厨房-实时虫情监测</span></p> <p><span style="font-size:10px;">制丝车间-实时虫情监测</span></p> <p><span style="font-size:10px;">卷包车间-实时虫情监测</span></p> <p><span style="font-size:10px;">手工包装作业间-实时虫情监测</span></p> <p><span style="font-size:10px;">烟叶初烤房-环境温度监测</span></p> <p><span style="font-size:10px;">烟叶初烤房-环境湿度监测</span></p> <p><br></p> </td> 
+     <td> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9921.png" alt="" width="100" height="55" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9923.png" alt="" width="100" height="54" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9928.png" alt="" width="100" height="48" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9932.png" alt="" width="100" height="46" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9938.png" alt="" width="100" height="50" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10104.png" alt="" width="100" height="36" title=""></p> </td> 
+     <td> <p><span style="font-size:10px;">远程调用接口(对方提供接口)</span></p> </td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td><span style="font-size:10px;">4</span></td> 
+     <td> 
+      <div> 
+       <div>
+        <span style="font-size:10px;">西昌卷烟厂MES系统</span>
+       </div> 
+      </div> <br> </td> 
+     <td><span style="font-size:10px;">自然醇化库-环境温度监测</span> <p><span style="font-size:10px;">自然醇化库-环境湿度监测</span></p> <p><span style="font-size:10px;">糖香料厨房-环境温度监测</span></p> <p><span style="font-size:10px;">糖香料厨房-环境湿度监测</span></p> <p><span style="font-size:10px;">制丝车间-环境温度监测</span></p> <p><br></p> <p><span style="font-size:10px;">制丝车间-环境湿度监测</span></p> <span style="font-size:10px;">制丝车间-生产条件</span> <p><span style="font-size:10px;">卷包车间-环境温度监测</span></p> <p><br></p> <p><span style="font-size:10px;">卷包车间-环境湿度监测</span></p> <p><span style="font-size:10px;">手工包装作业间-环境温度监测</span></p> <p><span style="font-size:10px;">手工包装作业间-环境湿度监测</span></p> </td> 
+     <td> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9912.png" alt="" width="100" height="50" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9922.png" alt="" width="100" height="53" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9927.png" alt="" width="100" height="52" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9931.png" alt="" width="100" height="45" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9935.png" alt="" width="100" height="67" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9937.png" alt="" width="100" height="46" title=""></p> </td> 
+     <td> <p><span style="font-size:10px;">对方提供sqlserver数据库，</span></p> <p><span style="font-size:10px;">直查数据库</span></p> </td> 
+     <td> <p><span style="font-size:10px;">Mes数据库</span></p> <p><span style="font-size:10px;">温度、适度、水质</span></p> <p><span style="font-size:10px;">地址：<span style="font-size:9px;">jdbc:sqlserver://10.164.56.54:1433;DatabaseName=Runtime</span></span></p> <p><span style="font-size:10px;">用户名：viewUser</span></p> <p><span style="font-size:10px;">密码：XCyc2022!</span></p> <br> </td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td><span style="font-size:10px;">5</span></td> 
+     <td> 
+      <div> 
+       <div>
+        <span style="font-size:10px;">西昌卷烟厂车间产量监测系统</span>
+       </div> 
+      </div> </td> 
+     <td><span style="font-size:10px;">卷包车间-车间产量</span><br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9935.png" alt="" width="100" height="67" title=""><br></td> 
+     <td> <p><span style="font-size:10px;">对方提供mysql数据库，</span></p> <p><span style="font-size:10px;">直查数据库</span></p> </td> 
+     <td> 
+      <div> 
+       <p><span style="font-size:10px;">汇聚平台数据库</span></p> 
+       <p><br></p> 
+       <p><span style="font-size:10px;">mysql数据库</span></p> 
+       <p><span style="font-size:10px;">地址：10.164.62.105:3306</span></p> 
+       <p><span style="font-size:10px;">账号：root01&nbsp;</span></p> 
+       <p><span style="font-size:10px;">密码：hlxd@20221</span></p> 
+      </div> <br> </td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td><span style="font-size:10px;">6</span></td> 
+     <td><span style="font-size:10px;">前端静态数据</span></td> 
+     <td> <p><span style="font-size:10px;">烟叶初烤房-智能初考房</span></p> <p><span style="font-size:10px;">烟叶初烤房-烟叶初考流程</span></p> <p><span style="font-size:10px;">烟叶复烤厂-整个模块</span></p> <p><span style="font-size:10px;">烟叶种植基地-基地位置</span></p> <p><br></p> <p><span style="font-size:10px;">烟叶种植基地-基地环境</span></p> <p><span style="font-size:10px;">烟叶种植基地-农产品地理标志</span></p> <p><span style="font-size:10px;">烟叶种植基地-凉山清甜香烟叶</span></p> <p><span style="font-size:10px;">自然醇化库-实时虫情监测</span></p> <span style="font-size:10px;">糖香料厨房-糖香料配置原料</span> <p><span style="font-size:10px;">制丝车间-烟叶原料及工艺标准</span></p> <p><span style="font-size:10px;">卷包车间-清甜香烟支物理指标标准</span></p> <p><span style="font-size:10px;">手工包装作业间-手工包装作业流程</span></p> </td> 
+     <td> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10106.png" alt="" width="100" height="41" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10108.png" alt="" width="100" height="33" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9910.png" alt="" width="100" height="70" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9920.png" alt="" width="100" height="52" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9926.png" alt="" width="100" height="49" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9930.png" alt="" width="100" height="58" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9933.png" alt="" width="100" height="51" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9939.png" alt="" width="100" height="75" title=""></p> </td> 
+     <td><span style="font-size:10px;">数据和图片，前端写死</span></td> 
+     <td><br></td> 
+     <td><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor346">5.2、接口地址</h2> 
+  <div> 
+   <table> 
+    <tbody> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">序号</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">数据</span>
+        <span style="font-size:10px;">源</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">模块</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">截图</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">接口地址</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">备注</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="6"> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <span style="font-size:10px;">1</span>
+       </div> </td> 
+      <td colspan="1" rowspan="6"> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <span style="font-size:10px;">神农系统</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">烟叶种植基地-烟叶种植记录</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11754.png" alt="" width="150" height="178" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sn/mission/listCompleteByFarmId</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <br>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">烟叶种植基地-农场地块</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11755.png" alt="" width="150" height="98" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sn/land/listOfMiddleByFarmId</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">地块信息通过两个接口获取，一个查询农场下地块信息，一个查询农场下物联网设备信息</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">烟叶种植基地-实时气象监测</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11756.png" alt="" width="150" height="136" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sn/iotAccess/device/list</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">先查询物联网设备列表，再取设备对应字段信息</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">烟叶种植基地-实时环境监测</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11757.png" alt="" width="150" height="135" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sn/iotAccess/device/list</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">先查询物联网设备列表，再取设备对应字段信息</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">烟叶种植基地-实时虫情监测</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11758.png" alt="" width="150" height="141" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sn/iotAccessThird/device/list</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">请求第三方设备列表，取第一个虫情设备信息</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">作业间-溯源生成记录</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11759.png" alt="" width="150" height="252" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sn/qrCodeAgri/listQrCodeByCondition</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <br>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="4"> 
+       <div>
+        <span style="font-size:10px;">2</span>
+       </div> </td> 
+      <td colspan="1" rowspan="4"> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <br>
+       </div> 
+       <div>
+        <span style="font-size:10px;">服务端配置系统</span>
+       </div> 
+       <div>
+        <br>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">醇化库-</span>
+       </div> 
+       <div>
+        <span style="font-size:10px;">原材料出入库记录</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11760.png" alt="" width="150" height="264" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/bs/spiceSkuRecord/listSpiceSkuRecord</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">自建表-本地mysql存储数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">醇化库-原材料库存总览</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11761.png" alt="" width="150" height="130" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/bs/spiceSkuRecord/getSpiceSkuOverview</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">自建表-本地mysql存储数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">糖香料厨房-糖香料配置工艺</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11762.png" alt="" width="150" height="136" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/bs/spiceConfig/listSpiceConfig</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">自建表-本地mysql存储数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">糖香料厨房-糖香料领用记录</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11763.png" alt="" width="150" height="274" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/bs/spiceUseRecord/listSpiceUseRecord</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">自建表-本地mysql存储数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="5"> 
+       <div>
+        <span style="font-size:10px;">3</span>
+       </div> </td> 
+      <td colspan="1" rowspan="5"> 
+       <div>
+        <span style="font-size:10px;">西昌卷烟厂虫情监测系统</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">获取虫情监测区域列表</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img src="https://ulwbyrx233.feishu.cn/space/api/box/stream/download/asynccode/?code=MzNjMGUyNmU4ZWJkYTUyY2M5ZTQ4OTU1ZmM4MzMyY2VfWXF1Wm1YOHdpWkY1akZiMDNHVzl5WUpLOTZRdmdOaWpfVG9rZW46Ym94Y25xUjZBbDlxaDJldm5ic2RLTnVnZmRkXzE2NjkyODExMDg6MTY2OTI4NDcwOF9WNA" width="120" height="9" title="" alt="">
+         </div> 
+        </div> 
+        <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11764.png" alt="" width="150" height="24" title="">
+        <br>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/cq/areaList</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">获取虫情预警列表（区域虫情数量统计）</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11765.png" alt="" width="150" height="127" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/cq/getAreaBugEveryDay</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">获取虫情预警列表（区域虫情数量统计）</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <br>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/cq/third/deviceList</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">获取设备每日虫情数据</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11766.png" alt="" width="150" height="127" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/cq/third/getDeviceEveryBug</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">获取设备虫情图片</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <br>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/cq/third/getImagesList</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="3"> 
+       <div>
+        <span style="font-size:10px;">4</span>
+       </div> </td> 
+      <td colspan="1" rowspan="3"> 
+       <div>
+        <span style="font-size:10px;">西昌卷烟厂EMS系统</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">制丝车间-环境温度监测</span>
+       </div> 
+       <div>
+        <span style="font-size:10px;">制丝车间-环境湿度监测</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11767.png" alt="" width="150" height="136" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">温度：http://xichangtestc.snkoudai.com/api/mes//silkWorkshop/temperature/list</span>
+       </div> <p><span style="font-size:10px;">湿度：</span></p> <p><span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/mes//silkWorkshop/humidity/list</span></p> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">sqlServer查询第三方数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">卷包车间-环境温度监测</span>
+       </div> 
+       <div>
+        <span style="font-size:10px;">卷包车间-环境湿度监测</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11768.png" alt="" width="150" height="136" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">温度：http://xichangtestc.snkoudai.com/api/mes//rollWorkshop/temperature/list</span>
+       </div> <p><span style="font-size:10px;">湿度：</span></p> <p><span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/mes//rollWorkshop/humidity/list</span></p> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">sqlServer查询第三方数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">手工包装作业间-环境温度监测</span>
+       </div> 
+       <div>
+        <span style="font-size:10px;">手工包装作业间-环境湿度监测</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11769.png" alt="" width="150" height="136" title="">
+         </div> 
+        </div> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> <p><span style="font-size:10px;">温度：</span></p> <p><span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/mes//material/temperature/list</span></p> <p><span style="font-size:10px;">湿度：</span></p> <p><span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/mes//material/humidity/list</span></p> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">sqlServer查询第三方数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="2"> 
+       <div>
+        <span style="font-size:10px;">5</span>
+       </div> </td> 
+      <td colspan="1" rowspan="2"> 
+       <div>
+        <span style="font-size:10px;">西昌卷烟厂车间优质品率</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">制丝车间-优质品率</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11770.png" alt="" width="150" height="268" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/jb/statisticsJbQuality</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">自建表-本地mysql存储数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">卷包车间-优质品率</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11771.png" alt="" width="150" height="280" title="">
+          <br>
+         </div> 
+        </div> 
+        <br> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/jb/statisticsJbQuality</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">自建表-本地mysql存储数据</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="3"> 
+       <div>
+        <span style="font-size:10px;">6</span>
+       </div> </td> 
+      <td colspan="1" rowspan="3"> 
+       <div>
+        <span style="font-size:10px;">海康威视视频系统</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">醇化库摄像头播放</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11772.png" alt="" width="150" height="139" title="">
+          <br>
+         </div> 
+        </div> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sp/getCamerasPreviewURLs</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">糖香料厨房摄像头播放</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11773.png" alt="" width="150" height="139" title="">
+          <br>
+         </div> 
+        </div> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sp/getCamerasPreviewURLs</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+     <tr> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">手工包装作业间摄像头播放</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div> 
+        <div> 
+         <div>
+          <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11774.png" alt="" width="150" height="139" title="">
+         </div> 
+        </div> 
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">http://xichangtestc.snkoudai.com/api/sp/getCamerasPreviewURLs</span>
+       </div> </td> 
+      <td colspan="1" rowspan="1"> 
+       <div>
+        <span style="font-size:10px;">远程调用接口(对方提供接口)</span>
+       </div> </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+  </div> 
+  <h1 id="anchor861">6、数据库</h1> 
+  <h2 id="anchor862">6.1、用户表</h2> 
+  <p>tbl_user</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11623.png" alt="" width="400" height="236" title=""></p> 
+  <h2 id="anchor865">6.2、token表</h2> 
+  <p>tbl_user_token</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11624.png" alt="" width="400" height="217" title=""></p> 
+  <h2 id="anchor868">6.3、免登录token表</h2> 
+  <p>tbl_user_token_no_login</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11625.png" alt="" width="400" height="148" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor872">6.4、糖香料相关配置表</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11627.png" alt="" width="400" height="311" title=""></p> 
+  <p><br></p> 
+  <h2 id="anchor875">6.5、优质品率</h2> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11628.png" alt="" width="400" height="254" title="">
+  <br> 
+  <p><br></p> 
+  <h1 id="anchor878">7、时序图</h1> 
+  <h2 id="anchor879">7.1、登陆时序图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11649.png" alt="" width="400" height="261" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor883">8、服务端开发</h1> 
+  <h2 id="anchor884">新建独立服务</h2> 
+  <p>服务名称：za-bigscreen&nbsp;&nbsp;</p> 
+  <p><br></p> 
+  <h2 id="anchor887">新建数据库</h2> 
+  <p>数据库名称：frp_bigscreen</p> 
+  <p><br></p> 
+  <div> 
+   <h1 id="anchor891">9、nginx代理列表</h1> 
+   <table> 
+    <tbody> 
+     <tr> 
+      <th><span style="font-size:10px;">序号</span></th> 
+      <th><span style="font-size:10px;">代理目标名称</span><br></th> 
+      <th><span style="font-size:10px;">代理目标地址</span></th> 
+      <th><span style="font-size:10px;">代理二级地址</span></th> 
+      <th><span style="font-size:10px;">访问方式</span><br></th> 
+      <th><span style="font-size:10px;">备注</span></th> 
+     </tr> 
+    </tbody> 
+    <tbody> 
+     <tr> 
+      <td><span style="font-size:10px;">1</span><br></td> 
+      <td><span style="font-size:10px;">神农口袋正式服阿里云oss</span></td> 
+      <td><span style="font-size:10px;">https://snkoudai.oss-cn-hangzhou.aliyuncs.com/</span><br></td> 
+      <td><span style="font-size:10px;">snkoudai-oss</span><br></td> 
+      <td><span style="font-size:10px;">http://10.164.62.135/snkoudai-oss/xxx.jpg</span><br></td> 
+      <td><span style="font-size:10px;">xxx.jpg：文件名</span></td> 
+     </tr> 
+     <tr> 
+      <td><span style="font-size:10px;">2</span></td> 
+      <td><span style="font-size:10px;">物联网阿里云oss</span></td> 
+      <td><span style="font-size:10px;">https://zaiot.oss-cn-hangzhou.aliyuncs.com/</span><br></td> 
+      <td><span style="font-size:10px;">zaiot-oss</span><br></td> 
+      <td><span style="font-size:10px;">http://10.164.62.135/zaiot-oss/xxx.jpg</span><br></td> 
+      <td><span style="font-size:10px;">xxx.jpg：文件名</span><br></td> 
+     </tr> 
+     <tr> 
+      <td><span style="font-size:10px;">3</span></td> 
+      <td><span style="font-size:10px;">欧科齐oss</span></td> 
+      <td><span style="font-size:10px;">https://zzoukeqi.oss-cn-beijing.aliyuncs.com/</span><br></td> 
+      <td><span style="font-size:10px;">oukeqi-oss</span><br></td> 
+      <td><span style="font-size:10px;">http://10.164.62.135/oukeqi-oss/xxx.jpg</span><br></td> 
+      <td><span style="font-size:10px;">xxx.jpg：文件名</span><br></td> 
+     </tr> 
+     <tr> 
+      <td><span style="font-size:10px;">4</span></td> 
+      <td><span style="font-size:10px;">神农口袋地图</span></td> 
+      <td><span style="font-size:10px;">https://map.snkoudai.com/</span><br></td> 
+      <td><span style="font-size:10px;">sn-map</span><br></td> 
+      <td><span style="font-size:10px;">http://10.164.62.135/sn-map/xxx</span><br></td> 
+      <td><span style="font-size:10px;">xxx：地图路径</span></td> 
+     </tr> 
+     <tr> 
+      <td><span style="font-size:10px;">5</span></td> 
+      <td><span style="font-size:10px;">本地服务器文件夹（图片）</span></td> 
+      <td><span style="font-size:10px;">/var/gameplat/picture/</span><br></td> 
+      <td><span style="font-size:10px;">image</span><br></td> 
+      <td><span style="font-size:10px;">http://10.164.62.135/image/xxx.jpg</span><br></td> 
+      <td><span style="font-size:10px;">xxx.jpg：文件名</span><br></td> 
+     </tr> 
+     <tr> 
+      <td><span style="font-size:10px;">6</span></td> 
+      <td><span style="font-size:10px;">本地服务器文件夹（视频）</span><br></td> 
+      <td><span style="font-size:10px;">/var/gameplat/video/job_video/</span><br></td> 
+      <td><span style="font-size:10px;">video</span><br></td> 
+      <td><span style="font-size:10px;">http://10.164.62.135/video/xxx.mp4</span><br></td> 
+      <td><span style="font-size:10px;">xxx.mp4：视频名称</span><br></td> 
+     </tr> 
+     <tr> 
+      <td><span style="font-size:10px;">7</span></td> 
+      <td><span style="font-size:10px;">神农口袋视频地址</span></td> 
+      <td><span style="font-size:10px;">https://hls01open.ys7.com/openlive</span><br></td> 
+      <td><span style="font-size:10px;">openlive</span><br></td> 
+      <td><span style="font-size:10px;">http://10.164.62.135/openlivep/xxx</span><br></td> 
+      <td><span style="font-size:10px;">xxx：视频流地址</span><br></td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <br> 
+   <p><br></p> 
+   <h1 class="heading-1 ace-line old-record-id-SuKGdMsaWoAc8AxltMacXEngnDv" id="anchor964">10、其他资料补充</h1> 
+   <div class="ace-line old-record-id-MymOdKwU8oo0KCxEBalcmC58nnh">
+    海康威视对接参考文档：
+    <a href="https://open.hikvision.com/docs/docId?productId=618cf0a9ec4acb67a0a10fd6&amp;version=%2Fab5e866f57254292b774e177a8bb3332&amp;curNodeId=d3afe28c-83c1-4b9d-8fe5-225b471031ba" target="_blank" rel="noreferrer noopener">《海康威视在线文档》</a>
+   </div> 
+   <div class="ace-line old-record-id-SMUgd0wqKou6OgxqYd7caaQlnqf">
+    对应播放摄像头indexCode
+   </div> 
+   <div> 
+    <table class="ace-table" style="border:none;width:500px;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-MmIKdk0EOoKOSoxMvr9c9W4XnHd">
+         页面
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-MiOSdIUawouCcIxuLmTcU8Mdnab">
+         cameraName
+        </div> </td> 
+       <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-RqcQdkKMWoOie4x4WLYcEFiTnqb">
+         cameraIndexCode
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-H6qydKm2koEIAIx0aPtcJSF1nDc">
+         糖香料厨房
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-YY0md28k6oqEkMxS4ylcpw98n2a">
+         59.240工艺糖香料房01
+        </div> </td> 
+       <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Kai4da0MkoY4kOxFL8qcfLaQnyV">
+         3361043fbe144ea0882e1335efe0e812
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-L8Ccdw82uokeaex4ABkcqlKInHd">
+         糖香料厨房
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-S02WdWuMioOEQ0xUyDfcHwEsnYb">
+         59.240工艺糖香料房02
+        </div> </td> 
+       <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-AkyUdE8EYoU4uyxc9nscqUt7nJk">
+         a5f9501436fc40d4b634da5a5ec04e78
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-PMU0dkEWioMIqMxgZ3zcCcknnCc">
+         自然醇化库
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-N0sedwi0SoKaCyxMvx5cascVnud">
+         59.241工艺科原料库1三楼01
+        </div> </td> 
+       <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Pyq4d6kmuoCuEgxkNPyc2tiynbh">
+         378b36c0addb4c0e9471a0f978393e15
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-SkKMd8ieGoAkOgx44UMcfws2nbd">
+         手工包装作业间
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-EcC2dkacioAwYExm8XTces0enVf">
+         59.242工艺科卷包手工烟01
+        </div> </td> 
+       <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GMA6dkk6koOkYEx2t6bcUNHrnwc">
+         3dc7916549f847ff90a1e49b3e4c326c
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-RqcSdmKoAoIW26x8n9Rc2Bw7nTe">
+         手工包装作业间
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-NqoOd4i2Io604GxwBaAcaKbJnMg">
+         59.242工艺科卷包手工烟02
+        </div> </td> 
+       <td colspan="4" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-L4cydUMQKowE0yxKcnncmGNunHg">
+         00629dd5c5444ea5b596cc8bd5463a00
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+   <div class="ace-line old-record-id-VmmwdgIi0o0YKsxMZ61cxcbonag">
+    请求地址：/api/video/v2/cameras/previewURLs（POST）目前使用v2版本接口
+   </div> 
+   <div> 
+    <table class="ace-table ke-select-col" style="border:none;width:auto;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-OMi8diksEoOY26x2lwVcIh1Znaf">
+         参数名称
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-OiSqdoW0AoOO0yxCckocE5cUnFg">
+         类型
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-NSk4dU8cgoCQEsxgxIGcLQAJnSf">
+         是否必填
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-LOsud6OmeoM2kOxqKyycJobJnje">
+         描述信息
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-KQK6doUAuosaqqxkVT1cBlTJn20">
+         备注
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-A4O8dwQ2eoY4wAx9yWjcPTIOngA">
+         cameraIndexCode
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Eo40d4oAQoikGyx2F9ic2cqYnBc">
+         string
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-XgIgdwEwCoIIa0xCJLWcFkmwnWm">
+         true
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GekidCOMyoqosMxMzkFc3zl9n1b">
+         监控点唯一标识，#API@分页获取监控点资源@#接口获取返回参数cameraIndexCode
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-FgUed4EsyowcAWxzeahc9Tjkntg">
+         根据对应摄像头indexCode传值
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-AwqidqSOcoEIuqxQRrOcvI5Bnmd">
+         streamType
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-HCYsds2oAoYoQ4x0GRmc2qaqnud">
+         integer
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-CWIidcayao0W8QxvMpIclRElndn">
+         false
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-L0MadwYSmomKK6xg9XUc8tJRnyh">
+         码流类型，0:主码流 1:子码流 2:第三码流 参数不填，默认为主码流
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-JKwUda6qyoEG8ixkNLWc17Wsnig">
+         默认0
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Se4ydO0oao2SOAxWCu3c4Nc8nre">
+         protocol
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-I4UodqWa4o8MOcxOMn6cAwKPn9d">
+         string
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GqwadmqgAoisaqxYdHxcVjgwnmc">
+         false
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-USmUd86umo8oKgx3EkAcluFVnAx">
+         取流协议（应用层协议），“hik”:HIK私有协议，使用视频SDK进行播放时，传入此类型；“rtsp”:RTSP协议；“rtmp”:RTMP协议；“hls”:HLS协议（HLS协议只支持海康SDK协议、EHOME协议、ONVIF协议接入的设备；只支持H264视频编码和AAC音频编码）。参数不填，默认为HIK协议
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GMcAd2Ok2oI0Gsx7p1Ac2Z7tndn">
+         固定使用hls视频流，由前端处理流文件播放
+        </div> 
+        <div class="ace-line old-record-id-Bmcmdem6AoCQQ0xAFDKcDPFanLg">
+         <br>
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-H2s0daOMuooC62x88gucczkynWx">
+         transmode
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-D4YYdsKYmo66Wux060ccvUjNnMf">
+         integer
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-P8SEdUoQYoSUG8xkbGLcQBENnig">
+         false
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-QeEAd2YEeoyI06xqoUucz3Qnncc">
+         传输协议（传输层协议），0:UDP 1:TCP 默认是TCP 注： GB28181 2011及以前版本只支持UDP传输
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-VA6Gd6wgqoCeskxgJO5cXGNbnDd">
+         默认tcp
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
+   <div class="ace-line old-record-id-T8qcd0k22o62yAxmUwTchdQgn6c">
+    <br>
+   </div> 
+   <p><br></p> 
+  </div> 
+  <div> 
+   <div></div> 
+   <div> 
+    <ul> 
+     <li><br><br></li> 
+    </ul> 
+   </div> 
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor64" title="2、参与人员">2、参与人员</a> </li>
+    <li class="text-ellipsis"><a href="#anchor72" title="3、项目账号信息">3、项目账号信息</a> </li>
+    <li class="text-ellipsis"><a href="#anchor118" title="4、项目架构">4、项目架构</a> </li>
+    <li class="text-ellipsis"><a href="#anchor122" title="5、对接数据说明">5、对接数据说明</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor123" title="5.1、按数据源展示">5.1、按数据源展示</a> </li>
+      <li class="text-ellipsis"><a href="#anchor346" title="5.2、接口地址">5.2、接口地址</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor861" title="6、数据库">6、数据库</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor862" title="6.1、用户表">6.1、用户表</a> </li>
+      <li class="text-ellipsis"><a href="#anchor865" title="6.2、token表">6.2、token表</a> </li>
+      <li class="text-ellipsis"><a href="#anchor868" title="6.3、免登录token表">6.3、免登录token表</a> </li>
+      <li class="text-ellipsis"><a href="#anchor872" title="6.4、糖香料相关配置表">6.4、糖香料相关配置表</a> </li>
+      <li class="text-ellipsis"><a href="#anchor875" title="6.5、优质品率">6.5、优质品率</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor878" title="7、时序图">7、时序图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor879" title="7.1、登陆时序图">7.1、登陆时序图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor883" title="8、服务端开发">8、服务端开发</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor884" title="新建独立服务">新建独立服务</a> </li>
+      <li class="text-ellipsis"><a href="#anchor887" title="新建数据库">新建数据库</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor891" title="9、nginx代理列表">9、nginx代理列表</a> </li>
+    <li class="text-ellipsis"><a href="#anchor964" title="10、其他资料补充">10、其他资料补充</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

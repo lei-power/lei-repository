@@ -1,5 +1,6 @@
 package cn.lei.spider.pipeline;
 
+import cn.hutool.core.date.DateUtil;
 import cn.lei.spider.model.ChanDaoTree;
 import com.alibaba.fastjson.JSON;
 import java.io.FileWriter;
@@ -7,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import us.codecraft.webmagic.ResultItems;
@@ -26,10 +26,10 @@ public class ChandaoIndexPipeLine extends FilePersistentBase implements Pipeline
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        String path = System.getProperty("user.dir") + "/lei-project/lei-top/lei-tool/lei-tool-spider/target/chandao/";
+        String path = System.getProperty("user.dir") + "\\lei-project\\lei-top\\lei-tool\\lei-tool-spider\\target\\chandaoIndex\\";
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(this.getFile(
-                    path + UUID.randomUUID() + "-chandaoindex.json")));
+                    path + DateUtil.current() + "-index.json")));
 
             Map<String, Object> itemsAll = resultItems.getAll();
             List<ChanDaoTree> tree = (List<ChanDaoTree>) itemsAll.get("tree");

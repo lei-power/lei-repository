@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>神农口袋梳理信息</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span>
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">1、神农口袋功能理解图</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-37899473" href="https://www.processon.com/view/link/63241df25653bb1ab0d6fedc" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/63241df25653bb1ab0d6fedc</a></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">2、神农口袋关联关系理解图</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-37899473" href="https://www.processon.com/view/link/63241e28e401fd43462e00ac" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/63241e28e401fd43462e00ac</a></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">3、产品系统基础理解图</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-37899473" href="https://www.processon.com/view/link/63241e41f346fb3377e63f26" target="_blank" rel="noreferrer noopener">https://www.processon.com/view/link/63241e41f346fb3377e63f26</a></p> 
+  <p align="center" class="ql-align-center ql-direction-ltr ql-heading-title ql-long-37899473" style="text-align:center;font-size:20pt;color:#494949;"><strong class="ql-author-37899473">系统规范</strong></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">一、代码规范</span>
+  </div> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">1、</span>
+   <strong class="ql-author-37899473">遵循Restful风格：</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">接口增删改使用Psot请求，查询使用Get请求</span></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">2、</span>
+   <strong class="ql-author-37899473">注解参数</strong>
+   <span class="ql-author-37899473">：</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">使用post，必须有@RequestBody，Get请求必须有@RequretParam注解信息</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">且标注字段是否必填。</span></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">3、</span>
+   <strong class="ql-author-37899473">命名规范</strong>
+   <span class="ql-author-37899473">：</span>
+  </div> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">接口必须使用list,get,add,edit,del,sync,bind,check等动作型词汇。</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">且controller、service、manage层名称保持一致</span></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">4、</span>
+   <strong class="ql-author-37899473">接口返回值：</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">如果不是异常或者直接返回的提示信息，必须使用ApiPageResp 封装返回</span></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">5、</span>
+   <strong class="ql-author-37899473">PO,VO,DTO，Req,Resp等约束分层：</strong>
+  </div> 
+  <h2 class="ql-long-37899473"> </h2>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:14pt;">
+   <span class="ql-author-37899473">区分co、admin、gov端的入参和出参，不允许相互交叉使用</span>
+  </div> 
+  <ul>
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">PO：只能存在与mapper，manage(神农口袋)，子服务controller和service（物联网），聚合层service中。</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">VO：和各端严格对应。严禁交叉使用，比如Co端使用Admin端的VO。及AdminDeviceVO在CoDeviceController或CoDeviceService中出现。</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">Req：严格和各端保持一直，只能在自己端的controller和service种使用（co、admin、gov）。</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">Resp：要求同req</span></li> 
+  </ul>
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">6、</span>
+   <strong class="ql-author-37899473">service层开发规范：</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">禁止在service层使用增删改操作，设计cud操作，必须下沉到manage层，方式co端和admin同时调用service层，交叉修改，导致数据错乱。事务处理，统一放在manage层操作。</span></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">7、</span>
+   <strong class="ql-author-37899473">Mapper层封装的查询信息：</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">只能返回基本类型数据（Long，String，BigDecimal）、list和PO,禁止返回Map对象</span></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">8、</span>
+   <strong class="ql-author-37899473">接口查询命名规范：</strong>
+  </div> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">统计按照GetByxxx 或者getListAll 或多条件查询getByxxxAndxxx</span></p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">二、日志打印</span>
+  </div> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">日志打印等级</span>
+  </div> 
+  <ul>
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">error错误日志信息，必须打印，方便线上日志看抛出的是什么异常</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">打印日志信息节点，feign接口调用的时候，对接第三方api，入参和出参需要打印，以及某些方法调用查询传值时，需要打印，以便判断时传值问题还是查询问题。</span></li> 
+  </ul>
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">三、Git分支管理</span>
+  </div> 
+  <h1 class="ql-long-37899473"> </h1>
+  <div class="ql-direction-ltr ql-long-37899473" style="font-size:16pt;">
+   <span class="ql-author-37899473">分支含义及规范要求：</span>
+  </div> 
+  <ul>
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">master：主分支不允许推送代码，每次版本发布后需要merge到master，保持分支代码最新。</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">develop：开发分支，新功能拉分支时一般基于当前分支，当存在多个新功能并行时 ，需要从dev分支拉取多个feture分支。</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">feature：新特性分支，一般为新功能分支，当新的功能需求或版本迭代时，使用该分支。</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">hotfix：热修复分支，在上线发布版本后，发现bug，需要紧急修复，从master拉取hotfix_v版本号r0（r1）f分支，修复发布后，需要把分支代码合并到master和dev分支。</span></li> 
+   <li style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">release：发布版本分支，项目上线后，打该分支，通常的命名为release/版本号（我们之前是提测分支，每次开发分支开发完成后，提测到测试环境使用）。</span></li> 
+  </ul> 
+ </div> 
+</div></body>
+</html>

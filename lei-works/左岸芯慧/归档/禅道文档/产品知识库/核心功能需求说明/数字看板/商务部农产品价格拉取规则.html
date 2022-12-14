@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>商务部农产品价格拉取规则</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p>逻辑：</p> 
+  <p>拉取农场所在地或政府主体所在地的省份的【默认】批发市场的价格，如果默认的批发市场没有价格，则依次遍历该省份下的其他批发市场，直到拉取到有价格的批发市场。如果当前省份的批发市场都没有对应作物的价格，则会遍历北京的批发市场来兜底（先查询北京默认的批发市场，再查北京其他的批发市场）。</p> 
+  <p><br></p> 
+  <p>逻辑说明：</p> 
+  <p>1.先查询本区域的 批发市场列表 【A1，A2，A3】（排序按照默认市场在前）<br>2.如果本区域不是北京，再查询北京的批发市场【B1，B2】（排序按照默认市场在前）<br>3.将两个批发市场放到一个列表里【A1，A2，A3，B1，B2】<br>4.对这个批发市场列表，从前到后的顺序，循环查询价格，遇到某一个批发市场有价格就停止，返回数据<br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9370.png" alt=""></p> 
+ </div> 
+</div></body>
+</html>

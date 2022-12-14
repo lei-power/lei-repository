@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>（说明）私有化部署——后端部署常见问题</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">0、文档使用范围</h1> 
+  <p>该文档是后端人员在服务部署阶段，可能遇见的系统环境、代码配置、等一系列问题汇总。通过此文档记录，用以避坑。</p> 
+  <p><br></p> 
+  <h1 id="anchor3">1、常见问题汇总</h1> 
+  <p><br></p> 
+  <p> </p>
+  <div class="detail-content article-content table-col" style="font-size:14px;"> 
+   <h2 id="anchor7">1.1、k8s等容器化部署时服务间通过IP调用问题</h2> 
+   <p>eureka客户端的配置 eureka.instance.prefer-ip-address=true时，如果在容器环境下，需要将 ip-address 设置为对应的容器地址。</p> 
+   <p><br></p> 
+   <h2 id="anchor10">1.2、 服务中用到字体生成图片</h2> 
+   <p>如果所在服务用到字体生成图片，需要确认服务所在环境是否存在该字体。如果不存在，可以在构建镜像时指定。</p> 
+   <p><br></p> 
+   <h2 id="anchor13">1.3、数据库连接指定是否使用SSL</h2> 
+   <p>Caused by: sun.security.validator.ValidatorException: PKIX path building failed</p> 
+   <p>以上错误是由于数据库链接指定了SSL=true，但源应用程序不信任目标应用程序的证书，因为在源应用程序的JVM信任库中找不到该证书或证书链。</p> 
+   <p>解决方式一：修改 useSSL=false</p> 
+   <p><br></p> 
+   <h2 id="anchor18">1.4、物联网和神农口袋的服务一起私有化，需要注意修改神农口袋调用物联网服务地址</h2> 
+   <p><a href="http://chandao.freetek.cc/zentao/file-read-4456.png?tid=vlkqbu0u" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-4456.png" alt=""></a></p> 
+   <div> 
+    <div class="gtx-trans-icon"></div> 
+   </div> 
+   <div> 
+    <div class="gtx-trans-icon"></div> 
+   </div> 
+   <div>
+    <br>
+   </div> 
+   <div> 
+    <div class="gtx-trans-icon"></div> 
+   </div> 
+   <h2 id="anchor30">1.5、阿里云oss调用访问超时或失败</h2> 
+   <p>确认一下配置文件中指定的阿里云oss的endpoint是内网地址还是外网地址，通过ping确认是否能够正常访问。</p> 
+  </div> 
+  <div class="outline table-col"> 
+   <div class="outline-toggle"></div> 
+   <div class="outline-content"> 
+    <ul class="tree tree-angles"> 
+     <li class="text-ellipsis has-list open in"> 
+      <ul> 
+       <li class="text-ellipsis" style="background-color:#FFFFFF;"><br></li> 
+       <li class="text-ellipsis" style="background-color:#FFFFFF;"></li> 
+      </ul> </li> 
+    </ul> 
+   </div> 
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="0、文档使用范围">0、文档使用范围</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="1、常见问题汇总">1、常见问题汇总</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor7" title="1.1、k8s等容器化部署时服务间通过IP调用问题">1.1、k8s等容器化部署时服务间通过IP调用问题</a> </li>
+      <li class="text-ellipsis"><a href="#anchor10" title="1.2、 服务中用到字体生成图片">1.2、 服务中用到字体生成图片</a> </li>
+      <li class="text-ellipsis"><a href="#anchor13" title="1.3、数据库连接指定是否使用SSL">1.3、数据库连接指定是否使用SSL</a> </li>
+      <li class="text-ellipsis"><a href="#anchor18" title="1.4、物联网和神农口袋的服务一起私有化，需要注意修改神农口袋调用物联网服务地址">1.4、物联网和神农口袋的服务一起私有化，需要注意修改神农口袋调用物联网服务地址</a> </li>
+      <li class="text-ellipsis"><a href="#anchor30" title="1.5、阿里云oss调用访问超时或失败">1.5、阿里云oss调用访问超时或失败</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221123企业实名认证-3组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、迭代需求简述</h1> 
+  <p><br></p> 
+  <p>本次迭代的主要需求：</p> 
+  <p><br></p> 
+  <div> 
+   <p>1.可以在神农口袋APP进行企业实名认证操作，通过OCR识别，提取用户上传证件的信息，再通过真实性校验API进行信息校验，判断是否真实有效给出审核结果</p> 
+   <p>2.<span class="lark-record-clipboard"></span>目前平台的用户都没有进行实名认证，真实性存疑，影响后续的产品和业务使用，为了解决这个问题需要用户进行实名认证</p> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>产品需求文档参考链接：<a href="https://s03zdy2o4k.feishu.cn/docx/doxcneV5QfEfzs5MZG8A6mGJuzP">https://s03zdy2o4k.feishu.cn/docx/doxcneV5QfEfzs5MZG8A6mGJuzP</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor15">2、参与人员与时间</h1> 
+  <p>服务端：刘洋、严家强</p> 
+  <p>迭代开始时间：2022-11-23</p> 
+  <p>迭代结束时间：2022-12-7</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#313C52;" id="anchor22">3、状态图</h1> 
+  <a href="http://chandao.freetek.cc/zentao/file-read-11687.png?tid=m0gmfdaw" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-11687.png?tid=m0gmfdaw" alt="" width="500" height="287" title=""></a> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor26">4、用例图</h1> 
+  <p><br></p> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-11704.png?tid=m0gmfdaw" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-11704.png?tid=m0gmfdaw" alt=""></a>&nbsp;</p> 
+  <p><br></p> 
+  <h1 id="anchor30">5、数据库设计ER图</h1> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-12051.png?tid=m0gmfdaw" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-12051.png?tid=m0gmfdaw" alt="" width="500" height="148" title=""></a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor34">6、核心流程时序</h1> 
+  <p><br></p> 
+  <h2 id="anchor36">6.1 企业认证</h2> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-11706.png?tid=m0gmfdaw" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-11706.png?tid=m0gmfdaw" alt="" width="500" height="654" title=""></a></p> 
+  <h2><br></h2> 
+  <p><br></p> 
+  <div> 
+   <p>1：当前企业的【企业名称】， 2-表单上的【统一社会信用代码】（不是OCR识别的）， 3-表单上的【姓名】， 4-表单上的【身份证号码】， 作为参数传给 企业四要素 API验证；&nbsp;API请求失败时，通过弹窗展示说明；&nbsp;API请求成功时，说明验证通过，信息一致匹配，继续完成以下校验</p> 
+   <p><br></p> 
+   <p>2：<span class="lark-record-clipboard"></span>ocr识别的【企业名称】和当前【企业名称】一致， 2-ocr识别的【社会统一信用代码】和表单上用户编辑后的一致（一致说明识别是准确的，用户没改过）， 3-ocr识别的【真实姓名】和表单上用户编辑后的一致， 4-ocr识别的【身份证号码】和表单上用户编辑后的一致， 5-表单上的【统一社会信用代码】在已认证的企业法人类型的企业中没有重复的；&nbsp;不满足上述任一规则时，生成实名认证申请记录，记录的状态为“待审核”（需要由运营后台任一手动审核），同时推送短信给指定的运营人员，页面跳转到“待审核”的结果页；&nbsp;满足上述所有规则时，生产实名认证申请记录，记录的状态为“审核通过”，同时更新企业表，企业的实名认证状态变为“已认证”，页面跳转到“已认证”的结果页；</p> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <h2 id="anchor47"><br>6.2 自然人认证</h2> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-11707.png?tid=m0gmfdaw" target="_blank" rel="noreferrer noopener"><img src="http://chandao.freetek.cc/zentao/file-read-11707.png?tid=m0gmfdaw" alt="" width="500" height="667" title=""></a></p> 
+  <p><br></p> 
+  <p>1：<span class="lark-record-clipboard"></span>表单上的【姓名】 ， 2-表单上的【身份证号码】 ， 3-上传的身份证反面照片 作为参数传给 人证比对 API验证；&nbsp;API请求失败时，通过弹窗展示说明；&nbsp;API请求成功时，说明验证通过，信息一致匹配，继续完成以下校验</p> 
+  <p><br></p> 
+  <p>2：<span class="lark-record-clipboard"></span>ocr识别的【真实姓名】和当前【企业名称】一致， 3-ocr识别的【真实姓名】和表单上用户编辑后的一致， 4-ocr识别的【身份证号码】和表单上用户编辑后的一致， 5-表单上的【身份证号码】在已认证的自然人类型企业中没有重复的，&nbsp;不满足上述任一规则时，生产实名认证申请记录，记录的状态为“待审核”（需要由运营后台任一手动审核），同时推送短信给指定的运营人员，页面跳转到“待审核”的结果页；&nbsp;满足上述所有规则时，生产实名认证申请记录，记录的状态为“审核通过”，同时更新企业表，企业的实名认证状态变为“已认证”，页面跳转到“已认证”的结果页；</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#313C52;" id="anchor55">6.3 企业法人认证重新申请</h2> 
+  <p>根据企业id删除之前的记录，在重新走一遍企业认证流程（上述所描述）。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#313C52;" id="anchor59">6.4 自然人认证重新申请</h2> 
+  <p>根据企业id删除之前的记录，在重新走一遍自然人认证流程（上述所描述）。</p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、迭代需求简述">1、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor15" title="2、参与人员与时间">2、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor22" title="3、状态图">3、状态图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor26" title="4、用例图">4、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor30" title="5、数据库设计ER图">5、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor34" title="6、核心流程时序">6、核心流程时序</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor36" title="6.1 企业认证">6.1 企业认证</a> </li>
+      <li class="text-ellipsis"><a href="#anchor47" title="6.2 自然人认证">6.2 自然人认证</a> </li>
+      <li class="text-ellipsis"><a href="#anchor55" title="6.3 企业法人认证重新申请">6.3 企业法人认证重新申请</a> </li>
+      <li class="text-ellipsis"><a href="#anchor59" title="6.4 自然人认证重新申请">6.4 自然人认证重新申请</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

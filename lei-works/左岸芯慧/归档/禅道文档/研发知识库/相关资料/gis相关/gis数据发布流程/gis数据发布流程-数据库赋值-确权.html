@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis数据发布流程-数据库赋值-确权</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍矢量数据入库后，确权新增的字段，怎么去赋值</p> 
+  <p><br></p> 
+  <h2 id="anchor3">2、赋值</h2> 
+  <p><span style="color:#E53333;"><strong>Excel文件见附件</strong></span></p> 
+  <h2 id="anchor5">2.1、省市区镇村赋值</h2> 
+  <p>（1）找到矢量数据的表，执行sql命令，将dkbm字段截取前12位，得到村代码</p> 
+  <p>UPDATE sde.TBL_TIANJIN_QUEQUAN SET temp_field = SUBSTRING(DKBM,0,13)</p> 
+  <p><br></p> 
+  <p>（2）将一开始的excel表格里的sql语句再命令窗口执行，根据村代码去反匹配镇村id和名称</p> 
+  <p><img src="http://chandao.freetek.cc/zentao/file-read-9352.png?tid=f13qt660" alt="" width="600" height="171" title=""></p> 
+  <p><br></p> 
+  <p><img src="http://chandao.freetek.cc/zentao/file-read-9353.png?tid=f13qt660" alt="" width="600" height="252" title=""></p> 
+  <p>（3）正常update语句去更新市、区数据</p> 
+  <p>UPDATE sde.TBL_TIANJIN_QUEQUAN SET&nbsp;<br>city_id = '120100',<br>city_name = '天津市',<br>county_id = '120116',<br>county_name = '滨海新区'</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor18">2.2、承包方、发包方相关数据赋值</h2> 
+  <p>在拿到确权数据的时候，我们有这三个文件夹，我们进入权属数据文件夹</p> 
+  <p><img src="http://chandao.freetek.cc/zentao/file-read-9356.png?tid=f13qt660" alt="" width="600" height="80" title=""></p> 
+  <p>可以看到有mdb后缀格式的文件，这个就是土地承包相关数据表</p> 
+  <p><img src="http://chandao.freetek.cc/zentao/file-read-9355.png?tid=f13qt660" alt="" width="600" height="85" title=""></p> 
+  <p>（1）承包方、发包方数据入库</p> 
+  <p>新建frp_tianjin_xiaowangzhuang数据库</p> 
+  <p><br></p> 
+  <p><img src="http://chandao.freetek.cc/zentao/file-read-9357.png?tid=f13qt660" alt="" width="600" height="282" title=""></p> 
+  <p><br></p> 
+  <p>导入完成后数据</p> 
+  <p><img src="http://chandao.freetek.cc/zentao/file-read-9354.png?tid=f13qt660" alt="" width="600" height="137" title=""></p> 
+  <p><br></p> 
+  <p>（2）更新dk表数据</p> 
+  <p>-- 更新承包方数据</p> 
+  <p>UPDATE a SET a.CBFBM = c.CBFBM, a.CBFMC = c.CBFMC ,a.CBFZJHM = c.CBFZJHM,a.LXDH = c.LXDH&nbsp; FROM sde.TBL_TIANJIN_QUEQUAN a<br>INNER JOIN frp_tianjin_xiaowangzhuang.dbo.CBDKXX b ON a.DKBM = b.DKBM<br>INNER JOIN frp_tianjin_xiaowangzhuang.dbo.CBF c ON b.CBFBM = c.CBFBM<br><br>-- 更新发包方数据<br>UPDATE a SET a.FBFBM = c.FBFBM,a.FBFMC = c.FBFMC&nbsp; FROM sde.TBL_TIANJIN_QUEQUAN a<br>INNER JOIN frp_tianjin_xiaowangzhuang.dbo.CBDKXX b ON a.DKBM = b.DKBM<br>INNER JOIN frp_tianjin_xiaowangzhuang.dbo.FBF c ON c.FBFBM = b.FBFBM</p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor3" title="2、赋值">2、赋值</a> </li>
+      <li class="text-ellipsis"><a href="#anchor5" title="2.1、省市区镇村赋值">2.1、省市区镇村赋值</a> </li>
+      <li class="text-ellipsis"><a href="#anchor18" title="2.2、承包方、发包方相关数据赋值">2.2、承包方、发包方相关数据赋值</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

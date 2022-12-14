@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>服务端私有化部署-总纲</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍私有化项目从前期准备、中期部署、后期验收整个过程，整理成一个规范文档</p> 
+  <p><br></p> 
+  <h1 id="anchor3">2、前期准备</h1> 
+  <h2 id="anchor4">2.1、服务器配置</h2> 
+  <p>详情见附件</p> 
+  <p>神农口袋&amp;大数据平台&amp;物联网平台私有化部署配置20210928.xlsx</p> 
+  <h2 id="anchor7">2.2、域名申请</h2> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">服务</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">平台</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">域名示例</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span style="font-weight:700;background-color:#F1F1F1;">备注</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;" rowspan="3">神农口袋<br></td> 
+     <td style="border:1px solid #ddd;">神农口袋企业端</td> 
+     <td style="border:1px solid #ddd;">www.snkoudai.xxx.com&nbsp;<br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#494949;">可以分配ssl证书，也可以不分配</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"><span>神农口袋管理后台</span><br></td> 
+     <td style="border:1px solid #ddd;">admin.snkoudai.xxx.com<br></td> 
+     <td style="border:1px solid #ddd;"><span>建议不要分配ssl证书，管理后台有些功能不支持</span></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"><span>神农口袋溯源H5</span><br></td> 
+     <td style="border:1px solid #ddd;">suyuan.snkoudai.xxx.com</td> 
+     <td style="border:1px solid #ddd;"><span>建议分配ssl证书</span></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"><span>大数据平台</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>大数据平台和中台</span><br></td> 
+     <td style="border:1px solid #DDD;">gov.snkoudai.xxx.com<br></td> 
+     <td style="border:1px solid #DDD;"><span style="color:#494949;">可以分配ssl证书，也可以不分配</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;" rowspan="5"><span>物联网</span><br></td> 
+     <td style="border:1px solid #DDD;"><span>物联网基地端</span><br></td> 
+     <td style="border:1px solid #DDD;">www.iot.xxx.com<br></td> 
+     <td style="border:1px solid #DDD;"><span style="color:#494949;">可以分配ssl证书，也可以不分配</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;"><span style="color:#494949;">物联网管理后台</span><br></td> 
+     <td style="border:1px solid #DDD;">admin.iot.xxx.com<br></td> 
+     <td style="border:1px solid #DDD;"><span style="color:#494949;"><span style="color:#494949;">建议不要分配ssl证书，管理后台有些功能不支持</span><span style="color:#494949;"></span></span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">物联网运营商端</td> 
+     <td style="border:1px solid #DDD;">oper.iot.xxx.com<br></td> 
+     <td style="border:1px solid #DDD;"><span style="color:#494949;">可以分配ssl证书，也可以不分配</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">第三方接口服务</td> 
+     <td style="border:1px solid #DDD;">open.iot.xxx.com<br></td> 
+     <td style="border:1px solid #DDD;"><span style="color:#494949;">可以分配ssl证书，也可以不分配</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">小程序端</td> 
+     <td style="border:1px solid #ddd;">base.iot.xxx.com<br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#E53333;">必须分配ssl证书(小程序使用）</span><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <span style="font-size:16px;color:#E53333;">备注：</span>
+  <span style="color:#E53333;">xxx.com：表示甲方需要更改的名称和后缀</span> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor46">2.3、制定交付计划</h2> 
+  <p>根据客户的需求，内部进行评审，制定交付计划（包含安排部署负责人、部署节点）</p> 
+  <h2 id="anchor48">2.3、确定部署代码版本</h2> 
+  <p>根据客户的需求，确定好部署代码版本</p> 
+  <p><br></p> 
+  <h2 id="anchor51">2.4、部署环境</h2> 
+  <h3>1、内网部署</h3> 
+  <p>跟甲方沟通部署流程，申请vpn、服务器账号</p> 
+  <h3>2、外网部署</h3> 
+  <p>跟甲方申请部署服务器账号</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor58">3、中期部署</h1> 
+  <h2 id="anchor59">3.1、安装软件</h2> 
+  <p>详情见链接</p> 
+  <p><a href="/zentao/doc-objectLibs-custom-0-37-203.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-203.html</a></p> 
+  <p><br></p> 
+  <p><span style="color:#E53333;">注意：再安装软件之前，请售前跟甲方沟通下软件是由谁来安装：</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1：部署的软件是他们安装，还是我们来帮忙安装</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2：如果是我们来安装，他们可提供专门版本的软件安装包</span></p> 
+  <p><span style="color:#E53333;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3：如果不提供软件版本，我们会默认按照下面列表软件版本安装</span></p> 
+  <p><br></p> 
+  <table style="font-size:14px;background-color:#FFFFFF;color:#3C4353;width:1117.1px;">
+   <tbody>
+    <tr>
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">序号</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">软件</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">版本号</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td>1<br></td> 
+     <td>jdk</td> 
+     <td>1.8</td> 
+    </tr>
+    <tr>
+     <td>2</td> 
+     <td>mysql</td> 
+     <td>5.7</td> 
+    </tr>
+    <tr>
+     <td>3</td> 
+     <td>rabbitmq</td> 
+     <td>3.7.5</td> 
+    </tr>
+    <tr>
+     <td>4</td> 
+     <td>elang</td> 
+     <td>19.3<br></td> 
+    </tr>
+    <tr>
+     <td>5</td> 
+     <td>redis</td> 
+     <td>5.0.3</td> 
+    </tr>
+    <tr>
+     <td>6</td> 
+     <td>nginx</td> 
+     <td>1.14.1</td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+  <h2 id="anchor90">3.2、服务端代码配置</h2> 
+  <p>详情见链接</p> 
+  <p><a href="/zentao/doc-objectLibs-custom-0-37-201.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-201.html</a></p> 
+  <p><br></p> 
+  <h2 id="anchor94">3.3、部署</h2> 
+  <h3>1、服务端部署</h3> 
+  <p> </p>
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>序号</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>部署流程步骤</span><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><span>描述</span><br></th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;">1</td> 
+     <td style="border:1px solid #ddd;">第一步：创建部署文件夹</td> 
+     <td style="border:1px solid #ddd;"> <p>登陆服务器，创建部署文件夹</p> <p>mkdir&nbsp;/var/gameplat/snkoudai</p> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">第二步：创建工程目录</td> 
+     <td style="border:1px solid #ddd;"> <p>创建工程目录，以网关为例</p> <p>cd&nbsp;/var/gameplat/snkoudai</p> <p>mkdir&nbsp;za-gateway</p> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;">第三步：创建临时目录</td> 
+     <td style="border:1px solid #ddd;"><span>1、在service-foundation工程</span><br><span>mkdir /var/gameplat/snkoudai/adminupload/tmp</span><br><br><span>2、excel本地文件夹路径</span><br><span>在/service-produce工程</span><br><span>mkdir&nbsp;</span><span>&nbsp;/var/gameplat/snkoudai/service-produce-server/template</span><br><br><span>3、qrcode路径</span><br><span>在/service-produce工程</span><br><span>mkdir&nbsp;</span><span>/var/gameplat/snkoudai/service-produce-server/qrcode</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">4</td> 
+     <td style="border:1px solid #ddd;">第四步：初始化数据库脚本</td> 
+     <td style="border:1px solid #ddd;"> <p style="font-size:14px;background-color:#FFFFFF;">详情见附件</p> <p style="font-size:14px;background-color:#FFFFFF;">此脚本是基于荔湖乡丰项目脚本，版本是神农口袋v4.54.0<span style="font-size:13px;background-color:transparent;"></span></p> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">5</td> 
+     <td style="border:1px solid #ddd;">第五步：初始化nginx配置</td> 
+     <td style="border:1px solid #ddd;"> <p>详情见链接</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-206.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-206.html</a></p> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">6</td> 
+     <td style="border:1px solid #ddd;">第六步：<span>本地打包，通过ftp将jar包，部署到对应的工程目录</span></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">7</td> 
+     <td style="border:1px solid #ddd;">第七步：启动所有工程服务</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <h4><br></h4> 
+  <h3>2、前端部署</h3> 
+  <p><br></p> 
+  <h1 id="anchor137">4、后期验收</h1> 
+  <h2 id="anchor138">4.1、验收操作</h2> 
+  <p>配合售前、甲方对需要的地方进行修改</p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2、前期准备">2、前期准备</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor4" title="2.1、服务器配置">2.1、服务器配置</a> </li>
+      <li class="text-ellipsis"><a href="#anchor7" title="2.2、域名申请">2.2、域名申请</a> </li>
+      <li class="text-ellipsis"><a href="#anchor46" title="2.3、制定交付计划">2.3、制定交付计划</a> </li>
+      <li class="text-ellipsis"><a href="#anchor48" title="2.3、确定部署代码版本">2.3、确定部署代码版本</a> </li>
+      <li class="text-ellipsis"><a href="#anchor51" title="2.4、部署环境">2.4、部署环境</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor58" title="3、中期部署">3、中期部署</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor59" title="3.1、安装软件">3.1、安装软件</a> </li>
+      <li class="text-ellipsis"><a href="#anchor90" title="3.2、服务端代码配置">3.2、服务端代码配置</a> </li>
+      <li class="text-ellipsis"><a href="#anchor94" title="3.3、部署">3.3、部署</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor137" title="4、后期验收">4、后期验收</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor138" title="4.1、验收操作">4.1、验收操作</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

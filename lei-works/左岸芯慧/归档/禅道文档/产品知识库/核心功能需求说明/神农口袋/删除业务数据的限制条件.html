@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>删除业务数据的限制条件</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;"><strong>操作</strong><br></td> 
+     <td style="border:1px solid #ddd;"><strong>限制条件</strong></td> 
+     <td style="border:1px solid #ddd;"><strong>图示</strong></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【企业】</td> 
+     <td style="border:1px solid #ddd;">开启政府监管的企业则不允许删除</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10132.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【农场】</td> 
+     <td style="border:1px solid #ddd;">开启政府监管的企业<span>则</span>不允许删除农场</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10133.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【地块】</td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> 
+      <ol>
+       <li><span>开启政府监管的企业则不允许删除地</span><span>块</span></li> 
+       <li>添加过种养品种的地块则不允许删除</li> 
+      </ol><p><br></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10139.png" alt="" width="103" height="50" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10131.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">下架【地块】</td> 
+     <td style="border:1px solid #ddd;">有当前种养品种的地块则不允许下架</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10135.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【种养品种】</td> 
+     <td style="border:1px solid #ddd;">有采收记录的种养品种则不允许删除</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10136.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【采收记录】</td> 
+     <td style="border:1px solid #ddd;">被删除的采收记录的采收数量 &gt; 其所属种植计划的可销售量时，则不允许删除</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10137.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【销售记录】</td> 
+     <td style="border:1px solid #ddd;">已打印了合格证的销售记录则不允许删除</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10140.png" alt="" width="103" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"><span>删除【合格证】</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p><span>企业端无删除合格证入口，可通过运营后台删除，无限制条件</span></p> <p><span>运营后台删除入口：运营数据 &gt; 合格证管理</span></p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10141.png" alt="" width="103" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【损耗记录】</td> 
+     <td style="border:1px solid #ddd;"> <p><span>企业端无删除损耗记录入口，可通过运营后台删除，无限制条</span><span>件</span></p> <p>运营后台删除入口：运营数据 &gt; 损耗出库管理</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10138.png" alt="" width="103" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【农事】</td> 
+     <td style="border:1px solid #ddd;"> 
+      <ol>
+       <li>自动生成的农事则不允许删除，例如：育苗、移栽、播种、开始养殖、投苗、采收、出栏、捕捞、销售等</li> 
+       <li>开启政府监管的企业，<span style="color:#172B4D;font-family:'-apple-system', BlinkMacSystemFont;">当天创建的农事，隔天不允许：</span> 
+        <ol>
+         <li><span style="color:#172B4D;font-family:'-apple-system', BlinkMacSystemFont;">可通过管理中台删除，管理中台删除时无限制条件</span></li> 
+         <li><span style="color:#172B4D;font-family:'-apple-system', BlinkMacSystemFont;">管理中台删除入口：经营主体管理&gt;经营主体信息&gt;详情&gt;农事填报记录</span></li> 
+        </ol></li> 
+       <li><span style="color:#172B4D;font-family:'-apple-system', BlinkMacSystemFont;">超级管理员、管理员可以删除任何农事，农场负责人、生产负责人只可删除自己创建的农事</span></li> 
+      </ol></td> 
+     <td style="border:1px solid #ddd;"> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10143.png" alt="" width="102" height="50" title=""><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10144.png" alt="" width="102" height="50" title=""></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10145.png" alt="" width="105" height="50" title=""></p> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【农资使用记录】</td> 
+     <td style="border:1px solid #ddd;">不支持直接删除农资使用记录，可通过删除对应的农事来删除使用记录</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【农资出入库记录】</td> 
+     <td style="border:1px solid #ddd;"> <p>被删除的出入库记录后还进行了其他出入库操作，则不允许删除该记录</p> <p>（可按出入库记录创建时间从后往前删）</p> </td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10148.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【耕地用途申报记录】</td> 
+     <td style="border:1px solid #ddd;">已推送的申报记录则不允许删除</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【溯源码】</td> 
+     <td style="border:1px solid #ddd;">溯源码批次中有已绑定采收记录的溯源码，则不允许删除该号段</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10147.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"><span>删除【农产品】</span><br></td> 
+     <td style="border:1px solid #ddd;">有由该农产品生成的采收记录，则不允许删除<br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10146.png" alt="" width="102" height="50" title=""><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">删除【员工】</td> 
+     <td style="border:1px solid #ddd;">当前角色为超极管理员时，可删除除超极管理员以外的其他所有员工；当前角色为管理员时，可删除除超极管理员、管理员以外的其他所有员工<br></td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-10150.png" alt="" width="105" height="50" title=""><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <br> 
+ </div> 
+</div></body>
+</html>

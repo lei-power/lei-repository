@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220516.如何针对产品需求做后端服务建设</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p><br></p> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:26px;">1 产品需求类型有哪些？</span>
+  </div> 
+  <div style="font-size:14px;">
+   新需求
+  </div> 
+  <div style="font-size:14px;">
+   变更类需求
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:26px;">2 后端常规需求建设流程：</span>
+  </div> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3518.png" alt=""></p> 
+  <p><br></p> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:26px;">3 后端根据产品需求类型做建设时有哪些差异？</span>
+  </div> 
+  <div>
+   <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3531.png" alt="">
+   <br>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:26px;">4 模型设计</span>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:22px;">4.1 为什么要做？</span>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-family:'FangSong_GB2312', FangSong, STFangsong;">我们人类的大脑天生喜欢“偷懒”，能动用系统1(直觉)的，我们绝不想启用系统2(理性)。所以在面对复杂情况的时候，没有人的大脑能装下这么多的信息。唯有将其分而治之，将大问题分解成多个小问题，我们才有可能理解和实现。--《程序员底层思维》</span>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-family:'FangSong_GB2312', FangSong, STFangsong;font-weight:bold;font-size:22px;">4.2 目的：</span>
+  </div> 
+  <div> 
+   <ul style="margin-left:0px;">
+    <li style="font-size:14px;text-align:left;color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;">有助于按照实际情况或按照所需要的样式对系统进行可视化</li> 
+    <li style="font-size:14px;text-align:left;color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;">能够规约系统的结构和行为</li> 
+    <li style="font-size:14px;text-align:left;color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;">模型给出了指导系统的模板</li> 
+    <li style="font-size:14px;text-align:left;color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;">对做出的决策进行文档化</li> 
+   </ul>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:22px;">4.3 如何做</span>
+  </div> 
+  <div> 
+   <ol>
+    <li><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">作者</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">输入</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">用户名、密码</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">登录博客，so that可以写文章。</span></li> 
+    <li><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">作者打开编辑器，</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">撰写文章</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">，发表</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">博客</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">。</span></li> 
+    <li><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">作者可以给自己的文章</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">打上</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">一到多个</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">标签</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">。</span></li> 
+    <li><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">作者可以给自己的博客</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">设置</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">一到多个</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">分类</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">。</span></li> 
+    <li><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">用户</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">可以</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">发表评论</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">，so that表达对文章的看法。</span></li> 
+    <li><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">用户可以</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;font-weight:bold;">回复</span><span style="color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;font-size:14px;">他人的评论，so that发表对评论的回应。</span></li> 
+   </ol>
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3519.png" alt="">
+  <p><br></p> 
+  <div style="font-size:14px;">
+   以保险需求为例
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">4.3.1 描述问题：</span>
+  </div> 
+  <div style="font-size:14px;margin-left:28px;">
+   平台可以管理保险公司
+  </div> 
+  <div style="font-size:14px;margin-left:28px;">
+   平台可以管理保险公司的险种
+  </div> 
+  <div style="font-size:14px;margin-left:28px;">
+   平台可以管理险种的投保地区范围
+  </div> 
+  <div style="font-size:14px;margin-left:28px;">
+   平台可以管理险种的投保作物规则
+  </div> 
+  <div style="font-size:14px;margin-left:28px;">
+   <span style="color:#323232;background-color:rgba(255,255,255,0.01);">经营主体</span>选择地块上的作物来创建订单
+  </div> 
+  <div style="font-size:14px;margin-left:28px;">
+   <span style="color:#323232;background-color:rgba(255,255,255,0.01);">经营主体</span>如果确认支付后即可生成保单
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">4.3.2 用例图</span>
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3520.png" alt="">
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3521.png" alt=""></p> 
+  <p><br></p> 
+  <div style="font-size:14px;margin-left:0px;">
+   <span style="font-weight:bold;font-size:20px;">4.3.3 找名词和动词</span>
+  </div> 
+  <div style="font-size:14px;">
+   名词：保险公司、险种、险种地区、险种作物、
+   <span style="color:#323232;background-color:rgba(255,255,255,0.01);">经营主体、</span>订单、保单
+  </div> 
+  <div style="font-size:14px;">
+   动词：下单、取消订单、增删改保险公司、险种、险种地区、险种作物
+  </div> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3522.png" alt=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">4.3.4 数据模型设计</span>
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3523.jpg" alt="">
+  <p><br></p> 
+  <div style="font-size:14px;"></div> 
+  <p><br></p> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">4.3.5 时序图</span>
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3524.png" alt="">
+  <p><br></p> 
+  <div style="font-size:14px;">
+   扩展：
+  </div> 
+  <div style="font-size:14px;">
+   四色建模法
+  </div> 
+  <div style="font-size:14px;">
+   事件风暴法
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:22px;">4.4 程度、数量、边界</span>
+  </div> 
+  <div style="font-size:14px;">
+   1、清楚的知道的当前系统是给谁用的；
+  </div> 
+  <div style="font-size:14px;">
+   通过用例图来表明
+  </div> 
+  <div style="font-size:14px;">
+   2、通过设计文档知道当前系统抽象出的名词；
+  </div> 
+  <div style="font-size:14px;">
+   数据模型设计，条件允许可以出类图更好
+  </div> 
+  <div style="font-size:14px;">
+   3、通过设计文档知道当前系统有哪些动作及状态
+  </div> 
+  <div style="font-size:14px;">
+   时序图、状态图
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:26px;">5 代码开发</span>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:22px;">5.1 代码结构如何思考</span>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">5.2 金字塔原理思维结构</span>
+  </div> 
+  <div style="font-size:14px;">
+   书中提到，要自下而上地思考，总结概括；自上而下地表达，结论先行。
+  </div> 
+  <div style="font-size:14px;">
+   其中，自下而上总结概括的过程就是抽象的过程，构建金字塔的过程就是寻找逻辑关系、抽象概括的过程。
+  </div> 
+  <div> 
+   <ol style="margin-left:0px;">
+    <li style="font-size:14px;text-align:left;color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;">先写中心论点</li> 
+    <li style="font-size:14px;text-align:left;color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;">再写分论点</li> 
+    <li style="font-size:14px;text-align:left;color:#000000;font-family:'FangSong_GB2312', FangSong, STFangsong;">最后针对每个分论点做论据</li> 
+   </ol>
+  </div> 
+  <div style="font-size:14px;">
+   <span style="font-family:'FangSong_GB2312', FangSong, STFangsong;">案例：</span>
+  </div> 
+  <div style="font-size:14px;">
+   AbstractApplicationContext.java
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3525.png" alt="">
+  <p><br></p> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">5.3 分治思维</span>
+  </div> 
+  <div style="font-size:14px;">
+   分治的价值在于，我们不应该试着在同一时间把整个需求问题都塞进自己的大脑，而应该试着以某种方式去组织问题。
+  </div> 
+  <div style="font-size:14px;">
+   可以让我们在开发中灵活的使用分层、分场景和分步骤等解决办法，化解软件设计中的复杂问题，从而写出可读性更好的代码、开发出可维护性、可扩展性更好的系统。
+  </div> 
+  <div style="font-size:14px;">
+   案例：
+  </div> 
+  <div style="font-size:14px;">
+   系统中的分层，就是分而治之，确保每层只做自己的事情。
+  </div> 
+  <div style="font-size:14px;">
+   例如：我们系统的 Service 和 Manage 层就是
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3526.png" alt="">
+  <p><br></p> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">5.4 矩阵思维</span>
+  </div> 
+  <div style="font-size:14px;">
+   我们在做矩阵分析的时候，纵轴可以选择使用业务场景，横轴是备选维度，可以是受场景影响的业务流程，也可以是受场景影响的业务属性，或者任何其它不同性质的“东西”
+  </div> 
+  <div style="font-size:14px;">
+   例如：对状态分析、业务共性分析等
+  </div> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3527.png" alt=""></p> 
+  <p><br></p> 
+  <div style="font-size:14px;">
+   <span style="font-weight:bold;font-size:20px;">5.5 保险案例</span>
+  </div> 
+  <div style="font-size:14px;">
+   以创建报销订单为例：
+  </div> 
+  <div style="font-size:14px;">
+   CoFarmInsureOrderService.add()
+  </div> 
+  <div style="font-size:14px;">
+   下单流程：
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3528.png" alt="">
+  <p><br></p> 
+  <p><br></p> 
+  <div style="font-size:14px;">
+   梳理后：
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3529.png" alt=""> 
+ </div> 
+</div></body>
+</html>

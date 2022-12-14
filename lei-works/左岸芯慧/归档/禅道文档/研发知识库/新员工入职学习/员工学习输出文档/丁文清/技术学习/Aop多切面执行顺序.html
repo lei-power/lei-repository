@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aop多切面执行顺序</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">阅读系统代码时，发现controller使用Aop多切面处理数据，那么当请求进入后，是如何按顺序执行的呢？</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9336.png" alt=""></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><br></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">根据@PointCut，指定扫描哪些路径下的方法为切入点</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9338.png" alt=""></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span style="color:#494949;font-size:14.6667px;">通过了解，整理ApringAop执行顺序文档；</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">Q : SpringAop 多个切面织入一个方法时，执行顺序如何；</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">A：答案是，按指定的顺序执行，顺序小，先执行，顺序大的后执行；</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">需要注意的是，先执行的必然是后结束！</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">目前设定执行顺序方法有三种</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">1、实现org.springframework.core.Ordered接口，重写Order方法</p> 
+  <pre>@Component  
+@Aspect  
+public class WebLogAspect implements Ordered{
+    @Override  
+    public int getOrder() {  
+        return 1;  
+    }  
+      
+}  </pre> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">2、使用Order注解指定顺序(目前系统使用方式)</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;">3、通过配置文件设定顺序</p> 
+  <pre>&lt;aop:config expose-proxy="true"&gt;  
+    &lt;aop:aspect ref="aopBean" order="0"&gt;    
+        &lt;aop:pointcut id="testPointcut"  expression="@annotation(xxx.xxx.xxx.annotation.xxx)"/&gt;    
+        &lt;aop:around pointcut-ref="testPointcut" method="doAround" /&gt;    
+        &lt;/aop:aspect&gt;    
+&lt;/aop:config&gt; </pre> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">通过执行顺序图展示，更直接</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9604.png" alt="" width="650" height="385" title=""></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">同一个aspecct，advice执行顺序</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9600.png" alt="" width="650" height="475" title=""></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473">不同的aspect，advice执行顺序</span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><span class="ql-author-37899473"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9599.png" alt="" width="650" height="404" title=""><br></span></p> 
+  <p class="ql-direction-ltr ql-long-37899473" style="font-size:11pt;color:#494949;"><br></p> 
+ </div> 
+</div></body>
+</html>

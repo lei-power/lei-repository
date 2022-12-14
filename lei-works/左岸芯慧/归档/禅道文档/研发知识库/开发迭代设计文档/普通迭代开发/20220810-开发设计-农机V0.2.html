@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220810-开发设计-农机V0.2</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 class="md-end-block md-heading" style="font-size:2.25em;color:#333333;background-color:#FFFFFF;"><span class="md-plain md-expand"> </span></h1>
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor1">一、迭代需求简述</h2> 
+  <p><span class="md-plain"></span></p> 
+  <h1 class="md-end-block md-heading" style="font-size:2.25em;color:#333333;background-color:#FFFFFF;"><span class="md-plain"></span></h1> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:12pt;"><span style="font-size:14px;">本次迭代的主要需</span><span style="font-size:14px;">求：</span></span></p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;font-size:14px;background-color:#FFFFFF;text-indent:-18pt;">1、农机订单管理</p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;font-size:14px;background-color:#FFFFFF;text-indent:-18pt;">2、订单作业任务管理</p> 
+  <p class="MsoListParagraph" style="margin-left:18pt;font-size:14px;background-color:#FFFFFF;text-indent:-18pt;"><span style="font-size:12pt;"><br></span></p> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:12pt;"><span style="font-size:14px;">产品需求文档参考链接：</span><span style="font-size:14px;"><a href="https://shimo.im/docs/368JygvKpXkJWpCp/read" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/execution-story-79.html</a></span></span></p> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p><br></p> 
+  <p><span class="md-plain"></span></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor13">二、参与人员与时间</h2> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:12pt;"><span style="font-size:14px;">服务端：张俊、刘洋、姬帅</span></span></p> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:12pt;"><span style="font-size:14px;">迭代时间：</span><span style="font-size:14px;">2022-08-11</span><span style="font-size:14px;">到</span><span style="font-size:14px;">2022-09-01</span></span></p> 
+  <p class="MsoNormal" style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:12pt;"><span style="font-size:14px;">涉及到的业务端：农机管理平台端、农机手小程序端、神农口袋APP端</span></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor20">三、用例图</h2> 
+  <p>订单、任务状态流转动作用例。</p> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7116.png" alt="">
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor25">四、数据库设计ER图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7115.png" alt="" width="400" height="163" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor30">五、流程状态转化图</h2> 
+  <p><br></p> 
+  <h2 id="anchor32">5.1、订单状态图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7117.png" alt="" width="400" height="527" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">状态说明：</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">1、订单状态从已下单--&gt;处理中，需要服务站人员动作触发。约束：处理中状态不可逆向流转。</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">2、订单状态从处理中--&gt;已派单，需要服务站人员动作触发。状态流转前提：需要已创建大于0个任务。</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">3、订单状态从已派单--&gt;处理中，动作事件触发。状态流转前提：订单状态为已派单，订单下全部任务状态为已完成。</p> 
+  <div>
+   <br>
+  </div> 
+  <p><br></p> 
+  <h2 id="anchor42">5.2、任务状态图</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7118.png" alt=""></p> 
+  <p><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">状态说明：</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">1、任务初始状态【未开始】，可以删除任务。删除动作不会触发状态流转。删除前提：订单状态不是【已派单】状态。</p> 
+  <div></div> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor50">六、核心流程时序</h2> 
+  <p><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor52">6.1、经营主体下单：</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5659.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5659.jpeg" alt="" width="400" height="264" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor55">6.2、经营主体取消订单</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5660.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5660.jpeg" alt="" width="400" height="264" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor58">6.3、经营主体评价订单</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5661.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5661.jpeg" alt="" width="400" height="264" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor61">6.4、服务站派单</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5819.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5819.jpeg" alt="" width="400" height="264" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor64">6.5、服务站关闭订单</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5663.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5663.jpeg" alt="" width="400" height="309" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor67">6.6、服务站完成派单</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5664.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5664.jpeg" alt="" width="400" height="276" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor70">6.7、服务站直接完成任务</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5665.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5665.jpeg" alt="" width="400" height="284" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor73">6.8、农机手开始任务</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5666.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5666.jpeg" alt="" width="400" height="332" title=""></a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="font-size:14px;background-color:#FFFFFF;" id="anchor76">6.9、农机手完成任务</h2> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-5667.jpeg" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5667.jpeg" alt="" width="400" height="284" title=""></a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor80">七、系统架构设计</h2> 
+  <p>新增神农口袋企业端聚合层：backend-co</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="一、迭代需求简述">一、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor13" title="二、参与人员与时间">二、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor20" title="三、用例图">三、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor25" title="四、数据库设计ER图">四、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor30" title="五、流程状态转化图">五、流程状态转化图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor32" title="5.1、订单状态图">5.1、订单状态图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor42" title="5.2、任务状态图">5.2、任务状态图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor50" title="六、核心流程时序">六、核心流程时序</a> </li>
+    <li class="text-ellipsis"><a href="#anchor52" title="6.1、经营主体下单：">6.1、经营主体下单：</a> </li>
+    <li class="text-ellipsis"><a href="#anchor55" title="6.2、经营主体取消订单">6.2、经营主体取消订单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor58" title="6.3、经营主体评价订单">6.3、经营主体评价订单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor61" title="6.4、服务站派单">6.4、服务站派单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor64" title="6.5、服务站关闭订单">6.5、服务站关闭订单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor67" title="6.6、服务站完成派单">6.6、服务站完成派单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor70" title="6.7、服务站直接完成任务">6.7、服务站直接完成任务</a> </li>
+    <li class="text-ellipsis"><a href="#anchor73" title="6.8、农机手开始任务">6.8、农机手开始任务</a> </li>
+    <li class="text-ellipsis"><a href="#anchor76" title="6.9、农机手完成任务">6.9、农机手完成任务</a> </li>
+    <li class="text-ellipsis"><a href="#anchor80" title="七、系统架构设计">七、系统架构设计</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220509.UML流程图思考与应用</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p><br></p> 
+  <p>分享人：李海峰</p> 
+  <p>分享时间：待定</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor6">1.产品逻辑与业务逻辑的区别</h1> 
+  <p><br></p> 
+  <p>产品逻辑：为了满足业务需求，实现业务需要，产品提供的那些功能去满足，有哪些策略</p> 
+  <p>业务逻辑：一些业务上的要求；</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span style="font-size:24px;"><strong>举例</strong></span>：</p> 
+  <p><br></p> 
+  <p>最近打算做拼团活动，要求一个人只能参加一次，所以我希望在拼团页面，判断用户是否参加过拼团活动，参加过的话，提示你已经参加过该活动，</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>业务逻辑：<span>一个人只能参加一次；</span></p> 
+  <p>产品逻辑：<span>在拼团页面，判断用户是否参加过拼团活动，参加过的话，提示你已经参加过该活动，</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor23">2.流程图</h1> 
+  <p><br></p> 
+  <p>在产品维度，常见的流程图有三种：</p> 
+  <p><br></p> 
+  <ul>
+   <li><strong><span style="font-size:18px;">用户流程图</span></strong></li> 
+   <li><strong><span style="font-size:18px;">业务流程图</span></strong></li> 
+   <li><strong><span style="font-size:18px;">页面流程图</span></strong></li> 
+  </ul>
+  <p><br></p> 
+  <h2 id="anchor31">2.1 用户流程图</h2> 
+  <p><br></p> 
+  <p>需要描述用户的操作步骤即可，不涉及异常操作，通过情况进行汇报时使用；</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor36">2.2 业务流程图（比较关键）</h2> 
+  <p><br></p> 
+  <p>业务流程图是一种用来说明各角色（系统）之间的关系，信息流向的一种图表，以业务流程为中心。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor41">2.3 页面流程图</h2> 
+  <p><br></p> 
+  <p>描述各个页面之间的跳转关系</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor52">3.流程图绘制规范</h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <ol>
+   <li>绘制时，应遵循从左到右、从上到下的顺序排列</li> 
+   <li><span>处理流程须以<strong>单一入口</strong>和<strong>单一出口</strong>绘制，同一路径的指示箭头应只有一个</span><br></li> 
+  </ol>
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-3155.png" alt=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor67">4.常见错误画法</h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor70">4.1 混入业务维度</h2> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>特别容易把业务模块也画到功能流程图里面。</p> 
+  <p>区分你的功能流程图里面有木有业务模块并不难。唯一的判断标准是该图中的每个节点都应该是这个产品中真实存在的功能名称，否则应该是混入了其他东西。</p> 
+  <p>真正的难点在于如何将业务流程映射成合理的功能流程，以及功能流程如何映射成恰当的业务流程。</p> 
+  <p><br></p> 
+  <h2 id="anchor77">4.2 混入页面维度</h2> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>次容易将页面写到功能流程图里面。比如某页面只是某个功能的子集，你非要把它写到功能流程图里面，是不合适的。</p> 
+  <p>比如微信里面，发送照片给好友是一个功能，但是涉及到的页面“照片”、“选择相册”、“某一相册详情”以及操作“选中某一照片”，他们都不是功能，完全不应该显示在功能流程图里面。</p> 
+  <p>当然某些功能的命名，有可能和页面是一样的。</p> 
+  <p><br></p> 
+  <h2 id="anchor84">4.3 混入操作维度</h2> 
+  <p><br></p> 
+  <p>每个功能可能包含很多操作，比如微信中发送照片给好友，包含了”点击相册”，”滚动照片列表”，”选择照片并发送”等操作。需要正确区分操作不是功能。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor6" title="1.产品逻辑与业务逻辑的区别">1.产品逻辑与业务逻辑的区别</a> </li>
+    <li class="text-ellipsis"><a href="#anchor23" title="2.流程图">2.流程图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor31" title="2.1 用户流程图">2.1 用户流程图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor36" title="2.2 业务流程图（比较关键）">2.2 业务流程图（比较关键）</a> </li>
+      <li class="text-ellipsis"><a href="#anchor41" title="2.3 页面流程图">2.3 页面流程图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor52" title="3.流程图绘制规范">3.流程图绘制规范</a> </li>
+    <li class="text-ellipsis"><a href="#anchor67" title="4.常见错误画法">4.常见错误画法</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor70" title="4.1 混入业务维度">4.1 混入业务维度</a> </li>
+      <li class="text-ellipsis"><a href="#anchor77" title="4.2 混入页面维度">4.2 混入页面维度</a> </li>
+      <li class="text-ellipsis"><a href="#anchor84" title="4.3 混入操作维度">4.3 混入操作维度</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

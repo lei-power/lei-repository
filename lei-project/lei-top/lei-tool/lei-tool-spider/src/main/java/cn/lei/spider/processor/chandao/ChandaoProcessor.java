@@ -1,4 +1,4 @@
-package cn.lei.spider.processor;
+package cn.lei.spider.processor.chandao;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.lei.spider.model.ChanDaoTree;
@@ -29,7 +29,9 @@ import us.codecraft.webmagic.selector.Selectable;
 public class ChandaoProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(100)
-                            .addCookie("Cookie", "lang=zh-cn; device=desktop; keepLogin=on; za=wanglei; theme=default; checkedItem=; preProductID=10; docFilesViewType=card; lastDocModule=417; goback=%7B%22qa%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-browse-4-0-unclosed-0-openedBy_asc-43-20.html%22%2C%22doc%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-388.html%3Ftid%3Dqefoq8tq%23app%3Ddoc%22%2C%22execution%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-view-4432.html%3Ftid%3D9un8fb32%23app%3Dexecution%22%2C%22project%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-219.html%22%7D; preBranch=24; zentaosid=e2ab29bd482ff7e061970c67675aaddd; zp=33758e4bb789be91b2c48563d132af78d984fd01; tab=doc; windowWidth=1920; windowHeight=977");
+                            .addHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36")
+                            .addHeader("Referer","http://chandao.freetek.cc/zentao/index-index.html?tid=4m2u1uli")
+                            .addCookie("Cookie", "lang=zh-cn; device=desktop; keepLogin=on; za=wanglei; theme=default; docFilesViewType=card; lastDocModule=417; lastProject=130; preExecutionID=131; storyPreExecutionID=131; goback=%7B%22qa%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-browse-4-0-unclosed-0-openedBy_asc-43-20.html%22%2C%22doc%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-483.html%3Ftid%3Dlqrwpwmw%23app%3Ddoc%22%2C%22execution%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fbug-view-4432.html%3Ftid%3D9un8fb32%23app%3Dexecution%22%2C%22project%22%3A%22http%3A%5C%2F%5C%2Fchandao.freetek.cc%5C%2Fzentao%5C%2Fdoc-objectLibs-custom-0-37-219.html%22%7D; preProductID=26; preBranch=all; zentaosid=e1d4121b40c993a85c70decb0e6adee9; zp=740910f93d64ce3dd06225ded0690c5e9e99b2ca; tab=doc; windowWidth=1920; windowHeight=977");
 
     private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
@@ -41,7 +43,7 @@ public class ChandaoProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
 
-        String path = System.getProperty("user.dir") + "/lei-project/lei-top/lei-tool/lei-tool-spider/target/chandao/";
+        String path = System.getProperty("user.dir") + "\\lei-project\\lei-top\\lei-tool\\lei-tool-spider\\target\\chandaoIndex\\";
         File[] files = new File(path).listFiles();
         List<ChanDaoTree> tree = new ArrayList<>();
         for (File file : files) {
@@ -51,8 +53,7 @@ public class ChandaoProcessor implements PageProcessor {
             tree.addAll(parse);
             reader.close();
         }
-        List<ChanDaoTree> treeList = tree.stream().filter(distinctByKey(ChanDaoTree::getHref))
-                                         .collect(Collectors.toList());
+        List<ChanDaoTree> treeList = tree.stream().filter(distinctByKey(ChanDaoTree::getHref)).collect(Collectors.toList());
         ChanDaoTree daoTree = new ChanDaoTree();
         String url = page.getUrl().get();
         for (ChanDaoTree chanDaoTree : treeList) {
@@ -64,8 +65,10 @@ public class ChandaoProcessor implements PageProcessor {
 
         //正文
         String content = custom.xpath("//div[@class='table-row']").get();
+        content = content.replaceAll("/zentao/file-read", "http://chandao.freetek.cc/zentao/file-read");
         //附件
         List<String> fujainList = custom.xpath("//div[@class='detail-content']/ul").all();
+        List<String> imgs = custom.xpath("//div[@class='detail-content']/ul").all();//*[@id="content"]/div[1]/div[2]/div/a[1]
 
         page.putField("content", content);
         page.putField("fujainList", fujainList);
@@ -80,10 +83,15 @@ public class ChandaoProcessor implements PageProcessor {
         return site;
     }
 
+    /**
+     * 先调用ChandaoIndexProcessor 生成地址url再循环调用
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        System.err.println(System.getProperty("user.dir"));
         Spider.create(new ChandaoProcessor())
-              .addUrl("http://chandao.freetek.cc/zentao/doc-tablecontents-custom-0-37.html")
-              .addPipeline(new ChandaoPipeLine()).thread(10).run();
+              .addUrl("http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-310.html")
+              .addPipeline(new ChandaoPipeLine())
+              .thread(10).run();
     }
 }

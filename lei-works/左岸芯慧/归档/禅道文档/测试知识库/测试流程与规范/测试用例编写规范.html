@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>测试用例编写规范</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h2 style="color:#3C4353;font-size:16pt;" id="anchor0"><span class="ql-author-13603723">一、引言</span></h2> 
+  <h2 class="ql-long-13603723" style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor2">1.1 目的</h3> 
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">为测试用例的质量负责、保证测试用例对需求的覆盖率，使测试工作能有序、合理化的进行，从而提高所测产品、系统或者模块的测试质量，也是作为各测试人员在设计用例时的一种规范，使之设计的用例能有效的被管理，特制定该文档。</p> 
+  <h2 class="ql-long-13603723" style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor5">1.2 适用范围</h3> 
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">本文档适用于所有测试人员、适用于对公司所有产品的业务流程、功能等的测试用例设计。</p> 
+  <h1 class="ql-long-13603723" style="color:#3C4353;"></h1> 
+  <h2 style="color:#3C4353;font-size:16pt;" id="anchor8"><span class="ql-author-13603723">二、</span>用例规范</h2> 
+  <h2 class="ql-long-13603723" style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor10">2.1 用例的概念</h3> 
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">测试用例(Test Case)：是为某个特殊目标而编制的一组测试输入、执行条件以及预期结果，以便测试某个程序路径或核实是否满足某个特定需求。</p> 
+  <h2 class="ql-long-13603723" style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor13">2.2 用例的用途</h3> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">理清测试思路</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">测试前编写测试用例可以帮助整理测试思路、有效的指导测试工作有序进行、避免遗漏功能点，保证测试的充分性，尤其适用于业务较复杂的项目。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">明确测试任务</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">编写完用例后，可明确自己需要执行的用例总数，方便预估测试工作量，且可以很明确的知晓实际测试执行的进度、评估上线风险。</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">评估测试能力</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">也可用于产品经理、上级等评估测试人员的测试效率、充分性、覆盖率、考虑问题全面性等方面的能力。</span></p> 
+  <h2 class="ql-long-13603723" style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor27">2.3 用例的设计步骤</h3> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">需求分析</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">从项目需求文档/设计文档/原型图中/设计稿，了解项目的需求，通过测试人员自己的分析、 理解，整理成为测试需求、清楚被测项目包含的功能点。</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">业务流程分析</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">对本次迭代的整体业务流程要熟悉，主流程、数据流向、关键判断条件、以及必要/非必要条件等，可结合流程图/脑图等整理。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">测试用例设计</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">结合【三、用例设计方法】完成本次迭代的用例设计。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">测试用例评审</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">由测试用例设计者发起，邀请测试负责人、产品经理、前后端开发人员等召开测试用例评审会。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">测试用例完善</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">根据评审结果完善、补充测试用例。</span></p> 
+  <h2 class="ql-long-13603723" style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor49">2.4 用例的内容及编写原则</h3> 
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">整体原则：保证整套<span class="ql-author-13603723">测试用例的有效性，即：能够被正常执行、达到对应功能的测试目的，无理解歧义，被不同人员执行时测试结果是一致的。</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">颗粒度划分规范</h4> </li> 
+  </ul>
+  <span style="color:#494949;font-size:11pt;">&nbsp; &nbsp; &nbsp; &nbsp;一个功能多个异常流程，应分开编写多个测试用例；</span>
+  <br>
+  <span style="color:#494949;font-size:11pt;"><span style="font-size:14.6667px;">&nbsp; &nbsp; &nbsp; &nbsp;</span>同一功能不同入口，可视是否有逻辑区分判断合并；</span>
+  <br>
+  <span style="color:#494949;font-size:11pt;"><span style="font-size:14.6667px;">&nbsp; &nbsp; &nbsp; &nbsp;</span>同一功能不同数据准备，应分开编写多个测试用例；</span>
+  <br>
+  <span style="color:#494949;font-size:11pt;"><span style="font-size:14.6667px;">&nbsp; &nbsp; &nbsp; &nbsp;</span>同一功能，移动端和PC端需要单独编写；</span>
+  <br>
+  <span style="color:#494949;font-size:11pt;"><span style="font-size:14.6667px;">&nbsp; &nbsp; &nbsp; &nbsp;</span>看似同一功能，实际数据库分表设计，需单独编写；</span>
+  <br>
+  <span style="color:#494949;font-size:11pt;"><span style="font-size:14.6667px;">&nbsp; &nbsp; &nbsp; &nbsp;</span>……</span>
+  <br>
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">用例的内容格式</span></h4> </li> 
+  </ul>
+  <table>
+   <tbody>
+    <tr>
+     <td class="ql-sheet-cell" width="133" style="background-color:#D7D8D9;"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">字段</span></p> </td> 
+     <td class="ql-sheet-cell" width="471" style="background-color:#D7D8D9;"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">描述</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="133"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">标题</span></p> </td> 
+     <td class="ql-sheet-cell" width="471"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">对测试用例主旨的描述，既要言简意赅，也要能够清楚表达测试用例的目的。</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="133"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">优先级</span></p> </td> 
+     <td class="ql-sheet-cell" width="471"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">一般分为四个等级，P1、P2、P3、P4：</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">P1：基本功能核心业务流程；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">P2：非核心基本功能；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">P3：边界值、交互操作等；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">P4：极端情况异常测试内容等。</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="133"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">前置条件</span></p> </td> 
+     <td class="ql-sheet-cell" width="471"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="color:#4D4D4D;">执行用例测试步骤前需要做的所有必备条件，需列明详细前置条件，保证他人也能参照对应用例执行；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="color:#4D4D4D;">原则上所有用例都有前置条件，要求：完整清楚，包括入口、帐号类型、账号权限、数据准备等。</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="133"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">测试步骤</span></p> </td> 
+     <td class="ql-sheet-cell" width="471"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">为了达到测试用例的测试目的，所需要执行的操作；每个操作步骤对应一个预期结果；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei" style="color:#333333;">不具备特殊含义的测试数据可简单带过、但具有特殊验证含义的测试数据需在测试步骤中明确列出。</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="133"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">预期结果</span></p> </td> 
+     <td class="ql-sheet-cell" width="471"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">结果含需要验证的所有结果输出，如页面检查、存储检查等；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">涉及页面：需明确页面提示结果、跳转、数据变化；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">涉及存储：需明确关键值变化、数据库具体的表和关键字字段值变化。</span></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <h4 style="color:#3C4353;"></h4> 
+  <ul>
+   <li><span style="color:#494949;font-size:12pt;font-weight:700;">测试用例编写举例</span></li> 
+  </ul>
+  <p><span style="color:#E53333;"><span style="font-size:16px;color:#E53333;">模板见附件</span></span></p> 
+  <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">以关键字段举例：</span></p> 
+  <span></span> 
+  <table>
+   <tbody>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128" style="background-color:#D7D8D9;"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">标题</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269" style="background-color:#D7D8D9;"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">前置条件</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334" style="background-color:#D7D8D9;"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">测试步骤</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385" style="background-color:#D7D8D9;"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723 ql-font-microsoftyahei">预期结果</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">农产品库存列表页有数据时功能是否正确</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">当前农场有多个库存量&gt;0的作物</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.首页点击左菜单【农产品库存管理】</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.查看列表数据拉取</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.查看作物图片</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.查看作物名称</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">5.查看库存量</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">6.查看分页功能</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.跳转至农产品库存页面，页面标题正确</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.拉取对应农场下库存量&gt;0的作物种类，按库存量降序排列，农林牧渔混合排列，库存量=0 或 &lt;0 的不拉取</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.对应作物种类图片展示正确</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.对应作物种类名称展示正确</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">5.库存量展示正确、单位正确，农业/渔业 公斤、林业/畜牧业 对应单位</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">6.传统分页，总条数正确，页数正确，切换其他页功能正确，每页数据正确</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">农产品库存列表页缺省样式</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">当前农场没有库存量&gt;0的作物</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.查看农产品库存页面样式</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.缺省样式正确</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">农产品库存，相关入口、按钮权限</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">当前农场有库存量&gt;0的作物</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.查看左菜单【农产品库存管理】入口</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.查看农产品库存列表页【销售】按钮</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.查看农产品库存列表页【库存损耗】按钮</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.管理后台运营商管理配置菜单显示则展示；否则隐藏菜单入口</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.当前角色没有销售权限：</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">前端：点击【销售】toast提示；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">服务端：接口返回404，给出提示；</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">当前角色有销售权限：</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">前端：点击【销售】可正常跳转；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">服务端：接口可正常提交；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.当前角色没有库存损耗权限：</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">前端：【库存损耗】按钮隐藏；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">服务端：接口返回404，给出提示；</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">当前角色有库存损耗权限：</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">前端：【库存损耗】按钮正常显示；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">服务端：接口可正常提交；</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">农产品库存 — 按品种销售 — 种养品种下拉框</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.当前农场有多个库存量&gt;0的作物</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.已进入农产品销售页面</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.查看种养品种下拉框</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.默认选中入口的作物种类；下拉框拉取当前农场库存量&gt;0的作物种类，按库存量降序排列，农林牧渔混合排列，库存量=0 或 &lt;0 的不拉取；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">可修改；</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">农产品库存 — 按品种销售 — 销售时间选择器</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.当前农场某个作物种类库存量&gt;0，且有多条入库记录</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.已进入农产品销售页面，种养品种选中该作物</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.查看销售时间默认值</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.查看销售时间可选范围</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.修改出入库记录表该作物的最后一次入库日期，查看销售时间可选范围</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.选择销售日期后修改已选的种养品种</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.默认为空，必填项，未选择时点击【销售】给出提示</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.可选范围 &gt;=该作物最后一次入库日期 &amp;&amp; &lt;=今天，其他日期不可选择；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.可选范围同步更新（注意：此处可选范围不是取种植计划的最后一次采收时间）；</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.销售时间重置，可选范围同步更新；</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">……</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">……</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">……</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">……</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">农产品库存 — 按品种销售，正向流程可销售成功（扣减库存时遵循先进先出原则）</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.黄瓜库存量600公斤，对应3个种养品种：</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">A 可销售量100、最后一次采收日期4/1</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">B 可销售量200、最后一次采收日期4/2</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">C 可销售量300、最后一次采收日期4/3</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">D 可销售0、最后一次采收日期3/31</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.已进入农产品销售页面，种养品种选择黄瓜</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.销售数量填写 350公斤，其他字段填写/选择正确</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.点击【销售】按钮</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.检查生成的销售批次</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.检查销售明细记录</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">5.检查黄瓜库存量</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">6.检查A、B、C、D剩余可销售量</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">7.检查出库记录日志</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.可正常输入/选择</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.销售成功，跳转至操作完成页面</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.生成1条销售批次，种养品种、销售数量、销售时间、销售去向、销售价格、品牌、操作人、创建时间等字段与销售时填写一致</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.生成3条销售明细记录，种植计划、销售数量、销售时间、销售去向、销售价格、品牌、操作人、创建时间、销售批次id等字段正确</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">A 销售100、B销售200、C销售50、没有D</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">5.扣减销售数量350公斤，剩余库存量250公斤</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">6.A 扣减可销售量100、剩余0</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">B 扣减可销售量200、剩余0</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">C 扣减可销售量50、剩余250</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">D 不参与扣减、剩余还是0</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">7.生成3条出库日志，出库类型、关联id（销售明细id）、出库数量（100、200、50）、出库日期、创建时间等字段正确</span><span class="ql-cursor"></span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell selected" width="128"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">农产品库存 — 按品种销售，销售数量&gt;库存量，销售失败</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="269"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.黄瓜库存量600公斤，对应3个种养品种：</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">A 可销售量100、最后一次采收日期4/1</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">B 可销售量200、最后一次采收日期4/2</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">C 可销售量300、最后一次采收日期4/3</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.已进入农产品销售页面，种养品种选择黄瓜</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="334"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.销售数量填写 350公斤，其他字段填写/选择正确</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.其他人同步销售，销售后剩余库存&lt;350，当前账户点击【销售】按钮</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.检查是否生成销售批次</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.检查是否生成销售明细记录</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">5.检查黄瓜库存量</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">6.检查A、B、C剩余可销售量</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">7.检查是否生成出库记录日志</span></p> </td> 
+     <td class="ql-sheet-cell selected" width="385"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">1.可正常输入/选择</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">2.销售失败，服务端返回提示，停留当前页面</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">3.不生成销售批次</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">4.不生成销售明细记录</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">5.不扣减库存</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">6.不扣减可销售量</span></p> <p style="font-size:11pt;color:#494949;"><span class="ql-author-13603723">7.不生成出库日志</span></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <br>
+  <h1 class="ql-long-13603723" style="color:#3C4353;"></h1> 
+  <h2 style="color:#3C4353;font-size:16pt;" id="anchor289"><span class="ql-author-13603723">三、用例设计方法</span></h2> 
+  <h2 class="ql-long-13603723" style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor291">3.1 功能测试用例设计方法</h3> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">等价类划分</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">有数据输入、或有过滤范围的地方，可以使用等价类划分法，将大量数据划分成若干范围，再从每个范围中挑选代表数据进行测试。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">边界值</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">有数据输入的地方，一般可以使用，边界值法往往和等价类划分法一起使用，以形成一套较为完善的测试方案，找出边界值点、次边界值点。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">错误推测法</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">错误推测法，即猜测可能和常出现的错误，来提前制定用例，规避风险。错误推测法很受设计人员的测试经验影响，测试经验不同，设计出来的测试用例区别会很大。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">因果图法</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">罗列出所有的输入和输出，将输入和输出整理出因果图和依赖关系，根据每一个依赖做设计。因果图方法考虑输入的组合，特别适用于多个输入条件相关有关联又相互约束的情况。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">判定表法</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">判定表适合于解决多个逻辑条件的组合，将各种逻辑的组合罗列出来，避免遗漏。列出每个对应条件所有可能情况下的取值，不需要考虑条件和顺序，再列出结果动作项，对每个条件进行结果判定。最后可以适当的进行规则简化和合并。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">正交法</h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;">当输入条件很多时，因果图等设计方法设计出来的用例数往往多的惊人，用正交法可有效减少用例数。正交法的核心思想是从大量测试数据中选取有代表性的点来测试，从而减少测试用例数。</p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;">场景法</h4> </li> 
+  </ul>
+  <p class="ql-long-13603723 ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;">画出程序流程图，再把流程图转换成控制流图，根据控制流图设计出场景，再根据场景设计测试用例。</p> 
+  <h2 style="color:#3C4353;"></h2> 
+  <h3 style="color:#3C4353;font-size:14pt;" id="anchor321">3.2 现有系统常见测试点</h3> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">角色权限</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">web端、APP端、小程序、管理中台等均涉及到角色权限，所有新功能均需测试前后端权限处理、校验。</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">数据权限</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">管理中台：视产品需求 考虑 所在地 + 参与统计 + 经营类目，影响范围：查看列表、新增时待选列表、导出等；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">大数据：所在地 + 参与统计。</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">相同功能多入口</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">添加种养品种：</span><span class="ql-author-13603723">企业web端 / APP端 单个添加、批量添加（农林牧渔）；企业web端 / APP端 育苗转移栽（农林）；企业APP端快速创建溯源添加种养品种（农林牧渔）；企业web端 / APP端 种养品种列表（农林牧渔）；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">编辑种养品种：</span><span class="ql-author-13603723">企业web端 / APP端 编辑（农林牧渔）；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">删除种养品种：</span><span class="ql-author-13603723">企业web端 单个删除、批量删除（农林牧渔）、企业APP端单个删除（农林牧渔）；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">采收：</span><span class="ql-author-13603723">企业web端 / APP端 单个采收（农林牧渔）、批量采收 （农渔）、APP端快速创建溯源采收（农林牧渔）；企业web端 / APP端 采收纪录列表（农林牧渔）；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">记农事：</span><span class="ql-author-13603723">企业web端 / APP端 单个记农事、批量记农事（强制使用农资、不强制使用农资）、添加种养品种 / 采收 / 销售 等自动生成的农事；企业web端 / APP端农事记录列表；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">结束种养品种：</span><span class="ql-author-13603723">企业web端 / APP端 单个结束、批量结束（农林牧渔）；采收结束 / 种植结束；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">销售：</span><span class="ql-author-13603723">企业web端 / APP端 按品种销售、按地块销售（农林牧渔）、销售批次列表、明细；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">选择地块控件：</span></p> 
+  <p class="ql-text-indent-1 ql-indent-1" style="margin-left:26px;text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">企业web端：批量添加种养品种、批量记农事、批量采收、上报受灾情况、投保、地块列表头部筛选框、生产统计列表头部筛选框；</span></p> 
+  <p class="ql-text-indent-1 ql-indent-1" style="margin-left:26px;text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">企业APP端：批量添加种养品种、批量记农事、批量采收、上报受灾情况等；</span></p> 
+  <p class="ql-text-indent-1 ql-indent-1" style="margin-left:26px;text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">管理中台：</span>穗优保险补录、执法小程序；</p> 
+  <p class="ql-text-indent-1 ql-indent-1" style="margin-left:26px;text-indent:29.3333px;font-size:11pt;color:#494949;">……</p> 
+  <p class="ql-indent-1" style="margin-left:26px;font-size:11pt;color:#494949;"><span class="ql-font-microsoftyahei ql-author-13603723" style="font-weight:700;">物联网：</span></p> 
+  <p class="ql-indent-2" style="margin-left:46px;font-size:11pt;color:#494949;">企业web端：物联网、地图模式、地块详情页、溯源H5、农场秀H5；</p> 
+  <p class="ql-indent-2" style="margin-left:46px;font-size:11pt;color:#494949;">企业APP端：物联网、地图模式、编辑溯源；</p> 
+  <p class="ql-indent-2" style="margin-left:46px;font-size:11pt;color:#494949;">大数据：自然资源监管、经营主体监管、物联网监控、质量安全追溯平台；</p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">溯源H5：</span><span class="ql-author-13603723">手机扫码H5、官网溯源示例、APP溯源示例、APP查看溯源、质量安全追溯平台；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">……</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">不同端的特殊性</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">APP较web端：</span><span class="ql-author-13603723">手机操作系统/版本、前后台切换、数据更新、版本更新、定位/相机/存储等权限、推送、交叉事件、back键、手势、无线/蜂窝网络等；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">小程序较web端：</span><span class="ql-author-13603723">手机操作系统/版本、微信版本、授权微信登录、页面分享、前后台切换等；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">H5：</span><span class="ql-author-13603723">不同操作系统/软件/浏览器扫码的兼容性、分享等；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">……</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">兼容性测试</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">硬件兼容性：</span><span class="ql-author-13603723">与整机的兼容性、与外设的兼容性；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">软件兼容：</span><span class="ql-author-13603723">与操作系统兼容、与浏览器的兼容、分辨率的兼容、与其他应用软件的兼容；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">数据库兼容：</span><span class="ql-author-13603723">与历史数据的兼容性（数据清洗）、与其他业务的兼容性；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723" style="font-weight:700;">历史版本兼容：</span><span class="ql-author-13603723">如某一功能迭代但APP未升级，APP是否能正常使用；</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">……</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">性能测试</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">通过自动化测试工具模拟多种正常、峰值和异常负载条件来对被测系统的各项性能指标进行测试，验证各项性能指标是否满足用户需求。</span></p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">目前暂未做接口压测，但需测试数据量较大时接口响应时间、判断是否满足大部分场景。</span></p> 
+  <ul>
+   <li style="font-size:12pt;color:#494949;"> <h4 style="color:#494949;font-size:12pt;"><span class="ql-author-13603723">其他测试点</span></h4> </li> 
+  </ul>
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">附相应资料：</span><a class="ql-link ql-author-13603723" href="https://www.cnblogs.com/xiaocaicai-cc/p/15571128.html" target="_blank" rel="noreferrer noopener">https://www.cnblogs.com/xiaocaicai-cc/p/15571128.html</a></p> 
+  <h1 class="ql-long-13603723" style="color:#3C4353;"></h1> 
+  <h2 style="color:#3C4353;font-size:16pt;" id="anchor377"><span class="ql-author-13603723">四、用例管理工具</span></h2> 
+  <p class="ql-text-indent-1 ql-long-13603723" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-13603723">统一使用禅道来管理测试用例，可根据个人习惯直接于禅道编写 或 导出模板通过excel编写后再导入禅道。</span>禅道使用规范参考：<a class="ql-link ql-author-13603723" href="https://shimo.im/docs/EWr3DVrYw0JUZkJQ/" target="_blank" rel="noreferrer noopener">https://shimo.im/docs/EWr3DVrYw0JUZkJQ/</a></p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="一、引言">一、引言</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor2" title="1.1 目的">1.1 目的</a> </li>
+      <li class="text-ellipsis"><a href="#anchor5" title="1.2 适用范围">1.2 适用范围</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor8" title="二、用例规范">二、用例规范</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor10" title="2.1 用例的概念">2.1 用例的概念</a> </li>
+      <li class="text-ellipsis"><a href="#anchor13" title="2.2 用例的用途">2.2 用例的用途</a> </li>
+      <li class="text-ellipsis"><a href="#anchor27" title="2.3 用例的设计步骤">2.3 用例的设计步骤</a> </li>
+      <li class="text-ellipsis"><a href="#anchor49" title="2.4 用例的内容及编写原则">2.4 用例的内容及编写原则</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor289" title="三、用例设计方法">三、用例设计方法</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor291" title="3.1 功能测试用例设计方法">3.1 功能测试用例设计方法</a> </li>
+      <li class="text-ellipsis"><a href="#anchor321" title="3.2 现有系统常见测试点">3.2 现有系统常见测试点</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor377" title="四、用例管理工具">四、用例管理工具</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

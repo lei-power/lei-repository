@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>私有化部署-西昌中烟项目服务器软件安装</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 style="color:#3C4353;background-color:#FFFFFF;" id="anchor0">1、概要</h1> 
+  <p style="font-size:14px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;本文档主要介绍jdk、mysql、nginx软件在Centos7上安装流程</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h1 style="color:#3C4353;background-color:#FFFFFF;" id="anchor3">2、软件版本</h1> 
+  <table style="font-size:14px;background-color:#FFFFFF;color:#313C52;width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">序号</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">软件</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">版本号</span><br></th> 
+     <th style="background-color:#F1F1F1;"><span style="background-color:#EEEEEE;">安装方式</span><br></th> 
+     <th style="background-color:#F1F1F1;">附件地址</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1<br></td> 
+     <td>jdk</td> 
+     <td>1.8</td> 
+     <td>离线安装</td> 
+     <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/jdk-8u11-linux-x64.tar.gz" target="_blank" rel="noreferrer noopener">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/jdk-8u11-linux-x64.tar.gz</a><br></td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>mysql</td> 
+     <td>5.7</td> 
+     <td>在线安装</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>nginx</td> 
+     <td>1.14.1</td> 
+     <td>离线安装</td> 
+     <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/nginx.zip" target="_blank" rel="noreferrer noopener">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/nginx.zip</a><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h1 style="color:#3C4353;background-color:#FFFFFF;" id="anchor38">3、软件安装</h1> 
+  <p style="font-size:14px;background-color:#FFFFFF;">前置说明：</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;color:#3C4353;">1）创建安装文件夹</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;color:#3C4353;">mkdir&nbsp;/opt/software</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;color:#3C4353;">2）上传安装文件</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;color:#3C4353;">使用ftp将文件上传到/opt/software文件夹</p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor44">3.1、jdk安装</h2> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">1）、解压tar包</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">tar -zxvf jdk-8u11-linux-x64.tar.gz</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">2）、修改解压后的包名称</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">mv jdk1.8.0_11 jdk1.8</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">3）、修改profile文件</h4> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   vim /etc/profile
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   增加以下环境变量
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   export JAVA_HOME=/opt/software/jdk1.8
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   export JRE_HOME=/$JAVA_HOME/jre
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;">export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">4）、刷新配置文件</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">source /etc/profile</p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor61">3.2、mysql安装</h2> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">1）、获取mysql的5.7源</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">cd /opt/software</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">wget&nbsp;<a href="http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm">http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm</a></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">rpm -ivh mysql57-community-release-el7-8.noarch.rpm</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">2）、安装mysql-server</h4> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   yum -y install mysql-server
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   提示是否继续安装一直Y
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   默认配置文件路径：&nbsp;
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   配置文件：/etc/my.cnf&nbsp;
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   日志文件：/var/log/var/log/mysqld.log&nbsp;
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   服务启动脚本：/usr/lib/systemd/system/mysqld.service&nbsp;
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;">socket文件：/var/run/mysqld/mysqld.pid</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">3）、修改配置文件</h4> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   vim /etc/my.cnf
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   修改编码
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   [client]
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   default-character-set=utf8
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   [mysql.server]
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   default-character-set=utf8
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   [mysql]
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   default-character-set=utf8
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   [mysqld]
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   character-set-server=utf8
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   log-bin=mysql-bin
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   server-id=1
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   binlog-ignore-db=mysql
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   binlog-do-db = demo
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   character-set-client-handshake = FALSE
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   character-set-server = utf8mb4
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   collation-server = utf8mb4_unicode_ci
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   init_connect=’SET NAMES utf8mb4'
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   skip_ssl # 配置不使用ssl
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-6502.png?tid=8j9an0au" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6502.png" alt="" width="400" height="490" title=""></a></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">4）、启动MySQL</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">启动service mysqld start (重启命令service mysqld restart)</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">5）、获取系统默认密码</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">grep "password" /var/log/mysqld.log</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><a href="http://chandao.freetek.cc/zentao/file-read-6503.png?tid=8j9an0au" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-6503.png" alt="" width="400" height="135" title=""></a></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">6）、修改密码</h4> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   进入mysql 命令 mysql -uroot -p 输入回车之后输入第五步获得的密码
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;">修改mysql密码 命令&nbsp;alter user 'root'@'localhost' identified by 'Root!!2018';&nbsp;&nbsp;</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">7）、外网访问</h4> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   （1）、use mysql;
+  </div> 
+  <div style="font-size:14px;background-color:#FFFFFF;">
+   （2）、update user set host = '%' where user = 'root';
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;">（3）、flush privileges;</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;"><br></p> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;"><br></h2> 
+  <h2 style="color:#3C4353;background-color:#FFFFFF;" id="anchor119">3.3、nginx安装</h2> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">（1）、上传附件</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">上传附件到服务器/opt/software文件夹</p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">（2）、openssl<span style="font-family:SimSun, STSong;">安装</span></h4> 
+  <span style="font-size:14px;background-color:#FFFFFF;">tar zxvf openssl-fips-2.0.10.tar.gz</span>
+  <span style="font-size:14px;background-color:#FFFFFF;"></span> 
+  <p style="font-size:14px;background-color:#FFFFFF;">cd openssl-fips-2.0.10</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">./config &amp;&amp; make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">（3）、pcre安装</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">tar zxvf pcre-8.40.tar.gz</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">cd pcre-8.40</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">./configure &amp;&amp; make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">（4）、zlib安装</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">tar zxvf zlib-1.2.11.tar.gz</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">cd zlib-1.2.11</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">./configure &amp;&amp; make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">（5）、nginx安装</h4> 
+  <p> </p>
+  <div style="font-size:14px;">
+   <span style="color:#DF402A;">nginx需要代理https,先安装openssl依赖</span>
+   <span style="font-size:13px;"></span>
+  </div> 
+  <p> </p>
+  <div style="font-size:14px;">
+   yum -y install openssl openssl-devel
+  </div> 
+  <p style="font-size:14px;background-color:#FFFFFF;">tar zxvf nginx-1.14.1.tar.gz</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">cd nginx-1.14.1</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">./configure --prefix=/usr/local/nginx/ --with-http_ssl_module</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">make &amp;&amp; make install</p> 
+  <h4 style="color:#3C4353;background-color:#FFFFFF;">（6）、启动</h4> 
+  <p style="font-size:14px;background-color:#FFFFFF;">/opt/software/nginx/sbin/nginx -c /opt/software/nginx/conf/nginx.conf</p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2、软件版本">2、软件版本</a> </li>
+    <li class="text-ellipsis"><a href="#anchor38" title="3、软件安装">3、软件安装</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor44" title="3.1、jdk安装">3.1、jdk安装</a> </li>
+      <li class="text-ellipsis"><a href="#anchor61" title="3.2、mysql安装">3.2、mysql安装</a> </li>
+      <li class="text-ellipsis"><a href="#anchor119" title="3.3、nginx安装">3.3、nginx安装</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

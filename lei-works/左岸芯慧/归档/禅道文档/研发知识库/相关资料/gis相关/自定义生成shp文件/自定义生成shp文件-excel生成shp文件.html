@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义生成shp文件-excel生成shp文件</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍excel方式<span>怎么将经纬度生成shp矢量数据，下面以</span><span>神农口袋农场数据生成shp文件为例</span></p> 
+  <p><br></p> 
+  <h1 id="anchor3">2、手动生成excel数据</h1> 
+  <h2 id="anchor4">2.1、依赖</h2> 
+  <p>通过sql语句将需要的字段全部查询出来，通过工具导出excel数据</p> 
+  <p><br></p> 
+  <pre class="prettyprint lang-xml">SELECT 
+farm.id as farm_id,
+farm.farm_name ,
+company.id as company_id,
+company.company_name,
+companyCat.id as company_category_id,
+companyCat.company_category_name,
+tmp.business_category_ids,
+tmp.business_category_names,
+farm.province_id,
+farm.province_name,
+farm.city_id,
+farm.city_name,
+farm.county_id,
+farm.county_name,
+farm.town_id,
+farm.town_name,
+farm.village_id,
+farm.village_name,
+farm.statistics_flag,
+farm.farm_center_lng as gcj_lng,
+farm.farm_center_lat as gcj_lat,
+tmp3.check_time as patrol_check_time,
+tmp3.result as patrol_judge_result,
+'0' as patrol_flag,
+tmp4.create_time as certificate_time
+
+FROM frp_produce.tbl_farm farm
+LEFT JOIN frp_user.tbl_company company ON farm.company_id = company.id
+LEFT JOIN frp_produce.sys_company_category companyCat ON farm.company_category_id = companyCat.id
+INNER JOIN
+(
+SELECT a.id as farm_id,GROUP_CONCAT(d.id) as business_category_ids,GROUP_CONCAT(d.biz_category_name) as business_category_names   FROM frp_produce.tbl_farm a
+left join frp_produce.tbl_farm_business_category_ref c ON a.id = c.farm_id
+LEFT JOIN frp_produce.sys_business_category d ON d.id = c.business_category_id
+
+WHERE  a.statistics_flag = 1
+GROUP BY a.id
+) as tmp ON farm.id = tmp.farm_id
+
+LEFT JOIN 
+(
+
+SELECT tmp2.farm_id,tmp2.check_time,tmp2.judge_result,tmp2.result FROM frp_produce.tbl_farm g 
+inner JOIN 
+(
+SELECT a.id,a.farm_id,a.check_time, a.judge_result,
+
+case WHEN a.judge_result = 0  then "合格"  ELSE "不合格" END as result
+FROM frp_patrol.tbl_patrol_record a WHERE a.id IN (
+SELECT max(id) FROM frp_patrol.tbl_patrol_record patrol WHERE  patrol.invalid_flag = 0 GROUP BY farm_id
+)
+) as tmp2 ON g.id = tmp2.farm_id
+WHERE  g.statistics_flag = 1
+) as tmp3 ON farm.id = tmp3.farm_id
+
+left JOIN 
+(
+SELECT k.farm_id,max(k.create_time) as create_time FROM  frp_produce.tbl_certificate k 
+GROUP BY farm_id
+
+) as tmp4 ON farm.id = tmp4.farm_id
+WHERE farm.statistics_flag = 1 and farm.farm_center_lat IS NOT NULL AND farm.farm_center_lng IS NOT NULL ;</pre> 
+  <h2 id="anchor70">2.2、转换坐标系</h2> 
+  <p><span style="color:#E53333;font-size:24px;">如果本身坐标系是wgs84坐标系，可以省略当前步骤</span></p> 
+  <p><span style="color:#E53333;font-size:24px;"><br></span></p> 
+  <p>将excel数据导入到mysql中，生成表。通过java代码的方式将gcj02坐标系的经纬度转换成wgs84格式坐标系（<strong><span style="color:#E53333;font-size:16px;">神农口袋农场经纬度是谷歌坐标系，所以需要转换成wgs84坐标系</span></strong>）</p> 
+  <p><br></p> 
+  <pre class="prettyprint lang-java">public void update() {
+        List&lt;GisFarm&gt; list = gisFarmMapper.getAll();
+        for (GisFarm gisFarm : list) {
+            double[] doubles = WKTUtil.transformGCJ02ToWGS84(Double.parseDouble(gisFarm.getGcjLng()), Double.parseDouble(gisFarm.getGcjLat()));
+            gisFarm.setWgsLng(doubles[0]+"");
+            gisFarm.setWgsLat(doubles[1]+"");
+            gisFarmMapper.update(gisFarm);
+        }
+    }</pre> 
+  <p>WKTUtil.transformGCJ02ToWGS84（）方法请参考下面链接</p> 
+  <p><a href="/zentao/doc-objectLibs-custom--37-352.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom--37-352.html</a></p> 
+  <p><br></p> 
+  <h2 id="anchor87">2.3、将转换坐标系后的数据表导出</h2> 
+  <h2><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9601.png" alt="" width="400" height="226" title=""></h2> 
+  <h2 id="anchor89">2.4、arcmap处理</h2> 
+  <h3>（1）将excel数据转换成可处理文件</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9602.png" alt="" width="400" height="312" title=""></p> 
+  <h3>（2）添加经纬度字段</h3> 
+  <p>这个经纬度字段格式是：双精度类型的，导出的经纬度是字符串类型，不能展示使用</p> 
+  <p>下面以精度展示，纬度同理</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9603.png" alt="" width="400" height="190" title=""></p> 
+  <p><br></p> 
+  <p>字段赋值</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9605.png" alt="" width="400" height="320" title=""></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9608.png" alt="" width="400" height="210" title=""></p> 
+  <h3>（3）显示数据</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9613.png" alt="" width="400" height="334" title=""></p> 
+  <p>结果</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9614.png" alt="" width="400" height="189" title=""></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2、手动生成excel数据">2、手动生成excel数据</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor4" title="2.1、依赖">2.1、依赖</a> </li>
+      <li class="text-ellipsis"><a href="#anchor70" title="2.2、转换坐标系">2.2、转换坐标系</a> </li>
+      <li class="text-ellipsis"><a href="#anchor87" title="2.3、将转换坐标系后的数据表导出">2.3、将转换坐标系后的数据表导出</a> </li>
+      <li class="text-ellipsis"><a href="#anchor89" title="2.4、arcmap处理">2.4、arcmap处理</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

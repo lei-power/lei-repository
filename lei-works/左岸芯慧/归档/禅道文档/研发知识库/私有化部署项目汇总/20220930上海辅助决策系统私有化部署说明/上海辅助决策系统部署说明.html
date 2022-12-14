@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>上海辅助决策系统部署说明</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <div align="center"> 
+   <h1 id="anchor1"><strong><span style="font-size:16px;">20220</span></strong><strong></strong><strong><span style="font-size:16px;">930.上海(政务外网</span></strong><strong><span style="font-size:16px;">辅助决策系统私有化部署)</span></strong></h1> 
+   <h2 align="left" id="anchor2"><strong><span style="font-size:16px;">一、 前提说明</span></strong></h2> 
+   <h3 align="left">1、辅助决策系统<strong></strong>部署在政务外网,&nbsp;&nbsp; 操作系统是arm NeoKylin 4.8.5-36,&nbsp; 基础软件需要编译安装.</h3> 
+   <h3 align="left">2、此环境无法访问互联网,&nbsp; ssh登录服务器和通过浏<strong></strong>览器访问都需要专门的vpn(secoclient).</h3> 
+   <h2 align="left" id="anchor5">二、 整体规划</h2> 
+   <h3 align="left">1、软件部署规划</h3> 
+   <p align="left"><br></p> 
+   <table style="height:557px;border-collapse:collapse;width:1707.03pt;" class="ke-zeroborder" width="1707" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+     <tr>
+      <td class="et2" width="176" height="23">代理外网IP</td> 
+      <td class="et2" width="172">内网IP</td> 
+      <td class="et2" width="130">内存</td> 
+      <td class="et2" width="264">CPU</td> 
+      <td class="et2" width="171">磁盘</td> 
+      <td class="et2" width="94">是否能上网</td> 
+      <td class="et2" width="176">用途</td> 
+      <td class="et2" width="356">备注</td> 
+      <td class="et2" width="163">部署的业务服务</td> 
+     </tr>
+     <tr>
+      <td class="et3" height="164">100.64.230.170</td> 
+      <td class="et3">172.25.92.23</td> 
+      <td class="et3">10C</td> 
+      <td class="et3">24G</td> 
+      <td class="et3">900G</td> 
+      <td class="et3">否</td> 
+      <td class="et3">数据库服务器</td> 
+      <td class="et3">mysql</td> 
+      <td class="et5" width="163">service-adminuser<br>service-appconfig<br>service-customer<br>service-expert<br>service-governmentuser<br>service-message<br>service-nongwei<br>service-operate<br>service-weather</td> 
+     </tr>
+     <tr>
+      <td class="et3" height="160">100.64.242.182</td> 
+      <td class="et3">172.25.92.20</td> 
+      <td class="et3">12C</td> 
+      <td class="et3">24G</td> 
+      <td class="et3">900G</td> 
+      <td class="et3">否</td> 
+      <td class="et3">网关服务器</td> 
+      <td class="et4" width="356">1,<span>&nbsp;&nbsp; </span>部署的服务涉及 nginx,<span>&nbsp; </span>redis, rabbitmq<br>2,<span>&nbsp;&nbsp; </span>内部调用走服务器内网,<span>&nbsp; </span>前端访问申请代理IP<br>3,<span>&nbsp;&nbsp; </span>nginx对每个服务要配置内网和外网的</td> 
+      <td class="et5" width="163">service-archive<br>service-gisdata<br>service-idgen<br>service-notice<br>service-operuser<br>service-patrol<br>service-user<br>service-userlog<br>za-eureka</td> 
+     </tr>
+     <tr>
+      <td class="et3" height="210">100.64.154.17</td> 
+      <td class="et3">172.25.6.80</td> 
+      <td class="et3">16C</td> 
+      <td class="et3">32G</td> 
+      <td class="et3">900G</td> 
+      <td class="et3">否</td> 
+      <td class="et3">应用服务器,<span>&nbsp; </span>对象存储服务minio</td> 
+      <td class="et3"><br></td> 
+      <td class="et5" width="163">gateway<br>gateway-admin<br>gateway-consume<br>gateway-government<br>service-customer-task<br>service-foundation<br>service-gissde<br>service-jnchain<br>service-landoccupy<br>service-landowner<br>service-minio<br>service-produce</td> 
+     </tr>
+    </tbody>
+   </table> 备注:&nbsp;&nbsp; OSS对象存储用minio代替 
+   <p align="left"><br></p> 
+   <h3 align="left">2、 基础软件版本</h3> 
+   <div align="left"> 
+    <table style="height:177px;border-collapse:collapse;width:577.02pt;" class="ke-zeroborder" width="577" cellspacing="0" cellpadding="0" border="0">
+     <tbody>
+      <tr>
+       <td class="et2" width="108" height="17">类型</td> 
+       <td class="et3" width="377">版本</td> 
+       <td class="et3" width="91">备注</td> 
+      </tr>
+      <tr>
+       <td rowspan="3" class="et3" width="108" height="58">jdk</td> 
+       <td class="et3" width="377">java version "1.8.0_191"</td> 
+       <td rowspan="3" class="et3" width="91">业务程序运行环境</td> 
+      </tr>
+      <tr>
+       <td class="et3" width="377">Java(TM) SE Runtime Environment (build 1.8.0_191-b12)</td> 
+      </tr>
+      <tr>
+       <td class="et3" width="377">Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)</td> 
+      </tr>
+      <tr>
+       <td class="et3" width="108" height="34">mysql</td> 
+       <td class="et3" width="377">Ver 14.14 Distrib 5.7.32, for Linux (aarch64) using<span>&nbsp; </span>EditLine wrapper</td> 
+       <td class="et3" width="91">数据库</td> 
+      </tr>
+      <tr>
+       <td class="et3" width="108" height="17">redis</td> 
+       <td class="et3" width="377">4.0.11</td> 
+       <td class="et3" width="91">中间件</td> 
+      </tr>
+      <tr>
+       <td class="et3" width="108" height="17">rabbitmq</td> 
+       <td class="et3" width="377">3.7.4-1.el7</td> 
+       <td class="et3" width="91">中间件</td> 
+      </tr>
+      <tr>
+       <td class="et3" width="108" height="34">supervisord</td> 
+       <td class="et3" width="377">3.3.3</td> 
+       <td class="et3" width="91">业务程序统一管理服务</td> 
+      </tr>
+     </tbody>
+    </table>
+    <br>
+   </div> 
+   <h3 align="left"></h3> 
+   <div align="left"> 
+    <h3>3、前端服务IP规划</h3> 
+    <div> 
+     <table style="height:171px;border-collapse:collapse;width:497.02pt;" class="ke-zeroborder" width="497" cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+       <tr>
+        <td class="et3" width="149" height="20">服务</td> 
+        <td class="et3" width="112">对应的域名</td> 
+        <td class="et3" width="91">外网申请的端口号</td> 
+        <td class="et3" width="144">备注</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">神农口袋web</td> 
+        <td class="et4">http://snkoudaish.shac.cn/</td> 
+        <td class="et5">83</td> 
+        <td rowspan="8" class="et6" width="144">代理IP地址是10.83.246.224</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">管理中台</td> 
+        <td class="et7"><a href="http://sngovsh.shac.cn/admin">http://sngovsh.shac.cn/admin</a></td> 
+        <td rowspan="2" class="et5">82</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">数字大屏</td> 
+        <td class="et4">http://sngovsh.shac.cn/</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">运营后台</td> 
+        <td class="et7"><a href="http://snadminsh.shac.cn/">http://snadminsh.shac.cn/</a></td> 
+        <td class="et5">81<span>&nbsp;&nbsp; </span>ok</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">H5小程序</td> 
+        <td class="et7"><a href="http://show.snkoudai.sh.shac.cn/">http://show.snkoudai.sh.shac.cn/</a></td> 
+        <td class="et5">80</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">OSS文件存储服务器</td> 
+        <td class="et4">http://oss.snkoudai.shac.cn</td> 
+        <td class="et5">84</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">redis</td> 
+        <td class="et4"><br></td> 
+        <td class="et5">85</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">rabbitmq</td> 
+        <td class="et4"><br></td> 
+        <td class="et5">86</td> 
+       </tr>
+       <tr>
+        <td class="et4" height="16">mysql</td> 
+        <td class="et4"><br></td> 
+        <td class="et5">87</td> 
+        <td class="et8"><br></td> 
+       </tr>
+      </tbody>
+     </table>
+     <p><br></p> 
+     <h2 id="anchor107">三、 部署实施阶段</h2> 
+     <div> 
+      <h3>1、 系统初始化配置(所有主机操作)</h3> 
+      <div> 
+       <h4>(1)、&nbsp; 内核参数优化</h4> 
+       <div> 
+        <pre class="prettyprint">cat /etc/sysctl.conf 
+# sysctl settings are defined through files in
+# /usr/lib/sysctl.d/, /run/sysctl.d/, and /etc/sysctl.d/.
+#
+# Vendors settings live in /usr/lib/sysctl.d/.
+</pre> 
+        <h3># To override a whole file, create a new file with the same in</h3> 
+        <pre class="prettyprint"># /etc/sysctl.d/ and put new settings there. To override
+# only specific settings, add a file with a lexically later
+# name in /etc/sysctl.d/ and put new settings there.
+#
+# For more information, see sysctl.conf(5) and sysctl.d(5).
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+vm.swappiness = 0
+net.ipv4.neigh.default.gc_stale_time=120
+
+
+# see details in https://help.aliyun.com/knowledge_detail/39428.html
+net.ipv4.conf.all.rp_filter=0
+net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.default.arp_announce = 2
+net.ipv4.conf.lo.arp_announce=2
+net.ipv4.conf.all.arp_announce=2
+
+
+# see details in https://help.aliyun.com/knowledge_detail/41334.html
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 1024
+net.ipv4.tcp_synack_retries = 2
+kernel.sysrq=1
+</pre> 
+        <h4>(2)、 系统文件打开数优化</h4> 
+        <div> 
+         <pre class="prettyprint">cat /etc/security/limits.conf 
+
+# End of file
+* soft nproc 65536
+* hard nproc 65536
+</pre> 
+         <br>
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <h3 align="left">二、 安装业务管理软件supervisord</h3> 
+   <h4 align="left">1、 源码安装</h4> 
+   <h4 align="left">2、 主配置文件</h4> 
+   <h4 align="left">/etc/supervisor/supervisord.conf<br></h4> 
+   <pre class="prettyprint">[unix_http_server]
+file=/tmp/supervisor.sock   ; the path to the socket file
+[supervisord]
+logfile=/var/log/supervisord.log ; main log file; default $CWD/supervisord.log
+logfile_maxbytes=50MB        ; max main logfile bytes b4 rotation; default 50MB
+logfile_backups=10           ; # of main logfile backups; 0 means none, default 10
+loglevel=info                ; log level; default info; others: debug,warn,trace
+pidfile=/var/run//supervisord.pid ; supervisord pidfile; default supervisord.pid
+nodaemon=false               ; start in foreground if true; default false
+minfds=1024                  ; min. avail startup file descriptors; default 1024
+minprocs=200                 ; min. avail process descriptors;default 200
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
+[include]
+files = conf.d/*.conf</pre> 
+   <div align="left"> 
+    <h4>3、 业务程序配置案例如下</h4> 
+    <div>
+     /etc/supervisor/conf.d/test.conf
+     <br>
+    </div> 
+    <div> 
+     <pre class="prettyprint">[program:za-eureka]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar za-eureka-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms128m -Xmx600m
+directory=/data/za-eureka
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-archive]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar service-archive-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms1024m -Xmx2048m
+directory=/data/service-archive
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-patrol]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar service-patrol-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms256m -Xmx512m
+directory=/data/service-patrol
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-notice]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar service-notice-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms128m -Xmx512m
+directory=/data/service-notice
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-idgen]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar service-idgen-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms128m -Xmx256m
+directory=/data/service-idgen
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-gisdata]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar  service-gisdata-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms256m -Xmx1024m
+directory=/data/service-gisdata
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-user]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar service-user-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms128m -Xmx512m
+directory=/data/service-user
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-operuser]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar service-operuser-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms128m -Xmx512m
+directory=/data/service-operuser
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+
+[program:service-userlog]
+process_name=%(program_name)s_%(process_num)02d
+command= /usr/local/jdk1.8.0_191/bin/java -jar service-userlog-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=adm -Xms128m -Xmx512m
+directory=/data/service-userlog
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+[root@host-172-25-92-20 conf.d]#  realpath  test.conf
+/etc/supervisor/conf.d/test.conf</pre> 
+    </div> 
+   </div> 
+   <div align="left"> 
+    <h4>4、 业务程序启动状态查看</h4> 
+    <div> 
+     <p>supervisorctl&nbsp; status</p> 
+     <p><br></p> 
+     <pre class="prettyprint">service-archive:service-archive_00     RUNNING   pid 17605, uptime 6 days, 17:32:51
+service-gisdata:service-gisdata_00     RUNNING   pid 8631, uptime 8 days, 23:30:20
+service-idgen:service-idgen_00         RUNNING   pid 2590, uptime 13 days, 23:45:58
+service-notice:service-notice_00       RUNNING   pid 16091, uptime 1 day, 19:16:24
+service-operuser:service-operuser_00   RUNNING   pid 9143, uptime 8 days, 23:28:15
+service-patrol:service-patrol_00       RUNNING   pid 9228, uptime 8 days, 23:28:04
+service-user:service-user_00           RUNNING   pid 9478, uptime 8 days, 23:27:31
+service-userlog:service-userlog_00     RUNNING   pid 5473, uptime 13 days, 23:24:38
+za-eureka:za-eureka_00                 RUNNING   pid 1943, uptime 13 days, 23:48:46</pre> 
+    </div> 
+   </div> 
+   <div align="left"> 
+    <h3>三、 arm版mysql的安装</h3> 
+    <h4>1、说明:&nbsp;&nbsp; 官网没有直接提供arm版本的mysql, 需要源码编译安装, 可参考如下链接(带boost的mysql源码安装)</h4> 
+    <p><a href="https://www.cnblogs.com/galengao/p/5755788.html" target="_blank" rel="noreferrer noopener">https://www.cnblogs.com/galengao/p/5755788.html</a></p> 
+    <p><br></p> 
+    <h4>2、&nbsp; mysql的配置参考如下</h4> 
+    <div> 
+     <p>/etc/my.cnf</p> 
+     <p><br></p> 
+     <pre class="prettyprint">[client]
+default-character-set=utf8
+
+[mysql.server]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+[mysqld]
+datadir=/data/mysql/data
+basedir=/usr/local/mysql
+socket=/tmp/mysql.sock
+user=mysql
+port=3306
+character-set-server=utf8
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+bind-address=0.0.0.0
+max_connections =1000
+max_connect_errors = 1000
+max_allowed_packet = 128M
+skip_ssl
+skip-name-resolve
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+#skip-grant-tables
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+socket=/tmp/mysql.sock</pre> 
+     <h4>3、 生产rds数据库采用逻辑备份上传进来, 使用bash进本进行导入, 可参考</h4> 
+     <div> 
+      <p>mysql.sh</p> 
+      <p><br></p> 
+      <pre class="prettyprint">#!/bin/bash
+
+mkdir -p test
+tar -xvf rds逻辑备份完整tar包 -C ./test/
+
+cd test
+echo "开始进行数据库解压"
+for gz in $(ls -al |grep .gz$|awk '{print $9}');
+do
+  echo "开始解压 $gz"
+  gzip -d $gz &amp;&amp; rm -f $gz || echo "$gz解压失败"
+done
+echo "文件解压完成"
+
+echo "开始导入到数据库"
+
+for sql in $(ls -al|grep .sql$|awk '{print $9}');
+do
+  dbname=`ls $sql|awk -F'\_datafull' '{print $1}'`
+  echo "数据库的名称是: $dbname"
+  mysqladmin  -uroot -p数据库密码  create $dbname
+  mysql --default-character-set=utf8 -uroot -p数据库密码  $dbname  &lt; $sql
+  echo "$dbname 恢复完成"
+done
+
+echo "所有的数据库恢复完成."</pre> 
+     </div> 
+     <div> 
+      <h3>四、 redis和rocketmq正常源码安装即可</h3> 
+      <div> 
+       <p>部署完成, 创建正常的账号.</p> 
+       <p><br></p> 
+       <h3>五、 mini安装配置</h3> 
+       <div> 
+        <h4>1、使用mini代替生产阿里云OSS</h4> 
+        <div> 
+         <h4>2、 阿里云OSS备份如下, 参考命令如下</h4> 
+         <div> 
+          <pre class="prettyprint">./ossutil64 sync oss://examplebucket  examplefolder/ -e oss-cn-shanghai.aliyuncs.com -i AccessSecret  -k AccessKey</pre> 
+          <h4>3、&nbsp; 本地阿里云备份导入到mini上, 可参考如下</h4> 
+          <pre class="prettyprint">官网地址
+
+https://rclone.org/
+下载rclone
+
+curl https://rclone.org/install.sh | sudo bash
+
+配置
+
+配置rclone的配置文件，rclone默认会读取
+
+/root/.config/rclone/rclone.conf
+
+如果该文件没有那手动创建一下即可
+
+
+配置文件内容如下
+
+    [minio]
+    type = s3
+    env_auth = false
+    access_key_id = admin
+    secret_access_key = 12345678
+    region =
+    endpoint = http://10.0.110.120:9000
+
+
+[minio]是起一个名字，表示下面的配置都是给minio配置的，其他的就是配置IP，账号密码
+
+基本使用命令
+
+rclone lsd minio:
+
+列出minio下所有的bucket信息
+
+rclone mkdir minio:bucket
+
+在minio中创建一个名称是bucket的桶
+
+rclone sync /home/files minio:bucket
+
+把/home/files文件夹下所有的文件包括子文件都传到bucket下</pre> 
+          <p><br></p> 
+          <h3>六、 前端代码, 使用nginx进行负载</h3> 
+          <div> 
+           <h4>1、 nginx采用源码安装</h4> 
+           <div> 
+            <h4>2、&nbsp; nginx的主配置文件如下</h4> 
+            <div>
+             nginx.conf
+             <br>
+            </div> 
+            <div> 
+             <pre class="prettyprint">user  www www;
+worker_processes  auto;
+
+error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    use epoll;
+    worker_connections  1024;
+    multi_accept on;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  logs/access.log;
+
+    sendfile        on;
+    #tcp_nopush     on;
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+    gzip  on;
+    client_max_body_size     50m;
+    client_header_timeout    1m;
+    client_body_timeout      1m;
+    proxy_connect_timeout     60s;
+    proxy_read_timeout      1m;
+    proxy_send_timeout      1m;
+
+    include /usr/local/nginx/conf/vhost/*.conf;
+
+
+}
+
+include /usr/local/nginx/conf/stream/*.conf;</pre> 
+             <p><br></p> 
+             <h4>3、 每个服务, 用vhost单独分开,&nbsp; 比如</h4> 
+             <div> 
+              <p>oss.snkoudai.shac.cn_out.conf</p> 
+              <p> </p>
+              <pre class="prettyprint">server {
+    listen       84;
+    server_name  10.83.246.224;
+    access_log /usr/local/nginx/logs/oss.snkoudai.shac.cn_access.log;
+    error_log /usr/local/nginx/logs/oss.snkoudai.shac.cn_error.log error;
+
+
+    #client_max_body_size 1024M;
+    #sendfile on;
+    #keepalive_timeout 1800;
+
+
+
+
+    location / {
+        proxy_pass http://172.25.6.80:9000;   # minio api 代理
+        proxy_connect_timeout 1800s; #nginx跟后端服务器连接超时时间(代理连接超时)默认60s
+        proxy_send_timeout 1800s;    #后端服务器数据回传时间(代理发送超时)默认值60s
+        proxy_read_timeout 1800s;    #连接成功后，后端服务器响应时间(代理接收超时)默认值60s
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+
+    }
+
+}</pre> 注意:&nbsp; server_name使用的是代理IP 
+              <p><br></p> 
+              <p><br></p> 
+              <h3>七、&nbsp; 涉及三方接口主要是测绘院的地图接口和理想的短信接口等, 总共有三个</h3> 
+              <div> 
+               <p><br></p> 
+               <h3>八、 后续的问题,&nbsp; 由于无法上网,&nbsp;&nbsp; 需要手动定期去做服务器的巡检.<br></h3> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div>
+    <br>
+   </div> 
+   <div>
+    <br>
+   </div> 
+   <div> 
+    <h2><br></h2> 
+    <p><br></p> 
+   </div> 
+   <div>
+    <br>
+   </div> 
+   <div> 
+    <p><br></p> 
+    <p align="left"><br></p> 
+   </div> 
+   <div>
+    <br>
+   </div> 
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="20220930.上海(政务外网辅助决策系统私有化部署)">20220930.上海(政务外网辅助决策系统私有化部署)</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor2" title="一、 前提说明">一、 前提说明</a> </li>
+      <li class="text-ellipsis"><a href="#anchor5" title="二、 整体规划">二、 整体规划</a> </li>
+      <li class="text-ellipsis"><a href="#anchor107" title="三、 部署实施阶段">三、 部署实施阶段</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

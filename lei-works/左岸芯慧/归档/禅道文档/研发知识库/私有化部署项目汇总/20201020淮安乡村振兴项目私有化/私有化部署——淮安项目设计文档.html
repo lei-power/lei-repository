@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>私有化部署——淮安项目设计文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1></h1> 
+  <h1 id="anchor1">1、计划安排</h1> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <th><br></th> 
+     <th>流程</th> 
+     <th>参与人员<br></th> 
+     <th>排期/人天<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td rowspan="7" colspan="1">实施环节</td> 
+     <td>1、总体设计<br></td> 
+     <td>徐柯、王恺、王磊<br></td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>2、项目实施启动会<br></td> 
+     <td>徐柯、王恺、王磊、汪健、廖丹丹、邱晨</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>3、环境搭建<br></td> 
+     <td>王恺、王磊、汪健、廖丹丹</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>4、项目部署<br></td> 
+     <td>王恺、王磊、汪健、廖丹丹</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>5、项目自测<br></td> 
+     <td>王恺、王磊、汪健、廖丹丹</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>6、菜单、数据配置<br></td> 
+     <td>王恺、王磊、汪健、廖丹丹</td> 
+     <td><br></td> 
+    </tr> 
+    <tr> 
+     <td>7、测试、售前验收<br></td> 
+     <td>徐柯、邱晨</td> 
+     <td><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h1 id="anchor50">2、资源规划</h1> 
+  <h2 id="anchor51">2.1、甲方资源清单</h2> 
+  <p>参见《<a href="/zentao/doc-objectLibs-custom-0-37-387.html?tid=qefoq8tq">淮安项目部署资源需求清单</a>》文档。</p> 
+  <h2 id="anchor53">2.2、服务部署规划</h2> 
+  <h3>后端服务部署</h3> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <th>序号</th> 
+     <th>服务</th> 
+     <th>端口号</th> 
+     <th>地址</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td>1</td> 
+     <td>service-adminuser-server</td> 
+     <td>20061</td> 
+     <td>/var/gameplat/snkoudai/service-adminuser-server</td> 
+    </tr> 
+    <tr> 
+     <td>2</td> 
+     <td>service-appconfig-server</td> 
+     <td>20130</td> 
+     <td>/var/gameplat/snkoudai/service-appconfig-server</td> 
+    </tr> 
+    <tr> 
+     <td>3</td> 
+     <td>service-archive-server</td> 
+     <td>20230</td> 
+     <td>/var/gameplat/snkoudai/service-archive-server</td> 
+    </tr> 
+    <tr> 
+     <td>4</td> 
+     <td>service-foundation-server</td> 
+     <td>20050</td> 
+     <td>/var/gameplat/snkoudai/service-foundation-server</td> 
+    </tr> 
+    <tr> 
+     <td>5</td> 
+     <td>service-patrol-server</td> 
+     <td>20880</td> 
+     <td>/var/gameplat/snkoudai/service-patrol-server</td> 
+    </tr> 
+    <tr> 
+     <td>6</td> 
+     <td>service-idgen-server</td> 
+     <td>20150</td> 
+     <td>/var/gameplat/snkoudai/service-idgen-server</td> 
+    </tr> 
+    <tr> 
+     <td>7</td> 
+     <td>service-message-server</td> 
+     <td>20991</td> 
+     <td>/var/gameplat/snkoudai/service-message-server</td> 
+    </tr> 
+    <tr> 
+     <td>8</td> 
+     <td>service-user-server</td> 
+     <td>20060</td> 
+     <td>/var/gameplat/snkoudai/service-user-server<br></td> 
+    </tr> 
+    <tr> 
+     <td>9</td> 
+     <td>service-notice-server</td> 
+     <td>20890</td> 
+     <td>/var/gameplat/snkoudai/service-notice-server</td> 
+    </tr> 
+    <tr> 
+     <td>10</td> 
+     <td>service-operate-server</td> 
+     <td>20110</td> 
+     <td>/var/gameplat/snkoudai/service-operate-server</td> 
+    </tr> 
+    <tr> 
+     <td>11</td> 
+     <td>service-operuser-server</td> 
+     <td>20210</td> 
+     <td>/var/gameplat/snkoudai/service-operuser-server</td> 
+    </tr> 
+    <tr> 
+     <td>12</td> 
+     <td>service-produce-server</td> 
+     <td>20070</td> 
+     <td>/var/gameplat/snkoudai/service-produce-server</td> 
+    </tr> 
+    <tr> 
+     <td>13</td> 
+     <td>za-eureka</td> 
+     <td>20010</td> 
+     <td>/var/gameplat/snkoudai/za-eureka</td> 
+    </tr> 
+    <tr> 
+     <td>14</td> 
+     <td>za-gateway</td> 
+     <td>20040</td> 
+     <td>/var/gameplat/snkoudai/za-gateway</td> 
+    </tr> 
+    <tr> 
+     <td>15</td> 
+     <td>za-gateway-admin</td> 
+     <td>20042</td> 
+     <td>/var/gameplat/snkoudai/za-gateway-admin</td> 
+    </tr> 
+    <tr> 
+     <td>16</td> 
+     <td>za-gateway-consume</td> 
+     <td>20041</td> 
+     <td>/var/gameplat/snkoudai/za-gateway-consume</td> 
+    </tr> 
+    <tr> 
+     <td>17</td> 
+     <td>za-gateway-operuser</td> 
+     <td>20044</td> 
+     <td>/var/gameplat/snkoudai/za-gateway-operuser</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3><br>前端服务部署</h3> 
+  <table style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th>序号<br></th> 
+     <th>前端资源<br></th> 
+     <th>目录<br></th> 
+     <th>服务器<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td> <p>0</p> </td> 
+     <td> <p>web企业端</p> </td> 
+     <td> <p>/www/snkoudai/web</p> </td> 
+     <td>服务器01</td> 
+    </tr> 
+    <tr> 
+     <td> <p>3</p> </td> 
+     <td> <p>web admin运营后台</p> </td> 
+     <td> <p>/www/admin/web/snkoudai_admin</p> </td> 
+     <td>服务器01<br></td> 
+    </tr> 
+    <tr> 
+     <td> <p>4</p> </td> 
+     <td> <p>web 溯源平台</p> </td> 
+     <td> <p>/www/consume/h5/tracesource</p> </td> 
+     <td>服务器01<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h3>软件部署</h3> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <th>序号</th> 
+     <th>前端资源</th> 
+     <th>版本</th> 
+     <th>目录</th> 
+     <th>服务器</th> 
+     <th>账号密码<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td> <p>0</p> </td> 
+     <td> <p>mysql</p> </td> 
+     <td>5.7</td> 
+     <td> <p>/opt/software/mysql</p> </td> 
+     <td>服务器01</td> 
+     <td>root&nbsp;/SNkoudaiOA!@#$&lt;&gt;?</td> 
+    </tr> 
+    <tr> 
+     <td> <p>1</p> </td> 
+     <td> <p>redis</p> </td> 
+     <td>3.6</td> 
+     <td> <p>/opt/software/redis</p> </td> 
+     <td>服务器01<br></td> 
+     <td>-</td> 
+    </tr> 
+    <tr> 
+     <td> <p>2</p> </td> 
+     <td> <p>jdk</p> </td> 
+     <td>1.8</td> 
+     <td> <p>/opt/software/jdk</p> </td> 
+     <td>服务器01<br></td> 
+     <td>-</td> 
+    </tr> 
+    <tr> 
+     <td> <p>3</p> </td> 
+     <td> <p>erlang</p> </td> 
+     <td>21.0</td> 
+     <td> <p>/opt/software/erlang</p> </td> 
+     <td>服务器01<br></td> 
+     <td>-</td> 
+    </tr> 
+    <tr> 
+     <td> <p>4</p> </td> 
+     <td> <p>rabbitmq</p> </td> 
+     <td>3.8.1</td> 
+     <td> <p>/opt/software/rabbitmq</p> </td> 
+     <td>服务器01<br></td> 
+     <td>snkdoa&nbsp;/rabbitmqSnkdoa<br></td> 
+    </tr> 
+    <tr> 
+     <td> <p>5</p> </td> 
+     <td> <p>nginx</p> </td> 
+     <td>1.1</td> 
+     <td> <p>/opt/software/nginx</p> </td> 
+     <td>服务器01<br></td> 
+     <td>-</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h1></h1> 
+  <h1 id="anchor318"><br>3、域名规划</h1> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <th><span style="font-weight:400;">服务<br></span></th> 
+     <th><span style="font-weight:400;">域名<br></span></th> 
+     <th><span style="font-weight:400;">代理ip端口<br></span></th> 
+     <th><span style="font-weight:400;">备注<br></span></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td rowspan="3" colspan="1"> <p><span><span>神农口袋</span></span></p> </td> 
+     <td> <p><span><span>oa.snkoudai.com</span></span></p> </td> 
+     <td> <p><span><span>172.16.118.215:20040</span></span></p> </td> 
+     <td> <p><span><span>神农口袋Pro企业端</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p><span><span>oa.admin.snkoudai.com</span></span></p> </td> 
+     <td> <p><span><span>172.16.118.215:20042</span></span></p> </td> 
+     <td> <p><span><span>神农口袋Pro管理后台</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td> <p><span><span>oa.suyuan.snkoudai.com</span></span></p> </td> 
+     <td> <p><span><span>172.16.118.215:20040</span></span></p> </td> 
+     <td> <p><span><span>神农口袋Pro溯源h5页面</span></span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1、计划安排">1、计划安排</a> </li>
+    <li class="text-ellipsis"><a href="#anchor50" title="2、资源规划">2、资源规划</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor51" title="2.1、甲方资源清单">2.1、甲方资源清单</a> </li>
+      <li class="text-ellipsis"><a href="#anchor53" title="2.2、服务部署规划">2.2、服务部署规划</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor318" title="3、域名规划">3、域名规划</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

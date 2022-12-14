@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis数据发布流程-数据库赋值-高标准</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍矢量数据入库后，高标准新增的字段，怎么去赋值</p> 
+  <div> 
+   <p><br></p> 
+   <h2></h2> 
+   <h2 id="anchor5">2、赋值</h2> 
+   <p><br></p> 
+   <h2 id="anchor7">2.1、省市区镇村赋值</h2> 
+   <p>（1）高标准不是标准化的数据，所有没有统一的方式赋值，原则是提取关键信息来匹配镇村的信息，例如通过项目名来确认地块所属的镇，目前高标准项目只要匹配到镇一级；</p> 
+   <p><br></p> 
+   <h2></h2> 
+   <div> 
+    <h2 id="anchor12">2.2&nbsp;一级地类信息赋值</h2> 
+    <p>一级地类信息赋值共有8个类型，利用矢量文件的DLBM字段映射；</p> 
+    <p><br></p> 
+    <table style="width:100%;"> 
+     <tbody> 
+      <tr> 
+       <th>步骤<br></th> 
+       <th>概述<br></th> 
+       <th>详情<br></th> 
+       <th>示例<br></th> 
+      </tr> 
+     </tbody> 
+     <tbody> 
+      <tr> 
+       <td>1<br></td> 
+       <td> <p>在sqlserver的控制台运行sql语句</p> </td> 
+       <td> <p><br></p> <p>SQL语句如下，将“XXX”修改为目标市名称后执行：</p> <p><br></p> <pre class="prettyprint lang-js"><span class="pun" style="color:#666600;">--</span><span class="pln" style="color:#000000;"> </span><span class="pun" style="color:#666600;">---------------------------------------------------------------</span><span class="pln" style="color:#000000;"> </span></pre> <pre class="prettyprint lang-js"><span class="pln" style="color:#000000;">UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='01',YJDLMC='耕地' WHERE DLBM IN ('0101','0102','0103','011','012','013');
+
+UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='02',YJDLMC='园地' WHERE DLBM IN ('0201','0201K','0202','0202K','0203','0203K','0204','0204K','021','022','023');
+
+UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='03',YJDLMC='林地' WHERE DLBM IN ('0301','0301K','0302','0302K','0303','0304','0305','0306','0307','0307K','031','032','033');
+
+UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='04',YJDLMC='草地' WHERE DLBM IN ('0401','0402','0403','0403K','041','042','043');
+
+UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='10',YJDLMC='交通运输用地' WHERE DLBM IN ('1006','104');
+
+UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='11',YJDLMC='水域及水利设施用地' WHERE DLBM IN ('1103','1104','1104A','1104K','1107','1107A','113','114','117');
+
+UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='12',YJDLMC='其他土地' WHERE DLBM IN ('1202','1203','122','123');
+
+UPDATE [dbo].[TEMPLATE_GBZ_MERGE_5]
+SET YJDLBM='07',YJDLMC='住宅用地' WHERE DLBM IN ('0702','072');&nbsp; </span><span class="pln" style="color:#000000;"></span></pre> <pre class="prettyprint lang-js">--<span class="pln" style="color:#000000;"> </span><span class="pun" style="color:#666600;">---------------------------------------------------------------</span></pre> 
+        <div>
+         <br>
+        </div> <p><br></p> <p><br></p> </td> 
+       <td><a href="http://chandao.freetek.cc/zentao/file-read-11752.png?tid=amrpsxp2" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11752.png" alt="" width="350" height="135" title=""></a><br></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <p><br></p> 
+   </div> 
+   <div> 
+    <div>
+     <br>
+    </div> 
+   </div> 
+   <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p> 
+   <p><br></p> 
+   <h2 id="anchor74">2.3、DKMJM&nbsp;地块面积亩&nbsp;</h2> 
+   <p>11-18年标准：DIKUAIAREA：地块面积，单位：亩，赋值<br>19-20年标准：DKMJ：地块面积（单个图斑面积），单位：公顷，单位换算成亩，赋值</p> 
+  </div> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor5" title="2、赋值">2、赋值</a> </li>
+      <li class="text-ellipsis"><a href="#anchor7" title="2.1、省市区镇村赋值">2.1、省市区镇村赋值</a> </li>
+      <li class="text-ellipsis"><a href="#anchor12" title="2.2&nbsp;一级地类信息赋值">2.2&nbsp;一级地类信息赋值</a> </li>
+      <li class="text-ellipsis"><a href="#anchor74" title="2.3、DKMJM&nbsp;地块面积亩&nbsp;">2.3、DKMJM&nbsp;地块面积亩&nbsp;</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220810 淮安乡村振兴项目 功能详细设计文档-2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h2 id="anchor0">一、迭代需求简述</h2> 
+  <p>本次迭代的主要需求：</p> 
+  <ul>
+   <li> <p><span>新增-任务管理（总监/中队长/小队长）</span></p> </li> 
+   <li> <p>新增-农资任务管理（农资库存管理员）</p> </li> 
+   <li> <p>新增-农机领用任务管理（农机仓库管理员）</p> </li> 
+   <li> <p><span>新增-劳作人员管理功能</span></p> </li> 
+   <li> <p>新增-农机库存管理</p> </li> 
+   <li> <p>优化-用户权限</p> </li> 
+   <li> <p>优化-种植计划编辑</p> </li> 
+   <li> <p>优化-农事类型</p> </li> 
+  </ul>
+  <ul>
+   <li> <p>产品需求文档参考链接：<a href="/zentao/doc-objectLibs-project-51-70-202.html">http://chandao.freetek.cc/zentao/doc-objectLibs-project-51-70-202.html</a></p> </li> 
+   <li> <p>产品UE参考链接：<a href="https://www.figma.com/file/y7WPVOQIFhPMoOuneeC9yq/%E6%B7%AE%E5%AE%89%E9%A1%B9%E7%9B%AE?node-id=0:1" target="_blank" rel="noreferrer noopener">https://www.figma.com/file/y7WPVOQIFhPMoOuneeC9yq/淮安项目?node-id=0:1</a></p> </li> 
+  </ul>
+  <p><br></p> 
+  <h2 id="anchor33">二、参与人员与时间</h2> 
+  <ul>
+   <li> <p>服务端：王恺、王磊</p> </li> 
+   <li> <p>迭代时间：2022-8-22到2022-9-22</p> </li> 
+   <li> <p>涉及的服务端端：神农口袋、管理后台</p> </li> 
+  </ul>
+  <p><br></p> 
+  <h2 id="anchor44">三、用例图</h2> 
+  <p><span style="color:inherit;"> </span></p> 
+  <h4 style="color:#3C4353;"><span style="color:inherit;">1.总监或中队长</span></h4> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7719.png" alt="" width="570" height="444" title="">
+  <br>
+  <p><br></p> 
+  <h3><br></h3> 
+  <h4>2.小队长</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7713.png" alt="" width="400" height="161" title=""></p> 
+  <p><br></p> 
+  <h3><br></h3> 
+  <h4>3.农机库管员</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7648.png" alt="" width="500" height="467" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">4.农资库管员</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7650.png" alt="" width="500" height="158" title=""></p> 
+  <p><br></p> 
+  <h3><br></h3> 
+  <h4>5.admin管理员</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7554.png" alt="" width="375" height="680" title=""></p> 
+  <p><br></p> 
+  <h2></h2> 
+  <h2></h2> 
+  <h2 style="color:#3C4353;"></h2> 
+  <h2 style="color:#3C4353;" id="anchor67">四、数据库设计</h2> 
+  <h3 style="color:#3C4353;" id="anchor68">1.ER图概览</h3> 
+  <p><br></p> 
+  <ul>
+   <li> <p>说明：方框代表实体，线代表实体间的关系，爪形代表多，双竖线代表一，可用来表示一对一、一对多等关系。</p> </li> 
+  </ul>
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7723.png" alt="" width="500" height="618" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h3 style="color:#3C4353;" id="anchor76">2.表结构详情</h3> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7993.png" alt="" width="500" height="1200" title="">
+  <br>
+  <p><br></p> 
+  <h2 style="color:#3C4353;" id="anchor78">五、状态图</h2> 
+  <h3 style="color:#3C4353;" id="anchor79">1.农事任务状态图</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7557.png" alt="" width="700" height="264" title=""></p> 
+  <h3 style="color:#3C4353;"></h3> 
+  <h3 style="color:#3C4353;"><br></h3> 
+  <h3 style="color:#3C4353;" id="anchor83">2.仓储处理中子任务状态图</h3> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7704.png" alt="" width="300" height="326" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <ul>
+   <li> <p>.农事任务状态图有六个状态：1.待接受、2.关闭、3.仓储处理中、4.待执行、5.执行完毕、6.完成</p> </li> 
+   <li> <p><span>.农事任务状态图十个主动作：1.创建、2.修改、3.撤回、4.拒绝、5.删除、6.接受、7.出库完成、8、领用完成、9.提交任务信息、10.确认完成</span></p> </li> 
+   <li> <p>&nbsp;注：6.接受分为四种情况，详见时序图；</p> </li> 
+  </ul>
+  <p><br></p> 
+  <ul>
+   <li> <p>农资出库子任务状态图有两个状态：1.待出库、2.已出库</p> </li> 
+   <li> <p>农资出库子任务状态图四个动作：6.接受、11.出库、12.删除农资出入库记录、7<span>.出库完成</span></p> </li> 
+  </ul>
+  <ul>
+   <li> <p>农机领用子任务状态图有两个状态：1.待处理、2.已处理</p> </li> 
+   <li> <p>农机领用子任务状态图四个动作：6.接受、14.领用、<span>15.删除农机出入记录、8</span><span>.<span>领用</span>完成</span></p> </li> 
+  </ul>
+  <p><br></p> 
+  <h2 id="anchor110">六、核心流程时序</h2> 
+  <h3 id="anchor111">1.总监或中队长时序</h3> 
+  <h4 style="color:#3C4353;">1.新增</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7714.png" alt="" width="600" height="595" title=""><br></h4> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">2.修改</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7726.png" alt="" width="660" height="495" title=""><br></h4> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">3.撤回</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7716.png" alt="" width="450" height="393" title=""><br></h4> 
+  <h4 style="color:#3C4353;"><br>4.删除</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7717.png" alt="" width="500" height="521" title=""><br></h4> 
+  <h4 style="color:#3C4353;"><br>5.确认完成</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7718.png" alt="" width="600" height="549" title=""></p> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">6.管理工作人员时序（增删改）略...</h4> 
+  <p><br></p> 
+  <h3 id="anchor127">2.小队长时序</h3> 
+  <h4 style="color:#3C4353;">1.拒绝</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7720.png" alt="" width="440" height="413" title=""><br></h4> 
+  <h4 style="color:#3C4353;"><br>2.接受</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7721.png" alt="" width="500" height="1008" title=""><br></h4> 
+  <h4 style="color:#3C4353;"><br>3.提交任务信息</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7722.png" alt="" width="480" height="469" title=""></p> 
+  <p><br></p> 
+  <h3 id="anchor135">3.农机库管员时序</h3> 
+  <h4 style="color:#3C4353;">1.领用</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7708.png" alt="" width="450" height="485" title=""><br></h4> 
+  <h4 style="color:#3C4353;">2.删除农机出入库记录</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7709.png" alt="" width="500" height="473" title=""></p> 
+  <h4 style="color:#3C4353;">3.领用完成</h4> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7821.png" alt="" width="500" height="590" title=""></p> 
+  <p><br></p> 
+  <h3 style="color:#3C4353;" id="anchor143">4.农资库管员时序</h3> 
+  <h4 style="color:#3C4353;">1.出库</h4> 
+  <h4 style="color:#3C4353;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7705.png" alt="" width="440" height="474" title=""></h4> 
+  <p><br></p> 
+  <h4 style="color:#3C4353;">2.删除农资出入库记录(逻辑改动)</h4> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7706.png" alt="" width="520" height="435" title="">
+  <p><br></p> 
+  <h4 style="color:#3C4353;">3.出库完成</h4> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7823.png" alt="" width="500" height="590" title=""></p> 
+  <h3 style="color:#3C4353;" id="anchor152">5.admin管理员时序（农机大类、小类、种类、任务类型的增删改）略...</h3> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;" id="anchor154">七、已有逻辑改动</h2> 
+  <h3 style="color:#3C4353;" id="anchor155">1.写sql脚本更新数据库</h3> 
+  <ul>
+   <li> <p>“农场负责人”&nbsp; 角色名称改为 “总监”</p> </li> 
+   <li> <p><span><span>“生产负责人” 角色名称改为“农机仓库负责人”</span></span></p> </li> 
+   <li> <p><span>“仓库负责人”角色名称改为“农资仓库负责人”</span></p> </li> 
+   <li> <p><span>“中队长”----新增</span></p> </li> 
+   <li> <p>“小队长”---新增</p> </li> 
+  </ul>
+  <ul>
+   <li> <p>农事类型表修改&nbsp; &nbsp;该&nbsp;'强制使用的一级农资类型ID' 字段改为字符类型，多个id逗号分隔&nbsp;</p> </li> 
+  </ul>
+  <p><br></p> 
+  <h3 style="color:#3C4353;" id="anchor175">2.现有接口改动</h3> 
+  <ul>
+   <li> <p>删除农资出库记录</p> </li> 
+   <li> <p>种植计划编辑（农林牧渔）</p> </li> 
+   <li> <p><span>农事类型（增删改查列表）</span></p> </li> 
+  </ul>
+  <p><br></p> 
+  <h2 style="color:#3C4353;" id="anchor186">八、任务排期</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-7789.png" alt="" width="500" height="814" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="一、迭代需求简述">一、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor33" title="二、参与人员与时间">二、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor44" title="三、用例图">三、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor67" title="四、数据库设计">四、数据库设计</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor68" title="1.ER图概览">1.ER图概览</a> </li>
+      <li class="text-ellipsis"><a href="#anchor76" title="2.表结构详情">2.表结构详情</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor78" title="五、状态图">五、状态图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor79" title="1.农事任务状态图">1.农事任务状态图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor83" title="2.仓储处理中子任务状态图">2.仓储处理中子任务状态图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor110" title="六、核心流程时序">六、核心流程时序</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor111" title="1.总监或中队长时序">1.总监或中队长时序</a> </li>
+      <li class="text-ellipsis"><a href="#anchor127" title="2.小队长时序">2.小队长时序</a> </li>
+      <li class="text-ellipsis"><a href="#anchor135" title="3.农机库管员时序">3.农机库管员时序</a> </li>
+      <li class="text-ellipsis"><a href="#anchor143" title="4.农资库管员时序">4.农资库管员时序</a> </li>
+      <li class="text-ellipsis"><a href="#anchor152" title="5.admin管理员时序（农机大类、小类、种类、任务类型的增删改）略...">5.admin管理员时序（农机大类、小类、种类、任务类型的增删改）略...</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor154" title="七、已有逻辑改动">七、已有逻辑改动</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor155" title="1.写sql脚本更新数据库">1.写sql脚本更新数据库</a> </li>
+      <li class="text-ellipsis"><a href="#anchor175" title="2.现有接口改动">2.现有接口改动</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor186" title="八、任务排期">八、任务排期</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

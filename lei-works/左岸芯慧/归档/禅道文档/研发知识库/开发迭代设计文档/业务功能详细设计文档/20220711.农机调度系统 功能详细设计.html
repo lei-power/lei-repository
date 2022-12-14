@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220711.农机调度系统 功能详细设计</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <img src="https://gimg2.baidu.com/image_search/src=http://img.jj20.com/up/allimg/4k/s/02/2109242332225H9-0-lp.jpg&amp;refer=http://img.jj20.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1660877744&amp;t=1cb6f05199e6585017b5fd3557c70fbc" alt=""> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;">一、迭代需求简述</span></p> 
+  <p><br></p> 
+  <p>系统建设背景：</p> 
+  <p><span style="color:#172B4D;font-family:'-apple-system', BlinkMacSystemFont;">为深入贯彻落实农业农村部关于印发《“十四五”全国农业机械化发展规划》，进一步加快本区都市现代绿色农业发展，提高农业综合生产能力和市场竞争力，推动上海市崇明区农机化事业快速健康发展，结合崇明区农业生产和农机社会化服务发展实际制定本规划。结合实际场景出发，搭建“1+3+X+Y”的底层架构。</span></p> 
+  <p><br></p> 
+  <p>需求简述：</p> 
+  <p>农机系统的核心为经营主体的农机任务申请，组织部门的调度派单和农机手的任务管理。</p> 
+  <p><br></p> 
+  <p>产品UE参考链接：<a href="https://5nmyqi.axshare.com/" class="external-link"><u>https://5nmyqi.axshare.com</u></a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor12">二、参与人员与时间</h1> 
+  <p>服务端：张俊、刘洋</p> 
+  <p>迭代时间：</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor19">三、用例图</h1> 
+  <p>1、运营后台用例图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5213.jpeg" alt="" width="400" height="447" title=""></p> 
+  <p><br></p> 
+  <p>2、经营主体用例图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5214.jpeg" alt="" width="400" height="488" title=""></p> 
+  <p><br></p> 
+  <p>3、农机手用例图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5215.jpeg" alt="" width="400" height="411" title=""></p> 
+  <p><br></p> 
+  <p>4、服务站管理员用例图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5248.jpeg" alt="" width="400" height="479" title=""></p> 
+  <p><br></p> 
+  <p>5、组织部门用例图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5250.jpeg" alt="" width="400" height="374" title=""></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor35">四、数据库设计ER图</h1> 
+  <p><br></p> 
+  <p>农机业务系统的表结构分成三个库，分别位：农机基础数据库、农机员工组织库、农机业务库。</p> 
+  <p>农机基础数据库：承载农机系统及其他业务系统的基础数据信息。基础数据（标准库）的删除功能不开放；如确实需要做删除操作，提交开发操作。</p> 
+  <p>农机员工组织库：承载农机系统的服务中心（租户概念）、员工、资源菜单角色。</p> 
+  <p>农机业务库：承载农户的作业订单、农机手的任务及农机资源的调度。随着后续的业务迭代考虑按业务垂直分库。</p> 
+  <p><br></p> 
+  <p>1、农机业务系统ER图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5502.jpeg" alt="" width="400" height="425" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>2、农机业务系统详情表结构</p> 
+  <p>2.1、标准数据库</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5794.png" alt="" width="400" height="264" title=""></p> 
+  <p><br></p> 
+  <p>2.2、员工组织库</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5796.png" alt="" width="400" height="394" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>2.3、农机业务库</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5795.png" alt="" width="400" height="257" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor62">五、核心业务状态</h1> 
+  <p><br></p> 
+  <p>1、经营主体订单状态</p> 
+  <p><br></p> 
+  <p>订单状态流转图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5499.jpeg" alt="" width="400" height="527" title=""></p> 
+  <p><br></p> 
+  <p>订单状态表</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5497.jpeg" alt="" width="400" height="198" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>状态说明：</p> 
+  <p>1、订单状态从已下单--&gt;处理中，需要服务站人员动作触发。约束：处理中状态不可逆向流转。</p> 
+  <p>2、订单状态从处理中--&gt;已派单，需要服务站人员动作触发。状态流转前提：需要已创建大于0个任务。</p> 
+  <p>3、订单状态从已派单--&gt;处理中，动作事件触发。状态流转前提：订单状态为已派单，订单下全部任务状态为已完成。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>2、农机手任务状态</p> 
+  <p><br></p> 
+  <p>任务状态流转图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5500.jpeg" alt=""></p> 
+  <p><br></p> 
+  <p>任务状态表</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5498.jpeg" alt="" width="400" height="152" title=""></p> 
+  <p><br></p> 
+  <p>状态说明：</p> 
+  <p>1、任务初始状态【未开始】，可以删除任务。删除动作不会触发状态流转。删除前提：订单状态不是【已派单】状态。</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>状态动作用例</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5501.jpeg" alt="" width="290" height="561" title=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>订单状态和任务状态设计存在的缺陷：</p> 
+  <p>1、缺陷：订单的【处理中】为一个中间状态，缺少限制农机手在中间状态对任务的操作，导致服务站人员对任务的变更删除会影响农机手对任务的管理和任务数据的一致性。</p> 
+  <p>约定：通过服务站人员工作流程上的规范杜绝对农机手任务的随意变更删除。</p> 
+  <p>2、缺陷：订单从【处理中】流转到【已派单】没有限制对订单地块的全部任务派发完成。可能存在未满足经营主体的实际任务需求而推进了订单状态的流转。</p> 
+  <p>约定：服务站人员线下与经营主体沟通达成一致。</p> 
+  <p>3、缺陷：订单【已下单】流转到【处理中】，订单状态不能关闭或取消。如果订单状态在【处理中】，因为一些其他因素无法派单此时无法关闭订单。</p> 
+  <p>约定：最少完成一个任务的分配推进订单状态。</p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor103">六、核心流程时序</h1> 
+  <p><br></p> 
+  <p>1、状态动作相关时序图</p> 
+  <p>1.1、经营主体下单：</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11472.png" alt="" width="400" height="323" title=""></p> 
+  <p><br></p> 
+  <p>1.2、经营主体取消订单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5660.jpeg" alt="" width="400" height="264" title=""></p> 
+  <p><br></p> 
+  <p>1.3、经营主体评价订单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5661.jpeg" alt="" width="400" height="264" title=""></p> 
+  <p><br></p> 
+  <p>1.4、服务站派单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5819.jpeg" alt="" width="400" height="264" title=""></p> 
+  <p><br></p> 
+  <p>1.5、服务站关闭订单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5663.jpeg" alt="" width="400" height="309" title=""></p> 
+  <p><br></p> 
+  <p>1.6、服务站完成派单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5664.jpeg" alt="" width="400" height="276" title=""></p> 
+  <p><br></p> 
+  <p>1.7、服务站直接完成任务</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5665.jpeg" alt="" width="400" height="284" title=""></p> 
+  <p><br></p> 
+  <p>1.8、农机手开始任务</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5666.jpeg" alt="" width="400" height="332" title=""></p> 
+  <p><br></p> 
+  <p>1.9、农机手完成任务</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5667.jpeg" alt="" width="400" height="284" title=""></p> 
+  <p><br></p> 
+  <p>2、调度相关时序图</p> 
+  <p>2.1、服务站申请调度</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5668.jpeg" alt="" width="400" height="273" title=""></p> 
+  <p><br></p> 
+  <p>2.2、上级组织申请资源</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5669.jpeg" alt="" width="400" height="301" title=""></p> 
+  <p><br></p> 
+  <p>2.3、上级组织调度</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5670.jpeg" alt="" width="400" height="289" title=""></p> 
+  <p><br></p> 
+  <p>2.4、上级组织移除农机资源</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-5671.jpeg" alt="" width="400" height="273" title=""></p> 
+  <p><br></p> 
+  <h1 style="color:#3C4353;" id="anchor146">六、其他设计补充材料</h1> 
+  <p><br></p> 
+  <p>数据库脚本附件：</p> 
+  <p><a class="ke-insertfile" href="http://chandao.freetek.cc/zentao/file-read-5604.sql" target="_blank" rel="noreferrer noopener">农机业务库</a></p> 
+  <p><a class="ke-insertfile" href="http://chandao.freetek.cc/zentao/file-read-5605.sql" target="_blank" rel="noreferrer noopener">农机基础信息库</a></p> 
+  <p><a class="ke-insertfile" href="http://chandao.freetek.cc/zentao/file-read-5606.sql" target="_blank" rel="noreferrer noopener">农机员工组织库</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor12" title="二、参与人员与时间">二、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor19" title="三、用例图">三、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor35" title="四、数据库设计ER图">四、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor62" title="五、核心业务状态">五、核心业务状态</a> </li>
+    <li class="text-ellipsis"><a href="#anchor103" title="六、核心流程时序">六、核心流程时序</a> </li>
+    <li class="text-ellipsis"><a href="#anchor146" title="六、其他设计补充材料">六、其他设计补充材料</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

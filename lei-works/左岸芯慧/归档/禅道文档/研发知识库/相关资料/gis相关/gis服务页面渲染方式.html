@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis服务页面渲染方式</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍前端在集成gis服务时，渲染的几种方式</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor4">2、渲染方式</h1> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">方法</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">渲染方式<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">渲染流程<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">渲染维度比较<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">比较补充<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">实例</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">备注</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>方式一</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>缓存切片服务</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>1、通过arcgis将矢量数据在第一次发布的时候，</p> <p>发布成切片</p> <p>（也就是切分成不同层级的图片，缓存在一个文件中），</p> <p>然后得到切片服务地址</p> <p>2、前端将切片服务地址集成到代码中，在</p> <p>页面渲染时，从缓存中读取</p> <p><span>3、直接将大切片渲染到页面</span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><strong>速度加载</strong>：最快</p> <p><strong>数据限制</strong>：无限制</p> <p><strong>条件筛选</strong>：不支持</p> <p><strong>自定义样式</strong>：不支持</p> <p><strong>实时数据</strong>：否</p> <p><strong>交互</strong>：受限</p> </td> 
+     <td style="border:1px solid #ddd;"> <p><strong>速度加载</strong>：从缓存读取数据，不经过数据库</p> <p><strong>数据限制</strong>：没有限制，在发布的时候全部做缓存处理</p> <p><strong>条件筛选</strong>：不支持，切片服务展示的全部数据，一个整体</p> <p><strong>自定义样式</strong>：不支持，<span>颜色样式是由软件在发布时已固定</span></p> <p><span><strong>实时数据</strong>：不支持，拉取的是缓存数据，需要定时更新</span></p> <p><span><strong>交互</strong>：、交互受限，有些交互无法实现，如：</span><span>鼠标移到目标上，</span></p> <p><span>显示详细信息</span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span><strong>大数据平台-土地确权</strong></span></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11419.png" alt="" width="200" height="164" title=""></p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>方式二</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>服务端动态渲染服务</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>1、<span>通过arcgis将矢量数据在第一次发布的时候，</span></p> <p><span>发布成一个</span>动态服务，得到动态服务地址</p> <p><span>2、前端将动态服务地址集成到代码中，在</span></p> <p><span>页面渲染的时候</span></p> <p><span>，是由<span>服务端（服务器）根据客户端查询条件</span></span></p> <p><span><span>,由服务器渲染生成一张动态的大切片（也就</span></span></p> <p><span><span>是</span></span></p> <p><span><span>图片）</span></span></p> <p><span><span>3、直接将切片渲染到页面</span></span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><strong>速度加载</strong>：慢</p> <p><strong>数据限制</strong>：无限制</p> <p><strong>条件筛选</strong>：支持</p> <p><strong>自定义样式</strong>：支持</p> <p><span><strong>实时数据</strong>：是</span></p> <p><span><span><strong>交互</strong>：受限</span><br></span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <p><strong>速度加载</strong>：较慢，服务端根据条件去数据库查询数据，</p> <p>然后服务端将所有数据加载成一个大切片返回给前端渲染，</p> <p>服务端压力大，客户端压力小</p> <p><strong>数据限制</strong>：没有限制，是由服务器性能决定</p> <p><strong>条件筛选</strong>：支持，服务端可以根据客户端的条件进行动态数据筛选</p> <p><strong>自定义样式</strong>：支持，前端可以自定义图层样式</p> <p>（<span>如填充色，边框色，边框粗细等）</span></p> <p><span><strong>实时数据</strong>：支持，拉取的是数据库数据，数据库数据变动了，</span></p> <p><span>页面数据也变动</span></p> <p><span><strong>交互</strong>：、交互受限，返回的是一个大切片，有些交互无法实现，</span></p> <p><span>如：</span><span>鼠标移到目标上，显示详细信息</span></p> <p><span><span></span></span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span><strong>大数据平台-遥感监测</strong></span></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11421.png" alt="" width="200" height="163" title=""></p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>方式三</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>客户端动态渲染服务</span><br></td> 
+     <td style="border:1px solid #ddd;"> <p>1、<span>通过arcgis将矢量数据在第一次发布的时候，</span></p> <p><span>发布成一个</span>动态服务，得到动态服务地址</p> <p><span>2、前端将动态服务地址集成到代码中，</span></p> <p><span>在页面渲染的时候，</span></p> <p><span>是由客户端（浏览器）<span>像接口一样</span></span></p> <p><span><span>请求轮廓信息和轮廓绑定的数据信息</span></span></p> <p><span><span>3、再将拉取到的数据渲染到页面</span></span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><strong>速度加载</strong>：最慢</p> <p><strong>数据限制</strong>：有限制</p> <p><strong>条件筛选</strong>：支持</p> <p><strong>自定义样式</strong>：支持</p> <p><span><strong>实时数据</strong>：是</span></p> <p><span><span><strong>交互</strong>：不受限</span><br></span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><br></p> <p><strong>速度加载</strong>：最慢，<span>因为是由客户端先拉去数据库拉取数据，</span></p> <p><span>再动态渲染，服务端压力小，客户端压力大</span></p> <p><strong>数据限制</strong>：有限制，3000个</p> <p><strong>条件筛选</strong>：支持，可以根据不同条件筛选数据</p> <p><strong>自定义样式</strong>：支持，前端可以自定义图层样式</p> <p>（<span>如填充色，边框色，边框粗细等）</span></p> <p><span><strong>实时数据</strong>：支持，拉取的是数据库数据，数据库数据变动了，</span></p> <p><span>页面数据也变动</span></p> <p><span><strong>交互</strong>：、交互不受限，一次性拉取了需要数据，可以将</span><span>鼠标</span></p> <p><span>移到目标上，显示详细信息</span></p> <p><span></span></p> </td> 
+     <td style="border:1px solid #ddd;"> <p><span><strong>大数据平台-经营主体</strong></span></p> <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11420.png" alt="" width="200" height="172" title=""></p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor4" title="2、渲染方式">2、渲染方式</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

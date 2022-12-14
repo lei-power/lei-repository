@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220830  消息系统 功能详细设计文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span> 
+  <h1 class="ql-long-26020151"></h1> 
+  <h1 style="font-size:16pt;" id="anchor2">一、迭代需求简述</h1> 
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;">消息中心仅作为消息发送使用，跟业务没有任何关系，涉及到业务部分有业务系统自行处理；</p> 
+  <ul>
+   <li style="font-size:11pt;color:#494949;">消息中心的功能只有消息生产、消息展示、消息推送、消息维护等相关功能；</li> 
+   <li style="font-size:11pt;color:#494949;">业务系统想要引用消息，需要先按照消息中心的统一规范注册，消息中心会按照消息类型判断是否需要扩展；</li> 
+  </ul>
+  <p style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">产品需求文档参考链接：</span><a class="ql-link ql-author-26020151" href="https://s03zdy2o4k.feishu.cn/docx/doxcnz03EMPaqB2tILZvpcFd8Nc" target="_blank" rel="noreferrer noopener">https://s03zdy2o4k.feishu.cn/docx/doxcnz03EMPaqB2tILZvpcFd8Nc</a></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><br></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span></span></p> 
+  <h1 class="ql-long-26020151"></h1> 
+  <h1 style="font-size:16pt;" id="anchor12"><span class="ql-author-26020151">二、参与人员与时间</span></h1> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">服务端：刘洋、姬帅、严家强</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><br></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><br></p> 
+  <span> </span> 
+  <h1 class="ql-long-26020151"></h1> 
+  <h1 style="font-size:16pt;" id="anchor18"><span class="ql-author-26020151">三、设计方案</span></h1> 
+  <h2 class="ql-long-26020151"></h2> 
+  <p style="font-size:14pt;"><span class="ql-author-26020151">提供sdk没有MQ</span></p> 
+  <p style="font-size:14pt;"><span class="ql-author-26020151"><br></span></p> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8188.png" alt="" width="500" height="255" title="">
+  <p><br></p> 
+  <p><br></p> 
+  <p><span></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">备注：业务端系统无需关心消息系统消息的逻辑处理，只要按照消息系统封装的每种大类消息入库接口的参数封装即可。图示消息系统psuh2pull的方式显示是mq，因为当前业务量并不是很大，暂时采用的是同步的方式，后面如果业务量逐渐递增，可以考虑使用异步的方式，减轻消息系统性能层面带来的压力，但同样的是引用了mq带来了实现的难度，以及后续关于mq消息的消费以、消息持久化及消息重复消费等一系列棘手问题。</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <span> </span> 
+  <h1 style="font-size:16pt;" id="anchor29"><span class="ql-author-26020151">四、UML图</span></h1> 
+  <span> </span> 
+  <h2 style="font-size:14pt;" id="anchor31"><span class="ql-author-26020151">1.架构图</span></h2> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8189.png" alt="" width="500" height="487" title="">
+  <p><br></p> 
+  <h2 style="font-size:14pt;" id="anchor33"><br><span class="ql-author-26020151">2.时序图（极光推送方式）</span></h2> 
+  <p><span></span></p> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8190.png" alt="" width="500" height="583" title="">
+  <p><br></p> 
+  <p><span></span></p> 
+  <h1 style="font-size:16pt;" id="anchor37"><span class="ql-author-26020151">五、数据库设计ER图</span></h1> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8191.png" alt="" width="500" height="395" title="">
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8192.png" alt="" width="500" height="346" title=""></p> 
+  <p><br></p> 
+  <p><span></span></p> 
+  <h1 class="ql-long-26020151"></h1> 
+  <h1 style="font-size:16pt;" id="anchor43"><span class="ql-author-26020151">六、后续可能接入情形分析</span></h1> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h2 style="font-size:14pt;" id="anchor45"><span class="ql-author-26020151">1 新增消息小类</span></h2> 
+  <h3 class="ql-long-26020151"></h3> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">1.1 场景举例</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">现有的农技咨询大类新增一个小类类型：农户收到专家的提醒。</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h3 style="font-size:14pt;"><span class="ql-author-26020151">1.2 数据库的修改</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">表名：tbl_message</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">字段名：`type_sub_code` tinyint(11) DEFAULT NULL COMMENT '1：专家问答【专家端】专家收到农户的回复；；2：专家问答【专家端】专家收到农户新的提问；3 ：专家问答【专家端】专家收到专家的回复；4：专家问答【提问端】 农户收到了专家的回复；5 公告系统：公告发布通知'</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">修改： `type_sub_code` tinyint(11) DEFAULT NULL COMMENT '1：专家问答【专家端】专家收到农户的回复；；2：专家问答【专家端】专家收到农户新的提问；3 ：专家问答【专家端】专家收到专家的回复；4：专家问答【提问端】 农户收到了专家的回复；5 公告系统：公告发布通知；6.农户收到了专家的提醒'</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h3 class="ql-long-26020151"></h3> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">1.3 代码层面的接入</span></h3> 
+  <h4 class="ql-long-26020151"></h4> 
+  <h4 style="font-size:12pt;"><span class="ql-author-26020151">1.3.1 站内信接入</span></h4> 
+  <pre>@Autowired
+private MessageSendFacadeClient messageSendFacadeClient;
+
+
+//业务系统的调用
+PrivateMessageDTO privateMessage = new PrivateMessageDTO();
+//实体属性值填充 如下表格解释
+messageSendFacadeClient.savePrivateMessage(privateMessage);</pre> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">PrivateMessageDTO 属性值填充规则：</span></p> 
+  <table>
+   <tbody>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">clientCode</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">展示端：snkoudai（农户收到专家的提醒，说明是在神农口袋app或者web端看到此信息，该值填充snkoudai，对应的字典表为：tbl_message_client的client_code字段的值）</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">typeCode</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">消息类型：XXLX101（该值为消息大类的唯一标识，取值由产品定义，对应的表字段为：tbl_message_type的type_code字段）</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">typeSubCode</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">消息小类：6（对应的是一开始数据库表字段注释修改对应的值）</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">feedbackType</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">操作反馈类型（1：无，2：详情，3：站内跳转，4：外链）</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">值得选择1：如若农户只需要看到文字性描述，不需要点击时做任何跳转和操作；2：若该通知时由专家编辑好的通知实体，需要点击查看该通知详情</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">....后面的值以此内推，该类型由产品决定</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">feedbackContent</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">操作反馈内容（可以是id，或者额外扩展的json）</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">解释：点击消息跳转需要的信息，该值由前端和后端商榷。</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">feedbackId</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">当反馈类型为2：详情的时候填充。</span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">作用：用来跳转和删除对应的消息</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">messageTitle</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">消息标题：产品定义</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">messageBody</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">消息体：产品定义</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">messageImage</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">消息图片：产品定义</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">sendTime</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">发送时间 可以是延迟消息</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">messageCode</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">消息编码：雪花算法生成</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">sendUserId</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">发送人id</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">sendUserName</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">发送人名称（可以是单位或者个人名称）</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">sendUserType</span></p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">发送人类型（1：admin-user，2：government-user，3：user）</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="111"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">List&lt;BaseMessageReceiverDTO&gt; </span><span class="ql-author-26020151" style="color:#9876AA;">list</span></p> <p style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+     <td class="ql-sheet-cell" width="492"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">接收人</span></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <span> </span> 
+  <h4 class="ql-long-26020151"></h4> 
+  <h4 style="font-size:12pt;"><span class="ql-author-26020151">1.3.2 极光推送接入</span></h4> 
+  <pre>JiGuangMessageDTO jiGuangMessage = new JiGuangMessageDTO();
+HashMap&lt;String, String&gt; paramMap = new HashMap&lt;&gt;();
+paramMap.put("typeSubCode", DictCons.MessageTypeSubCode.PUBLISH_NOTICE + "");
+paramMap.put("typeCode", DictCons.MessageTypeCode.Notice);
+paramMap.put("clientCode", DictCons.MessageClientCode.SNKOUDAI);
+paramMap.put("noticeId", po.getId() + "");
+Map&lt;String, Object&gt; map = new HashMap&lt;&gt;(paramMap);
+JSONObject jsonObject = new JSONObject(map);
+jiGuangMessage.setFeedbackContent(jsonObject.toJSONString());
+//实体属性值填充 如下表格解释
+messageSendFacadeClient.saveJiGuangMessage(jiGuangMessage);</pre> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">JiGuangMessageDTO 属性值填充规则（只列出和站内信含义不同字段填充值得字段）：</span></p> 
+  <table>
+   <tbody>
+    <tr>
+     <td class="ql-sheet-cell" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151" style="color:#9876AA;">feedbackContent</span></p> </td> 
+     <td class="ql-sheet-cell" width="436"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">该值为极光推送点击需要跳转的map转换的实体，参考上述代码块，代码块中的map由前端后端约定</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell" width="154"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">其他字段</span></p> </td> 
+     <td class="ql-sheet-cell" width="436"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">和上述站内信表格值得填充规则一样</span></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <h2 class="ql-long-26020151"></h2> 
+  <h2 style="font-size:14pt;" id="anchor195"><span class="ql-author-26020151">2 新增消息大类</span></h2> 
+  <span> </span> 
+  <h3 class="ql-long-26020151"></h3> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">2.1 场景举例</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">新增农事通知大类（每一个大类至少有一个消息小类 消息小类请参考上述描述，下述只说明消息大类接入方式）</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><br></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><span></span></span></p> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">2.2 数据库的修改</span></h3> 
+  <span> </span> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">tbl_message_type</span></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8193.png" alt="" width="500" height="72" title=""></p> 
+  <p><br></p> 
+  <p><span></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">tbl_message_type_client_code_ref</span></p> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8194.png" alt="">
+  <p><span> </span></p> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h3 style="font-size:14pt;"><span class="ql-author-26020151">2.3 代码层面的接入</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">和上述新增消息小类一样。</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><br></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><span></span></span></p> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h2 style="font-size:14pt;" id="anchor216"><span class="ql-author-26020151">3.新增展示端</span></h2> 
+  <h3 class="ql-long-26020151"></h3> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">3.1 场景举例</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">农机手端的新增</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><br></span></p> 
+  <span> </span> 
+  <h3 class="ql-long-26020151"></h3> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">3.2 数据库的修改</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">tbl_message_client</span></p> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8195.png" alt="" width="500" height="103" title="">
+  <br>
+  <p><br></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><br></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><span></span></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">tbl_message_type_client_code_ref</span></p> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8196.png" alt="" width="500" height="132" title="">
+  <br>
+  <p><br></p> 
+  <p><br></p> 
+  <p><span></span></p> 
+  <h3 class="ql-long-26020151"></h3> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">3.3 代码层面的修改</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">无</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h3 class="ql-long-26020151"></h3> 
+  <h3 style="font-size:13pt;"><span class="ql-author-26020151">3.4 极光推送相关</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">后端工作：</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">需要在极光官方注册申请获取key和密钥。账号密码请与相关人员联系。</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">前端工作：</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">新的app集成极光sdk</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">与后端约定极光推送的推送别名</span></p> 
+  <p><br></p> 
+  <span> </span> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h2 style="font-size:14pt;" id="anchor247"><span class="ql-author-26020151">4 新增推送方式</span></h2> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h3 style="font-size:14pt;"><span class="ql-author-26020151">4.1 场景举例</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">拓展短信</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h3 style="font-size:14pt;"><span class="ql-author-26020151">4.2 数据库的修改</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;">tbl_message的push_type字段的注释修改。</p> 
+  <p><br></p> 
+  <span> </span> 
+  <h2 class="ql-long-26020151"></h2> 
+  <h3 style="font-size:14pt;"><span class="ql-author-26020151">4.3 代码层面的修改</span></h3> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">MessageManage</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><br></span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151"><span> </span></span></p> 
+  <pre>/**
+ * 保存消息 和 消息接收人
+ * message 和 messageReceiver 通过messageCode关联
+ *
+ * @param baseMessage
+ * @return
+ */
+public BaseResp&lt;Message&gt; save(BaseMessage baseMessage) {
+    if (baseMessage instanceof JiGuangMessage) {
+        this.doJiGuangMessageSomething((JiGuangMessage) baseMessage);
+    } else if (baseMessage instanceof PrivateMessage) {
+        this.doPrivateMessageSomething((PrivateMessage) baseMessage);
+    } else if (baseMessage instanceof ShortMessage) {
+        //todo 暂时没有
+    }
+    return BaseResp.success();
+}
+备注：在后续增加分支即可。</pre> 
+  <span> </span> 
+  <div class="ql-direction-ltr ql-long-26020151" style="font-size:14pt;">
+   <span class="ql-author-26020151">&nbsp;消息系统暴漏接口</span>
+  </div> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8197.png" alt="" width="500" height="153" title="">
+  <br>
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-8198.png" alt="" width="500" height="231" title=""></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor2" title="一、迭代需求简述">一、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor12" title="二、参与人员与时间">二、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor18" title="三、设计方案">三、设计方案</a> </li>
+    <li class="text-ellipsis"><a href="#anchor29" title="四、UML图">四、UML图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor31" title="1.架构图">1.架构图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor33" title="2.时序图（极光推送方式）">2.时序图（极光推送方式）</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor37" title="五、数据库设计ER图">五、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor43" title="六、后续可能接入情形分析">六、后续可能接入情形分析</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor45" title="1 新增消息小类">1 新增消息小类</a> </li>
+      <li class="text-ellipsis"><a href="#anchor195" title="2 新增消息大类">2 新增消息大类</a> </li>
+      <li class="text-ellipsis"><a href="#anchor216" title="3.新增展示端">3.新增展示端</a> </li>
+      <li class="text-ellipsis"><a href="#anchor247" title="4 新增推送方式">4 新增推送方式</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

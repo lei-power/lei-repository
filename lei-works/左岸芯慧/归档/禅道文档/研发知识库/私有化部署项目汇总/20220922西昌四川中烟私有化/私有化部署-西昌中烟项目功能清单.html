@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>私有化部署-西昌中烟项目功能清单</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、需求功能清单</h1> 
+  <h2 id="anchor1">1.1、gov端</h2> 
+  <p> </p>
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">产品</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">端<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">说明<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">神农口袋<br></td> 
+     <td style="border:1px solid #ddd;">大数据平台</td> 
+     <td style="border:1px solid #ddd;">提供大数据平台接口，让西昌服务远程调用</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <h2 id="anchor20">1.2、端主要功能或页面</h2> 
+  <p> </p>
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;"><br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">功能<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">接口地址<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">说明<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;" rowspan="21">大数据平台</td> 
+     <td style="border:1px solid #ddd;">登陆</td> 
+     <td style="border:1px solid #ddd;">/api/governmentuser/gov/login<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>通过农场id查询完成农事</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/mission/listCompleteByFarmId<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>农场地块</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/farm/get/map<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>直查获取当前农场下所有地块列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/land/listOfMiddleByFarmId<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>获取地块详情</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/land/get<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>经营主体溯源码</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/qrCodeAgri/listQrCodeByCondition<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>经营主体溯源码统计</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/archive/gov/archive/farmBarCodeDay/list<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>第三方虫情历史数据</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccessThird/device/bugAnalyHistory<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>第三方虫情列表数据</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccessThird/device/bugList<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>物联网设备（网关）列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccess/device/list<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>物联网指标历史数据</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccess/device/property/history<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>物联网设备（网关）详情</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccess/device/detail<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>物联网摄像头列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccess/camera/list<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>第三方设备列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccessThird/device/list<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>第三方设备详情</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccessThird/device/getDetail<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>第三方设备历史数据</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/iotAccessThird/device/history<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>根据采收反查该农场具备的作物大类列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/cropSubject/listByPickRecordFarm<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>根据农场id反查该农场具备的作物大类列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/cropSubject/listOnNotPlanByFarmId<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>通过地块编号查询地块信息</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/nongwei/gov/lvseLandCertificate/listByLandCode<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>获取地块下种植计划列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/plant/plan/list<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;"><span>当前地块已完成任务列表</span><br></td> 
+     <td style="border:1px solid #ddd;">/api/produce/gov/mission/listCompleteByLandId<br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、需求功能清单">1、需求功能清单</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor1" title="1.1、gov端">1.1、gov端</a> </li>
+      <li class="text-ellipsis"><a href="#anchor20" title="1.2、端主要功能或页面">1.2、端主要功能或页面</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

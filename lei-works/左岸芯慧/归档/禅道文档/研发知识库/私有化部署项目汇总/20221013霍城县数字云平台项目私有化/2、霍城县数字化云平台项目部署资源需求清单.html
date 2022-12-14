@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2、霍城县数字化云平台项目部署资源需求清单</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 style="color:#3C4353;" id="anchor0">1、服务器</h1> 
+  <p>以下为 物联网 + 神农口袋 + 大数据平台 都需要私有化的情况，给出的推荐服务器配置。</p> 
+  <p>如果仅私有化部署系统，可以动态调整应用服务器数量，其他服务器均不变。</p> 
+  <p><br></p> 
+  <p> </p>
+  <table class="MsoNormalTable ke-zeroborder" border="0" cellspacing="0" style="width:435.3pt;border:none;">
+   <tbody>
+    <tr>
+     <td width="104"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">服务项类</p> </td> 
+     <td width="139"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">名称</p> </td> 
+     <td width="352"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">配置</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">单位</p> </td> 
+     <td width="54"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">数量</p> </td> 
+    </tr>
+    <tr>
+     <td width="104" rowspan="3"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;"><br></p> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;"><br></p> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;"><br></p> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;"><br></p> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;"><br></p> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">云主机</p> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;"><br></p> </td> 
+     <td width="139"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">接入服务器</p> </td> 
+     <td width="352"> <p class="MsoNormal" style="vertical-align:middle;">阿里云型号：通用型ecs.g7.2xlarge<br>cpu:8核<br>内存：32GB &nbsp;&nbsp;&nbsp;&nbsp;<br>硬盘：系统盘100GB+数据盘500GB<br>操作系统：CentOS 7.6<br>公网带宽：10M+（根据访问量动态配置）</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">台/年</p> </td> 
+     <td width="54"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">1</p> </td> 
+    </tr>
+    <tr>
+     <td width="139"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">应用服务器</p> </td> 
+     <td width="352"> <p class="MsoNormal" style="vertical-align:middle;">阿里云型号：通用型ecs.g7.2xlarge<br>cpu:8核<br>内存：32GB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>硬盘：系统盘100GB+数据盘500GB<br>操作系统：CentOS 7.6</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">台/年</p> </td> 
+     <td width="54"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">4</p> </td> 
+    </tr>
+    <tr>
+     <td width="139"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">缓存服务器</p> </td> 
+     <td width="352"> <p class="MsoNormal" style="vertical-align:middle;">阿里云型号：通用型ecs.g7.2xlarge<br>cpu:8核<br>内存：32GB<br>硬盘：系统盘100GB+数据盘500GB<br>操作系统：CentOS 7.6</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">台/年</p> </td> 
+     <td width="54"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">1</p> </td> 
+    </tr>
+    <tr>
+     <td width="104"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">数据库</p> </td> 
+     <td width="139"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">RDS云mysql数据库</p> </td> 
+     <td width="352"> <p class="MsoNormal" style="vertical-align:middle;">mysql版本：5.7<br>选用系列：高可用版本<br>存储理性：本地SSD盘<br>CPU:8核<br>内存：32GB<br>存储空间：1TB</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">台/年</p> </td> 
+     <td width="54"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">1</p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><span>注意：1、所有提供服务器都需要具备访问互联网资源能力（或通过开放白名单实现访问指定资源）；2、所有服务器在部署阶段能够本地直连访问。</span></p> 
+  <h1 style="color:#3C4353;" id="anchor81">2、阿里云组件</h1> 
+  <p>阿里云组件为必须提供的私有化资源，不可更换。</p> 
+  <p><br></p> 
+  <table class="MsoNormalTable ke-zeroborder" border="0" cellspacing="0" style="width:436.15pt;border:none;">
+   <tbody>
+    <tr>
+     <td width="105"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">服务项类</p> </td> 
+     <td width="137"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">名称</p> </td> 
+     <td width="354"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">配置</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">单位</p> </td> 
+     <td width="56"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">数量</p> </td> 
+    </tr>
+    <tr>
+     <td width="105"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">文件存储OSS</p> </td> 
+     <td width="137"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">阿里云oss</p> </td> 
+     <td width="354"> <p class="MsoNormal" style="vertical-align:middle;">资源包类型：标准(LRS)存储包<br>存储包容量：1TB<br>地域：中国大陆通用</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">年</p> </td> 
+     <td width="56"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">1</p> </td> 
+    </tr>
+    <tr>
+     <td width="105"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">短信</p> </td> 
+     <td width="137"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">阿里云短信服务</p> </td> 
+     <td width="354"> <p class="MsoNormal" style="vertical-align:middle;">国内短信流量包<br>5000条短信包，收费大约在250元左右。<br>有效使用时间为2年。<br>可以根据实际的使用量动态调整</p> </td> 
+     <td width="73"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">年</p> </td> 
+     <td width="56"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">1</p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <h1 style="color:#3C4353;" id="anchor129">3、第三方应用服务</h1> 
+  <p>1、用户按上述要求注册账号或购买组件，将账号密码提供给该项目销售人员，左岸可协助指导注册、设置。原则上所有的账号及组件都需以客户名义重新申请，如遇项目交付周期短或用户不太方便注册情况，<br>微信开放平台、微信公众平台、微信小程序（如无需使用物联网平台小程序可不注册）、萤石云开发者账号，其余可用左岸资源。</p> 
+  <p class="MsoNormal">2、IOS开发者账号针对与APP上架在苹果商城，目前左岸的神农口袋APP已经上架在苹果商城，同样的APP上架苹果应用商城审核通过可能会比较困难，告知客户使用安卓端。</p> 
+  <p><br></p> 
+  <table class="MsoNormalTable ke-zeroborder" border="0" cellspacing="0" style="width:auto;border:none;">
+   <tbody>
+    <tr>
+     <td width="134"> <p class="MsoNormal" style="vertical-align:middle;">应用及组件名称</p> </td> 
+     <td width="307"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">说明</p> </td> 
+    </tr>
+    <tr>
+     <td width="134"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">APICloud账号及APICloud组件</p> </td> 
+     <td width="307"> <p class="MsoNormal" style="vertical-align:middle;">账号：App采用混合开发，开发框架为APICloud，需提前申请</p> </td> 
+    </tr>
+    <tr>
+     <td width="134"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">地图开发者账号</p> </td> 
+     <td width="307"> <p class="MsoNormal" style="vertical-align:middle;">账号：分别申请高德地图和百度地图开发者账号，并提供应用key和secret值https://developer.amap.com/dev/key/app<br>api云服务：web和app中使用到地理编码、逆地理编码、地址反解等api云服务（高德不支持国外地点，百度支持）</p> </td> 
+    </tr>
+    <tr>
+     <td width="134"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">微信分享</p> </td> 
+     <td width="307"> <p class="MsoNormal" style="vertical-align:middle;">微信开放平台：微信开放平台创建APP应用，并开启微信分享能力，获得key和secr值。<br>微信公众平台：开通微信公众平台，保证溯源H5页面有指定微信分享样式</p> </td> 
+    </tr>
+    <tr>
+     <td width="134"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">微信小程序</p> </td> 
+     <td width="307"> <p class="MsoNormal" style="vertical-align:middle;">物联网平台小程序使用</p> </td> 
+    </tr>
+    <tr>
+     <td width="134"> <p class="MsoNormal" align="center" style="text-align:center;vertical-align:middle;">萤石云开发者账号</p> </td> 
+     <td width="307"> <p class="MsoNormal" style="vertical-align:middle;">通过https://open.ys7.com/mobile/download.html?type=app申请账号，提供对应key和secret</p> </td> 
+    </tr>
+    <tr>
+     <td style="text-align:center;">极光推送</td> 
+     <td>通过&nbsp;https://www.jiguang.cn/push 申请账号</td> 
+    </tr>
+   </tbody>
+  </table>
+  <br>
+  <h1 style="color:#3C4353;" id="anchor171">4、域名</h1> 
+  <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;"><br></p> 
+  <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;如果客户没有备案域名，可以在客户申请域名期间使用左岸域名过渡。</p> 
+  <table>
+   <tbody>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">名称</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">域名</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">备注</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">神农口袋</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848"></span><a class="ql-link ql-author-54538848" href="https://www.snkoudai.xxx.com" target="_blank" rel="noreferrer noopener">www.snkoudai.xxx.com</a><span class="ql-author-54538848"></span></p> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">可以分配ssl证书，也可以不分配</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">神农口袋管理后台</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">admin.snkoudai.xxx.com</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-vertical-middle ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">神农口袋溯源h5页面</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">suyuan.snkoudai.xxx.com</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">大数据平台</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">gov.snkoudai.xxx.com</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">物联网基地端</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><a class="ql-link ql-author-54538848" href="https://www.iot.xxx.com" target="_blank" rel="noreferrer noopener">www.iot.xxx.com</a></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">小程序接口</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">base.iot.xxx.com</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">该域名需要ssl证书</span></p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">物联网管理后台</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">admin.iot.xxx.com</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;</p> </td> 
+    </tr>
+    <tr>
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="155" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">物联网运营商端&nbsp;</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="224" style="vertical-align:middle;"> <p align="left" class="ql-align-left ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-54538848">oper.iot.xxx.com</span></p> </td> 
+     <td class="ql-sheet-cell ql-vertical-middle selected" width="232" style="vertical-align:middle;"> <p align="left" class="ql-align-left" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+      <div>
+       <br>
+      </div> </td> 
+    </tr>
+   </tbody>
+  </table> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、服务器">1、服务器</a> </li>
+    <li class="text-ellipsis"><a href="#anchor81" title="2、阿里云组件">2、阿里云组件</a> </li>
+    <li class="text-ellipsis"><a href="#anchor129" title="3、第三方应用服务">3、第三方应用服务</a> </li>
+    <li class="text-ellipsis"><a href="#anchor171" title="4、域名">4、域名</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

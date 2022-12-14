@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>43.1 区域农机作业归档表（按日）</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;">数据归档规则：每天归档更新前 1 5天的数据，把前15天数据清除，重新赋值，所有字段全量归档。</p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;">第一次统计日期：上线时开始</p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">只统计参与统计的经营主体产生的数据；</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">数据对应：【归档表类型】-【线上配置类型】</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">翻耕-深翻</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">整畦-旋耕</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">直播-机直播</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">移栽-机插秧</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">采收-收割</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">归档表：tbl_archive_nj_machinery_work_area_day</span></p> 
+  <p class="ql-direction-ltr ql-long-18491946" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946">归档接口：<a href="https://gov.snkoudai.com/swagger-ui.html#!/archive45nj45manual45controller/machineryDayUsingPOST" class="toggleOperation">/gov/nj/manual/machinery/day</a><br></span></p> 
+  <table> 
+   <tbody> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#D7D8D9;" width="117"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>类型</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#D7D8D9;" width="178"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>字段</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#D7D8D9;" width="173"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>说明</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" style="background-color:#D7D8D9;" width="113"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>备注</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="3" colspan="1" width="117"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>主键</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>区域id</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>只要有服务中心的区域都归档（包括禁用的）</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>省、市、区、镇、村</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>作物分类id</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>只开启了机械化作业的作物分类</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>作物分类</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>时间戳</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>年月日</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="2" colspan="1" width="117"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>附属字段</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>作物名称</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>&nbsp;</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>区域名称</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="13" colspan="1" width="117"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>归档字段</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>播种面积（亩）</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>1）参与统计的该区域内农业主体地块种植计划开始时间是当天的面积之和；</span></span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>2) 保留两 2 位小数</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>种植计划开始时间落在归档日则计入播种面积。开启机械化作业的作物分类才归档；</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>农机作业面积(亩)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>1、按照农机订单全部任务完成时间在今天的面积之和；</span></span></p> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>2、保留两 2 位小数</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>按照订单流转到待评价时记录的订单完成时间落在当天的；取订单的作业面积之和</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>翻耕-作业面积(亩)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>整畦-作业面积(亩)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>直播-作业面积(亩)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>移栽-作业面积(亩)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>采收-作业面积(亩)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>农机订单数(个)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>1、订单创建时间落在今天的订单个数（排除已关闭订单）。</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>按照订单创建时间</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>翻耕-订单数(个)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>整畦-订单数(个)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>&nbsp;&nbsp;同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>直播-订单数(个)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>移栽-订单数（个）</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+    <tr> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="178"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>采收-订单数(个)</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="173"> <p style="font-size:11pt;color:#494949;"><span><span style="font-size:13px;">&nbsp;</span></span></p> </td> 
+     <td class="ql-sheet-cell" rowspan="1" colspan="1" width="113"> <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-18491946" style="font-size:13px;"><span>同上</span></span></p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+</div></body>
+</html>

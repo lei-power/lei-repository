@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220210 蔬菜价格险 功能详细设计文档-3组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">一、迭代需求简述</h1> 
+  <p><br></p> 
+  <p>本次迭代的主要需求：</p> 
+  <p>1.对接安信农保的保险下单全流程接口</p> 
+  <p>2.管理后台配置保险（蔬菜价格险）策略</p> 
+  <p>3.农户可以在神农口袋web端进行蔬菜价格险的在线下单、支付、查看保单等操作。</p> 
+  <p><br></p> 
+  <p>产品需求文档参考链接：</p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;"><br></span></p> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;">二、参与人员与时间</span></p> 
+  <p>服务端：严加强、陈英建</p> 
+  <p>迭代时间：2021-12-01到2022-02-10</p> 
+  <p><br></p> 
+  <p><span style="font-size:20px;font-weight:700;">三、用例图</span></p> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-2288.png" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2288.png" alt="" width="400" height="212" title=""></a></p> 
+  <p><a href="http://chandao.freetek.cc/zentao/file-read-2289.png" target="_blank" rel="noreferrer noopener"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2289.png" alt="" width="400" height="268" title=""></a></p> 
+  <p><br></p> 
+  <h2 style="color:#3C4353;" id="anchor17">四、状态图</h2> 
+  <h2 style="color:#3C4353;" id="anchor18">1.农户保险订单状态转化图</h2> 
+  <p>农户订单多种状态，状态流转如下。</p> 
+  <p>简要描述：订单的状态总共有三种。未支付、支付成功、取消。</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2907.jpg" alt=""></p> 
+  <p><span style="color:inherit;font-size:18px;font-weight:700;">2.农户保单状态转化图</span></p> 
+  <p>保险保单状态:10已出单（保单已生成，还未进入保障中）、 20保障中（进入了起保时间，未到终保时间）、 30、判陪中（保障期结束进入判赔中，时间不确定，在安信未推送理赔结果之前一直是判赔中） 40、未发生理赔（保险保障期，发起理赔，保险公司判处结果，最终无需赔付）41、判陪成功 50、理赔成功（保险保障期，发起理赔，并理赔成功）</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2911.jpg" alt=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor28">五、数据库设计ER图</h1> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2770.jpg" alt=""></p> 
+  <p><br></p> 
+  <p>简要说明：</p> 
+  <p>ER图中分成几个部分：</p> 
+  <p><br></p> 
+  <ol>
+   <li>投保准备相关表：保险公司，保险银行，保险银行支行</li> 
+   <li>投保策略：险种，险种区域投保范围配置表，险种作物分组配置表，险种作物分组投保规则表</li> 
+   <li>投保结果：农户订单，农户保单，农户订单与地块绑定表</li> 
+  </ol>
+  <h1 id="anchor37">六、核心流程时序图</h1> 
+  <h2 id="anchor38"><strong>1、投保</strong></h2> 
+  <p><strong><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2889.jpg" alt=""><br></strong></p> 
+  <h2 id="anchor40"><strong>2、支付</strong></h2> 
+  <p><strong><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2890.jpg" alt=""><br></strong></p> 
+  <h2 id="anchor42"><strong>3、订单取消</strong></h2> 
+  <p><strong><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2891.jpg" alt=""><br></strong></p> 
+  <h2 id="anchor44"><strong>4、判赔</strong></h2> 
+  <p><strong><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2892.jpg" alt=""><br></strong></p> 
+  <h2 id="anchor46"><strong>5、结案</strong></h2> 
+  <p><strong><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2893.jpg" alt=""><br></strong></p> 
+  <h2 id="anchor48">6、判赔中、保障中</h2> 
+  <h2><strong><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2906.jpg" alt=""></strong></h2> 
+  <p><span style="color:inherit;font-size:20px;font-weight:700;">七、其他设计补充材料</span></p> 
+  <p><br></p> 
+  <p><span><span style="background-color:#FFFFFF;">安心农保的接口文档</span></span><span><span style="font-size:14.6667px;background-color:#FFFFFF;">在附件中</span></span></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="一、迭代需求简述">一、迭代需求简述</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor17" title="四、状态图">四、状态图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor18" title="1.农户保险订单状态转化图">1.农户保险订单状态转化图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor28" title="五、数据库设计ER图">五、数据库设计ER图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor37" title="六、核心流程时序图">六、核心流程时序图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor38" title="1、投保">1、投保</a> </li>
+      <li class="text-ellipsis"><a href="#anchor40" title="2、支付">2、支付</a> </li>
+      <li class="text-ellipsis"><a href="#anchor42" title="3、订单取消">3、订单取消</a> </li>
+      <li class="text-ellipsis"><a href="#anchor44" title="4、判赔">4、判赔</a> </li>
+      <li class="text-ellipsis"><a href="#anchor46" title="5、结案">5、结案</a> </li>
+      <li class="text-ellipsis"><a href="#anchor48" title="6、判赔中、保障中">6、判赔中、保障中</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

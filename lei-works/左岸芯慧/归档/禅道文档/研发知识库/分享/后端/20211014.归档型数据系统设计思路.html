@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20211014.归档型数据系统设计思路</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p>分享人：李海峰</p> 
+  <p>分享时间：2021-10-14</p> 
+  <p><br></p> 
+  <h1 id="anchor3">1.使用范围</h1> 
+  <p>看板展示系统和数据管理系统</p> 
+  <p><br></p> 
+  <h1 id="anchor6">2.数据思路</h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2249.png" alt=""></p> 
+  <p><br></p> 
+  <h1 id="anchor11">3.数据归档设计</h1> 
+  <p><br></p> 
+  <h2 id="anchor13">3.1 当前问题</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2250.png" alt=""></p> 
+  <p><br></p> 
+  <h2 id="anchor16">3.2 解决思路</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2251.png" alt=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 id="anchor21">3.3 其他注意事项</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2252.png" alt=""></p> 
+  <h2 id="anchor23">3.4 举例</h2> 
+  <p><br></p> 
+  <p>以信息直报为例</p> 
+  <p><br></p> 
+  <p>1.归档字段：新增种植档案数、新增及时种植档案数。。。</p> 
+  <p>2.归档维度：信息直报，英文名称info_report</p> 
+  <p>3.展示维度：农场_天，农场_月，行政区_天，行政区_月</p> 
+  <p><br></p> 
+  <p>则设计的归档表有四张分别为</p> 
+  <p>信息直报农场按天归档表：tbl_info_report_farm_day</p> 
+  <p>信息直报农场按月归档表：tbl_info_report_farm_month</p> 
+  <p>信息直报行政区按天归档表：tbl_info_report_area_day</p> 
+  <p>信息直报行政区按月归档表：tbl_info_report_area_month</p> 
+  <p><br></p> 
+  <p>具体的表示例图如下</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table>
+   <tbody>
+    <tr>
+     <td>信息直报_农场_天<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2253.png" alt="" width="400" height="153" title=""><br></td> 
+    </tr>
+    <tr>
+     <td>信息直报_农场_月<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2254.png" alt="" width="400" height="93" title=""><br></td> 
+    </tr>
+    <tr>
+     <td>信息直报_行政区_天<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2255.png" alt="" width="400" height="124" title=""><br></td> 
+    </tr>
+    <tr>
+     <td>信息直报_行政区_月<br></td> 
+     <td><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-2256.png" alt="" width="400" height="86" title=""><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor52"><span style="font-size:32px;">附录</span></h1> 
+  <p><br></p> 
+  <p>以下内容摘录在网络：</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor57">一、维度</h1> 
+  <ul>
+   <li>介绍：指的是在分析一个问题的时候，可以从不同角度来看待，而这些角度就是维度，角度不同决定了维度不同</li> 
+   <li>维度的分类 
+    <ul>
+     <li>定性维度：一般指的求 “每个” “各个” 等相关维度 
+      <ul>
+       <li>在SQL上表示：一般都是放置group by中</li> 
+      </ul></li> 
+     <li>定量维度：一般表示区间范围或者具体的值 
+      <ul>
+       <li>SQL上表示：一般是放置在where中</li> 
+      </ul></li> 
+    </ul></li> 
+   <li>维度的分层和分级：在根据某一个维度进行统计的时候，可以对这个维度进行细化分层统计 
+    <ul>
+     <li>例如 
+      <ul>
+       <li>按照时间统计：可以细化 年 季度 月 天 周 小时 …</li> 
+       <li>按照地区统计：可以细化 国家 省份 城市 …</li> 
+      </ul></li> 
+    </ul></li> 
+   <li>维度的下钻和上卷 
+    <ul>
+     <li>例如： 
+      <ul>
+       <li>比如说：在统计的时候，要求以天作为维度进行统计，在统计过程中要求下钻统计，每个小时，并且上卷统计 月 和 年 数据</li> 
+      </ul></li> 
+     <li>一般要以一个标准，往标准细化方向走，一般叫下钻，往粗粒度方向走，一般称为上卷统计</li> 
+    </ul></li> 
+   <li>不管是分层分级还是上卷和下钻，从分析的角度来看，无非就是增加了一些维度而已</li> 
+  </ul>
+  <h1 id="anchor80"><a></a>二、指标</h1> 
+  <ul>
+   <li>介绍：衡量事务的标准，也叫度量值</li> 
+   <li>常见的度量值：max、min、count、sum、agv、比率、同比增长…</li> 
+   <li>指标分类： 
+    <ul>
+     <li>绝对数值：求具体的结果，比如像max、min、count、sum、avg</li> 
+     <li>相对数值：求相对的值，比如说转换率、流失率、同比、环比…</li> 
+    </ul></li> 
+  </ul>
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor3" title="1.使用范围">1.使用范围</a> </li>
+    <li class="text-ellipsis"><a href="#anchor6" title="2.数据思路">2.数据思路</a> </li>
+    <li class="text-ellipsis"><a href="#anchor11" title="3.数据归档设计">3.数据归档设计</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor13" title="3.1 当前问题">3.1 当前问题</a> </li>
+      <li class="text-ellipsis"><a href="#anchor16" title="3.2 解决思路">3.2 解决思路</a> </li>
+      <li class="text-ellipsis"><a href="#anchor21" title="3.3 其他注意事项">3.3 其他注意事项</a> </li>
+      <li class="text-ellipsis"><a href="#anchor23" title="3.4 举例">3.4 举例</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor52" title="附录">附录</a> </li>
+    <li class="text-ellipsis"><a href="#anchor57" title="一、维度">一、维度</a> </li>
+    <li class="text-ellipsis"><a href="#anchor80" title="二、指标">二、指标</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

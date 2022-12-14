@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221123-开发设计-企业实名认证（3组）</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、迭代需求简述</h1> 
+  <p><br></p> 
+  <p>本次迭代的主要需求：</p> 
+  <p><br></p> 
+  <div> 
+   <p>1.可以在神农口袋APP进行企业实名认证操作，通过OCR识别，提取用户上传证件的信息，再通过真实性校验API进行信息校验，判断是否真实有效给出审核结果</p> 
+   <p>2.<span class="lark-record-clipboard"></span>目前平台的用户都没有进行实名认证，真实性存疑，影响后续的产品和业务使用，为了解决这个问题需要用户进行实名认证</p> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>产品需求文档参考链接：<a href="https://s03zdy2o4k.feishu.cn/docx/doxcneV5QfEfzs5MZG8A6mGJuzP">https://s03zdy2o4k.feishu.cn/docx/doxcneV5QfEfzs5MZG8A6mGJuzP</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor15">2、参与人员与时间</h1> 
+  <p>服务端：刘洋、严家强</p> 
+  <p>迭代开始时间：2022-11-23</p> 
+  <p>迭代结束时间：</p> 
+  <p><br></p> 
+  <h1 style="color:#313C52;" id="anchor20">3、接口清单</h1> 
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11719.png" alt="" width="500" height="395" title=""> 
+  <p><br></p> 
+  <br> 
+  <h1 style="color:#313C52;" id="anchor24">4、额外补充</h1> 
+  <p><br></p> 
+  <h2 style="color:#313C52;" id="anchor26">4.1 ocr的交互以及三方sdk交互说明和细节补充（具体参考功能组件ocr相关文档）</h2> 
+  <p>身份证ocr识别：前端集成识别</p> 
+  <p>营业执照ocr识别：后端集成识别，利用的是百度云三方sdk。位置：user服务、<span>CoRealNameAuthController的businessLicense方法。</span></p> 
+  <p><span>身份证验证：后端集成，利用的是阿里云三方sdk。位置：user服务、RealNameAuthUtil的postForm方法</span></p> 
+  <p><span>企业四要素验证：后端集成，利用的是百度云的三方sdk。位置：<span>RealNameAuthUtil的</span>reqFourElements方法</span></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h2 style="color:#313C52;" id="anchor33">4.2 影响的接口</h2> 
+  <p>co端：</p> 
+  <p>CocompanyController的list方法、get方法</p> 
+  <p><br></p> 
+  <p>BarcodeH5Controller的get方法</p> 
+  <p><br></p> 
+  <p>admin端：</p> 
+  <p>AdminCompanyController的get方法</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>备注：上述所有影响的接口都是在原来的接口返回参数里，加上企业的实名认证相关信息</p> 
+  <h1></h1> 
+  <h1 style="color:#313C52;"><br></h1> 
+  <br> 
+  <p><br></p> 
+  <h2 id="anchor48">&nbsp;</h2> 
+  <p><br></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、迭代需求简述">1、迭代需求简述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor15" title="2、参与人员与时间">2、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor20" title="3、接口清单">3、接口清单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor24" title="4、额外补充">4、额外补充</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor26" title="4.1 ocr的交互以及三方sdk交互说明和细节补充（具体参考功能组件ocr相关文档）">4.1 ocr的交互以及三方sdk交互说明和细节补充（具体参考功能组件ocr相关文档）</a> </li>
+      <li class="text-ellipsis"><a href="#anchor33" title="4.2 影响的接口">4.2 影响的接口</a> </li>
+      <li class="text-ellipsis"><a href="#anchor48" title="&nbsp;">&nbsp;</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

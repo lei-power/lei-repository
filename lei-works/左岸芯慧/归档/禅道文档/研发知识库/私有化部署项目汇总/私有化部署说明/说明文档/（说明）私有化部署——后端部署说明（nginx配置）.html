@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>（说明）私有化部署——后端部署说明（nginx配置）</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>本文档主要介绍私有化nginx配置文件修改</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor4">2、nginx配置文件修改</h1> 
+  <h2 id="anchor5">2.1、神农口袋nginx</h2> 
+  <p>管理平台：</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;server_name guanli.zc.gov.cn&nbsp; &nbsp; 替换为甲方域名，</p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://za-gateway-admin.snkoudai:20042&nbsp; &nbsp;替换为甲方网关ip地址或者容器地址</span></p> 
+  <p><span><br></span></p> 
+  <p><span>神农口袋企业端：</span></p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; server_name snkoudai.zc.gov.cn&nbsp; &nbsp;<span>替换为甲方域名</span></span></p> 
+  <p><span><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://za-gateway.snkoudai:20040&nbsp; &nbsp;替换为甲方网关ip地址或者容器地址</span></span></p> 
+  <p><span><br></span></p> 
+  <p><span>大数据平台和中台：</span></p> 
+  <p><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;server_name xiangfeng5g.zc.gov.cn&nbsp;<span>替换为甲方域名</span></span></p> 
+  <p><span><span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://za-gateway-government.snkoudai:20040&nbsp; &nbsp;替换为甲方网关ip地址或者容器地址</span></span></p> 
+  <p><span><br></span></p> 
+  <p><span></span></p> 
+  <h2></h2> 
+  <pre class="prettyprint lang-bsh">#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+
+server{
+    listen 80;
+    server_name guanli.zc.gov.cn;
+    index index.html;
+    # root /www/admin/web/snkoudai_admin;
+
+    location /api/ {
+        #proxy_pass http://172.16.118.191:20042;
+        proxy_pass http://za-gateway-admin.snkoudai:20042;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.191:20042;
+        proxy_pass http://za-gateway-admin.snkoudai:20042;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.191:20042;
+        proxy_pass http://za-gateway-admin.snkoudai:20042;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.191:20042;
+        proxy_pass http://za-gateway-admin.snkoudai:20042;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location / {
+        root /usr/share/nginx/frp_admin_web;
+        if ($http_user_agent ~* "(mobile|nokia|iphone|ipad|android|samsung|htc|blackberry)") {
+            rewrite ^(.*)$ http://guanli.zc.gov.cn;
+        }
+        try_files $uri $uri/ /index.html;
+        index index.html;
+    }
+
+
+    location /shanghaiArcGIS {
+        proxy_pass https://mape.shanghai-map.net;
+        rewrite "^/shanghaiArcGIS/(.*)$" /ArcGIS/$1 break;
+    }
+
+}
+
+server {
+    listen  80;
+    server_name snkoudai.zc.gov.cn;
+
+    location /api/ {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /snkdApi {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        rewrite "^/snkdApi/(.*)$" /api/$1 break;
+    }
+	
+		location / {
+	   root      /usr/share/nginx/frp_company_web/;
+	   try_files $uri $uri/ @router;
+	   index home.html index.html login.html;
+	}
+	
+		  location @router {
+           rewrite ^.*$ /index.html last;
+        }
+    
+    location /web-client {
+        alias /usr/share/nginx/frp_company_web/;
+        try_files $uri $uri/ @webClientRouter;
+        index index.html;
+    }
+
+    
+    location @webClientRouter {
+        rewrite ^.*$ /web-client/index.html last;
+    }
+    	location /h5App {
+	   alias       /usr/share/nginx/frp_company_web/;
+	   try_files $uri $uri/ @h5AppRouter;
+	   index index.html;
+	}
+	 location @h5AppRouter {
+            rewrite ^.*$ /h5App/index.html last;
+        }
+      error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+
+
+server {
+    listen  80;
+    server_name suyuan.zc.gov.cn;
+
+	index index.html;
+	root      /usr/share/nginx/frp_trace_h5;
+    location /api/ {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.191:20040;
+        proxy_pass http://za-gateway.snkoudai:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+   
+	
+		location / {
+	   
+	}
+	
+		 
+      error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+    
+
+server{
+    listen 80;
+    server_name xiangfeng5g.zc.gov.cn;
+    index index.html;
+
+    client_max_body_size 1024M;
+    gzip on;
+    gzip_min_length 1k;
+    gzip_buffers 4 16k;
+    #gzip_http_version 1.0;
+    gzip_comp_level 2;
+    gzip_types text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+    gzip_vary off;
+    gzip_disable "MSIE [1-6]\.";
+
+    location /api/ {
+        #proxy_pass http://172.16.118.191:20043;
+        proxy_pass http://za-gateway-government.snkoudai:20043;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.191:20043;
+        proxy_pass http://za-gateway-government.snkoudai:20043;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.191:20043;
+        proxy_pass http://za-gateway-government.snkoudai:20043;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.191:20043;
+        proxy_pass http://za-gateway-government.snkoudai:20043;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location / {
+        add_header Cache-Control no-cache;
+        add_header Pragma no-cache;
+        add_header Expires 0;
+        root /usr/share/nginx/frp_gov_web/;
+        try_files $uri $uri/ @router;
+        index index.html;
+    }
+
+    location /areas {
+        proxy_pass http://datavmap-public.oss-cn-hangzhou.aliyuncs.com;
+    }
+
+    location /freetekApi {
+        proxy_pass http://xiangfeng5g.zc.gov.cn/api;
+        #rewrite "^/freetekApi$" /api break;
+    }
+
+
+
+    location /admin {
+        alias /usr/share/nginx/frp_gov_web/;
+        try_files $uri $uri/ @adminrouter;
+        index index.html;
+    }
+
+    location @adminrouter {
+        rewrite ^.*$ /admin/index.html last;
+    }
+
+    location @router {
+        rewrite ^.*$ /index.html last;
+    }
+}
+
+    
+
+
+}<span><span style="font-size:13px;font-weight:400;"> </span></span></pre> 
+  <p><span><span style="font-size:13px;font-weight:400;"></span></span></p> 
+  <p><span><span style="font-size:13px;font-weight:400;"><br></span></span></p> 
+  <h1><br></h1> 
+  <h2 id="anchor343">2.2、物联网nginx</h2> 
+  <p> </p>
+  <p>物联网管理后台：</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;server_name <span style="color:#494949;font-size:14.6667px;background-color:#FFFFFF;">adminiot.zc.gov.cn</span>&nbsp; &nbsp; 替换为甲方域名，</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://zaiot-gateway-aggr.baseiot:20040&nbsp; &nbsp;替换为甲方网关ip地址或者容器地址</p> 
+  <p>物联网基地端：</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;server_name baseiot.zc.gov.cn &nbsp;替换为甲方域名</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; proxy_pass http://zaiot-gateway-aggr.baseiot:20040&nbsp; &nbsp;替换为甲方网关ip地址或者容器地址</p> 
+  <p><br></p> 
+  <p>第三方接口：</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;server_name openiot.zc.gov.cn&nbsp;替换为甲方域名</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://zaiot-gateway-open.baseiot:20044&nbsp; &nbsp;替换为甲方网关ip地址或者容器地址</p> 
+  <p> </p>
+  <p>物联网运营商端：</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;server_name&nbsp;operiot.zc.gov.cn&nbsp;替换为甲方域名</p> 
+  <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;proxy_pass http://zaiot-gateway-aggr.baseiot:20040&nbsp; &nbsp;替换为甲方网关ip地址或者容器地址</p> 
+  <p><br></p> 
+  <p> </p>
+  <pre class="prettyprint lang-bsh">
+#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+server{
+    listen 80;
+    server_name adminiot.zc.gov.cn;
+    index index.html;
+    # root /www/admin/web;
+
+    location /api/ {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location / {
+        root /usr/share/nginx/zaiot-admin/;
+        try_files $uri $uri/ /index.html;
+        index index.html;
+    }
+}
+
+
+server{
+    listen 80;
+    server_name baseiot.zc.gov.cn;
+    index index.html;
+    
+    location /api/ {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+    }
+
+    location ^~/base{
+        alias /usr/share/nginx/zaiot-base-new;
+        index index.html;
+        try_files $uri $uri/ /base/index.html;
+    }
+
+    location ~ ^/$ {
+        return 301 http://baseiot.zc.gov.cn/base;
+    }
+}
+    
+
+server {
+    listen 80;
+    server_name openiot.zc.gov.cn;
+
+    location /api/ {
+        #proxy_pass http://172.16.118.197:20044;
+        proxy_pass http://zaiot-gateway-open.baseiot:20044;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.197:20044;
+        proxy_pass http://zaiot-gateway-open.baseiot:20044;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.197:20044;
+        proxy_pass http://zaiot-gateway-open.baseiot:20044;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.197:20044;
+        proxy_pass http://zaiot-gateway-open.baseiot:20044;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+}
+
+
+server{
+    listen 80;
+    server_name operiot.zc.gov.cn;
+    index index.html;
+
+    location /api/ {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /webjars/ {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-ui.html {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+    location /swagger-resources {
+        #proxy_pass http://172.16.118.197:20040;
+        proxy_pass http://zaiot-gateway-aggr.baseiot:20040;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-Ip $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Via "nginx";
+    }
+
+
+    location / {
+        root /usr/share/nginx/zaiot-operator/;
+        try_files $uri $uri/ /index.html;
+        index index.html;
+    }
+}
+
+
+}
+</pre> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor4" title="2、nginx配置文件修改">2、nginx配置文件修改</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor5" title="2.1、神农口袋nginx">2.1、神农口袋nginx</a> </li>
+      <li class="text-ellipsis"><a href="#anchor343" title="2.2、物联网nginx">2.2、物联网nginx</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

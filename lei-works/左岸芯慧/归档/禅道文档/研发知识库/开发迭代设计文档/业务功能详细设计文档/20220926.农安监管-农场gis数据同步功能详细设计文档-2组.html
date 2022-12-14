@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20220926.农安监管-农场gis数据同步功能详细设计文档-2组</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>1、神农口袋农场需要发布成全国gis点服务，gis服务数据库名称：tbl_za_gisfarm</p> 
+  <p>2、目前农场gis应用于农安监管（通用版）页面</p> 
+  <p><br></p> 
+  <p>需求地址：<a href="/zentao/story-view-467-13-101.html#app=execution" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/story-view-467-13-101.html#app=execution</a></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor7">2、参与人员与时间</h1> 
+  <p><br></p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">服务端：王恺</p> 
+  <p style="font-size:14px;background-color:#FFFFFF;">迭代时间：2022-09-26到 待定</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor13">3、用例图</h1> 
+  <p><br></p> 
+  <p><br></p> 
+  <h1 id="anchor16">4、数据库</h1> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9539.png" alt="" width="169" height="400" title=""></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">序号</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">字段<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">字段注释</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">备注</th> 
+    </tr>
+   </tbody>
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;">1<br></td> 
+     <td style="border:1px solid #ddd;">OBJECTID<br></td> 
+     <td style="border:1px solid #ddd;">sqlserver数据库主键</td> 
+     <td style="border:1px solid #ddd;">mysql主键是id，同步的时候，将mysql的id赋值给objectId</td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">2</td> 
+     <td style="border:1px solid #ddd;">farm_id<br></td> 
+     <td style="border:1px solid #ddd;">农场id</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">3</td> 
+     <td style="border:1px solid #ddd;">farm_name<br></td> 
+     <td style="border:1px solid #ddd;">农场名称</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">4</td> 
+     <td style="border:1px solid #ddd;">company_id<br></td> 
+     <td style="border:1px solid #ddd;">企业id</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">5</td> 
+     <td style="border:1px solid #ddd;">company_name<br></td> 
+     <td style="border:1px solid #ddd;">企业名称</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">6</td> 
+     <td style="border:1px solid #ddd;">company_category_id<br></td> 
+     <td style="border:1px solid #ddd;">企业类型id</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">7</td> 
+     <td style="border:1px solid #ddd;">company_category_name<br></td> 
+     <td style="border:1px solid #ddd;">企业类型名称</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">8</td> 
+     <td style="border:1px solid #ddd;">business_category_ids<br></td> 
+     <td style="border:1px solid #ddd;">经营类目id</td> 
+     <td style="border:1px solid #ddd;">多个英文逗号分割</td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">9</td> 
+     <td style="border:1px solid #ddd;">business_category_names<br></td> 
+     <td style="border:1px solid #ddd;">经营类目名称</td> 
+     <td style="border:1px solid #ddd;"><span>多个英文逗号分割</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">10</td> 
+     <td style="border:1px solid #ddd;">province_id<br></td> 
+     <td style="border:1px solid #ddd;">省id</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">11</td> 
+     <td style="border:1px solid #DDD;">province_name<br></td> 
+     <td style="border:1px solid #DDD;">省名称</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">12</td> 
+     <td style="border:1px solid #DDD;">city_id<br></td> 
+     <td style="border:1px solid #DDD;">市id</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">13</td> 
+     <td style="border:1px solid #DDD;">city_name<br></td> 
+     <td style="border:1px solid #DDD;">市名称</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">14</td> 
+     <td style="border:1px solid #DDD;">county_id<br></td> 
+     <td style="border:1px solid #DDD;">区id</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">15</td> 
+     <td style="border:1px solid #DDD;">county_name<br></td> 
+     <td style="border:1px solid #DDD;">区名称</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">116</td> 
+     <td style="border:1px solid #DDD;">town_id<br></td> 
+     <td style="border:1px solid #DDD;">镇id</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">17</td> 
+     <td style="border:1px solid #DDD;">town_name<br></td> 
+     <td style="border:1px solid #DDD;">镇<span>名称</span></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">18</td> 
+     <td style="border:1px solid #DDD;">village_id<br></td> 
+     <td style="border:1px solid #DDD;">村id</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">19</td> 
+     <td style="border:1px solid #DDD;">village_name<br></td> 
+     <td style="border:1px solid #DDD;">村<span>名称</span></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">20</td> 
+     <td style="border:1px solid #DDD;">statistics_flag<br></td> 
+     <td style="border:1px solid #DDD;">是否参与统计</td> 
+     <td style="border:1px solid #DDD;">0：否 1：是</td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">21</td> 
+     <td style="border:1px solid #DDD;">certificate_time<br></td> 
+     <td style="border:1px solid #DDD;">合格证打印时间</td> 
+     <td style="border:1px solid #DDD;">存储最新一次时间</td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">22</td> 
+     <td style="border:1px solid #DDD;">gcj_farm_center_lng<br></td> 
+     <td style="border:1px solid #DDD;">农场经度(谷歌坐标系)</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">23</td> 
+     <td style="border:1px solid #DDD;">gcj_farm_center_lat<br></td> 
+     <td style="border:1px solid #DDD;">农场纬度<span>(谷歌坐标系)</span></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">24</td> 
+     <td style="border:1px solid #ddd;"><span>wgs_far</span><span>m_center_lng</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农场经度(wgs84坐标系)</span><br></td> 
+     <td style="border:1px solid #ddd;"><span style="color:#000000;">将谷歌坐标系经度转换成wgs84坐标系</span></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">25</td> 
+     <td style="border:1px solid #ddd;"><span>wgs_farm_center_lat</span><br></td> 
+     <td style="border:1px solid #ddd;"><span>农场纬度</span><span>(<span>wgs84</span>坐标系)</span><br></td> 
+     <td style="border:1px solid #ddd;"><span><span style="color:#E53333;"><span style="color:#000000;">将谷歌坐标系纬度转换成wgs84坐标</span><span style="color:#000000;">系</span></span></span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">26</td> 
+     <td style="border:1px solid #DDD;">patrol_check_time<br></td> 
+     <td style="border:1px solid #DDD;">监管时间</td> 
+     <td style="border:1px solid #DDD;"><span>存储最新一次时间</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">27</td> 
+     <td style="border:1px solid #DDD;">patrol_judge_result<br></td> 
+     <td style="border:1px solid #DDD;">监管结果</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">28</td> 
+     <td style="border:1px solid #DDD;">patrol_flag<br></td> 
+     <td style="border:1px solid #DDD;">是否监管</td> 
+     <td style="border:1px solid #DDD;"><span>根据最新一次监管时间判断，今年是否监管&nbsp; &nbsp;0：否 1：是</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">29</td> 
+     <td style="border:1px solid #DDD;">certificate_flag<br></td> 
+     <td style="border:1px solid #DDD;">是否打印合格证</td> 
+     <td style="border:1px solid #DDD;"><span>根据最新一次合格证时间判断，今年是否打印合格证&nbsp; &nbsp;0：否 1：是</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">30</td> 
+     <td style="border:1px solid #DDD;">nj_order_flag<br></td> 
+     <td style="border:1px solid #DDD;">是否有农机订单</td> 
+     <td style="border:1px solid #DDD;"><span>根据最新一次农机下单时间判断，今年是否下单&nbsp; &nbsp;0：否 1：是</span><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">31</td> 
+     <td style="border:1px solid #DDD;"><span>nj_order_time</span><br></td> 
+     <td style="border:1px solid #DDD;">农机最新一次下单时间</td> 
+     <td style="border:1px solid #DDD;"><span style="color:#000000;">存储最新一次下单时间</span></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">32</td> 
+     <td style="border:1px solid #DDD;">create_time<br></td> 
+     <td style="border:1px solid #DDD;"><span>创建时间</span><br></td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #DDD;">33</td> 
+     <td style="border:1px solid #DDD;">update_time<br></td> 
+     <td style="border:1px solid #DDD;">更新时间</td> 
+     <td style="border:1px solid #DDD;"><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <h1 id="anchor155">5、时序图</h1> 
+  <h2 id="anchor156">5.1、定时任务-数据入库时序图</h2> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9856.jpeg" alt="" width="400" height="653" title=""></p> 
+  <h2 id="anchor158">5.2、定时任务-数据同步时序图</h2> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9545.jpeg" alt="" width="400" height="352" title=""></p> 
+  <p><br></p> 
+  <h1 id="anchor162">6、农场gis发布流程</h1> 
+  <p>生成shp文件请参考：</p> 
+  <p><a href="/zentao/doc-objectLibs-custom-0-37-351.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-351.html</a></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9556.jpeg" alt="" width="400" height="754" title=""></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor7" title="2、参与人员与时间">2、参与人员与时间</a> </li>
+    <li class="text-ellipsis"><a href="#anchor13" title="3、用例图">3、用例图</a> </li>
+    <li class="text-ellipsis"><a href="#anchor16" title="4、数据库">4、数据库</a> </li>
+    <li class="text-ellipsis"><a href="#anchor155" title="5、时序图">5、时序图</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor156" title="5.1、定时任务-数据入库时序图">5.1、定时任务-数据入库时序图</a> </li>
+      <li class="text-ellipsis"><a href="#anchor158" title="5.2、定时任务-数据同步时序图">5.2、定时任务-数据同步时序图</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor162" title="6、农场gis发布流程">6、农场gis发布流程</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

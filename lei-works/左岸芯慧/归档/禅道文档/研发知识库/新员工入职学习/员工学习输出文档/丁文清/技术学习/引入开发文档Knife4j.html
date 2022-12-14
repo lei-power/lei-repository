@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>引入开发文档Knife4j</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <div> 
+   <h1 class="heading-1 ace-line old-record-id-EUaKdmomAoemIYxc7JUcXQU3nOd" id="anchor1">优化：</h1> 
+   <div class="ace-line old-record-id-K4UgdmwiAowUysxDGv3cxg5unr7">
+    一、在运行相关项目后，请求的swagger文档，发现使用的还是旧版本文档，在前端对接时，接口文档看起来不是那么清楚，所以打算升级引入Knife4j；
+   </div> 
+   <div class="ace-line old-record-id-B86gdMsweoCuaixQxTNcdtG3n7d">
+    Knife4j介绍：是为Java MVC框架集成Swagger生成Api文档的增强解决方案，前身是swagger-bootstrap-ui，取名knife4j是希望它能像一把匕首一样小巧、轻量，并且功能强悍。
+   </div> 
+   <div class="ace-line old-record-id-Fq6kdKaeso0KgSx46rcc601EnOb">
+    历史版本swagger文档展示，在接口文档描述上，对入参和出参描述信息不详细；
+   </div> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-Xqg6d6uSooUEscxCGPucgJXBnec">
+    <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9373.png" alt="">
+    <br>
+   </div> 
+   <div class="ace-line old-record-id-KkwidAU6uogqUexoT5bcx0kEn1e">
+    接口请求参数，仅展示字段名称和类型，具体解释没有，返回参数同理；
+   </div> 
+   <div class="ace-line old-record-id-VWcydEs8AoOMQqxSYOfc1EbdnHh">
+    <br>
+   </div> 
+   <div class="ace-line old-record-id-XMqSdOcC2oGQwUx8alKcTJ57n3b">
+    Knife4j展示内容则包含字段值，描述信息，是否必填项，字段类型等；
+   </div> 
+   <div class="ace-line old-record-id-UYy8daucyoOwioxCwaqcZsMLnug">
+    请求参数：
+   </div> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-FSmId0CQEokYakxGaHIcDaxXnDc">
+    <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9374.png" alt="">
+    <br>
+   </div> 
+   <div class="ace-line old-record-id-Y8KsdQs6Eokq8AxYX8ycpg50nHd">
+    返回参数：参数描述信息 + 数据结构类型，清晰明了；
+   </div> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-OOMadkmAEoAkcox0azkcsC6rn2c">
+    <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9375.png" alt="">
+    <br>
+   </div> 
+   <div class="ace-line old-record-id-Zck0d2uemoAsgmxaaqRcqxrjnRb">
+    同时也支持权限校验信息
+   </div> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-G0Cwdiqc6oKUcCxosrgcpdvdnY1">
+    <br>
+   </div> 
+   <div class="ace-line old-record-id-PWwudAEGgoIUeWxglq1ctLVBnUd">
+    这样只要后端在定义的时候，把请求参数和返回参数描述清楚，前端即可快速了解字段内容；
+   </div> 
+   <div class="old-record-id-AkuWdWiKAokAwIx4yuTcMP2fnbd"> 
+    <hr>
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-HgeKdWYqmoWogIxuE2QcpFn0nlc" id="anchor18">改造流程：</h1> 
+   <h2 class="heading-2 ace-line old-record-id-F6GQdMCyIo4eeUxg3WEcfO8ZnVc" id="anchor19">1、在对应模块service下引入依赖</h2> 
+   <pre class="ace-line old-record-id-KKYmdeaaooGimyx2PrDcHKapnIf">&lt;<strong>dependency</strong>&gt;
+    &lt;<strong>groupId</strong>&gt;com.github.xiaoymin&lt;/<strong>groupId</strong>&gt;
+    &lt;<strong>artifactId</strong>&gt;knife4j-spring-boot-starter&lt;/<strong>artifactId</strong>&gt;
+    &lt;<strong>version</strong>&gt;2.0.2&lt;/<strong>version</strong>&gt;
+&lt;/<strong>dependency</strong>&gt;</pre> 
+   <h2 class="heading-2 ace-line old-record-id-WOwGd8AY2oseyexcoN4ckH1Fnib" id="anchor25">2、编写swaggerConfig</h2> 
+   <p><br></p> 
+   <pre class="prettyprint lang-js">import io.swagger.annotations.ApiOperation;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/**
+ * Created by IvamLee on 2017/12/13.
+ */
+@Configuration
+@EnableSwagger2 // 启用 Swagger
+public class SwaggerConfig {
+
+    @Bean(value = "defaultApi3")
+    public Docket defaultApi2() {
+        Docket docket=new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(new ApiInfoBuilder()
+                        .title("test_knife4j")
+                        .description("# knife4j")
+                        .termsOfServiceUrl("http://www.baidu.com/")
+                        .version("1.0")
+                        .build())
+                //分组名称
+                .groupName("2.0")
+                .select()
+                //这里指定Controller扫描包路径
+//                .apis(RequestHandlerSelectors.basePackage("com.za.landoccupy.biz.*"))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .paths(PathSelectors.any())
+                .build();
+        return docket;
+    }
+
+    //构建 api文档的详细信息
+    private ApiInfo apiInfo(String title, String desc) {
+        return new ApiInfoBuilder()
+                .title(title)
+                .description(desc)
+                .version("2.0")
+                .build();
+    }
+
+
+}</pre> 
+   <h2 class="heading-2 ace-line old-record-id-JMsYdaWmeoqC0IxwvbScgo7Mntg" id="anchor76">3、在对应控制器中使用注解，表示该controller是被文档扫描的</h2> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-XQQUd4oG0ou680xc39hczcmOntg">
+    <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9405.png" alt="">
+    <br>
+   </div> 
+   <h2 class="heading-2 ace-line old-record-id-KyoqdqYI2oGGY4xIJB3c1cRFnQf" id="anchor78">4、启动服务，访问对应服务IP+ 端口/doc.html</h2> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-ZCA8dQa8CowOQkxkB6rcnDolngc">
+    <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9377.png" alt="">
+    <br>
+   </div> 
+   <div class="ace-line old-record-id-AGgWd0i80o2UGuxsZtucdA16naf">
+    eg:http://localhost:20270/doc.html
+   </div> 
+   <div class="ace-line old-record-id-C6aQdi4g0omA0WxSE4fc3yjPnsb">
+    <br>
+   </div> 
+   <h1 class="heading-1 ace-line old-record-id-EA2Wd60isoqyySxg0eTcD4UPnot" id="anchor82"><span style="color:#D83931;">注意</span>：</h1> 
+   <h2 class="heading-2 ace-line old-record-id-OWGydiO20oEKqAxGiAjc0E8cnNf" id="anchor83">1、版本信息对应：</h2> 
+   <blockquote class="old-record-id-RcgadwgmcoWau0xmCfBcJN8Wn5g"> 
+    <div class="ace-line old-record-id-LsUuday8QoseQwx6RRXcceETnOe">
+     knife4j版本需要和sprongBoot版本相对应，knife4j使用3.x版本时，springboot版本必须是2.2.0及以上；
+    </div> 
+   </blockquote> 
+   <blockquote class="old-record-id-DqASdqQ0cosu2OxoHbjczUoNnLe"> 
+    <div class="ace-line old-record-id-A88AdoWEqogeIYxqyM3cai4rn1f">
+     目前我们项目使用的springboot版本是1.5.9.RELEASE，引入knife4j-spring-boot-starter的版本为2.0.2；
+    </div> 
+   </blockquote> 
+   <h2 class="heading-2 ace-line old-record-id-HwMyd4MGkoSkakxGYfkc8jqWnRh" id="anchor90">2、注解使用</h2> 
+   <div class="ace-line old-record-id-EKM4d4k6YoOGSoxEdOzc7Ihcnwf">
+    对应控制器的@Api注解中，不要带有
+    <span style="color:#D83931;">/</span>,否则文档内容会展示不出来，
+    <span style="color:#8F959E;">因为 </span>
+    <span style="color:#D83931;">/</span>
+    <span style="color:#8F959E;"> 作为特殊符号，前后内容会被解析成路径。建议@Api注解中使用tags="描述信息"，description已经不建议使用，系统都提示了;</span>
+   </div> 
+   <div class="ace-line old-record-id-ByUYd0q4AoWEmox8qrtcOHT8nhb">
+    参考文档：https://blog.csdn.net/Michelle_Zhong/article/details/124024226
+   </div> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-SGoGdyA8OoAik0xIlzic17SxnCg">
+    <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9406.png" alt="">
+    <br>
+   </div> 
+   <h2 class="heading-2 ace-line old-record-id-QEesd224gocC6ixwZSQc7EtSnMh" id="anchor94">3、常用注解：与swagger使用一致</h2> 
+   <div style="text-align:center;" class="image-uploaded gallery old-record-id-G42kd6MUUoa8qOxgbbGcfGWwnMe">
+    <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9378.png" alt="">
+    <br>
+   </div> 
+   <div class="ace-line old-record-id-Jcu8dWc4aoqg6mxwXrpc2RIZnMf">
+    <br>
+   </div> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="优化：">优化：</a> </li>
+    <li class="text-ellipsis"><a href="#anchor18" title="改造流程：">改造流程：</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor19" title="1、在对应模块service下引入依赖">1、在对应模块service下引入依赖</a> </li>
+      <li class="text-ellipsis"><a href="#anchor25" title="2、编写swaggerConfig">2、编写swaggerConfig</a> </li>
+      <li class="text-ellipsis"><a href="#anchor76" title="3、在对应控制器中使用注解，表示该controller是被文档扫描的">3、在对应控制器中使用注解，表示该controller是被文档扫描的</a> </li>
+      <li class="text-ellipsis"><a href="#anchor78" title="4、启动服务，访问对应服务IP+ 端口/doc.html">4、启动服务，访问对应服务IP+ 端口/doc.html</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor82" title="注意：">注意：</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor83" title="1、版本信息对应：">1、版本信息对应：</a> </li>
+      <li class="text-ellipsis"><a href="#anchor90" title="2、注解使用">2、注解使用</a> </li>
+      <li class="text-ellipsis"><a href="#anchor94" title="3、常用注解：与swagger使用一致">3、常用注解：与swagger使用一致</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

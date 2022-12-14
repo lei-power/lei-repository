@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>和风天气调研文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <span> </span> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">一、如何使用</span></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">&nbsp; &nbsp; &nbsp; &nbsp;登录链接：</span><a class="ql-link ql-author-26020151" href="https://console.qweather.com/" target="_blank" rel="noreferrer noopener">https://console.qweather.com</a><span class="ql-author-26020151">。注册账号，对于企业应用创建商业版应用，这个时候会有对应商业版的key，通过此key调用webApi接口。</span></p> 
+  <p class="ql-direction-ltr ql-text-indent-1 ql-long-26020151" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-26020151">Api开发文档地址：</span><a class="ql-link ql-author-26020151" href="https://dev.qweather.com/docs/api/" target="_blank" rel="noreferrer noopener">https://dev.qweather.com/docs/api/</a></p> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">二、对接接口注意事项</span></p> 
+  <p class="ql-direction-ltr ql-text-indent-1 ql-long-26020151" style="text-indent:29.3333px;font-size:11pt;color:#494949;"><span class="ql-author-26020151">这里在使用http调用的时候，此api返回的数据经过了gzip的加密，即在接收的时候相应的处理一下。</span></p> 
+  <pre>byte[] body = restTemplate.exchange(weatherNowUrl, HttpMethod.GET, null, byte[].class).getBody();</pre> 
+  <p class="ql-direction-ltr ql-text-indent-1" style="text-indent:29.3333px;font-size:11pt;color:#494949;">&nbsp;</p> 
+  <pre>try (InputStream inputStream = new ByteArrayInputStream(oResult);
+     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+     GZIPInputStream gzipInputStream = new GZIPInputStream(inputStream)) {
+    byte[] buf = new byte[4096];
+    int len = -1;
+    while ((len = gzipInputStream.read(buf, 0, buf.length)) != -1) {
+        byteArrayOutputStream.write(buf, 0, len);
+    }
+    return new String(byteArrayOutputStream.toByteArray(), StandardCharsets.UTF_8);
+} catch (IOException e) {
+    log.error("action:{},errMsg:{}", "解密和风天气数据", e.getMessage());
+    throw new RuntimeException(e);
+}</pre> 
+  <p class="ql-direction-ltr" style="font-size:11pt;color:#494949;">&nbsp;</p> 
+  <p class="ql-long-26020151 ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">三、对于格点api和城市api区别</span></p> 
+  <p class="ql-long-26020151 ql-direction-ltr" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">1.两个都有接口展示当天的最高气温和最低气温，但是经过大数据量实践，这两个值对于同一个经纬度，最高气温和最低气温的值是不一样的。所以在使用什么api展示天气温度，就用什么api展示当天的最高气温和最低气温，不可交叉使用。</span></p> 
+  <p class="ql-direction-ltr ql-long-26020151" style="font-size:11pt;color:#494949;"><span class="ql-author-26020151">2.紫外线数据，目前只有城市api的逐天天气才有。</span></p> 
+ </div> 
+</div></body>
+</html>

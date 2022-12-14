@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>snkoudai-test008（testf）维护文档</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <div> 
+   <h2 id="anchor1">1、基础信息</h2> 
+  </div> 
+  <div> 
+   <h3 id="anchor4">1.1 ip</h3> 
+   <p>snkoudai-test008 （ 47.97.120.110（公） / 172.16.118.214（私) )</p> 
+   <h3 id="anchor6">1.2 账号密码</h3> 
+   <table>
+    <tbody>
+     <tr>
+      <th>名称</th> 
+      <th>用户</th> 
+      <th>密码</th> 
+     </tr>
+    </tbody>
+    <tbody>
+     <tr>
+      <td>linux</td> 
+      <td>root</td> 
+      <td>SNkoudai!@#$&lt;&gt;?</td> 
+     </tr>
+     <tr>
+      <td>mysql</td> 
+      <td>root</td> 
+      <td>Freetek0987!@#$</td> 
+     </tr>
+     <tr>
+      <td>rabbitmq</td> 
+      <td>snkoudai</td> 
+      <td>rabbitmq1234</td> 
+     </tr>
+     <tr>
+      <td>redis</td> 
+      <td></td> 
+      <td></td> 
+     </tr>
+    </tbody>
+   </table>
+   <h2 id="anchor22">2、环境信息</h2> 
+   <h3 id="anchor23">2.1 软件版本</h3> 
+   <table>
+    <tbody>
+     <tr>
+      <th>序号</th> 
+      <th>软件</th> 
+      <th>版本号</th> 
+      <th>安装方式</th> 
+      <th>附件地址</th> 
+     </tr>
+    </tbody>
+    <tbody>
+     <tr>
+      <td>1</td> 
+      <td>jdk</td> 
+      <td>1.8</td> 
+      <td>离线安装</td> 
+      <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/jdk-8u11-linux-x64.tar.gz">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/jdk-8u11-linux-x64.tar.gz</a></td> 
+     </tr>
+     <tr>
+      <td>2</td> 
+      <td>mysql</td> 
+      <td>5、7</td> 
+      <td>在线安装</td> 
+      <td></td> 
+     </tr>
+     <tr>
+      <td>3</td> 
+      <td>rabbitmq</td> 
+      <td>3.8.1</td> 
+      <td>离线安装</td> 
+      <td>见附件</td> 
+     </tr>
+     <tr>
+      <td>4</td> 
+      <td>elang</td> 
+      <td>21.3</td> 
+      <td>离线安装</td> 
+      <td>见附件</td> 
+     </tr>
+     <tr>
+      <td>5</td> 
+      <td>redis</td> 
+      <td>5.0.3</td> 
+      <td>离线安装</td> 
+      <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/redis-5.0.3.tar.gz">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/redis-5.0.3.tar.gz</a></td> 
+     </tr>
+     <tr>
+      <td>6</td> 
+      <td>nginx</td> 
+      <td>1.14.1</td> 
+      <td>离线安装</td> 
+      <td><a href="https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/nginx.zip">https://zuoan-test.oss-cn-hangzhou.aliyuncs.com/software/nginx.zip</a></td> 
+     </tr>
+    </tbody>
+   </table>
+   <h3 id="anchor59">2.2 软件路径、启动命令</h3> 
+   <h4>jdk</h4> 
+   <h5>路径</h5> 
+   <ul>
+    <li>/opt/software/jdk1.8</li> 
+   </ul>
+   <h4>常用命令</h4> 
+   <ul>
+    <li>查看版本： java -version</li> 
+   </ul>
+   <h4>mysql</h4> 
+   <h5>路径</h5> 
+   <ul>
+    <li>/usr/bin/mysql</li> 
+    <li>配置文件：/etc/my.cnf</li> 
+    <li>日志文件：/var/log/var/log/mysqld.log</li> 
+    <li>服务启动脚本：/usr/lib/systemd/system/mysqld.service</li> 
+    <li>socket文件：/var/run/mysqld/mysqld.pid</li> 
+   </ul>
+   <p><br></p> 
+   <h4 style="color:#3C4353;">常用命令</h4> 
+   <p><br></p> 
+   <ul>
+    <li>状态： systemctl status mysqld</li> 
+    <li>启动： systemctl start mysqld</li> 
+    <li>重启： systemctl restart mysqld</li> 
+    <li>停止： systemctl stop mysqld</li> 
+   </ul>
+   <h4>rabbitmq</h4> 
+   <h5>路径</h5> 
+   <ul>
+    <li>/usr/erlang</li> 
+    <li>/usr/lib/rabbitmq/bin</li> 
+   </ul>
+   <p><br></p> 
+   <h4 style="color:#3C4353;">常用命令</h4> 
+   <ul>
+    <li>状态： systemctl status rabbitmq-server.service</li> 
+    <li>启动： systemctl start rabbitmq-server.service</li> 
+    <li>重启： systemctl restart rabbitmq-server.service</li> 
+    <li>停止： systemctl stop rabbitmq-server.service</li> 
+   </ul>
+   <h4>redis</h4> 
+   <h5>路径</h5> 
+   <ul>
+    <li>/usr/local/redis</li> 
+   </ul>
+   <p><br></p> 
+   <h4 style="color:#3C4353;">常用命令</h4> 
+   <ul>
+    <li>启动： ./usr/local/redis/bin/redis-server /usr/local/redis/bin/redis.conf</li> 
+   </ul>
+   <h4>nginx</h4> 
+   <h5>路径</h5> 
+   <ul>
+    <li>/opt/software/nginx</li> 
+   </ul>
+   <p><br></p> 
+   <h4 style="color:#3C4353;">常用命令</h4> 
+   <ul>
+    <li>/opt/software/nginx/sbin/nginx -c /opt/software/nginx/conf/nginx.conf</li> 
+   </ul>
+   <h2 id="anchor101">3、工程信息</h2> 
+   <h3 id="anchor102">3.1 已部署服务</h3> 
+   <table>
+    <tbody>
+     <tr>
+      <th>序号</th> 
+      <th>服务</th> 
+      <th>端口号</th> 
+      <th>地址</th> 
+     </tr>
+    </tbody>
+    <tbody>
+     <tr>
+      <td>1</td> 
+      <td>service-adminuser-server</td> 
+      <td>20061</td> 
+      <td>/var/gameplat/snkoudai/service-adminuser-server</td> 
+     </tr>
+     <tr>
+      <td>2</td> 
+      <td>service-appconfig-server</td> 
+      <td>20130</td> 
+      <td>/var/gameplat/snkoudai/service-appconfig-server</td> 
+     </tr>
+     <tr>
+      <td>3</td> 
+      <td>service-archive-server</td> 
+      <td>20230</td> 
+      <td>/var/gameplat/snkoudai/service-archive-server</td> 
+     </tr>
+     <tr>
+      <td>4</td> 
+      <td>service-foundation-server</td> 
+      <td>20050</td> 
+      <td>/var/gameplat/snkoudai/service-foundation-server</td> 
+     </tr>
+     <tr>
+      <td>5</td> 
+      <td>service-governmentuser-server</td> 
+      <td>20140</td> 
+      <td>/var/gameplat/snkoudai/service-governmentuser-server</td> 
+     </tr>
+     <tr>
+      <td>6</td> 
+      <td>service-idgen-server</td> 
+      <td>20150</td> 
+      <td>/var/gameplat/snkoudai/service-idgen-server</td> 
+     </tr>
+     <tr>
+      <td>7</td> 
+      <td>service-message-server</td> 
+      <td>20991</td> 
+      <td>/var/gameplat/snkoudai/service-message-server</td> 
+     </tr>
+     <tr>
+      <td>8</td> 
+      <td>service-nongwei-server</td> 
+      <td>20160</td> 
+      <td>/var/gameplat/snkoudai/service-nongwei-server</td> 
+     </tr>
+     <tr>
+      <td>9</td> 
+      <td>service-notice-server</td> 
+      <td>20890</td> 
+      <td>/var/gameplat/snkoudai/service-notice-server</td> 
+     </tr>
+     <tr>
+      <td>10</td> 
+      <td>service-operate-server</td> 
+      <td>20110</td> 
+      <td>/var/gameplat/snkoudai/service-operate-server</td> 
+     </tr>
+     <tr>
+      <td>11</td> 
+      <td>service-operuser-server</td> 
+      <td>20210</td> 
+      <td>/var/gameplat/snkoudai/service-operuser-server</td> 
+     </tr>
+     <tr>
+      <td>12</td> 
+      <td>service-produce-server</td> 
+      <td>20070</td> 
+      <td>/var/gameplat/snkoudai/service-produce-server</td> 
+     </tr>
+     <tr>
+      <td>13</td> 
+      <td>service-user-server</td> 
+      <td>20060</td> 
+      <td>/var/gameplat/snkoudai/service-user-server</td> 
+     </tr>
+     <tr>
+      <td>14</td> 
+      <td>za-gateway</td> 
+      <td>20040</td> 
+      <td>/var/gameplat/snkoudai/za-gateway</td> 
+     </tr>
+     <tr>
+      <td>15</td> 
+      <td>za-gateway-admin</td> 
+      <td>20042</td> 
+      <td>/var/gameplat/snkoudai/za-gateway-admin</td> 
+     </tr>
+     <tr>
+      <td>16</td> 
+      <td>za-gateway-consume</td> 
+      <td>20041</td> 
+      <td>/var/gameplat/snkoudai/za-gateway-consume</td> 
+     </tr>
+     <tr>
+      <td>17</td> 
+      <td>za-gateway-operuser</td> 
+      <td>20044</td> 
+      <td>/var/gameplat/snkoudai/za-gateway-operuser</td> 
+     </tr>
+    </tbody>
+   </table>
+  </div> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor1" title="1、基础信息">1、基础信息</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor4" title="1.1 ip">1.1 ip</a> </li>
+      <li class="text-ellipsis"><a href="#anchor6" title="1.2 账号密码">1.2 账号密码</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor22" title="2、环境信息">2、环境信息</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor23" title="2.1 软件版本">2.1 软件版本</a> </li>
+      <li class="text-ellipsis"><a href="#anchor59" title="2.2 软件路径、启动命令">2.2 软件路径、启动命令</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor101" title="3、工程信息">3、工程信息</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor102" title="3.1 已部署服务">3.1 已部署服务</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

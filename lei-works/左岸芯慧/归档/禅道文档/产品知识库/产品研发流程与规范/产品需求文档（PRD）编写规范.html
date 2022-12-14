@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>产品需求文档（PRD）编写规范</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p>一、本需求最终想要达到什么目的或为了解决什么问题，谁提的需求。</p> 
+  <p style="color:#404040;font-family:'-apple-system', BlinkMacSystemFont;">1.角色：谁要使用这个功能。</p> 
+  <p style="color:#404040;font-family:'-apple-system', BlinkMacSystemFont;">2.功能：需要完成什么样的功能。</p> 
+  <p style="color:#404040;font-family:'-apple-system', BlinkMacSystemFont;">3.价值：为什么需要这个功能，这个功能带来什么样的价值。</p> 
+  <p style="color:#404040;font-family:'-apple-system', BlinkMacSystemFont;"><br></p> 
+  <p>二、需求类型</p> 
+  <p>说明清楚是“新功能”，还是"现有功能改进"</p> 
+  <p><br></p> 
+  <p>三、涉及工种</p> 
+  <p>说明清楚是否需要 “前端开发人员”、“后端开发人员”、“UI设计师”参与，需要哪些工种参与。</p> 
+  <p><br></p> 
+  <p>四、涉及到的影响范围</p> 
+  <p>说明清楚会影响到哪几个端，以及影响到哪些功能模块。</p> 
+  <p><br></p> 
+  <p>五、业务逻辑详细说明</p> 
+  <p>1）用例图</p> 
+  <p>从0-1的产品需包含用例图。</p> 
+  <p>如何画用例图，可以通过以下链接学习：<a class="ke-insertfile" href="https://mp.weixin.qq.com/s/Ixqt9Oll1s7855bO5Q-20w" target="_blank" rel="noreferrer noopener">https://mp.weixin.qq.com/s/Ixqt9Oll1s7855bO5Q-20w</a></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-633.png" alt=""></p> 
+  <p><br></p> 
+  <p>2）类图</p> 
+  <p>例如本次新增了销售记录的功能，需整理出“销售记录”的所有字段，且想清楚和其他类的对应关系。</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-528.png" alt=""></p> 
+  <p><br></p> 
+  <p>3）状态机图</p> 
+  <p>如果涉及到状态的流转，需要画状态机图。</p> 
+  <p>如果画状态机图，可以通过以下链接学习：<a class="ke-insertfile" href="https://mp.weixin.qq.com/s/rQ5allTAdJdVXJgga6c7SQ" target="_blank" rel="noreferrer noopener">https://mp.weixin.qq.com/s/rQ5allTAdJdVXJgga6c7SQ</a></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-530.png" alt=""></p> 
+  <p><br></p> 
+  <p>4）业务流程图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-652.png" alt=""></p> 
+  <p><br></p> 
+  <p>5）页面及交互说明</p> 
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-526.png" alt=""></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:100%;">
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;">页面元素</td> 
+     <td style="border:1px solid #ddd;">数据规则<br></td> 
+     <td style="border:1px solid #ddd;">备注</td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">列表</td> 
+     <td style="border:1px solid #ddd;"> <p>1、数据拉取规则：拉取当前农场下所有种养计划（包含当前种养、历史种养、计划种养的种养计划）。</p> <p>2、排序规则：按照种养开始时间降序排列，如果种养时间相同，则按创建时间降序排列。</p> <p>3、分页规则：<span>分页展示，一页拉取10条数据。通过底部分页控件来进行分页查看。</span></p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">列表 中&nbsp;“<span>种</span><span>类</span><span>-</span><span>品</span><span>种</span>”列</td> 
+     <td style="border:1px solid #ddd;">展示 作物种类的图片 + 作物种类 + 品种。如果有品种，展示规则为：作物种类-品种。如果没有品种，展示规则：作物种类。</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">选择种养品种的筛选框</td> 
+     <td style="border:1px solid #ddd;"> <p>1、数据拉取规则：拉取当前农场下所有种养计划所属的作物种类</p> <p>2、排序规则：按照作物种类ID升序排列</p> </td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;">编辑 按钮</td> 
+     <td style="border:1px solid #ddd;">状态：当前种养和计划种养的种养计划可进行编辑；历史种养的种养计划，按钮置灰不可点击，点击没反应。</td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <p><br></p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-527.png" alt=""></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:1796px;">
+   <tbody>
+    <tr>
+     <td><span><span><span>页面元素</span></span></span></td> 
+     <td><span><span><span>数据规则<br></span></span></span></td> 
+     <td><span><span><span>备注</span></span></span></td> 
+    </tr>
+    <tr>
+     <td><span><span><span>种类&nbsp;</span></span></span></td> 
+     <td> <p><span><span><span>1、数据拉取规则：拉取系统中所有的作物种类</span></span></span></p> <p><span><span><span>2、排序规则：作物种类ID升序排列</span></span></span></p> <p><span><span><span>3、分页规则：只拉取前200个作物，一次性拉取，不分页。</span></span></span></p> <p><span><span><span>4、交互规则：支持搜索，搜索是针对全部种类进行搜索，所以需要是后端提供接口进行搜索。</span></span></span></p> </td> 
+     <td><span><span><span><br></span></span></span></td> 
+    </tr>
+    <tr>
+     <td><span><span><span>品种</span></span></span></td> 
+     <td> <p><span><span><span>1、可输入的内容：可输入任何类型的字符，包含中文、字母、数字、特殊符号</span></span></span></p> <p><span><span><span>2、字数限制：20个字符。1个中文算1个字符，2个字母或数字或特殊符号算1个字符。</span></span></span></p> </td> 
+     <td><span><span><span><br></span></span></span></td> 
+    </tr>
+    <tr>
+     <td><span><span><span>移栽时间</span></span></span></td> 
+     <td><span><span><span>数据拉取规则：拉取今天及以前的日期</span></span></span></td> 
+    </tr>
+   </tbody>
+  </table> 
+ </div> 
+</div></body>
+</html>

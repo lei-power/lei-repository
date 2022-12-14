@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>20221214-开发设计-农机V1.4</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 style="color:#313C52;" id="anchor0"><span style="font-size:24px;background-color:#FFFFFF;color:inherit;">1.需求描述</span></h1> 
+  <p>http://chandao.freetek.cc/zentao/execution-storyView-587-146.html?tid=4dqris8c</p> 
+  <p><span style="font-weight:700;font-size:14px;background-color:#FFFFFF;"></span></p> 
+  <h1 style="color:#313C52;" id="anchor3"><span style="font-size:24px;">2.涉及内容</span></h1> 
+  <h2 style="color:#313C52;" id="anchor4">2.1.农机管理平台</h2> 
+  <p>1、新增 农机作业管理-》农机作业任务管理-》拒单管理</p> 
+  <p>2、新增 农机手任务状态 待确认、已拒单 状态。</p> 
+  <p>3、新增 农机手任务状态 已拒单 下改派逻辑。</p> 
+  <p>4、新增 改派前提示查询，订单下是否有指定农机手的拒单记录。</p> 
+  <p>5、新增 服务站人员可完成任务接单操作。</p> 
+  <p>6、新增 系统导航-》工作台-》服务站下拒单任务数量的查询。</p> 
+  <p>7、新增 农机手拒单后短信提醒服务中心短信订阅员工。</p> 
+  <p>7、修改 任务删除前置条件由 待作业 改为 待确认 或 已拒单。</p> 
+  <p><br></p> 
+  <h2 style="color:#313C52;"><br></h2> 
+  <h2 style="color:#313C52;" id="anchor15">2.2.农机手小程序</h2> 
+  <p>1、新增 任务接单、拒单功能</p> 
+  <p>2、新增 任务 待确认、已拒单 列表查询</p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <h1 style="color:#313C52;" id="anchor19"><span style="font-size:24px;background-color:#FFFFFF;">3.详细设计</span></h1> 
+  <p>3.1、状态图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12669.jpeg" alt=""></p> 
+  <p><br></p> 
+  <p>3.2、核心时序图</p> 
+  <p>服务站完成派单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12670.jpeg" alt=""></p> 
+  <p><br></p> 
+  <p>农机手接单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12671.jpeg" alt=""></p> 
+  <p><br></p> 
+  <p>农机手拒单</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12672.jpeg" alt=""></p> 
+  <p><br></p> 
+  <p>服务站改派拒单任务</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-12673.jpeg" alt=""></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p>3.3、需求改动</p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">改动点</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">原有逻辑</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">变动逻辑<br></th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">影响范围<br></th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">订单状态【处理中】到【已完成】判断条件新增<br></td> 
+     <td style="border:1px solid #ddd;">派单完成 动作触发（条件：存在派单任务且所有任务不是待确认和已拒单）<br></td> 
+     <td style="border:1px solid #ddd;">新增接单动作触发（条件：地块全部分配完 &amp; 所有任务不是待确认和已拒单）<br></td> 
+     <td style="border:1px solid #ddd;">添加所有地块分配完成的判断，受任务拒单逻辑影响（任务拒单地块状态也是已分配）<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">任务状态新增<br></td> 
+     <td style="border:1px solid #ddd;">/<br></td> 
+     <td style="border:1px solid #ddd;"><span>新增任务【待确认】【已拒单】状态</span><br></td> 
+     <td style="border:1px solid #ddd;">删除任务的前置条件变更，订单状态【处理中】到【已派单】条件变更<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">删除任务条件修改<br></td> 
+     <td style="border:1px solid #ddd;">任务状态是【待作业】&amp;订单状态是【处理中】任务可删除<br></td> 
+     <td style="border:1px solid #ddd;">任务状态【待确认】 &amp; 【已拒单】任务可删除<br></td> 
+     <td style="border:1px solid #ddd;">删除任务同步删除订单地块已分配状态，【已拒单】删除任务无法再改派<br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">新增任务改派逻辑<br></td> 
+     <td style="border:1px solid #ddd;">/</td> 
+     <td style="border:1px solid #ddd;">任务状态是【已拒单】状态可以将任务更改给其他农机手<br></td> 
+     <td style="border:1px solid #ddd;">改派后会丢失原有的派单任务信息，建议是重新生成一条指定改派农机手的任务<br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <p><br></p> 
+  <h1 style="color:#313C52;" id="anchor78"><span style="font-size:24px;">4.其他</span></h1> 
+  <h2 style="color:#313C52;" id="anchor79">4.1.开发分支</h2> 
+  <p><br></p> 
+  <h2 style="color:#313C52;" id="anchor81"><span style="font-size:16px;">4.2.涉及服务</span></h2> 
+  <p><span style="font-size:16px;"><br></span></p> 
+  <h2 style="color:#313C52;" id="anchor83"><span style="font-size:16px;">4.3.需求地址</span></h2> 
+  <p><span style="font-size:16px;">http://chandao.freetek.cc/zentao/execution-storyView-587-146.html?tid=4dqris8c</span></p> 
+  <p><span style="font-size:24px;"><br></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+  <p><span style="font-size:14px;background-color:#FFFFFF;"><span style="font-size:16px;"><br></span></span></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1.需求描述">1.需求描述</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2.涉及内容">2.涉及内容</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor4" title="2.1.农机管理平台">2.1.农机管理平台</a> </li>
+      <li class="text-ellipsis"><a href="#anchor15" title="2.2.农机手小程序">2.2.农机手小程序</a> </li>
+     </ul></li>
+    <li class="text-ellipsis"><a href="#anchor19" title="3.详细设计">3.详细设计</a> </li>
+    <li class="text-ellipsis"><a href="#anchor78" title="4.其他">4.其他</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor79" title="4.1.开发分支">4.1.开发分支</a> </li>
+      <li class="text-ellipsis"><a href="#anchor81" title="4.2.涉及服务">4.2.涉及服务</a> </li>
+      <li class="text-ellipsis"><a href="#anchor83" title="4.3.需求地址">4.3.需求地址</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

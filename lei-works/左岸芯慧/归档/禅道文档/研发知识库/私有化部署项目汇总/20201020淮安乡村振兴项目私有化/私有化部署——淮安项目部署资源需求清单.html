@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>私有化部署——淮安项目部署资源需求清单</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p>1 服务器清单</p> 
+  <p> </p>
+  <table border="0" class="ke-zeroborder">
+   <tbody>
+    <tr>
+     <td> <p>名称</p> </td> 
+     <td> <p>配置</p> </td> 
+     <td> <p>数量</p> </td> 
+    </tr>
+    <tr>
+     <td> <p>接入服务器</p> </td> 
+     <td> <p>cpu:16核</p> </td> 
+     <td> <p>1</p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>内存：32GB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>硬盘：系统盘100GB+数据盘500GB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>操作系统：CentOS 7.x</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>公网带宽：10M+（根据访问量动态配置）</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p>应用服务器</p> </td> 
+     <td> <p>cpu:16核</p> </td> 
+     <td> <p>3</p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>内存：32GB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>硬盘：系统盘100GB+数据盘500GB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>操作系统：CentOS 7.x</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p>缓存服务器</p> </td> 
+     <td> <p>cpu:16核</p> </td> 
+     <td> <p>1</p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>内存：32GB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>硬盘：系统盘100GB+数据盘500GB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p>操作系统：CentOS 7.x</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <a></a> 
+  <h2 id="anchor129">2云服务清单</h2> 
+  <table border="0" class="ke-zeroborder">
+   <tbody>
+    <tr>
+     <td> <p>服务项</p> </td> 
+     <td> <p>名称</p> </td> 
+     <td> <p>配置</p> </td> 
+     <td> <p>数量</p> </td> 
+    </tr>
+    <tr>
+     <td> <p>数据库</p> </td> 
+     <td> <p>阿里云RDS云mysql数据库</p> </td> 
+     <td> <p>mysql版本：5.7</p> </td> 
+     <td> <p>1</p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p><br></p> </td> 
+     <td> <p>存储理性：本地SSD盘</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p><br></p> </td> 
+     <td> <p>CPU:8核</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p><br></p> </td> 
+     <td> <p>内存：32GB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p><br></p> </td> 
+     <td> <p><br></p> </td> 
+     <td> <p>存储空间：1TB</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p>文件存储OSS</p> </td> 
+     <td> <p>阿里云oss</p> </td> 
+     <td> <p>资源包类型：标准(LRS)存储包</p> <p>存储包容量：1TB</p> <p>地域：中国大陆通用</p> </td> 
+     <td> <p>1</p> </td> 
+    </tr>
+    <tr>
+     <td> <p>短信</p> </td> 
+     <td> <p>阿里云短信服务</p> </td> 
+     <td> <p>国内短信流量包</p> <p>5000条短信包，收费大约在250元左右。</p> <p>有效使用时间为2年。</p> <p>可以根据实际的使用量动态调整</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <h2 id="anchor231">3域名</h2> 
+  <p> </p>
+  <table border="0" class="ke-zeroborder">
+   <tbody>
+    <tr>
+     <td> <p>名称</p> </td> 
+     <td> <p>域名</p> </td> 
+     <td> <p>备注</p> </td> 
+    </tr>
+    <tr>
+     <td> <p>神农口袋OA</p> </td> 
+     <td> <p><a href="https://www.snkoudai.xxx.com/">www.snkoudai.xxx.com</a></p> </td> 
+     <td> <p>可以分配ssl证书，也可以不分配</p> </td> 
+    </tr>
+    <tr>
+     <td> <p>神农口袋OA管理后台</p> </td> 
+     <td> <p>admin.snkoudai.xxx.com</p> </td> 
+     <td> <p><br></p> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <p> </p>
+  <table>
+   <tbody>
+    <tr>
+     <td>名称<br></td> 
+     <td>域名<br></td> 
+     <td>备注<br></td> 
+    </tr>
+    <tr>
+     <td>神农口袋OA<br></td> 
+     <td>www.snkoudai.xxx.com<br></td> 
+     <td><br></td> 
+    </tr>
+    <tr>
+     <td>神农口袋OA管理后台<br></td> 
+     <td>admin.snkoudai.xxx.com<br></td> 
+     <td><br></td> 
+    </tr>
+    <tr>
+     <td>神农口袋OA溯源h5页面<br></td> 
+     <td>suyuan.snkoudai.xxx.com<br></td> 
+     <td><br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <h2 id="anchor273">4第三方账户</h2> 
+  <h1><a></a></h1> 
+  <h2><a></a></h2> 
+  <h2><a></a></h2> 
+  <p> </p>
+  <table>
+   <tbody>
+    <tr>
+     <td> <p>名称</p> </td> 
+     <td> <p>备注</p> </td> 
+    </tr>
+    <tr>
+     <td> <p>IOS开发者账号</p> </td> 
+     <td> <p>需开通iOS开发者账号，并申请iOS应用的证书</p> </td> 
+    </tr>
+    <tr>
+     <td> <p>APICloud账号及APICloud组件</p> </td> 
+     <td> <p>账号：App采用混合开发，开发框架为APICloud，需提前申请<a href="https://www.apicloud.com/" target="_blank" rel="noreferrer noopener">https://www.apicloud.com/</a></p> <p>组件：账号下新建一个项目，按照目前神农口袋app项目添加对应模块，部分模块打正式包时需要付费</p> <p>配置项：将生成的项目代码结构删除，将神农口袋app代码复制进去，注意修改根路径下config.xml文件里的widget标签id（id为apicloud项目id）、feature标签配置的各个模块key值（可由左岸配置）</p> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p>地图开发者账号</p> </td> 
+     <td> <p>账号：分别申请高德地图和百度地图开发者账号，并提供应用key和secret值<a href="https://developer.amap.com/dev/key/app" target="_blank" rel="noreferrer noopener">https://developer.amap.com/dev/key/app</a></p> <p>api云服务：web和app中使用到地理编码、逆地理编码、地址反解等api云服务（高德不支持国外地点，百度支持）</p> <p><br></p> </td> 
+    </tr>
+    <tr>
+     <td> <p>微信分享</p> </td> 
+     <td> <p>微信开放平台：微信开放平台创建APP应用，并开启微信分享能力，获得key和secr值</p> <p>微信公众平台：开通微信公众平台，保证溯源H5页面有指定微信分享样式</p> <br></td> 
+    </tr>
+   </tbody>
+  </table>
+  <h2><a></a></h2> 
+  <h2><a></a></h2> 
+  <p><br></p> 
+  <br> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor129" title="2云服务清单">2云服务清单</a> </li>
+    <li class="text-ellipsis"><a href="#anchor231" title="3域名">3域名</a> </li>
+    <li class="text-ellipsis"><a href="#anchor273" title="4第三方账户">4第三方账户</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

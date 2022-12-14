@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gis数据——三调 + 确权数据梳理</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <div> 
+   <div class="ace-line old-record-id-JJLzdAgK7ofzi8xlgJ7cmewEn5e">
+    Gis相关数据
+   </div> 
+   <div class="ace-line old-record-id-JGWwdYMOCoWQe8xu2sectdZonCd">
+    大屏关联使用Gis数据内容：
+   </div> 
+   <div class="ace-line old-record-id-VSGadoi0YoKUa2xCYLGcbDx9ntb">
+    三调、确权、高标准、两区划定、影像（遥感）
+   </div> 
+   <div class="ace-line old-record-id-LKywdIQwEoqEAmxoJ2BcsF2lntf">
+    tips:每个gis数据源可以看作一个业务系统，区别在于业务系统是否完善（系统内容仅仅支持查询展示，还是支持增删改查功能）
+   </div> 
+   <p>Gis标准规范</p> 
+   <p><br></p> 
+   <div> 
+    <div> 
+     <table class="ace-table" style="border:none;width:auto;"> 
+      <tbody> 
+       <tr> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-HUIadaYKGouUS8xoPJlcj7ocnpe">
+          数据库表命名
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-RiuedwcuYo4kMwx2DMLceEcDncb">
+          <span style="color:#D83931;">不管拿到的矢量数据是区级还是市级，数据库就只建一张市级表，因为市级是一个最折中的一个区间，数据不会很大也不会很小</span>
+         </div> </td> 
+       </tr> 
+       <tr> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-QeWOdEqwSo0kywxKW1tcbbGhnFf">
+          动态服务和切片服务管理
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-SAYsdM80Mo4ICYxy8GOck89Wnth">
+          <span style="color:#D83931;">切片服务数据源跟数据库保持一致，切片服务可以根据区、镇、村、分类等等不同的纬度进行切片，但是数据源都是一样，只有数据库一张表</span>
+         </div> </td> 
+       </tr> 
+       <tr> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-EAomdAKyMoC8wUxe0ZGcTCwCnkb">
+          省、市、区、镇、村级gis数据展示+数据源获取
+         </div> 
+         <div class="ace-line old-record-id-VKUCdWAaco6WkWxEZAPckDiDncf">
+          <br>
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-USysdCKAMoYe6yxmQK3cInu6nvd">
+          <span style="color:#D83931;">我们将市级数据作为中间层来规划，市级账号登陆使用市级切片服务，查询服务使用市级动态服务查询。区级和镇村级都展示区级的切片服务，查询都是用市级动态服务查询</span>
+         </div> </td> 
+       </tr> 
+      </tbody> 
+     </table> 
+    </div> 
+    <div class="ace-line old-record-id-BYGCd4Oq6oQ8uWxsRHScYH0tnig">
+     Gis数据发布流程：获取数据--&gt;分析--&gt;入库--&gt;发布gis服务
+    </div> 
+    <p><br></p> 
+    <table class="ace-table" style="border:none;width:500px;"> 
+     <tbody> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-KeIadqMeMo2QiAxMpmpcBqi1n2g">
+         步骤一
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-Ka6OdkYAioWkSIxaysXcKX2BnLb">
+         镇村数据入神农口袋mysql库,tbl_area_local表
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-KQg6d2eaSoyMYKxsdfyclWg4nJe">
+         步骤二
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-ZsmkdaQa0omqGwxmUc4c1HvLnhe">
+         arcmap对矢量数据进行转换：转成wgs84格式
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-REYGdKMuKoki6ex2BmUcEHCSn8d">
+         步骤三
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-C4ASd0sasogcGexgP74cWhY3nAe">
+         对转换后的矢量数据添加字段，例如：省市区镇村
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-QIUYdMoe0oYCqCxmEaGcOKIAnFd">
+         步骤四
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-PWYad6MASomsOuxwnVccevVynkd">
+         将处理的矢量数据入库：sqlserver数据库
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-SQCwdSo40oYw4AxCuXtc5yYJnJe">
+         步骤五
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-NgEAdaCEKowOooxcTAGcNdapnCg">
+         填充新增字段数据
+        </div> </td> 
+      </tr> 
+      <tr> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-GCKodUA2CoyUeaxakveco8mcnHf">
+         步骤六
+        </div> </td> 
+       <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+        <div class="ace-line old-record-id-AiIyd6kesomyaixgTHkc6S3vnfh">
+         将入库后的数据发布成gis服务
+        </div> </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <div> 
+     <p>参考文档：<a href="/zentao/doc-objectLibs-custom-0-37-428.html?tid=wi40um2u" target="_blank" rel="noreferrer noopener"><span style="color:#003399;">《gis数据发布流程-发布gis服务》</span></a></p> 
+     <p><br></p> 
+     <p><br></p> 
+     <div> 
+      <p>数据总览：</p> 
+      <p> </p>
+      <div> 
+       <table class="ace-table ke-select-col" style="border:none;width:auto;"> 
+        <tbody> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-NWeGd4qkAo0uUWx6vMmcd16vnFe">
+            序号
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-Bk0Qd4MasoCyySxCqFzcUoIPnKh">
+            系统分类
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-HKQ2deeQcoQU60xA9UAcPIp1nbe">
+            依赖数据
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-F6AYdYUQcogMWkx8HBncuzC3n9g">
+            备注
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-XmKkdismqoacUEx0mZ5cLGokn4e">
+            1
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-Esgyd04UooyScCx2pA2c88wZnXg">
+            耕地保护系统
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-Bq0EdAE8Oo8k6sx0GhUcVRaInPf">
+            三调数据
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-Mksgd60Q0oGICMxUFU3c6RM0nce">
+            <br>
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-BKUYdEYYWoK0Oixay0RcUBHvnue">
+            2
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-KeUudmyGmoAM6Exm2oXcajHqnIc">
+            土地承包系统
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-VgEQdiAyQoEaE2xgrDzcZMxVnVg">
+            确权数据
+           </div> </td> 
+          <td colspan="1" rowspan="6" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-AqW2dE2gYoqa0WxwDdhcFynOnSh">
+            1）根据当前登录主体的【管理区域】，若该区域下的【GIS服务分类】已配置了【承包地确权数据】的GIS服务，则展示【承包地】菜单
+           </div> 
+           <div class="ace-line old-record-id-Jawsd2ooIoKY8ix8fbBc2sQJn6f">
+            2）根据当前登录主体的【管理区域】，若该区域下的【GIS服务分类】已配置了【第三次全部土地调查数据】的GIS服务，则展示【农用地】菜单
+           </div> 
+           <div class="ace-line old-record-id-KosMdWiyQoc4gWxIFjyc54EanZe">
+            3）根据当前登录主体的【管理区域】，若该区域下的【GIS服务分类】已配置了【高标准农田数据】的GIS服务，则展示【高标准农田数据】菜单
+           </div> 
+           <div class="ace-line old-record-id-KUSgdw44IoY00IxmlbhchBoXnwn">
+            4）根据当前登录主体的【管理区域】，若该区域下的【GIS服务分类】已配置了【两区划定数据】的GIS服务，则展示【两区划定数据】菜单
+           </div> 
+           <div class="ace-line old-record-id-TqIYdiE0aoE8CexS4s0c62YBnLc">
+            5）根据当前登录主体的【管理区域】，若该区域下的【GIS服务分类】已配置了【土壤重金属污染数据】的GIS服务，则展示【土壤重金属污染数据】菜单
+           </div> 
+           <div class="ace-line old-record-id-E48wdMumSoS2usx8NMKcmITjn8d">
+            6）根据当前登录主体的【管理区域】，若该区域下的【GIS服务分类】已配置了【土壤墒情肥力数据】的GIS服务，则展示【土壤墒情肥力数据】菜单
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-FqCid4uoooIOCQx08LCcUbSfnAg">
+            3
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-V6gEdm4GYoI2o6xkLFacgvWonQb">
+            高标准农田
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-V2aed0m8yoQGGoxgvnzcK70bnkc">
+            高标准 + 高标准轮廓
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-SUw6d2eIgoC2ywxw1rucuR86nqg">
+            4
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-LqAQdUomeoyg8KxQjMGcOdD6n8c">
+            两区划定
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-UUOedAQgUogW2mx2zjHcQA0knCf">
+            三调数据+区域轮廓
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-WWCedqe4Eo8UQsxfaVZcGbXhnod">
+            5
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-QMEAdQQUoowigwxqKu0crZjQnsd">
+            影像（遥感监测）
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-QSwEd6WsYo6om8xd6sbc3MIinih">
+            卫星影像 + 三调数据
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-TK2edCeK4oQsuGxEPjIcP5Cpnie">
+            6
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-RWiwdoMcgoKw2Mxy2BVcbc6unSe">
+            经营主体
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-SUKOdikEoomMO6xSgR4cpMWrnZb">
+            区域Gis轮廓数据 +经营主体
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-AS06dMuYgomQE0xMT4Cc3xvLnWb">
+            7
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-PWy8dQ2CcoGweyx49iocIIvGnUg">
+            土壤重金属+墒情肥力数据
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-VYA2d8Geaoe8AaxeqrrcqB11nqg">
+            三调数据
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-QAyadc4cUoW2IIxEPHCcMFW0nqd">
+            8
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-LgKGdoIggoymcwxUh2YcAV8Jnne">
+            养殖业主体
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-MqAwd2ccsoo0i0xMjMeclriFnVb">
+            <br>
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-T6AUdCKKyo4ycAxKMYMcqkCanig">
+            <br>
+           </div> </td> 
+         </tr> 
+         <tr> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-Xa4Cd44OYomaq4xGoqVcDC6onOb">
+            9
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-H2OIdSiYmoCi6CxiWGVcEGTonOc">
+            监管主体
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-NisGdEYEKo6YgIxeUGXcne99nqd">
+            <br>
+           </div> </td> 
+          <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+           <div class="ace-line old-record-id-PwAadiO2YoEgkMxumcUcM61AnPb">
+            <br>
+           </div> </td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div> 
+      <span class="lark-record-clipboard"></span> 
+      <div>
+       <span style="color:inherit;font-size:20px;font-weight:700;">一、三调</span>
+      </div> 
+     </div> 
+    </div> 
+    <div> 
+     <p>三调数据包含内容：</p> 
+     <p><br></p> 
+     <div> 
+      <table class="ace-table" style="border:none;width:auto;"> 
+       <tbody> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Me0Udy4cgoKqwkxKAIxc4zwrnIh">
+           土地利用所属分类
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-GoqIdGUoKo4i2axMD3dcxv8hnKz">
+           一级分类
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-OMmUdwyGCoyu0kxYZIWc3HvonEb">
+           二级分类
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="7" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-ZUIgdgMmGoCI0exaHT4cRXAfnSt">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-RiU8doGw6oogkuxO97KcTrSZnzq">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-LwiSd4qU8oEyMcx8bh1cpaQon1g">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-FSqGd4OYeoyqGQxQjkccGUSYn6f">
+           <br>
+          </div> 
+          <div style="text-align:center;" class="ace-line old-record-id-Ay4gdMM2eoGWWcxkVtPcHbVPnDb">
+           农用地
+          </div> 
+          <div style="text-align:center;" class="ace-line old-record-id-IuCGdImwco0UM2xWeGVcXaLun6f">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-MeMSdy8YGoSoccx50wzc30tyniI">
+           耕地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-B4y2dUuiAoyGsqx8paDcFXgUnyd">
+           水田、水浇地、旱地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-AQS8dSCWQoawkmxW63BcqWsanfh">
+           园地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DkqmdGsKookcSyxOOu1cHcPonee">
+           果园、茶园、橡胶园、其他园地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NwOedCY6goSCawxiclQclZZcnDg">
+           林地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-CagedAEQQoQSAYxawhJcYQoRn0b">
+           乔木林地、竹林地、红树林地、森林沼泽、灌木林地、灌丛沼泽、其他林地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-WKcadC6cSoci6ux87crc0CrJnue">
+           草地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-AYm4dQKgMogM4MxchEzcDEfqnRm">
+           天然牧草地、沼泽草地、人工牧草地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-WQ0OdC2EsoMso8xqEnBcNKbnnhc">
+           交通运输用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YOK6d2yyyo6M8qxgxsNcG5QWnad">
+           农村道路、田坎
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DqA8dsgKoo4IKMxqsm9cEjm6nJb">
+           水域及水利设施用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-RoC4dmIksoWEAyxmCYacFHnKnAu">
+           水库水面、坑塘水面、沟渠
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DEaGdIU6EoKuUIxiu8Icpo1Cnfg">
+           其他土地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-XgYmdYgMsoCIwAxWoRqcB6wmngf">
+           设施农用地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="8" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-MYQId622Ko2mQQxUSSscoKCynBA">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-AgUEdmUY6oyGMoxOs57cTyW1n8g">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-V2Sod4GcooGgwIxOcRacyP2Qnkf">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-FsC8dmaqko0S0wxMF8QcIMXdned">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-VQw0dyQM2oua0QxeMOrc4bgpn1f">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-AGCodKceUokYOKxGmGBcU4jLnyd">
+           <br>
+          </div> 
+          <div class="ace-line old-record-id-UIe4dEuGgoigWoxUN20c3dObnob">
+           <br>
+          </div> 
+          <div style="text-align:center;" class="ace-line old-record-id-BSW6d6iqUoMMGUxuwU5cgM6znrf">
+           建设用地
+          </div> 
+          <div style="text-align:center;" class="ace-line old-record-id-PKkcdSwQ6oyqAexIfMecVSu2nXf">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-AKcudUc2EoYAE2xe8bYc4U7OnTh">
+           商服用地
+          </div> 
+          <div class="ace-line old-record-id-K2wWdeSCeoSsaKxkZI3couJinBb">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-N88KdAA6yoemYmxCHxecpELdnnb">
+           零售商业用地、批发市场用地、餐饮用地、旅馆用地、商务金融用地、娱乐用地、其他商服用地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-A8s0d0GsQoAsMgxd0cccfCtknGU">
+           工矿仓储用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-UkWYdYs0uoYIMcxwB6lcHB7rnkc">
+           工业用地、采矿用地、盐田、仓储用地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-WkWUduOqooKqI2xM7E0czVa1nsd">
+           住宅用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-EcMMd2qm8oiK2kxUxagcxTZFnoh">
+           城镇住宅用地、农村宅基地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-SC6gdmuCIowiAyx2rjXcYSEJn6c">
+           公共管理与公共服务用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Vq02dIceyoYWUQxCegPcNd9Wnzc">
+           机关团体用地、新闻出版用地、教育用地、科研用地、医疗卫生用地、社会福利用地、文化设施用地、体育用地、公用设施用地、公园与绿地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-SCy6d0gCkoMeW0x23oLc6vDrnae">
+           特殊用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Zm8qdqqWOomi0UxT7YrcZx7vnpa">
+           军事设施用地、使领馆用地、监教场所用地、宗教用地、殡葬用地、风景名胜设施用地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-VACodKscEoM4gExgjJIcMfalnRe">
+           交通运输用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Oo8udMS8GouKIix4cvuc2sqCnnd">
+           铁路用地、轨道交通用地、公路用地、城镇村道路用地、交通服务场站用地、机场用地、港口码头用地、管道运输用地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-UEOgdiK0Ao4A0uxIdJQcPNOLnZc">
+           水域及水利设施用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HIuAdc24moOGsCxgQHXcWRQ6n1A">
+           水工建筑用地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-RyAedsUGIoE666x2X1FcRhgfnBe">
+           其他土地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-FU8Qde6cIoGIYCxKEM4c7XSYnEg">
+           空闲地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="3" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-ZuQgdOyeSoEG2UxmWzjcfraanNe">
+           <br>
+          </div> 
+          <div style="text-align:center;" class="ace-line old-record-id-J2gAdoQoIocWG0xOfDqccNzLndq">
+           未利用地
+          </div> 
+          <div style="text-align:center;" class="ace-line old-record-id-RGoUdQWgkoocoExg3u7cGbrunTd">
+           <br>
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-FUwidMiGUouEwax2xWPcBpJVno6">
+           草地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-UkA6d8omwook8MxIl3Vc4YSmnmh">
+           其他草地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-EMcWdmGEEosO2AxO1E5cmqKPneb">
+           其他土地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-QgcCdQc0KokcGMxMr0Ecpz4dnTh">
+           盐碱地、沙地、裸土地、裸岩石砾地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-FGeidCUGeocmikx4aY7cmkKonne">
+           水域及水利设施用地
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-RGeKd8YyOoEeikxW00Jc8L2nnFh">
+           河流水面、湖泊水面、沿海滩涂、内陆滩涂、沼泽地、冰川及永久积雪
+          </div> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+     <span class="lark-record-clipboard"></span> 
+     <div class="ace-line old-record-id-KsW6dUwwMosAQOx2RMqcOtvvngf">
+      三调数据关联系统：耕地保护系统
+     </div> 
+     <div class="ace-line old-record-id-NoAodYIy2oe0m8xx8Ckc8iQjnw6">
+      耕地保护系统功能：
+     </div> 
+     <div class="ace-line old-record-id-QAEUdIOQCo4GeaxMzlgclLTBndf">
+      <strong>1、对AI识别结果第一轮筛查识别，将识别的shp文件与旌阳三调数据对比，获取有交集的识别shp文件，在后台对占用物进行处理归档；针对AI识别错误的建筑物/水体进行纠正，判定为有占用或者无占用；</strong>
+     </div> 
+     <div class="ace-line old-record-id-NasEdmE8Ooc2yqx0sadcXSZtnub">
+      <strong>2、线下核查-乡镇/村田长可对占用物进行核查处理，核查占用物是否确实有占用情况；提报后由上级行政部门审核归档，作为耕地占用情况依据。</strong>
+     </div> 
+     <div class="ace-line old-record-id-SeSEdqm0coSEMaxwjd6cgHGqnLN">
+      <strong>3、手动录入占用物，可在地图上圈出占用物，选择是否需要把人工圈定的占用物让乡镇/村田长进行核查；给监管人员提供自查的方式；</strong>
+     </div> 
+     <div class="ace-line old-record-id-Mmkyd0C6ioaqUux2yZdcVbdpnpb">
+      <strong>4、审核-乡镇/村田长对异常进行复核后，由县域人员进行审核 ，可对结果审核通过归档，同时也可以审核驳回；</strong>
+     </div> 
+     <div class="ace-line old-record-id-CwMMdCk4Io0KcMxv94PcXnsZnd3">
+      <strong>5、重新审核-审核驳回的数据由乡镇/村田长进行重新复核后数据变为待复核后进行后续处理；</strong>
+     </div> 
+     <p><strong>6、耕地占用结果查看，针对审核通过&amp;有占用耕地的数据通过地图和列表两种方式进行查看；</strong></p> 
+     <p><strong><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11046.png" alt="" width="450" height="249" title=""><br></strong></p> 
+    </div> 
+    <span class="lark-record-clipboard"></span> 
+    <p>参考附件：国土调查数据库标准（试行修订稿）、土地利用现状分类标准(GBT-21010-2017）</p> 
+    <p><br></p> 
+    <div> 
+     <h1 class="heading-1 ace-line old-record-id-TMAWdOwYkoi28Kxk1AVcABpDnYc" id="anchor444">二、确权</h1> 
+     <div class="ace-line old-record-id-Mkyudw8KOookwQxUSaSckbySnqb">
+      确权数据包含内容：
+     </div> 
+     <div> 
+      <table class="ace-table" style="border:none;width:auto;"> 
+       <tbody> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Ta0ad4wwmo8kG2xc5HPcL9nLnYb">
+           确权
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-KoIwde6M4oQwGkx4LCacwxFQnYf">
+           包含内容
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NsMadSmi8oEoq0xIvCJclDnRnbh">
+           县/乡/村/组/区域级行政区结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-S4M4dYqAuoUmuexQdxqcIdJEn9f">
+           标识码、要素代码、区域代码、区域名称、界限类型、界限性质
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-WOMqdGkQGooKuexsFh4c1sjkn2e">
+           区域点/线/面状物属性结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NaQEdw2qqoCik0x6SVTcIClwntf">
+           标识码、要素代码、地物名称、长度、宽度、备注、面积、面积（亩）
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Zy2Ads4C6oGC6SxMfnycm2Kmnmh">
+           地块属性结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Qeecd2SUooo68qxS0BXcX1QTndc">
+           标识码、要素代码、地块代码、地块名称、所有权性质、地块类别、土地利用类型、地力等级、土地用途、是否基本农田、实测面积、地块东至/西至/南至/北至、地块备注、指界人姓名、空间坐标、实测面积（亩）
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NI84dUsE0oSkuwxMvvtcLbjGnxe">
+           基本农田保护区属性结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-RY2gdW0Oaowe6KxCKAjcUshUnvc">
+           标识码、要素代码、保护区编号、基本农田面积、基本农田面积（亩）
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-BQmqd6MWgoMegIxP0aacMvqbniD">
+           承包地块信息结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Ou0udwEWqo6o8Ex0aZ0c7ZtRnbb">
+           地块代码、发包方代码、承包方代码、承包经营权取得方式、确权（合同）面积、承包合同代码、流转合同代码、承包经营权证（登记）代码、原合同面积、确权（合同）面积（亩）、是否确权股
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-XgOYdKMkkoOCYaxW6dHcsz11nce">
+           发包方结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-EYAkdocqQoOEcIxMNYYcO92gnGb">
+           发包方代码、发包方名称、发包方负责人姓名、负责人证件类型、负责人证件号码、联系电话、发包方地址、邮政编码、发包方调查员、发包方调查日期、发包方调查记事
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-MwuadOWy8ocEsSxQvuhcQJvPnRc">
+           承包方结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Egy8dueAIoUi2UxCejhchqKvnbg">
+           承包方代码、承包方类型、承包方（代表）名称、承包方（代表）证件类型、承包方（代表）证件号码、承包方地址、邮政编码、联系电话、承包方成员数量、承包方调查日期、承包方调查员、公示记事人、公示记事、公示审核日期、公示审核人
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DC8qdCoSuo6iugxUfcdcZRNynYb">
+           家庭成员结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-F2QSdky6IoUU0wxeUsdcHkfcnme">
+           承包方代码、成员姓名、成员性别、成员证件类型、成员证件号码、与户主关系、成员备注、是否共有人、成员备注说明
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-LU0adyogwo2EOCxeKjAc8G0SnXc">
+           承包合同结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-N6oedCISyoWEyAxv42actsASnDS">
+           承包合同代码、原承包合同代码、发包方代码、承包方代码、承包方式、承包期限起、承包期限止、确权（合同）总面积、承包地块总数、签订合同、原合同总面积
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-PcOodgoiCosWOaxYfuzcpLz9n1d">
+           流转合同结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-M2AIdqGSuo4SS2xk7b2cTGo1n7d">
+           承包合同代码、流转合同代码、承包方代码、受让方代码、流转方式、流转期限、流转期限开始日期、流转期限结束日期、流转面积、流转地块数、流转前土地用途、流转后土地用途、流转费用说明、合同签订日期
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-XAw6dkoucoGaWGxiCAzcI8k8noc">
+           权属来源资料结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-QKModuKmcoysqaxAB1fcPduBnRf">
+           承包经营权证（登记簿）代码、资料附件编号、资料附件名称、资料附件日期、附件
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HCSudwA62oWMI2x2DLBcUlcXnQd">
+           承包经营权登记簿结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-OiE2dOMCSo2wqkxsXAgceEOOn9e">
+           承包经营权证（登记簿）代码、发包方代码、承包方代码、承包期限、承包期限起、承包期限止、地块示意图、承包经营权证流水号、登记簿附记、原承包经营权证编号、登簿人、登记时间
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-XgewdMmcoo088oxmoQKchUx5naf">
+           承包经营权证结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-RauCduM2soIwMyxeG1pct8Bsnih">
+           承包经营权证（登记簿）代码、发证机关、发证日期、权证是否领取、权证领取日期、权证领取人名称、权证领取人证件类型、权证领取人证件号码
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DGCKdGe8ioQec6xkirKc7BVRnpr">
+           权证补发结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NIaId0WiaoySqyxuyC7cNr5QnKb">
+           承包经营权证（登记簿）代码、权证补发原因、补发日期、权证补发领取日期、权证补发领取人姓名、权证补发领取人证件类型、权证补发领取人证件号码
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DugydWYKKooAquxSsM6ceEu9nVg">
+           权证换发结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-AuKsdE0SmooYqcxoxu8cDQwPnMc">
+           承包经营权证（登记簿）代码、权证换发原因、换发日期、权证换发领取日期、权证换发领取人姓名、权证换发领取人证件类型、权证换发领取人证件号码
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-ICUSdCa4soK4SKxQphDcPi5Fnke">
+           权证注销结构
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-IKQUdIK24oAciYxaAzicJbR4n5g">
+           承包经营权证（登记簿）代码、注销原因、注销日期
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-LGAkdecYEoMmysxUbpNcERv0nDf">
+           控制点类型及等级
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Ia8edsKw6o2mOwxEDXhcquT8nQh">
+           平面控制点、大地原点、三角点(一二三四五等)、土根点（一二三级）、导线点（一二级）、高程控制点、水准原点、水准点（一二三四等）、卫星定位控制但、卫星定位等级点（ABCDE）
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-O8USdYA4AooCwqxKYkjcjdPRnVf">
+           标石类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YckkdqWG4oGm2exEbbicGJidnNe">
+           基岩标石、混凝土标石、普通标石、其他标石类型
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-TmM2dCgoaoEme8xUxYrcUq4SnUd">
+           标志类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-J2wwdawGioiy2kxUlYmcyhxOnLg">
+           钢标志、铜标志、刻十字标志、其他标志类型
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NSy8d0qkOoKqqGxiWKHc0BMhnIg">
+           界限类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DAgCdCW28oeoauxOofGclCWtnIh">
+           海岸线、大潮平均高潮线、零米等深线、江河入海口陆海分界线、国界、省/自治区/直辖市界、地区/自治州/地级市界、县/区/旗/市界、乡/街道/镇界、开发区/保税区界、组界
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YQaIdy20IogSo6xA7cocwbWCnYb">
+           界限性质
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-VWiodOGWoocS0wx0A8ecAuicnoh">
+           已定界、未定界、争议界、工作界、其他界限
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-E6iwdyMYgoIOWsx61a5cI43Onqe">
+           所有权性质
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-BWSodAm0YoMkAExo5DqcWrE6nfb">
+           国有土地所有权、集体土地所有权、村民小组、村集体经济组织、乡集体经济组织、其他农民集体经济组织
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-JG2mdEU6qoIyMwxop0ncX0rvnze">
+           地块类别
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-UEiudYucEoMUUcxUV2NcfbLVnyg">
+           承包地块、自留地、机动地、开荒地、其他集体土地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HGWedMueQoasSCxecSQcFoXpn6c">
+           地力等级
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HkQAdQ8Q6oMSECx8pYxcogspnCg">
+           一二三四五六七八九十等地
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YuI0dWuGSoey4wxGqqycv3eBnGf">
+           土地用途
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Syc6dg8GEoSKIgxghnLc264Lnjb">
+           种植业、、林业、畜牧业、渔业、非农业用途
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-N0kCd26UOowyMexYjj8cwmtUnAb">
+           承包经营权取得方式
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-OsAudqe4EoAQ6AxBJO1cWy5Ynqp">
+           承包、家庭承包、其他承包方式、招标、拍卖、公开协商、转让、互换
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-OIKIdmQ6ioCGuCxcZLuc8ciinUd">
+           界址点类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-X0uedsS0UoO8Q0xIkZTcpHZ5nfo">
+           实测法界址点、航测法界址点、图解法界址点
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-NKICduk2Qo6MwEx689jcYPBWnyh">
+           界标类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-VeWOdggEeoA8C2xoXDicQ8VjnKf">
+           钢钉、水泥桩、石灰桩、喷涂、瓷标识、无标志、木桩、埋石、其他标界
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-T2UYdSoqEoqOA4xEnTpcUMYlnWe">
+           界址线类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-BqgGdcCkSoI2k6xop0GcUtt6nih">
+           田垄、沟渠、道路、行树、围墙、墙壁、栅栏、两点连线、其他连线
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-YmMOd86muooqu8xszcRcTClcnzh">
+           界址线位置
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-FK2AdGcG8oce44xQLGgcVoW2nAh">
+           内、中、外
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-L8u8dAoGuomaE0xueF8chk6Cncf">
+           证件类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-HIwMdGwOqoCsS4xILAccvncOnug">
+           居民身份证、军官证、行政、企事业单位机构代码证/法人代码证、户口簿、护照、其他证件
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-IoOkduyCaoUQIMxYhmEcbRc4nzI">
+           承包方类型
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-MWyUdaIcIoMa8cxICuHcFcZHnfb">
+           农户、个人、单位
+          </div> </td> 
+        </tr> 
+        <tr> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-Wwm6dOMSKoGO84xiMSmcHOCAnzc">
+           成员备注
+          </div> </td> 
+         <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+          <div class="ace-line old-record-id-DuCOdaUMCocy00x4keTcNtOBnLc">
+           外嫁女、入赘男、在校大学生、国家公职人员、军人（军官、士兵）、新生儿、去世、其他备注
+          </div> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </div> 
+     <div class="ace-line old-record-id-HSwEdoe26owoE2xg1oxcmfs7n6A">
+      确权数据关联系统：土地承包系统
+     </div> 
+     <div class="ace-line old-record-id-LwOOdmMEQoyOa0xIdhHcDnV5nIh">
+      主要功能：
+     </div> 
+     <div class="ace-line old-record-id-NuuydwY6OoGMkCxgTZDcwPRFnzc">
+      <strong>1.发包方、承包方、承包方家庭成员、承包地块信息等维护；</strong>
+     </div> 
+     <div class="ace-line old-record-id-OAI4d0CQWoogoGx31dncCluDnKD">
+      <strong>2.初始登记、其他方式登记、互换登记、转让登记、分户登记、合户登记、变更户主登记、注销登记8种登记流程的实现；</strong>
+     </div> 
+     <div class="ace-line old-record-id-JGMWdK0mqokEqex6wvqcQWvDngb">
+      <strong>3.承包合同、登记簿、权证的管理；</strong>
+     </div> 
+     <div class="ace-line old-record-id-IwIEdCsc2oqSYmxQrerctgmJn6f">
+      <strong>4.权证的初发、补发、换发以及权证打印；</strong>
+     </div> 
+     <div class="ace-line old-record-id-VGsAdA6eSokAOUxwbNtcc2ZJn9d">
+      <strong>5.外设指南和土地承包区域配置管理</strong>
+     </div> 
+     <div class="ace-line old-record-id-RKgGd8UsKoOsE2xgD72cdw5hnXd">
+      土地承包流程：
+     </div> 
+    </div> 
+    <span class="lark-record-clipboard"></span> 
+    <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-11044.png" alt="" width="450" height="248" title=""></p> 
+    <p>参考附件：农村土地承包经营权确权登记数据库规范（新版）</p> 
+    <p><br></p> 
+    <p><br></p> 
+   </div> 
+   <span class="lark-record-clipboard"></span> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor444" title="二、确权">二、确权</a> </li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>

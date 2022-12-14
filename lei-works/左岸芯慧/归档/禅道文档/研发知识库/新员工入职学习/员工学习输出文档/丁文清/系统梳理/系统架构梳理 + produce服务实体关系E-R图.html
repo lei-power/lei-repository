@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>系统架构梳理 + produce服务实体关系E-R图</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <p>1、系统架构图</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9711.png" alt="" width="650" height="469" title=""></p> 
+  <p>业务系统总览</p> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9831.jpg" alt="" width="650" height="311" title=""></p> 
+  <p><br></p> 
+  <p>2、produce服务实体E-R图</p> 
+  <p><br></p> 
+  <div> 
+   <div class="ace-line old-record-id-UA20dyOSKoGYqixcJtJcHA2hnKf">
+    produce服务主要信息表包含：
+   </div> 
+   <div class="ace-line old-record-id-PSMIdOOCIo8wyGxcV3yc7vQonwf">
+    农场、地块、农事、农资、采收、种养计划、库存、溯源码、合格证、条形码、区域管理、管棚区、保险、物联网
+   </div> 
+  </div> 
+  <p><br></p> 
+  <div> 
+   <div class="ace-line old-record-id-NiIQdiOy6oagkIxUrlLc2W6WnRf">
+    农场：
+   </div> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="table table-kindeditor" style="width:auto;">
+   <tbody>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-BQ0gdCWE8osGYAxeSyocjMDfnzc">
+        tbl_farm
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-FUCudOm42oEYy2xWsN5cIUhynKh">
+        农场表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-WWOSd6Owuoeew4xoDblc4re7nkg">
+        tbl_farm_score
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-I2QSdM4kWossGwxy8wvcCthqnBg">
+        农场评分表
+       </div> 
+      </div> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-Qe04d2sIqoMGKSxElqNccTSVnig">
+        tbl_farm_business_category_ref
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-HqkidKYScosEAgxwxcWcBymPnGd">
+        农场经营类目关联表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-CYCMdkOS2ouwuqxIz86ccj9bnUf">
+        tbl_farmshow
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-WcWCdum2wo4qsuxMnJXcSsE4nng">
+        农场秀关联表
+       </div> 
+      </div> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-HQOCdaEw4oGMYsxusWUcDpennVf">
+        tbl_farm_crop_area_output
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-B6cUdSI6UoIqCexMPQFc8ununOc">
+        农场播种面积预计产量关联表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-PIEIdSsyioUC8Ixa84TcPzZUnKf">
+        tbl_farm_crop_sell_weight_percent
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-KguGdKS4UoeOI8xeaZOczkk5nGb">
+        农场销售去向关联表
+       </div> 
+      </div> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-W2k2d6cYOo2WEIxA3dJcb6opnph">
+        tbl_farm_image
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-LmuQdqwEeoI2eWx0qnzcg0xAnvf">
+        农场图片关联表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-AOEcdQamIoMYmWx4P4ncElTInZg">
+        tbl_farm_enterprise_link
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-GacSdeiUOoem8ux0jQ4cczk1n7c">
+        农场供应企业关联表
+       </div> 
+      </div> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-H84idyaeMoWcSyxA7oeczwnLnQb">
+        tbl_farm_insure
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-JAwOdui0IoeSAUxgr9VcvgbBnQg">
+        农场投保人关联表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div class="ace-line old-record-id-QcGedWqMQo6sE4xEHtfcSZYpn3c">
+       <span class="lark-record-clipboard"></span>tbl_farm_real_time_dynamic
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-NOa8dkEA8o8w6CxWc3HcRTbWnie">
+        农场实时经营动态关联表
+       </div> 
+      </div> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-RwUcd8GIyoc8uCxGeWFcrbqynyd">
+        tbl_farm_insure_order
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-KcGgdyQqeouuowxIjZOcPovSnsb">
+        农场投保订单关联表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div class="ace-line old-record-id-Fu2wd6imYok0Ksxsq2acQ6zRn92">
+       tbl_farmshow_agri
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-TWCEdGsqYoAkKix81Tucoe7ZnWd">
+        农场秀附件关联表
+       </div> 
+      </div> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-UigwdmMgwoOe6YxO8CicqDeenSg">
+        tbl_farm_insure_policy
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-CqgedsqMEokIC0xQ9SecCxGWnrg">
+        农场保单关联表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-G4OwdWAW0o84wyxSYhBc06kWnBc">
+        tbl_farmshow_goods
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-UYCydAe4Io8u4gxEvBYctdOVncd">
+        农场秀关联物品表
+       </div> 
+      </div> </td> 
+    </tr>
+    <tr>
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-MoqOdSCEyoc6IoxkpxscDr5pn7d">
+        tbl_farm_insure_order_land
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-QU0idMMYcomEm8xUzNVcoFEgnFe">
+        农场投保地块关联表
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;"> 
+      <div> 
+       <div class="ace-line old-record-id-GgAWdCWQioqgcWxeWfMcuUWunfz">
+        sys_farm_type
+       </div> 
+      </div> </td> 
+     <td style="border:1px solid #ddd;">农场类型表</td> 
+    </tr>
+   </tbody>
+  </table>
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9738.png" alt="" width="429" height="400" title="">
+  <p><br></p> 
+  <div> 
+   <div class="ace-line old-record-id-T4CydkGASoAU0UxuAKIc5sr5nMh">
+    地块：
+   </div> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <table class="ace-table" style="border:none;width:auto;">
+   <tbody>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-VYSOdaIAgowki6xKwxPcl4K0nAc">
+       sys_land_type
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-EMuSdM0aqoyIsmxEvrqcpZ3Bn5d">
+       地块类型表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-TukudaM00o8Yoqx8v90cyvLjncf">
+       tbl_land
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-LA2kd4qCgoeI86xMOOZc20uanUz">
+       地块表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-FE8sdSaIMomI68xIf87c9dSOnqc">
+       tbl_land_broaden
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-WCqodeWmmos2SoxYhpLcbl3UnT9">
+       地块拓展表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-TGw8dQOASoU866xglofcUBivnVf">
+       tbl_land_group
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-Qo60d6C8uomQo0xw1P5cNDHXnTe">
+       地块编组关联表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-O4WOdCe8YokoMsxy8E1caeP0nTh">
+       tbl_land_leisure_config
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-U2mSdI6UkoG6Sixk7CEcpgcNnoc">
+       空闲地块配置表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-MuiadEYMIoWk0cxOmiec1a3Ynrf">
+       <br>
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-UAYydYC4GoqMG8xqQzkc1etonRe">
+       <br>
+      </div> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9740.png" alt="" width="500" height="190" title="">
+  <p>农事：</p> 
+  <p><br></p> 
+  <div> 
+   <table class="ace-table" style="border:none;width:auto;">
+    <tbody>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Yiqyd2MAooEGuAx8lu1cswSGnzd">
+        sys_mission_category
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-V6QWdWe22o2wyGxa67bcEU5Unjb">
+        农事类型表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-JmoOda4Y0o0CmExmypTcWw0gnrh">
+        tbl_mission_area_config
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-S6GydwAeKoYsqKxWG6VcF0wGnfh">
+        农事区域表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-RCUIdy0MMoy2eoxueFkcNi3znGb">
+        sys_mission_category_crop_subject_ref
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Tmwudug2ko08i2xQ37Pcws1qnOf">
+        农事类型与作物大类关表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Ley0d0SsqoUeyKx2fn0cRpuPnfe">
+        tbl_mission_del_record
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-VsKidsIGookamgxItn6casKdnDh">
+        农事删除记录表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-HW2kdsEMuomSQkxuoF2cwaoSn3b">
+        tbl_mission
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-UYesdQYMGoCOQ8xLrnRcq5U8nwh">
+        农事任务表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-QsKUdUk0uoQcOExBYSzcRxH9nK6">
+        tbl_mission_input
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-RCI2dCeo8o60sWx06urcrktBnue">
+        农事投入物品关联表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-FQkmdK2cgoOCYIxe6aycWHeynbg">
+        tbl_mission_involve
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-AQG0de4YmoSSkuxAWcVccmwrnQn">
+        农事参与人关联表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-GkQodUWeaoQmIMxkzkcc6LHOn7f">
+        tbl_mission_remove_log
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Mo8mdu2GGo4KEoxSqTxc2a6onjb">
+        农事删除日志增量推送表
+       </div> </td> 
+     </tr>
+    </tbody>
+   </table>
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9741.png" alt="" width="500" height="291" title=""></p> 
+  <p>农资：</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="ace-table" style="border:none;width:auto;">
+   <tbody>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-CSM0dkQQGoU88wxG4xucMFqhnMc">
+       sys_agri_category
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-Ek4UdCUiwoyqAqxYFROcVXbgnjK">
+       农资类型表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-JIu8do06yoouyOxozjuc5hHkngh">
+       sys_agri_res_in_out_category
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-E4ogdW6YmoYeygxo9COcwELdnEb">
+       农资出入库类型表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-C8KMdc4GKosUk2xcdfkckZLtneh">
+       sys_agri_form_type
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-M4Gad4q0coSIoKxcDVGcBZrBncc">
+       农资剂型表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-XGmwd6i2koSwQ8xYfYWcRYjznAf">
+       sys_agri_res_pack_unit
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-VSUydMs6oowIcYxa3EqcttcbnFV">
+       农资包装单位表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-FgO6dKwGYoYCWKxMTlpcDWz3nlh">
+       tbl_agri_res
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-W60qdYUk4oA0eGxA33zcfkQQngh">
+       农资主表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-NQeYdeYygoE2KSxItpZcVe2Lnah">
+       tbl_agri_res_sku
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-ZYUAds84Cogo0ixOmoRcJ10oneg">
+       农资库表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-D6cYdcoMAoeCgEx46LZcXFu7nYd">
+       tbl_agri_res_effective
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-UkKudmGK6oCSmUx41K0cZwpUn8f">
+       农资有效成分表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-V8uEdkYwOoqIscxoFEJcrF6Fn1d">
+       tbl_agri_res_sku_in_out
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-CWUYdQ2Kwomqsuxik9GcUEHpndf">
+       农资出入库记录表
+      </div> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9742.png" alt="" width="500" height="277" title="">
+  <p>采收：</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="ace-table" style="border:none;width:auto;">
+   <tbody>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-MGgudAMeuo86Kmx6qfcciPI4nWh">
+       tbl_pick_record
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-MU6ed2YgWowIwMxOu2vc2ZLun1c">
+       采收记录表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-Jo8gdUMGaoc6CqxEfxDcuAPmnFd">
+       tbl_pick_record_fishery
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-ZUUcd4QKQoyAmexofZycf1vUnWh">
+       采收记录渔业表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-UO8kdu4uKo8KgcxhrxgchVwfnzr">
+       tbl_pick_record_agri
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-Uw4udQAgYo6Ky0xmmRXc0oz5n9e">
+       采收记录农业表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-YSsmdiqUAoMyQcxycVOcn28WnSh">
+       tbl_pick_record_forestry
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-I206dme20oAKMEx4yU2ciLobnrd">
+       采收记录林业表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-EIycdICGAoAWOYxqqkQcnrnnngd">
+       tbl_pick_record_animal
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-RcwadoyYYomyscxGwRQcviS4npg">
+       采收记录牧业表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-NKuMdC0MKoqiauxmcBxc7Z7Qnic">
+       <br>
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-KE6cdgsqkoiOAcxmLkRcdx1Inpb">
+       <br>
+      </div> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9743.png" alt="" width="350" height="300" title="">
+  <p><br></p> 
+  <p>销售：</p> 
+  <p><br></p> 
+  <p><br></p> 
+  <table class="ace-table" style="border:none;width:auto;">
+   <tbody>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-JsYydWW6eoI4csxvIaBcJtTHnKo">
+       tbl_sell_group
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-W8kadCCKkoA4S8xU5tdc7aMZn1d">
+       销售批次表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-MAY2dEA2moMycCxm0fJcnlL3nRc">
+       tbl_sell_record_fishery
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-UE6QdCOcAoQOYkxq2Oic4Ni2n0b">
+       销售记录渔业表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-SSaIdwm2qo8mMCxSFElccfRjnUA">
+       tbl_sell_record_agri
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-OCGidg0KgoQsYyx00cDcKuh9nEO">
+       销售记录农业表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-G4CiduuYYoGAw0xg9ZmcqjbinSe">
+       tbl_sell_record_forestry
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-EyWGdcYCmoMYegxEvlece3lqnog">
+       销售记录林业表
+      </div> </td> 
+    </tr>
+    <tr>
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-GuEudUqGuocSmexesLGcZDLQnHc">
+       tbl_sell_record_animal
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-HScId4k8KooCS2xQpPxcuEPknUd">
+       销售记录牧业表
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-GUEWdEgokowag2xK4aDcIxNPnpc">
+       <br>
+      </div> </td> 
+     <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+      <div class="ace-line old-record-id-Nu8WdkwQOoqeaYxyKeJcxEFanpf">
+       <br>
+      </div> </td> 
+    </tr>
+   </tbody>
+  </table>
+  <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9744.png" alt="" width="500" height="127" title="">
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <span class="lark-record-clipboard"></span> 
+  <p>种养计划：</p> 
+  <p><br></p> 
+  <div> 
+   <table class="ace-table" style="border:none;width:auto;">
+    <tbody>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Suy8d0amgo0Msgxgjvtc5vaZnDg">
+        tbl_plant_plan
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-OqEgdQsamoia2qxQtTiczuflnqf">
+        种养计划主表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-W0w6dmI6coYQIoxmokqchhTSncf">
+        tbl_plant_plan_inspect_report
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-UYC4doeqcoKU4Ax85FLcXMD2nkd">
+        种养计划证书表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-YwEadWiE6oqKUMxqGeucd2p0nZd">
+        tbl_plant_plan_agri
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-OI8QdOM86ouak2x6Dg2cZnz4nee">
+        种养计划农业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-CckQdEoukoQciUxKSPhckL7hnMb">
+        tbl_plant_plan_inspect_report_agri
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-BsCkdmO4ioeeQsxOwZbcdwm9nVh">
+        种养计划农业证书表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-XkiYdOcMQo4MI2xU5xLcxxZ0nVh">
+        tbl_plant_plan_animal
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-TUwkdMqq8oM0Igx2J2Fc5SfXn0f">
+        种养计划牧业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-ROaCd248UoKi08xNAF6c0zegnGg">
+        tbl_plant_plan_inspect_report_animal
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Q2GIdc22aoIS26xuJUFcbhKzn5l">
+        种养计划牧业证书表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-PIEMdmWCmosuoOxQJbAcYnRnnqf">
+        tbl_plant_plan_fishery
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-T6IGd0KOEokg06xetiWcMxnyn8O">
+        种养计划渔业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Ke40dswg2oYOaOxohkBcoFYWnjg">
+        tbl_plant_plan_inspect_report_fishery
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-AWSwdosmMoSiOCxklpwcBBzen5c">
+        种养计划渔业证书表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Tio2dcSKeoS6CwxIP2ocvNuznre">
+        tbl_plant_plan_forestry
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-EG8odoaQioUqGUxaSO3caPyxnNf">
+        种养计划林业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Gk2kduMSIoiamYxkx5zcaE3pnbe">
+        tbl_plant_plan_inspect_report_forestry
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-AEy0dgGEqo0WA2xknYMcrpCfnIe">
+        种养计划林业证书表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-KIcAdA8Ycous4MxQdxmcLiLon1f">
+        tbl_plant_plan_inspect_report_img
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-LEAyduEGYoUCU0xoR4ucYCwjnJd">
+        种养计划检测报告图片关联表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-TkKadw88ioyAiAxUZJTcyoxonPb">
+        tbl_plant_plan_sell_animal
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-MSw6dIM2UoCoOKxIcjHcroGqngE">
+        种植计划牧业销售表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-MQymd6ceKoGAgIxAlJecohKonmd">
+        tbl_plant_plan_sell_agri
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-AQo4dSYeOoAagMx2b9HcdxPLnre">
+        种植计划农业销售表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-BWsqdaOYWoi6k2xOK80cVXcgnXf">
+        tbl_plant_plan_sell_fishery
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-I4gQdeYCWo8eEsxCs0rcrhJznpg">
+        种植计划渔业销售表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-K6w4dWcS8oEkUSxGIt8c3NsjnJb">
+        tbl_plant_plan_sell_forestry
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-E62GdOc8EoWQUAxy8Yjcf8DMnTc">
+        种植计划林业销售表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-DOmudUYcko0G0QxKupqcIvqTnef">
+        <br>
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-SswudiSIsomEgWxIfARcH7I3nYe">
+        <br>
+       </div> </td> 
+     </tr>
+    </tbody>
+   </table>
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9745.png" alt="" width="500" height="235" title=""></p> 
+  <p><br></p> 
+  <p>库存：</p> 
+  <p><br></p> 
+  <div> 
+   <p><br></p> 
+   <table class="ace-table" style="border:none;width:500px;">
+    <tbody>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-ViM4dW0m8oA2wmxOWaRcb4rgnFf">
+        tbl_stock
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-J64KdgKG0oOKGkxFVNbcI1Iznqa">
+        库存表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-BmSId2AQ0omCeax6u7IcZVsBnWg">
+        tbl_stock_spoilage
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-KQ6udcKssowSawxGScXcke8Onae">
+        库存损耗表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-AsEWd0aCgouQAsxmCnOco6Prnkc">
+        tbl_stock_log
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-DoQSdySKYo8ym6xojRfcm22hnVd">
+        库存日志表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-UGUAd6ygKoMKgMxWMBocLw0DnQe">
+        <br>
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-G20ydEIU0o6WM4xANKAcDUNBnZb">
+        <br>
+       </div> </td> 
+     </tr>
+    </tbody>
+   </table> 溯源码： 
+   <p><br></p> 
+   <p><br></p> 
+   <table class="ace-table" style="border:none;width:auto;">
+    <tbody>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-OAuQdECCSoe8YAxobRZcrOB5nmd">
+        tbl_qr_code
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-OEIedMcgmoe6aexWsHIcUBdGnRe">
+        溯源码表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-CaeSdAYIcoqsQWxcZjZcDzOBnCd">
+        tbl_qr_code_mission
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Lei8d2OoyoCqQcxUda5cui1Rncg">
+        采收任务关联溯源表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-LCOYdwGaUoQgKMxUfRIc3kFZndd">
+        tbl_qr_code_access_record
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-OOmSdwqyEoqwWmxANLncnEKEnkd">
+        溯源码采收记录表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-HKsmdEGeOookiCxOItacqjhPnXd">
+        tbl_qr_code_mission_agri
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-JgEGdSkQKo2YE0xXhssciiVLnMI">
+        采收溯源任务关联农业表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-TuSOdeoKuoas8uxGEvucfJrEnEd">
+        tbl_qr_code_agri
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Ssc0deCkiowegQx6kA5cHrXcnVZ">
+        采收溯源农业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-FkkGdcM0KosGuIx04Xdc8gXsnrc">
+        tbl_qr_code_mission_animal
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-WYsMdE6UQoSYSKxWJ0FcxFPTnUH">
+        采收溯源任务关联牧业表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Z8kydkaWkoeCE6xaqcRcFwETnIf">
+        tbl_qr_code_animal
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Iqg8d60wCoeS6ExMTr6cxE5Tncg">
+        采收溯源牧业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-S40ad8m4Qo6SOwxr7OyciltUnkX">
+        tbl_qr_code_mission_fishery
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Coied6suqookK8xWy6lcf8OXnsg">
+        采收溯源任务关联渔业表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-V2kkd8cCoocSI2xc5Y5c3wuqnwh">
+        tbl_qr_code_fishery
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-GKaOdyGAso686IxvKbgcHD9gnmg">
+        采收溯源渔业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-MUMCdiCMeoUkY8xaiWMcQGtanTg">
+        tbl_qr_code_mission_forestry
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-GoGodmWIEooAMux4wJsce6dEnRc">
+        采收溯源任务关联林业表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-NECSd0cCiowsM4xLQducaDlhnAN">
+        tbl_qr_code_forestry
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Es2ydGA2ooGSUoxuetYc2OtHnAb">
+        采收溯源林业表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Q6mSdK0uioY4uYx23mCca75mnLc">
+        tbl_qr_code_module
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-IewqdcYASoayOExOMNZctRnqnHb">
+        溯源多个模块显示开关表
+       </div> </td> 
+     </tr>
+    </tbody>
+   </table>
+   <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9747.png" alt="" width="500" height="161" title="">
+   <p><br></p> 
+   <p>合格证：</p> 
+   <p><br></p> 
+   <p><br></p> 
+   <table class="ace-table" style="border:none;width:auto;">
+    <tbody>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-TuAUdUQe4oQwEGx6LSMcmvr4nUc">
+        tbl_certificate_template
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-DWywd808moCImkxWYhPccvO2nLg">
+        合格证模板表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-DWq2dOMyuoOwcUxE3utcr4Vwnsb">
+        tbl_certificate_template_attr
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-CGQwdyKyQoQcIexopLacIN7cnHb">
+        合格证模板属性表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-VOG8d2qqEo4UEmxUJWxcFxqqn6g">
+        tbl_certificate
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Iu4ydaGmKocaGWxgpMJcvBc7nzb">
+        合格证表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-PwmQds8wOoWmACxUtCZcV6IAnBc">
+        tbl_certificate_template_attr_ref
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-NKksdQES0o8O8kx4r41czomJnjh">
+        合格证模板属性关联表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-NocOdCa4kosEKAxai8ecThgxn2c">
+        tbl_certificate_access_record
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-MICYdkceAowWg4xQVxhclSnpnVf">
+        合格证访问记录报表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-P082dO6aKoiy4exIr4Sc8UWZnuh">
+        tbl_company_aquatic_seed_license
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-PQaKdwsGuoWeSGxsHuQcE5Jxnsf">
+        企业水产秒种许可证表
+       </div> </td> 
+     </tr>
+     <tr>
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-Je2AdusYSo4aQAxoLDpcr5tcnUd">
+        tbl_certificate_attr
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-QGWidqaMKoQuMUxieitchsf6nkd">
+        合格证属性表
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-DMkudkguOok2SexgdMjcteGPnXe">
+        <br>
+       </div> </td> 
+      <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+       <div class="ace-line old-record-id-F88SdYqIcoEAEQxMl2ccCBz3nfd">
+        <br>
+       </div> </td> 
+     </tr>
+    </tbody>
+   </table>
+   <img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9748.png" alt="" width="500" height="317" title="">
+   <p><br></p> 
+   <p><br></p> 
+   <div> 
+    <div class="ace-line old-record-id-YYSgdEwwOoQ80axaKy7c86bFnjc">
+     条形码：
+    </div> 
+    <div> 
+     <table class="ace-table" style="border:none;width:auto;">
+      <tbody>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-WqEwdIOqWoGecexOQtAcftUUnrd">
+          tbl_barcode
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-PW6OdWAGeoiYY4xaaBEcsIVinpb">
+          条形码表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-KOUqdcKQMoSsaMxIDIGckJAynZg">
+          tbl_barcode_group_attr
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-J2G2dmCYOo4Ce8xOwTycjny1n7f">
+          条形码属性表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-Sgmqdg8QcoweWixWmFCcdz9envc">
+          tbl_barcode_access_record
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-HAaMdAc8ko08oaxYBHsc7d6Qn3b">
+          条形码记录表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-IiWEdiIYGoQ6Wixo5p8ctZufnYd">
+          tbl_barcode_template
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-PYM4dkIc8og08YxELBHc88I8nwc">
+          条形码模板表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-EgEudKGCmomoMoxMBSIc5aYTn9f">
+          tbl_barcode_certificate_recode
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-TyAwduq60oo48qxcTyvcLTT1nwh">
+          条形码访问记录表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-LyQYdKscSoaMIuxiKO1chzvOnve">
+          tbl_barcode_template_attr
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-ByYGdgg4Sowg64xUb3ncKKsbndh">
+          条形码模板属性表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-NMqOdYOMkoCKquxScKuc7WKYnse">
+          tbl_barcode_group
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-WKcQdu4GWoyIcIxPgrUcRiqInoN">
+          条形码组表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-A4IOdcUcAoe2Aex4joUcX64Jnvg">
+          tbl_barcode_template_attr_ref
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-Ic2odOAUAoCCKaxIPY3cci7an3d">
+          条形码模板属性关联表
+         </div> </td> 
+       </tr>
+      </tbody>
+     </table>
+    </div> 
+    <div class="ace-line old-record-id-HqsIdMqWmoKQouxK6o6cLltonsd">
+     区域管理：
+    </div> 
+    <div> 
+     <table class="ace-table" style="border:none;width:auto;">
+      <tbody>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-SIoqdQKU4oEQwyxA7yhcElEpn1b">
+          tbl_area_business_entity
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-Ak2MdCGEaoyS8QxY4h5coJ9unvh">
+          区域经营主体配置表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-Nw68doykAow2imxUlqyc3SeTnqf">
+          tbl_area_green_certifi_config
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-PQSydWSykoo6aixEphbcN6kAnec">
+          区域绿色认证配置表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-WWgEdGskWoaWwGxQ5jKcaVRqnfV">
+          tbl_area_business_scale_statistics
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-QSIAds2wcoEgyGxMHNucPrzJnfb">
+          区域经营主体统计配置表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-XycOdMa82ocAEax6aJnciX6ynPg">
+          tbl_area_land_type_distribution
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-S6kkd8GK4oQuwsxqUTlcoEwAnog">
+          区域地块类型分布表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-OOCadQwcuogCsuxGim7cmx8onZc">
+          tbl_area_camera_config
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-TyKEd8qM4oMMKgxM381cKz6ungd">
+          区域摄像头配置表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-GeuCdmgYAoyeGmx6MiFcTZ5dnHp">
+          tbl_area_plot_config
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-VsSkdKeqooeQMwxmYmTcMZ6Knhg">
+          区域地块面积配置表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-ACYsdCGECoOKSWxYL2Xcm5Ejn0c">
+          tbl_area_config
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-XcwCdSAAuoku4cxo764cAe26njg">
+          区域绿色生产方式统计配置表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-EKgYd8kAEomcW2x2FWQcr6IanSd">
+          tbl_area_farming_config
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-CIGedu64goMsEsxQl11c9PyHnjh">
+          区域农场关联地块表
+         </div> </td> 
+       </tr>
+      </tbody>
+     </table>
+    </div> 
+    <div class="ace-line old-record-id-ESiOdyIm4oWuImx8PFUcDolgn6e">
+     管棚区：
+    </div> 
+    <div> 
+     <table class="ace-table" style="border:none;width:auto;">
+      <tbody>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-P6s2dUCO8oyK8yxKuU3c5Abyngb">
+          tbl_greenhouse
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-DwqwdowQGo6OSUxeWBDcdxkxnMc">
+          管棚表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-J6SGdsIIQo6EuIxvoC8ckf2Wniq">
+          tbl_greenhouse_project
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-LmuEdygEwo4UqEx612dcoSPInsb">
+          管棚项目表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-QKuWdEm0KoAs80xASqpcqzs1nfR">
+          tbl_greenhouse_county_code
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-CCmudU2WYoIwQGxGqYTcVMQYnzf">
+          管棚项目区自增流水号关联表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-I6AIdqCUUowaSOxy0zWco9BxnEc">
+          tbl_greenhouse_land_relation
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-OAeYdUAyWo46MYxSu1OcCBxRnIc">
+          管棚地块关联表
+         </div> </td> 
+       </tr>
+      </tbody>
+     </table>
+    </div> 
+    <div class="ace-line old-record-id-LimCdE6mooMi08xuqpCcH4G3nge">
+     保险:
+    </div> 
+    <div> 
+     <table class="ace-table" style="border:none;width:auto;">
+      <tbody>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-JcAGdEmwQowUAuxGNIqczBHtnib">
+          tbl_insure
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-YSAMdEkucoYMSAxu2a3c40tHn7c">
+          保险险种表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-CwQod8oGYoEwsixC2zccgpQDnhb">
+          tbl_insure_company
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-SkEidEYmyoWE4sxE7AdcfZj7nvb">
+          保险公司表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-JQ8mdAwiAo8wEyxY3JEcZ0bTnkf">
+          tbl_insurance_land
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-GEqedYEsOoCmAax8jZncD7sJnCh">
+          保险补录地块表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-VCCcdsMekoQEQkxgx0qc8uWjnfd">
+          tbl_insure_bank
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-QgKGdOy0Eo8uouxg3IhcYSQfnTe">
+          保险公司投保支持银行表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-GaIYdSmcOo2WuoxUtyZcDEpfnEf">
+          tbl_insurance_log
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-B0godgA66oK2I6xWYWCczc10nIb">
+          保险记录操作日志表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-DkQadWKMeoeQAmxEVwjc36KanLg">
+          tbl_insure_bank_branch
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-M2UcdegsWoSiyqxILQjcPovPnYd">
+          保险公司投保支付银行支行表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-DCiwdoMGIo6yuUx0KpQcUueUnXq">
+          tbl_insurance_record
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-OAS0doyQso4kyaxuUGhc0kijnXb">
+          保险记录表（安信农保）
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-McmcdOgkuoA0Y4xkFdpckzq0nbh">
+          tbl_insure_crop_group
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-CsqqdmYCKoogKcxelJrcrvzFnfb">
+          可投保农作物保险表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-D6UgdmAaOoW0UsxamqYc7nGBn8d">
+          tbl_insure_area_ref
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-No2UdokgSoA0yqxCq3lcSOm6niq">
+          保险服务范围地区关联表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-BeAkdKquOosYCOxZPHOcLQHAnzo">
+          tbl_insure_crop_group_rule
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-EQSydOAcMoQQekxKSq1cCKMvnqc">
+          保险险种可投保作物规则
+         </div> </td> 
+       </tr>
+      </tbody>
+     </table>
+    </div> 
+   </div> 
+   <span class="lark-record-clipboard"></span> 
+   <p><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9751.png" alt="" width="400" height="215" title=""></p> 
+   <p><br></p> 
+   <p><br></p> 
+   <div> 
+    <div class="ace-line old-record-id-VQWIdeYa4o6iq6x6wOScrVUtneh">
+     物联网：
+    </div> 
+    <div> 
+     <table class="ace-table" style="border:none;width:auto;">
+      <tbody>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-L4s8dkO6QoWgGkxac5bcttKLn1d">
+          tbl_iot_account_config
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-X0E4deCQcooAoyx8dkycZGDknue">
+          iot系统账号配置表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-Bk4qdO8UMoUy40xyGqxc29lZnOg">
+          tbl_iot_land_device
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-OqCedWk60o6I4kxUFWzcEFC4n5d">
+          物联网设备绑定地块表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-MqI8dO6AAoaMYGxUBKRcUgMpnvd">
+          tbl_iot_farm_config
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-IwwmdgEeGo2CiaxSUgvc2NhwnDf">
+          农场iot配置表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-RGKAdWYS0ooO4mxM1NUckiOsn1d">
+          tbl_iot_land_third_device
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-SoWodcqaAoeYeUx44GucbgYJnBc">
+          地块绑定第三方设备表
+         </div> </td> 
+       </tr>
+       <tr>
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-CA42dKQWaoK8KMxW263cgDL6njc">
+          tbl_iot_land_camera
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-NIu0d44oIoeKagxBq0NcpRHkniT">
+          物联网摄像头绑定地块表
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-YmasdeAU2oAsIwxOmWxc1KahnLd">
+          <br>
+         </div> </td> 
+        <td colspan="1" rowspan="1" style="font-size:10pt;"> 
+         <div class="ace-line old-record-id-A6sudCYUkoGIeYxW4iVcNzACnMe">
+          <br>
+         </div> </td> 
+       </tr>
+      </tbody>
+     </table>
+    </div> 
+   </div> 
+   <span class="lark-record-clipboard"></span> 
+   <p><br></p> 
+   <span class="lark-record-clipboard"></span> 
+   <p><br></p> 
+   <span class="lark-record-clipboard"></span> 
+   <p><br></p> 
+   <p><br></p> 
+  </div> 
+  <span class="lark-record-clipboard"></span> 
+  <p><br></p> 
+  <p><br></p> 
+ </div> 
+</div></body>
+</html>

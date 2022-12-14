@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gis数据发布流程-格式转换和数据入库</title>
+</head> <body><div class="table-row"> 
+ <div class="detail-content article-content table-col"> 
+  <h1 id="anchor0">1、概要</h1> 
+  <p>在这里主要介绍arcmap对矢量数据进行格式转换、字段添加、入库操作</p> 
+  <p><br></p> 
+  <h1 id="anchor3">2、<span>矢量数据格式转换</span></h1> 
+  <p><span><br><span style="color:#E53333;font-size:18px;"><strong>所有矢量数据操作都是基于下面流程进行</strong></span></span></p> 
+  <h2 id="anchor5"><span>2.1、新建文件地理数据库</span></h2> 
+  <p><span>新建一个文件地理数据库，用来处理数据，地理数据库命名可以自定义或者默认</span></p> 
+  <h2><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9326.png" alt="" width="400" height="466" title=""></span></h2> 
+  <h2 id="anchor8"><span>2.2、格式转换</span></h2> 
+  <p><span><span>将矢量数据格式转换为wgs84格式，wkid:4326</span></span></p> 
+  <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9327.png" alt="" width="400" height="209" title=""></span></p> 
+  <p><span><br></span></p> 
+  <h2 id="anchor12"><span>2.3、添加字段</span></h2> 
+  <p><span><span style="color:#E53333;font-size:18px;">添加字段详情见附件</span></span></p> 
+  <p><span><span style="color:#E53333;font-size:18px;">根据矢量数据的类型，添加对应的字段</span></span></p> 
+  <p><span><span style="color:#E53333;font-size:18px;">这里只添加字段，不处理字段的值处理，字段的值是在后面数据库里操作赋值</span></span></p> 
+  <p><span><span style="color:#E53333;font-size:18px;"> </span></span></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">步骤</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">描述</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">截图</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">备注</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第一步<br></td> 
+     <td style="border:1px solid #ddd;">打开属性表</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9328.png" alt="" width="400" height="169" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;" rowspan="2">第二步</td> 
+     <td style="border:1px solid #ddd;">添加字段</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9330.png" alt="" width="400" height="107" title=""><br></td> 
+     <td style="border:1px solid #ddd;">详细字段见附件</td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">添加临时字段</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9332.png" alt="" width="400" height="176" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p>临时字段：temp_field</p> <p>这个字段是临时使用，用来截取dkbm字段数据，完成后</p> <p>需要删除</p> </td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <p><span><br></span></p> 
+  <h2 id="anchor52"><span>2.4、数据入库</span></h2> 
+  <p><span style="font-size:18px;color:#E53333;"><strong>所有矢量数据的入库操作都是这个流程</strong></span></p> 
+  <p><span> </span></p> 
+  <table class="table table-kindeditor" style="width:100%;"> 
+   <tbody> 
+    <tr> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">步骤</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">描述</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">截图</th> 
+     <th style="background-color:#f1f1f1;border:1px solid #DDD;">备注</th> 
+    </tr> 
+   </tbody> 
+   <tbody> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第一步<br></td> 
+     <td style="border:1px solid #ddd;">选择数据库，导入矢量数据</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9343.png" alt="" width="400" height="240" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第二步</td> 
+     <td style="border:1px solid #ddd;">数据库表名确定</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9344.png" alt="" width="400" height="225" title=""><br></td> 
+     <td style="border:1px solid #ddd;"> <p>表命名规范详情见链接</p> <p><a href="/zentao/doc-objectLibs-custom-0-37-115.html" target="_blank" rel="noreferrer noopener">http://chandao.freetek.cc/zentao/doc-objectLibs-custom-0-37-115.html</a></p> </td> 
+    </tr> 
+    <tr> 
+     <td style="border:1px solid #ddd;">第三步</td> 
+     <td style="border:1px solid #ddd;">注册版本</td> 
+     <td style="border:1px solid #ddd;"><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9345.png" alt="" width="400" height="257" title=""><br></td> 
+     <td style="border:1px solid #ddd;"><br></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <br> 
+  <br> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><br></p> 
+  <p><span><img onload="setImageSize(this,0)" src="http://chandao.freetek.cc/zentao/file-read-9346.png" alt="" width="1" height="0" title=""><br></span></p> 
+ </div> 
+ <div class="outline table-col"> 
+  <div class="outline-toggle">
+   <i class="icon icon-angle-right"></i>
+  </div> 
+  <div class="outline-content"> 
+   <ul class="tree tree-angles" data-ride="tree" id="outline">
+    <li class="text-ellipsis"><a href="#anchor0" title="1、概要">1、概要</a> </li>
+    <li class="text-ellipsis"><a href="#anchor3" title="2、矢量数据格式转换">2、矢量数据格式转换</a> 
+     <ul>
+      <li class="text-ellipsis"><a href="#anchor5" title="2.1、新建文件地理数据库">2.1、新建文件地理数据库</a> </li>
+      <li class="text-ellipsis"><a href="#anchor8" title="2.2、格式转换">2.2、格式转换</a> </li>
+      <li class="text-ellipsis"><a href="#anchor12" title="2.3、添加字段">2.3、添加字段</a> </li>
+      <li class="text-ellipsis"><a href="#anchor52" title="2.4、数据入库">2.4、数据入库</a> </li>
+     </ul></li>
+   </ul> 
+  </div> 
+ </div> 
+</div></body>
+</html>
