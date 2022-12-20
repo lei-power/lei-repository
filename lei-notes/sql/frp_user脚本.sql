@@ -60,6 +60,33 @@ UPDATE tbl_area_testc a
 SET a.village_code = b.village_code;
 
 
+
+-- 2022.12.20
+UPDATE `tbl_area_testc` SET town_code=SUBSTRING(village_code,1,9)
+SELECT town_id, max(town_name) , GROUP_CONCAT(DISTINCT town_code)  FROM tbl_area_testc GROUP BY town_id HAVING   GROUP_CONCAT(DISTINCT town_code)  is NULL;
+SELECT DISTINCT town_name  FROM tbl_area_testc WHERE town_code is NULL;
+UPDATE tbl_area_testc SET town_code='361103001' WHERE town_id='1000145';
+
+
+SELECT * FROM tbl_area_testc WHERE town_name IN
+                                   ('头桥集团',
+                                    '永丰街道',
+                                    '洞泾镇',
+                                    '泗泾镇',
+                                    '新桥镇',
+                                    '经开区镇',
+                                    '农业园区',
+                                    '广富林街道',
+                                    '新海镇',
+                                    '南汇新城镇',
+                                    '桃源街道',
+                                    '第一师十四团',
+                                    '信丰垦殖场',
+                                    '义城镇');
+-- 2022.12.20
+
+
+
 ####################################### tbl_area_local 匹配区域编码 end ####################################################
 
 
