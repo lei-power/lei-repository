@@ -6,11 +6,6 @@ sqlLevel=info
 #默认数据源
 url=jdbc:sqlite:D:\top\lei-repository\lei-project\lei-top\lei-db\src\main\resources\lei-db.db
 
-[mysql_testc]
-url=jdbc:mysql://47.97.120.110:3306/frp_user?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-user=root
-pass=Freetek0987!@#$
-
 
 [mysql_local]
 url=jdbc:mysql://192.168.200.128:3306/backup?useSSL=false
@@ -26,3 +21,48 @@ pass=SNkoudai!@#$<>?
 remarks = true
 useInformationSchema = true
 
+
+[mysql_za_snkd_prod_frp_produce]
+url=jdbc:mysql:/rm-bp1iojes59z03o5on0o.mysql.rds.aliyuncs.com:3306/frp_produce?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=true
+user=snkoudai
+pass=Freetek666888
+remarks = true
+useInformationSchema = true
+
+
+[mysql_za_snkd_prod_frp_gisdata_archive]
+url=jdbc:mysql:/rm-bp1iojes59z03o5on0o.mysql.rds.aliyuncs.com:3306/frp_gisdata_archive?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=true
+user=snkoudai
+pass=Freetek666888
+remarks = true
+useInformationSchema = true
+
+
+[mysql_za_snkd_prod_frp_agriproduceland]
+url=jdbc:mysql:/rm-bp1iojes59z03o5on0o.mysql.rds.aliyuncs.com:3306/frp_agriproduceland?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=true
+user=snkoudai
+pass=Freetek666888
+remarks = true
+useInformationSchema = true
+
+
+[mysql_za_snkd_testc_frp_produce]
+url=jdbc:mysql://47.97.218.249:3306/frp_produce?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+user=root
+pass=Freetek0987!@#$
+remarks = true
+useInformationSchema = true
+
+[mysql_za_snkd_testc_frp_gisdata_archive]
+url=jdbc:mysql://47.97.218.249:3306/frp_gisdata_archive?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+user=root
+pass=Freetek0987!@#$
+remarks = true
+useInformationSchema = true
+
+[mysql_za_snkd_testc_frp_agriproduceland]
+url=jdbc:mysql://47.97.218.249:3306/frp_agriproduceland?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+user=root
+pass=Freetek0987!@#$
+remarks = true
+useInformationSchema = true
