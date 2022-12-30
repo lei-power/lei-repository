@@ -9,6 +9,7 @@ import cn.lei.all.entity.BaseResp;
 import cn.lei.all.entity.po.AgriProduceLand;
 import cn.lei.all.entity.po.GisLandType;
 import cn.lei.all.entity.req.DataCleansingAgriproduceLandReq;
+import cn.lei.core.util.DateTimeUtils;
 import cn.lei.core.util.GisUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,11 +102,12 @@ public class DataCleansingService {
             agriProduceLand.setStrokeOpacity("1");
             //轮廓粗细
             agriProduceLand.setStrokeWeight("2");
+            agriProduceLand.setLandZoom("16");
             return agriProduceLand;
         }).collect(Collectors.toMap(AgriProduceLand::getLandCode, p -> p));
 
         //查询produce中已经同步过去的地块
-        StringBuilder landIdStrBuilder = new StringBuilder().append("SELECT id,sh_gis_dkid FROM `tbl_land` WHERE sh_gis_dkid IN (");
+        StringBuilder landIdStrBuilder = new StringBuilder().append("SELECT id,sh_gis_dkid,create_time FROM `tbl_land` WHERE sh_gis_dkid IN (");
         landCodeList.forEach(landcode -> {
             landIdStrBuilder.append("\'").append(landcode).append("\',");
         });
@@ -116,6 +118,7 @@ public class DataCleansingService {
             GisLandType gisLandType = new GisLandType();
             gisLandType.setId(Long.parseLong(landIdVO.getStr("id")));
             gisLandType.setGisLandTypeName(landIdVO.getStr("sh_gis_dkid"));
+            gisLandType.setCreateTime(landIdVO.getDate("create_time"));
             return gisLandType;
         }).collect(Collectors.toList());
 
@@ -128,6 +131,7 @@ public class DataCleansingService {
                 AgriProduceLand rest = new AgriProduceLand();
                 BeanUtils.copyProperties(ed, rest);
                 rest.setId(re.getId());
+                rest.setLandStartTime(re.getCreateTime());
                 insetList.add(rest);
             } else {badId.add(re.getId());}
         }
@@ -137,12 +141,12 @@ public class DataCleansingService {
         insetList.forEach(insert -> {
             String sql = new String();
             sql = "UPDATE `tbl_land` SET `stroke_color`=\'" + insert.getStrokeColor() + "\'," + "`stroke_opacity`='1',`stroke_weight`='2',`fill_color`=\'" + insert.getStrokeColor() + "\'," + "`fill_opacity`='0.5',`land_center_lat`=\'" + insert.getLandCenterLat() + "\'," + "`land_center_lng`=\'"
-                    + insert.getLandCenterLng() + "',`sh_gis_dkid`=" + insert.getGisLandTypeId() + " WHERE `id`=" + insert.getId() + ";\n";
+                    + insert.getLandCenterLng() + "',`gis_land_type_id`=" + insert.getGisLandTypeId() + ",`land_zoom`=\'" + insert.getLandZoom() + "\',`land_start_time`=\'" + DateTimeUtils.convertDate2String(insert.getLandStartTime()) + "\' WHERE `id`=" + insert.getId() + ";\n";
             updateBuilder.append(sql);
         });
         String isertSql = updateBuilder.toString();
 
-       log.error("-------------------------------------------------执行如下sql-----------------------------------------------------------\n{}",isertSql);
+        log.error("-------------------------------------------------执行如下sql-----------------------------------------------------------\n{}", isertSql);
         Db.use(frpProduce).execute(isertSql);
         return BaseResp.success(null, "如下的已存在produce库tbl_land表对应的生产地块不存在了" + badId.toString());
     }
@@ -155,8 +159,6 @@ public class DataCleansingService {
      * @return
      */
     public static List<String> getLandCenter(List<List<String>> path) {
-        double area = 0.0;//多边形面积
-        double Gx = 0.0, Gy = 0.0;// 重心的x、y
 
         List<List<String>> poList = new ArrayList<>();
         for (List<String> point : path) {
@@ -167,18 +169,12 @@ public class DataCleansingService {
             poList.add(result);
         }
 
-        for (int i = 1; i <= poList.size(); i++) {
-            double iLat = Double.valueOf(poList.get(i % poList.size()).get(0));
-            double iLng = Double.valueOf(poList.get(i % poList.size()).get(1));
-            double nextLat = Double.valueOf(poList.get(i - 1).get(0));
-            double nextLng = Double.valueOf(poList.get(i - 1).get(1));
-            double temp = (iLat * nextLng - iLng * nextLat) / 2.0;
-            area += temp;
-            Gx += temp * (iLat + nextLat) / 3.0;
-            Gy += temp * (iLng + nextLng) / 3.0;
-        }
-        Gx = Gx / area;
-        Gy = Gy / area;
+        List<Double> latList = poList.stream().map(po -> Double.valueOf(po.get(0))).sorted().collect(toList());
+        List<Double> lonList = poList.stream().map(po -> Double.valueOf(po.get(1))).sorted().collect(toList());
+        //累加取平均数
+        double Gx = (latList.get(0) + latList.get(latList.size() - 1)) / 2;
+        double Gy = (lonList.get(0) + lonList.get(lonList.size() - 1)) / 2;
+
         List<String> resultList = new ArrayList<>();
         resultList.add(StringUtils.substring(String.valueOf(Gx), 0, String.valueOf(Gx).indexOf(".") + 14));
         resultList.add(StringUtils.substring(String.valueOf(Gy), 0, String.valueOf(Gx).indexOf(".") + 14));

@@ -3,6 +3,7 @@ package cn.lei.all.entity.po;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 import lombok.Data;
 
 @Data
@@ -38,5 +39,8 @@ public class AgriProduceLand {
     @ApiModelProperty("位置描图：地块中心点经度值")
     private String landCenterLng;
 
-
+    @ApiModelProperty("缩放比例")
+    private String landZoom;
+    @ApiModelProperty("地块开始时间，在无提前生成地块逻辑前，理论与create_time相同")
+    private Date landStartTime;
 }
