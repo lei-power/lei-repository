@@ -9,10 +9,10 @@ import cn.lei.all.entity.BaseResp;
 import cn.lei.all.entity.po.AgriProduceLand;
 import cn.lei.all.entity.po.GisLandType;
 import cn.lei.all.entity.req.DataCleansingAgriproduceLandReq;
+import cn.lei.core.entity.Points;
 import cn.lei.core.util.DateTimeUtils;
 import cn.lei.core.util.GisUtils;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,9 +42,9 @@ public class DataCleansingService {
         DataSource frpGisdataArchive = null;
         DataSource frpAgriproduceland = null;
         if (flag == 100) {
-            frpProduce = DbUtil.getDs("mysql_za_snkd_prod_frp_produce");
-            frpGisdataArchive = DbUtil.getDs("mysql_za_snkd_prod_frp_gisdata_archive");
-            frpAgriproduceland = DbUtil.getDs("mysql_za_snkd_prod_frp_agriproduceland");
+            frpProduce = DbUtil.getDs("mysql_za_snkd_local_frp_produce");
+            frpGisdataArchive = DbUtil.getDs("mysql_za_snkd_local_frp_gisdata_archive");
+            frpAgriproduceland = DbUtil.getDs("mysql_za_snkd_local_frp_agriproduceland");
         } else if (flag == 103) {
             frpProduce = DbUtil.getDs("mysql_za_snkd_testc_frp_produce");
             frpGisdataArchive = DbUtil.getDs("mysql_za_snkd_testc_frp_gisdata_archive");
@@ -88,10 +88,12 @@ public class DataCleansingService {
             agriProduceLand.setGisLandTypeName(gisLandTypeMap.get(agriProduceLand.getGisLandTypeId()).getGisLandTypeName());
             agriProduceLand.setPath(agriLand.getStr("path"));
             //中心点
-            List<String> landCenter = getLandCenter(GisUtils.strToPointList(agriLand.getStr("path")).stream().map(str -> Arrays.asList(StringUtils.split(str, ","))).collect(toList()));
-            agriProduceLand.setLandCenterLat(landCenter.get(0));
-            agriProduceLand.setLandCenterLng(landCenter.get(1));
-
+            Points points = GisUtils.calculationCenterPoint(agriProduceLand.getPath());
+            if(points != null){
+                Map<String, Double> gcj02 = GisUtils.wgs84ToGcj02(points.getLng(),points.getLat());
+                agriProduceLand.setLandCenterLat(String.valueOf(gcj02.get("lat")));
+                agriProduceLand.setLandCenterLng(String.valueOf(gcj02.get("lon")));
+            }
             //填充色
             agriProduceLand.setFillColor(gisLandTypeMap.get(agriProduceLand.getGisLandTypeId()).getGisLandTypeColor());
             //轮廓色
@@ -158,6 +160,7 @@ public class DataCleansingService {
      * @param path
      * @return
      */
+    @Deprecated
     public static List<String> getLandCenter(List<List<String>> path) {
 
         List<List<String>> poList = new ArrayList<>();

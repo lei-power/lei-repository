@@ -1,5 +1,6 @@
 package cn.lei.core.util;
 
+import cn.lei.core.entity.Points;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -8,12 +9,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
 
 /**
  * @author wangkai
  * @date 2022/7/21 16:23
  */
+@Slf4j
 public class GisUtils {
 
     //国内坐标边界
@@ -167,6 +174,68 @@ public class GisUtils {
         transform += (20.0 * Math.sin(x * PI) + 40.0 * Math.sin(x / 3.0 * PI)) * 2.0 / 3.0;
         transform += (150.0 * Math.sin(x / 12.0 * PI) + 300.0 * Math.sin(x / 30.0 * PI)) * 2.0 / 3.0;
         return transform;
+    }
+
+
+
+    //计算内心、质心
+    public static Points getCenterOfGravityPoint4(List<Coordinate> CoordinateList) {
+        Coordinate[] coordinates = new Coordinate[CoordinateList.size()];
+        CoordinateList.toArray(coordinates);
+        GeometryFactory geometryFactory = new GeometryFactory();
+        //MultiPoint mpoint=geometryFactory.createMultiPointFromCoords(coordinates);//创建多点
+        //Point pt=mpoint.getCentroid();//得到多点的质心
+        //Point pt=mpoint.getInteriorPoint();//多点内心
+        Polygon p=geometryFactory.createPolygon(coordinates);//创建多边形
+        //Point pt=p.getCentroid();//多边形质心
+        Point pt=p.getInteriorPoint();//多边形内心
+        return  new Points(pt.getX(),pt.getY());
+    }
+
+
+    /**
+     * 计算多边形中心点
+     * 格式：104.44990628434761,31.098708748010381;104.44992346139867,31.098715972264358;104.44990628434761,31.098708748010381
+     * @param path 轮廓
+     * @return
+     */
+    public static Points calculationCenterPoint(String path){
+        if(TextUtils.isEmpty(path)){
+            return null;
+        }
+        String[] split = path.split(";");
+        List<Coordinate>  CoordinateList=new ArrayList<>();
+        //CoordinateList.add(new Coordinate("经度","纬度"));
+        for (String s : split) {
+            String[] split1 = s.split(",");
+            CoordinateList.add(new Coordinate(Double.valueOf(split1[0]),Double.valueOf(split1[1])));
+        }
+        try {
+            Points pt = getCenterOfGravityPoint4(CoordinateList);
+            return pt;
+        }catch (Exception e){
+            log.error("计算多边形中心点失败！",e);
+        }
+        return null;
+    }
+    public static void main(String[] args){
+
+        String path = "104.5075103619391,31.09541688781541;104.50753181961122,31.09553758722108;104.50760423925462,31.095749481733257;104.50786977794709,31.095781668241436;104.50813263443055,31.09572802406114;104.50838207986894,31.095588549192364;104.50853228357377,31.095377995784695;104.50842767742219,31.095297529514248;104.50827210929933,31.095530881698544;104.50804412153306,31.09562744122308;104.50775444295945,31.095640852268154;104.50766593006196,31.09547589641374;104.50764447238984,31.095313622768337;104.50765251901689,31.09516073685449;104.50762569692674,31.095048084075863;104.5079073288733,31.094994439895565;104.50802534606996,31.09497030001443;104.5079797485167,31.094905926998074;104.5081406810576,31.09484423619073;104.50751572635713,31.094938113506252;104.50748890426698,31.09510172825616;104.50753718402925,31.09521169882577;104.5075103619391,31.09541688781541";
+        String[] split = path.split(";");
+        List<Coordinate>  CoordinateList=new ArrayList<>();
+        //CoordinateList.add(new Coordinate("经度","纬度"));
+        for (String s : split) {
+            String[] split1 = s.split(",");
+            CoordinateList.add(new Coordinate(Double.valueOf(split1[0]),Double.valueOf(split1[1])));
+        }
+//        CoordinateList.add(new Coordinate(104.4030908924392,31.172708070811638));
+//        CoordinateList.add(new Coordinate(104.40502744734795,31.172445214328178));
+//        CoordinateList.add(new Coordinate(104.4045875650695,31.171444750365623));
+//        CoordinateList.add(new Coordinate(104.40291386664421,31.171820259627708));
+//        CoordinateList.add(new Coordinate(104.4030908924392,31.172708070811638));
+
+        Points pt=getCenterOfGravityPoint4(CoordinateList);
+        System.out.println(pt.getLng()+" "+pt.getLat());
     }
 
 }
