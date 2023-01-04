@@ -26,6 +26,12 @@ public class DataCleansingController {
     @Autowired
     private DataCleansingService dataCleansingService;
 
+    /**
+     * 数据清洗，已废弃，不是很好用，连接正式服不稳定
+     * @param reqModel
+     * @return
+     */
+    @Deprecated
     @PostMapping("/cleaningAgriproduceLand")
     @ApiOperation(value = "清洗正式服中已经同步到神农口袋的农业生产用地")
     public BaseResp cleaningAgriproduceLand(@RequestBody DataCleansingAgriproduceLandReq reqModel) {
