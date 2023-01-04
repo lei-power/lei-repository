@@ -71,7 +71,7 @@ public class CheatEncrypt {
         CheatEncrypt cheatEncrypt = new CheatEncrypt();
         //        cheatEncrypt.encoding("lei-items/chatnotes/刘玉婷 和 莫失莫忘 的聊天记录.md");
         //        cheatEncrypt.encoding("lei-items/chatnotes/吃嗯陈 和 莫失莫忘 的聊天记录.md");
-          cheatEncrypt.encoding("lei-items/chatnotes/笔记/聊天踩坑实录.md");
+        cheatEncrypt.encoding("lei-items/chatnotes/笔记/聊天踩坑实录.md");
 
     }
 }
