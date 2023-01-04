@@ -28,7 +28,7 @@ public class GenDir {
     static String level = "#";
 
 
-    public  static void iterator(DirTree dirTree,String dir, int lenth) {
+    public static void iterator(DirTree dirTree, String dir, int lenth) {
         if (dirTree.getLevel().length() > lenth) {
             return;
         }
@@ -38,33 +38,33 @@ public class GenDir {
                 if (file.isFile()) {
                     FileUtil.appendUtf8String("* [" + file.getName() + "](" + FileUtil.subPath(courseFile, file.getPath()) + ")\n", courseFile + "/仓库目录.md");
                 } else if (file.isDirectory()) {
-                    FileUtil.appendUtf8String(dirTree.getLevel()+"#" + " [" + file.getName() + "](" + FileUtil.subPath(courseFile, file.getPath()) + ")\n\r\n", courseFile + "/仓库目录.md");
+                    FileUtil.appendUtf8String(dirTree.getLevel() + "#" + " [" + file.getName() + "](" + FileUtil.subPath(courseFile, file.getPath()) + ")\n", courseFile + "/仓库目录.md");
                     DirTree dirTree2 = new DirTree();
                     dirTree2.setName(file.getName());
                     dirTree2.setPath(FileUtil.subPath(courseFile, file.getPath()));
-                    dirTree2.setLevel(dirTree.getLevel()+"#" );
-                    iterator(dirTree2,file.getPath(), lenth);
+                    dirTree2.setLevel(dirTree.getLevel() + "#");
+                    iterator(dirTree2, file.getPath(), lenth);
                 }
             }
         }
     }
 
     public static void main(String[] args) throws IOException {
-        System.err.println(FileUtil.del(new File(courseFile + "/仓库目录.md")));
-        FileUtil.writeUtf8String("# [仓库目录](仓库目录.md)\n", courseFile + "/仓库目录.md");
+        FileUtil.writeUtf8String("\n", courseFile + "/仓库目录.md");
+        FileUtil.appendUtf8String("# [仓库目录](仓库目录.md)\n", courseFile + "/仓库目录.md");
         GenDir genDir = new GenDir();
-        genDir.iteratorPath(courseFile + "/lei-notes", 4);
-        genDir.iteratorPath(courseFile + "/lei-works", 10);
-        genDir.iteratorPath(courseFile + "/lei-items", 10);
-        genDir.iteratorPath(courseFile + "/lei-project", 10);
+        genDir.iteratorPath(courseFile + "/lei-notes", 2);
+        genDir.iteratorPath(courseFile + "/lei-works", 4);
+        genDir.iteratorPath(courseFile + "/lei-items", 4);
+
     }
 
-    private  void iteratorPath(String dir, int deep) {
+    private void iteratorPath(String dir, int deep) {
         File or = new File(dir);
         DirTree dirTree = new DirTree();
         dirTree.setName(or.getName());
         dirTree.setPath(FileUtil.subPath(courseFile, or.getPath()));
         dirTree.setLevel("#");
-        iterator(dirTree,dir,deep);
+        iterator(dirTree, dir, deep);
     }
 }
