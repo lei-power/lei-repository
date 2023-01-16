@@ -1,4 +1,4 @@
-package cn.lei.core.demo;
+package cn.lei.zero;
 
 import cn.hutool.core.io.FileUtil;
 import cn.lei.core.entity.DirTree;

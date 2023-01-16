@@ -118,8 +118,15 @@
 ### Chapter 12. Serialization
 
 - [85. 优先选择 Java 序列化的替代方案](notes/85.%20优先选择%20Java%20序列化的替代方案.md)
+
 - [86. 非常谨慎地实现 Serializable](notes/86.%20非常谨慎地实现%20Serializable.md)
+
 - [87. 考虑使用自定义的序列化形式](notes/87.%20考虑使用自定义的序列化形式.md)
+
 - [88. 保护性的编写 readObject 方法](notes/88.%20保护性的编写%20readObject%20方法.md)
+
 - [89. 对于实例控制，枚举类型优于 readResolve](notes/89.%20对于实例控制，枚举类型优于%20readResolve.md)
+
 - [90. 考虑用序列化代理代替序列化实例](notes/90.%20考虑用序列化代理代替序列化实例.md)
+
+  

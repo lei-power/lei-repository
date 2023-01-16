@@ -68,21 +68,9 @@ SELECT DISTINCT town_name  FROM tbl_area_testc WHERE town_code is NULL;
 UPDATE tbl_area_testc SET town_code='361103001' WHERE town_id='1000145';
 
 
-SELECT * FROM tbl_area_testc WHERE town_name IN
-                                   ('头桥集团',
-                                    '永丰街道',
-                                    '洞泾镇',
-                                    '泗泾镇',
-                                    '新桥镇',
-                                    '经开区镇',
-                                    '农业园区',
-                                    '广富林街道',
-                                    '新海镇',
-                                    '南汇新城镇',
-                                    '桃源街道',
-                                    '第一师十四团',
-                                    '信丰垦殖场',
-                                    '义城镇');
+SELECT *
+FROM tbl_area_testc
+WHERE town_name IN ('头桥集团', '永丰街道', '洞泾镇', '泗泾镇', '新桥镇', '经开区镇', '农业园区', '广富林街道', '新海镇', '南汇新城镇', '桃源街道', '第一师十四团', '信丰垦殖场', '义城镇');
 -- 2022.12.20
 
 
