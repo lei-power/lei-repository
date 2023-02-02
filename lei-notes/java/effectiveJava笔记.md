@@ -1,7 +1,3 @@
-# effectiveJava笔记
-[TOC]
-
-
 ## 1.引言
 - 代码应该被复用，而非拷贝
 - 四种类型：接口（含@interface）、类（含enum)、数组、基本数据集类型
@@ -36,8 +32,7 @@
     - getType —— 与 getInstance 类似，但是在工厂方法处于不同的类中的时候使用。**getType** 中的 **Type** 是工厂方法返回的对象类型，例如：**FileStore fs = Files.getFileStore(path)**;
     - newType —— 与 newInstance 类似，但是在工厂方法处于不同的类中的时候使用。**newType**中的 **Type** 是工厂方法返回的对象类型，例如：**BufferedReader br = Files.newBufferedReader(path)**;
     - type —— getType 和 newType 简洁的替代方式，例如：**List\<Complaint\> litany = Collections.list(legacyLitany)**;
-
-      ​      
+    
 ### 2.当构造方法参数过多时使用 builder 模式
 - 多重叠构造器具有安全性，**javaBeans模式构建实例缺乏安全性**
 - 类不包含显式的构造器时，编译器会生成缺省的构造器，因此只要让这个类**包含一个私有构造器**，它就不能被实例化。
