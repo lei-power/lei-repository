@@ -1,9 +1,10 @@
 #### 常用方法
 
 ```java
-//生成
+        //生成
         Stream<Integer> iterate=Stream.iterate(1,n->n*8).limit(xxx);
         Stream.generate(Math::random);
+
         //分组
         Map<String, List<T>>yearData=allData.stream().collect(Collectors.groupingBy(T::getYear));
 
@@ -48,20 +49,20 @@
 
     多个中间操作可以连接起来形成一个流水线，除非流水线上触发终止操作，否则中间操作不会执行任何的处理！而在终止操作时一次性全部处理，称为“惰性求值”。
 
-| **方 法**                             | **描 述**                                                 |
-|-------------------------------------|---------------------------------------------------------|
-| **filter(Predicate p)**             | 接收 Lambda ， 从流中排除某些元素                                   |
-| **distinct()**                      | 筛选，通过流所生成元素的equals() 去除重复元素                             |
-| **limit(long maxSize)**             | 截断流，使其元素不超过给定数量                                         |
-| **skip(long n)**                    | 跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素不足 n 个，则返回一个空流。与 limit(n) 互补 |
-| **peek(Consumer** **action)**       | 接收Lambda，对流中的每个数据执行Lambda体操作                            |
-| **sorted()**                        | 产生一个新流，其中按自然顺序排序                                        |
-| **sorted(Comparator com)**          | 产生一个新流，其中按比较器顺序排序                                       |
-| **map(Function f)**                 | 接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。                  |
-| **mapToDouble(ToDoubleFunction f)** | 接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 DoubleStream。           |
-| **mapToInt(ToIntFunction f)**       | 接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 IntStream。              |
-| **mapToLong(ToLongFunction f)**     | 接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 LongStream。             |
-| **flatMap(Function f)**             | 接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流                  |
+| **方法**                             | **描述**                                                 |
+|------------------------------------|--------------------------------------------------------|
+| **filter(Predicate p)**            | 接收 Lambda ， 从流中排除某些元素                                  |
+| **distinct()**                     | 筛选，通过流所生成元素的equals() 去除重复元素                            |
+| **limit(long maxSize)**            | 截断流，使其元素不超过给定数量                                        |
+| **skip(long n)**                   | 跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素不足 n 个，则返回一个空流。与 limit(n) 互补 |
+| **peek(Consumer** **action)**      | 接收Lambda，对流中的每个数据执行Lambda体操作                           |
+| **sorted()**                       | 产生一个新流，其中按自然顺序排序                                       |
+| **sorted(Comparator com)**         | 产生一个新流，其中按比较器顺序排序                                      |
+| **map(Function f)**                | 接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。                 |
+| **mapToDouble(ToDoubleFunction f)** | 接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 DoubleStream。          |
+| **mapToInt(ToIntFunction f)**      | 接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 IntStream。             |
+| **mapToLong(ToLongFunction f)**    | 接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的 LongStream。            |
+| **flatMap(Function f)**            | 接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流                 |
 
 #### 终端操作
 
@@ -73,7 +74,7 @@
 | **boolean** **anyMatch**(**Predicate p**)  | 检查是否至少匹配一个元素                                     |
 | **boolean** **noneMatch(Predicate p)**     | 检查是否没有匹配所有元素                                     |
 | **Optional<T>** **findFirst()**            | 返回第一个元素                                          |
-| **Optional<T>** **findAny()**              | 返回当前流中的任意元素                                      |
+| **Optional<T>** **findAny()**              | 返回当前流中的任+意元素                                     |
 | **long** **count()**                       | 返回流中元素总数                                         |
 | **Optional<T>** **max(Comparator c)**      | 返回流中最大值                                          |
 | **Optional<T>** **min(Comparator c)**      | 返回流中最小值                                          |

@@ -1,4 +1,4 @@
-[TOC]
+
 ### 线程中断
 1. void interrupt()
 2. static boolean interrupted() 判断是否中断再重置中断标识
