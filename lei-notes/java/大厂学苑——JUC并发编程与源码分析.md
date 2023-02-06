@@ -29,37 +29,37 @@ try {Thread.sleep(500);} catch (InterruptedException e) {
     LockSupport类使用了一种名为Permit（许可）的概念来做到阻塞和唤醒线程的功能， 每个线程都有一个许可(permit)，
     permit只有两个值1和零，默认是零。
     可以把许可看成是一种(0,1)信号量（Semaphore），但与 Semaphore 不同的是，许可的累加上限是1。
-   **其他2个方法必须先持有锁，然后先等待后唤醒，而LockSupport都不需要**  
-   
- ###java内存模型JMM
- #### 三大特性
- 1. 可见性
- 2. 原子性
- 3. 有序性 （指令重排必须满足*数据依赖性*）
- 
- #### 多线程先行发生原则之happens-before
- **（包含可见性和有序性的约束）**
- 一个操作**执行结果**对另一个操作可见 或者 指令重排 必须存在happens-before关系
- 1. 次序规则：一个线程内，写在前的先行发生于写在后面的操作；
- 2. 锁定规则：unLock先行发生lock（时间上）
- 3. volatile变量规则：写发生于读前，可见性保证（时间上）
- 4. 传递规则：A先于B,B先于C，-->A先C
- 5.线程启动规则：Thread对象的start（）方法先行发生于线程的每一个动作
- 6.线程中断规则：线程的interrupt（）先行发生于中断事件的检测Thread.interrupted()；
- 7.线程终止规则：线程的所有操作都先发生于对此线程的终止检测？Thread：：join(),Thread::isAlive()的返回值等检测线程是否已经终止执行；
- 8.对象终结规则：对象没有完成初始化前不能调用finallized()方法；
- 
+    **其他2个方法必须先持有锁，然后先等待后唤醒，而LockSupport都不需要**
+
+###java内存模型JMM
+#### 三大特性
+1. 可见性
+2. 原子性
+3. 有序性 （指令重排必须满足*数据依赖性*）
+
+#### 多线程先行发生原则之happens-before
+**（包含可见性和有序性的约束）**
+一个操作**执行结果**对另一个操作可见 或者 指令重排 必须存在happens-before关系
+1. 次序规则：一个线程内，写在前的先行发生于写在后面的操作；
+2. 锁定规则：unLock先行发生lock（时间上）
+3. volatile变量规则：写发生于读前，可见性保证（时间上）
+4. 传递规则：A先于B,B先于C，-->A先C
+   5.线程启动规则：Thread对象的start（）方法先行发生于线程的每一个动作
+   6.线程中断规则：线程的interrupt（）先行发生于中断事件的检测Thread.interrupted()；
+   7.线程终止规则：线程的所有操作都先发生于对此线程的终止检测？Thread：：join(),Thread::isAlive()的返回值等检测线程是否已经终止执行；
+   8.对象终结规则：对象没有完成初始化前不能调用finallized()方法；
+
 #### volatile
- 1. 内存语义： 写一个volatile变量，JMM会把该线程本地内存**立即刷新会主内存**；读一个volatile变量，JMM会把本地内存设置无效，直接从**主内存里读取共享变量**；
- 2. Java内存模型中定义的8种工作内存与主内存之间的原子操作
-    {read(读取)→load(加载)→use(使用)} **时间间隔不保证原子性** →{assign(赋值)→store(存储)→write(写入)→lock(锁定)→unlock(解锁)}
- 3. volatile变量不适合参与到依赖当前值的运算，如i = i + 1; i++;
-    通常volatile用做保存某个状态的boolean值or int值
-    
+1. 内存语义： 写一个volatile变量，JMM会把该线程本地内存**立即刷新会主内存**；读一个volatile变量，JMM会把本地内存设置无效，直接从**主内存里读取共享变量**；
+2. Java内存模型中定义的8种工作内存与主内存之间的原子操作
+   {read(读取)→load(加载)→use(使用)} **时间间隔不保证原子性** →{assign(赋值)→store(存储)→write(写入)→lock(锁定)→unlock(解锁)}
+3. volatile变量不适合参与到依赖当前值的运算，如i = i + 1; i++;
+   通常volatile用做保存某个状态的boolean值or int值
+
 ##### volatile 使用场景
 1. 单一赋值 volatile int a = 10; volatile boolean flag=false;
 2. 状态标识，判断业务是否结束
-3.开销较低的读写锁策略
+   3.开销较低的读写锁策略
 ```java
         /**
          * 使用：当读远多于写，结合使用内部锁和 volatile 变量来减少同步的开销
@@ -110,14 +110,14 @@ public class SingletonDemo {
     }
 }
 ````
-    
+
 #### 内存屏障（内存栅栏，内存栅障，屏障指令）
 1. 内存屏障之前的所有**写操作都要回写到主内存**，
 2. 内存屏障之后的所有**读操作都能获得内存屏障之前的所有写操作的最新结果**(实现了可见性)。
-StoreLoad 禁止重排序&&**强制把写缓存区数据刷回主内存，让高速内存/工作内存的数据失效，重新读取主内存数据**
-**StoreStore-->volatile写-->StoreLoad**
-**volatile读-->LoadLoad-->LoadStore**
-*变量本来就被Volatile修饰怎么会有普通读写？？？？？？*--> 一个方法内2个变量操作
+   StoreLoad 禁止重排序&&**强制把写缓存区数据刷回主内存，让高速内存/工作内存的数据失效，重新读取主内存数据**
+   **StoreStore-->volatile写-->StoreLoad**
+   **volatile读-->LoadLoad-->LoadStore**
+   *变量本来就被Volatile修饰怎么会有普通读写？？？？？？*--> 一个方法内2个变量操作
 
 ### CAS
 ```java
@@ -139,7 +139,7 @@ StoreLoad 禁止重排序&&**强制把写缓存区数据刷回主内存，让高
     1. AtomicInteger
     2. AtomicBoolean
     3. AtomicLong
-    常用方法：get() getAndSet() getAndDecrement() getAndAdd() compareAndSet()
+       常用方法：get() getAndSet() getAndDecrement() getAndAdd() compareAndSet()
 ```java
         MyNumber myNumber = new MyNumber();
         CountDownLatch countDownLatch = new CountDownLatch(SIEZ_);
@@ -171,7 +171,7 @@ StoreLoad 禁止重排序&&**强制把写缓存区数据刷回主内存，让高
     1. AtomicIntegerFieldUpdater
     2. AtomicLongFieldUpdater
     3. AtomicReferenceFieldUpdater
-    **更新对象中的某些字段，更新的属性必须有public volatile 修饰符**
+       **更新对象中的某些字段，更新的属性必须有public volatile 修饰符**
 5. 原子操作增强类
     1. DoubleAccumulator
     2. DoubleAdder
@@ -204,7 +204,7 @@ Longadder:add()方法
         }
     }
 ````
-Striped64:longAccumulate(x, null, uncontended)方法 
+Striped64:longAccumulate(x, null, uncontended)方法
 ```java
     final void longAccumulate(long x, LongBinaryOperator fn, boolean wasUncontended//初始 false) {
         int h;
@@ -303,23 +303,23 @@ Striped64:longAccumulate(x, null, uncontended)方法
 1. 强引用是造成Java内存泄漏的主要原因之一，处于可达状态； Reference
 2. 软引用 高速缓存就有用到软引用，内存够用的时候就保留，不够用就回收 SoftReference
 3. 弱引用 GC一动就挂了，不管JVM内存 WeakReference
-4. 虚引用 PhantomReference 需要引用队列保存 对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收，虚引用的主要作用是跟踪对象被垃圾回收的状态。 
+4. 虚引用 PhantomReference 需要引用队列保存 对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收器回收，虚引用的主要作用是跟踪对象被垃圾回收的状态。
    仅仅是提供了一种确保对象被 finalize以后，做某些事情的机制。 PhantomReference的get方法总是返回null，因此无法访问对应的引用对象；**回收前做个通知**
 5. ！[Threadlocal造成内存泄漏.png](../../../lei-warehouse2/lei-warehouse/lei-notebook/imgs/Threadlocal造成内存泄漏.png)
 
 ### java内存布局和对象头
 1. 对象实例 对象头（Header）   实例数据（Instance Data）**-->按四字节对齐**   对齐填充（Padding）
 2. 对象头-->Mark Word 对象标记 Class Pointer --> 类型指针 Klass pointer
-3. Mark Word 的存储是非固定的数据结构，为了极小空间存存储更多的数据，动态信息，随着对象的状态进行变化 
-![jvm栈.png](../../../lei-warehouse2/lei-warehouse/lei-notebook/imgs/jvm栈.png) 
-![hot](../imgs/下载(6).jpg)
-|锁状态|25bit|31bit|1bit|4bit 分代年龄|1bit 偏向锁位|2bit 锁标志位|
-|-|-|-|-|-|-|-|
-|无锁|-|hashcode|-|分代年龄|0|0，1|
-|偏向锁|54bit 当前线程指针JavaThred*|Epoch|-|分代年龄|1|0，1|
-|轻量级锁，自旋锁，无锁?|62bit 指向线程栈中LockRecord指针|-|-|-|-|0，0|
-|重量级锁|62bit 指向互斥量（重量级锁）的指针|-|-|-|-|1，0|
-|GC标志信息|62bit CMS过程用到的标记信息|-|-|-|-|1，0|
+3. Mark Word 的存储是非固定的数据结构，为了极小空间存存储更多的数据，动态信息，随着对象的状态进行变化
+   ![jvm栈.png](../../../lei-warehouse2/lei-warehouse/lei-notebook/imgs/jvm栈.png)
+   ![hot](../imgs/下载(6).jpg)
+   |锁状态|25bit|31bit|1bit|4bit 分代年龄|1bit 偏向锁位|2bit 锁标志位|
+   |-|-|-|-|-|-|-|
+   |无锁|-|hashcode|-|分代年龄|0|0，1|
+   |偏向锁|54bit 当前线程指针JavaThred*|Epoch|-|分代年龄|1|0，1|
+   |轻量级锁，自旋锁，无锁?|62bit 指向线程栈中LockRecord指针|-|-|-|-|0，0|
+   |重量级锁|62bit 指向互斥量（重量级锁）的指针|-|-|-|-|1，0|
+   |GC标志信息|62bit CMS过程用到的标记信息|-|-|-|-|1，0|
 
 ### Synchronized与锁升级
 1. java 1.5以前用户态和内核态的切换 synchronized属于重量级锁，效率低下，因为监视器锁（monitor）是依赖于底层的操作系统的Mutex Lock来实现的
@@ -334,9 +334,9 @@ Striped64:longAccumulate(x, null, uncontended)方法
 * -XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0
 * 关闭偏向锁：关闭之后程序默认会直接进入------------------------------------------>>>>>>>>   轻量级锁状态。
 * -XX:-UseBiasedLocking
-![px](../imgs/偏向锁.jpg)
+  ![px](../imgs/偏向锁.jpg)
 1. 锁升级的整个流程
-![px](../imgs/图像.png)
+   ![px](../imgs/图像.png)
 #### JIT
 just in time compiler 即时编译器
 锁消除
@@ -374,16 +374,16 @@ new Thread(() -> {
    CLH：Craig、Landin and Hagersten 队列，是一个单向链表，AQS中的队列是CLH变体的虚拟双向队列FIFO
    如果共享资源被占用，就需要一定的阻塞等待唤醒机制来保证锁分配。这个机制主要用的是CLH队列的变体实现的，将暂时获取不到锁的线程加入到队列中，这个队列就是AQS的抽象表现。它将请求共享资源的线程封装成队列的结点（Node），通过CAS、自旋以及LockSupport.park()的方式，维护state变量的状态，使并发达到同步的效果
 2. 同步器和锁的关系
-    1.锁面向的是使用者，同步器面向的是实现者
-    
+   1.锁面向的是使用者，同步器面向的是实现者
+
 3. AQS：
-    aqs使用一个volatile修饰的int成员变量表示同步状态，fifo队列完成资源获取排队，将线程封装成Node节点，cas完成对state修改；
+   aqs使用一个volatile修饰的int成员变量表示同步状态，fifo队列完成资源获取排队，将线程封装成Node节点，cas完成对state修改；
 4. node节点：
-![node节点：](../imgs/下载(6)2.jpg)  
+   ![node节点：](../imgs/下载(6)2.jpg)
 5. ![](../imgs/aa.jpg)
-AQS内部维护一个同步队列，元素就是包装了线程的Node。
-同步队列中首节点是获取到锁的节点，它在释放锁的时会唤醒后继节点，后继节点获取到锁的时候，会把自己设为首节点。 
-线程会先尝试获取锁，失败则封装成Node，CAS加入同步队列的尾部。在加入同步队列的尾部时，会判断前驱节点是否是head结点，并尝试加锁(可能前驱节点刚好释放锁)，否则线程进入阻塞等待。
+   AQS内部维护一个同步队列，元素就是包装了线程的Node。
+   同步队列中首节点是获取到锁的节点，它在释放锁的时会唤醒后继节点，后继节点获取到锁的时候，会把自己设为首节点。
+   线程会先尝试获取锁，失败则封装成Node，CAS加入同步队列的尾部。在加入同步队列的尾部时，会判断前驱节点是否是head结点，并尝试加锁(可能前驱节点刚好释放锁)，否则线程进入阻塞等待。
 
 ### 读写锁、邮戳锁
 读锁全完，写锁有望；写锁独占，读写全堵；

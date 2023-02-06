@@ -1,6 +1,7 @@
 ### 远程调用的异常处理（左岸方式）
+
 ```java
-        //统一结果返回类BaseResp处理了异常封装
+//统一结果返回类BaseResp处理了异常封装
         BaseResp<List<String>>resp=produceFacadeClient.getListOfGisDkidByFarmId(snFarmId);
         if(!resp.isSuccess()){
         return BaseResp.returnResp(resp); //将异常信息层层返回
@@ -8,15 +9,17 @@
 ```
 
 ### 集合非空判断
+
 ```java
-        // map 类型只判断是否为null list要判断size>0
+// map 类型只判断是否为null list要判断size>0
         if(HashMap!=null){}
                 if(landList!=null&&landList.size>0){}
-
 ```
+
 #### 大数据量分批插入
+
 ```java
-        //方法一：stream流 利用分页方法
+//方法一：stream流 利用分页方法
         if(result.size()>0){
                 //一次500条
                 int totalsize=500;
@@ -40,13 +43,12 @@
         List<Land> landList=insertList.subList(i,i+toIndex);
         produceFacadeClient.insertBatch(landList);
         }
-
 ```
 
 ### 加锁的写法（左岸方式）
 
 ```java
-        String key=LockCons.gisSyncLandToSn+gisfarmId;// key命名规范化，统一放入常量类里
+String key=LockCons.gisSyncLandToSn+gisfarmId;// key命名规范化，统一放入常量类里
         try{
         RLock lock=redissonClient.getLock(key);// redisson 分布式锁用法
         boolean locked=lock.isLocked();        //  先判断是否已加锁，做相应操作
@@ -83,7 +85,7 @@
 ### AOP获取日志写法（左岸方式）
 
 ```java
-    @Pointcut("execution(public * com.za.*.biz.gov.controller..*.*(..))") public void logPointCut(){}
+@Pointcut("execution(public * com.za.*.biz.gov.controller..*.*(..))") public void logPointCut(){}
     @Around("logPointCut()") public Object around(ProceedingJoinPoint point)throws Throwable{
         // 执行方法
         // 环绕通知在此处调用proceed()后,如果子服务有业务异常会直接步入这里并结束.所以需要捕获异常并抛出
@@ -122,25 +124,49 @@
 ```
 
 ### 输入流从classPath获取
+
 ```java
-        ClassPathResource resource=new ClassPathResource("beans.xml");
+ClassPathResource resource=new ClassPathResource("beans.xml");
         InputStream inputStream=resource.getInputStream();
 ```
 
 ### spring el表达式取值
+
 ```java
-        @Value("#{'${gov.zagis.refdomain.list}'.split(',')}") //可以用字符串函数
+@Value("#{'${gov.zagis.refdomain.list}'.split(',')}") //可以用字符串函数
         private List<String> refDomainList;
 ```
 
 ### 递归案例一
-![](./IMG/JAVA基础——常用代码归纳及踩坑记录—1675657868096.png)
+![](https://lei-repository.oss-cn-hangzhou.aliyuncs.com/images/JAVA基础——常用代码归纳及踩坑记录/1675665739114.png?x-oss-process=image/auto-orient,1/interlace,1/quality,q_50/format,jpg)
+
+### 挂载lib减少jar体积
+1. 拷贝lib目录文件
+2. 打包排除jar包
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <fork>true</fork>
+        <layout>ZIP</layout>
+        <includes>
+            <include>
+                <!-- 排除所有Jar -->
+                <groupId>nothing</groupId>
+                <artifactId>nothing</artifactId>
+            </include>
+        </includes>
+    </configuration>
+</plugin>
+```
+
 
 
 
 ### 踩坑实录
 - 存储数据到redis需要参数完整，少了时间的单位会变成二进制文件（显示为乱码）
-- controller,service,mapper是spring的ioc容器管理<br>servlet，filter ，listener是tomcat容器管理
-- bin、userbin、userlocalbin、sbin、usersbin、userlocalsbin；linux下这些目录都可以直接执行
-- touch 创建一个文件 {touch test1.txt test2.txt 同时创建两个文件} {touch test{0001..2000}.txt 批量创建文件（如创建2000个文件）}
-- linux解压 unzip filename.zip  tar -zxvf filename.tar.gz
+- controller,service,mapper是spring的ioc容器管理 <br>servlet，filter ，listener是tomcat容器管理
+- **bin、userbin、userlocalbin、sbin、usersbin、userlocalsbin** linux下这些目录都可以直接执行
+- touch 创建一个文件 {touch test1.txt test2.txt 同时创建两个文件} **{touch test{0001..2000}.txt 批量创建文件（如创建2000个文件）}**
+
