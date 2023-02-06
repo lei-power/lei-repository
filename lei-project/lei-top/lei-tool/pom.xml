@@ -14,7 +14,7 @@
     <modules>
         <module>lei-tool-spider</module>
         <module>lei-tool-gen</module>
-        <module>lei-tool-zero</module>
+        <module>lei-tool-other</module>
     </modules>
     <dependencies>
         <dependency>

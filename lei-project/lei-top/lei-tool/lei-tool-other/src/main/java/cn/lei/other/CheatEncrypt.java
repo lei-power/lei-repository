@@ -1,4 +1,4 @@
-package cn.lei.zero;
+package cn.lei.other;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.crypto.SecureUtil;
