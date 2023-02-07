@@ -94,7 +94,7 @@ SET a.village_code = b.village_code;
 
 -- 2022.12.20
 UPDATE `tbl_area_testc`
-SET town_code=SUBSTRING(village_code, 1, 9)
+SET town_code=SUBSTRING(village_code, 1, 9);
 SELECT town_id, MAX(town_name), GROUP_CONCAT(DISTINCT town_code)
 FROM tbl_area_testc
 GROUP BY town_id
@@ -118,3 +118,19 @@ WHERE town_name IN ('头桥集团', '永丰街道', '洞泾镇', '泗泾镇', '�
 
 
 ```
+
+### 更新省市区镇村
+```mysql
+a.`province_id`      =b.`province_id`   ,
+a.`province_name`    =b.`province_name` ,
+a.`city_id`          =b.`city_id`       ,
+a.`city_name`        =b.`city_name`     ,
+a.`county_id`        =b.`county_id`     ,
+a.`county_name`      =b.`county_name`   ,
+a.`town_id`          =b.`town_id`       ,
+a.`town_name`        =b.`town_name`     ,
+a.`village_id`       =b.`village_id`    ,
+a.`village_name`     =b.`village_name`
+
+```
+

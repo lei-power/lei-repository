@@ -30,8 +30,8 @@ public class SwaggerConfig {
             title = "内部系统";
         }
         ApiInfo apiInfo = new ApiInfoBuilder().title(title)//大标题
-                .version("1.0")//版本
-                .build();
+                                              .version("1.0")//版本
+                                              .build();
 
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo).useDefaultResponseMessages(false).select().build().globalOperationParameters(pars);
     }
